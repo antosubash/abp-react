@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>MyProject</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyProject.Application.Contracts\MyProject.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" Version="5.0.1" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>
