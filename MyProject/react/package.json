@@ -5,9 +5,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen": "nswag openapi2tsclient /input:https://localhost:44390/swagger/v1/swagger.json /generateClientClasses:false /output:generated/MyProjectModels.ts"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "next": "12.0.7",
     "next-themes": "^0.0.15",
     "react": "17.0.2",
