@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import ThemeChanger from "@abp/components/ThemeChanger";
+import ThemeSwitcher from "@abp/components/ThemeChanger";
 
 const Admin: NextPage = () => {
   return (
-    <div className="font-family-karla flex ">
+    <div className="flex">
       <aside className="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div className="p-6">
           <a href="/" className="text-3xl font-semibold uppercase">
@@ -58,7 +58,7 @@ const Admin: NextPage = () => {
           href="#"
           className="absolute w-full upgrade-btn bottom-0 active-nav-link  flex items-center justify-center py-4"
         >
-          <ThemeChanger />
+          <ThemeSwitcher />
         </a>
       </aside>
       <div className="relative w-full flex flex-col h-screen overflow-y-hidden">
@@ -182,7 +182,7 @@ const Admin: NextPage = () => {
           <main className="w-full flex-grow p-6">
             <h1 className="text-3xl text-black pb-6">Blank Page</h1>
             content
-            <ThemeChanger/>
+            <ThemeSwitcher/>
           </main>
 
           <footer className="w-full text-right p-4">
