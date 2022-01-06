@@ -163,7 +163,7 @@ namespace MyProject.IdentityServer
             
             
             
-            // Swagger Client
+             // Swagger Client
             var swaggerClientId = configurationSection["MyProject_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
             {
@@ -177,6 +177,23 @@ namespace MyProject.IdentityServer
                     requireClientSecret: false,
                     redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }           
+            
+            // React Client
+            var reactClientId = configurationSection["MyProject_React:ClientId"];
+            if (!swaggerClientId.IsNullOrWhiteSpace())
+            {
+                var reactRootUrl = configurationSection["MyProject_React:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: reactClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: null,
+                    requireClientSecret: false,
+                    redirectUri: reactRootUrl,
+                    corsOrigins: new[] { reactRootUrl.RemovePostFix("/") }
                 );
             }
         }

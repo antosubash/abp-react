@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ThemeSwitcher from "@abp/components/ThemeChanger";
 import classNames from "classnames";
 import { Menus } from "utils/Constants";
+import UserMenus from "@abp/components/User/UserMenus";
 
 interface Props {}
 
@@ -9,13 +10,16 @@ const NavBar = (props: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center bg-secondary z-10">
-      <div className="flex items-center">
-        <img src="/img/Logo_black.svg" alt="Logo" className="h-4" />
+      <div className="flex items-center text-xl font-bold">
+        <a href="/">My Startup</a>
       </div>
       <ul className=" items-center hidden md:flex">
         {Menus.map((menu, index) => {
           return (
-            <li key={index} className="growing-underline mx-3 hover:bg-slate-300 p-4 rounded">
+            <li
+              key={index}
+              className="growing-underline mx-3 hover:bg-slate-300 p-4 rounded"
+            >
               <a href={menu.Link}>{menu.Name}</a>
             </li>
           );
@@ -25,10 +29,7 @@ const NavBar = (props: Props) => {
         <div className="flex items-center justify-center mr-6">
           <ThemeSwitcher />
         </div>
-        <button className="mr-6 hover:bg-slate-300 p-3 rounded-3xl">Login</button>
-        <button className="py-2 px-4 text-white bg-black rounded-3xl">
-          Signup
-        </button>
+        <UserMenus />
       </div>
       <div
         id="showMenu"

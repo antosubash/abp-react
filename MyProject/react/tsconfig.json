@@ -19,6 +19,12 @@
       "@abp/components/*": [
         "components/*"
       ],
+      "@abp/generated/*": [
+        "generated/*"
+      ],
+      "@abp/utils/*": [
+        "utils/*"
+      ],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

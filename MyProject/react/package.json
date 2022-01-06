@@ -6,14 +6,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "nswag openapi2tsclient /input:https://localhost:44390/swagger/v1/swagger.json /generateClientClasses:false /output:generated/MyProjectModels.ts"
+    "gen": "nswag openapi2tsclient /input:https://localhost:44310/swagger/v1/swagger.json /generateClientClasses:false /output:generated/MyProjectModels.ts"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "classnames": "^2.3.1",
     "next": "12.0.7",
     "next-themes": "^0.0.15",
+    "oidc-client-ts": "^2.0.0-rc.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-oidc-context": "^2.0.0-beta.2"
   },
   "devDependencies": {
     "@types/node": "17.0.6",
