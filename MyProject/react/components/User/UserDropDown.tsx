@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAuth } from "react-oidc-context";
+import Link from "next/link";
 
 const UserDropDown = () => {
   var auth = useAuth();
@@ -38,27 +39,31 @@ const UserDropDown = () => {
               >
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      className={`${
-                        active && "bg-blue-500"
-                      } block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
-                      href="/admin"
-                    >
-                      Admin
-                    </a>
+                    <Link href="/admin" passHref={true}>
+                      <div
+                        className={`${
+                          active && "bg-blue-500"
+                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
+                      >
+                        Admin
+                      </div>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      className={`${
-                        active && "bg-blue-500"
-                      } block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
-                      onClick={() => { auth.signoutRedirect(); }}
-                      href="#"
-                    >
-                      Sign out
-                    </a>
+                    <Link href="#" passHref={true}>
+                      <div
+                        className={`${
+                          active && "bg-blue-500"
+                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
+                        onClick={() => {
+                          auth.signoutRedirect();
+                        }}
+                      >
+                        Sign out
+                      </div>
+                    </Link>
                   )}
                 </Menu.Item>
               </div>

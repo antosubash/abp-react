@@ -3,6 +3,7 @@ import ThemeSwitcher from "@abp/components/ThemeChanger";
 import classNames from "classnames";
 import { Menus } from "utils/Constants";
 import UserMenus from "@abp/components/User/UserMenus";
+import Link from "next/link";
 
 interface Props {}
 
@@ -11,7 +12,7 @@ const NavBar = (props: Props) => {
   return (
     <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center bg-secondary z-10">
       <div className="flex items-center text-xl font-bold">
-        <a href="/">My Startup</a>
+        <Link href="/">My Startup</Link>
       </div>
       <ul className=" items-center hidden md:flex">
         {Menus.map((menu, index) => {

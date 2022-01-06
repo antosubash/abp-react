@@ -25,6 +25,12 @@
       "@abp/utils/*": [
         "utils/*"
       ],
+      "@abp/services/*": [
+        "services/*"
+      ],
+      "@abp/stores/*": [
+        "stores/*"
+      ],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
