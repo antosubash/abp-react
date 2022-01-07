@@ -116,7 +116,7 @@ namespace MyProject
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo {Title = "MyProject API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
-                    options.CustomSchemaIds(type => type.FullName);
+                    options.CustomSchemaIds(type => type.FriendlyId().Replace("[", "Of").Replace("]", ""));
                 });
         }
 

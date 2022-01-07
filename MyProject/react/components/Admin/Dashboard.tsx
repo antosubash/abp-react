@@ -1,16 +1,16 @@
 import React from "react";
+import { useAuth } from "react-oidc-context";
 
 interface Props {}
 
 const Dashboard = (props: Props) => {
+  var auth = useAuth();
   return (
     <div>
       <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
-        Good afternoom, Charlie
+        Hello, {auth?.user?.profile.name}!
       </h1>
-      <h2 className="text-md text-gray-400">
-        Here&#x27;s what&#x27;s happening with your ambassador account today.
-      </h2>
+
       <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">
         <div className="w-full md:w-6/12">
           <div className="shadow-lg w-full bg-white dark:bg-gray-700 relative overflow-hidden">

@@ -11,7 +11,6 @@ export const getAccessToken = async () => {
   const oidcStorage = sessionStorage.getItem(
     `oidc.user:${process.env.NEXT_PUBLIC_IDENTITY_URL}:${process.env.NEXT_PUBLIC_IDENTITY_CLIENT_ID}`
   );
-  console.log(oidcStorage);
   if (!oidcStorage) {
     return null;
   }
