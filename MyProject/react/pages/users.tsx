@@ -4,7 +4,8 @@ import React from "react";
 import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 import UserList from "@abp/components/User/UserList";
-import GroupList from "@abp/components/User/GroupList";
+import RoleList from "@abp/components/User/RoleList";
+
 const Users: NextPage = () => {
   return (
     <div>
@@ -34,7 +35,7 @@ const Users: NextPage = () => {
                   )
                 }
               >
-                Group
+                Roles
               </Tab>
             </Tab.List>
             <Tab.Panels>
@@ -50,7 +51,7 @@ const Users: NextPage = () => {
                   "p-3",
                 )}
               >
-                <GroupList/>
+                <RoleList/>
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>

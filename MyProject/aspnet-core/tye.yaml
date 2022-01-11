@@ -1,0 +1,19 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: myproject
+services:
+- name: myproject-identityserver
+  project: src/MyProject.IdentityServer/MyProject.IdentityServer.csproj
+  bindings:
+  - port: 44344
+    protocol: https
+- name: myproject-httpapi-host
+  project: src/MyProject.HttpApi.Host/MyProject.HttpApi.Host.csproj
+  bindings:
+  - port: 44310
+    protocol: https
+

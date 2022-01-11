@@ -6,6 +6,8 @@ import { AuthProvider } from "react-oidc-context";
 import Loader from "@abp/components/Loader";
 import { useEffect, useState } from "react";
 import useAppConfigStore from "@abp/stores/appConfig";
+import { SWRConfig } from "swr";
+import axiosInstance from "@abp/utils/axiosInstance";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,11 +31,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const fetcher = (url: any) => axiosInstance.get(url).then((res) => res.data);
   return (
     <ThemeProvider attribute="class" themes={["light", "dark"]}>
       <AuthProvider {...oidcConfig}>
-        {isLoading ? <Loader /> : <Component {...pageProps} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <SWRConfig
+            value={{
+              refreshInterval: 3000,
+              fetcher: (resource, init) =>
+                axiosInstance.get(resource, init).then((res) => res.data),
+            }}
+          >
+            <Component {...pageProps} />
+          </SWRConfig>
+        )}
       </AuthProvider>
     </ThemeProvider>
   );

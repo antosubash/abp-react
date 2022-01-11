@@ -1,13 +1,13 @@
-import { IdentityUserDto } from "@abp/generated/MyProjectModels";
-import { getUsers } from "@abp/services/UserService";
-import React, { useEffect, useState } from "react";
+import { useUsers } from "hooks/useUsers";
+import React from "react";
+import Loader from "../Loader";
+import Error from "../Error";
 import Table from "../Shared/Table";
-interface Props {}
 
-const UserList = (props: Props) => {
+const UserList = () => {
   const columns = [
     {
-      name: "username",
+      name: "userName",
       label: "Username",
       render: ({ value }: any) => <h1>{value}</h1>,
     },
@@ -18,32 +18,14 @@ const UserList = (props: Props) => {
     {
       name: "isActive",
       label: "Is Active",
-      render: ({ value }: any) => <h1>{ value ? "true" : "false" }</h1>,
+      render: ({ value }: any) => <h1>{value ? "yes" : "no"}</h1>,
     },
   ];
 
-  const [data, setData] = useState<any[]>();
-
-  useEffect(() => {
-    async function fetchData() {
-      var users = await getUsers();
-      console.log(users);
-      var userList = users?.data?.items?.map((user: IdentityUserDto) => {
-        return {
-          username: user.name,
-          email: user.email,
-          isActive: user.isActive,
-        };
-      });
-      setData(userList);
-    }
-    fetchData();
-  }, []);
-  return (
-    <>
-      <Table columns={columns} data={data} />
-    </>
-  );
+  var { isLoading, users, isError } = useUsers(0, 10);
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+  return <Table columns={columns} data={users} />;
 };
 
 export default UserList;
