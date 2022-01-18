@@ -260,3 +260,4 @@ src/MyProject.HttpApi.HostWithIds/Logs/*
 src/MyProject.DbMigrator/Logs/*
 src/MyProject.Blazor.Server/Logs/*
 src/MyProject.Blazor.Server.Tiered/Logs/*
+*.tye
