@@ -1,12 +1,14 @@
 import { ListResultDtoOfUserData } from "@abp/generated/MyProjectModels";
-import { useRequest } from "./useRequest";
+import { useQuery } from "react-query";
+import axiosInstance  from '@abp/utils/axiosInstance';
+import { QueryNames } from '@abp/utils/Constants';
 
 export const useUsers = (skip: number, take: number) => {
   const url = `/api/identity/users?SkipCount=${skip}&MaxResultCount=${take}`;
-  const { data, error } = useRequest<ListResultDtoOfUserData>(url);
-  return {
-    users: data?.items,
-    isLoading: !error && !data,
-    isError: error,
-  };
+  return useQuery(QueryNames.Users, async () => {
+    const { data } = await axiosInstance.get<ListResultDtoOfUserData>(url, {
+      clearCacheEntry: true,
+    });
+    return data;
+  });
 };

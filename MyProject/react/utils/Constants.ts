@@ -36,3 +36,10 @@ export const AdminMenus = [
     Icon: FaUserCog,
   },
 ];
+
+export const QueryNames = {
+  Users: "Users",
+  Tenants: "Tenants",
+  Roles: "Roles",
+  AppConfig: "AppConfig"
+}

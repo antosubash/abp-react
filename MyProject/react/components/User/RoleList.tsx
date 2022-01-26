@@ -23,10 +23,10 @@ const RoleList = () => {
     },
   ];
 
-  var { isLoading, roles, isError } = useRoles(0, 10);
+  var { isLoading, data, isError } = useRoles(0, 10);
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
-  return <Table columns={columns} data={roles} />;
+  return <Table columns={columns} data={data?.items} />;
 };
 
 export default RoleList;
