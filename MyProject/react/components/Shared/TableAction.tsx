@@ -38,9 +38,6 @@ const TableAction = (props: Props) => {
               <Menu.Item>
                 {({ active }) => <TableMenuItem active={active} label="Delete" />}
               </Menu.Item>
-              <Menu.Item>
-                {({ active }) => <TableMenuItem active={active} label="Edit" />}
-              </Menu.Item>
             </div>
           </Menu.Items>
         </Transition>
