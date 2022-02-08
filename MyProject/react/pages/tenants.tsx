@@ -1,4 +1,5 @@
 import AdminLayout from "@abp/components/layouts/Admin";
+import TenantList from "@abp/components/Tenant/TenantList";
 import { NextPage } from "next";
 import React from "react";
 
@@ -8,7 +9,7 @@ const Tenants: NextPage = (props: Props) => {
   return (
     <div>
       <AdminLayout>
-        <div>Tenants</div>
+        <TenantList/>
       </AdminLayout>
     </div>
   );

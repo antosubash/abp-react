@@ -22,10 +22,10 @@ const UserList = () => {
     },
   ];
 
-  var { isLoading, users, isError } = useUsers(0, 10);
+  var { isLoading, data, isError } = useUsers(0, 10);
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
-  return <Table columns={columns} data={users} />;
+  return <Table columns={columns} data={data?.items} />;
 };
 
 export default UserList;

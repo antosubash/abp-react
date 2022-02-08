@@ -1,12 +1,14 @@
-import { ListResultDtoOfIdentityRoleDto } from "@abp/generated/MyProjectModels";
-import { useRequest } from "./useRequest";
+import axiosInstance from "@abp/utils/axiosInstance";
+import { useQuery } from "react-query";
+import { PagedResultDtoOfTenantDto } from '@abp/generated/MyProjectModels';
+import { QueryNames } from '@abp/utils/Constants';
 
 export const useTenants = (skip: number, take: number) => {
   const url = `/api/multi-tenancy/tenants?SkipCount=${skip}&MaxResultCount=${take}`;
-  const { data, error } = useRequest<ListResultDtoOfIdentityRoleDto>(url);
-  return {
-    tenants: data?.items,
-    isLoading: !error && !data,
-    isError: error,
-  };
+  return useQuery(QueryNames.Tenants, async () => {
+    const { data } = await axiosInstance.get<PagedResultDtoOfTenantDto>(url, {
+      clearCacheEntry: true,
+    });
+    return data;
+  });
 }

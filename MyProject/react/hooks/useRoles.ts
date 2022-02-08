@@ -1,12 +1,17 @@
 import { ListResultDtoOfIdentityRoleDto } from "@abp/generated/MyProjectModels";
-import { useRequest } from "./useRequest";
+import axiosInstance from "@abp/utils/axiosInstance";
+import { useQuery } from "react-query";
+import { QueryNames } from '@abp/utils/Constants';
 
 export const useRoles = (skip: number, take: number) => {
   const url = `/api/identity/roles?SkipCount=${skip}&MaxResultCount=${take}`;
-  const { data, error } = useRequest<ListResultDtoOfIdentityRoleDto>(url);
-  return {
-    roles: data?.items,
-    isLoading: !error && !data,
-    isError: error,
-  };
+  return useQuery(QueryNames.Roles, async () => {
+    const { data } = await axiosInstance.get<ListResultDtoOfIdentityRoleDto>(
+      url,
+      {
+        clearCacheEntry: true,
+      }
+    );
+    return data;
+  });
 };
