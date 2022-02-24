@@ -16,7 +16,6 @@ const TenantList = (props: Props) => {
     ];
 
     var { isLoading, data, isError } = useTenants(0, 10);
-    console.log("🚀 ~ file: TenantList.tsx ~ line 19 ~ TenantList ~ data", data)
     if (isLoading) return <Loader />;
     if (isError) return <Error />;
     return <Table columns={columns} data={data?.items} />;

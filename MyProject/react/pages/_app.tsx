@@ -3,7 +3,6 @@ import "../styles/main.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "react-oidc-context";
-import Loader from "@abp/components/Loader";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { QueryNames } from "@abp/utils/Constants";
 import Base from "@abp/components/Base";
@@ -21,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   const onLoginSuccess = () => {
-    queryClient.invalidateQueries(QueryNames.AppConfig);
+    queryClient.invalidateQueries(QueryNames.GetAppConfig);
   };
 
   return (

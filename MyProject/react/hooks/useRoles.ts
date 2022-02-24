@@ -5,7 +5,7 @@ import { QueryNames } from '@abp/utils/Constants';
 
 export const useRoles = (skip: number, take: number) => {
   const url = `/api/identity/roles?SkipCount=${skip}&MaxResultCount=${take}`;
-  return useQuery(QueryNames.Roles, async () => {
+  return useQuery(QueryNames.GetRoles, async () => {
     const { data } = await axiosInstance.get<ListResultDtoOfIdentityRoleDto>(
       url,
       {

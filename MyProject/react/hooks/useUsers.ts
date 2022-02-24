@@ -5,7 +5,7 @@ import { QueryNames } from '@abp/utils/Constants';
 
 export const useUsers = (skip: number, take: number) => {
   const url = `/api/identity/users?SkipCount=${skip}&MaxResultCount=${take}`;
-  return useQuery(QueryNames.Users, async () => {
+  return useQuery(QueryNames.GetUsers, async () => {
     const { data } = await axiosInstance.get<ListResultDtoOfUserData>(url, {
       clearCacheEntry: true,
     });

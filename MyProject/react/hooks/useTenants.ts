@@ -5,7 +5,7 @@ import { QueryNames } from '@abp/utils/Constants';
 
 export const useTenants = (skip: number, take: number) => {
   const url = `/api/multi-tenancy/tenants?SkipCount=${skip}&MaxResultCount=${take}`;
-  return useQuery(QueryNames.Tenants, async () => {
+  return useQuery(QueryNames.GetTenants, async () => {
     const { data } = await axiosInstance.get<PagedResultDtoOfTenantDto>(url, {
       clearCacheEntry: true,
     });

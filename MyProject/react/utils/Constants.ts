@@ -2,15 +2,15 @@ import { FaChalkboard, FaDatabase, FaUserCog, FaUsers } from "react-icons/fa";
 export const Menus = [
   {
     Name: "How it works",
-    Link: "#",
+    Link: "#how-it-works",
   },
   {
     Name: "Features",
-    Link: "#",
+    Link: "#features",
   },
   {
     Name: "Pricing",
-    Link: "#",
+    Link: "#pricing",
   },
 ];
 
@@ -38,8 +38,8 @@ export const AdminMenus = [
 ];
 
 export const QueryNames = {
-  Users: "Users",
-  Tenants: "Tenants",
-  Roles: "Roles",
-  AppConfig: "AppConfig"
+  GetUsers: "GetUsers",
+  GetTenants: "GetTenants",
+  GetRoles: "GetRoles",
+  GetAppConfig: "GetAppConfig"
 }
