@@ -6,8 +6,21 @@ import { AuthProvider } from "react-oidc-context";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { QueryNames } from "@abp/utils/Constants";
 import Base from "@abp/components/Base";
+import { createTheme } from "react-data-table-component";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  createTheme("default", {
+    background: {
+      default: 'transparent'
+    },
+  });
+
+  createTheme("dark", {
+    background: {
+      default: 'transparent'
+    },
+  });
+
   // Create a client
   const queryClient = new QueryClient();
   const oidcConfig = {

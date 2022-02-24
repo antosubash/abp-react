@@ -41,7 +41,7 @@ const Users: NextPage = () => {
             <Tab.Panels>
               <Tab.Panel
                 className={classNames(
-                  "p-3",
+                  "pt-8",
                 )}
               >
                 <UserList/>

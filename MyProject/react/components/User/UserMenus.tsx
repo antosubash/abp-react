@@ -12,7 +12,7 @@ const UserMenus = (props: Props) => {
         <UserDropDown />
       ) : (
         <div>
-          <button className="mr-6 hover:bg-slate-300 p-3 rounded-3xl" onClick={() => auth.signinRedirect()}>
+          <button className="mr-6 hover:bg-slate-300 dark:hover:bg-slate-500 p-3 rounded-xl" onClick={() => auth.signinRedirect()}>
             Login
           </button>
           <button className="py-2 px-4 text-white bg-black rounded-3xl" onClick={() => location.href = `${process.env.NEXT_PUBLIC_IDENTITY_URL}/Account/Register` }>

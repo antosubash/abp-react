@@ -19,7 +19,7 @@ const NavBar = (props: Props) => {
           return (
             <li
               key={index}
-              className="growing-underline mx-3 hover:bg-slate-300 p-4 rounded"
+              className="growing-underline mx-3 hover:bg-slate-300 dark:hover:bg-slate-600 p-4 rounded"
             >
               <a href={menu.Link}>{menu.Name}</a>
             </li>

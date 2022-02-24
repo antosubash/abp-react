@@ -2,30 +2,45 @@ import { useUsers } from "hooks/useUsers";
 import React, { useState } from "react";
 import Loader from "../Loader";
 import Error from "../Error";
-import DataTable from "react-data-table-component";
+import DataTable, { TableColumn } from "react-data-table-component";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
+import { AdjustmentsIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
+import { IdentityUserDto } from "@abp/generated/MyProjectModels";
 const UserList = () => {
-  const columns = [
+  const queryClient = useQueryClient();
+  const columns: TableColumn<IdentityUserDto>[] = [
     {
-      name: "userName",
-      label: "Username",
+      name: "Username",
       selector: (row: any) => row.userName,
     },
     {
-      name: "email",
-      label: "Email",
+      name: "Email",
       selector: (row: any) => row.email,
     },
     {
-      name: "isActive",
-      label: "Is Active",
-      selector: (row: any) => <h1>{row.isActive ? "yes" : "no"}</h1>,
+      name: "Is Active",
+      selector: (row: any) => row.isActive ? "yes" : "no",
+    },
+    {
+      name: "Permissions",
+      button: true,
+      cell: (row: any) => <AdjustmentsIcon className="h-5 w-5 text-blue-500 cursor-pointer" />,
+    },
+    {
+      name: "Edit",
+      button: true,
+      cell: (row: any) => <PencilAltIcon className="h-5 w-5 text-blue-500 cursor-pointer" />,
+    },
+    {
+      name: "Delete",
+      button: true,
+      cell: (row: any) => <TrashIcon className="h-5 w-5 text-red-500 cursor-pointer"/>,
     },
   ];
 
   const { theme } = useTheme();
-  const queryClient = useQueryClient();
+
   var [skip, setSkip] = useState<number>(0);
   var [limit, setLimit] = useState<number>(10);
   var [page, setPage] = useState<number>(0);
