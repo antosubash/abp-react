@@ -1,4 +1,4 @@
-import { setup } from "axios-cache-adapter";
+import axios from "axios";
 import { User } from "oidc-client-ts";
 
 export const getHeaders = async () => {
@@ -17,16 +17,8 @@ export const getAccessToken = async () => {
   return User.fromStorageString(oidcStorage).access_token;
 };
 
-const axiosInstance = setup({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  cache: {
-    // Invalidate only when a specific option is passed through config
-    invalidate: async (config: any, request: any) => {
-      if (request.clearCacheEntry) {
-        await config?.store?.removeItem(config.uuid);
-      }
-    },
-  },
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL
 });
 
 axiosInstance.interceptors.request.use(async function (config: any) {

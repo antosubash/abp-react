@@ -18,11 +18,13 @@
     "next-themes": "^0.0.15",
     "oidc-client-ts": "^2.0.0-rc.3",
     "react": "17.0.2",
+    "react-data-table-component": "^7.4.7",
     "react-dom": "17.0.2",
     "react-final-table": "^1.5.1",
     "react-icons": "^4.3.1",
     "react-oidc-context": "^2.0.0-beta.2",
     "react-query": "^3.34.12",
+    "styled-components": "^5.3.3",
     "zustand": "^3.6.8"
   },
   "devDependencies": {
