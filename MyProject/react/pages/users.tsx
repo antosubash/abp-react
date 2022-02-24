@@ -4,7 +4,7 @@ import React from "react";
 import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 import UserList from "@abp/components/User/UserList";
-import RoleList from "@abp/components/User/RoleList";
+import RoleList from "@abp/components/Role/RoleList";
 
 const Users: NextPage = () => {
   return (
