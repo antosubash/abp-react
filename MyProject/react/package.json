@@ -15,6 +15,7 @@
     "axios-cache-adapter": "^2.7.3",
     "classnames": "^2.3.1",
     "next": "12.1.0",
+    "next-localization": "^0.11.0",
     "next-themes": "^0.0.15",
     "oidc-client-ts": "^2.0.0-rc.3",
     "react": "17.0.2",

@@ -7,17 +7,21 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { QueryNames } from "@abp/utils/Constants";
 import Base from "@abp/components/Base";
 import { createTheme } from "react-data-table-component";
+import { useRouter } from "next/router";
+import { I18nProvider } from "next-localization";
+import i18n from "@abp/utils/i18n";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   createTheme("default", {
     background: {
-      default: 'transparent'
+      default: "transparent",
     },
   });
 
   createTheme("dark", {
     background: {
-      default: 'transparent'
+      default: "transparent",
     },
   });
 
@@ -37,15 +41,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <ThemeProvider attribute="class" themes={["light", "dark"]}>
-      <AuthProvider {...oidcConfig} onSigninCallback={() => onLoginSuccess()}>
-        <QueryClientProvider client={queryClient}>
-          <Base>
-            <Component {...pageProps} />
-          </Base>
-        </QueryClientProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <I18nProvider i18nInstance={i18n} locale={router.locale!}>
+      <ThemeProvider attribute="class" themes={["light", "dark"]}>
+        <AuthProvider {...oidcConfig} onSigninCallback={() => onLoginSuccess()}>
+          <QueryClientProvider client={queryClient}>
+            <Base>
+              <Component {...pageProps} />
+            </Base>
+          </QueryClientProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }
 

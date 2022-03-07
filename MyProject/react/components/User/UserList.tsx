@@ -1,7 +1,7 @@
 import { useUsers } from "hooks/useUsers";
 import React, { useState } from "react";
-import Loader from "../Loader";
-import Error from "../Error";
+import Loader from "@abp/components/Loader";
+import Error from "@abp/components/Error";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";

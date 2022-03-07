@@ -5,8 +5,10 @@ import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 import UserList from "@abp/components/User/UserList";
 import RoleList from "@abp/components/Role/RoleList";
+import { useI18n } from "next-localization";
 
 const Users: NextPage = () => {
+  const i18n = useI18n();
   return (
     <div>
       <AdminLayout>
@@ -23,7 +25,7 @@ const Users: NextPage = () => {
                   )
                 }
               >
-                Users
+                {i18n.t("AbpIdentity.Users")}
               </Tab>
               <Tab
                 className={({ selected }) =>
@@ -35,7 +37,7 @@ const Users: NextPage = () => {
                   )
                 }
               >
-                Roles
+                {i18n.t("AbpIdentity.Roles")}
               </Tab>
             </Tab.List>
             <Tab.Panels>
@@ -48,7 +50,7 @@ const Users: NextPage = () => {
               </Tab.Panel>
               <Tab.Panel
                 className={classNames(
-                  "p-3",
+                  "pt-8",
                 )}
               >
                 <RoleList/>
