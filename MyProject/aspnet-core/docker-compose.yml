@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  identityserver:
+    image: myprojectidentityserver
+    build:
+      context: .
+      dockerfile: src/MyProject.IdentityServer/Dockerfile
+
+  httpapi.host:
+    image: myprojecthttpapihost
+    build:
+      context: .
+      dockerfile: src/MyProject.HttpApi.Host/Dockerfile
+
