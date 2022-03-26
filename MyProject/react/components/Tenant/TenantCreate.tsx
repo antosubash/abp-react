@@ -1,10 +1,16 @@
+import { TenantCreateDto } from "@abp/generated/MyProjectModels";
 import React, { useState, Fragment } from "react";
+import { useForm } from "react-hook-form";
 import DialogWrapper from "../Shared/DialogWrapper";
 type Props = {};
 
 const TenantCreate = (props: Props) => {
   let [isOpen, setIsOpen] = useState(true);
 
+  const { register, handleSubmit } = useForm<TenantCreateDto>();
+  const onSubmit = (data: any) =>{
+    console.log(data as TenantCreateDto);
+  };
   function closeModal() {
     setIsOpen(false);
   }
@@ -25,7 +31,7 @@ const TenantCreate = (props: Props) => {
         </button>
       </div>
       <DialogWrapper isOpen={isOpen} title="Create tenant" onClose={closeModal}>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-8 space-y-6">
             <div>
               <label
@@ -35,9 +41,7 @@ const TenantCreate = (props: Props) => {
                 Name
               </label>
               <input
-                type="text"
-                name="name"
-                id="name"
+                {...register("name", { required: true })}
                 className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                 placeholder="Enter your tenant name"
               />
@@ -51,9 +55,8 @@ const TenantCreate = (props: Props) => {
                 Email
               </label>
               <input
-                type="text"
-                name="email"
-                id="email"
+                type="email"
+                {...register("adminEmailAddress", { required: true, })}
                 className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                 placeholder="yourmail@provider.com"
               />
@@ -61,15 +64,14 @@ const TenantCreate = (props: Props) => {
 
             <div>
               <label
-                htmlFor="job"
+                htmlFor="password"
                 className="text-sm text-gray-700 block mb-1 font-medium"
               >
                 Password
               </label>
               <input
                 type="password"
-                name="password"
-                id="password"
+                {...register("adminPassword", { required: true })}   
                 className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                 placeholder="password"
               />
