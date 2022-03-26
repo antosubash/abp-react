@@ -10,7 +10,7 @@ const Tenants: NextPage = (props: Props) => {
   return (
     <div>
       <AdminLayout>
-        {/* <TenantCreate /> */}
+        <TenantCreate />
         <div className="pt-8">
           <TenantList />
         </div>
