@@ -27,6 +27,7 @@
     "react-oidc-context": "^2.0.0-beta.2",
     "react-query": "^3.34.12",
     "styled-components": "^5.3.3",
+    "sweetalert2": "^11.4.7",
     "zustand": "^3.6.8"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/main.css";
+import "sweetalert2/dist/sweetalert2.min.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "react-oidc-context";

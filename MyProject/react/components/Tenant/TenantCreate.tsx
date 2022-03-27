@@ -1,15 +1,26 @@
 import { TenantCreateDto } from "@abp/generated/MyProjectModels";
-import React, { useState, Fragment } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import DialogWrapper from "../Shared/DialogWrapper";
+import { createTenant } from "@abp/services/TenantService";
+import Swal from "sweetalert2";
+import { useQueryClient } from "react-query";
+import { QueryNames } from "@abp/utils/Constants";
+import Form from "../Shared/Form";
+import Input from "../Shared/Input";
+import Button from "../Shared/Button";
 type Props = {};
 
 const TenantCreate = (props: Props) => {
-  let [isOpen, setIsOpen] = useState(true);
-
-  const { register, handleSubmit } = useForm<TenantCreateDto>();
-  const onSubmit = (data: any) =>{
-    console.log(data as TenantCreateDto);
+  let [isOpen, setIsOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const onSubmit = async (data: any) => {
+    var tenant = data as TenantCreateDto;
+    var response = await createTenant(tenant);
+    if (response.status === 200) {
+      queryClient.invalidateQueries(QueryNames.GetTenants);
+      setIsOpen(false);
+      Swal.fire("Success", "Tenant Created Successfully", "success");
+    }
   };
   function closeModal() {
     setIsOpen(false);
@@ -22,78 +33,31 @@ const TenantCreate = (props: Props) => {
   return (
     <>
       <div className="float-right">
-        <button
-          type="button"
-          onClick={openModal}
-          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          New Tenant
-        </button>
+        <Button displayText="New Tenant" onClick={openModal} />
       </div>
       <DialogWrapper isOpen={isOpen} title="Create tenant" onClose={closeModal}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mt-8 space-y-6">
-            <div>
-              <label
-                htmlFor="name"
-                className="text-sm text-gray-700 block mb-1 font-medium"
-              >
-                Name
-              </label>
-              <input
-                {...register("name", { required: true })}
-                className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                placeholder="Enter your tenant name"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="text-sm text-gray-700 block mb-1 font-medium"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                {...register("adminEmailAddress", { required: true, })}
-                className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                placeholder="yourmail@provider.com"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="text-sm text-gray-700 block mb-1 font-medium"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                {...register("adminPassword", { required: true })}   
-                className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                placeholder="password"
-              />
-            </div>
-          </div>
-
-          <div className="space-x-4 mt-8 float-right">
-            <button
-              onClick={closeModal}
-              className="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="submit"
-              className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50"
-            >
-              Save
-            </button>
-          </div>
-        </form>
+        <Form onSubmit={onSubmit} onCancel={closeModal}>
+          <Input
+            required
+            placeholder="Enter your tenant name"
+            name="name"
+            displayName="Name"
+          />
+          <Input
+            required
+            placeholder="yourmail@provider.com"
+            name="adminEmailAddress"
+            displayName="Email"
+            type="email"
+          />
+          <Input
+            required
+            placeholder="Password"
+            name="adminPassword"
+            displayName="Password"
+            type="password"
+          />
+        </Form>
       </DialogWrapper>
     </>
   );
