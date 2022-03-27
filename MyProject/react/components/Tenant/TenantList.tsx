@@ -15,6 +15,7 @@ import { deleteTenant } from "@abp/services/TenantService";
 import { QueryNames } from "@abp/utils/Constants";
 import TenantEdit from "./TenantEdit";
 import { TenantDto } from "@abp/generated/MyProjectModels";
+import FeatureList from "./FeatureList";
 type Props = {};
 
 const TenantList = (props: Props) => {
@@ -112,7 +113,13 @@ const TenantList = (props: Props) => {
   if (isError) return <Error />;
   return (
     <>
-      <TenantEdit isOpen={isEditOpen} closeModal={closeModal} name={tenantToEdit?.name!} id={tenantToEdit?.id!}/>
+      {/* <FeatureList /> */}
+      <TenantEdit
+        isOpen={isEditOpen}
+        closeModal={closeModal}
+        name={tenantToEdit?.name!}
+        id={tenantToEdit?.id!}
+      />
       <DataTable
         theme={theme === "dark" ? "dark" : "default"}
         columns={columns}
