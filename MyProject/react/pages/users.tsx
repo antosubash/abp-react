@@ -6,6 +6,7 @@ import classNames from "classnames";
 import UserList from "@abp/components/User/UserList";
 import RoleList from "@abp/components/Role/RoleList";
 import { useI18n } from "next-localization";
+import AddUser from "@abp/components/User/AddUser";
 
 const Users: NextPage = () => {
   const i18n = useI18n();
@@ -46,6 +47,7 @@ const Users: NextPage = () => {
                   "pt-8",
                 )}
               >
+                <AddUser/>
                 <UserList/>
               </Tab.Panel>
               <Tab.Panel

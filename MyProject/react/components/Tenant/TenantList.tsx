@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";
 import { useTenants } from "hooks/useTenants";
-import DataTable, { TableColumn, TableRow } from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import {
   AdjustmentsIcon,
   PencilAltIcon,
@@ -65,13 +65,11 @@ const TenantList = (props: Props) => {
   }
 
   const tenantEdit = (row: any) => {
-    console.log(row);
     setTenantToEdit(row);
     openModal();
   };
 
   const tenantDelete = (row: any) => {
-    console.log(row.name);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -113,7 +111,7 @@ const TenantList = (props: Props) => {
   if (isError) return <Error />;
   return (
     <>
-      {/* <FeatureList /> */}
+      <FeatureList />
       <TenantEdit
         isOpen={isEditOpen}
         closeModal={closeModal}
