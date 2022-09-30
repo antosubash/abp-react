@@ -1,0 +1,43 @@
+{
+  "name": "my-project",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "gen": "nswag openapi2tsclient /input:https://localhost:44310/swagger/v1/swagger.json /generateClientClasses:false /output:generated/MyProjectModels.ts"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
+    "axios": "^0.24.0",
+    "axios-cache-adapter": "^2.7.3",
+    "classnames": "^2.3.1",
+    "next": "12.1.0",
+    "next-localization": "^0.11.0",
+    "next-themes": "^0.0.15",
+    "oidc-client-ts": "^2.0.0-rc.3",
+    "react": "17.0.2",
+    "react-data-table-component": "^7.4.7",
+    "react-dom": "17.0.2",
+    "react-final-table": "^1.5.1",
+    "react-hook-form": "^7.28.1",
+    "react-icons": "^4.3.1",
+    "react-oidc-context": "^2.0.0-beta.2",
+    "react-query": "^3.34.12",
+    "styled-components": "^5.3.3",
+    "sweetalert2": "^11.4.7",
+    "zustand": "^3.6.8"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.6",
+    "@types/react": "17.0.38",
+    "autoprefixer": "^10.4.1",
+    "eslint": "8.6.0",
+    "eslint-config-next": "12.0.7",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.8",
+    "typescript": "4.5.4"
+  }
+}
