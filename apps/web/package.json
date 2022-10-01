@@ -22,7 +22,7 @@
     "autoprefixer": "^10.4.12",
     "eslint-config-custom": "*",
     "postcss": "^8.4.17",
-    "tailwind-config": "0.1.2",
+    "tailwind-config": "*",
     "tailwindcss": "^3.1.8",
     "@abpreact/tsconfig": "*",
     "typescript": "^4.8.4"

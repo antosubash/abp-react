@@ -23,7 +23,7 @@
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "tsup": "^6.2.3",
-    "tailwind-config": "0.1.2",
+    "tailwind-config": "*",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.4"
   },
