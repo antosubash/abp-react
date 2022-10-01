@@ -1,5 +1,16 @@
 # web
 
+## 0.0.4
+
+### Patch Changes
+
+- af9978c: fixed some package versions
+- 3e15cf0: Updated the packages
+- Updated dependencies [af9978c]
+- Updated dependencies [3e15cf0]
+  - @abpreact/core@0.0.4
+  - @abpreact/utils@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
