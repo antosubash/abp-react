@@ -1,7 +1,11 @@
 import Head from "next/head";
 import { Button } from "@abpreact/core";
+import { useIsomorphicLayoutEffect } from "@abpreact/utils";
 
 export default function Home() {
+  useIsomorphicLayoutEffect(() => {
+    console.log("abpreact docs page");
+  }, []);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -23,3 +27,5 @@ export default function Home() {
     </div>
   );
 }
+
+
