@@ -17,14 +17,14 @@
   },
   "devDependencies": {
     "@abpreact/tsconfig": "*",
-    "eslint": "^8.24.0",
+    "eslint": "^8.26.0",
     "eslint-config-abpreact": "*",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
     "react": "^18.2.0",
-    "tsup": "^6.2.3",
+    "tsup": "^6.4.0",
     "tailwind-config": "*",
-    "tailwindcss": "^3.1.8",
+    "tailwindcss": "^3.2.2",
     "typescript": "^4.8.4"
   },
   "publishConfig": {
