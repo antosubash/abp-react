@@ -12,7 +12,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "release": "turbo run build --filter=docs^... && changeset publish",
+    "gen": "nswag openapi2tsclient /input:https://localhost:44310/swagger/v1/swagger.json /generateClientClasses:false /output:generated/MyProjectModels.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
