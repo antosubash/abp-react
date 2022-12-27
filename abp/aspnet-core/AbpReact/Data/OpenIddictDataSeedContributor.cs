@@ -76,7 +76,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         var consoleAndAngularClientId = configurationSection["AbpReact_App:ClientId"];
         if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
         {
-            var webClientRootUrl = configurationSection["AbpReact_App:RootUrl"]?.TrimEnd('/');
+            var webClientRootUrl = configurationSection.GetSection("AbpReact_App:RootUrl").Get<string[]>().Select(x => x.TrimEnd('/')).ToArray();
             await CreateApplicationAsync(
                 name: consoleAndAngularClientId,
                 type: OpenIddictConstants.ClientTypes.Public,
@@ -91,12 +91,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.RefreshToken
                 },
                 scopes: commonScopes,
-                redirectUris: new[] {
-                    webClientRootUrl
-                },
-                postLogoutRedirectUris: new[] {
-                    webClientRootUrl
-                }
+                redirectUris: webClientRootUrl,
+                postLogoutRedirectUris: webClientRootUrl
             );
         }
 
@@ -127,7 +123,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         var swaggerClientId = configurationSection["AbpReact_Swagger:ClientId"];
         if (!swaggerClientId.IsNullOrWhiteSpace())
         {
-            var swaggerRootUrl = configurationSection["AbpReact_Swagger:RootUrl"].TrimEnd('/');
+            var swaggerRootUrl = configurationSection.GetSection("AbpReact_Swagger:RootUrl").Get<string[]>().Select(x => x.TrimEnd('/'));
             await CreateApplicationAsync(
                 name: swaggerClientId,
                 type: OpenIddictConstants.ClientTypes.Public,
@@ -139,9 +135,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                 },
                 scopes: commonScopes,
-                redirectUris: new[] {
-                    $"{swaggerRootUrl}/swagger/oauth2-redirect.html"
-                }
+                redirectUris: swaggerRootUrl.Select(x => $"{x}/swagger/oauth2-redirect.html").ToArray()
             );
         }
     }
