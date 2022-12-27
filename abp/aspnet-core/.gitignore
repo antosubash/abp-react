@@ -260,4 +260,4 @@ AbpReact/Logs/*
 *.db-wal
 
 # Use abp install-libs to restore.
-**/wwwroot/libs/*
+# **/wwwroot/libs/*

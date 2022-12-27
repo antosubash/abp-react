@@ -41,12 +41,7 @@ public class Program
             await builder.AddApplicationAsync<AbpReactModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
-
-            if (IsMigrateDatabase(args))
-            {
-                await app.Services.GetRequiredService<AbpReactDbMigrationService>().MigrateAsync();
-                return 0;
-            }
+            await app.Services.GetRequiredService<AbpReactDbMigrationService>().MigrateAsync();
 
             Log.Information("Starting AbpReact.");
             await app.RunAsync();
