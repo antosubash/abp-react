@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "dev" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Docker Login
+      uses: docker/login-action@v1.14.1
+      with:
+        registry: registry.antosubash.com
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - uses: actions/checkout@v2
+    - name: Build the abpreact Docker image
+      run: docker build ./abp/aspnet-core --file abp/aspnet-core/AbpReact/Dockerfile --tag abpreact:dev
+    - name: Docker tag images
+      run: docker tag abpreact:dev registry.antosubash.com/abpreact:dev
+    - name: Push abpreact image
+      run: docker push registry.antosubash.com/abpreact:dev

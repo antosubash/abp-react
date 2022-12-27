@@ -5,8 +5,5 @@ export const config = {
 };
 
 export default function middleware(req: NextRequest) {
-  const url = req.nextUrl;
-  const hostname = req.headers.get("host") || "localhost:3000";
-  url.pathname = `/_sites/${hostname}${url.pathname}`;
-  return NextResponse.rewrite(url);
+  
 }
