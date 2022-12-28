@@ -30,9 +30,6 @@ public class Program
             loggerConfiguration.WriteTo.Seq("https://seq.antosubash.com", apiKey: seqApiKey);
         }
 
-        loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
-        loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
-
         Log.Logger = loggerConfiguration.CreateLogger();
 
         try
