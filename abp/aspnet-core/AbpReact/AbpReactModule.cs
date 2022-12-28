@@ -265,7 +265,8 @@ public class AbpReactModule : AbpModule
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpReact API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
+                options.CustomSchemaIds(type => type.FriendlyId().Replace("[", "Of").Replace("]", ""));
+                options.CustomOperationIds(options => $"{options.ActionDescriptor.RouteValues["controller"]}{options.ActionDescriptor.RouteValues["action"]}");
             });
     }
 
