@@ -145,6 +145,7 @@ public class AbpReactModule : AbpModule
         ConfigureEfCore(context);
         context.Services.AddSameSiteCookiePolicy();
         context.Services.AddDataProtection()
+            .SetApplicationName("AbpReact")
             .PersistKeysToDbContext<AbpReactDbContext>();
     }
 
