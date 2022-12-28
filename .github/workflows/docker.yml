@@ -24,3 +24,8 @@ jobs:
       run: docker tag abpreact:dev registry.antosubash.com/abpreact:dev
     - name: Push abpreact image
       run: docker push registry.antosubash.com/abpreact:dev
+    - name: Send Http Post Request
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: ${{ secrets.WEBHOOK_URL }}
+        method: 'POST'
