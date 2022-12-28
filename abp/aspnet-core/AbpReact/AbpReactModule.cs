@@ -46,7 +46,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
-
+using AbpReact.Extensions;
 namespace AbpReact;
 
 [DependsOn(
@@ -143,6 +143,7 @@ public class AbpReactModule : AbpModule
         ConfigureCors(context, configuration);
         ConfigureDataProtection(context);
         ConfigureEfCore(context);
+        context.Services.AddSameSiteCookiePolicy();
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -339,6 +340,7 @@ public class AbpReactModule : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseCors();
+        app.UseCookiePolicy();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 
