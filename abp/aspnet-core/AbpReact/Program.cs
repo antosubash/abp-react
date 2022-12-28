@@ -11,7 +11,7 @@ public class Program
     {
         // https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
+        var seqApiKey = Environment.GetEnvironmentVariable("SEQ_API_KEY");
         var loggerConfiguration = new LoggerConfiguration()
 #if DEBUG
             .MinimumLevel.Debug()
@@ -21,14 +21,17 @@ public class Program
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
+            .Enrich.WithProperty("Application", "AbpReact")
             .WriteTo.Async(c => c.File("Logs/logs.txt"))
             .WriteTo.Async(c => c.Console());
 
-        if (IsMigrateDatabase(args))
+        if (seqApiKey != null)
         {
-            loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
-            loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
+            loggerConfiguration.WriteTo.Seq("https://seq.antosubash.com", apiKey: seqApiKey);
         }
+
+        loggerConfiguration.MinimumLevel.Override("Volo.Abp", LogEventLevel.Warning);
+        loggerConfiguration.MinimumLevel.Override("Microsoft", LogEventLevel.Warning);
 
         Log.Logger = loggerConfiguration.CreateLogger();
 
