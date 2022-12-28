@@ -7,11 +7,12 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 namespace AbpReact.Data;
 
-public class AbpReactDbContext : AbpDbContext<AbpReactDbContext>
+public class AbpReactDbContext : AbpDbContext<AbpReactDbContext>, IDataProtectionKeyContext
 {
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
     public AbpReactDbContext(DbContextOptions<AbpReactDbContext> options)
         : base(options)
     {
@@ -30,6 +31,7 @@ public class AbpReactDbContext : AbpDbContext<AbpReactDbContext>
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+        
 
         /* Configure your own entities here */
     }

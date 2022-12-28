@@ -144,6 +144,8 @@ public class AbpReactModule : AbpModule
         ConfigureDataProtection(context);
         ConfigureEfCore(context);
         context.Services.AddSameSiteCookiePolicy();
+        context.Services.AddDataProtection()
+            .PersistKeysToDbContext<AbpReactDbContext>();
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
