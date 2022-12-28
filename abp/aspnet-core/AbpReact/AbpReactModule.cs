@@ -47,6 +47,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 using AbpReact.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
+
 namespace AbpReact;
 
 [DependsOn(
@@ -147,6 +149,12 @@ public class AbpReactModule : AbpModule
         context.Services.AddDataProtection()
             .SetApplicationName("AbpReact")
             .PersistKeysToDbContext<AbpReactDbContext>();
+
+        context.Services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders =
+                ForwardedHeaders.XForwardedProto;
+        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
@@ -337,7 +345,10 @@ public class AbpReactModule : AbpModule
         if (!env.IsDevelopment())
         {
             app.UseErrorPage();
+            app.UseHsts();
         }
+        app.UseForwardedHeaders();
+        app.UseHttpsRedirection();
 
         app.UseCorrelationId();
         app.UseStaticFiles();

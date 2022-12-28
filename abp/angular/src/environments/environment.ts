@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44380/',
+    issuer: 'https://api.abpreact.antosubash.com/',
     redirectUri: baseUrl,
     clientId: 'AbpReact_App',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44380',
+      url: 'https://api.abpreact.antosubash.com/',
       rootNamespace: 'AbpReact',
     },
   },
