@@ -3,7 +3,6 @@ import { Button } from "@abpreact/core";
 import { GetServerSideProps } from "next";
 
 export default function Home( { site } : any) {
-  console.log(site)
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -27,10 +26,8 @@ export default function Home( { site } : any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  var site = context.params?.site as string;
   return {
     props: {
-      site: site,
     },
   };
 };

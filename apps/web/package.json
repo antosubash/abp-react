@@ -1,5 +1,5 @@
 {
-  "name": "@abpreact/web",
+  "name": "web",
   "version": "0.0.4",
   "private": true,
   "scripts": {
