@@ -7,5 +7,5 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": ["@abpreact/docs"]
+  "ignore": ["web"]
 }
