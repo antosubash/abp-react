@@ -5,4 +5,3 @@
 export type ControllerInterfaceApiDescriptionModel = {
     type?: string | null;
 };
-

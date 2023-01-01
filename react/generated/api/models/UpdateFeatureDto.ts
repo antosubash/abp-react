@@ -6,4 +6,3 @@ export type UpdateFeatureDto = {
     name?: string | null;
     value?: string | null;
 };
-

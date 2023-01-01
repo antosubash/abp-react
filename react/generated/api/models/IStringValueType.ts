@@ -9,4 +9,3 @@ export type IStringValueType = {
     readonly properties?: Record<string, any> | null;
     validator?: IValueValidator;
 };
-

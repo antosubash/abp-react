@@ -10,13 +10,13 @@ import { request as __request } from '../core/request';
 export class AbpTenantService {
 
     /**
-     * @param name
+     * @param name 
      * @returns FindTenantResultDto Success
      * @throws ApiError
      */
     public static abpTenantFindTenantByName(
-        name: string,
-    ): CancelablePromise<FindTenantResultDto> {
+name: string,
+): CancelablePromise<FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-name/{name}',
@@ -35,13 +35,13 @@ export class AbpTenantService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns FindTenantResultDto Success
      * @throws ApiError
      */
     public static abpTenantFindTenantById(
-        id: string,
-    ): CancelablePromise<FindTenantResultDto> {
+id: string,
+): CancelablePromise<FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-id/{id}',

@@ -1,11 +1,10 @@
-import IdentityServer4Provider from "next-auth/providers/identity-server4";
 import { NextAuthOptions, unstable_getServerSession } from "next-auth";
 import {
   GetServerSidePropsContext,
 } from "next";
 import { OpenAPI as ApiOptions } from "../generated/api";
 import { getCookieFromRequest } from "./cookieUtils";
-export const getAuthOptions = (req: any, res: any) => {
+export const getAuthOptions = (req: any) => {
   var issuer = getCookieFromRequest("next-auth.issuer", req);
   if (!issuer) {
     throw new Error("issuer not found");
@@ -22,10 +21,13 @@ export const getAuthOptions = (req: any, res: any) => {
         },
         wellKnown: `${issuer}/.well-known/openid-configuration`,
         authorization: {
-          params: { scope: "openid profile email NextAuthApp" },
+          params: { scope: "openid profile email AbpReact" },
         },
         profile: (profile: any) => {
-          console.log("🚀 ~ file: authUtil.ts ~ line 25 ~ getAuthOptions ~ profile", profile)
+          console.log(
+            "🚀 ~ file: authUtil.ts ~ line 25 ~ getAuthOptions ~ profile",
+            profile
+          );
           return {
             id: profile.sub,
             name: profile.name,
@@ -33,8 +35,8 @@ export const getAuthOptions = (req: any, res: any) => {
             image: profile.picture,
           };
         },
-        clientId: process.env.IdentityServer4_CLIENT_ID,
-      }
+        clientId: "AbpReact_Next_App",
+      },
     ],
     secret: process.env.SECRET,
     session: {
@@ -67,7 +69,7 @@ export const getAuthOptions = (req: any, res: any) => {
 };
 
 export const getServerSession = async (context: GetServerSidePropsContext) => {
-  var authOptions = getAuthOptions(context.req, context.res);
+  var authOptions = getAuthOptions(context.req);
   const session = await unstable_getServerSession(
     context.req,
     context.res,

@@ -7,4 +7,3 @@ import type { UpdateFeatureDto } from './UpdateFeatureDto';
 export type UpdateFeaturesDto = {
     features?: Array<UpdateFeatureDto> | null;
 };
-

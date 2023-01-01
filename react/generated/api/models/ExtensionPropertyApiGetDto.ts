@@ -5,4 +5,3 @@
 export type ExtensionPropertyApiGetDto = {
     isAvailable?: boolean;
 };
-

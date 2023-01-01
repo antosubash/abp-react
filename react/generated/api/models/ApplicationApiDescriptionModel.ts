@@ -9,4 +9,3 @@ export type ApplicationApiDescriptionModel = {
     modules?: Record<string, ModuleApiDescriptionModel> | null;
     types?: Record<string, TypeApiDescriptionModel> | null;
 };
-

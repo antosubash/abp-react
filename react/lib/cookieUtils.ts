@@ -16,13 +16,12 @@ export const getCookieFromMiddleware = (name: string, req: any) => {
     return null;
   }
   const NextRequestMeta = req[NextRequestMetaSymbol];
-  var cookieString = NextRequestMeta._nextMiddlewareCookie
-    .toString()
+  var cookieString = NextRequestMeta._nextMiddlewareCookie?.toString()
     .replace("Path=/", "");
-  var cookieArray = cookieString.split(";");
-  var cookie = cookieArray.find((x: string | string[]) => x.includes(name));
+  var cookieArray = cookieString?.split(";");
+  var cookie = cookieArray?.find((x: string | string[]) => x.includes(name));
   var value = cookie?.split("=")[1];
-  return decodeURIComponent(value.trim());
+  return decodeURIComponent(value?.trim());
 };
 
 export const getCookieFromRequest = (name: string, req: IncomingMessage) => {

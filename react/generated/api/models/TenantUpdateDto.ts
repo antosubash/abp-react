@@ -7,4 +7,3 @@ export type TenantUpdateDto = {
     name: string;
     concurrencyStamp?: string | null;
 };
-

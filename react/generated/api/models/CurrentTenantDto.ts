@@ -7,4 +7,3 @@ export type CurrentTenantDto = {
     name?: string | null;
     isAvailable?: boolean;
 };
-

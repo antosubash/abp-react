@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { useAuth } from "react-oidc-context";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const UserDropDown = () => {
-  var auth = useAuth();
   return (
     <div className="relative inline-block">
       <Menu>
@@ -58,7 +57,7 @@ const UserDropDown = () => {
                           active && "bg-blue-500"
                         } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
                         onClick={() => {
-                          auth.signoutRedirect();
+                          signOut();
                         }}
                       >
                         Sign out

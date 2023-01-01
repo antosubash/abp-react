@@ -88,9 +88,9 @@ const getQueryString = (params: Record<string, any>): string => {
     return '';
 };
 
-const getUrl = async (config: OpenAPIConfig, options: ApiRequestOptions): Promise<string> => {
+const getUrl = (config: OpenAPIConfig, options: ApiRequestOptions): string => {
     const encoder = config.ENCODE_PATH || encodeURI;
-    const base = await resolve(options, config.BASE);
+
     const path = options.url
         .replace('{api-version}', config.VERSION)
         .replace(/{(.*?)}/g, (substring: string, group: string) => {
@@ -100,7 +100,7 @@ const getUrl = async (config: OpenAPIConfig, options: ApiRequestOptions): Promis
             return substring;
         });
 
-    const url = `${base}${path}`;
+    const url = `${config.BASE}${path}`;
     if (options.query) {
         return `${url}${getQueryString(options.query)}`;
     }
@@ -275,7 +275,7 @@ const catchErrorCodes = (options: ApiRequestOptions, result: ApiResult): void =>
 export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): CancelablePromise<T> => {
     return new CancelablePromise(async (resolve, reject, onCancel) => {
         try {
-            const url = await getUrl(config, options);
+            const url = getUrl(config, options);
             const formData = getFormData(options);
             const body = getRequestBody(options);
             const headers = await getHeaders(config, options, formData);

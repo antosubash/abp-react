@@ -8,4 +8,3 @@ export type PagedResultDtoOfIdentityRoleDto = {
     items?: Array<IdentityRoleDto> | null;
     totalCount?: number;
 };
-

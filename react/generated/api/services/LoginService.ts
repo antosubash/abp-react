@@ -11,13 +11,13 @@ import { request as __request } from '../core/request';
 export class LoginService {
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns AbpLoginResult Success
      * @throws ApiError
      */
     public static loginLogin(
-        requestBody?: UserLoginInfo,
-    ): CancelablePromise<AbpLoginResult> {
+requestBody?: UserLoginInfo,
+): CancelablePromise<AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/login',
@@ -54,13 +54,13 @@ export class LoginService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns AbpLoginResult Success
      * @throws ApiError
      */
     public static loginCheckPassword(
-        requestBody?: UserLoginInfo,
-    ): CancelablePromise<AbpLoginResult> {
+requestBody?: UserLoginInfo,
+): CancelablePromise<AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/check-password',

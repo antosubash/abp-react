@@ -13,4 +13,3 @@ export type EmailSettingsDto = {
     defaultFromAddress?: string | null;
     defaultFromDisplayName?: string | null;
 };
-

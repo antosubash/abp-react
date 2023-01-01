@@ -31,13 +31,13 @@ export class EmailSettingsService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static emailSettingsUpdate(
-        requestBody?: UpdateEmailSettingsDto,
-    ): CancelablePromise<any> {
+requestBody?: UpdateEmailSettingsDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/setting-management/emailing',
@@ -55,13 +55,13 @@ export class EmailSettingsService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static emailSettingsSendTestEmail(
-        requestBody?: SendTestEmailInput,
-    ): CancelablePromise<any> {
+requestBody?: SendTestEmailInput,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/setting-management/emailing/send-test-email',

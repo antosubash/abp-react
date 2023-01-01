@@ -1,14 +1,14 @@
+import { useSession } from "next-auth/react";
 import React from "react";
-import { useAuth } from "react-oidc-context";
 
 interface Props {}
 
 const Dashboard = (props: Props) => {
-  var auth = useAuth();
+  var session = useSession();
   return (
     <div>
       <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
-        Hello, {auth?.user?.profile.name}!
+        Hello, !
       </h1>
 
       <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">

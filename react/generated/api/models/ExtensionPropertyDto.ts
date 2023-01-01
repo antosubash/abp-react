@@ -17,4 +17,3 @@ export type ExtensionPropertyDto = {
     configuration?: Record<string, any> | null;
     defaultValue?: any;
 };
-

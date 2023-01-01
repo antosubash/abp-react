@@ -33,19 +33,19 @@ export class RoleService {
     }
 
     /**
-     * @param filter
-     * @param sorting
-     * @param skipCount
-     * @param maxResultCount
+     * @param filter 
+     * @param sorting 
+     * @param skipCount 
+     * @param maxResultCount 
      * @returns PagedResultDtoOfIdentityRoleDto Success
      * @throws ApiError
      */
     public static roleGetList(
-        filter?: string,
-        sorting?: string,
-        skipCount?: number,
-        maxResultCount?: number,
-    ): CancelablePromise<PagedResultDtoOfIdentityRoleDto> {
+filter?: string,
+sorting?: string,
+skipCount?: number,
+maxResultCount?: number,
+): CancelablePromise<PagedResultDtoOfIdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/roles',
@@ -67,13 +67,13 @@ export class RoleService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns IdentityRoleDto Success
      * @throws ApiError
      */
     public static roleCreate(
-        requestBody?: IdentityRoleCreateDto,
-    ): CancelablePromise<IdentityRoleDto> {
+requestBody?: IdentityRoleCreateDto,
+): CancelablePromise<IdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/identity/roles',
@@ -91,13 +91,13 @@ export class RoleService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns IdentityRoleDto Success
      * @throws ApiError
      */
     public static roleGet(
-        id: string,
-    ): CancelablePromise<IdentityRoleDto> {
+id: string,
+): CancelablePromise<IdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/roles/{id}',
@@ -116,15 +116,15 @@ export class RoleService {
     }
 
     /**
-     * @param id
-     * @param requestBody
+     * @param id 
+     * @param requestBody 
      * @returns IdentityRoleDto Success
      * @throws ApiError
      */
     public static roleUpdate(
-        id: string,
-        requestBody?: IdentityRoleUpdateDto,
-    ): CancelablePromise<IdentityRoleDto> {
+id: string,
+requestBody?: IdentityRoleUpdateDto,
+): CancelablePromise<IdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/roles/{id}',
@@ -145,13 +145,13 @@ export class RoleService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns any Success
      * @throws ApiError
      */
     public static roleDelete(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/identity/roles/{id}',

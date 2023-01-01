@@ -11,13 +11,13 @@ import { request as __request } from '../core/request';
 export class UserLookupService {
 
     /**
-     * @param id
+     * @param id 
      * @returns UserData Success
      * @throws ApiError
      */
     public static userLookupFindById(
-        id: string,
-    ): CancelablePromise<UserData> {
+id: string,
+): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/{id}',
@@ -36,13 +36,13 @@ export class UserLookupService {
     }
 
     /**
-     * @param userName
+     * @param userName 
      * @returns UserData Success
      * @throws ApiError
      */
     public static userLookupFindByUserName(
-        userName: string,
-    ): CancelablePromise<UserData> {
+userName: string,
+): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/by-username/{userName}',
@@ -61,19 +61,19 @@ export class UserLookupService {
     }
 
     /**
-     * @param filter
-     * @param sorting
-     * @param skipCount
-     * @param maxResultCount
+     * @param filter 
+     * @param sorting 
+     * @param skipCount 
+     * @param maxResultCount 
      * @returns ListResultDtoOfUserData Success
      * @throws ApiError
      */
     public static userLookupSearch(
-        filter?: string,
-        sorting?: string,
-        skipCount?: number,
-        maxResultCount?: number,
-    ): CancelablePromise<ListResultDtoOfUserData> {
+filter?: string,
+sorting?: string,
+skipCount?: number,
+maxResultCount?: number,
+): CancelablePromise<ListResultDtoOfUserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/search',
@@ -95,13 +95,13 @@ export class UserLookupService {
     }
 
     /**
-     * @param filter
+     * @param filter 
      * @returns number Success
      * @throws ApiError
      */
     public static userLookupGetCount(
-        filter?: string,
-    ): CancelablePromise<number> {
+filter?: string,
+): CancelablePromise<number> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/count',

@@ -31,13 +31,13 @@ export class ProfileService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns ProfileDto Success
      * @throws ApiError
      */
     public static profileUpdate(
-        requestBody?: UpdateProfileDto,
-    ): CancelablePromise<ProfileDto> {
+requestBody?: UpdateProfileDto,
+): CancelablePromise<ProfileDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/account/my-profile',
@@ -55,13 +55,13 @@ export class ProfileService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static profileChangePassword(
-        requestBody?: ChangePasswordInput,
-    ): CancelablePromise<any> {
+requestBody?: ChangePasswordInput,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/my-profile/change-password',

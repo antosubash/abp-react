@@ -12,4 +12,3 @@ export type PermissionGrantInfoDto = {
     allowedProviders?: Array<string> | null;
     grantedProviders?: Array<ProviderInfoDto> | null;
 };
-

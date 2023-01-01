@@ -8,4 +8,3 @@ export type ModuleExtensionDto = {
     entities?: Record<string, EntityExtensionDto> | null;
     configuration?: Record<string, any> | null;
 };
-

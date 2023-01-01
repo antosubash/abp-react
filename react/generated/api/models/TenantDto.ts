@@ -8,4 +8,3 @@ export type TenantDto = {
     name?: string | null;
     concurrencyStamp?: string | null;
 };
-

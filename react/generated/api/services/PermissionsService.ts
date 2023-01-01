@@ -11,15 +11,15 @@ import { request as __request } from '../core/request';
 export class PermissionsService {
 
     /**
-     * @param providerName
-     * @param providerKey
+     * @param providerName 
+     * @param providerKey 
      * @returns GetPermissionListResultDto Success
      * @throws ApiError
      */
     public static permissionsGet(
-        providerName?: string,
-        providerKey?: string,
-    ): CancelablePromise<GetPermissionListResultDto> {
+providerName?: string,
+providerKey?: string,
+): CancelablePromise<GetPermissionListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/permission-management/permissions',
@@ -39,17 +39,17 @@ export class PermissionsService {
     }
 
     /**
-     * @param providerName
-     * @param providerKey
-     * @param requestBody
+     * @param providerName 
+     * @param providerKey 
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static permissionsUpdate(
-        providerName?: string,
-        providerKey?: string,
-        requestBody?: UpdatePermissionsDto,
-    ): CancelablePromise<any> {
+providerName?: string,
+providerKey?: string,
+requestBody?: UpdatePermissionsDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/permission-management/permissions',

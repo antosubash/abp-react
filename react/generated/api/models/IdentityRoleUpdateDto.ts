@@ -9,4 +9,3 @@ export type IdentityRoleUpdateDto = {
     isPublic?: boolean;
     concurrencyStamp?: string | null;
 };
-

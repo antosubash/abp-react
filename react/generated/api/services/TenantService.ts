@@ -13,13 +13,13 @@ import { request as __request } from '../core/request';
 export class TenantService {
 
     /**
-     * @param id
+     * @param id 
      * @returns TenantDto Success
      * @throws ApiError
      */
     public static tenantGet(
-        id: string,
-    ): CancelablePromise<TenantDto> {
+id: string,
+): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants/{id}',
@@ -38,15 +38,15 @@ export class TenantService {
     }
 
     /**
-     * @param id
-     * @param requestBody
+     * @param id 
+     * @param requestBody 
      * @returns TenantDto Success
      * @throws ApiError
      */
     public static tenantUpdate(
-        id: string,
-        requestBody?: TenantUpdateDto,
-    ): CancelablePromise<TenantDto> {
+id: string,
+requestBody?: TenantUpdateDto,
+): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/multi-tenancy/tenants/{id}',
@@ -67,13 +67,13 @@ export class TenantService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns any Success
      * @throws ApiError
      */
     public static tenantDelete(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/multi-tenancy/tenants/{id}',
@@ -92,19 +92,19 @@ export class TenantService {
     }
 
     /**
-     * @param filter
-     * @param sorting
-     * @param skipCount
-     * @param maxResultCount
+     * @param filter 
+     * @param sorting 
+     * @param skipCount 
+     * @param maxResultCount 
      * @returns PagedResultDtoOfTenantDto Success
      * @throws ApiError
      */
     public static tenantGetList(
-        filter?: string,
-        sorting?: string,
-        skipCount?: number,
-        maxResultCount?: number,
-    ): CancelablePromise<PagedResultDtoOfTenantDto> {
+filter?: string,
+sorting?: string,
+skipCount?: number,
+maxResultCount?: number,
+): CancelablePromise<PagedResultDtoOfTenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants',
@@ -126,13 +126,13 @@ export class TenantService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns TenantDto Success
      * @throws ApiError
      */
     public static tenantCreate(
-        requestBody?: TenantCreateDto,
-    ): CancelablePromise<TenantDto> {
+requestBody?: TenantCreateDto,
+): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/multi-tenancy/tenants',
@@ -150,13 +150,13 @@ export class TenantService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns string Success
      * @throws ApiError
      */
     public static tenantGetDefaultConnectionString(
-        id: string,
-    ): CancelablePromise<string> {
+id: string,
+): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',
@@ -175,15 +175,15 @@ export class TenantService {
     }
 
     /**
-     * @param id
-     * @param defaultConnectionString
+     * @param id 
+     * @param defaultConnectionString 
      * @returns any Success
      * @throws ApiError
      */
     public static tenantUpdateDefaultConnectionString(
-        id: string,
-        defaultConnectionString?: string,
-    ): CancelablePromise<any> {
+id: string,
+defaultConnectionString?: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',
@@ -205,13 +205,13 @@ export class TenantService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns any Success
      * @throws ApiError
      */
     public static tenantDeleteDefaultConnectionString(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',

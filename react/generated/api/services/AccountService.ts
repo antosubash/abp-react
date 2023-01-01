@@ -13,13 +13,13 @@ import { request as __request } from '../core/request';
 export class AccountService {
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static accountRegister(
-        requestBody?: RegisterDto,
-    ): CancelablePromise<IdentityUserDto> {
+requestBody?: RegisterDto,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/register',
@@ -37,13 +37,13 @@ export class AccountService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static accountSendPasswordResetCode(
-        requestBody?: SendPasswordResetCodeDto,
-    ): CancelablePromise<any> {
+requestBody?: SendPasswordResetCodeDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-password-reset-code',
@@ -61,13 +61,13 @@ export class AccountService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static accountResetPassword(
-        requestBody?: ResetPasswordDto,
-    ): CancelablePromise<any> {
+requestBody?: ResetPasswordDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/reset-password',

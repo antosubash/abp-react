@@ -11,15 +11,15 @@ import { request as __request } from '../core/request';
 export class FeaturesService {
 
     /**
-     * @param providerName
-     * @param providerKey
+     * @param providerName 
+     * @param providerKey 
      * @returns GetFeatureListResultDto Success
      * @throws ApiError
      */
     public static featuresGet(
-        providerName?: string,
-        providerKey?: string,
-    ): CancelablePromise<GetFeatureListResultDto> {
+providerName?: string,
+providerKey?: string,
+): CancelablePromise<GetFeatureListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/feature-management/features',
@@ -39,17 +39,17 @@ export class FeaturesService {
     }
 
     /**
-     * @param providerName
-     * @param providerKey
-     * @param requestBody
+     * @param providerName 
+     * @param providerKey 
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static featuresUpdate(
-        providerName?: string,
-        providerKey?: string,
-        requestBody?: UpdateFeaturesDto,
-    ): CancelablePromise<any> {
+providerName?: string,
+providerKey?: string,
+requestBody?: UpdateFeaturesDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/feature-management/features',

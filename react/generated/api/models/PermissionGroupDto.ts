@@ -9,4 +9,3 @@ export type PermissionGroupDto = {
     displayName?: string | null;
     permissions?: Array<PermissionGrantInfoDto> | null;
 };
-

@@ -3,7 +3,7 @@ import { HostInfo } from "../models/HostInfo";
 export const hostData: HostInfo[] = [
   {
     host: "localhost:3000",
-    apiUrl: "https://localhost:44377",
+    apiUrl: "https://api.abpreact.antosubash.com",
   },
   {
     host: "test:3000",

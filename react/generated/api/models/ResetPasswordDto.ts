@@ -7,4 +7,3 @@ export type ResetPasswordDto = {
     resetToken: string;
     password: string;
 };
-

@@ -15,13 +15,13 @@ import { request as __request } from '../core/request';
 export class UserService {
 
     /**
-     * @param id
+     * @param id 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static userGet(
-        id: string,
-    ): CancelablePromise<IdentityUserDto> {
+id: string,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}',
@@ -40,15 +40,15 @@ export class UserService {
     }
 
     /**
-     * @param id
-     * @param requestBody
+     * @param id 
+     * @param requestBody 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static userUpdate(
-        id: string,
-        requestBody?: IdentityUserUpdateDto,
-    ): CancelablePromise<IdentityUserDto> {
+id: string,
+requestBody?: IdentityUserUpdateDto,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}',
@@ -69,13 +69,13 @@ export class UserService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns any Success
      * @throws ApiError
      */
     public static userDelete(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/identity/users/{id}',
@@ -94,19 +94,19 @@ export class UserService {
     }
 
     /**
-     * @param filter
-     * @param sorting
-     * @param skipCount
-     * @param maxResultCount
+     * @param filter 
+     * @param sorting 
+     * @param skipCount 
+     * @param maxResultCount 
      * @returns PagedResultDtoOfIdentityUserDto Success
      * @throws ApiError
      */
     public static userGetList(
-        filter?: string,
-        sorting?: string,
-        skipCount?: number,
-        maxResultCount?: number,
-    ): CancelablePromise<PagedResultDtoOfIdentityUserDto> {
+filter?: string,
+sorting?: string,
+skipCount?: number,
+maxResultCount?: number,
+): CancelablePromise<PagedResultDtoOfIdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users',
@@ -128,13 +128,13 @@ export class UserService {
     }
 
     /**
-     * @param requestBody
+     * @param requestBody 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static userCreate(
-        requestBody?: IdentityUserCreateDto,
-    ): CancelablePromise<IdentityUserDto> {
+requestBody?: IdentityUserCreateDto,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/identity/users',
@@ -152,13 +152,13 @@ export class UserService {
     }
 
     /**
-     * @param id
+     * @param id 
      * @returns ListResultDtoOfIdentityRoleDto Success
      * @throws ApiError
      */
     public static userGetRoles(
-        id: string,
-    ): CancelablePromise<ListResultDtoOfIdentityRoleDto> {
+id: string,
+): CancelablePromise<ListResultDtoOfIdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/roles',
@@ -177,15 +177,15 @@ export class UserService {
     }
 
     /**
-     * @param id
-     * @param requestBody
+     * @param id 
+     * @param requestBody 
      * @returns any Success
      * @throws ApiError
      */
     public static userUpdateRoles(
-        id: string,
-        requestBody?: IdentityUserUpdateRolesDto,
-    ): CancelablePromise<any> {
+id: string,
+requestBody?: IdentityUserUpdateRolesDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/roles',
@@ -225,13 +225,13 @@ export class UserService {
     }
 
     /**
-     * @param userName
+     * @param userName 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static userFindByUsername(
-        userName: string,
-    ): CancelablePromise<IdentityUserDto> {
+userName: string,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-username/{userName}',
@@ -250,13 +250,13 @@ export class UserService {
     }
 
     /**
-     * @param email
+     * @param email 
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
     public static userFindByEmail(
-        email: string,
-    ): CancelablePromise<IdentityUserDto> {
+email: string,
+): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-email/{email}',
