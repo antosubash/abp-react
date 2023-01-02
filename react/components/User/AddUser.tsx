@@ -1,8 +1,4 @@
-import {
-  IdentityUserCreateDto,
-  TenantCreateDto,
-} from "@abp/generated/MyProjectModels";
-import { createTenant } from "@abp/services/TenantService";
+
 import { QueryNames } from "@abp/utils/Constants";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
@@ -11,7 +7,7 @@ import Input from "@abp/components/Shared/Input";
 import Button from "@abp/components/Shared/Button";
 import DialogWrapper from "@abp/components/Shared/DialogWrapper";
 import Form from "@abp/components/Shared/Form";
-import { createUser } from "@abp/services/UserService";
+import { IdentityUserCreateDto, UserService } from "@abp/generated/api";
 
 type Props = {};
 
@@ -19,9 +15,9 @@ const AddUser = (props: Props) => {
   let [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const onSubmit = async (data: any) => {
-    var tenant = data as IdentityUserCreateDto;
-    var response = await createUser(tenant);
-    if (response.status === 200) {
+    var user = data as IdentityUserCreateDto;
+    var created = await UserService.userCreate(user);
+    if (created) {
       queryClient.invalidateQueries(QueryNames.GetUsers);
       setIsOpen(false);
       Swal.fire("Success", "User Created Successfully", "success");

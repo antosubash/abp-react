@@ -4,18 +4,17 @@ import Error from "@abp/components/Error";
 import { useTenants } from "hooks/useTenants";
 import DataTable from "react-data-table-component";
 import {
-  AdjustmentsIcon,
-  PencilAltIcon,
+  AdjustmentsHorizontalIcon,
+  PencilIcon,
   TrashIcon,
-} from "@heroicons/react/solid";
+} from "@heroicons/react/24/solid";
 import { useQueryClient } from "react-query";
 import { useTheme } from "next-themes";
 import Swal from "sweetalert2";
-import { deleteTenant } from "@abp/services/TenantService";
 import { QueryNames } from "@abp/utils/Constants";
 import TenantEdit from "./TenantEdit";
-import { TenantDto } from "@abp/generated/MyProjectModels";
 import FeatureList from "./FeatureList";
+import { TenantDto, TenantService } from "@abp/generated/api";
 type Props = {};
 
 const TenantList = (props: Props) => {
@@ -31,14 +30,14 @@ const TenantList = (props: Props) => {
       name: "Permissions",
       button: true,
       cell: (row: any) => (
-        <AdjustmentsIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+        <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
       ),
     },
     {
       name: "Edit",
       button: true,
       cell: (row: any) => (
-        <PencilAltIcon
+        <PencilIcon
           className="h-5 w-5 text-blue-500 cursor-pointer"
           onClick={() => tenantEdit(row)}
         />
@@ -80,7 +79,7 @@ const TenantList = (props: Props) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        var response = await deleteTenant(row.id as string);
+        var response = await TenantService.tenantDelete(row.id as string);
         if (response.status === 204) {
           queryClient.invalidateQueries(QueryNames.GetTenants);
           Swal.fire("Deleted!", "Your file has been deleted.", "success");

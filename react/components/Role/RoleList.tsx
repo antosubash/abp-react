@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { useRoles } from "hooks/useRoles";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";
-import DataTable, { TableColumn } from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import {
-  AdjustmentsIcon,
-  PencilAltIcon,
+  AdjustmentsHorizontalIcon,
+  PencilIcon,
   TrashIcon,
-} from "@heroicons/react/solid";
+} from "@heroicons/react/24/solid";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 
 const RoleList = () => {
-  const queryClient = useQueryClient();
   const columns = [
     {
       name: "Name",
@@ -30,14 +29,14 @@ const RoleList = () => {
       name: "Permissions",
       button: true,
       cell: (row: any) => (
-        <AdjustmentsIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+        <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
       ),
     },
     {
       name: "Edit",
       button: true,
       cell: (row: any) => (
-        <PencilAltIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+        <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
       ),
     },
     {

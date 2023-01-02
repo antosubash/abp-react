@@ -4,6 +4,7 @@ import {
 } from "next";
 import { OpenAPI as ApiOptions } from "../generated/api";
 import { getCookieFromRequest } from "./cookieUtils";
+import jwtDecode from "jwt-decode";
 export const getAuthOptions = (req: any) => {
   var issuer = getCookieFromRequest("next-auth.issuer", req);
   if (!issuer) {
@@ -24,10 +25,6 @@ export const getAuthOptions = (req: any) => {
           params: { scope: "openid profile email AbpReact" },
         },
         profile: (profile: any) => {
-          console.log(
-            "🚀 ~ file: authUtil.ts ~ line 25 ~ getAuthOptions ~ profile",
-            profile
-          );
           return {
             id: profile.sub,
             name: profile.name,
@@ -51,11 +48,14 @@ export const getAuthOptions = (req: any) => {
       },
       async session({ session, token }) {
         session.accessToken = token.accessToken;
+        session.userRole = token.userRole;
         return session;
       },
       async jwt({ token, account }) {
         if (account) {
           token.accessToken = account.access_token!;
+          const decoded = jwtDecode(token.accessToken) as any;
+          token.userRole = decoded.role;
         }
         return token;
       },

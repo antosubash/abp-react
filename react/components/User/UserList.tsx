@@ -6,13 +6,12 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useTheme } from "next-themes";
 import { useQueryClient } from "react-query";
 import {
-  AdjustmentsIcon,
-  PencilAltIcon,
+  AdjustmentsHorizontalIcon,
+  PencilIcon,
   TrashIcon,
-} from "@heroicons/react/solid";
-import { IdentityUserDto } from "@abp/generated/MyProjectModels";
+} from "@heroicons/react/24/solid";
+import { IdentityUserDto } from "@abp/generated/api";
 const UserList = () => {
-  const queryClient = useQueryClient();
   const columns: TableColumn<IdentityUserDto>[] = [
     {
       name: "Username",
@@ -30,14 +29,14 @@ const UserList = () => {
       name: "Permissions",
       button: true,
       cell: (row: any) => (
-        <AdjustmentsIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+        <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
       ),
     },
     {
       name: "Edit",
       button: true,
       cell: (row: any) => (
-        <PencilAltIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+        <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
       ),
     },
     {

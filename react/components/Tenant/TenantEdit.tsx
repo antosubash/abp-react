@@ -1,5 +1,4 @@
-import { TenantUpdateDto } from "@abp/generated/MyProjectModels";
-import { updateTenant } from "@abp/services/TenantService";
+import { TenantService, TenantUpdateDto } from "@abp/generated/api";
 import { QueryNames } from "@abp/utils/Constants";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
@@ -17,12 +16,10 @@ const TenantEdit = (props: Props) => {
   const [name, setName] = useState<string>();
   var queryClient = useQueryClient();
   const tenantUpdate = async () => {
-    var tenant = new TenantUpdateDto();
+    var tenant = {} as TenantUpdateDto;
     tenant.name = name!;
-    console.log(tenant);
-    var res = await updateTenant(props.id, tenant);
-    console.log(res);
-    if (res.status === 200) {
+    var updated = await TenantService.tenantUpdate(props.id, tenant);
+    if (updated) {
       queryClient.invalidateQueries(QueryNames.GetTenants);
       props.closeModal();
       Swal.fire("Updated!", "Tenant updated successfully!", "success");

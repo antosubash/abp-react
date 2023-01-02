@@ -1,13 +1,12 @@
-import { TenantCreateDto } from "@abp/generated/MyProjectModels";
 import React, { useState } from "react";
 import DialogWrapper from "../Shared/DialogWrapper";
-import { createTenant } from "@abp/services/TenantService";
 import Swal from "sweetalert2";
 import { useQueryClient } from "react-query";
 import { QueryNames } from "@abp/utils/Constants";
 import Form from "../Shared/Form";
 import Input from "../Shared/Input";
 import Button from "../Shared/Button";
+import { TenantCreateDto, TenantService } from "@abp/generated/api";
 type Props = {};
 
 const TenantCreate = (props: Props) => {
@@ -15,8 +14,8 @@ const TenantCreate = (props: Props) => {
   const queryClient = useQueryClient();
   const onSubmit = async (data: any) => {
     var tenant = data as TenantCreateDto;
-    var response = await createTenant(tenant);
-    if (response.status === 200) {
+    var created = await TenantService.tenantCreate(tenant);
+    if (created) {
       queryClient.invalidateQueries(QueryNames.GetTenants);
       setIsOpen(false);
       Swal.fire("Success", "Tenant Created Successfully", "success");

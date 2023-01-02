@@ -6,7 +6,6 @@ interface Props {}
 
 const UserMenus = (props: Props) => {
   var session = useSession();
-  console.log("🚀 ~ file: UserMenus.tsx:9 ~ UserMenus ~ session", session)
   return (
     <div className="flex justify-center items-center">
       {session.data ? (

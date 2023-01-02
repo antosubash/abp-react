@@ -1,3 +1,4 @@
+import jwtDecode, { JwtPayload } from "jwt-decode";
 import { withAuth } from "next-auth/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { hostData } from "./data/HostData";
@@ -24,7 +25,6 @@ export default withAuth(
       console.log("middleware.ts: setting issuer to " + tenant.apiUrl);
       response.cookies.set("next-auth.issuer", tenant.apiUrl);
       response.cookies.set("__tenant", tenant.tenantId || "");
-      
     }
     return response;
   },
