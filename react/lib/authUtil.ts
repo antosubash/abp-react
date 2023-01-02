@@ -35,12 +35,12 @@ export const getAuthOptions = (req: any) => {
         clientId: "AbpReact_Next_App",
       },
     ],
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     session: {
       strategy: "jwt",
     },
     jwt: {
-      secret: process.env.SECRET,
+      secret: process.env.NEXTAUTH_SECRET,
     },
     callbacks: {
       async signIn() {
