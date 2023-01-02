@@ -6,6 +6,10 @@ export const hostData: HostInfo[] = [
     apiUrl: "https://api.abpreact.antosubash.com",
   },
   {
+    host: "abpreact.antosubash.com",
+    apiUrl: "https://api.abpreact.antosubash.com",
+  },
+  {
     host: "test:3000",
     apiUrl: "https://localhost:44377",
     tenantId: "ad6897ab-22bf-8385-a31b-3a07781ca8a9",
