@@ -25,7 +25,7 @@ jobs:
     - name: Push abpreact image
       run: docker push registry.antosubash.com/abpreact:dev
     - name: Build the abpreact nextjs image
-      run: docker build . --file apps/web/Dockerfile --tag abpreactnextjs:dev
+      run: docker build . --file react/Dockerfile --tag abpreactnextjs:dev
     - name: Docker tag next image
       run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
     - name: Push abpreact-nextjs image
