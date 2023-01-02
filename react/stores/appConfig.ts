@@ -1,6 +1,6 @@
-import { ApplicationConfigurationDto } from "@abp/generated/MyProjectModels";
-import { getAppConfig } from "@abp/services/AppConfigService";
+import { ApplicationConfigurationDto } from "@abp/generated/api";
 import create from "zustand";
+import { AbpApplicationConfigurationService } from "./../generated/api/services/AbpApplicationConfigurationService";
 
 type State = {
   appConfig: ApplicationConfigurationDto;
@@ -11,7 +11,7 @@ type State = {
 };
 
 const useAppConfigStore = create<State>((set) => ({
-  appConfig: new ApplicationConfigurationDto(),
+  appConfig: {},
   isDone: false,
   setAppConfig: (config: ApplicationConfigurationDto) => {
     set({ appConfig: config, isDone: true });
@@ -20,12 +20,13 @@ const useAppConfigStore = create<State>((set) => ({
     set({ isDone: isDone });
   },
   fetchAppConfig: async (): Promise<ApplicationConfigurationDto> => {
-    const res = await getAppConfig();
-    if (res) {
-      set({ appConfig: res.data, isDone: true });
-      return res.data;
+    const config =
+      await AbpApplicationConfigurationService.abpApplicationConfigurationGet();
+    if (config) {
+      set({ appConfig: config, isDone: true });
+      return config;
     }
-    return new ApplicationConfigurationDto();
+    return {};
   },
 }));
 
