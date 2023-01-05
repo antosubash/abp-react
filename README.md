@@ -6,6 +6,10 @@ This repo is a work in progress. It only has a login working. The rest of the ap
 
 This is a React UI for the [ABP Framework](https://abp.io/). It is a work in progress and is not ready for production use. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend.
 
+## Demo
+
+You can see a demo of the app [here](https://abpreact.antosubash.com/).
+
 ## Goals
 
 The goal of this project is to provide a React UI for the ABP Framework. It will be a fully functional UI that can be used as a starting point for any ABP project. It will also be a reference for anyone who wants to build a React UI for ABP.
