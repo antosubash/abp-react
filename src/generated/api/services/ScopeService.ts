@@ -70,38 +70,38 @@ id: string,
     }
 
     /**
-     * @param id 
-     * @param id 
+     * @param clientId 
      * @param name 
      * @param displayName 
      * @param description 
      * @param resources 
      * @param properties 
+     * @param id 
      * @returns ScopeDto Success
      * @throws ApiError
      */
     public static scopeUpdate(
-id: string,
-id?: string,
+clientId: string,
 name?: string,
 displayName?: string,
 description?: string,
 resources?: string,
 properties?: string,
+id?: string,
 ): CancelablePromise<ScopeDto> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/scope-management/{id}',
+            url: '/api/scope-management/{clientId}',
             path: {
-                'Id': id,
+                'clientId': clientId,
             },
             query: {
-                'id': id,
                 'Name': name,
                 'DisplayName': displayName,
                 'Description': description,
                 'Resources': resources,
                 'Properties': properties,
+                'Id': id,
             },
         });
     }
