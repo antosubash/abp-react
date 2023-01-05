@@ -1,4 +1,3 @@
-import jwtDecode, { JwtPayload } from "jwt-decode";
 import { withAuth } from "next-auth/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { hostData } from "./data/HostData";
@@ -10,6 +9,8 @@ export default withAuth(
     var host = request.headers.get("host");
     var currentIssuer = request.cookies.get("next-auth.issuer")?.value;
     var issuer = "";
+    // TODO: this is a hack to get the issuer for the tenant.  
+    // We should be able to get this from the API.
     var tenant = hostData.find((x) => x.host == host);
     var shouldSetCookie = false;
     if (!currentIssuer) {
@@ -31,9 +32,6 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        // console.log("middleware.ts: url: line: 32 ", req.url);
-        // console.log("middleware.ts: token: ", token);
-        // /admin requires admin role, but /me only requires the user to be logged in.
         return req.nextUrl.pathname !== "/admin" || token?.userRole === "admin";
       },
     },

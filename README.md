@@ -14,6 +14,20 @@ You can see a demo of the app [here](https://abpreact.antosubash.com/).
 
 The goal of this project is to provide a React UI for the ABP Framework. It will be a fully functional UI that can be used as a starting point for any ABP project. It will also be a reference for anyone who wants to build a React UI for ABP.
 
+## Features
+
+- [x] Landing Page
+- [x] Login
+- [ ] Register
+- [ ] Forgot Password
+- [ ] Profile
+- [ ] Tenant Management
+- [ ] Role Management
+- [ ] User Management
+- [ ] Client Management
+- [ ] Audit Logs Viewer
+- [ ] Settings Management
+
 ## How to run
 
 1. Clone the repo
