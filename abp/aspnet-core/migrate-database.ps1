@@ -1,1 +1,0 @@
-dotnet run --project AbpReact --migrate-database

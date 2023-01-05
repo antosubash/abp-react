@@ -18,23 +18,12 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - uses: actions/checkout@v2
-    - name: Build the abpreact Docker image
-      run: docker build ./abp/aspnet-core --file abp/aspnet-core/AbpReact/Dockerfile --tag abpreact:dev
-    - name: Docker tag images
-      run: docker tag abpreact:dev registry.antosubash.com/abpreact:dev
-    - name: Push abpreact image
-      run: docker push registry.antosubash.com/abpreact:dev
     - name: Build the abpreact nextjs image
-      run: docker build ./react --file react/Dockerfile --tag abpreactnextjs:dev
+      run: docker build ./src --file src/Dockerfile --tag abpreactnextjs:dev
     - name: Docker tag next image
       run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
     - name: Push abpreact-nextjs image
       run: docker push registry.antosubash.com/abpreactnextjs:dev
-    - name: Send Http Post Request to Deploy API
-      uses: fjogeleit/http-request-action@v1
-      with:
-        url: ${{ secrets.WEBHOOK_URL }}
-        method: 'POST'
     - name: Send Http Post Request to Deploy NextJs App
       uses: fjogeleit/http-request-action@v1
       with:
