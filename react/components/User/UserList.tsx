@@ -10,43 +10,66 @@ import {
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import {
+  Column,
+  Table as ReactTable,
+  PaginationState,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  ColumnDef,
+  OnChangeFn,
+  flexRender,
+} from "@tanstack/react-table";
 import { IdentityUserDto } from "@abp/generated/api";
 const UserList = () => {
-  const columns: TableColumn<IdentityUserDto>[] = [
-    {
-      name: "Username",
-      selector: (row: any) => row.userName,
-    },
-    {
-      name: "Email",
-      selector: (row: any) => row.email,
-    },
-    {
-      name: "Is Active",
-      selector: (row: any) => (row.isActive ? "yes" : "no"),
-    },
-    {
-      name: "Permissions",
-      button: true,
-      cell: (row: any) => (
-        <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-      ),
-    },
-    {
-      name: "Edit",
-      button: true,
-      cell: (row: any) => (
-        <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-      ),
-    },
-    {
-      name: "Delete",
-      button: true,
-      cell: (row: any) => (
-        <TrashIcon className="h-5 w-5 text-red-500 cursor-pointer" />
-      ),
-    },
-  ];
+  const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(
+    () => [
+      {
+        header: "User Management",
+        columns: [
+          {
+            accessorKey: "userName",
+            header: "Username",
+            cell: (info) => info.getValue(),
+          },
+          {
+            accessorKey: "email",
+            header: "Email",
+            cell: (info) => info.getValue(),
+          },
+          {
+            accessorKey: "isActive",
+            header: "Active",
+            cell: (info) => (info.getValue() ? "yes" : "no"),
+          },
+          {
+            accessorKey: "permissions",
+            header: "Permissions",
+            cell: (info) => (
+              <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+            ),
+          },
+          {
+            accessorKey: "edit",
+            header: "Edit",
+            cell: (info) => (
+              <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+            ),
+          },
+          {
+            accessorKey: "delete",
+            header: "Delete",
+            cell: (info) => (
+              <TrashIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+            ),
+          },
+        ],
+      },
+    ],
+    []
+  );
 
   const { theme } = useTheme();
 
@@ -65,21 +88,50 @@ const UserList = () => {
   };
 
   var { isLoading, data, isError } = useUsers(page, skip, limit);
+
+  const table = useReactTable({
+    data: data?.items!,
+    columns: defaultColumns,
+    getCoreRowModel: getCoreRowModel(),
+  });
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
   return (
     <>
-      <DataTable
-        theme={theme === "dark" ? "dark" : "default"}
-        columns={columns}
-        data={data?.items ?? []}
-        paginationTotalRows={data?.totalCount}
-        progressPending={isLoading}
-        pagination
-        paginationServer
-        onChangeRowsPerPage={handlePerRowsChange}
-        onChangePage={handlePageChange}
-      />
+      <div className="p-2">
+        <table className="min-w-full divide-y text-left divide-gray-200 table-fixed dark:divide-gray-700">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className="pb-3">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td
+                    key={cell.id}
+                    className="py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

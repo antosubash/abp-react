@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
+    "@tanstack/react-table": "^8.7.4",
     "axios": "^1.2.2",
     "classnames": "^2.3.2",
     "cookies-next": "^2.1.1",
