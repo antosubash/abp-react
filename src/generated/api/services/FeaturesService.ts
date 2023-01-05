@@ -70,4 +70,32 @@ requestBody?: UpdateFeaturesDto,
         });
     }
 
+    /**
+     * @param providerName 
+     * @param providerKey 
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static featuresDelete(
+providerName?: string,
+providerKey?: string,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/feature-management/features',
+            query: {
+                'providerName': providerName,
+                'providerKey': providerKey,
+            },
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+                500: `Server Error`,
+                501: `Server Error`,
+            },
+        });
+    }
+
 }

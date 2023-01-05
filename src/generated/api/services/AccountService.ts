@@ -5,6 +5,7 @@ import type { IdentityUserDto } from '../models/IdentityUserDto';
 import type { RegisterDto } from '../models/RegisterDto';
 import type { ResetPasswordDto } from '../models/ResetPasswordDto';
 import type { SendPasswordResetCodeDto } from '../models/SendPasswordResetCodeDto';
+import type { VerifyPasswordResetTokenInput } from '../models/VerifyPasswordResetTokenInput';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -47,6 +48,30 @@ requestBody?: SendPasswordResetCodeDto,
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-password-reset-code',
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+                500: `Server Error`,
+                501: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @param requestBody 
+     * @returns boolean Success
+     * @throws ApiError
+     */
+    public static accountVerifyPasswordResetToken(
+requestBody?: VerifyPasswordResetTokenInput,
+): CancelablePromise<boolean> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/account/verify-password-reset-token',
             body: requestBody,
             mediaType: 'application/json',
             errors: {

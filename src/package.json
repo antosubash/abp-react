@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen-api": "openapi --input https://api.abpreact.antosubash.com/swagger/v1/swagger.json --output ./generated/api --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
+    "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./generated/api --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",

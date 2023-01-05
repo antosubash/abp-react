@@ -1,27 +1,30 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ApplicationConfigurationDto } from '../models/ApplicationConfigurationDto';
+import type { ApplicationLocalizationDto } from '../models/ApplicationLocalizationDto';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class AbpApplicationConfigurationService {
+export class AbpApplicationLocalizationService {
 
     /**
-     * @param includeLocalizationResources 
-     * @returns ApplicationConfigurationDto Success
+     * @param cultureName 
+     * @param onlyDynamics 
+     * @returns ApplicationLocalizationDto Success
      * @throws ApiError
      */
-    public static abpApplicationConfigurationGet(
-includeLocalizationResources?: boolean,
-): CancelablePromise<ApplicationConfigurationDto> {
+    public static abpApplicationLocalizationGet(
+cultureName: string,
+onlyDynamics?: boolean,
+): CancelablePromise<ApplicationLocalizationDto> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/abp/application-configuration',
+            url: '/api/abp/application-localization',
             query: {
-                'IncludeLocalizationResources': includeLocalizationResources,
+                'CultureName': cultureName,
+                'OnlyDynamics': onlyDynamics,
             },
             errors: {
                 400: `Bad Request`,
