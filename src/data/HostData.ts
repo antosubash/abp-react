@@ -3,11 +3,11 @@ import { HostInfo } from "../models/HostInfo";
 export const hostData: HostInfo[] = [
   {
     host: "localhost:3000",
-    apiUrl: "https://api.abpreact.antosubash.com",
+    apiUrl: "https://abp.antosubash.com",
   },
   {
     host: "abpreact.antosubash.com",
-    apiUrl: "https://api.abpreact.antosubash.com",
+    apiUrl: "https://abp.antosubash.com",
   },
   {
     host: "test:3000",
