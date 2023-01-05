@@ -19,7 +19,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Build the abpreact nextjs image
-      run: docker build ./react --file react/Dockerfile --tag abpreactnextjs:dev
+      run: docker build ./src --file src/Dockerfile --tag abpreactnextjs:dev
     - name: Docker tag next image
       run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
     - name: Push abpreact-nextjs image
