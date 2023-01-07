@@ -60,12 +60,10 @@ export const getAuthOptions = (req: any) => {
           token.accessToken = account.access_token!;
           token.refreshToken = account.refresh_token!;
           token.expiresAt = account.expires_at * 1000;
-          console.log("first access token expires at", token.expiresAt)
           var decoded = jwtDecode(account.access_token!) as any;
           token.userRole = decoded.role;
           return token;
         } else if (Date.now() < token.expiresAt!) {
-          console.log("access token not expired yet until", token.expiresAt)
           // If the access token has not expired yet, return it
           return token;
         }
@@ -73,8 +71,6 @@ export const getAuthOptions = (req: any) => {
         try {
           // https://issuer/.well-known/openid-configuration
           // We need the `token_endpoint`.
-          console.log("token expires at", token.expiresAt)
-          console.log("access token expired, try to refresh it")
           const response = await fetch(issuer + "/connect/token", {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
@@ -90,7 +86,6 @@ export const getAuthOptions = (req: any) => {
           const tokens = await response.json();
 
           if (!response.ok) throw tokens;
-          console.log("refreshed access token", tokens.access_token)
           var newToken = {
             ...token, // Keep the previous token properties
             accessToken: tokens.access_token,
@@ -111,7 +106,7 @@ export const getAuthOptions = (req: any) => {
     },
     events: {},
     // Enable debug messages in the console if you are having problems
-    debug: true,
+    debug: false,
   };
 
   return authOptions;

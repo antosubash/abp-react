@@ -10,6 +10,7 @@ import i18n from "@abp/utils/i18n";
 import { SessionProvider } from "next-auth/react";
 import { getCookie } from "cookies-next";
 import { OpenAPI as ApiOptions } from "../generated/api";
+import Base from "@abp/components/Base";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
   const queryClient = new QueryClient();
@@ -26,12 +27,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       return "";
     }
   };
+
   return (
     <SessionProvider session={session}>
       <I18nProvider i18nInstance={i18n} locale={router.locale!}>
         <ThemeProvider attribute="class" themes={["light", "dark"]}>
           <QueryClientProvider client={queryClient}>
-            <Component {...pageProps} />
+            <Base>
+              <Component {...pageProps} />
+            </Base>
           </QueryClientProvider>
         </ThemeProvider>
       </I18nProvider>
