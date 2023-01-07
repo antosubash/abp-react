@@ -1,12 +1,15 @@
-import { NextAuthOptions, unstable_getServerSession } from "next-auth";
 import {
-  GetServerSidePropsContext,
-} from "next";
+  NextAuthOptions,
+  TokenSet,
+  unstable_getServerSession,
+} from "next-auth";
+import { GetServerSidePropsContext } from "next";
 import { OpenAPI as ApiOptions } from "../generated/api";
 import { getCookieFromRequest } from "./cookieUtils";
 import jwtDecode from "jwt-decode";
 export const getAuthOptions = (req: any) => {
   var issuer = getCookieFromRequest("next-auth.issuer", req);
+  var clientId = "AbpReact_Next_App";
   if (!issuer) {
     throw new Error("issuer not found");
   }
@@ -32,7 +35,7 @@ export const getAuthOptions = (req: any) => {
             image: profile.picture,
           };
         },
-        clientId: "AbpReact_Next_App",
+        clientId: clientId,
       },
     ],
     secret: process.env.NEXTAUTH_SECRET,
@@ -51,13 +54,59 @@ export const getAuthOptions = (req: any) => {
         session.userRole = token.userRole;
         return session;
       },
-      async jwt({ token, account }) {
+
+      async jwt({ token, account }: any) {
         if (account) {
           token.accessToken = account.access_token!;
-          const decoded = jwtDecode(token.accessToken) as any;
+          token.refreshToken = account.refresh_token!;
+          token.expiresAt = account.expires_at * 1000;
+          console.log("first access token expires at", token.expiresAt)
+          var decoded = jwtDecode(account.access_token!) as any;
           token.userRole = decoded.role;
+          return token;
+        } else if (Date.now() < token.expiresAt!) {
+          console.log("access token not expired yet until", token.expiresAt)
+          // If the access token has not expired yet, return it
+          return token;
         }
-        return token;
+        // If the access token has expired, try to refresh it
+        try {
+          // https://issuer/.well-known/openid-configuration
+          // We need the `token_endpoint`.
+          console.log("token expires at", token.expiresAt)
+          console.log("access token expired, try to refresh it")
+          const response = await fetch(issuer + "/connect/token", {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              client_id: clientId,
+              grant_type: "refresh_token",
+              refresh_token: token.refreshToken,
+            } as Record<string, string>),
+            method: "POST",
+          });
+
+          const tokens = await response.json();
+
+          if (!response.ok) throw tokens;
+          console.log("refreshed access token", tokens.access_token)
+          var newToken = {
+            ...token, // Keep the previous token properties
+            accessToken: tokens.access_token,
+            expiresAt: Date.now() + tokens.expires_in as number,
+            // Fall back to old refresh token, but note that
+            // many providers may only allow using a refresh token once.
+            refreshToken: tokens.refresh_token ?? token.refreshToken,
+          };
+          return newToken;
+        } catch (error) {
+          console.log("error", error);
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
+        }
       },
     },
     events: {},

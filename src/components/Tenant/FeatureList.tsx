@@ -6,7 +6,6 @@ type Props = {};
 
 const FeatureList = (props: Props) => {
   var { data } = useFeatures("T", undefined);
-  console.log(data);
   return (
     <Tab.Group>
       <Tab.List>

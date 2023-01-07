@@ -18,9 +18,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     __tenant: getCookie("__tenant") as string,
   } as Record<string, string>;
   ApiOptions.TOKEN = async () => {
-    var currentSession = await fetch("/api/auth/session");
-    var currentSessionJson = await currentSession.json();
-    return currentSessionJson.accessToken || "";
+    try {
+      var currentSession = await fetch("/api/auth/session");
+      var currentSessionJson = await currentSession.json();
+      return currentSessionJson.accessToken || "";
+    } catch (error) {
+      return "";
+    }
   };
   return (
     <SessionProvider session={session}>

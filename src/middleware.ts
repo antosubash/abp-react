@@ -23,7 +23,6 @@ export default withAuth(
     }
     OpenAPI.BASE = issuer;
     if (shouldSetCookie && tenant) {
-      console.log("middleware.ts: setting issuer to " + tenant.apiUrl);
       response.cookies.set("next-auth.issuer", tenant.apiUrl);
       response.cookies.set("__tenant", tenant.tenantId || "");
     }
