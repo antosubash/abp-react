@@ -71,8 +71,6 @@ const UserList = () => {
     []
   );
 
-  const { theme } = useTheme();
-
   var [skip, setSkip] = useState<number>(0);
   var [limit, setLimit] = useState<number>(10);
   var [page, setPage] = useState<number>(0);
