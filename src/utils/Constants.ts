@@ -43,4 +43,5 @@ export const QueryNames = {
   GetRoles: "GetRoles",
   GetAppConfig: "GetAppConfig",
   GetFeatures: "GetFeatures",
+  GetTranslations: "GetTranslations",
 }
