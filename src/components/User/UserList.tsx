@@ -1,25 +1,17 @@
 import { useUsers } from "hooks/useUsers";
-import React, { useState } from "react";
+import React from "react";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";
-import DataTable, { TableColumn } from "react-data-table-component";
-import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import {
-  Column,
-  Table as ReactTable,
   PaginationState,
   useReactTable,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
   ColumnDef,
-  OnChangeFn,
   flexRender,
 } from "@tanstack/react-table";
 import { IdentityUserDto } from "@abp/generated/api";
@@ -71,26 +63,34 @@ const UserList = () => {
     []
   );
 
-  var [skip, setSkip] = useState<number>(0);
-  var [limit, setLimit] = useState<number>(10);
-  var [page, setPage] = useState<number>(0);
+  const [{ pageIndex, pageSize }, setPagination] =
+    React.useState<PaginationState>({
+      pageIndex: 0,
+      pageSize: 10,
+    });
 
-  const handlePageChange = (page: number) => {
-    setPage(page);
-    var skip = (page - 1) * limit;
-    setSkip(skip);
-  };
+  const defaultData = React.useMemo(() => [], []);
 
-  const handlePerRowsChange = async (newPerPage: number, _page: number) => {
-    setLimit(newPerPage);
-  };
+  const pagination = React.useMemo(
+    () => ({
+      pageIndex,
+      pageSize,
+    }),
+    [pageIndex, pageSize]
+  );
 
-  var { isLoading, data, isError } = useUsers(page, skip, limit);
-
+  var { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+  var pageCount = Math.ceil(data?.totalCount! / pageSize);
   const table = useReactTable({
-    data: data?.items!,
+    data: data?.items || defaultData,
+    pageCount: pageCount || 0,
+    state: {
+      pagination,
+    },
     columns: defaultColumns,
     getCoreRowModel: getCoreRowModel(),
+    onPaginationChange: setPagination,
+    manualPagination: true,
   });
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -129,6 +129,74 @@ const UserList = () => {
             ))}
           </tbody>
         </table>
+        <div className="h-2" />
+        <div className="flex items-center gap-2">
+          <button
+            className="border rounded p-1"
+            onClick={() => table.setPageIndex(0)}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {"<<"}
+          </button>
+          <button
+            className="border rounded p-1"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            {"<"}
+          </button>
+          <button
+            className="border rounded p-1"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            {">"}
+          </button>
+          <button
+            className="border rounded p-1"
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            disabled={!table.getCanNextPage()}
+          >
+            {">>"}
+          </button>
+          <span className="flex items-center gap-1">
+            <div>Page</div>
+            <strong>
+              {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </strong>
+          </span>
+          <span className="flex items-center gap-1">
+            | Go to page:
+            <input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                table.setPageIndex(page);
+              }}
+              className="border p-1 rounded w-16"
+            />
+          </span>
+          <select
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => {
+              table.setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+          {isLoading ? "Loading..." : null}
+        </div>
+        <div>{table.getRowModel().rows.length} Rows</div>
+        <div>
+          {/* <button onClick={() => rerender()}>Force Rerender</button> */}
+        </div>
+        <pre>{JSON.stringify(pagination, null, 2)}</pre>
       </div>
     </>
   );

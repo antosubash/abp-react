@@ -9,7 +9,7 @@ export default withAuth(
     var host = request.headers.get("host");
     var currentIssuer = request.cookies.get("next-auth.issuer")?.value;
     var issuer = "";
-    // TODO: this is a hack to get the issuer for the tenant.  
+    // TODO: this is a hack to get the issuer for the tenant.
     // We should be able to get this from the API.
     var tenant = hostData.find((x) => x.host == host);
     var shouldSetCookie = false;
@@ -31,7 +31,18 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        return req.nextUrl.pathname !== "/admin" || token?.userRole === "admin";
+        var adminPaths = ["/admin", "/users", "/tenants", "/settings"];
+        var publicPaths = ["/"];
+        if (
+          token?.userRole === "admin" &&
+          adminPaths.includes(req.nextUrl.pathname)
+        ) {
+          return true;
+        }
+        if (publicPaths.includes(req.nextUrl.pathname)) {
+          return true;
+        }
+        return false;
       },
     },
   }
