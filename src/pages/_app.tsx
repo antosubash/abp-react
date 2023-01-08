@@ -11,6 +11,7 @@ import { SessionProvider } from "next-auth/react";
 import { getCookie } from "cookies-next";
 import { OpenAPI as ApiOptions } from "../generated/api";
 import Base from "@abp/components/Base";
+import Meta from "@abp/components/Meta";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
   const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <ThemeProvider attribute="class" themes={["light", "dark"]}>
           <QueryClientProvider client={queryClient}>
             <Base>
+              <Meta />
               <Component {...pageProps} />
             </Base>
           </QueryClientProvider>
