@@ -32,14 +32,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <I18nProvider i18nInstance={i18n} locale={router.locale!}>
-        <ThemeProvider attribute="class" themes={["light", "dark"]}>
-          <QueryClientProvider client={queryClient}>
-            <Base>
-              <Meta />
-              <Component {...pageProps} />
-            </Base>
-          </QueryClientProvider>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <Base>
+            <Meta />
+            <Component {...pageProps} />
+          </Base>
+        </QueryClientProvider>
       </I18nProvider>
     </SessionProvider>
   );

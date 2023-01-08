@@ -11,7 +11,7 @@ interface Props {}
 const NavBar = (props: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
-    <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center bg-secondary z-10">
+    <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
       <div className="flex items-center text-xl font-bold">
         <Link href="/">My Startup</Link>
       </div>
@@ -43,7 +43,7 @@ const NavBar = (props: Props) => {
       <div
         id="mobileNav"
         className={classNames(
-          "px-4 py-6 fixed top-0 left-0 h-full w-full bg-secondary z-20 animate-fade-in-down bg-white dark:bg-gray-700",
+          "px-4 py-6 fixed top-0 left-0 h-full w-full  z-20 animate-fade-in-down bg-white dark:bg-gray-700",
           { hidden: !isVisible }
         )}
       >

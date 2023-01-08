@@ -15,6 +15,7 @@
     "axios": "^1.2.2",
     "classnames": "^2.3.2",
     "cookies-next": "^2.1.1",
+    "daisyui": "^2.46.1",
     "jwt-decode": "^3.1.2",
     "next": "13.1.1",
     "next-auth": "^4.18.7",
@@ -22,6 +23,7 @@
     "next-seo": "^5.15.0",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
+    "react-daisyui": "^3.0.2",
     "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
     "react-final-table": "^1.5.1",
@@ -31,9 +33,12 @@
     "sharp": "^0.31.3",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.6.16",
+    "theme-change": "^2.3.0",
     "zustand": "^4.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.8",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "autoprefixer": "^10.4.13",

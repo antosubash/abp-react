@@ -5,7 +5,7 @@ interface Props {}
 
 const Hero = (props: Props) => {
   return (
-    <section className="pt-24 md:mt-0 md:h-screen flex flex-col justify-center text-center md:text-left md:flex-row md:justify-between md:items-center lg:px-48 md:px-12 px-4 bg-secondary">
+    <section className="pt-24 md:mt-0 md:h-screen flex flex-col justify-center text-center md:text-left md:flex-row md:justify-between md:items-center lg:px-48 md:px-12 px-4 ">
       <div className="md:flex-1 md:mr-10">
         <h1 className="text-5xl font-bold mb-7">
           A headline for your

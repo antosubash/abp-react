@@ -8,7 +8,7 @@ const Dashboard = (props: Props) => {
   return (
     <div>
       <h1 className="text-4xl font-semibold text-gray-800 dark:text-white">
-        Hello, !
+        Hello, {session.data?.user?.name}!
       </h1>
 
       <div className="flex my-6 items-center w-full space-y-4 md:space-x-4 md:space-y-0 flex-col md:flex-row">

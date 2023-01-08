@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" data-theme="light">
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -25,7 +25,7 @@ class MyDocument extends Document {
           rel="stylesheet"
         />
         <Head />
-        <body className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+        <body className="bg-base-100">
           <Main />
           <NextScript />
         </body>
