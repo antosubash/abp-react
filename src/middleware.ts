@@ -33,12 +33,15 @@ export default withAuth(
       authorized: ({ req, token }) => {
         var adminPaths = ["/admin", "/users", "/tenants", "/settings"];
         var publicPaths = ["/"];
-        var assets = ["/img", "/favicon.ico"];
+        var assets = ["/img", "/favicon.ico", "/robots.txt"];
         if (
           token?.userRole === "admin" &&
-          (adminPaths.includes(req.nextUrl.pathname) ||
-            publicPaths.includes(req.nextUrl.pathname))
+          adminPaths.includes(req.nextUrl.pathname)
         ) {
+          return true;
+        }
+
+        if (publicPaths.includes(req.nextUrl.pathname)) {
           return true;
         }
 
