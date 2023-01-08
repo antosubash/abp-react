@@ -18,10 +18,10 @@ const Hero = (props: Props) => {
           tempore consectetur voluptas, cumque nobis laboriosam voluptatem.
         </p>
         <div>
-          <button className="bg-black px-6 py-4 rounded-lg border-2 border-black border-solid text-white mr-2 mb-2">
+          <button aria-label="call to action" className="bg-black px-6 py-4 rounded-lg border-2 border-black border-solid text-white mr-2 mb-2">
             Call to action
           </button>
-          <button className="px-6 py-4 border-2 border-black border-solid rounded-lg">
+          <button aria-label="secondary action" className="px-6 py-4 border-2 border-black border-solid rounded-lg">
             Secondary action
           </button>
         </div>
