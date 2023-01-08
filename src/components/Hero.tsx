@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface Props {}
@@ -26,7 +27,7 @@ const Hero = (props: Props) => {
         </div>
       </div>
       <div className="flex justify-around md:block mt-8 md:mt-0 md:flex-1">
-        <img src="/img/MacBook Pro.png" alt="Macbook" />
+        <Image src="/img/MacBook Pro.png" alt="Macbook" width={500} height={306} />
       </div>
     </section>
   );

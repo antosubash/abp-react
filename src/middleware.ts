@@ -33,15 +33,21 @@ export default withAuth(
       authorized: ({ req, token }) => {
         var adminPaths = ["/admin", "/users", "/tenants", "/settings"];
         var publicPaths = ["/"];
+        var assets = ["/img", "/favicon.ico"];
         if (
           token?.userRole === "admin" &&
-          adminPaths.includes(req.nextUrl.pathname)
+          (adminPaths.includes(req.nextUrl.pathname) ||
+            publicPaths.includes(req.nextUrl.pathname))
         ) {
           return true;
         }
-        if (publicPaths.includes(req.nextUrl.pathname)) {
+
+        if (
+          assets.filter((x) => req.nextUrl.pathname.startsWith(x)).length > 0
+        ) {
           return true;
         }
+        console.log("Not authorized path", req.nextUrl.pathname);
         return false;
       },
     },

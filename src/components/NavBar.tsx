@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { Menus } from "utils/Constants";
 import UserMenus from "@abp/components/User/UserMenus";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {}
 
@@ -37,7 +38,7 @@ const NavBar = (props: Props) => {
         className="md:hidden"
         onClick={() => setIsVisible(true)}
       >
-        <img src="/img/Menu.svg" alt="Menu icon" />
+        <Image src="/img/Menu.svg" alt="Menu icon" height={16} width={16} />
       </div>
       <div
         id="mobileNav"
@@ -51,7 +52,13 @@ const NavBar = (props: Props) => {
           className="flex justify-end"
           onClick={() => setIsVisible(false)}
         >
-          <img src="/img/Cross.svg" alt="" className="h-16 w-16" />
+          <Image
+            src="/img/Cross.svg"
+            alt=""
+            className="h-16 w-16"
+            height={16}
+            width={16}
+          />
         </div>
         <ul className="flex flex-col mx-8 my-24 items-center text-3xl">
           {Menus.map((menu, index) => {
