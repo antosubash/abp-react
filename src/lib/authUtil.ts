@@ -8,8 +8,8 @@ import { OpenAPI as ApiOptions } from "../generated/api";
 import { getCookieFromRequest } from "./cookieUtils";
 import jwtDecode from "jwt-decode";
 export const getAuthOptions = (req: any) => {
-  var issuer = getCookieFromRequest("next-auth.issuer", req);
-  var clientId = "AbpReact_Next_App";
+  const issuer = getCookieFromRequest("next-auth.issuer", req);
+  const clientId = "AbpReact_Next_App";
   if (!issuer) {
     throw new Error("issuer not found");
   }
@@ -60,7 +60,7 @@ export const getAuthOptions = (req: any) => {
           token.accessToken = account.access_token!;
           token.refreshToken = account.refresh_token!;
           token.expiresAt = account.expires_at * 1000;
-          var decoded = jwtDecode(account.access_token!) as any;
+          const decoded = jwtDecode(account.access_token!) as any;
           token.userRole = decoded.role;
           return token;
         } else if (Date.now() < token.expiresAt!) {
@@ -86,7 +86,7 @@ export const getAuthOptions = (req: any) => {
           const tokens = await response.json();
 
           if (!response.ok) throw tokens;
-          var newToken = {
+          const newToken = {
             ...token, // Keep the previous token properties
             accessToken: tokens.access_token,
             expiresAt: Date.now() + tokens.expires_in as number,
@@ -113,7 +113,7 @@ export const getAuthOptions = (req: any) => {
 };
 
 export const getServerSession = async (context: GetServerSidePropsContext) => {
-  var authOptions = getAuthOptions(context.req);
+  const authOptions = getAuthOptions(context.req);
   const session = await unstable_getServerSession(
     context.req,
     context.res,
@@ -123,10 +123,10 @@ export const getServerSession = async (context: GetServerSidePropsContext) => {
 };
 
 export const prepareApiRequest = async (context: GetServerSidePropsContext) => {
-  var session = await getServerSession(context);
-  var issuer = getCookieFromRequest("next-auth.issuer", context.req);
+  const session = await getServerSession(context);
+  const issuer = getCookieFromRequest("next-auth.issuer", context.req);
   ApiOptions.BASE = issuer ?? "";
-  var tenant = getCookieFromRequest("__tenant", context.req);
+  const tenant = getCookieFromRequest("__tenant", context.req);
   ApiOptions.HEADERS = {
     __tenant: tenant,
   } as Record<string, string>;

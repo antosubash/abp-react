@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800 z-50">
+    <div className="w-full min-h-screen flex items-center justify-center  z-50">
       <svg
         viewBox="0 0 38 38"
         className="animate-spin h-20 w-20 stroke-current text-black-600 mr-2"

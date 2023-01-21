@@ -20,7 +20,7 @@ const NavBar = (props: Props) => {
           return (
             <li
               key={index}
-              className="growing-underline mx-3 hover:bg-slate-300 dark:hover:bg-slate-600 p-4 rounded"
+              className="growing-underline mx-3  p-4 rounded"
             >
               <a href={menu.Link}>{menu.Name}</a>
             </li>
@@ -43,7 +43,7 @@ const NavBar = (props: Props) => {
       <div
         id="mobileNav"
         className={classNames(
-          "px-4 py-6 fixed top-0 left-0 h-full w-full  z-20 animate-fade-in-down bg-white dark:bg-gray-700",
+          "px-4 py-6 fixed top-0 left-0 h-full w-full  z-20 animate-fade-in-down ",
           { hidden: !isVisible }
         )}
       >

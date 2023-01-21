@@ -13,7 +13,7 @@ const UserMenus = (props: Props) => {
       ) : (
         <div>
           <button
-            className="mr-6 hover:bg-slate-300 dark:hover:bg-slate-500 p-3 rounded-xl"
+            className="mr-6 hover:bg-slate-300  p-3 rounded-xl"
             onClick={() => {
               signIn("openiddict", undefined, {
                 __tenant: getCookie("__tenant") as string,

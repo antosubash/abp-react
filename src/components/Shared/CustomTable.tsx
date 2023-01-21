@@ -7,7 +7,7 @@ type TableProps = {
 const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
   return (
     <>
-      <table className="min-w-full divide-y text-left divide-gray-200 table-fixed dark:divide-gray-700">
+      <table className="min-w-full divide-y text-left divide-gray-200 table-fixed ">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -30,7 +30,7 @@ const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+                  className="py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase "
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>

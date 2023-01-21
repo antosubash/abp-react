@@ -7,12 +7,12 @@ const UserDropDown = () => {
   return (
     <div className="relative inline-block">
       <Menu>
-        <Menu.Button className="flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+        <Menu.Button className="flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium  hover:bg-gray-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
           <svg
             width="20"
             fill="currentColor"
             height="20"
-            className="text-gray-800 dark:text-gray-100"
+            className="text-gray-800 "
             viewBox="0 0 1792 1792"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -29,7 +29,7 @@ const UserDropDown = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items>
-            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5">
+            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5">
               <div
                 className="py-1 "
                 role="menu"
@@ -42,7 +42,7 @@ const UserDropDown = () => {
                       <div
                         className={`${
                           active && "bg-blue-500"
-                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
+                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
                       >
                         Admin
                       </div>
@@ -55,7 +55,7 @@ const UserDropDown = () => {
                       <div
                         className={`${
                           active && "bg-blue-500"
-                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600`}
+                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
                         onClick={() => {
                           signOut();
                         }}

@@ -6,8 +6,8 @@ export const useUsers = (pageIndex: number, pageSize: number) => {
   return useQuery(
     [QueryNames.GetUsers, pageIndex, pageSize],
     async () => {
-      var skip = 0;
-      if (pageIndex > 0) {
+        let skip = 0;
+        if (pageIndex > 0) {
         skip = (pageIndex - 1) * pageSize;
       }
       const data = await UserService.userGetList("", "", skip, pageSize);

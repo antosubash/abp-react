@@ -1,6 +1,6 @@
 import { ApplicationConfigurationDto } from "@abp/generated/api";
 import create from "zustand";
-import { AbpApplicationConfigurationService } from "./../generated/api/services/AbpApplicationConfigurationService";
+import { AbpApplicationConfigurationService } from "@abp/generated/api/services/AbpApplicationConfigurationService";
 
 type State = {
   appConfig: ApplicationConfigurationDto;

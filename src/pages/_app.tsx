@@ -21,8 +21,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   } as Record<string, string>;
   ApiOptions.TOKEN = async () => {
     try {
-      var currentSession = await fetch("/api/auth/session");
-      var currentSessionJson = await currentSession.json();
+      const currentSession = await fetch("/api/auth/session");
+      const currentSessionJson = await currentSession.json();
       return currentSessionJson.accessToken || "";
     } catch (error) {
       return "";

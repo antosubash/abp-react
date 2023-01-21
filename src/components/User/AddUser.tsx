@@ -15,12 +15,12 @@ const AddUser = (props: Props) => {
   let [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const onSubmit = async (data: any) => {
-    var user = data as IdentityUserCreateDto;
-    var created = await UserService.userCreate(user);
+    const user = data as IdentityUserCreateDto;
+    const created = await UserService.userCreate(user);
     if (created) {
-      queryClient.invalidateQueries(QueryNames.GetUsers);
+      await queryClient.invalidateQueries(QueryNames.GetUsers);
       setIsOpen(false);
-      Swal.fire("Success", "User Created Successfully", "success");
+      await Swal.fire("Success", "User Created Successfully", "success");
     }
   };
 
