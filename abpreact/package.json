@@ -6,7 +6,7 @@
     "lint": "dotenv -- turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "docker": "turbo prune --scope=apps/abp --docker",
+    "docker": "turbo prune --scope=abp-react --docker",
     "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
   },
   "devDependencies": {
