@@ -1,18 +1,21 @@
 {
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "build": "dotenv -- turbo run build",
+    "dev": "dotenv -- turbo run dev",
+    "lint": "dotenv -- turbo run lint",
     "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.34.0",
     "eslint-config-custom": "workspace:*",
-    "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.11",
-    "turbo": "latest"
+    "prettier": "^2.8.4",
+    "prettier-plugin-tailwindcss": "^0.2.3",
+    "openapi-typescript-codegen": "^0.23.0",
+    "turbo": "latest",
+    "dotenv-cli": "latest"
   },
   "packageManager": "pnpm@7.15.0"
 }

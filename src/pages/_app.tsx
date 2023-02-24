@@ -13,7 +13,7 @@ import {
   AbpApplicationConfigurationService,
   ApplicationConfigurationDto,
   OpenAPI as ApiOptions,
-} from "../generated/api";
+} from "@abpreact/proxy";
 import Base from "@abp/components/Base";
 import Meta from "@abp/components/Meta";
 import App from "next/app";
