@@ -20,7 +20,7 @@ const TenantEdit = (props: Props) => {
     tenant.name = name!;
     var updated = await TenantService.tenantUpdate(props.id, tenant);
     if (updated) {
-      queryClient.invalidateQueries(QueryNames.GetTenants);
+      queryClient.invalidateQueries([QueryNames.GetTenants]);
       props.closeModal();
       Swal.fire("Updated!", "Tenant updated successfully!", "success");
     }

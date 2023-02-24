@@ -1,4 +1,4 @@
-import { useUsers } from "hooks/useUsers";
+import { useUsers } from "@abpreact/hooks";
 import React from "react";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";

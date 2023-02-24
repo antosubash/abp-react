@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRoles } from "hooks/useRoles";
+import { useRoles } from "@abpreact/hooks";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";
 import DataTable from "react-data-table-component";

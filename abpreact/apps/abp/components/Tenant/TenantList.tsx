@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Loader from "@abp/components/Loader";
 import Error from "@abp/components/Error";
-import { useTenants } from "hooks/useTenants";
+import { useTenants } from "@abpreact/hooks";
 import DataTable from "react-data-table-component";
 import {
   AdjustmentsHorizontalIcon,
@@ -81,7 +81,7 @@ const TenantList = (props: Props) => {
       if (result.isConfirmed) {
         var response = await TenantService.tenantDelete(row.id as string);
         if (response.status === 204) {
-          queryClient.invalidateQueries(QueryNames.GetTenants);
+          queryClient.invalidateQueries([QueryNames.GetTenants]);
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       }

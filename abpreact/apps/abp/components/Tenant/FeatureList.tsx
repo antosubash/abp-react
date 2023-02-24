@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react";
-import { useFeatures } from "hooks/useFeatures";
+import { useFeatures } from "@abpreact/hooks";
 import React from "react";
 
 type Props = {};

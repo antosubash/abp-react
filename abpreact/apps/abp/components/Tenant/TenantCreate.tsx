@@ -16,7 +16,7 @@ const TenantCreate = (props: Props) => {
     var tenant = data as TenantCreateDto;
     var created = await TenantService.tenantCreate(tenant);
     if (created) {
-      queryClient.invalidateQueries(QueryNames.GetTenants);
+      queryClient.invalidateQueries([QueryNames.GetTenants]);
       setIsOpen(false);
       Swal.fire("Success", "Tenant Created Successfully", "success");
     }
