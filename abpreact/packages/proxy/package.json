@@ -3,13 +3,11 @@
   "version": "0.0.0",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist",
-    "./styles.css": "./dist/index.css"
+    ".": "./dist"
   },
   "license": "MIT",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

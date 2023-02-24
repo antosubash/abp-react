@@ -117,6 +117,33 @@ importers:
       eslint-config-turbo: 0.0.8_eslint@8.34.0
       eslint-plugin-react: 7.32.2_eslint@8.34.0
 
+  packages/hooks:
+    specifiers:
+      '@abpreact/proxy': workspace:*
+      '@tanstack/react-query': 4.24.10
+      '@types/node': 18.11.18
+      '@types/react': ^18.0.28
+      eslint: ^8.34.0
+      eslint-config-custom: workspace:*
+      postcss: ^8.4.21
+      react: ^18.2.0
+      tsconfig: workspace:*
+      tsup: ^6.6.3
+      typescript: ^4.9.5
+    dependencies:
+      '@abpreact/proxy': link:../proxy
+      '@tanstack/react-query': 4.24.10_react@18.2.0
+      react: 18.2.0
+    devDependencies:
+      '@types/node': 18.11.18
+      '@types/react': 18.0.28
+      eslint: 8.34.0
+      eslint-config-custom: link:../eslint-config-custom
+      postcss: 8.4.21
+      tsconfig: link:../tsconfig
+      tsup: 6.6.3_uujdqti2krmttzhqvubwnsmcci
+      typescript: 4.9.5
+
   packages/proxy:
     specifiers:
       axios: ^1.3.4
@@ -169,6 +196,26 @@ importers:
       tailwind-config: link:../tailwind-config
       tsconfig: link:../tsconfig
       tsup: 6.6.3_uujdqti2krmttzhqvubwnsmcci
+      typescript: 4.9.5
+
+  packages/utils:
+    specifiers:
+      '@abpreact/proxy': workspace:*
+      '@types/node': 18.11.18
+      '@types/react': 18.0.26
+      eslint: ^8.34.0
+      eslint-config-custom: workspace:*
+      tsconfig: workspace:*
+      tsup: ^6.6.3
+      typescript: ^4.9.5
+    devDependencies:
+      '@abpreact/proxy': link:../proxy
+      '@types/node': 18.11.18
+      '@types/react': 18.0.26
+      eslint: 8.34.0
+      eslint-config-custom: link:../eslint-config-custom
+      tsconfig: link:../tsconfig
+      tsup: 6.6.3_typescript@4.9.5
       typescript: 4.9.5
 
 packages:
@@ -814,6 +861,27 @@ packages:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.2.7_postcss@8.4.21
     dev: true
+
+  /@tanstack/query-core/4.24.10:
+    resolution: {integrity: sha512-2QywqXEAGBIUoTdgn1lAB4/C8QEqwXHj2jrCLeYTk2xVGtLiPEUD8jcMoeB2noclbiW2mMt4+Fq7fZStuz3wAQ==}
+    dev: false
+
+  /@tanstack/react-query/4.24.10_react@18.2.0:
+    resolution: {integrity: sha512-FY1DixytOcNNCydPQXLxuKEV7VSST32CAuJ55BjhDNqASnMLZn+6c30yQBMrODjmWMNwzfjMZnq0Vw7C62Fwow==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.24.10
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
 
   /@tanstack/react-table/8.7.9_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-6MbbQn5AupSOkek1+6IYu+1yZNthAKTRZw9tW92Vi6++iRrD1GbI3lKTjJalf8lEEKOqapPzQPE20nywu0PjCA==}
