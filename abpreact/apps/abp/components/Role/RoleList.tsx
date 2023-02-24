@@ -9,7 +9,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import { useTheme } from "next-themes";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 const RoleList = () => {
   const columns = [

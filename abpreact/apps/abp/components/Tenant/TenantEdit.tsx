@@ -1,7 +1,7 @@
 import { TenantService, TenantUpdateDto } from "@abpreact/proxy";
 import { QueryNames } from "@abp/utils/Constants";
 import React, { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import DialogWrapper from "../Shared/DialogWrapper";
 

@@ -1,7 +1,7 @@
 
 import { QueryNames } from "@abp/utils/Constants";
 import React, { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Input from "@abp/components/Shared/Input";
 import Button from "@abp/components/Shared/Button";

@@ -9,5 +9,8 @@ export default defineConfig((options: Options) => ({
   minify: true,
   clean: true,
   external: ["react"],
+  esbuildOptions(options) {
+    options.external = ["@tanstack/*"];
+  },
   ...options,
 }));

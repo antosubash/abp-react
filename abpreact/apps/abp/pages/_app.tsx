@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import "../styles/main.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import type { AppProps } from "next/app";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { I18nProvider } from "next-localization";
 import i18n from "@abp/utils/i18n";

@@ -1,5 +1,5 @@
 import i18n from "@abp/utils/i18n";
-import { useAppConfig } from "hooks/useAppConfig";
+import { useAppConfig } from "@abpreact/hooks";
 import React, { ReactNode } from "react";
 import Loader from "./Loader";
 

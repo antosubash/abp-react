@@ -8,7 +8,7 @@ import {
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
 import Swal from "sweetalert2";
 import { QueryNames } from "@abp/utils/Constants";

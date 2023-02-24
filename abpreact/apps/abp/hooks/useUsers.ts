@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryNames } from "@abp/utils/Constants";
 import { UserService } from "@abpreact/proxy";
 
