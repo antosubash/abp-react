@@ -1,46 +1,61 @@
-# 1. Install dependencies only when needed
-FROM node:16-alpine AS deps
+# 1. Generate a sparse/partial monorepo with a pruned lockfile for a target workspace. https://turborepo.org/docs/reference/command-line-reference#turbo-prune---scopetarget
+
+# Refer to this original https://github.com/vercel/turborepo/blob/main/examples/with-docker/apps/web/Dockerfile
+
+FROM node:alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 
+# Set working directory
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+COPY . .
+RUN corepack enable
+# will remove `turbo@latest` to `turbo` after stable release of 1.4.7
+RUN pnpm dlx turbo@latest prune --scope=abp-react --docker
 
 
 # 2. Rebuild the source code only when needed
-FROM node:16-alpine AS builder
+FROM node:alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN yarn build
+
+# Build the project and its dependencies
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# set your APP_NAME
+ENV APP_NAME=abp-react
+
+COPY .gitignore .gitignore
+COPY --from=deps /app/out/json/ .
+COPY --from=deps /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=deps /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
+
+RUN corepack enable
+RUN pnpm install
+
+COPY --from=deps /app/out/full/ .
+COPY turbo.json turbo.json
+RUN pnpm turbo run build --filter=$APP_NAME...
 
 # 3. Production image, copy all the files and run next
-FROM node:16-alpine AS runner
+FROM node:alpine AS runner
+
 WORKDIR /app
 
+ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV=production
+
+# set your APP_NAME
+ENV APP_NAME=abp-react
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
+# comment out below if you don't have public folder
+COPY --from=builder /app/apps/$APP_NAME/public public
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/static ./.next/static
 
 USER nextjs
 
@@ -48,4 +63,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD node apps/$APP_NAME/server.js
