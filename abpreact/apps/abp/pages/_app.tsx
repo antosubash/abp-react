@@ -12,7 +12,7 @@ import {
   ApplicationConfigurationDto,
   OpenAPI as ApiOptions,
 } from "@abpreact/proxy";
-import Meta  from "@abpreact/ui";
+import { Meta } from "@abpreact/ui";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appConfig = pageProps.appConfig as ApplicationConfigurationDto;
 

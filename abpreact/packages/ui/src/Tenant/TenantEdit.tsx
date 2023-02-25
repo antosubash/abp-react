@@ -3,16 +3,16 @@ import { QueryNames } from "@abpreact/hooks";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import DialogWrapper from "../Shared/DialogWrapper";
+import {DialogWrapper} from "../Shared/DialogWrapper";
 
-type Props = {
+export type TenantEditProps = {
   name: string;
   id: string;
   isOpen: boolean;
   closeModal: () => void;
 };
 
-const TenantEdit = (props: Props) => {
+export const TenantEdit = (props: TenantEditProps) => {
   const [name, setName] = useState<string>();
   var queryClient = useQueryClient();
   const tenantUpdate = async () => {
@@ -71,5 +71,3 @@ const TenantEdit = (props: Props) => {
     </DialogWrapper>
   );
 };
-
-export default TenantEdit;

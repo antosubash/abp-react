@@ -12,11 +12,11 @@ import {
   ColumnDef,
 } from "@tanstack/react-table";
 import { IdentityUserDto } from "@abpreact/proxy";
-import CustomTable from "../Shared/CustomTable";
+import { CustomTable } from "../Shared/CustomTable";
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";
 
-const UserList = () => {
+export const UserList = () => {
   const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(
     () => [
       {
@@ -101,5 +101,3 @@ const UserList = () => {
     </div>
   );
 };
-
-export default UserList;

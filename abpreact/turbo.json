@@ -1,7 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local", ".env"],
-  "globalEnv": ["NEXT_PUBLIC_API_BASE_URL", "NEXTAUTH_SECRET"],
+  "globalDependencies": ["**/.env.*local", ".env", "NEXT_PUBLIC_API_BASE_URL", "NEXTAUTH_SECRET"],
+  "globalEnv": [
+    "NEXT_PUBLIC_API_BASE_URL",
+    "NEXTAUTH_SECRET"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

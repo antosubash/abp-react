@@ -8,8 +8,8 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { QueryNames } from "@abpreact/hooks";
-import TenantEdit from "./TenantEdit";
-import FeatureList from "./FeatureList";
+import {TenantEdit} from "./TenantEdit";
+import { FeatureList } from "./FeatureList";
 import { TenantDto, TenantService } from "@abpreact/proxy";
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";

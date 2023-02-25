@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import DialogWrapper from "../Shared/DialogWrapper";
+import { DialogWrapper } from "../Shared/DialogWrapper";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QueryNames } from "@abpreact/hooks";
-import Form from "../Shared/Form";
-import Input from "../Shared/Input";
-import Button from "../Shared/Button";
+import { Form } from "../Shared/Form";
+import { Input } from "../Shared/Input";
+import { Button } from "../Shared/Button";
 import { TenantCreateDto, TenantService } from "@abpreact/proxy";
-type Props = {};
+export type TenantCreateProps = {};
 
-const TenantCreate = (props: Props) => {
+export const TenantCreate = (props: TenantCreateProps) => {
   let [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const onSubmit = async (data: any) => {
@@ -61,5 +61,3 @@ const TenantCreate = (props: Props) => {
     </>
   );
 };
-
-export default TenantCreate;
