@@ -35,6 +35,9 @@
     "styled-components": "^5.3.6",
     "@abpreact/ui": "workspace:*",
     "@abpreact/hooks": "workspace:*",
+    "tailwind-config": "workspace:*",
+    "tsconfig": "workspace:*",
+    "eslint-config-custom": "workspace:*",
     "sweetalert2": "^11.7.2",
     "theme-change": "^2.3.0",
     "zustand": "^4.3.3"

@@ -1,11 +1,11 @@
 import "../styles/globals.css";
 import "../styles/main.css";
+import "@abpreact/ui/styles.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { I18nProvider } from "next-localization";
-import i18n from "@abp/utils/i18n";
 import { SessionProvider } from "next-auth/react";
 import { getCookie } from "cookies-next";
 import {
@@ -13,6 +13,7 @@ import {
   OpenAPI as ApiOptions,
 } from "@abpreact/proxy";
 import { Meta } from "@abpreact/ui";
+import i18n from "../utils/i18n";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appConfig = pageProps.appConfig as ApplicationConfigurationDto;
 

@@ -39,6 +39,7 @@ importers:
       cookies-next: ^2.1.1
       daisyui: ^2.51.0
       eslint: 8.34.0
+      eslint-config-custom: workspace:*
       eslint-config-next: 13.2.1
       form-data: ^4.0.0
       jwt-decode: ^3.1.2
@@ -59,8 +60,10 @@ importers:
       sharp: ^0.31.3
       styled-components: ^5.3.6
       sweetalert2: ^11.7.2
+      tailwind-config: workspace:*
       tailwindcss: ^3.2.4
       theme-change: ^2.3.0
+      tsconfig: workspace:*
       typescript: 4.9.5
       zustand: ^4.3.3
     dependencies:
@@ -75,6 +78,7 @@ importers:
       classnames: 2.3.2
       cookies-next: 2.1.1
       daisyui: 2.51.0_gbtt6ss3tbiz4yjtvdr6fbrj44
+      eslint-config-custom: link:../../packages/eslint-config-custom
       form-data: 4.0.0
       jwt-decode: 3.1.2
       next: 13.2.1_biqbaboplfbrettd7655fr4n2y
@@ -92,7 +96,9 @@ importers:
       sharp: 0.31.3
       styled-components: 5.3.6_vtcxgy2wlmese7djxl6h7ok674
       sweetalert2: 11.7.2
+      tailwind-config: link:../../packages/tailwind-config
       theme-change: 2.3.0
+      tsconfig: link:../../packages/tsconfig
       zustand: 4.3.3_react@18.2.0
     devDependencies:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
