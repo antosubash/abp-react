@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import ThemeSwitcher from "@abp/components/ThemeChanger";
+import { useState } from "react";
 import classNames from "classnames";
-import { Menus } from "utils/Constants";
-import UserMenus from "@abp/components/User/UserMenus";
 import Link from "next/link";
 import Image from "next/image";
+import ThemeSwitcher from "../Shared/ThemeChanger";
+import { UserMenus } from "@abpreact/ui";
 
-interface Props {}
+interface Props {
+  menus: {
+    Name: string;
+    Link: string;
+  }[];
+}
 
 const NavBar = (props: Props) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,7 +20,7 @@ const NavBar = (props: Props) => {
         <Link href="/">My Startup</Link>
       </div>
       <ul className=" items-center hidden md:flex">
-        {Menus.map((menu, index) => {
+        {props.menus.map((menu, index) => {
           return (
             <li
               key={index}
@@ -61,7 +65,7 @@ const NavBar = (props: Props) => {
           />
         </div>
         <ul className="flex flex-col mx-8 my-24 items-center text-3xl">
-          {Menus.map((menu, index) => {
+          {props.menus.map((menu, index) => {
             return (
               <li key={index} className="my-6">
                 <a href={menu.Link}>{menu.Name}</a>

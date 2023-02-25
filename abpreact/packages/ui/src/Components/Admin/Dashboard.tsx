@@ -1,9 +1,8 @@
 import { useSession } from "next-auth/react";
-import React from "react";
 
-interface Props {}
+export interface DashboardProps {}
 
-const Dashboard = (props: Props) => {
+const Dashboard = (props: DashboardProps) => {
   var session = useSession();
   return (
     <div>
@@ -47,17 +46,13 @@ const Dashboard = (props: Props) => {
         <div className="flex items-center w-full md:w-1/2 space-x-4">
           <div className="w-1/2">
             <div className="shadow-lg px-4 py-6 w-full  relative">
-              <p className="text-2xl  font-bold">
-                12
-              </p>
+              <p className="text-2xl  font-bold">12</p>
               <p className="text-gray-400 text-sm">Active projects</p>
             </div>
           </div>
           <div className="w-1/2">
             <div className="shadow-lg px-4 py-6 w-full  relative">
-              <p className="text-2xl  font-bold">
-                $93.76
-              </p>
+              <p className="text-2xl  font-bold">$93.76</p>
               <p className="text-gray-400 text-sm">Commission in approval</p>
               <span className="rounded-full absolute p-4 bg-purple-500 top-2 right-4">
                 <svg
@@ -110,9 +105,7 @@ const Dashboard = (props: Props) => {
               Project Reffered
             </p>
             <div className="flex items-end space-x-2 my-6">
-              <p className="text-5xl  font-bold">
-                12
-              </p>
+              <p className="text-5xl  font-bold">12</p>
               <span className="text-green-500 text-xl font-bold flex items-center">
                 <svg
                   width="20"
@@ -194,9 +187,7 @@ const Dashboard = (props: Props) => {
               Project Paid
             </p>
             <div className="flex items-end space-x-2 my-6">
-              <p className="text-5xl  font-bold">
-                23
-              </p>
+              <p className="text-5xl  font-bold">23</p>
               <span className="text-green-500 text-xl font-bold flex items-center">
                 <svg
                   width="20"
@@ -278,9 +269,7 @@ const Dashboard = (props: Props) => {
               New features
             </p>
             <div className="flex items-end space-x-2 my-6">
-              <p className="text-5xl  font-bold">
-                12
-              </p>
+              <p className="text-5xl  font-bold">12</p>
               <span className="text-red-500 text-xl font-bold flex items-center">
                 <svg
                   width="20"
@@ -362,9 +351,7 @@ const Dashboard = (props: Props) => {
               Sign in
             </p>
             <div className="flex items-end space-x-2 my-6">
-              <p className="text-5xl  font-bold">
-                16
-              </p>
+              <p className="text-5xl  font-bold">16</p>
               <span className="text-red-500 text-xl font-bold flex items-center">
                 <svg
                   width="20"
@@ -528,9 +515,7 @@ const Dashboard = (props: Props) => {
               Maintenance
             </p>
             <div className="flex items-end space-x-2 my-6">
-              <p className="text-5xl  font-bold">
-                15
-              </p>
+              <p className="text-5xl  font-bold">15</p>
               <span className="text-green-500 text-xl font-bold flex items-center">
                 <svg
                   width="20"

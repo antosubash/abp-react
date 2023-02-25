@@ -1,7 +1,5 @@
 import { useUsers } from "@abpreact/hooks";
 import React from "react";
-import Loader from "@abp/components/Loader";
-import Error from "@abp/components/Error";
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
@@ -15,6 +13,9 @@ import {
 } from "@tanstack/react-table";
 import { IdentityUserDto } from "@abpreact/proxy";
 import CustomTable from "../Shared/CustomTable";
+import Loader from "../Shared/Loader";
+import Error from "../Shared/Error";
+
 const UserList = () => {
   const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(
     () => [

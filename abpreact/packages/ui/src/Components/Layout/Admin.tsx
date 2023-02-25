@@ -1,10 +1,15 @@
 import React from "react";
 import Sidebar from "../Admin/Sidebar";
-import ThemeSwitcher from "../ThemeChanger";
+import ThemeSwitcher from "../Shared/ThemeChanger";
 import UserMenus from "../User/UserMenus";
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  menus: {
+    Name: string;
+    Link: string;
+    Icon: React.FC;
+  }[];
 }
 
 const AdminLayout = (props: Props) => {
@@ -12,7 +17,7 @@ const AdminLayout = (props: Props) => {
     <div>
       <main className=" h-screen overflow-hidden relative">
         <div className="flex items-start justify-between">
-          <Sidebar />
+          <Sidebar menus={props.menus}/>
           <div className="flex flex-col w-full md:space-y-4">
             <header className="w-full h-16 z-40 flex items-center justify-between">
               <div className="block lg:hidden ml-6">

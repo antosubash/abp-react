@@ -1,6 +1,6 @@
 import { flexRender, Table } from "@tanstack/react-table";
 import React from "react";
-type TableProps = {
+export type TableProps = {
   table: Table<any>;
 };
 
@@ -78,7 +78,7 @@ const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
         </span>
         <select
           value={table.getState().pagination.pageSize}
-          onChange={(e) => {
+          onChange={(e: any) => {
             table.setPageSize(Number(e.target.value));
           }}
         >
