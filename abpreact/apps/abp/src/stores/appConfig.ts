@@ -1,6 +1,6 @@
 import { ApplicationConfigurationDto } from "@abpreact/proxy";
 import create from "zustand";
-import { AbpApplicationConfigurationService } from "@abpreact/proxy/services/AbpApplicationConfigurationService";
+import { AbpApplicationConfigurationService } from "@abpreact/proxy";
 
 type State = {
   appConfig: ApplicationConfigurationDto;

@@ -1,7 +1,7 @@
 import { withAuth } from "next-auth/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { OpenAPI } from "@abpreact/proxy";
-import { hostData } from "src/data/HostData";
+import { hostData } from "./src/data/HostData";
 
 export default withAuth(
   function middleware(request: NextRequest) {
