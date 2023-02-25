@@ -12,8 +12,7 @@ import {
   ApplicationConfigurationDto,
   OpenAPI as ApiOptions,
 } from "@abpreact/proxy";
-import Base from "@abp/components/Base";
-import Meta from "@abp/components/Meta";
+import Meta  from "@abpreact/ui";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appConfig = pageProps.appConfig as ApplicationConfigurationDto;
 
@@ -41,10 +40,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
       <I18nProvider i18nInstance={i18n} locale={router.locale!}>
         <QueryClientProvider client={queryClient}>
-          <Base>
-            <Meta />
-            <Component {...pageProps} />
-          </Base>
+          <Meta />
+          <Component {...pageProps} />
         </QueryClientProvider>
       </I18nProvider>
     </SessionProvider>

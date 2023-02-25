@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "../Admin/Sidebar";
+import { Sidebar } from "../Admin/Sidebar";
 import ThemeSwitcher from "../Shared/ThemeChanger";
-import UserMenus from "../User/UserMenus";
+import { UserMenus } from "../User/UserMenus";
 
-interface Props {
+export interface AdminLayoutProps {
   children: React.ReactNode;
   menus: {
     Name: string;
@@ -12,12 +12,12 @@ interface Props {
   }[];
 }
 
-const AdminLayout = (props: Props) => {
+export const AdminLayout = (props: AdminLayoutProps) => {
   return (
     <div>
       <main className=" h-screen overflow-hidden relative">
         <div className="flex items-start justify-between">
-          <Sidebar menus={props.menus}/>
+          <Sidebar menus={props.menus} />
           <div className="flex flex-col w-full md:space-y-4">
             <header className="w-full h-16 z-40 flex items-center justify-between">
               <div className="block lg:hidden ml-6">
@@ -36,14 +36,14 @@ const AdminLayout = (props: Props) => {
               </div>
               <div className="relative z-20 flex flex-col justify-end h-full px-3 md:w-full">
                 <div className="relative p-1 flex items-center w-full space-x-4 justify-end">
-                  <ThemeSwitcher/>
+                  <ThemeSwitcher />
                   <span className="w-1 h-8 rounded-lg bg-gray-200"></span>
-                  <UserMenus/>
+                  <UserMenus />
                 </div>
               </div>
             </header>
             <div className="overflow-auto h-screen pb-24 px-4 md:px-6">
-                {props.children}
+              {props.children}
             </div>
           </div>
         </div>
@@ -51,5 +51,3 @@ const AdminLayout = (props: Props) => {
     </div>
   );
 };
-
-export default AdminLayout;

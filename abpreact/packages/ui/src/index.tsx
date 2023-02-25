@@ -1,31 +1,37 @@
 // styles
 import "./styles.css";
+import Loader from "./Shared/Loader";
+import Error from "./Shared/Error";
+import ThemeSwitcher from "./Shared/ThemeChanger";
+
 // layout
-export * from "./Components/Layout/Main";
-export * from "./Components/Layout/Landing";
-export * from "./Components/Layout/Admin";
+export { LandingLayout, type LandingLayoutProps } from "./layout/Landing";
+export { AdminLayout, type AdminLayoutProps } from "./layout/Admin";
+export { MainLayout, type MainLayoutProps } from "./layout/Main";
 
 // admin
-export * from "./Components/Admin/NavBar";
-export * from "./Components/Admin/SideBar";
-export * from "./Components/Admin/NavBar";
 
-// tenant
-export * from "./Components/Tenant/TenantCreate";
-export * from "./Components/Tenant/TenantList";
-export * from "./Components/Tenant/TenantEdit";
-export * from "./Components/Tenant/FeatureList";
+export { NavBar, type NavBarProps } from "./Admin/NavBar";
+export { Sidebar, type SidebarProps } from "./Admin/Sidebar";
+export { Dashboard, type DashboardProps } from "./Admin/Dashboard";
 
-// sections
-export * from "./Components/Sections/Hero";
+// role
+export { RoleList } from "./Role/RoleList";
+
+// section
+export { Hero, type HeroProps } from "./Sections/Hero";
 
 // shared
-export * from "./Components/Shared/Input";
-export * from "./Components/Shared/Button";
-export * from "./Components/Shared/CustomTable";
-export * from "./Components/Shared/DialogWrapper";
-export * from "./Components/Shared/Form";
-export * from "./Components/Shared/Loader";
-export * from "./Components/Shared/Error";
-export * from "./Components/Shared/Meta";
-export * from "./Components/Shared/ThemeChanger";
+
+export { Meta, type MetaProps } from "./Shared/Meta";
+export { Button, type ButtonProps } from "./Shared/Button";
+export { Input, type InputProps } from "./Shared/Input";
+export { Form } from "./Shared/Form";
+export { CustomTable, type TableProps } from "./Shared/CustomTable";
+export { DialogWrapper, type DialogWrapperProps } from "./Shared/DialogWrapper";
+export { Loader, Error, ThemeSwitcher }
+
+// tenant
+
+export { TenantList } from "./Tenant/TenantList";
+

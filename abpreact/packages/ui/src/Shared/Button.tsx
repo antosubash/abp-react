@@ -4,7 +4,7 @@ export type ButtonProps = {
   displayText: string;
 };
 
-const Button = (props: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
   return (
     <button
       type="button"
@@ -15,5 +15,3 @@ const Button = (props: ButtonProps) => {
     </button>
   );
 };
-
-export default Button;

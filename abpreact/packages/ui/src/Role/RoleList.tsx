@@ -9,7 +9,7 @@ import {
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";
 
-const RoleList = () => {
+export const RoleList = () => {
   const columns = [
     {
       name: "Name",
@@ -66,5 +66,3 @@ const RoleList = () => {
     <>Role Table</>
   );
 };
-
-export default RoleList;

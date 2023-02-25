@@ -3,7 +3,7 @@ export type InputProps = {
   [x: string]: any;
 };
 
-const Input = (props: InputProps) => {
+export const Input = (props: InputProps) => {
   return (
     <div>
       <label htmlFor={props.name} className="text-sm block mb-1 font-medium">
@@ -16,5 +16,3 @@ const Input = (props: InputProps) => {
     </div>
   );
 };
-
-export default Input;

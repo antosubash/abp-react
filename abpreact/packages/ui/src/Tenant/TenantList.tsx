@@ -14,9 +14,9 @@ import { TenantDto, TenantService } from "@abpreact/proxy";
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";
 
-type Props = {};
+export type TenantListProps = {};
 
-const TenantList = (props: Props) => {
+export const TenantList = (props: TenantListProps) => {
   const queryClient = useQueryClient();
   let [isEditOpen, setIsEditOpen] = useState(false);
   const [tenantToEdit, setTenantToEdit] = useState<TenantDto>();
@@ -118,5 +118,3 @@ const TenantList = (props: Props) => {
     </>
   );
 };
-
-export default TenantList;

@@ -8,7 +8,7 @@ export type DialogWrapperProps = {
   children: React.ReactNode;
 };
 
-const DialogWrapper = (props: DialogWrapperProps) => {
+export const DialogWrapper = (props: DialogWrapperProps) => {
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
       <Dialog
@@ -60,5 +60,3 @@ const DialogWrapper = (props: DialogWrapperProps) => {
     </Transition>
   );
 };
-
-export default DialogWrapper;

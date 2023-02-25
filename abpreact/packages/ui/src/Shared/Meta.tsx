@@ -1,7 +1,7 @@
 // import { NextSeo } from "next-seo";
 import Head from "next/head";
 
-type MetaProps = {
+export type MetaProps = {
   title?: string;
   description?: string;
   keywords?: string;
@@ -26,7 +26,7 @@ type MetaProps = {
   ogType?: string;
 };
 
-const Meta = (props: MetaProps) => {
+export const Meta = (props: MetaProps) => {
   return (
     <Head>
       <meta key="charSet" charSet="UTF-8" />
@@ -161,5 +161,3 @@ const Meta = (props: MetaProps) => {
     </Head>
   );
 };
-
-export default Meta;

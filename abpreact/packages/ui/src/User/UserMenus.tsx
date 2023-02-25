@@ -1,10 +1,10 @@
 import React from "react";
-import UserDropDown from "./UserDropDown";
+import { UserDropDown } from "./UserDropDown";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { getCookie } from "cookies-next";
-interface Props {}
+export interface UserMenusProps {}
 
-const UserMenus = (props: Props) => {
+export const UserMenus = (props: UserMenusProps) => {
   var session = useSession();
   return (
     <div className="flex justify-center items-center">
@@ -36,5 +36,3 @@ const UserMenus = (props: Props) => {
     </div>
   );
 };
-
-export default UserMenus;

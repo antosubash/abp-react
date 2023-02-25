@@ -3,16 +3,16 @@ import classNames from "classnames";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeSwitcher from "../Shared/ThemeChanger";
-import { UserMenus } from "@abpreact/ui";
+import { UserMenus } from "../User/UserMenus";
 
-interface Props {
+export interface NavBarProps {
   menus: {
     Name: string;
     Link: string;
   }[];
 }
 
-const NavBar = (props: Props) => {
+export const NavBar = (props: NavBarProps) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
@@ -22,10 +22,7 @@ const NavBar = (props: Props) => {
       <ul className=" items-center hidden md:flex">
         {props.menus.map((menu, index) => {
           return (
-            <li
-              key={index}
-              className="growing-underline mx-3  p-4 rounded"
-            >
+            <li key={index} className="growing-underline mx-3  p-4 rounded">
               <a href={menu.Link}>{menu.Name}</a>
             </li>
           );
@@ -77,5 +74,3 @@ const NavBar = (props: Props) => {
     </nav>
   );
 };
-
-export default NavBar;

@@ -1,9 +1,9 @@
 import { Tab } from "@headlessui/react";
 import { useFeatures } from "@abpreact/hooks";
 
-type Props = {};
+export type FeatureListProps = {};
 
-const FeatureList = (props: Props) => {
+export const FeatureList = (props: FeatureListProps) => {
   var { data } = useFeatures("T", undefined);
   return (
     <Tab.Group>
@@ -15,14 +15,12 @@ const FeatureList = (props: Props) => {
       <Tab.Panels>
         {data?.groups?.map((el, index) => (
           <Tab.Panel key={index}>
-              {el.features?.map((feature, index) => (
-                <div key={index}>{feature.displayName}</div>
-              ))}
+            {el.features?.map((feature, index) => (
+              <div key={index}>{feature.displayName}</div>
+            ))}
           </Tab.Panel>
         ))}
       </Tab.Panels>
     </Tab.Group>
   );
 };
-
-export default FeatureList;

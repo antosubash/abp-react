@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 
 export interface DashboardProps {}
 
-const Dashboard = (props: DashboardProps) => {
+export const Dashboard = (props: DashboardProps) => {
   var session = useSession();
   return (
     <div>
@@ -595,5 +595,3 @@ const Dashboard = (props: DashboardProps) => {
     </div>
   );
 };
-
-export default Dashboard;

@@ -3,7 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
-const UserDropDown = () => {
+export const UserDropDown = () => {
   return (
     <div className="relative inline-block">
       <Menu>
@@ -73,5 +73,3 @@ const UserDropDown = () => {
     </div>
   );
 };
-
-export default UserDropDown;

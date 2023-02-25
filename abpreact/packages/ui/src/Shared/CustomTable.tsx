@@ -4,7 +4,7 @@ export type TableProps = {
   table: Table<any>;
 };
 
-const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
+export const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
   return (
     <>
       <table className="min-w-full divide-y text-left divide-gray-200 table-fixed ">
@@ -95,5 +95,3 @@ const CustomTable: React.FC<TableProps> = ({ table }: TableProps) => {
     </>
   );
 };
-
-export default CustomTable;

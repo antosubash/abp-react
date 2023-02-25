@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-import LandingLayout from "@abp/components/layouts/Landing";
-
+import { LandingLayout } from "@abpreact/ui";
 
 const Index: NextPage = () => {
   return <LandingLayout></LandingLayout>;

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export interface HeroProps {}
 
-const Hero = (props: HeroProps) => {
+export const Hero = (props: HeroProps) => {
   return (
     <section className="pt-24 md:mt-0 md:h-screen flex flex-col justify-center text-center md:text-left md:flex-row md:justify-between md:items-center lg:px-48 md:px-12 px-4 ">
       <div className="md:flex-1 md:mr-10">
@@ -42,5 +42,3 @@ const Hero = (props: HeroProps) => {
     </section>
   );
 };
-
-export default Hero;

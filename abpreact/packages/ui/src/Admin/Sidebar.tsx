@@ -10,7 +10,7 @@ export interface SidebarProps {
   }[]
 }
 
-const Sidebar = (props: SidebarProps) => {
+export const Sidebar = (props: SidebarProps) => {
   var router = useRouter();
   return (
     <div>
@@ -48,5 +48,3 @@ const Sidebar = (props: SidebarProps) => {
     </div>
   );
 };
-
-export default Sidebar;
