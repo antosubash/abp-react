@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import Loader from "@abp/components/Loader";
-import Error from "@abp/components/Error";
+import { useState } from "react";
 import { useTenants } from "@abpreact/hooks";
-import DataTable from "react-data-table-component";
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import { useQueryClient } from "@tanstack/react-query";
-import { useTheme } from "next-themes";
 import Swal from "sweetalert2";
-import { QueryNames } from "@abp/utils/Constants";
+import { QueryNames } from "@abpreact/hooks";
 import TenantEdit from "./TenantEdit";
 import FeatureList from "./FeatureList";
 import { TenantDto, TenantService } from "@abpreact/proxy";
+import Loader from "../Shared/Loader";
+import Error from "../Shared/Error";
+
 type Props = {};
 
 const TenantList = (props: Props) => {
@@ -88,8 +87,6 @@ const TenantList = (props: Props) => {
     });
   };
 
-  const { theme } = useTheme();
-
   var [skip, setSkip] = useState<number>(0);
   var [limit, setLimit] = useState<number>(10);
   var [page, setPage] = useState<number>(0);
@@ -117,17 +114,7 @@ const TenantList = (props: Props) => {
         name={tenantToEdit?.name!}
         id={tenantToEdit?.id!}
       />
-      <DataTable
-        theme={theme === "dark" ? "dark" : "default"}
-        columns={columns}
-        data={data?.items ?? []}
-        paginationTotalRows={data?.totalCount}
-        progressPending={isLoading}
-        pagination
-        paginationServer
-        onChangeRowsPerPage={handlePerRowsChange}
-        onChangePage={handlePageChange}
-      />
+      Tenant List
     </>
   );
 };

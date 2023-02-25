@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRoles } from "@abpreact/hooks";
-import Loader from "@abp/components/Loader";
-import Error from "@abp/components/Error";
-import DataTable from "react-data-table-component";
+
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { useTheme } from "next-themes";
-import { useQueryClient } from "@tanstack/react-query";
+import Loader from "../Shared/Loader";
+import Error from "../Shared/Error";
 
 const RoleList = () => {
   const columns = [
@@ -48,8 +46,6 @@ const RoleList = () => {
     },
   ];
 
-  const { theme } = useTheme();
-
   var [skip, setSkip] = useState<number>(0);
   var [limit, setLimit] = useState<number>(10);
   var [page, setPage] = useState<number>(0);
@@ -67,17 +63,7 @@ const RoleList = () => {
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
   return (
-    <DataTable
-      theme={theme === "dark" ? "dark" : "default"}
-      columns={columns}
-      data={data?.items ?? []}
-      paginationTotalRows={data?.totalCount}
-      progressPending={isLoading}
-      pagination
-      paginationServer
-      onChangeRowsPerPage={handlePerRowsChange}
-      onChangePage={handlePageChange}
-    />
+    <>Role Table</>
   );
 };
 

@@ -1,13 +1,13 @@
 
-import { QueryNames } from "@abp/utils/Constants";
 import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import Input from "@abp/components/Shared/Input";
-import Button from "@abp/components/Shared/Button";
-import DialogWrapper from "@abp/components/Shared/DialogWrapper";
-import Form from "@abp/components/Shared/Form";
 import { IdentityUserCreateDto, UserService } from "@abpreact/proxy";
+import Button from "../Shared/Button";
+import DialogWrapper from "../Shared/DialogWrapper";
+import Form from "../Shared/Form";
+import Input from "../Shared/Input";
+import { QueryNames } from "@abpreact/hooks";
 
 type Props = {};
 
@@ -18,7 +18,7 @@ const AddUser = (props: Props) => {
     const user = data as IdentityUserCreateDto;
     const created = await UserService.userCreate(user);
     if (created) {
-      await queryClient.invalidateQueries(QueryNames.GetUsers);
+      await queryClient.invalidateQueries([QueryNames.GetUsers]);
       setIsOpen(false);
       await Swal.fire("Success", "User Created Successfully", "success");
     }

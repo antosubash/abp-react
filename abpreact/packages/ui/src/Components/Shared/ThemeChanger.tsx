@@ -5,7 +5,10 @@ const ThemeSwitcher = () => {
   const [theme, setTheme] = useState("light");
   // When mounted on client, now we can show the UI
   useEffect(() => {
-    if (localStorage.getItem("theme") === null) {
+
+    if(typeof window === 'undefined') return;
+
+    if (window.localStorage.getItem("theme") === null) {
       document.documentElement.setAttribute("data-theme", "light");
     } else
       document.documentElement.setAttribute(

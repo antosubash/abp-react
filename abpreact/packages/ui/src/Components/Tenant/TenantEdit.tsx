@@ -1,5 +1,5 @@
 import { TenantService, TenantUpdateDto } from "@abpreact/proxy";
-import { QueryNames } from "@abp/utils/Constants";
+import { QueryNames } from "@abpreact/hooks";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";

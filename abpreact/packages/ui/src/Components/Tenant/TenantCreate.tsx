@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DialogWrapper from "../Shared/DialogWrapper";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
-import { QueryNames } from "@abp/utils/Constants";
+import { QueryNames } from "@abpreact/hooks";
 import Form from "../Shared/Form";
 import Input from "../Shared/Input";
 import Button from "../Shared/Button";

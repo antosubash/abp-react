@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    title: string;
-    children: React.ReactNode;
+export type DialogWrapperProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
 };
 
-const DialogWrapper = (props: Props) => {
+const DialogWrapper = (props: DialogWrapperProps) => {
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
       <Dialog
@@ -52,9 +52,7 @@ const DialogWrapper = (props: Props) => {
               >
                 {props.title}
               </Dialog.Title>
-              <div className="mt-2">
-                {props.children}
-              </div>
+              <div className="mt-2">{props.children}</div>
             </div>
           </Transition.Child>
         </div>

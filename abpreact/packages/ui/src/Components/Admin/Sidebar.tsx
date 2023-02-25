@@ -1,12 +1,16 @@
-import { AdminMenus } from "@abp/utils/Constants";
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 
-interface Props {}
+export interface SidebarProps {
+  menus : { 
+    Name: string;
+    Link: string;
+    Icon: React.FC;
+  }[]
+}
 
-const Sidebar = (props: Props) => {
+const Sidebar = (props: SidebarProps) => {
   var router = useRouter();
   return (
     <div>
@@ -17,7 +21,7 @@ const Sidebar = (props: Props) => {
           </div>
           <nav className="mt-6">
             <div>
-              {AdminMenus.map((menu, index) => {
+              {props.menus.map((menu, index) => {
                 return (
                   <Link key={index} href={menu.Link} passHref={true}>
                     <div
