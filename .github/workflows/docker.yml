@@ -47,6 +47,9 @@ jobs:
 
     - name: Build
       run: pnpm run build
+
+    - name: Docker output
+      run: pnpm --filter=abp-react deploy out
     # - name: Docker Login
     #   uses: docker/login-action@v2
     #   with:
