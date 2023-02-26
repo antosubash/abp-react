@@ -1,66 +1,45 @@
-# 1. Generate a sparse/partial monorepo with a pruned lockfile for a target workspace. https://turborepo.org/docs/reference/command-line-reference#turbo-prune---scopetarget
-
-# Refer to this original https://github.com/vercel/turborepo/blob/main/examples/with-docker/apps/web/Dockerfile
-
-FROM node:alpine AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+FROM node:alpine AS builder
 RUN apk add --no-cache libc6-compat
-
+RUN apk update
 # Set working directory
 WORKDIR /app
-
 COPY . .
 RUN corepack enable
-# will remove `turbo@latest` to `turbo` after stable release of 1.4.7
-RUN pnpm dlx turbo@latest prune --scope=abp-react --docker
-
-
-# 2. Rebuild the source code only when needed
-FROM node:alpine AS builder
+RUN pnpm dlx turbo prune --scope=abp-react --docker
+ 
+# Add lockfile and package.json's of isolated subworkspace
+FROM node:alpine AS installer
+RUN apk add --no-cache libc6-compat
+RUN apk update
 WORKDIR /app
-
-# Build the project and its dependencies
-ENV NEXT_TELEMETRY_DISABLED 1
-
-# set your APP_NAME
-ENV APP_NAME=abp-react
-
+ 
+# First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
-COPY --from=deps /app/out/json/ .
-COPY --from=deps /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-COPY --from=deps /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
+ 
+# Build the project
+COPY --from=builder /app/out/full/ .
 RUN corepack enable
 RUN pnpm install
-
-COPY --from=deps /app/out/full/ .
-COPY turbo.json turbo.json
-RUN pnpm turbo run build --filter=$APP_NAME...
-
-# 3. Production image, copy all the files and run next
+RUN pnpm turbo run build --scope=abp-react
+ 
 FROM node:alpine AS runner
-
 WORKDIR /app
-
-ENV NEXT_TELEMETRY_DISABLED 1
-ENV NODE_ENV=production
-
-# set your APP_NAME
-ENV APP_NAME=abp-react
-
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-# comment out below if you don't have public folder
-COPY --from=builder /app/apps/$APP_NAME/public public
-
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$APP_NAME/.next/static ./.next/static
-
+ 
+# Don't run production as root
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-CMD node apps/$APP_NAME/server.js
+ 
+COPY --from=installer /app/apps/abp/next.config.js .
+COPY --from=installer /app/apps/abp/package.json .
+ 
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/abp/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/abp/.next/static ./apps/abp-react/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/abp/public ./apps/abp-react/public
+ 
+CMD node apps/abp/server.js
