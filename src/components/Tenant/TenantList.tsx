@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 import { QueryNames } from "@abp/utils/Constants";
 import TenantEdit from "./TenantEdit";
 import FeatureList from "./FeatureList";
-import { TenantDto, TenantService } from "@abp/generated/api";
+import { TenantDto, TenantService } from "@abpreact/proxy";
 type Props = {};
 
 const TenantList = (props: Props) => {

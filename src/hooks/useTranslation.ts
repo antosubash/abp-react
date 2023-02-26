@@ -1,4 +1,4 @@
-import { AbpApplicationLocalizationService } from "@abp/generated/api";
+import { AbpApplicationLocalizationService } from "@abpreact/proxy";
 import { QueryNames } from "@abp/utils/Constants";
 import { useQuery } from "react-query";
 

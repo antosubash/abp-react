@@ -1,4 +1,4 @@
-import { TenantService, TenantUpdateDto } from "@abp/generated/api";
+import { TenantService, TenantUpdateDto } from "@abpreact/proxy";
 import { QueryNames } from "@abp/utils/Constants";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";

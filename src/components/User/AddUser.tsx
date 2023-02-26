@@ -7,7 +7,7 @@ import Input from "@abp/components/Shared/Input";
 import Button from "@abp/components/Shared/Button";
 import DialogWrapper from "@abp/components/Shared/DialogWrapper";
 import Form from "@abp/components/Shared/Form";
-import { IdentityUserCreateDto, UserService } from "@abp/generated/api";
+import { IdentityUserCreateDto, UserService } from "@abpreact/proxy";
 
 type Props = {};
 

@@ -1,4 +1,4 @@
-import { FeaturesService } from "@abp/generated/api";
+import { FeaturesService } from "@abpreact/proxy";
 import { QueryNames } from "@abp/utils/Constants";
 import { useQuery } from "react-query";
 

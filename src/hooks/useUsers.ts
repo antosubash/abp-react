@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { QueryNames } from "@abp/utils/Constants";
-import { UserService } from "@abp/generated/api";
+import { UserService } from "@abpreact/proxy";
 
 export const useUsers = (pageIndex: number, pageSize: number) => {
   return useQuery(

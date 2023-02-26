@@ -13,7 +13,7 @@ import {
   getCoreRowModel,
   ColumnDef,
 } from "@tanstack/react-table";
-import { IdentityUserDto } from "@abp/generated/api";
+import { IdentityUserDto } from "@abpreact/proxy";
 import CustomTable from "../Shared/CustomTable";
 const UserList = () => {
   const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(

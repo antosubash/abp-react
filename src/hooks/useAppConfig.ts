@@ -1,6 +1,6 @@
 import { QueryNames } from "@abp/utils/Constants";
 import { useQuery } from "react-query";
-import { AbpApplicationConfigurationService } from './../generated/api/services/AbpApplicationConfigurationService';
+import { AbpApplicationConfigurationService } from "@abpreact/proxy";
 
 export const useAppConfig = () => {
   return useQuery(QueryNames.GetAppConfig, async () => {

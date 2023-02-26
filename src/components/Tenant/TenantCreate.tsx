@@ -6,7 +6,7 @@ import { QueryNames } from "@abp/utils/Constants";
 import Form from "../Shared/Form";
 import Input from "../Shared/Input";
 import Button from "../Shared/Button";
-import { TenantCreateDto, TenantService } from "@abp/generated/api";
+import { TenantCreateDto, TenantService } from "@abpreact/proxy";
 type Props = {};
 
 const TenantCreate = (props: Props) => {

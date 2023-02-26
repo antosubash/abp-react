@@ -5,8 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./generated/api --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
@@ -34,7 +33,7 @@
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.6.16",
     "theme-change": "^2.3.0",
-    "zustand": "^4.2.0"
+    "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
