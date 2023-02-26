@@ -13,19 +13,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Docker Login
-      uses: docker/login-action@v2
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
       with:
-        registry: registry.antosubash.com
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    - uses: actions/checkout@v3
-    - name: Build the abpreact nextjs image
-      run: docker build . --file ./apps/abp/Dockerfile --tag abpreactnextjs:turbo
-    - name: Docker tag next image
-      run: docker tag abpreactnextjs:turbo registry.antosubash.com/abpreactnextjs:turbo
-    - name: Push abpreact-nextjs image
-      run: docker push registry.antosubash.com/abpreactnextjs:turbo
+        node-version: 16
+
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
+      with:
+        version: 7
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Build
+      run: pnpm run build
+    # - name: Docker Login
+    #   uses: docker/login-action@v2
+    #   with:
+    #     registry: registry.antosubash.com
+    #     username: ${{ secrets.REGISTRY_USERNAME }}
+    #     password: ${{ secrets.REGISTRY_PASSWORD }}
+    # - uses: actions/checkout@v3
+    # - name: Build the abpreact nextjs image
+    #   run: docker build . --file ./apps/abp/Dockerfile --tag abpreactnextjs:turbo
+    # - name: Docker tag next image
+    #   run: docker tag abpreactnextjs:turbo registry.antosubash.com/abpreactnextjs:turbo
+    # - name: Push abpreact-nextjs image
+    #   run: docker push registry.antosubash.com/abpreactnextjs:turbo
     # - name: Send Http Post Request to Deploy NextJs App
     #   uses: fjogeleit/http-request-action@v1
     #   with:
