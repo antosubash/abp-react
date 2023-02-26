@@ -1,12 +1,13 @@
 import { withAuth } from "next-auth/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { OpenAPI } from "@abpreact/proxy";
-import { hostData } from "./src/data/HostData";
+import { hostData } from "./data/HostData";
 
 export default withAuth(
   function middleware(request: NextRequest) {
     const response = NextResponse.next();
     var host = request.headers.get("host");
+    console.log(host);
     var currentIssuer = request.cookies.get("next-auth.issuer")?.value;
     var issuer = "";
     // TODO: this is a hack to get the issuer for the tenant.
