@@ -7,7 +7,9 @@ on:
 jobs:
 
   build:
-
+    defaults:
+      run:
+        working-directory: ./abpreact
     runs-on: ubuntu-latest
 
     steps:
@@ -19,13 +21,13 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Build the abpreact nextjs image
-      run: docker build ./src --file src/Dockerfile --tag abpreactnextjs:dev
+      run: docker build . --file ./apps/abp/Dockerfile --tag abpreactnextjs:turbo
     - name: Docker tag next image
-      run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
+      run: docker tag abpreactnextjs:turbo registry.antosubash.com/abpreactnextjs:turbo
     - name: Push abpreact-nextjs image
-      run: docker push registry.antosubash.com/abpreactnextjs:dev
-    - name: Send Http Post Request to Deploy NextJs App
-      uses: fjogeleit/http-request-action@v1
-      with:
-        url: ${{ secrets.NEXTJS_WEBHOOK_URL }}
-        method: 'POST'
+      run: docker push registry.antosubash.com/abpreactnextjs:turbo
+    # - name: Send Http Post Request to Deploy NextJs App
+    #   uses: fjogeleit/http-request-action@v1
+    #   with:
+    #     url: ${{ secrets.NEXTJS_WEBHOOK_URL }}
+    #     method: 'POST'
