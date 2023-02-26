@@ -19,7 +19,7 @@ jobs:
         registry: registry.antosubash.com
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build the abpreact nextjs image
       run: docker build . --file ./apps/abp/Dockerfile --tag abpreactnextjs:turbo
     - name: Docker tag next image
