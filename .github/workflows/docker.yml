@@ -9,7 +9,7 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: ./abpreact
+        working-directory: ./src
     runs-on: ubuntu-latest
 
     steps:
