@@ -16,10 +16,12 @@ module.exports = {
         {
             type: 'add',
             path: 'packages/{{name}}/src/index.tsx',
+            templateFile: 'plop-templates/package/src/index.tsx.hbs',
         },
         {
             type: 'add',
             path: 'packages/{{name}}/src/styles.css',
+            templateFile: 'plop-templates/package/src/styles.css.hbs',
         },
         {
             type: 'add',
@@ -38,8 +40,8 @@ module.exports = {
         },
         {
             type: 'add',
-            path: 'packages/{{name}}/tsup.config.js',
-            templateFile: 'plop-templates/package/tsup.config.js.hbs',
+            path: 'packages/{{name}}/tsup.config.ts',
+            templateFile: 'plop-templates/package/tsup.config.ts.hbs',
         },
     ]
 }
