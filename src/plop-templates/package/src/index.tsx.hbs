@@ -1,0 +1,2 @@
+// styles
+import "./styles.css";
