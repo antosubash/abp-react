@@ -26,13 +26,13 @@
     "next": "13.2.1",
     "next-auth": "4.19.2",
     "theme-change": "^2.3.0",
-    "@abpreact/proxy": "workspace:*"
+    "@abpreact/proxy": "workspace:*",
+    "@abpreact/hooks": "workspace:*"
   },
   "dependencies": {
     "sweetalert2": "^11.7.2",
     "@headlessui/react": "^1.7.12",
-    "@heroicons/react": "^2.0.16",
-    "@abpreact/hooks": "workspace:*"
+    "@heroicons/react": "^2.0.16"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
