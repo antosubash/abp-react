@@ -10,13 +10,13 @@
     "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
   },
   "devDependencies": {
+    "dotenv-cli": "latest",
     "eslint": "^8.34.0",
     "eslint-config-custom": "workspace:*",
+    "openapi-typescript-codegen": "^0.23.0",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",
-    "openapi-typescript-codegen": "^0.23.0",
-    "turbo": "latest",
-    "dotenv-cli": "latest"
+    "turbo": "^1.8.3"
   },
   "packageManager": "pnpm@7.15.0"
 }
