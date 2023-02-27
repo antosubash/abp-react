@@ -7,6 +7,7 @@
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "docker": "turbo prune --scope=abp-react --docker",
+    "generate": "plop",
     "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "eslint": "^8.34.0",
     "eslint-config-custom": "workspace:*",
     "openapi-typescript-codegen": "^0.23.0",
+    "plop": "^3.1.2",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.3",
     "turbo": "^1.8.3"
