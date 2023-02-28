@@ -24,7 +24,14 @@ class MyDocument extends Document {
           href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
           rel="stylesheet"
         />
-        <Head />
+        <Head>
+          <script
+            async
+            defer
+            data-website-id="d9753d5b-d888-4a04-ae92-79a158cc6ee8"
+            src="https://umami.antosubash.com/umami.js"
+          ></script>
+        </Head>
         <body className="bg-base-100">
           <Main />
           <NextScript />
