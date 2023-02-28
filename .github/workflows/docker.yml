@@ -10,6 +10,9 @@ jobs:
     defaults:
       run:
         working-directory: ./src
+    env:
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
     runs-on: ubuntu-latest
 
     steps:
