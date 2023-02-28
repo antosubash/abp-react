@@ -12,9 +12,9 @@ import {
   ColumnDef,
 } from "@tanstack/react-table";
 import { IdentityUserDto } from "@abpreact/proxy";
-import { CustomTable } from "../Shared/CustomTable";
-import Loader from "../Shared/Loader";
-import Error from "../Shared/Error";
+import { CustomTable } from "@abpreact/shared";
+import { Loader } from "@abpreact/shared";
+import { Error } from "@abpreact/shared";
 
 export const UserList = () => {
   const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(
@@ -25,36 +25,36 @@ export const UserList = () => {
           {
             accessorKey: "userName",
             header: "Username",
-            cell: (info) => info.getValue(),
+            cell: (info: { getValue: () => any; }) => info.getValue(),
           },
           {
             accessorKey: "email",
             header: "Email",
-            cell: (info) => info.getValue(),
+            cell: (info: { getValue: () => any; }) => info.getValue(),
           },
           {
             accessorKey: "isActive",
             header: "Active",
-            cell: (info) => (info.getValue() ? "yes" : "no"),
+            cell: (info: { getValue: () => any; }) => (info.getValue() ? "yes" : "no"),
           },
           {
             accessorKey: "permissions",
             header: "Permissions",
-            cell: (info) => (
+            cell: (info: any) => (
               <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
             ),
           },
           {
             accessorKey: "edit",
             header: "Edit",
-            cell: (info) => (
+            cell: (info: any) => (
               <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
             ),
           },
           {
             accessorKey: "delete",
             header: "Delete",
-            cell: (info) => (
+            cell: (info: any) => (
               <TrashIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
             ),
           },

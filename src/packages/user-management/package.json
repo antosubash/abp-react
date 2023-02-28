@@ -12,13 +12,21 @@
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@tanstack/react-table": "8.7.9",
+    "next": "13.2.1",
+    "theme-change": "^2.3.0"
+  },
   "dependencies": {
-    "@abpreact/proxy": "workspace:*"
+    "@abpreact/proxy": "workspace:*",
+    "@abpreact/shared": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "18.11.18",
-    "@types/react": "18.0.26",
-    "eslint": "^8.34.0",
+    "@types/node": "18.14.2",
+    "@types/react": "18.0.28",
+    "eslint": "^8.35.0",
     "eslint-config-custom": "workspace:*",
     "tailwind-config": "workspace:*",
     "tsconfig": "workspace:*",

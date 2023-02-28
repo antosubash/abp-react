@@ -1,5 +1,5 @@
 {
-  "name": "@abpreact/core",
+  "name": "@abpreact/shared",
   "version": "0.0.0",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -12,8 +12,19 @@
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit"
   },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@tanstack/react-table": "8.7.9",
+    "next": "13.2.1",
+    "theme-change": "^2.3.0"
+  },
   "dependencies": {
-    "@abpreact/proxy": "workspace:*"
+    "@abpreact/proxy": "workspace:*",
+    "@headlessui/react": "^1.7.12",
+    "@heroicons/react": "^2.0.16",
+    "sweetalert2": "^11.7.3",
+    "react-hook-form": "^7.43.2"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
