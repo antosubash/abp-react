@@ -11,12 +11,13 @@ import { getCookie } from "cookies-next";
 import {
   ApplicationConfigurationDto,
   OpenAPI as ApiOptions,
+  AbpApplicationConfigurationService,
 } from "@abpreact/proxy";
 import { Meta } from "@abpreact/ui";
 import i18n from "../utils/i18n";
+import App from "next/app";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appConfig = pageProps.appConfig as ApplicationConfigurationDto;
-
   i18n.set(
     appConfig?.localization?.currentCulture?.cultureName!,
     appConfig?.localization?.values
@@ -48,5 +49,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     </SessionProvider>
   );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  ApiOptions.BASE = process.env.NEXT_PUBLIC_API_BASE_URL!;
+  const appConfig =
+    await AbpApplicationConfigurationService.abpApplicationConfigurationGet();
+  return { ...appProps, pageProps: { ...appProps.pageProps, appConfig } };
+};
 
 export default MyApp;
