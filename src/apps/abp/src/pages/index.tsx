@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
-import { LandingLayout } from "@abpreact/ui";
+import { Hero, LandingLayout } from "@abpreact/ui";
 import { Menus } from "../utils/Constants";
 
 const Index: NextPage = () => {
-  return <LandingLayout menus={Menus}></LandingLayout>;
+  return <LandingLayout menus={Menus}>
+    <Hero />
+  </LandingLayout>;
 };
 
 export default Index;

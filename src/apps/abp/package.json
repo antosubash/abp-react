@@ -17,6 +17,7 @@
     "cookies-next": "^2.1.1",
     "daisyui": "^2.51.0",
     "@abpreact/proxy": "workspace:*",
+    "@abpreact/tenant-management": "workspace:*",
     "jwt-decode": "^3.1.2",
     "next": "13.2.1",
     "next-auth": "^4.19.2",
