@@ -1,4 +1,3 @@
-import { useUsers } from "@abpreact/hooks";
 import React from "react";
 import {
   AdjustmentsHorizontalIcon,
@@ -15,6 +14,7 @@ import { IdentityUserDto } from "@abpreact/proxy";
 import { CustomTable } from "@abpreact/shared";
 import { Loader } from "@abpreact/shared";
 import { Error } from "@abpreact/shared";
+import { useUsers } from "../Hooks/useUsers";
 
 export const UserList = () => {
   const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(

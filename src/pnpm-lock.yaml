@@ -284,27 +284,31 @@ importers:
     specifiers:
       '@abpreact/proxy': workspace:*
       '@abpreact/shared': workspace:*
+      '@headlessui/react': ^1.7.12
+      '@heroicons/react': ^2.0.16
+      '@tanstack/react-query': 4.24.10
       '@tanstack/react-table': 8.7.9
       '@types/node': 18.14.2
       '@types/react': 18.0.28
       eslint: ^8.35.0
       eslint-config-custom: workspace:*
-      next: 13.2.1
       react: 18.2.0
       react-dom: 18.2.0
+      sweetalert2: ^11.7.3
       tailwind-config: workspace:*
-      theme-change: ^2.3.0
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
     dependencies:
       '@abpreact/proxy': link:../proxy
       '@abpreact/shared': link:../shared
+      '@headlessui/react': 1.7.12_biqbaboplfbrettd7655fr4n2y
+      '@heroicons/react': 2.0.16_react@18.2.0
+      '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-table': 8.7.9_biqbaboplfbrettd7655fr4n2y
-      next: 13.2.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      theme-change: 2.3.0
+      sweetalert2: 11.7.3
     devDependencies:
       '@types/node': 18.14.2
       '@types/react': 18.0.28

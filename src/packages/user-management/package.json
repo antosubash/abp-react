@@ -16,12 +16,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "@tanstack/react-table": "8.7.9",
-    "next": "13.2.1",
-    "theme-change": "^2.3.0"
+    "@tanstack/react-query": "4.24.10"
   },
   "dependencies": {
     "@abpreact/proxy": "workspace:*",
-    "@abpreact/shared": "workspace:*"
+    "@abpreact/shared": "workspace:*",
+    "sweetalert2": "^11.7.3",
+    "@headlessui/react": "^1.7.12",
+    "@heroicons/react": "^2.0.16"
   },
   "devDependencies": {
     "@types/node": "18.14.2",

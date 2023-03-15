@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { UserService } from "@abpreact/proxy";
-import { QueryNames } from "../QueryConstants";
+import { UserQueryNames } from "../UserQueryConstants";
 
 export const useUsers = (pageIndex: number, pageSize: number) => {
   return useQuery(
-    [QueryNames.GetUsers, pageIndex, pageSize],
+    [UserQueryNames.GetUsers, pageIndex, pageSize],
     async () => {
         let skip = 0;
         if (pageIndex > 0) {
