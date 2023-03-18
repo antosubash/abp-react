@@ -38,8 +38,8 @@ The goal of this project is to provide a React UI for the ABP Framework. It will
 
 1. Clone the repo
 2. cd into the src folder
-3. Run `yarn install`
-4. Run `yarn dev`
+3. Run `pnpm install`
+4. Run `pnpm dev`
 
 ## How to contribute
 
@@ -54,12 +54,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* [ABP Framework](https://abp.io/)
-* [React](https://reactjs.org/)
-* [Next.js](https://nextjs.org/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [Tailwind CSS](https://tailwindcss.com/)
+- [ABP Framework](https://abp.io/)
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Contributors
 
-* [Anto Subash](https://github.com/antosubash)
+- [Anto Subash](https://github.com/antosubash)
