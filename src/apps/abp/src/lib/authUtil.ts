@@ -52,7 +52,7 @@ export const getAuthOptions = (req: any) => {
       async session({ session, token }) {
         session.accessToken = token.accessToken;
         session.idToken = token.idToken;
-        session.userRole = token.userRole;
+        session.user.userRole = token.userRole;
         return session;
       },
       async jwt({ token, account }: any) {
@@ -85,7 +85,6 @@ export const getAuthOptions = (req: any) => {
           });
 
           const tokens = await response.json();
-
           if (!response.ok) throw tokens;
           const newToken = {
             ...token, // Keep the previous token properties

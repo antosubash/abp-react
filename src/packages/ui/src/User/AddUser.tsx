@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { IdentityUserCreateDto, UserService } from "@abpreact/proxy";
+import { QueryNames } from "@abpreact/hooks";
+
 import { Button } from "../Shared/Button";
 import { DialogWrapper } from "../Shared/DialogWrapper";
 import { Form } from "../Shared/Form";
 import { Input } from "../Shared/Input";
-import { QueryNames } from "@abpreact/hooks";
 
 export type AddUserProps = {};
 
-export const AddUser = (props: AddUserProps) => {
+export const AddUser = ({}: AddUserProps) => {
   let [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const onSubmit = async (data: any) => {
@@ -34,7 +35,7 @@ export const AddUser = (props: AddUserProps) => {
   return (
     <>
       <div className="float-right">
-        <Button displayText="Create User" onClick={openModal} />
+        <Button variant="default" onClick={openModal}>Create New User</Button>
       </div>
       <DialogWrapper isOpen={isOpen} title="Create User" onClose={closeModal}>
         <Form onSubmit={onSubmit} onCancel={closeModal}>

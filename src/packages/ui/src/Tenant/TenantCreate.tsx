@@ -32,7 +32,7 @@ export const TenantCreate = (props: TenantCreateProps) => {
   return (
     <>
       <div className="float-right">
-        <Button displayText="New Tenant" onClick={openModal} />
+        <Button variant="default" onClick={openModal} />
       </div>
       <DialogWrapper isOpen={isOpen} title="Create tenant" onClose={closeModal}>
         <Form onSubmit={onSubmit} onCancel={closeModal}>

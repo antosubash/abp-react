@@ -16,23 +16,28 @@
     "check-types": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@abpreact/proxy": "workspace:*",
+    "@tanstack/react-query": "4.24.10",
+    "@tanstack/react-table": "8.7.9",
     "classnames": "^2.3.2",
     "cookies-next": "^2.1.1",
+    "next": "13.2.1",
+    "next-auth": "4.19.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2",
-    "@tanstack/react-query": "4.24.10",
-    "@tanstack/react-table": "8.7.9",
-    "next": "13.2.1",
-    "next-auth": "4.19.2",
-    "theme-change": "^2.3.0",
-    "@abpreact/proxy": "workspace:*"
+    "theme-change": "^2.3.0"
   },
   "dependencies": {
-    "sweetalert2": "^11.7.2",
+    "@abpreact/hooks": "workspace:*",
     "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.16",
-    "@abpreact/hooks": "workspace:*"
+    "@radix-ui/react-avatar": "^1.0.2",
+    "@radix-ui/react-tabs": "^1.0.3",
+    "class-variance-authority": "^0.4.0",
+    "clsx": "^1.2.1",
+    "sweetalert2": "^11.7.2",
+    "tailwind-merge": "^1.10.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
@@ -41,9 +46,9 @@
     "postcss": "^8.4.21",
     "react": "^18.2.0",
     "tailwind-config": "workspace:*",
+    "tailwindcss": "^3.2.7",
     "tsconfig": "workspace:*",
     "tsup": "^6.6.3",
-    "tailwindcss": "^3.2.7",
     "typescript": "^4.9.5"
   }
 }

@@ -39,7 +39,7 @@ export const NavBar = ({menus}: NavBarProps) => {
         className="md:hidden"
         onClick={() => setIsVisible(true)}
       >
-        <Image src="/img/Menu.svg" alt="Menu icon" height={16} width={16} />
+        {/* <Image src="/img/Menu.svg" alt="Menu icon" height={16} width={16} /> */}
       </div>
       <div
         id="mobileNav"
