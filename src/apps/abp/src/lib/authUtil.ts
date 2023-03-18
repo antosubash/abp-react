@@ -50,13 +50,12 @@ export const getAuthOptions = (req: any) => {
         return true;
       },
       async session({ session, token }) {
-        session.user.accessToken = token.accessToken;
+        session.accessToken = token.accessToken;
         session.idToken = token.idToken;
         session.user.userRole = token.userRole;
         return session;
       },
       async jwt({ token, account }: any) {
-        console.log(account, 'account')
         if (account) {
           token.accessToken = account.access_token!;
           token.idToken = account.id_token!;
@@ -86,7 +85,6 @@ export const getAuthOptions = (req: any) => {
           });
 
           const tokens = await response.json();
-
           if (!response.ok) throw tokens;
           const newToken = {
             ...token, // Keep the previous token properties

@@ -81,6 +81,7 @@ export const UserList = () => {
   );
 
   var { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+
   var pageCount = Math.ceil(data?.totalCount! / pageSize);
   const table = useReactTable({
     data: data?.items || defaultData,
