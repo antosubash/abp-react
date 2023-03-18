@@ -1,11 +1,18 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const UserDropDown = () => {
-  const session = useSession()
-  const hasAdmin = session.data?.user?.userRole;
+  const session = useSession();
+  const hasAdmin = session.data?.userRole?.includes("admin");
+  const router = useRouter();
+
+  const logout = () => {
+    router.push("/logout");
+  };
+
   return (
     <div className="relative inline-block z-50">
       <Menu>
@@ -61,8 +68,7 @@ export const UserDropDown = () => {
                           active && "bg-blue-500"
                         } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
                         onClick={async () => {
-                        await signOut({redirect: true});
-                       
+                          logout();
                         }}
                       >
                         Sign out
