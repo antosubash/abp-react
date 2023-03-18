@@ -6,20 +6,19 @@ import { hostData } from "./data/HostData";
 export default withAuth(
   function middleware(request: NextRequest) {
     const response = NextResponse.next();
-    var host = request.headers.get("host");
-    console.log(host);
-    var currentIssuer = request.cookies.get("next-auth.issuer")?.value;
-    var issuer = "";
+    const host = request.headers.get("host");
+    const currentIssuer = request.cookies.get("next-auth.issuer")?.value;
+    let issuer = "";
     // TODO: this is a hack to get the issuer for the tenant.
     // We should be able to get this from the API.
-    var tenant = hostData.find((x) => x.host == host);
-    var shouldSetCookie = false;
-    if (!currentIssuer) {
+    const tenant = hostData.find((x) => x.host == host);
+    let shouldSetCookie = false;
+    if (currentIssuer === undefined) {
       issuer = tenant?.apiUrl!;
       shouldSetCookie = true;
     }
 
-    if (tenant && currentIssuer != tenant?.apiUrl) {
+    if ((tenant && currentIssuer) !== tenant?.apiUrl) {
       shouldSetCookie = true;
     }
     OpenAPI.BASE = issuer;
@@ -30,27 +29,19 @@ export default withAuth(
     return response;
   },
   {
-    callbacks: {
+    callbacks:{
       authorized: ({ req, token }) => {
-        var adminPaths = ["/admin", "/users", "/tenants", "/settings"];
-        var publicPaths = ["/"];
-        var assets = ["/img", "/favicon.ico", "/robots.txt"];
-        if (
-          token?.userRole === "admin" &&
-          adminPaths.includes(req.nextUrl.pathname)
-        ) {
-          return true;
-        }
-
-        if (publicPaths.includes(req.nextUrl.pathname)) {
-          return true;
-        }
+        const adminPaths = ["/admin", "/users", "/tenants", "/settings"];
+        const publicPaths = ["/"];
+        const assets = ["/img", "/favicon.ico", "/robots.txt"];
 
         if (
-          assets.filter((x) => req.nextUrl.pathname.startsWith(x)).length > 0
-        ) {
-          return true;
-        }
+            (token?.userRole === "admin" && adminPaths.includes(req.nextUrl.pathname))
+            || publicPaths.includes(req.nextUrl.pathname)
+        ) return true;
+
+        if (assets.filter((x) => req.nextUrl.pathname.startsWith(x)).length > 0) return true;
+        
         console.log("Not authorized path", req.nextUrl.pathname);
         return false;
       },

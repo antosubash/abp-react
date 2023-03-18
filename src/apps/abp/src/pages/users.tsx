@@ -1,12 +1,9 @@
-import { AdminLayout } from "@abpreact/ui";
+import { AdminLayout, UserList, RoleList, AddUser } from "@abpreact/ui";
 import { NextPage } from "next";
 import React from "react";
 import { Tab } from "@headlessui/react";
 import classNames from "classnames";
-import { UserList } from "@abpreact/ui";
-import { RoleList } from "@abpreact/ui";
 import { useI18n } from "next-localization";
-import { AddUser } from "@abpreact/ui";
 import { AdminMenus } from "../utils/Constants";
 
 const Users: NextPage = () => {

@@ -1,6 +1,8 @@
 import {
+  Awaitable,
   NextAuthOptions,
   TokenSet,
+  User,
   unstable_getServerSession,
 } from "next-auth";
 import { GetServerSidePropsContext } from "next";
@@ -27,14 +29,12 @@ export const getAuthOptions = (req: any) => {
         authorization: {
           params: { scope: "openid profile email offline_access AbpTemplate" },
         },
-        profile: (profile: any) => {
-          return {
-            id: profile.sub,
-            name: profile.name,
-            email: profile.email,
-            image: profile.picture,
-          };
-        },
+        profile: (profile: {sub: string, name: string, email: string, picture: string}, token: TokenSet): Awaitable<User> => ({
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        }),
         clientId: clientId,
       },
     ],
@@ -50,12 +50,12 @@ export const getAuthOptions = (req: any) => {
         return true;
       },
       async session({ session, token }) {
-        session.accessToken = token.accessToken;
-        session.userRole = token.userRole;
+        session.user.accessToken = token.accessToken;
+        session.user.userRole = token.userRole;
         return session;
       },
-
       async jwt({ token, account }: any) {
+        console.log(account, 'account')
         if (account) {
           token.accessToken = account.access_token!;
           token.refreshToken = account.refresh_token!;
@@ -95,14 +95,17 @@ export const getAuthOptions = (req: any) => {
             refreshToken: tokens.refresh_token ?? token.refreshToken,
           };
           return newToken;
-        } catch (error) {
-          console.log("error", error);
+        } catch (err: unknown) {
+          if(err instanceof Error)
+            console.log(`Error Caught: ${err.message}`);
           return {
             ...token,
             error: "RefreshAccessTokenError",
           };
         }
       },
+
+     
     },
     events: {},
     // Enable debug messages in the console if you are having problems
@@ -130,5 +133,5 @@ export const prepareApiRequest = async (context: GetServerSidePropsContext) => {
   ApiOptions.HEADERS = {
     __tenant: tenant,
   } as Record<string, string>;
-  ApiOptions.TOKEN = session?.accessToken as string;
+  ApiOptions.TOKEN = session?.user?.accessToken as string;
 };

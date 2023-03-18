@@ -4,14 +4,15 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { getCookie } from "cookies-next";
 export interface UserMenusProps {}
 
-export const UserMenus = (props: UserMenusProps) => {
+export const UserMenus = ({}: UserMenusProps) => {
   var session = useSession();
-  return (
-    <div className="flex justify-center items-center">
-      {session.data ? (
-        <UserDropDown />
-      ) : (
-        <div>
+  const renderElement = () => {
+    if(session.data) {
+      return <UserDropDown />
+    }
+
+    return (
+      <div>
           <button
             className="mr-6 hover:bg-slate-300  p-3 rounded-xl"
             onClick={() => {
@@ -32,7 +33,11 @@ export const UserMenus = (props: UserMenusProps) => {
             Register
           </button>
         </div>
-      )}
+    )
+  }
+  return (
+    <div className="flex justify-center items-center">
+     {renderElement()}
     </div>
   );
 };
