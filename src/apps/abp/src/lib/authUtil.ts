@@ -127,5 +127,5 @@ export const prepareApiRequest = async (context: GetServerSidePropsContext) => {
   ApiOptions.HEADERS = {
     __tenant: tenant,
   } as Record<string, string>;
-  ApiOptions.TOKEN = session?.user.accessToken as string;
+  ApiOptions.TOKEN = session?.accessToken as string;
 };
