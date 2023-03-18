@@ -8,14 +8,9 @@ export const UserDropDown = () => {
   const session = useSession()
   const router = useRouter();
 
-  const hasAdmin = session.data?.user?.userRole.includes('admin');
+  const hasAdmin = session.data?.user?.userRole?.includes('admin');
   const picture = session.data?.user?.image; 
   const name = session?.data?.user?.name;
-
-
-  const logout = () => {
-    router.push("/logout");
-  };
   
   return (
     <div className="relative inline-block z-50">
@@ -65,9 +60,7 @@ export const UserDropDown = () => {
                         className={`${
                           active && "bg-blue-500"
                         } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
-                        onClick={async () => {
-                          logout();
-                        }}
+                        onClick={() => router.push("/logout")}
                       >
                         Sign out
                       </div>

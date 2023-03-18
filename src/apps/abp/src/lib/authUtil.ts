@@ -50,12 +50,13 @@ export const getAuthOptions = (req: any) => {
         return true;
       },
       async session({ session, token }) {
-        session.accessToken = token.accessToken;
+        session.user.accessToken = token.accessToken;
         session.idToken = token.idToken;
-        session.userRole = token.userRole;
+        session.user.userRole = token.userRole;
         return session;
       },
       async jwt({ token, account }: any) {
+        console.log(account, 'account')
         if (account) {
           token.accessToken = account.access_token!;
           token.idToken = account.id_token!;
@@ -128,5 +129,5 @@ export const prepareApiRequest = async (context: GetServerSidePropsContext) => {
   ApiOptions.HEADERS = {
     __tenant: tenant,
   } as Record<string, string>;
-  ApiOptions.TOKEN = session?.accessToken as string;
+  ApiOptions.TOKEN = session?.user.accessToken as string;
 };
