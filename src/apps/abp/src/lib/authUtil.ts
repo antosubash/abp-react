@@ -3,7 +3,7 @@ import {
   NextAuthOptions,
   TokenSet,
   User,
-  unstable_getServerSession,
+  getServerSession,
 } from "next-auth";
 import { GetServerSidePropsContext } from "next";
 import { OpenAPI as ApiOptions } from "@abpreact/proxy";
@@ -50,14 +50,15 @@ export const getAuthOptions = (req: any) => {
         return true;
       },
       async session({ session, token }) {
-        session.user.accessToken = token.accessToken;
-        session.user.userRole = token.userRole;
+        session.accessToken = token.accessToken;
+        session.idToken = token.idToken;
+        session.userRole = token.userRole;
         return session;
       },
       async jwt({ token, account }: any) {
-        console.log(account, 'account')
         if (account) {
           token.accessToken = account.access_token!;
+          token.idToken = account.id_token!;
           token.refreshToken = account.refresh_token!;
           token.expiresAt = account.expires_at * 1000;
           const decoded = jwtDecode(account.access_token!) as any;
@@ -104,8 +105,6 @@ export const getAuthOptions = (req: any) => {
           };
         }
       },
-
-     
     },
     events: {},
     // Enable debug messages in the console if you are having problems
@@ -115,23 +114,19 @@ export const getAuthOptions = (req: any) => {
   return authOptions;
 };
 
-export const getServerSession = async (context: GetServerSidePropsContext) => {
+export const getServerSessionFromContext = async (context: GetServerSidePropsContext) => {
   const authOptions = getAuthOptions(context.req);
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
   return session;
 };
 
 export const prepareApiRequest = async (context: GetServerSidePropsContext) => {
-  const session = await getServerSession(context);
+  const session = await getServerSessionFromContext(context);
   const issuer = getCookieFromRequest("next-auth.issuer", context.req);
   ApiOptions.BASE = issuer ?? "";
   const tenant = getCookieFromRequest("__tenant", context.req);
   ApiOptions.HEADERS = {
     __tenant: tenant,
   } as Record<string, string>;
-  ApiOptions.TOKEN = session?.user?.accessToken as string;
+  ApiOptions.TOKEN = session?.accessToken as string;
 };
