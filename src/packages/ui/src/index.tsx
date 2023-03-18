@@ -25,6 +25,8 @@ export { Hero, type HeroProps } from "./Sections/Hero";
 
 export { Meta, type MetaProps } from "./Shared/Meta";
 export { Button, type ButtonProps } from "./Shared/Button";
+export { Avatar, AvatarImage, AvatarFallback } from './Shared/Avatar';
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './Shared/Tabs';
 export { Input, type InputProps } from "./Shared/Input";
 export { Form } from "./Shared/Form";
 export { CustomTable, type TableProps } from "./Shared/CustomTable";

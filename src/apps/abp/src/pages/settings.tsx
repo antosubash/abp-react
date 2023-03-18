@@ -5,13 +5,11 @@ import { AdminMenus } from "../utils/Constants";
 
 interface Props {}
 
-const Settings: NextPage = (props: Props) => {
+const Settings: NextPage = ({}: Props) => {
   return (
-    <div>
-      <AdminLayout menus={AdminMenus}>
-        <div>Settings</div>
-      </AdminLayout>
-    </div>
+    <AdminLayout menus={AdminMenus}>
+      <div>Settings</div>
+    </AdminLayout>
   );
 };
 

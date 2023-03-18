@@ -10,7 +10,7 @@ export interface SidebarProps {
   }[]
 }
 
-export const Sidebar = (props: SidebarProps) => {
+export const Sidebar = ({menus}: SidebarProps) => {
   var router = useRouter();
   return (
     <div>
@@ -21,7 +21,7 @@ export const Sidebar = (props: SidebarProps) => {
           </div>
           <nav className="mt-6">
             <div>
-              {props.menus.map((menu, index) => {
+              {menus.map((menu, index) => {
                 return (
                   <Link key={index} href={menu.Link} passHref={true}>
                     <div

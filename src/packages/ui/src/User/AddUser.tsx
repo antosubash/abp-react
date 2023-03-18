@@ -34,7 +34,7 @@ export const AddUser = (props: AddUserProps) => {
   return (
     <>
       <div className="float-right">
-        <Button displayText="Create User" onClick={openModal} />
+        <Button variant="default" onClick={openModal}>Create New User</Button>
       </div>
       <DialogWrapper isOpen={isOpen} title="Create User" onClose={closeModal}>
         <Form onSubmit={onSubmit} onCancel={closeModal}>
