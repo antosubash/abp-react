@@ -6,6 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  var authOptions = getAuthOptions(req);
+  const authOptions = getAuthOptions(req);
   return NextAuth(req, res, authOptions);
 }

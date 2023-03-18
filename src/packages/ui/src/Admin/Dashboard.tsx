@@ -2,8 +2,8 @@ import { useSession } from "next-auth/react";
 
 export interface DashboardProps {}
 
-export const Dashboard = (props: DashboardProps) => {
-  var session = useSession();
+export const Dashboard = ({}: DashboardProps) => {
+  const session = useSession();
   return (
     <div>
       <h1 className="text-4xl font-semibold ">

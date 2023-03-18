@@ -12,7 +12,7 @@ export interface NavBarProps {
   }[];
 }
 
-export const NavBar = (props: NavBarProps) => {
+export const NavBar = ({menus}: NavBarProps) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
@@ -20,7 +20,7 @@ export const NavBar = (props: NavBarProps) => {
         <Link href="/">My Startup</Link>
       </div>
       <ul className=" items-center hidden md:flex">
-        {props.menus.map((menu, index) => {
+        {menus.map((menu, index) => {
           return (
             <li key={index} className="growing-underline mx-3  p-4 rounded">
               <a href={menu.Link}>{menu.Name}</a>
@@ -28,7 +28,7 @@ export const NavBar = (props: NavBarProps) => {
           );
         })}
       </ul>
-      <div className=" hidden md:flex md:flex-row">
+      <div className="hidden md:flex md:flex-row">
         <div className="flex items-center justify-center mr-6">
           <ThemeSwitcher />
         </div>
@@ -62,7 +62,7 @@ export const NavBar = (props: NavBarProps) => {
           />
         </div>
         <ul className="flex flex-col mx-8 my-24 items-center text-3xl">
-          {props.menus.map((menu, index) => {
+          {menus.map((menu, index) => {
             return (
               <li key={index} className="my-6">
                 <a href={menu.Link}>{menu.Name}</a>

@@ -16,6 +16,7 @@ import {
 import { Meta } from "@abpreact/ui";
 import i18n from "../utils/i18n";
 import App from "next/app";
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const appConfig = pageProps.appConfig as ApplicationConfigurationDto;
   i18n.set(
@@ -33,8 +34,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       const currentSession = await fetch("/api/auth/session");
       const currentSessionJson = await currentSession.json();
       return currentSessionJson.accessToken || "";
-    } catch (error) {
-      return "";
+    } catch (err: unknown) {
+      if(err instanceof Error) {
+        console.debug(`Error caugth: ${err.message}`);
+      }
     }
   };
 

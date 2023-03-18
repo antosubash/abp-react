@@ -1,11 +1,13 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export const UserDropDown = () => {
+  const session = useSession()
+  const hasAdmin = session.data?.user?.userRole;
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block z-50">
       <Menu>
         <Menu.Button className="flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium  hover:bg-gray-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
           <svg
@@ -29,26 +31,28 @@ export const UserDropDown = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items>
-            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5">
+            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 bg-white">
               <div
                 className="py-1 "
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
               >
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link href="/admin" passHref={true}>
-                      <div
-                        className={`${
-                          active && "bg-blue-500"
-                        } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
-                      >
-                        Admin
-                      </div>
-                    </Link>
-                  )}
-                </Menu.Item>
+                {hasAdmin && (
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link href="/admin" passHref={true}>
+                        <div
+                          className={`${
+                            active && "bg-blue-500"
+                          } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
+                        >
+                          Admin
+                        </div>
+                      </Link>
+                    )}
+                  </Menu.Item>
+                )}
                 <Menu.Item>
                   {({ active }) => (
                     <Link href="#" passHref={true}>
@@ -56,8 +60,9 @@ export const UserDropDown = () => {
                         className={`${
                           active && "bg-blue-500"
                         } block cursor-pointer px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900  `}
-                        onClick={() => {
-                          signOut();
+                        onClick={async () => {
+                        await signOut({redirect: true});
+                       
                         }}
                       >
                         Sign out

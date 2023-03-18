@@ -1,10 +1,13 @@
-import { Session } from "next-auth"
+import {  DefaultUser, DefaultSession } from "next-auth"
 import { JWT } from "next-auth/jwt"
 
 declare module "next-auth" {
-  interface Session {
-    accessToken: string;
-    userRole: string;
+  interface User extends DefaultUser {
+    accessToken?: string;
+    userRole?: string; 
+  }
+  interface Session extends DefaultSession {
+    user?: User;
     error?: "RefreshAccessTokenError";
   }
 }
