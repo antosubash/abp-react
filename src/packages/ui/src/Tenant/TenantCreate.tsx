@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { DialogWrapper } from "../Shared/DialogWrapper";
+import { useState } from "react";
+import {   
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger, } from "../Shared/DialogWrapper";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QueryNames } from "@abpreact/hooks";
-import { Form } from "../Shared/Form";
 import { Input } from "../Shared/Input";
 import { Button } from "../Shared/Button";
 import { TenantCreateDto, TenantService } from "@abpreact/proxy";
@@ -21,43 +26,41 @@ export const TenantCreate = (props: TenantCreateProps) => {
       Swal.fire("Success", "Tenant Created Successfully", "success");
     }
   };
-  function closeModal() {
-    setIsOpen(false);
-  }
 
-  function openModal() {
-    setIsOpen(true);
-  }
 
   return (
-    <>
-      <div className="float-right">
-        <Button variant="default" onClick={openModal} />
-      </div>
-      <DialogWrapper isOpen={isOpen} title="Create tenant" onClose={closeModal}>
-        <Form onSubmit={onSubmit} onCancel={closeModal}>
-          <Input
-            required
-            placeholder="Enter your tenant name"
-            name="name"
-            displayName="Name"
-          />
-          <Input
-            required
-            placeholder="yourmail@provider.com"
-            name="adminEmailAddress"
-            displayName="Email"
-            type="email"
-          />
-          <Input
-            required
-            placeholder="Password"
-            name="adminPassword"
-            displayName="Password"
-            type="password"
-          />
-        </Form>
-      </DialogWrapper>
-    </>
+    <section className="p-3">
+      <Dialog>
+        <DialogTrigger className="flex items-center pb-5" asChild>
+           <h3 className="title font-bold text-xl grow p-0 m-1">Tenant Management</h3>
+          <Button variant="default">Create New Tenant</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create a New Tenant</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={onSubmit}>
+            <Input
+              required
+              placeholder="Enter your tenant name"
+              name="name"
+            />
+            <Input
+              required
+              placeholder="yourmail@provider.com"
+              name="adminEmailAddress"
+            
+              type="email"
+            />
+            <Input
+              required
+              placeholder="Password"
+              name="adminPassword"
+              type="password"
+            />
+          </form>
+        </DialogContent>
+      </Dialog>
+    </section>
   );
 };
