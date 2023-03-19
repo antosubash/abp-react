@@ -15,7 +15,7 @@ const TableView = ({ table }: TableViewProps) => {
           {headers.map((header) => {
             if (header.isPlaceholder) return false;
             return (
-              <th key={header.id} className="px-3">
+              <th key={header.id} className="px-3 last:1/2 lg:last:w-1/4">
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
@@ -41,7 +41,7 @@ const TableView = ({ table }: TableViewProps) => {
             return (
               <td
                 key={cell.id}
-                className="py-3 px-3 text-xs text-left uppercase truncate"
+                className="pl-3 py-3 text-xs text-left uppercase truncate"
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>

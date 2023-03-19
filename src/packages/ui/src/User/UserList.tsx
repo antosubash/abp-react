@@ -90,46 +90,38 @@ export const UserList = () => {
             cell: (info) => (info.getValue() ? "yes" : "no"),
           },
           {
-            accessorKey: "permissions",
-            header: "Permissions",
+            accessorKey: "actions",
+            header: "Actions",
             cell: (info) => (
-              <AdjustmentsHorizontalIcon className="h-5 w-5 cursor-pointer" />
+              <section className="flex items-center space-x-2">
+                <Button variant="subtle">
+                  <AdjustmentsHorizontalIcon width={15} height={15} className="text-white"/>
+                </Button>
+                <Button
+                  variant="subtle"
+                  onClick={() =>
+                    setUserEdit({
+                      userId: info.row.original.id as string,
+                      userDto: info.row.original as IdentityUserUpdateDto,
+                    })
+                  }
+                >
+                  <PencilIcon width={15} height={15} className="text-white" />
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() =>
+                    onDeletUserEvent({
+                      name: info.row.original?.userName as string,
+                      uuid: info.row.original.id as string,
+                    })
+                  }
+                >
+                <TrashIcon width={15} height={15} />
+                </Button>
+              </section>
             ),
-          },
-          {
-            accessorKey: "edit",
-            header: "",
-            cell: (info) => (
-              <Button
-                variant="subtle"
-                onClick={() =>
-                  setUserEdit({
-                    userId: info.row.original.id as string,
-                    userDto: info.row.original as IdentityUserUpdateDto,
-                  })
-                }
-              >
-                <PencilIcon width={15} height={15} className="text-white" />
-              </Button>
-            ),
-          },
-          {
-            accessorKey: "delete",
-            header: "",
-            cell: (info) => (
-              <Button
-                variant="destructive"
-                onClick={() =>
-                  onDeletUserEvent({
-                    name: info.row.original?.userName as string,
-                    uuid: info.row.original.id as string,
-                  })
-                }
-              >
-                <TrashIcon width={24} height={24} />
-              </Button>
-            ),
-          },
+          }
         ],
       },
     ],
