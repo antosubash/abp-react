@@ -25,13 +25,16 @@ import { Button } from "../Shared/Button";
 import { useToast } from "../Shared/hooks/useToast";
 import { ToastAction } from "../Shared/Toast";
 import { UserEdit } from "./UserEdit";
+import { UserPermission } from './UserPermission';
 
 export const UserList = () => {
   const { toast } = useToast();
-  const [userEdit, setUserEdit] = useState<{
+  const [userActionDialog, setUserActionDialog] = useState<{
     userId: string;
     userDto: IdentityUserUpdateDto;
+    dialgoType?: 'edit' | 'permission';
   } | null>();
+
   const onDeletUserEvent = ({
     name,
     uuid,
@@ -94,15 +97,22 @@ export const UserList = () => {
             header: "Actions",
             cell: (info) => (
               <section className="flex items-center space-x-2">
-                <Button variant="subtle">
+                <Button variant="subtle" onClick={() => {
+                   setUserActionDialog({
+                    userId: info.row.original.id as string,
+                    userDto: info.row.original as IdentityUserUpdateDto,
+                    dialgoType: 'permission'
+                  });
+                }}>
                   <AdjustmentsHorizontalIcon width={15} height={15} className="text-white"/>
                 </Button>
                 <Button
                   variant="subtle"
                   onClick={() =>
-                    setUserEdit({
+                    setUserActionDialog({
                       userId: info.row.original.id as string,
                       userDto: info.row.original as IdentityUserUpdateDto,
+                      dialgoType: 'edit'
                     })
                   }
                 >
@@ -163,8 +173,11 @@ export const UserList = () => {
 
   return (
     <>
-      {userEdit && (
-        <UserEdit userId={userEdit.userId} userDto={userEdit.userDto} onDismiss={() => setUserEdit(null)} />
+      {userActionDialog && userActionDialog?.dialgoType === 'edit' && (
+        <UserEdit userId={userActionDialog.userId} userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
+      )}
+      {userActionDialog && userActionDialog?.dialgoType === 'permission' && (
+        <UserPermission userId={userActionDialog.userId} userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
       )}
       <CustomTable table={table} />
     </>
