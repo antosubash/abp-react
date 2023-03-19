@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ExtensionEnumFieldDto = {
-    name?: string | null;
-    value?: any;
+  name?: string | null;
+  value?: any;
 };

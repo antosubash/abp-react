@@ -3,14 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export interface SidebarProps {
-  menus : { 
+  menus: {
     Name: string;
     Link: string;
     Icon: React.FC;
-  }[]
+  }[];
 }
 
-export const Sidebar = ({menus}: SidebarProps) => {
+export const Sidebar = ({ menus }: SidebarProps) => {
   var router = useRouter();
   return (
     <div>

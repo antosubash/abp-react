@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ApplicationGlobalFeatureConfigurationDto = {
-    enabledFeatures?: Array<string> | null;
+  enabledFeatures?: Array<string> | null;
 };

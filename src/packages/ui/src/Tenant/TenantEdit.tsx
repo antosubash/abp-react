@@ -2,15 +2,14 @@ import { TenantService, TenantUpdateDto } from "@abpreact/proxy";
 import { QueryNames } from "@abpreact/hooks";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import Swal from "sweetalert2";
-import {   
+import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger, 
+  DialogTrigger,
 } from "../Shared/DialogWrapper";
-import { Button } from '../Shared/Button';
+import { Button } from "../Shared/Button";
 
 export type TenantEditProps = {
   name: string;
@@ -19,7 +18,12 @@ export type TenantEditProps = {
   closeModal: () => void;
 };
 
-export const TenantEdit = ({name, id, isOpen, closeModal}: TenantEditProps) => {
+export const TenantEdit = ({
+  name,
+  id,
+  isOpen,
+  closeModal,
+}: TenantEditProps) => {
   const [tenantName, setTenantName] = useState<string>();
   const queryClient = useQueryClient();
   const tenantUpdate = async () => {
@@ -29,7 +33,6 @@ export const TenantEdit = ({name, id, isOpen, closeModal}: TenantEditProps) => {
     if (updated) {
       queryClient.invalidateQueries([QueryNames.GetTenants]);
       closeModal();
-      Swal.fire("Updated!", "Tenant updated successfully!", "success");
     }
   };
 
@@ -39,16 +42,18 @@ export const TenantEdit = ({name, id, isOpen, closeModal}: TenantEditProps) => {
 
   return (
     <Dialog>
-        <DialogTrigger className="flex items-center pb-5" asChild>
-           <h3 className="title font-bold text-xl grow p-0 m-1">Tenant Management</h3>
-          <Button variant="default">Create New Tenant</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create a New Tenant</DialogTitle>
-          </DialogHeader>
-          {name}
-        </DialogContent>
-      </Dialog>
-  )
+      <DialogTrigger className="flex items-center pb-5" asChild>
+        <h3 className="title font-bold text-xl grow p-0 m-1">
+          Tenant Management
+        </h3>
+        <Button variant="default">Create New Tenant</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a New Tenant</DialogTitle>
+        </DialogHeader>
+        {name}
+      </DialogContent>
+    </Dialog>
+  );
 };

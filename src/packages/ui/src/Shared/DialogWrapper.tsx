@@ -1,17 +1,17 @@
-import { 
-forwardRef,
-ElementRef,
-ComponentPropsWithoutRef,
-HTMLAttributes
-} from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"
+import {
+  forwardRef,
+  ElementRef,
+  ComponentPropsWithoutRef,
+  HTMLAttributes,
+} from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
-import { cn } from "../utils"
+import { cn } from "../utils";
 
-const Dialog = DialogPrimitive.Root
+const Dialog = DialogPrimitive.Root;
 
-const DialogTrigger = DialogPrimitive.Trigger
+const DialogTrigger = DialogPrimitive.Trigger;
 
 const DialogPortal = ({
   className,
@@ -23,8 +23,8 @@ const DialogPortal = ({
       {children}
     </div>
   </DialogPrimitive.Portal>
-)
-DialogPortal.displayName = DialogPrimitive.Portal.displayName
+);
+DialogPortal.displayName = DialogPrimitive.Portal.displayName;
 
 const DialogOverlay = forwardRef<
   ElementRef<typeof DialogPrimitive.Overlay>,
@@ -38,8 +38,8 @@ const DialogOverlay = forwardRef<
     {...props}
     ref={ref}
   />
-))
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const DialogContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
@@ -63,8 +63,8 @@ const DialogContent = forwardRef<
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
-))
-DialogContent.displayName = DialogPrimitive.Content.displayName
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({
   className,
@@ -77,8 +77,8 @@ const DialogHeader = ({
     )}
     {...props}
   />
-)
-DialogHeader.displayName = "DialogHeader"
+);
+DialogHeader.displayName = "DialogHeader";
 
 const DialogFooter = ({
   className,
@@ -91,8 +91,8 @@ const DialogFooter = ({
     )}
     {...props}
   />
-)
-DialogFooter.displayName = "DialogFooter"
+);
+DialogFooter.displayName = "DialogFooter";
 
 const DialogTitle = forwardRef<
   ElementRef<typeof DialogPrimitive.Title>,
@@ -107,8 +107,8 @@ const DialogTitle = forwardRef<
     )}
     {...props}
   />
-))
-DialogTitle.displayName = DialogPrimitive.Title.displayName
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 const DialogDescription = forwardRef<
   ElementRef<typeof DialogPrimitive.Description>,
@@ -119,8 +119,8 @@ const DialogDescription = forwardRef<
     className={cn("text-sm text-slate-500", "dark:text-slate-400", className)}
     {...props}
   />
-))
-DialogDescription.displayName = DialogPrimitive.Description.displayName
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export {
   Dialog,
@@ -130,4 +130,4 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-}
+};

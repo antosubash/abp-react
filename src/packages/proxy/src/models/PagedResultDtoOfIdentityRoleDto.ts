@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IdentityRoleDto } from './IdentityRoleDto';
+import type { IdentityRoleDto } from "./IdentityRoleDto";
 
 export type PagedResultDtoOfIdentityRoleDto = {
-    items?: Array<IdentityRoleDto> | null;
-    totalCount?: number;
+  items?: Array<IdentityRoleDto> | null;
+  totalCount?: number;
 };

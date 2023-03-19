@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { EntityExtensionDto } from './EntityExtensionDto';
+import type { EntityExtensionDto } from "./EntityExtensionDto";
 
 export type ModuleExtensionDto = {
-    entities?: Record<string, EntityExtensionDto> | null;
-    configuration?: Record<string, any> | null;
+  entities?: Record<string, EntityExtensionDto> | null;
+  configuration?: Record<string, any> | null;
 };

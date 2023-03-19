@@ -1,10 +1,10 @@
 import { useUsers } from "@abpreact/hooks";
-import {useMemo, useState} from "react";
+import { useMemo, useState } from "react";
 
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
-  TrashIcon
+  TrashIcon,
 } from "@heroicons/react/24/solid";
 import {
   PaginationState,
@@ -12,43 +12,63 @@ import {
   getCoreRowModel,
   ColumnDef,
 } from "@tanstack/react-table";
-import { IdentityUserDto, UserService } from "@abpreact/proxy";
+import {
+  IdentityUserDto,
+  UserService,
+  IdentityUserUpdateDto,
+} from "@abpreact/proxy";
 import { CustomTable } from "../Shared/CustomTable";
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";
-import { Button } from '../Shared/Button'
+import { Button } from "../Shared/Button";
 
 import { useToast } from "../Shared/hooks/useToast";
-import { ToastAction } from '../Shared/Toast';
-import { useQueryClient } from "@tanstack/react-query";
-
+import { ToastAction } from "../Shared/Toast";
+import { UserEdit } from "./UserEdit";
 
 export const UserList = () => {
   const { toast } = useToast();
-  const onDeletUserEvent = ({name, uuid}: {name: string, uuid: string}): void => {
+  const [userEdit, setUserEdit] = useState<{
+    userId: string;
+    userDto: IdentityUserUpdateDto;
+  } | null>();
+  const onDeletUserEvent = ({
+    name,
+    uuid,
+  }: {
+    name: string;
+    uuid: string;
+  }): void => {
     toast({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       description: `You are about delete a user ${name}`,
-       action: <ToastAction altText="confirm" onClick={async () => {
-          try {
-            await UserService.userDelete(uuid);
-            toast({
-              title: 'Success',
-              description: `User ${name} has been deleted successfully.`
-            })
-          }catch(err: unknown) {
-            if(err instanceof Error) {
+      action: (
+        <ToastAction
+          altText="confirm"
+          onClick={async () => {
+            try {
+              await UserService.userDelete(uuid);
               toast({
-                title: 'Failed',
-                description: `There was a problem when deleting the user ${name}. Kindly try again.`,
-                variant: 'destructive'
-              })
-            } 
-          }
-       }}>
-        Confirm</ToastAction>,
-    })
-  }
+                title: "Success",
+                description: `User ${name} has been deleted successfully.`,
+              });
+            } catch (err: unknown) {
+              if (err instanceof Error) {
+                toast({
+                  title: "Failed",
+                  description: `There was a problem when deleting the user ${name}. Kindly try again.`,
+                  variant: "destructive",
+                });
+              }
+            }
+          }}
+        >
+          Confirm
+        </ToastAction>
+      ),
+    });
+  };
+
   const defaultColumns = useMemo<ColumnDef<IdentityUserDto>[]>(
     () => [
       {
@@ -78,15 +98,37 @@ export const UserList = () => {
           },
           {
             accessorKey: "edit",
-            header: "Edit",
+            header: "",
             cell: (info) => (
-              <PencilIcon className="h-5 w-5 cursor-pointer" />
+              <Button
+                variant="subtle"
+                onClick={() =>
+                  setUserEdit({
+                    userId: info.row.original.id as string,
+                    userDto: info.row.original as IdentityUserUpdateDto,
+                  })
+                }
+              >
+                <PencilIcon width={15} height={15} className="text-white" />
+              </Button>
             ),
           },
           {
             accessorKey: "delete",
-            header: "Delete",
-            cell: (info) => <Button variant="destructive" onClick={() => onDeletUserEvent({name: info.row.original?.userName as string, uuid: info.row.original.id as string})}><TrashIcon width={24} height={24}/></Button>
+            header: "",
+            cell: (info) => (
+              <Button
+                variant="destructive"
+                onClick={() =>
+                  onDeletUserEvent({
+                    name: info.row.original?.userName as string,
+                    uuid: info.row.original.id as string,
+                  })
+                }
+              >
+                <TrashIcon width={24} height={24} />
+              </Button>
+            ),
           },
         ],
       },
@@ -94,11 +136,10 @@ export const UserList = () => {
     []
   );
 
-  const [{ pageIndex, pageSize }, setPagination] =
-    useState<PaginationState>({
-      pageIndex: 0,
-      pageSize: 10,
-    });
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   const defaultData = useMemo(() => [], []);
 
@@ -129,6 +170,11 @@ export const UserList = () => {
   if (isError) return <Error />;
 
   return (
-    <CustomTable table={table} />
+    <>
+      {userEdit && (
+        <UserEdit userId={userEdit.userId} userDto={userEdit.userDto} onDismiss={() => setUserEdit(null)} />
+      )}
+      <CustomTable table={table} />
+    </>
   );
 };

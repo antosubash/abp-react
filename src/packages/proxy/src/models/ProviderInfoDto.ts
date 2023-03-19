@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ProviderInfoDto = {
-    providerName?: string | null;
-    providerKey?: string | null;
+  providerName?: string | null;
+  providerKey?: string | null;
 };

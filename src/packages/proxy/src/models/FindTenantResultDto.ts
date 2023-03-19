@@ -3,8 +3,8 @@
 /* eslint-disable */
 
 export type FindTenantResultDto = {
-    success?: boolean;
-    tenantId?: string | null;
-    name?: string | null;
-    isActive?: boolean;
+  success?: boolean;
+  tenantId?: string | null;
+  name?: string | null;
+  isActive?: boolean;
 };

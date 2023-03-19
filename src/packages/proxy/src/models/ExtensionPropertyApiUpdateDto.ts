@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ExtensionPropertyApiUpdateDto = {
-    isAvailable?: boolean;
+  isAvailable?: boolean;
 };

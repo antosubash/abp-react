@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       const currentSessionJson = await currentSession.json();
       return currentSessionJson.accessToken || "";
     } catch (err: unknown) {
-      if(err instanceof Error) {
+      if (err instanceof Error) {
         console.debug(`Error caugth: ${err.message}`);
       }
     }

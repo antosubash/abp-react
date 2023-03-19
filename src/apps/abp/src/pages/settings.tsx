@@ -1,4 +1,4 @@
-import {AdminLayout} from "@abpreact/ui";
+import { AdminLayout } from "@abpreact/ui";
 import { NextPage } from "next";
 import React from "react";
 import { AdminMenus } from "../utils/Constants";

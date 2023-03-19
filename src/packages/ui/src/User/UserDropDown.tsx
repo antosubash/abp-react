@@ -2,16 +2,16 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from '../Shared/Avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "../Shared/Avatar";
 import { useRouter } from "next/router";
 export const UserDropDown = () => {
-  const session = useSession()
+  const session = useSession();
   const router = useRouter();
 
-  const hasAdmin = session.data?.user?.userRole?.includes('admin');
-  const picture = session.data?.user?.image; 
+  const hasAdmin = session.data?.user?.userRole?.includes("admin");
+  const picture = session.data?.user?.image;
   const name = session?.data?.user?.name;
-  
+
   return (
     <div className="relative inline-block z-50">
       <Menu>
