@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IdentityUserUpdateDto, UserService } from "@abpreact/proxy";
+import { IdentityUserUpdateDto, UserService, GetPermissionListResultDto } from "@abpreact/proxy";
 import { useForm } from "react-hook-form";
 import { useToast } from "../Shared/hooks/useToast";
 
@@ -11,7 +11,7 @@ import {
   DialogFooter,
 } from "../Shared/DialogWrapper";
 import { Button } from "../Shared/Button";
-import { usePermissions } from "@abpreact/hooks";
+import {  usePermissions } from "@abpreact/hooks";
 
 type UserPermissionProps = {
     userId: string;
@@ -23,8 +23,8 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
-    const [permissons, setPermissons] = useState();
-    const { data } = usePermissions("openiddict", undefined);
+    const [permissons, setPermissons] = useState<GetPermissionListResultDto>();
+    const { data } = usePermissions('T', undefined);
     const onSubmit = async (data: unknown) => {
         const user = data as IdentityUserUpdateDto;
         try {

@@ -10,9 +10,9 @@ export interface LandingLayoutProps {
 
 export const LandingLayout = ({ menus }: LandingLayoutProps) => {
   return (
-    <div>
+    <section className="landing-layout">
       <NavBar menus={menus} />
       <Hero />
-    </div>
+    </section>
   );
 };

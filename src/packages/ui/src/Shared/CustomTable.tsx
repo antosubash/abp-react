@@ -53,7 +53,7 @@ const TableView = ({ table }: TableViewProps) => {
   };
 
   return (
-    <section className="container overflow-scroll">
+    <section className="overflow-scroll">
       <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
         <thead>{renderHeader()}</thead>
         <tbody>{renderBody()}</tbody>

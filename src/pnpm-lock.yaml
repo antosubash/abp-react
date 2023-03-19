@@ -13,7 +13,7 @@ importers:
       prettier-plugin-tailwindcss: ^0.2.3
       turbo: ^1.8.3
     devDependencies:
-      dotenv-cli: 7.0.0
+      dotenv-cli: 7.1.0
       eslint: 8.34.0
       eslint-config-custom: link:packages/eslint-config-custom
       openapi-typescript-codegen: 0.23.0
@@ -192,6 +192,7 @@ importers:
       '@abpreact/proxy': workspace:*
       '@headlessui/react': ^1.7.12
       '@heroicons/react': ^2.0.16
+      '@radix-ui/react-alert-dialog': ^1.0.3
       '@radix-ui/react-avatar': ^1.0.2
       '@radix-ui/react-dialog': ^1.0.3
       '@radix-ui/react-label': ^2.0.1
@@ -225,6 +226,7 @@ importers:
       '@abpreact/proxy': link:../proxy
       '@headlessui/react': 1.7.12_biqbaboplfbrettd7655fr4n2y
       '@heroicons/react': 2.0.16_react@18.2.0
+      '@radix-ui/react-alert-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
       '@radix-ui/react-avatar': 1.0.2_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
       '@radix-ui/react-label': 2.0.1_biqbaboplfbrettd7655fr4n2y
@@ -887,6 +889,25 @@ packages:
     resolution: {integrity: sha512-3e7rn8FDMin4CgeL7Z/49smCA3rFYY3Ha2rUQ7HRWFadS5iCRw08ZgVT1LaNTCNqgvrUiyczLflrVrF0SRQtNA==}
     dependencies:
       '@babel/runtime': 7.20.1
+    dev: false
+
+  /@radix-ui/react-alert-dialog/1.0.3_zula6vjvt3wdocc4mwcxqa6nzi:
+    resolution: {integrity: sha512-QXFy7+bhGi0u+paF2QbJeSCHZs4gLMJIPm6sajUamyW0fro6g1CaSGc5zmc4QmK2NlSGUrq8m+UsUqJYtzvXow==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
+      '@radix-ui/react-primitive': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-slot': 1.0.1_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
     dev: false
 
   /@radix-ui/react-avatar/1.0.2_biqbaboplfbrettd7655fr4n2y:
@@ -2167,8 +2188,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /dotenv-cli/7.0.0:
-    resolution: {integrity: sha512-XfMzVdpdDTRnlcgvFLg3lSyiLXqFxS4tH7RbK5IxkC4XIUuxPyrGoDufkfLjy/dA28EILzEu+mros6h8aQmyGg==}
+  /dotenv-cli/7.1.0:
+    resolution: {integrity: sha512-motytjZFQB3ZtGTIN4c0vnFgv4kuNZ2WxVnGY6PVFiygCzkm3IFBBguDUzezd9HgNA0OYYd6vNCWlozs0Q1Zxg==}
     hasBin: true
     dependencies:
       cross-spawn: 7.0.3
