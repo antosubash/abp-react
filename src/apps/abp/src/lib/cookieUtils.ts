@@ -16,8 +16,9 @@ export const getCookieFromMiddleware = (name: string, req: any) => {
     return null;
   }
   const NextRequestMeta = req[NextRequestMetaSymbol];
-  const cookieString = NextRequestMeta._nextMiddlewareCookie?.toString()
-      .replace("Path=/", "");
+  const cookieString = NextRequestMeta._nextMiddlewareCookie
+    ?.toString()
+    .replace("Path=/", "");
   const cookieArray = cookieString?.split(";");
   const cookie = cookieArray?.find((x: string | string[]) => x.includes(name));
   const value = cookie?.split("=")[1];
@@ -28,7 +29,7 @@ export const getCookieFromRequest = (name: string, req: IncomingMessage) => {
   const cookieString = req.headers.cookie as string;
   const cookieArray = cookieString?.split(";");
   const cookie = cookieArray?.find((x) => x.includes(name));
-  if(!cookie) {
+  if (!cookie) {
     console.log("cookie not found in the headers, trying the middleware");
     return getCookieFromMiddleware(name, req);
   }

@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type IanaTimeZone = {
-    timeZoneName?: string | null;
+  timeZoneName?: string | null;
 };

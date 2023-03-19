@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ReturnValueApiDescriptionModel = {
-    type?: string | null;
-    typeSimple?: string | null;
+  type?: string | null;
+  typeSimple?: string | null;
 };

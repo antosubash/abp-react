@@ -1,6 +1,15 @@
 import { NextPage } from "next";
 import React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent, AdminLayout, UserList, RoleList, AddUser } from "@abpreact/ui";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  AdminLayout,
+  UserList,
+  RoleList,
+  AddUser,
+} from "@abpreact/ui";
 import { useI18n } from "next-localization";
 import { AdminMenus } from "../utils/Constants";
 
@@ -16,18 +25,18 @@ const Users: NextPage = () => {
             <TabsTrigger value={users} className="w-full">
               {users}
             </TabsTrigger>
-              <TabsTrigger value={roles} className="w-full">
+            <TabsTrigger value={roles} className="w-full">
               {roles}
-              </TabsTrigger>
+            </TabsTrigger>
           </TabsList>
           <TabsContent value={users}>
-              <AddUser />
-              <UserList />
+            <AddUser />
+            <UserList />
           </TabsContent>
           <TabsContent value={roles}>
             <RoleList />
-          </TabsContent> 
-        </Tabs>  
+          </TabsContent>
+        </Tabs>
       </div>
     </AdminLayout>
   );

@@ -25,8 +25,8 @@ export { Hero, type HeroProps } from "./Sections/Hero";
 
 export { Meta, type MetaProps } from "./Shared/Meta";
 export { Button, type ButtonProps } from "./Shared/Button";
-export { Avatar, AvatarImage, AvatarFallback } from './Shared/Avatar';
-export { Tabs, TabsContent, TabsList, TabsTrigger } from './Shared/Tabs';
+export { Avatar, AvatarImage, AvatarFallback } from "./Shared/Avatar";
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./Shared/Tabs";
 export { Input, type InputProps } from "./Shared/Input";
 export { Label } from "./Shared/Label";
 export { CustomTable, type TableViewProps } from "./Shared/CustomTable";
@@ -40,20 +40,19 @@ export {
   DialogDescription,
 } from "./Shared/DialogWrapper";
 
-export { Toaster } from './Shared/Toaster';
+export { Toaster } from "./Shared/Toaster";
 
-export { Loader, Error, ThemeSwitcher }
+export { Loader, Error, ThemeSwitcher };
 
 // Shared hooks
-export { useToast, toast } from './Shared/hooks/useToast';
-
+export { useToast, toast } from "./Shared/hooks/useToast";
 
 // tenant
 
 export { TenantList, type TenantListProps } from "./Tenant/TenantList";
 export { TenantEdit, type TenantEditProps } from "./Tenant/TenantEdit";
 export { TenantCreate, type TenantCreateProps } from "./Tenant/TenantCreate";
-export { FeatureList, type FeatureListProps } from "./Tenant/FeatureList"
+export { FeatureList, type FeatureListProps } from "./Tenant/FeatureList";
 
 // user
 
@@ -61,5 +60,3 @@ export { UserList } from "./User/UserList";
 export { AddUser, type AddUserProps } from "./User/AddUser";
 export { UserDropDown } from "./User/UserDropDown";
 export { UserMenus, type UserMenusProps } from "./User/UserMenus";
-
-

@@ -44,4 +44,4 @@ export const QueryNames = {
   GetAppConfig: "GetAppConfig",
   GetFeatures: "GetFeatures",
   GetTranslations: "GetTranslations",
-}
+};

@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type ResetPasswordDto = {
-    userId?: string;
-    resetToken: string;
-    password: string;
+  userId?: string;
+  resetToken: string;
+  password: string;
 };

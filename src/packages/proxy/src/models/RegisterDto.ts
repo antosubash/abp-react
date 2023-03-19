@@ -3,9 +3,9 @@
 /* eslint-disable */
 
 export type RegisterDto = {
-    readonly extraProperties?: Record<string, any> | null;
-    userName: string;
-    emailAddress: string;
-    password: string;
-    appName: string;
+  readonly extraProperties?: Record<string, any> | null;
+  userName: string;
+  emailAddress: string;
+  password: string;
+  appName: string;
 };

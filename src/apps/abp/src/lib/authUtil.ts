@@ -29,7 +29,15 @@ export const getAuthOptions = (req: any) => {
         authorization: {
           params: { scope: "openid profile email offline_access AbpTemplate" },
         },
-        profile: (profile: {sub: string, name: string, email: string, picture: string}, token: TokenSet): Awaitable<User> => ({
+        profile: (
+          profile: {
+            sub: string;
+            name: string;
+            email: string;
+            picture: string;
+          },
+          token: TokenSet
+        ): Awaitable<User> => ({
           id: profile.sub,
           name: profile.name,
           email: profile.email,
@@ -89,15 +97,14 @@ export const getAuthOptions = (req: any) => {
           const newToken = {
             ...token, // Keep the previous token properties
             accessToken: tokens.access_token,
-            expiresAt: Date.now() + tokens.expires_in as number,
+            expiresAt: (Date.now() + tokens.expires_in) as number,
             // Fall back to old refresh token, but note that
             // many providers may only allow using a refresh token once.
             refreshToken: tokens.refresh_token ?? token.refreshToken,
           };
           return newToken;
         } catch (err: unknown) {
-          if(err instanceof Error)
-            console.log(`Error Caught: ${err.message}`);
+          if (err instanceof Error) console.log(`Error Caught: ${err.message}`);
           return {
             ...token,
             error: "RefreshAccessTokenError",
@@ -113,7 +120,9 @@ export const getAuthOptions = (req: any) => {
   return authOptions;
 };
 
-export const getServerSessionFromContext = async (context: GetServerSidePropsContext) => {
+export const getServerSessionFromContext = async (
+  context: GetServerSidePropsContext
+) => {
   const authOptions = getAuthOptions(context.req);
   const session = await getServerSession(context.req, context.res, authOptions);
   return session;

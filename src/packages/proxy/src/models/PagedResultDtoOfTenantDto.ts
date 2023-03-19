@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { TenantDto } from './TenantDto';
+import type { TenantDto } from "./TenantDto";
 
 export type PagedResultDtoOfTenantDto = {
-    items?: Array<TenantDto> | null;
-    totalCount?: number;
+  items?: Array<TenantDto> | null;
+  totalCount?: number;
 };

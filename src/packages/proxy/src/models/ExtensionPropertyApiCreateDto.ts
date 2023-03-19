@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ExtensionPropertyApiCreateDto = {
-    isAvailable?: boolean;
+  isAvailable?: boolean;
 };

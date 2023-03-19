@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type UpdateFeatureDto = {
-    name?: string | null;
-    value?: string | null;
+  name?: string | null;
+  value?: string | null;
 };

@@ -40,7 +40,6 @@
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "lucide-react": "^0.125.0",
-    "sweetalert2": "^11.7.2",
     "tailwind-merge": "^1.10.0"
   },
   "devDependencies": {

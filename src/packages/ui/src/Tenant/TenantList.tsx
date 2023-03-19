@@ -6,9 +6,8 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/solid";
 import { useQueryClient } from "@tanstack/react-query";
-import Swal from "sweetalert2";
 import { QueryNames } from "@abpreact/hooks";
-import {TenantEdit} from "./TenantEdit";
+import { TenantEdit } from "./TenantEdit";
 import { FeatureList } from "./FeatureList";
 import { TenantDto, TenantService } from "@abpreact/proxy";
 import Loader from "../Shared/Loader";
@@ -67,24 +66,11 @@ export const TenantList = (props: TenantListProps) => {
     openModal();
   };
 
-  const tenantDelete = (row: any) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        var response = await TenantService.tenantDelete(row.id as string);
-        if (response.status === 204) {
-          queryClient.invalidateQueries([QueryNames.GetTenants]);
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        }
-      }
-    });
+  const tenantDelete = async (row: any) => {
+    var response = await TenantService.tenantDelete(row.id as string);
+    if (response.status === 204) {
+      queryClient.invalidateQueries([QueryNames.GetTenants]);
+    }
   };
 
   var [skip, setSkip] = useState<number>(0);

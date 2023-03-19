@@ -62,7 +62,5 @@ export const RoleList = () => {
   var { isLoading, data, isError } = useRoles(page, skip, limit);
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
-  return (
-    <>Role Table</>
-  );
+  return <>Role Table</>;
 };

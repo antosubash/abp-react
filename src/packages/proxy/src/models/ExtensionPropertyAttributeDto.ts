@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ExtensionPropertyAttributeDto = {
-    typeSimple?: string | null;
-    config?: Record<string, any> | null;
+  typeSimple?: string | null;
+  config?: Record<string, any> | null;
 };

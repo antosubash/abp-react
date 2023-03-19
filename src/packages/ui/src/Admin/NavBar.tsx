@@ -12,7 +12,7 @@ export interface NavBarProps {
   }[];
 }
 
-export const NavBar = ({menus}: NavBarProps) => {
+export const NavBar = ({ menus }: NavBarProps) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
