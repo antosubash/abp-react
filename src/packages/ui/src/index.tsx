@@ -28,10 +28,25 @@ export { Button, type ButtonProps } from "./Shared/Button";
 export { Avatar, AvatarImage, AvatarFallback } from './Shared/Avatar';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './Shared/Tabs';
 export { Input, type InputProps } from "./Shared/Input";
-export { Form } from "./Shared/Form";
-export { CustomTable, type TableProps } from "./Shared/CustomTable";
-export { DialogWrapper, type DialogWrapperProps } from "./Shared/DialogWrapper";
+export { Label } from "./Shared/Label";
+export { CustomTable, type TableViewProps } from "./Shared/CustomTable";
+export {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "./Shared/DialogWrapper";
+
+export { Toaster } from './Shared/Toaster';
+
 export { Loader, Error, ThemeSwitcher }
+
+// Shared hooks
+export { useToast, toast } from './Shared/hooks/useToast';
+
 
 // tenant
 

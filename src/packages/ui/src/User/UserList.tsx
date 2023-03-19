@@ -1,9 +1,10 @@
 import { useUsers } from "@abpreact/hooks";
-import React from "react";
+import {useMemo, useState} from "react";
+
 import {
   AdjustmentsHorizontalIcon,
   PencilIcon,
-  TrashIcon,
+  TrashIcon
 } from "@heroicons/react/24/solid";
 import {
   PaginationState,
@@ -11,13 +12,44 @@ import {
   getCoreRowModel,
   ColumnDef,
 } from "@tanstack/react-table";
-import { IdentityUserDto } from "@abpreact/proxy";
+import { IdentityUserDto, UserService } from "@abpreact/proxy";
 import { CustomTable } from "../Shared/CustomTable";
 import Loader from "../Shared/Loader";
 import Error from "../Shared/Error";
+import { Button } from '../Shared/Button'
+
+import { useToast } from "../Shared/hooks/useToast";
+import { ToastAction } from '../Shared/Toast';
+import { useQueryClient } from "@tanstack/react-query";
+
 
 export const UserList = () => {
-  const defaultColumns = React.useMemo<ColumnDef<IdentityUserDto>[]>(
+  const { toast } = useToast();
+  const onDeletUserEvent = ({name, uuid}: {name: string, uuid: string}): void => {
+    toast({
+      title: 'Are you sure?',
+      description: `You are about delete a user ${name}`,
+       action: <ToastAction altText="confirm" onClick={async () => {
+          try {
+            await UserService.userDelete(uuid);
+            toast({
+              title: 'Success',
+              description: `User ${name} has been deleted successfully.`
+            })
+          }catch(err: unknown) {
+            if(err instanceof Error) {
+              toast({
+                title: 'Failed',
+                description: `There was a problem when deleting the user ${name}. Kindly try again.`,
+                variant: 'destructive'
+              })
+            } 
+          }
+       }}>
+        Confirm</ToastAction>,
+    })
+  }
+  const defaultColumns = useMemo<ColumnDef<IdentityUserDto>[]>(
     () => [
       {
         header: "User Management",
@@ -41,22 +73,20 @@ export const UserList = () => {
             accessorKey: "permissions",
             header: "Permissions",
             cell: (info) => (
-              <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+              <AdjustmentsHorizontalIcon className="h-5 w-5 cursor-pointer" />
             ),
           },
           {
             accessorKey: "edit",
             header: "Edit",
             cell: (info) => (
-              <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+              <PencilIcon className="h-5 w-5 cursor-pointer" />
             ),
           },
           {
             accessorKey: "delete",
             header: "Delete",
-            cell: (info) => (
-              <TrashIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-            ),
+            cell: (info) => <Button variant="destructive" onClick={() => onDeletUserEvent({name: info.row.original?.userName as string, uuid: info.row.original.id as string})}><TrashIcon width={24} height={24}/></Button>
           },
         ],
       },
@@ -65,24 +95,24 @@ export const UserList = () => {
   );
 
   const [{ pageIndex, pageSize }, setPagination] =
-    React.useState<PaginationState>({
+    useState<PaginationState>({
       pageIndex: 0,
       pageSize: 10,
     });
 
-  const defaultData = React.useMemo(() => [], []);
+  const defaultData = useMemo(() => [], []);
 
-  const pagination = React.useMemo(
+  const pagination = useMemo(
     () => ({
       pageIndex,
       pageSize,
     }),
-    [pageIndex, pageSize]
+    [pageIndex, pageSize, toast]
   );
 
-  var { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+  const { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+  const pageCount = Math.ceil(data?.totalCount! / pageSize);
 
-  var pageCount = Math.ceil(data?.totalCount! / pageSize);
   const table = useReactTable({
     data: data?.items || defaultData,
     pageCount: pageCount || 0,
@@ -94,11 +124,11 @@ export const UserList = () => {
     onPaginationChange: setPagination,
     manualPagination: true,
   });
+
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
+
   return (
-    <div className="p-2">
-      <CustomTable table={table} />
-    </div>
+    <CustomTable table={table} />
   );
 };

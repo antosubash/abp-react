@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" data-theme="light">
+      <Html lang="en" data-theme="dark">
         <meta charSet="utf-8" />
         <meta
           name="viewport"

@@ -13,7 +13,7 @@ import {
   OpenAPI as ApiOptions,
   AbpApplicationConfigurationService,
 } from "@abpreact/proxy";
-import { Meta } from "@abpreact/ui";
+import { Meta, Toaster } from "@abpreact/ui";
 import i18n from "../utils/i18n";
 import App from "next/app";
 
@@ -47,6 +47,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <Meta />
           <Component {...pageProps} />
+          <Toaster />
         </QueryClientProvider>
       </I18nProvider>
     </SessionProvider>
