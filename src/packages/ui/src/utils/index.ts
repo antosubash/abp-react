@@ -26,8 +26,16 @@ export enum PermissionProvider {
 }
 
 export enum Permissions {
-  IDENTITY_MANAGEMENT = 'AbpIdentity',
-  TENANT_MANAGEMENT = 'AbpTenantManagement',
-  FEATURE_MANAGEMENT = 'AbpFeatureManagement',
-  SETTING_MANAGEMENT = 'AbpSettingManagement',
+  ROLES = 'AbpIdentity.Roles',
+  USERS = 'AbpIdentity.Users',
+  TENANTS = 'AbpTenantManagement.Tenants',
+  MANAGAE_HOST_FEATURES = 'FeatureManagement.ManageHostFeatures',
+  SETTINGS = 'SettingManagement.Emailing',
+}
+
+export enum PermissionsGrant {
+    ROLE_MANAGEMENT = 'Role management',
+    TENANT_MANAGEMENT = 'Tenant management',
+    FEATURE_MANAHEMENT = 'Feature management',
+    SETTING_MANAGEMENT = 'Setting management'
 }

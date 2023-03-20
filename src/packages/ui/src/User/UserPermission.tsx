@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
-import { IdentityUserUpdateDto, UserService, GetPermissionListResultDto, PermissionGroupDto } from "@abpreact/proxy";
+import { useEffect, useState, useMemo, useCallback } from "react";
+import { IdentityUserUpdateDto, UserService, GetPermissionListResultDto, PermissionGroupDto, PermissionGrantInfoDto } from "@abpreact/proxy";
 import { useForm } from "react-hook-form";
 import { useToast } from "../Shared/hooks/useToast";
 
@@ -12,9 +12,14 @@ import {
 } from "../Shared/DialogWrapper";
 import { Button } from "../Shared/Button";
 import {  usePermissions } from "@abpreact/hooks";
-import { PermissionProvider, Permissions } from '../utils';
+import { PermissionProvider, Permissions, PermissionsGrant } from '../utils';
 import { Permission  } from "../Permission/Permission";
 import { Label } from "../Shared/Label";
+import classNames from "classnames";
+import { IdentityManagement } from "../Permission/IdentityManagement";
+import { TenantManagement } from '../Permission/TenantManagement';
+import { SettingManagement } from '../Permission/SettingManagement';
+import { FeatureManagement } from '../Permission/FeatureManagement';
 
 
 type UserPermissionProps = {
@@ -23,44 +28,83 @@ type UserPermissionProps = {
     onDismiss: () => void;
 }
 
+export type PermissionTracker = {
+    name: string;
+    isGranted: boolean;
+}
 export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps) => {
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
 
-    const { data } = usePermissions(PermissionProvider.NAME, PermissionProvider.KEY);
-    const onSubmit = async (data: unknown) => {
-        const user = data as IdentityUserUpdateDto;
-        try {
-          await UserService.userUpdate(userId, {...userDto, ...user});
-          toast({
-            title: "Success",
-            description: "User Updated Successfully",
-            variant: "default",
-          });
-          setOpen(false);
-        } catch (err: unknown) {
-          if (err instanceof Error) {
-            toast({
-              title: "Failed",
-              description: "User update wasn't successfull.",
-              variant: "destructive",
-            });
-          }
-        }
-    };
+    // flag determine to enable/disable all the permissions to a user. 
+    const [hasAllGranted, setHasAllGranted] = useState(false);
 
-    const onCloseEvent = () => {
+    const [currentPermissionGrant, setCurrentPermissionGrant] = useState<{name: 'identity' | 'tenants' | 'settings' | 'features', data: PermissionGrantInfoDto[] | null}>();
+
+    // This object will be send to the server api
+    const [permissionRemotePayload, setPermissionRemotePayload] = useState<{permissions: PermissionTracker[]}>({permissions: []});
+
+    const { data } = usePermissions(PermissionProvider.NAME, PermissionProvider.KEY);
+    const onSubmit = useCallback(async (data: unknown) => {
+        console.log(data, 'data')
+        
+    }, []);
+
+    const onCloseEvent = useCallback(() => {
         setOpen(false);
         onDismiss();
-    }
+    }, [open]);
+
 
     useEffect(() => {
         setOpen(true);
     }, []);
 
+    useEffect(() => {
+        const localPermissionPayload = data?.groups?.map(p => p?.permissions?.map(grant => ({name: grant.name, isGranted: grant.isGranted}))).flat();
+        permissionRemotePayload.permissions = localPermissionPayload as PermissionTracker[];
+        setPermissionRemotePayload({...permissionRemotePayload});
+    }, [data])
+
     const permissionGroups = useMemo(() => data?.groups, [data]);
-    
+
+    useEffect(() => {
+        if(permissionGroups) {
+            // by default assign first permissions
+            setCurrentPermissionGrant({name: 'identity', data: permissionGroups[0]?.permissions!});
+        }
+    }, [permissionGroups])
+
+
+
+
+
+    const switchManagement = useCallback((index: number) => {
+        if(permissionGroups) {
+            const management = permissionGroups[index];
+            const managementName = management.displayName
+            console.log(managementName, 'name')
+            if(managementName?.toLowerCase()?.includes('identity')) {
+                setCurrentPermissionGrant({name: 'identity', data: management?.permissions!});
+                return false;
+            }
+          
+            if(managementName?.toLowerCase()?.includes('tenant')) {
+                setCurrentPermissionGrant({name: 'tenants', data: management?.permissions!});
+                return false;
+            }
+            if(managementName?.toLowerCase()?.includes('feature')) {
+                setCurrentPermissionGrant({name: 'features', data: management?.permissions!});
+                return false;
+            }
+            if(managementName?.toLowerCase()?.includes('setting')) {
+                setCurrentPermissionGrant({name: 'settings', data: management?.permissions!});
+                return false;
+            }
+        }
+    }, [permissionGroups]);
+
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
@@ -68,35 +112,60 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
                 <DialogTitle>Permissions - {userDto.userName}</DialogTitle>
             </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <section className="flex pt-5 items-start">
-                            <section className="flex flex-col space-y-5">
-                                <Permission name="Grant All Permissions"
-                                    isGranted={false} 
-                                    id="all" 
-                                    onUpdate={() => console.log('all permisions')} 
-                                    className="ml-2"
-                                 />
-                                 <hr className="border-b-white" />
+                    <section className="flex pt-5 flex-col">
+                        <section className="flex flex-col space-y-5">
+                            <Permission name="Grant All Permissions"
+                                isGranted={hasAllGranted} 
+                                id="all_granted" 
+                                onUpdate={() => setHasAllGranted(f => !f)} 
+                                className="ml-2"
+                            />
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">
                                 {permissionGroups?.map(((permission: PermissionGroupDto, idx: number) => (
-                                    <Button key={idx} variant="outline">
-                                        <Label>{permission?.displayName}</Label>
-                                    </Button>
+                                    <div key={idx} className={classNames({
+                                        'bg-slate-400': currentPermissionGrant?.data === permission?.permissions
+                                    })}>
+                                        <Button 
+                                            variant="link"
+                                            className="w-full"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                switchManagement(idx);
+                                                
+                                            }}
+                                        >
+                                            <Label>{permission?.displayName}</Label>
+                                            <span>{` (${0})`}</span>
+                                        </Button>
+                                    </div>
                                 )))}
-                            </section>
-                            <section className="grow ml-10">
-                                <Permission name="Select All"
-                                    isGranted={false} 
-                                    id="select_all" 
-                                    onUpdate={() => console.log('Select All')} 
-                                    className="ml-2"
-                                 />
-                            </section>
+                            </div>
+                        </section>
+                        <hr className="border-b-white mt-5 mb-5" />
+                        <section className="flex flex-col space-y-5 mt-3">
+                            {currentPermissionGrant?.name === 'identity' && 
+                            <IdentityManagement 
+                                permissions={currentPermissionGrant?.data!} 
+                                trackers={permissionRemotePayload.permissions}
+                            />}
+                            
+                            {currentPermissionGrant?.name === 'tenants' && 
+                                <TenantManagement 
+                                    permissions={currentPermissionGrant?.data!}
+                                    trackers={permissionRemotePayload.permissions}
+                            />}
+                            {currentPermissionGrant?.name === 'settings' && 
+                                <SettingManagement 
+                                    permissions={currentPermissionGrant?.data!} 
+                                    trackers={permissionRemotePayload.permissions}
+                            />}
+                            {currentPermissionGrant?.name === 'features' && 
+                                <FeatureManagement 
+                                    permissions={currentPermissionGrant?.data!}
+                                    trackers={permissionRemotePayload.permissions}
+                            />}
+                        </section>
                     </section>
-                    <DialogFooter>
-                        <Button type="submit" variant="outline">
-                            Save
-                        </Button>
-                    </DialogFooter>
                 </form>
             </DialogContent>
         </Dialog>
