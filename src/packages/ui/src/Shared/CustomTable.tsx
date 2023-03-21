@@ -41,7 +41,7 @@ const TableView = ({ table }: TableViewProps) => {
             return (
               <td
                 key={cell.id}
-                className="pl-3 py-3 text-xs text-left uppercase truncate"
+                className="pl-3 py-3 text-xs text-left truncate"
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>

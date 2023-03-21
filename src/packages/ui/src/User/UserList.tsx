@@ -177,7 +177,7 @@ export const UserList = () => {
         <UserEdit userId={userActionDialog.userId} userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
       )}
       {userActionDialog && userActionDialog?.dialgoType === 'permission' && (
-        <UserPermission userId={userActionDialog.userId} userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
+        <UserPermission userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
       )}
       <CustomTable table={table} />
     </>

@@ -22,9 +22,8 @@ import { usePermissionsChanges } from "./usePermissionChanges";
 
 type FeatureManagementProps = {
     permissions: PermissionGrantInfoDto[]
-    trackers: PermissionTracker[];
 }
-export const FeatureManagement = ({ permissions, trackers }: FeatureManagementProps) => {
+export const FeatureManagement = ({ permissions }: FeatureManagementProps) => {
     const { 
         hasAllSelected, 
         onCurrentPermissionChanges,
@@ -37,8 +36,7 @@ export const FeatureManagement = ({ permissions, trackers }: FeatureManagementPr
             <Permission name="Select All"
                 isGranted={hasAllSelected} 
                 id="select_all" 
-                onUpdate={onHasAllSelectedUpate} 
-                className="ml-2"
+                onUpdate={onHasAllSelectedUpate}
             />
             {data?.map(({isGranted, displayName, parentName, name}, idx) => (
                 <div key={name}>
@@ -46,7 +44,7 @@ export const FeatureManagement = ({ permissions, trackers }: FeatureManagementPr
                         isGranted={isGranted!} 
                         id={displayName!.toLocaleLowerCase()} 
                         onUpdate={() => onCurrentPermissionChanges(idx)} 
-                        className={classNames("ml-2", {
+                        className={classNames("ml-5", {
                             'pl-5': parentName
                         })}
                     />

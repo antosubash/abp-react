@@ -8,9 +8,10 @@ type PermissonProps = {
   isGranted: boolean;
   onUpdate?: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
-function PermissionToggle({name, id, onUpdate, className, isGranted}: PermissonProps) {
+function PermissionToggle({name, id, onUpdate, className, isGranted, disabled }: PermissonProps) {
 
   const onChangeEvent = useCallback(() => {
     onUpdate?.()
@@ -18,7 +19,7 @@ function PermissionToggle({name, id, onUpdate, className, isGranted}: PermissonP
 
   return (
     <div className={classNames("flex items-center space-x-2 pb-2", className)}>
-      <Checkbox id={id} onCheckedChange={onChangeEvent} checked={isGranted} />
+      <Checkbox id={id} onCheckedChange={onChangeEvent} checked={isGranted} disabled={disabled} />
       <label
         htmlFor={id}
         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

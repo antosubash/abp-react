@@ -23,10 +23,9 @@ import { usePermissionsChanges } from "./usePermissionChanges";
 
 type SettingManagementProps = {
     permissions: PermissionGrantInfoDto[];
-    trackers: PermissionTracker[];
 }
 
-export const SettingManagement = ({ permissions, trackers }: SettingManagementProps) => {
+export const SettingManagement = ({ permissions }: SettingManagementProps) => {
     const { 
         hasAllSelected, 
         onCurrentPermissionChanges,
@@ -39,8 +38,7 @@ export const SettingManagement = ({ permissions, trackers }: SettingManagementPr
             <Permission name="Select All"
                 isGranted={hasAllSelected} 
                 id="select_all" 
-                onUpdate={onHasAllSelectedUpate} 
-                className="ml-2"
+                onUpdate={onHasAllSelectedUpate}
             />
             {data?.map(({isGranted, displayName, parentName, name}, idx) => (
                 <div key={name}>
@@ -48,7 +46,7 @@ export const SettingManagement = ({ permissions, trackers }: SettingManagementPr
                         isGranted={isGranted!} 
                         id={displayName!.toLocaleLowerCase()} 
                         onUpdate={() =>onCurrentPermissionChanges(idx)} 
-                        className={classNames("ml-2", {
+                        className={classNames("ml-5", {
                             'pl-5': parentName
                         })}
                     />

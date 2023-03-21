@@ -22,12 +22,8 @@ import { usePermissionsChanges } from "./usePermissionChanges";
 
 type IdentityManagementProps = {
     permissions: PermissionGrantInfoDto[]
-    trackers: PermissionTracker[];
-    onUpdate?: () => void
 }
-
-
-export const IdentityManagement = ({ permissions, trackers, onUpdate }: IdentityManagementProps) => {
+export const IdentityManagement = ({ permissions }: IdentityManagementProps) => {
     const { 
         hasAllSelected, 
         onCurrentPermissionChanges,
@@ -41,7 +37,6 @@ export const IdentityManagement = ({ permissions, trackers, onUpdate }: Identity
                 isGranted={hasAllSelected} 
                 id="select_all"
                 onUpdate={onHasAllSelectedUpate}
-                className="ml-2"
             />
             {data?.map(({isGranted, displayName, parentName}, idx) => (
                 <div key={idx}>
@@ -49,7 +44,7 @@ export const IdentityManagement = ({ permissions, trackers, onUpdate }: Identity
                         isGranted={isGranted!} 
                         id={displayName!.toLocaleLowerCase().concat(parentName!)} 
                         onUpdate={() => onCurrentPermissionChanges(idx)} 
-                        className={classNames("ml-2", {
+                        className={classNames("ml-5", {
                             'pl-5': parentName
                         })}
                     />
