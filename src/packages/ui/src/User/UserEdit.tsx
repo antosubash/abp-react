@@ -26,7 +26,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
   const onSubmit = async (data: unknown) => {
     const user = data as IdentityUserUpdateDto;
     try {
-      await UserService.userUpdate(userId, user);
+      await UserService.userUpdate(userId, {...userDto, ...user});
       toast({
         title: "Success",
         description: "User Updated Successfully",

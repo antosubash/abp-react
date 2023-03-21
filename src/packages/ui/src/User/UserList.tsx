@@ -25,13 +25,16 @@ import { Button } from "../Shared/Button";
 import { useToast } from "../Shared/hooks/useToast";
 import { ToastAction } from "../Shared/Toast";
 import { UserEdit } from "./UserEdit";
+import { UserPermission } from './UserPermission';
 
 export const UserList = () => {
   const { toast } = useToast();
-  const [userEdit, setUserEdit] = useState<{
+  const [userActionDialog, setUserActionDialog] = useState<{
     userId: string;
     userDto: IdentityUserUpdateDto;
+    dialgoType?: 'edit' | 'permission';
   } | null>();
+
   const onDeletUserEvent = ({
     name,
     uuid,
@@ -90,46 +93,45 @@ export const UserList = () => {
             cell: (info) => (info.getValue() ? "yes" : "no"),
           },
           {
-            accessorKey: "permissions",
-            header: "Permissions",
+            accessorKey: "actions",
+            header: "Actions",
             cell: (info) => (
-              <AdjustmentsHorizontalIcon className="h-5 w-5 cursor-pointer" />
-            ),
-          },
-          {
-            accessorKey: "edit",
-            header: "",
-            cell: (info) => (
-              <Button
-                variant="subtle"
-                onClick={() =>
-                  setUserEdit({
+              <section className="flex items-center space-x-2">
+                <Button variant="subtle" onClick={() => {
+                   setUserActionDialog({
                     userId: info.row.original.id as string,
                     userDto: info.row.original as IdentityUserUpdateDto,
-                  })
-                }
-              >
-                <PencilIcon width={15} height={15} className="text-white" />
-              </Button>
+                    dialgoType: 'permission'
+                  });
+                }}>
+                  <AdjustmentsHorizontalIcon width={15} height={15} className="text-white"/>
+                </Button>
+                <Button
+                  variant="subtle"
+                  onClick={() =>
+                    setUserActionDialog({
+                      userId: info.row.original.id as string,
+                      userDto: info.row.original as IdentityUserUpdateDto,
+                      dialgoType: 'edit'
+                    })
+                  }
+                >
+                  <PencilIcon width={15} height={15} className="text-white" />
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() =>
+                    onDeletUserEvent({
+                      name: info.row.original?.userName as string,
+                      uuid: info.row.original.id as string,
+                    })
+                  }
+                >
+                <TrashIcon width={15} height={15} />
+                </Button>
+              </section>
             ),
-          },
-          {
-            accessorKey: "delete",
-            header: "",
-            cell: (info) => (
-              <Button
-                variant="destructive"
-                onClick={() =>
-                  onDeletUserEvent({
-                    name: info.row.original?.userName as string,
-                    uuid: info.row.original.id as string,
-                  })
-                }
-              >
-                <TrashIcon width={24} height={24} />
-              </Button>
-            ),
-          },
+          }
         ],
       },
     ],
@@ -171,8 +173,11 @@ export const UserList = () => {
 
   return (
     <>
-      {userEdit && (
-        <UserEdit userId={userEdit.userId} userDto={userEdit.userDto} onDismiss={() => setUserEdit(null)} />
+      {userActionDialog && userActionDialog?.dialgoType === 'edit' && (
+        <UserEdit userId={userActionDialog.userId} userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
+      )}
+      {userActionDialog && userActionDialog?.dialgoType === 'permission' && (
+        <UserPermission userDto={userActionDialog.userDto} onDismiss={() => setUserActionDialog(null)} />
       )}
       <CustomTable table={table} />
     </>

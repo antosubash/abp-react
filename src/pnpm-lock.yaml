@@ -13,7 +13,7 @@ importers:
       prettier-plugin-tailwindcss: ^0.2.3
       turbo: ^1.8.3
     devDependencies:
-      dotenv-cli: 7.0.0
+      dotenv-cli: 7.1.0
       eslint: 8.34.0
       eslint-config-custom: link:packages/eslint-config-custom
       openapi-typescript-codegen: 0.23.0
@@ -192,7 +192,9 @@ importers:
       '@abpreact/proxy': workspace:*
       '@headlessui/react': ^1.7.12
       '@heroicons/react': ^2.0.16
+      '@radix-ui/react-alert-dialog': ^1.0.3
       '@radix-ui/react-avatar': ^1.0.2
+      '@radix-ui/react-checkbox': ^1.0.3
       '@radix-ui/react-dialog': ^1.0.3
       '@radix-ui/react-label': ^2.0.1
       '@radix-ui/react-tabs': ^1.0.3
@@ -200,6 +202,7 @@ importers:
       '@tanstack/react-query': 4.24.10
       '@tanstack/react-table': 8.7.9
       '@types/react': ^18.0.28
+      '@types/uuid': ^9.0.1
       class-variance-authority: ^0.4.0
       classnames: ^2.3.2
       clsx: ^1.2.1
@@ -220,12 +223,15 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.6.3
       typescript: ^4.9.5
+      uuid: ^9.0.0
     dependencies:
       '@abpreact/hooks': link:../hooks
       '@abpreact/proxy': link:../proxy
       '@headlessui/react': 1.7.12_biqbaboplfbrettd7655fr4n2y
       '@heroicons/react': 2.0.16_react@18.2.0
+      '@radix-ui/react-alert-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
       '@radix-ui/react-avatar': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-checkbox': 1.0.3_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
       '@radix-ui/react-label': 2.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-tabs': 1.0.3_biqbaboplfbrettd7655fr4n2y
@@ -243,8 +249,10 @@ importers:
       react-hook-form: 7.43.2_react@18.2.0
       tailwind-merge: 1.10.0
       theme-change: 2.3.0
+      uuid: 9.0.0
     devDependencies:
       '@types/react': 18.0.28
+      '@types/uuid': 9.0.1
       eslint: 8.34.0
       eslint-config-custom: link:../eslint-config-custom
       postcss: 8.4.21
@@ -889,6 +897,25 @@ packages:
       '@babel/runtime': 7.20.1
     dev: false
 
+  /@radix-ui/react-alert-dialog/1.0.3_zula6vjvt3wdocc4mwcxqa6nzi:
+    resolution: {integrity: sha512-QXFy7+bhGi0u+paF2QbJeSCHZs4gLMJIPm6sajUamyW0fro6g1CaSGc5zmc4QmK2NlSGUrq8m+UsUqJYtzvXow==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-dialog': 1.0.3_zula6vjvt3wdocc4mwcxqa6nzi
+      '@radix-ui/react-primitive': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-slot': 1.0.1_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@radix-ui/react-avatar/1.0.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-XRL8z2l9V7hRLCPjHWg/34RBPZUGpmOjmsRSNvIh2DI28GyIWDChbcsDUVc63MzOItk6Q83Ob2KK8k2FUlXlGA==}
     peerDependencies:
@@ -900,6 +927,25 @@ packages:
       '@radix-ui/react-primitive': 1.0.2_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-use-callback-ref': 1.0.0_react@18.2.0
       '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@radix-ui/react-checkbox/1.0.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-55B8/vKzTuzxllH5sGJO4zaBf9gYpJuJRRzaOKm+0oAefRnMvbf+Kgww7IOANVN0w3z7agFJgtnXaZl8Uj95AA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-previous': 1.0.0_react@18.2.0
+      '@radix-ui/react-use-size': 1.0.0_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -1181,6 +1227,25 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@radix-ui/react-use-previous/1.0.0_react@18.2.0:
+    resolution: {integrity: sha512-RG2K8z/K7InnOKpq6YLDmT49HGjNmrK+fr82UCVKT2sW0GYfVnYp4wZWBooT/EYfQ5faA9uIjvsuMMhH61rheg==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-use-size/1.0.0_react@18.2.0:
+    resolution: {integrity: sha512-imZ3aYcoYCKhhgNpkNDh/aTiU05qw9hX+HHI1QDBTyIlcFjgeFlKKySNGMwTp7nYFLQg/j0VA2FmCY4WPDDHMg==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.1
+      '@radix-ui/react-use-layout-effect': 1.0.0_react@18.2.0
+      react: 18.2.0
+    dev: false
+
   /@radix-ui/react-visually-hidden/1.0.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-qirnJxtYn73HEk1rXL12/mXnu2rwsNHDID10th2JGtdK25T9wX+mxRmGt7iPSahw512GbZOc0syZX1nLQGoEOg==}
     peerDependencies:
@@ -1326,6 +1391,10 @@ packages:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
     dependencies:
       '@types/node': 18.14.1
+    dev: true
+
+  /@types/uuid/9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@typescript-eslint/parser/5.44.0_7kw3g6rralp5ps6mg3uyzz6azm:
@@ -2167,8 +2236,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /dotenv-cli/7.0.0:
-    resolution: {integrity: sha512-XfMzVdpdDTRnlcgvFLg3lSyiLXqFxS4tH7RbK5IxkC4XIUuxPyrGoDufkfLjy/dA28EILzEu+mros6h8aQmyGg==}
+  /dotenv-cli/7.1.0:
+    resolution: {integrity: sha512-motytjZFQB3ZtGTIN4c0vnFgv4kuNZ2WxVnGY6PVFiygCzkm3IFBBguDUzezd9HgNA0OYYd6vNCWlozs0Q1Zxg==}
     hasBin: true
     dependencies:
       cross-spawn: 7.0.3
@@ -5223,6 +5292,11 @@ packages:
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 

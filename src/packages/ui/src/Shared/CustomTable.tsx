@@ -15,7 +15,7 @@ const TableView = ({ table }: TableViewProps) => {
           {headers.map((header) => {
             if (header.isPlaceholder) return false;
             return (
-              <th key={header.id} className="px-3">
+              <th key={header.id} className="px-3 last:1/2 lg:last:w-1/4">
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
@@ -41,7 +41,7 @@ const TableView = ({ table }: TableViewProps) => {
             return (
               <td
                 key={cell.id}
-                className="py-3 px-3 text-xs text-left uppercase truncate"
+                className="pl-3 py-3 text-xs text-left truncate"
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
@@ -53,7 +53,7 @@ const TableView = ({ table }: TableViewProps) => {
   };
 
   return (
-    <section className="container overflow-scroll">
+    <section className="overflow-scroll">
       <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
         <thead>{renderHeader()}</thead>
         <tbody>{renderBody()}</tbody>

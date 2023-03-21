@@ -17,3 +17,25 @@ export function formatDate(input: string | number): string {
 export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
+
+
+// enums
+export enum PermissionProvider {
+  KEY = '3a08950d-70d1-78fd-a45d-bc34ff730915',
+  NAME = 'U'
+}
+
+export enum Permissions {
+  ROLES = 'AbpIdentity.Roles',
+  USERS = 'AbpIdentity.Users',
+  TENANTS = 'AbpTenantManagement.Tenants',
+  MANAGAE_HOST_FEATURES = 'FeatureManagement.ManageHostFeatures',
+  SETTINGS = 'SettingManagement.Emailing',
+}
+
+export enum PermissionsGrant {
+    ROLE_MANAGEMENT = 'Role management',
+    TENANT_MANAGEMENT = 'Tenant management',
+    FEATURE_MANAHEMENT = 'Feature management',
+    SETTING_MANAGEMENT = 'Setting management'
+}

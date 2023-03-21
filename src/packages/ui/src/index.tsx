@@ -39,12 +39,13 @@ export {
   DialogTitle,
   DialogDescription,
 } from "./Shared/DialogWrapper";
-
 export { Toaster } from "./Shared/Toaster";
-
 export { Loader, Error, ThemeSwitcher };
+export { Checkbox } from './Shared/Checkbox';
+export {  AlertDialog } from './Shared/AlertDialog';
 
 // Shared hooks
+
 export { useToast, toast } from "./Shared/hooks/useToast";
 
 // tenant
