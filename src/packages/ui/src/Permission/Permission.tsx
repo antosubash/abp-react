@@ -6,14 +6,14 @@ type PermissonProps = {
   name: string;
   id: string;
   isGranted: boolean;
-  onUpdate: () => void;
+  onUpdate?: () => void;
   className?: string;
 }
 
 function PermissionToggle({name, id, onUpdate, className, isGranted}: PermissonProps) {
 
   const onChangeEvent = useCallback(() => {
-    onUpdate()
+    onUpdate?.()
   }, [])
 
   return (

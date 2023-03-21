@@ -42,10 +42,12 @@
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "lucide-react": "^0.125.0",
-    "tailwind-merge": "^1.10.0"
+    "tailwind-merge": "^1.10.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
+    "@types/uuid": "^9.0.1",
     "eslint": "^8.34.0",
     "eslint-config-custom": "workspace:*",
     "postcss": "^8.4.21",

@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { IdentityUserUpdateDto, UserService, GetPermissionListResultDto, PermissionGroupDto, PermissionGrantInfoDto } from "@abpreact/proxy";
 import { useForm } from "react-hook-form";
+import { v4 } from 'uuid';
 import { useToast } from "../Shared/hooks/useToast";
 
 import {
@@ -49,47 +50,33 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
     const { data } = usePermissions(PermissionProvider.NAME, PermissionProvider.KEY);
     const [permissionGroups, setPermissionGroups] = useState<PermissionGroupDto[]>([]);
 
-    const onSubmit = useCallback(async (data: unknown) => {
-        console.log(data, 'data')
-        
-    }, []);
-
-    const onCloseEvent = useCallback(() => {
-        setOpen(false);
-        onDismiss();
-    }, [open]);
-
-
-
     useEffect(() => {
         setOpen(true);
     }, []);
 
     useEffect(() => {
         if(data?.groups) {
-            setPermissionGroups([...data?.groups]);
             const localPermissionPayload = data?.groups?.map(p => p?.permissions?.map(grant => ({name: grant.name, isGranted: grant.isGranted}))).flat();
             permissionRemotePayload.permissions = localPermissionPayload as PermissionTracker[];
             setPermissionRemotePayload({...permissionRemotePayload});
-            const allSelected = localPermissionPayload.every(l => l?.isGranted);
-            if(allSelected) {
-                setHasAllGranted(true);
-            }
-        }    
+            setPermissionGroups([...data?.groups]);
+        }
     }, [data])
- 
-     const onAllGrantedEvent = useCallback(() => {
-        setHasAllGranted(f => !f);
-       
-    }, [data, permissionGroups])
+
+    const allSelected = useMemo(() => {
+       const hasAllPermissionGranted = permissionRemotePayload.permissions.every(l => l?.isGranted);
+       setHasAllGranted(hasAllPermissionGranted);
+       return hasAllPermissionGranted
+    }, [permissionRemotePayload]);
+
+
 
     useEffect(() => {
-        if(permissionGroups) {
+        if(permissionGroups.length > 0) {
             // by default assign first permissions
-            if(permissionGroups.length > 0) {
-                 const firstPermissionSet = permissionGroups[0];
-                 setCurrentPermissionGrant({name: 'identity', data: firstPermissionSet.permissions ?? []});
-            }  
+            const firstPermissionSet = permissionGroups[0];
+            setCurrentPermissionGrant({name: 'identity', data: firstPermissionSet.permissions ?? []});
+          
         }
         
     }, [permissionGroups])
@@ -120,6 +107,17 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
             }
         }
     }, [permissionGroups]);
+
+    const onSubmit = useCallback(async (data: unknown) => {
+        console.log(data, 'data')
+        
+    }, []);
+
+    const onCloseEvent = useCallback(() => {
+        setOpen(false);
+        onDismiss();
+    }, [open]);
+
     
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
@@ -128,60 +126,84 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
                 <DialogTitle>Permissions - {userDto.userName}</DialogTitle>
             </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <section className="flex pt-5 flex-col">
-                        <section className="flex flex-col space-y-5">
-                            <Permission name="Grant All Permissions"
-                                isGranted={hasAllGranted} 
-                                id="all_granted" 
-                                onUpdate={onAllGrantedEvent}
-                                className="ml-2"
-                            />
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">
-                                {permissionGroups?.map(((permission: PermissionGroupDto, idx: number) => (
-                                    <div key={idx} className={classNames({
-                                        'bg-slate-400': currentPermissionGrant?.data === permission?.permissions
-                                    })}>
-                                        <Button 
-                                            variant="link"
-                                            className="w-full"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                switchManagement(idx);
-                                                
-                                            }}
-                                        >
-                                            <Label>{permission?.displayName}</Label>
-                                            <span>{` (${0})`}</span>
-                                        </Button>
-                                    </div>
-                                )))}
-                            </div>
+                    <Permission name="Grant All Permissions"
+                        isGranted={hasAllGranted} 
+                        id="all_granted" 
+                        onUpdate={() => setHasAllGranted(f => !f)}
+                        className="ml-2"
+                    />
+                    {!hasAllGranted && (
+                        <section className="flex pt-5 flex-col">
+                            <section className="flex flex-col space-y-5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">
+                                    {permissionGroups?.map(((permission: PermissionGroupDto, idx: number) => (
+                                        <div key={idx} className={classNames({
+                                            'bg-slate-400': currentPermissionGrant?.data === permission?.permissions
+                                        })}>
+                                            <Button 
+                                                variant="link"
+                                                className="w-full"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    switchManagement(idx);
+                                                    
+                                                }}
+                                            >
+                                                <Label>{permission?.displayName}</Label>
+                                                <span>{` (${0})`}</span>
+                                            </Button>
+                                        </div>
+                                    )))}
+                                </div>
+                            </section>
+                            <hr className="border-b-white mt-5 mb-5" />
+                            <section className="flex flex-col space-y-5 mt-3">
+                                {currentPermissionGrant?.name === 'identity' && 
+                                    <IdentityManagement 
+                                        permissions={currentPermissionGrant?.data!} 
+                                        trackers={permissionRemotePayload.permissions}
+                                    />}
+                                
+                                {currentPermissionGrant?.name === 'tenants' && 
+                                    <TenantManagement 
+                                        permissions={currentPermissionGrant?.data!}
+                                        trackers={permissionRemotePayload.permissions}
+                                />}
+                                {currentPermissionGrant?.name === 'settings' && 
+                                    <SettingManagement 
+                                        permissions={currentPermissionGrant?.data!} 
+                                        trackers={permissionRemotePayload.permissions}
+                                />}
+                                {currentPermissionGrant?.name === 'features' && 
+                                    <FeatureManagement 
+                                        permissions={currentPermissionGrant?.data!}
+                                        trackers={permissionRemotePayload.permissions}
+                                />}
+                            </section>
                         </section>
-                        <hr className="border-b-white mt-5 mb-5" />
-                        <section className="flex flex-col space-y-5 mt-3">
-                            {currentPermissionGrant?.name === 'identity' && 
-                            <IdentityManagement 
-                                permissions={currentPermissionGrant?.data!} 
-                                trackers={permissionRemotePayload.permissions}
-                            />}
-                            
-                            {currentPermissionGrant?.name === 'tenants' && 
-                                <TenantManagement 
-                                    permissions={currentPermissionGrant?.data!}
-                                    trackers={permissionRemotePayload.permissions}
-                            />}
-                            {currentPermissionGrant?.name === 'settings' && 
-                                <SettingManagement 
-                                    permissions={currentPermissionGrant?.data!} 
-                                    trackers={permissionRemotePayload.permissions}
-                            />}
-                            {currentPermissionGrant?.name === 'features' && 
-                                <FeatureManagement 
-                                    permissions={currentPermissionGrant?.data!}
-                                    trackers={permissionRemotePayload.permissions}
-                            />}
+                    )}
+                    {hasAllGranted && (
+                        <section className="grid grid-cols-2 gap-2 mt-2">
+                            {permissionGroups.map((group) => (
+                                <div key={v4()}>
+                                    <h3>{group.displayName}</h3>
+                                     <hr className="border-b-white mt-5 mb-5" />
+                                    {group?.permissions?.map(p => (
+                                        <div key={v4()}>
+                                            <Permission name={p.displayName!}
+                                                isGranted 
+                                                id={p.name?.concat(`_${group.displayName}`) as string}
+                                                 className={classNames("ml-2", {
+                                                    'pl-5': p.parentName
+                                                })}
+                                               
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
                         </section>
-                    </section>
+                    )}
                 </form>
             </DialogContent>
         </Dialog>
