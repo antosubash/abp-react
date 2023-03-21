@@ -36,6 +36,7 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
+    
 
     // flag determine to enable/disable all the permissions to a user. 
     const [hasAllGranted, setHasAllGranted] = useState(false);
@@ -46,6 +47,8 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
     const [permissionRemotePayload, setPermissionRemotePayload] = useState<{permissions: PermissionTracker[]}>({permissions: []});
 
     const { data } = usePermissions(PermissionProvider.NAME, PermissionProvider.KEY);
+    const [permissionGroups, setPermissionGroups] = useState<PermissionGroupDto[]>([]);
+
     const onSubmit = useCallback(async (data: unknown) => {
         console.log(data, 'data')
         
@@ -57,34 +60,47 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
     }, [open]);
 
 
+
     useEffect(() => {
         setOpen(true);
     }, []);
 
     useEffect(() => {
-        const localPermissionPayload = data?.groups?.map(p => p?.permissions?.map(grant => ({name: grant.name, isGranted: grant.isGranted}))).flat();
-        permissionRemotePayload.permissions = localPermissionPayload as PermissionTracker[];
-        setPermissionRemotePayload({...permissionRemotePayload});
+        if(data?.groups) {
+            setPermissionGroups([...data?.groups]);
+            const localPermissionPayload = data?.groups?.map(p => p?.permissions?.map(grant => ({name: grant.name, isGranted: grant.isGranted}))).flat();
+            permissionRemotePayload.permissions = localPermissionPayload as PermissionTracker[];
+            setPermissionRemotePayload({...permissionRemotePayload});
+            const allSelected = localPermissionPayload.every(l => l?.isGranted);
+            if(allSelected) {
+                setHasAllGranted(true);
+            }
+        }    
     }, [data])
-
-    const permissionGroups = useMemo(() => data?.groups, [data]);
+ 
+     const onAllGrantedEvent = useCallback(() => {
+        setHasAllGranted(f => !f);
+       
+    }, [data, permissionGroups])
 
     useEffect(() => {
         if(permissionGroups) {
             // by default assign first permissions
-            setCurrentPermissionGrant({name: 'identity', data: permissionGroups[0]?.permissions!});
+            if(permissionGroups.length > 0) {
+                 const firstPermissionSet = permissionGroups[0];
+                 setCurrentPermissionGrant({name: 'identity', data: firstPermissionSet.permissions ?? []});
+            }  
         }
+        
     }, [permissionGroups])
 
-
-
-
+   
 
     const switchManagement = useCallback((index: number) => {
         if(permissionGroups) {
             const management = permissionGroups[index];
             const managementName = management.displayName
-            console.log(managementName, 'name')
+
             if(managementName?.toLowerCase()?.includes('identity')) {
                 setCurrentPermissionGrant({name: 'identity', data: management?.permissions!});
                 return false;
@@ -104,7 +120,7 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
             }
         }
     }, [permissionGroups]);
-
+    
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
@@ -117,7 +133,7 @@ export const UserPermission = ({userDto, userId, onDismiss}: UserPermissionProps
                             <Permission name="Grant All Permissions"
                                 isGranted={hasAllGranted} 
                                 id="all_granted" 
-                                onUpdate={() => setHasAllGranted(f => !f)} 
+                                onUpdate={onAllGrantedEvent}
                                 className="ml-2"
                             />
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">

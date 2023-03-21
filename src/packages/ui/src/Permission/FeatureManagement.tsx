@@ -18,32 +18,34 @@ import { Permission  } from "../Permission/Permission";
 import { Label } from "../Shared/Label";
 import classNames from "classnames";
 import {PermissionTracker} from '../User/UserPermission';
+import { usePermissionsChanges } from "./usePermissionChanges";
 
 type FeatureManagementProps = {
     permissions: PermissionGrantInfoDto[]
     trackers: PermissionTracker[];
 }
 export const FeatureManagement = ({ permissions, trackers }: FeatureManagementProps) => {
-     // Flag determine to enable/disable the selected permissions to a user. 
-    const [hasAllSelected, setHasAllSelected] = useState(false);
-    const onCurrentPermissionChanges = useCallback((grant: PermissionGrantInfoDto) => {
-        
-    }, []);
+    const { 
+        hasAllSelected, 
+        onCurrentPermissionChanges,
+        data, 
+        onHasAllSelectedUpate
+    } = usePermissionsChanges({permissions, type: 'feature'});
 
     return (
         <>
             <Permission name="Select All"
                 isGranted={hasAllSelected} 
                 id="select_all" 
-                onUpdate={() => setHasAllSelected(f => !f)} 
+                onUpdate={onHasAllSelectedUpate} 
                 className="ml-2"
             />
-            {permissions?.map(({isGranted, displayName, parentName, name}) => (
+            {data?.map(({isGranted, displayName, parentName, name}, idx) => (
                 <div key={name}>
                     <Permission name={displayName!}
                         isGranted={isGranted!} 
                         id={displayName!.toLocaleLowerCase()} 
-                        onUpdate={() => onCurrentPermissionChanges({isGranted, name, parentName, displayName})} 
+                        onUpdate={() => onCurrentPermissionChanges(idx)} 
                         className={classNames("ml-2", {
                             'pl-5': parentName
                         })}
