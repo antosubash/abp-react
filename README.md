@@ -30,8 +30,6 @@ The goal of this project is to provide a React UI for the ABP Framework. It will
 - [ ] Tenant Management
 - [ ] Role Management
 - [ ] User Management
-- [ ] Client Management
-- [ ] Audit Logs Viewer
 - [ ] Settings Management
 
 ## How to run
