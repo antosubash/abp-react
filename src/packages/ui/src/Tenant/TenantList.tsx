@@ -93,13 +93,13 @@ export const TenantList = (props: TenantListProps) => {
   if (isError) return <Error />;
   return (
     <>
-      <FeatureList />
+      {/* <FeatureList />
       <TenantEdit
         isOpen={isEditOpen}
         closeModal={closeModal}
         name={tenantToEdit?.name!}
         id={tenantToEdit?.id!}
-      />
+      /> */}
       Tenant List
     </>
   );
