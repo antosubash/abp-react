@@ -8,10 +8,10 @@ interface Props {}
 const Tenants: NextPage = ({}: Props) => {
     return (
         <AdminLayout menus={AdminMenus}>
-            <TenantCreate />
-            <div className="pt-8">
-                <TenantList />
-            </div>
+            <>
+                {/* <TenantCreate /> */}
+                <div className="pt-8">{/* <TenantList /> */}</div>
+            </>
         </AdminLayout>
     );
 };

@@ -19,7 +19,7 @@ const Users: NextPage = () => {
     const roles = i18n.t('AbpIdentity.Roles');
     return (
         <AdminLayout menus={AdminMenus}>
-            <div className="w-full px-2 py-4">
+            <div className="w-full">
                 <Tabs defaultValue={users}>
                     <TabsList className="w-full">
                         <TabsTrigger value={users} className="w-full">
