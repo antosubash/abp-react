@@ -3,8 +3,8 @@
 /* eslint-disable */
 
 export type IdentityRoleCreateDto = {
-  readonly extraProperties?: Record<string, any> | null;
-  name: string;
-  isDefault?: boolean;
-  isPublic?: boolean;
+    readonly extraProperties?: Record<string, any> | null;
+    name: string;
+    isDefault?: boolean;
+    isPublic?: boolean;
 };

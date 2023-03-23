@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type IValueValidator = {
-  readonly name?: string | null;
-  readonly properties?: Record<string, any> | null;
+    readonly name?: string | null;
+    readonly properties?: Record<string, any> | null;
 };

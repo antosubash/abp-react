@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type WindowsTimeZone = {
-  timeZoneId?: string | null;
+    timeZoneId?: string | null;
 };

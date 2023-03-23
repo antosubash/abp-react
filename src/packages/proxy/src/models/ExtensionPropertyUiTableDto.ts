@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ExtensionPropertyUiTableDto = {
-  isVisible?: boolean;
+    isVisible?: boolean;
 };

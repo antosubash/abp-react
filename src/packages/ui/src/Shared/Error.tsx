@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 interface ErrorProps {
-  message?: string;
+    message?: string;
 }
 
 const Error = (props: ErrorProps) => {
-  return <div>Error :( {props.message}</div>;
+    return <div>Error :( {props.message}</div>;
 };
 
 export default Error;

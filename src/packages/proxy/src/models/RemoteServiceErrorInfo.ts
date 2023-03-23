@@ -2,12 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { RemoteServiceValidationErrorInfo } from "./RemoteServiceValidationErrorInfo";
+import type { RemoteServiceValidationErrorInfo } from './RemoteServiceValidationErrorInfo';
 
 export type RemoteServiceErrorInfo = {
-  code?: string | null;
-  message?: string | null;
-  details?: string | null;
-  data?: Record<string, any> | null;
-  validationErrors?: Array<RemoteServiceValidationErrorInfo> | null;
+    code?: string | null;
+    message?: string | null;
+    details?: string | null;
+    data?: Record<string, any> | null;
+    validationErrors?: Array<RemoteServiceValidationErrorInfo> | null;
 };

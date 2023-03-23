@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ExtensionPropertyUiFormDto = {
-  isVisible?: boolean;
+    isVisible?: boolean;
 };

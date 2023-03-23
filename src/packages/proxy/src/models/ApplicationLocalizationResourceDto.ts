@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ApplicationLocalizationResourceDto = {
-  texts?: Record<string, string | null> | null;
-  baseResources?: Array<string> | null;
+    texts?: Record<string, string | null> | null;
+    baseResources?: Array<string> | null;
 };

@@ -1,50 +1,57 @@
-
-import { useEffect, useState, useMemo, useCallback } from "react";
-import { IdentityUserUpdateDto, UserService, GetPermissionListResultDto, PermissionGroupDto, PermissionGrantInfoDto } from "@abpreact/proxy";
-import { useForm } from "react-hook-form";
-import { useToast } from "../Shared/hooks/useToast";
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import {
+    IdentityUserUpdateDto,
+    UserService,
+    GetPermissionListResultDto,
+    PermissionGroupDto,
+    PermissionGrantInfoDto
+} from '@abpreact/proxy';
+import { useForm } from 'react-hook-form';
+import { useToast } from '../Shared/hooks/useToast';
 
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "../Shared/DialogWrapper";
-import { Button } from "../Shared/Button";
-import {  usePermissions } from "@abpreact/hooks";
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from '../Shared/DialogWrapper';
+import { Button } from '../Shared/Button';
+import { usePermissions } from '@abpreact/hooks';
 import { PermissionProvider, Permissions, PermissionsGrant } from '../utils';
-import { Permission  } from "../Permission/Permission";
-import { Label } from "../Shared/Label";
-import classNames from "classnames";
-import {PermissionTracker} from '../User/UserPermission';
-import { usePermissionsChanges } from "./usePermissionChanges";
+import { Permission } from '../Permission/Permission';
+import { Label } from '../Shared/Label';
+import classNames from 'classnames';
+import { PermissionTracker } from '../User/UserPermission';
+import { usePermissionsChanges } from './usePermissionChanges';
 
 type FeatureManagementProps = {
-    permissions: PermissionGrantInfoDto[]
-}
+    permissions: PermissionGrantInfoDto[];
+};
 export const FeatureManagement = ({ permissions }: FeatureManagementProps) => {
-    const { 
-        hasAllSelected, 
+    const {
+        hasAllSelected,
         onCurrentPermissionChanges,
-        data, 
+        data,
         onHasAllSelectedUpate
-    } = usePermissionsChanges({permissions, type: 'feature'});
+    } = usePermissionsChanges({ permissions, type: 'feature' });
 
     return (
         <>
-            <Permission name="Select All"
-                isGranted={hasAllSelected} 
-                id="select_all" 
+            <Permission
+                name="Select All"
+                isGranted={hasAllSelected}
+                id="select_all"
                 onUpdate={onHasAllSelectedUpate}
             />
-            {data?.map(({isGranted, displayName, parentName, name}, idx) => (
+            {data?.map(({ isGranted, displayName, parentName, name }, idx) => (
                 <div key={name}>
-                    <Permission name={displayName!}
-                        isGranted={isGranted!} 
-                        id={displayName!.toLocaleLowerCase()} 
-                        onUpdate={() => onCurrentPermissionChanges(idx)} 
-                        className={classNames("ml-5", {
+                    <Permission
+                        name={displayName!}
+                        isGranted={isGranted!}
+                        id={displayName!.toLocaleLowerCase()}
+                        onUpdate={() => onCurrentPermissionChanges(idx)}
+                        className={classNames('ml-5', {
                             'pl-5': parentName
                         })}
                     />
@@ -57,4 +64,4 @@ export const FeatureManagement = ({ permissions }: FeatureManagementProps) => {
             </DialogFooter>
         </>
     );
-}
+};
