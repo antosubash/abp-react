@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import { Button } from '../Shared/Button';
 
 export interface SidebarProps {
     menus: {
@@ -9,22 +11,48 @@ export interface SidebarProps {
         Link: string;
         Icon: React.FC;
     }[];
-    toggleLayout: boolean;
 }
 
-export const Sidebar = ({ menus, toggleLayout }: SidebarProps) => {
+export const Sidebar = ({ menus }: SidebarProps) => {
     const router = useRouter();
-
+    const [toggleSidebar, setToggleSidebar] = useState(false);
+    // const onResize = () => {
+    //     setToggleSidebar(false);
+    // };
+    // useEffect(() => {
+    //     window.addEventListener('resize', onResize);
+    //     return () => {
+    //         window.removeEventListener('resize', onResize);
+    //     };
+    // }, []);
     return (
         <section
-            className={classNames('h-screen lg:block hadow-lg w-100', {
-                block: toggleLayout,
-                hidden: !toggleLayout
-            })}
+            className={classNames(
+                'h-screen flex shadow-lg absolute w-54 pt-6 pl-2 pr-2',
+                {
+                    '-translate-x-4': toggleSidebar,
+                    'translate-x-0': !toggleSidebar
+                }
+            )}
         >
-            <section className="h-full ">
-                <section className="flex items-center justify-center pt-6 text-2xl font-bold">
-                    <Link href="/">My Startup</Link>
+            <section className="h-full">
+                <section className="flex items-center justify-center">
+                    <Link href="/" className="text-2xl font-bold">
+                        My Startup
+                    </Link>
+                    <section className="ml-6">
+                        <Button
+                            variant="subtle"
+                            size="sm"
+                            onClick={() => setToggleSidebar((v) => !v)}
+                        >
+                            <Bars3Icon
+                                className="text-white"
+                                width={24}
+                                height={24}
+                            />
+                        </Button>
+                    </section>
                 </section>
                 <nav className="mt-6">
                     <section>

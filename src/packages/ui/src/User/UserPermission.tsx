@@ -29,6 +29,7 @@ import { FeatureManagement } from '../Permission/FeatureManagement';
 
 type UserPermissionProps = {
     userDto: IdentityUserUpdateDto;
+    userId: string;
     onDismiss: () => void;
 };
 
@@ -36,7 +37,11 @@ export type PermissionTracker = {
     name: string;
     isGranted: boolean;
 };
-export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
+export const UserPermission = ({
+    userDto,
+    userId,
+    onDismiss
+}: UserPermissionProps) => {
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
     // flag determine to enable/disable all the permissions to a user.
@@ -45,10 +50,7 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
         name: 'identity' | 'tenants' | 'settings' | 'features';
         data: PermissionGrantInfoDto[] | null;
     }>();
-    const { data } = usePermissions(
-        PermissionProvider.NAME,
-        PermissionProvider.KEY
-    );
+    const { data } = usePermissions(PermissionProvider.NAME, userId);
     const [permissionGroups, setPermissionGroups] = useState<
         PermissionGroupDto[]
     >([]);
@@ -72,22 +74,39 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
 
     // check if user have all the permissions are granted already.
     useEffect(() => {
-        const hasAllPermissionGranted = permissionGroups
-            .map((g) => g.permissions?.every((p) => p.isGranted))
-            .every((v) => v);
-        setHasAllGranted(hasAllPermissionGranted);
+        if (permissionGroups.length > 0) {
+            const hasAllPermissionGranted = permissionGroups
+                .map((g) => g.permissions?.every((p) => p.isGranted))
+                .every((e) => e);
+            if (hasAllPermissionGranted)
+                setHasAllGranted(hasAllPermissionGranted);
+        }
     }, [permissionGroups]);
+
+    useEffect(() => {
+        if (permissionGroups.length > 0) {
+            permissionGroups.forEach((g) => {
+                g.permissions?.forEach((p) => {
+                    p.isGranted = hasAllGranted ? true : false;
+                });
+            });
+            setPermissionGroups([...permissionGroups]);
+        }
+    }, [hasAllGranted]);
 
     const switchManagement = useCallback(
         (index: number) => {
             if (permissionGroups) {
-                const allPermissionSelected = permissionGroups
-                    .map((g) => g.permissions?.every((p) => p.isGranted))
-                    .every((v) => v);
-                if (allPermissionSelected) {
-                    setHasAllGranted(true);
-                    return;
+                if (hasAllGranted) {
+                    const allPermissionSelected = permissionGroups
+                        .map((g) => g.permissions?.every((p) => p.isGranted))
+                        .every((v) => v);
+                    if (allPermissionSelected) {
+                        setHasAllGranted(allPermissionSelected);
+                        return;
+                    }
                 }
+
                 const management = permissionGroups[index];
                 const managementName = management.displayName;
 
@@ -142,7 +161,7 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
             try {
                 await PermissionsService.permissionsUpdate(
                     PermissionProvider.NAME,
-                    PermissionProvider.KEY,
+                    userId,
                     requestPayload
                 );
                 toast({
@@ -169,15 +188,6 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
         onDismiss();
     }, []);
 
-    const renderItems = useMemo(() => {
-        permissionGroups.forEach((g) => {
-            g.permissions?.forEach((p) => {
-                p.isGranted = hasAllGranted;
-            });
-        });
-        return permissionGroups;
-    }, [hasAllGranted, permissionGroups]);
-
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
@@ -198,7 +208,7 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
                         <section className="flex pt-5 flex-col">
                             <section className="flex flex-col">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">
-                                    {renderItems?.map(
+                                    {permissionGroups?.map(
                                         (
                                             permission: PermissionGroupDto,
                                             idx: number
@@ -271,7 +281,7 @@ export const UserPermission = ({ userDto, onDismiss }: UserPermissionProps) => {
                     {hasAllGranted && (
                         <>
                             <section className="grid grid-cols-2 gap-2 mt-2">
-                                {renderItems.map((group) => (
+                                {permissionGroups.map((group) => (
                                     <div key={v4()}>
                                         <h3>{group.displayName}</h3>
                                         <hr className="border-b-white mt-5 mb-5" />

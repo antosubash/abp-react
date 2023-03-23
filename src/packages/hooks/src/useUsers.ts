@@ -14,7 +14,8 @@ export const useUsers = (pageIndex: number, pageSize: number) => {
             return data;
         },
         {
-            refetchInterval: 2000
+            keepPreviousData: false,
+            cacheTime: undefined
         }
     );
 };

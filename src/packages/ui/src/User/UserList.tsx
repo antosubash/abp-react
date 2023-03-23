@@ -199,6 +199,7 @@ export const UserList = () => {
             {userActionDialog &&
                 userActionDialog?.dialgoType === 'permission' && (
                     <UserPermission
+                        userId={userActionDialog.userId}
                         userDto={userActionDialog.userDto}
                         onDismiss={() => setUserActionDialog(null)}
                     />

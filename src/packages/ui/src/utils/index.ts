@@ -20,7 +20,6 @@ export function absoluteUrl(path: string) {
 
 // enums
 export enum PermissionProvider {
-    KEY = '3a08950d-70d1-78fd-a45d-bc34ff730915',
     NAME = 'U'
 }
 

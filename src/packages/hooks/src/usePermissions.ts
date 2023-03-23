@@ -9,11 +9,18 @@ export const usePermissions = (
     providerName: string | undefined,
     providerKey: string | undefined
 ): UseQueryResult<GetPermissionListResultDto, unknown> => {
-    return useQuery([QueryNames.GetPermissions, providerName], async () => {
-        const data = await PermissionsService.permissionsGet(
-            providerName,
-            providerKey
-        );
-        return data;
-    });
+    return useQuery(
+        [QueryNames.GetPermissions, providerName],
+        async () => {
+            const data = await PermissionsService.permissionsGet(
+                providerName,
+                providerKey
+            );
+            return data;
+        },
+        {
+            keepPreviousData: false,
+            cacheTime: undefined
+        }
+    );
 };
