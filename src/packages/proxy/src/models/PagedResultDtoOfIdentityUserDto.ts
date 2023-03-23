@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { IdentityUserDto } from "./IdentityUserDto";
+import type { IdentityUserDto } from './IdentityUserDto';
 
 export type PagedResultDtoOfIdentityUserDto = {
-  items?: Array<IdentityUserDto> | null;
-  totalCount?: number;
+    items?: Array<IdentityUserDto> | null;
+    totalCount?: number;
 };

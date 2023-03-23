@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type VerifyPasswordResetTokenInput = {
-  userId?: string;
-  resetToken: string;
+    userId?: string;
+    resetToken: string;
 };

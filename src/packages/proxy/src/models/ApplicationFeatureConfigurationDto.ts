@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ApplicationFeatureConfigurationDto = {
-  values?: Record<string, string | null> | null;
+    values?: Record<string, string | null> | null;
 };

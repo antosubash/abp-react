@@ -2,8 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { UserData } from "./UserData";
+import type { UserData } from './UserData';
 
 export type ListResultDtoOfUserData = {
-  items?: Array<UserData> | null;
+    items?: Array<UserData> | null;
 };

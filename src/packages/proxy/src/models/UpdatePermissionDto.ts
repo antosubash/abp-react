@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type UpdatePermissionDto = {
-  name?: string | null;
-  isGranted?: boolean;
+    name?: string | null;
+    isGranted?: boolean;
 };

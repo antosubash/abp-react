@@ -2,8 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { TimeZone } from "./TimeZone";
+import type { TimeZone } from './TimeZone';
 
 export type TimingDto = {
-  timeZone?: TimeZone;
+    timeZone?: TimeZone;
 };

@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type ApplicationAuthConfigurationDto = {
-  grantedPolicies?: Record<string, boolean | null> | null;
+    grantedPolicies?: Record<string, boolean | null> | null;
 };

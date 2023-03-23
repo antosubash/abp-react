@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type FeatureProviderDto = {
-  name?: string | null;
-  key?: string | null;
+    name?: string | null;
+    key?: string | null;
 };

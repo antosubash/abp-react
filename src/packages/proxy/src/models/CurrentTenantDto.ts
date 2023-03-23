@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type CurrentTenantDto = {
-  id?: string | null;
-  name?: string | null;
-  isAvailable?: boolean;
+    id?: string | null;
+    name?: string | null;
+    isAvailable?: boolean;
 };

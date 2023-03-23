@@ -3,5 +3,5 @@
 /* eslint-disable */
 
 export type MultiTenancyInfoDto = {
-  isEnabled?: boolean;
+    isEnabled?: boolean;
 };

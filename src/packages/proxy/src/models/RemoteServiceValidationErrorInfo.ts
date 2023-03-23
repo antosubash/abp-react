@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type RemoteServiceValidationErrorInfo = {
-  message?: string | null;
-  members?: Array<string> | null;
+    message?: string | null;
+    members?: Array<string> | null;
 };
