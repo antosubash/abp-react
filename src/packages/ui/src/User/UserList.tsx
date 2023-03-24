@@ -12,11 +12,7 @@ import {
     getCoreRowModel,
     ColumnDef
 } from '@tanstack/react-table';
-import {
-    IdentityUserDto,
-    UserService,
-    IdentityUserUpdateDto
-} from '@abpreact/proxy';
+import { IdentityUserDto, IdentityUserUpdateDto } from '@abpreact/proxy';
 import { CustomTable } from '../Shared/CustomTable';
 import Loader from '../Shared/Loader';
 import Error from '../Shared/Error';
@@ -26,51 +22,15 @@ import { useToast } from '../Shared/hooks/useToast';
 import { ToastAction } from '../Shared/Toast';
 import { UserEdit } from './UserEdit';
 import { UserPermission } from './UserPermission';
+import { DeleteUser } from './DeleteUser';
 
 export const UserList = () => {
     const { toast } = useToast();
     const [userActionDialog, setUserActionDialog] = useState<{
         userId: string;
         userDto: IdentityUserUpdateDto;
-        dialgoType?: 'edit' | 'permission';
+        dialgoType?: 'edit' | 'permission' | 'delete';
     } | null>();
-
-    const onDeletUserEvent = ({
-        name,
-        uuid
-    }: {
-        name: string;
-        uuid: string;
-    }): void => {
-        toast({
-            title: 'Are you sure?',
-            description: `You are about delete a user ${name}`,
-            action: (
-                <ToastAction
-                    altText="confirm"
-                    onClick={async () => {
-                        try {
-                            await UserService.userDelete(uuid);
-                            toast({
-                                title: 'Success',
-                                description: `User ${name} has been deleted successfully.`
-                            });
-                        } catch (err: unknown) {
-                            if (err instanceof Error) {
-                                toast({
-                                    title: 'Failed',
-                                    description: `There was a problem when deleting the user ${name}. Kindly try again.`,
-                                    variant: 'destructive'
-                                });
-                            }
-                        }
-                    }}
-                >
-                    Confirm
-                </ToastAction>
-            )
-        });
-    };
 
     const defaultColumns = useMemo<ColumnDef<IdentityUserDto>[]>(
         () => [
@@ -136,10 +96,12 @@ export const UserList = () => {
                                 <Button
                                     variant="destructive"
                                     onClick={() =>
-                                        onDeletUserEvent({
-                                            name: info.row.original
-                                                ?.userName as string,
-                                            uuid: info.row.original.id as string
+                                        setUserActionDialog({
+                                            userId: info.row.original
+                                                .id as string,
+                                            userDto: info.row
+                                                .original as IdentityUserUpdateDto,
+                                            dialgoType: 'delete'
                                         })
                                     }
                                 >
@@ -189,7 +151,7 @@ export const UserList = () => {
 
     return (
         <>
-            {userActionDialog && userActionDialog?.dialgoType === 'edit' && (
+            {userActionDialog && userActionDialog.dialgoType === 'edit' && (
                 <UserEdit
                     userId={userActionDialog.userId}
                     userDto={userActionDialog.userDto}
@@ -197,13 +159,22 @@ export const UserList = () => {
                 />
             )}
             {userActionDialog &&
-                userActionDialog?.dialgoType === 'permission' && (
+                userActionDialog.dialgoType === 'permission' && (
                     <UserPermission
                         userId={userActionDialog.userId}
                         userDto={userActionDialog.userDto}
                         onDismiss={() => setUserActionDialog(null)}
                     />
                 )}
+            {userActionDialog && userActionDialog.dialgoType === 'delete' && (
+                <DeleteUser
+                    user={{
+                        username: userActionDialog.userDto.userName!,
+                        userId: userActionDialog.userId
+                    }}
+                    onDismiss={() => setUserActionDialog(null)}
+                />
+            )}
             <CustomTable table={table} />
         </>
     );

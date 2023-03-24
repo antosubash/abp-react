@@ -60,7 +60,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                     <DialogTitle>Upate a User: {userDto.userName}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <section className="grid grid-cols-2 gap-2 pb-5">
+                    <section className="flex flex-col space-y-5">
                         <Input
                             required
                             placeholder="Name"
@@ -87,7 +87,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                             {...register('phoneNumber')}
                         />
                     </section>
-                    <DialogFooter>
+                    <DialogFooter className="mt-5">
                         <Button type="submit" variant="outline">
                             Save
                         </Button>
