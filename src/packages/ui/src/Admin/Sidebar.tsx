@@ -17,7 +17,7 @@ export const Sidebar = ({ menus }: SidebarProps) => {
     const router = useRouter();
     const [toggleSidebar, setToggleSidebar] = useState(false);
     const parentNode = useRef<HTMLDivElement>(null);
-    console.log(toggleSidebar);
+
     return (
         <section
             ref={parentNode}

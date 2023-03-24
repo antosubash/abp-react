@@ -17,7 +17,7 @@ import {
     DialogFooter
 } from '../Shared/DialogWrapper';
 import { Button } from '../Shared/Button';
-import { usePermissions } from '@abpreact/hooks';
+import { useAppConfig, usePermissions } from '@abpreact/hooks';
 import { PermissionProvider } from '../utils';
 import { Permission } from '../Permission/Permission';
 import { Label } from '../Shared/Label';
