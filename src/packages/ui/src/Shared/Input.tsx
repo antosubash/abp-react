@@ -12,7 +12,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ({ className, ...props }, ref) => {
         const { label, errMessage, id } = props;
         return (
-            <section className="grid w-full max-w-sm items-center gap-1.5">
+            <section className="grid w-full items-center gap-1.5">
                 {label && <Label htmlFor={id}>{label}</Label>}
                 <input
                     className={cn(

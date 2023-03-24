@@ -27,7 +27,7 @@ export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
                             </section>
                         </section>
                     </header>
-                    <section className="mt-2">{children}</section>
+                    <section className="mt-2 sm:pl-[15rem]">{children}</section>
                 </section>
             </section>
         </main>

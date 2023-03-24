@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { IdentityUserCreateDto, UserService } from '@abpreact/proxy';
 import { QueryNames } from '@abpreact/hooks';
+import classNames from 'classnames';
 
 import { Button } from '../Shared/Button';
+import { Checkbox } from '../Shared/Checkbox';
 import { useToast } from '../Shared/hooks/useToast';
 import {
     Dialog,
@@ -19,12 +21,16 @@ export type AddUserProps = {};
 
 export const AddUser = ({}: AddUserProps) => {
     const [open, setOpen] = useState(false);
-
+    const [isActive, setIsActive] = useState(true);
+    const [lockoutEnabled, setLockoutEnabled] = useState(true);
     const { toast } = useToast();
     const queryClient = useQueryClient();
     const { handleSubmit, register } = useForm();
     const onSubmit = async (data: any) => {
         const user = data as IdentityUserCreateDto;
+        user.isActive = isActive;
+        user.lockoutEnabled = lockoutEnabled;
+
         try {
             await UserService.userCreate(user);
             await queryClient.invalidateQueries([QueryNames.GetUsers]);
@@ -61,39 +67,73 @@ export const AddUser = ({}: AddUserProps) => {
                         <DialogTitle>Create a New User</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <section className="grid grid-cols-2 gap-2 pb-5">
+                        <section className="flex flex-col w-full space-y-5">
                             <Input
                                 required
-                                placeholder="Enter username"
                                 {...register('username')}
+                                label="User name"
                             />
                             <Input
                                 required
-                                placeholder="Password"
+                                type="password"
                                 {...register('password')}
+                                label="Password"
                             />
+                            <Input label="Name" {...register('name')} />
+                            <Input label="Surname" {...register('surname')} />
                             <Input
                                 required
-                                placeholder="Name"
-                                {...register('name')}
-                            />
-                            <Input
-                                required
-                                placeholder="Surname"
-                                {...register('surname')}
-                            />
-                            <Input
-                                required
-                                placeholder="Email"
+                                label="Email address"
                                 {...register('email')}
                             />
                             <Input
-                                required
-                                placeholder="Phone Number"
+                                label="Phone Number"
                                 {...register('phoneNumber')}
                             />
+                            <div
+                                className={classNames(
+                                    'flex items-center space-x-2 pb-2'
+                                )}
+                            >
+                                <Checkbox
+                                    id="isActive"
+                                    name="isActive"
+                                    defaultChecked
+                                    checked={isActive}
+                                    onCheckedChange={(checked) =>
+                                        setIsActive(!!checked.valueOf())
+                                    }
+                                />
+                                <label
+                                    htmlFor="isActive"
+                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                    Active
+                                </label>
+                            </div>
+                            <div
+                                className={classNames(
+                                    'flex items-center space-x-2 pb-2'
+                                )}
+                            >
+                                <Checkbox
+                                    id="lockoutEnabled"
+                                    name="lockoutEnabled"
+                                    defaultChecked
+                                    checked={lockoutEnabled}
+                                    onCheckedChange={(checked) =>
+                                        setLockoutEnabled(!!checked.valueOf())
+                                    }
+                                />
+                                <label
+                                    htmlFor="lockoutEnabled"
+                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                    Lock account after failed login attempts
+                                </label>
+                            </div>
                         </section>
-                        <DialogFooter>
+                        <DialogFooter className="mt-5">
                             <Button type="submit" variant="outline">
                                 Save
                             </Button>
