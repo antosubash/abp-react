@@ -1,14 +1,8 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import {
-    IdentityUserUpdateDto,
-    UserService,
-    GetPermissionListResultDto,
-    PermissionGroupDto,
-    PermissionGrantInfoDto
-} from '@abpreact/proxy';
-import { PermissionProvider, Permissions, PermissionsGrant } from '../utils';
+import { useEffect, useState, useCallback } from 'react';
+import { PermissionGrantInfoDto } from '@abpreact/proxy';
+import { Permissions } from '../utils';
 
-type UsePermissionsChangesProps = {
+export type UsePermissionsChangesProps = {
     permissions: PermissionGrantInfoDto[];
     type: 'identity' | 'tenant' | 'feature' | 'setting';
 };
@@ -60,34 +54,38 @@ export const usePermissionsChanges = ({
     const [hasAllSelected, setHasAllSelected] = useState(false);
     const [data, setData] = useState<PermissionGrantInfoDto[]>(permissions);
 
-    const onCurrentPermissionChanges = useCallback((idx: number) => {
-        const selectedData = data[idx];
-        // wait for all the events to get done, then check.
-        setTimeout(() => {
-            const allSelected = permissions.every((d) => d.isGranted);
-            setHasAllSelected(allSelected);
-        }, 0);
+    const onCurrentPermissionChanges = useCallback(
+        (idx: number) => {
+            const selectedData = data[idx];
 
-        if (type === 'identity') {
-            helper(data, selectedData, Permissions.ROLES, setData);
-            helper(data, selectedData, Permissions.USERS, setData);
-        } else if (type === 'tenant') {
-            helper(data, selectedData, Permissions.TENANTS, setData);
-        } else if (type === 'feature') {
-            helper(
-                data,
-                selectedData,
-                Permissions.MANAGAE_HOST_FEATURES,
-                setData
-            );
-        } else if (type === 'setting') {
-            helper(data, selectedData, Permissions.SETTINGS, setData);
-        } else {
-            throw new Error(
-                'usePermissionsChanges hook received an unknown type property!'
-            );
-        }
-    }, []);
+            // wait for all the events to get done, then check.
+            setTimeout(() => {
+                const allSelected = permissions.every((d) => d.isGranted);
+                setHasAllSelected(allSelected);
+            }, 0);
+
+            if (type === 'identity') {
+                helper(data, selectedData, Permissions.ROLES, setData);
+                helper(data, selectedData, Permissions.USERS, setData);
+            } else if (type === 'tenant') {
+                helper(data, selectedData, Permissions.TENANTS, setData);
+            } else if (type === 'feature') {
+                helper(
+                    data,
+                    selectedData,
+                    Permissions.MANAGAE_HOST_FEATURES,
+                    setData
+                );
+            } else if (type === 'setting') {
+                helper(data, selectedData, Permissions.SETTINGS, setData);
+            } else {
+                throw new Error(
+                    'usePermissionsChanges hook received an unknown type property!'
+                );
+            }
+        },
+        [permissions, type]
+    );
 
     const onHasAllSelectedUpate = useCallback(() => {
         setHasAllSelected((f) => {

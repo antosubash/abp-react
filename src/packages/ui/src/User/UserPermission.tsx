@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, FormEvent } from 'react';
+import { useEffect, useState, useCallback, FormEvent, useMemo } from 'react';
 import {
     IdentityUserUpdateDto,
     PermissionGroupDto,
@@ -17,15 +17,13 @@ import {
     DialogFooter
 } from '../Shared/DialogWrapper';
 import { Button } from '../Shared/Button';
-import { useAppConfig, usePermissions } from '@abpreact/hooks';
-import { PermissionProvider } from '../utils';
+import { usePermissions, useUserRoles } from '@abpreact/hooks';
+import { PermissionProvider, USER_ROLE } from '../utils';
 import { Permission } from '../Permission/Permission';
 import { Label } from '../Shared/Label';
 import classNames from 'classnames';
-import { IdentityManagement } from '../Permission/IdentityManagement';
-import { TenantManagement } from '../Permission/TenantManagement';
-import { SettingManagement } from '../Permission/SettingManagement';
-import { FeatureManagement } from '../Permission/FeatureManagement';
+
+import { TogglePermission } from '../Permission/TogglePermission';
 
 type UserPermissionProps = {
     userDto: IdentityUserUpdateDto;
@@ -33,6 +31,7 @@ type UserPermissionProps = {
     onDismiss: () => void;
 };
 
+type Management = 'identity' | 'tenant' | 'setting' | 'feature';
 export type PermissionTracker = {
     name: string;
     isGranted: boolean;
@@ -44,12 +43,14 @@ export const UserPermission = ({
 }: UserPermissionProps) => {
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
+    const userRoles = useUserRoles({ userId });
+
     // flag determine to enable/disable all the permissions to a user.
     const [hasAllGranted, setHasAllGranted] = useState(false);
     const [currentPermissionGrant, setCurrentPermissionGrant] = useState<{
-        name: 'identity' | 'tenants' | 'settings' | 'features';
+        name: Management;
         data: PermissionGrantInfoDto[] | null;
-    }>();
+    } | null>();
     const { data } = usePermissions(PermissionProvider.NAME, userId);
     const [permissionGroups, setPermissionGroups] = useState<
         PermissionGroupDto[]
@@ -107,6 +108,8 @@ export const UserPermission = ({
                     }
                 }
 
+                setCurrentPermissionGrant(null);
+
                 const management = permissionGroups[index];
                 const managementName = management.displayName;
 
@@ -120,21 +123,21 @@ export const UserPermission = ({
 
                 if (managementName?.toLowerCase()?.includes('tenant')) {
                     setCurrentPermissionGrant({
-                        name: 'tenants',
+                        name: 'tenant',
                         data: management?.permissions!
                     });
                     return false;
                 }
                 if (managementName?.toLowerCase()?.includes('feature')) {
                     setCurrentPermissionGrant({
-                        name: 'features',
+                        name: 'feature',
                         data: management?.permissions!
                     });
                     return false;
                 }
                 if (managementName?.toLowerCase()?.includes('setting')) {
                     setCurrentPermissionGrant({
-                        name: 'settings',
+                        name: 'setting',
                         data: management?.permissions!
                     });
                     return false;
@@ -188,6 +191,30 @@ export const UserPermission = ({
         onDismiss();
     }, []);
 
+    const hasAdmin = useMemo(() => {
+        if (userRoles?.data?.items) {
+            return (
+                userRoles.data.items.filter((role) =>
+                    role.name?.includes(USER_ROLE.ADMIN)
+                ).length > 0
+            );
+        }
+        return false;
+    }, [userRoles]);
+
+    const renderTogglePermission = useCallback(() => {
+        return (
+            <TogglePermission
+                key={currentPermissionGrant!.name}
+                permissions={currentPermissionGrant?.data ?? []}
+                type={currentPermissionGrant!.name}
+            />
+        );
+    }, [currentPermissionGrant?.data]);
+
+    const formatDisplayName = (str: string): Management => {
+        return str.split(' ')[0].toLowerCase() as Management;
+    };
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
@@ -199,6 +226,7 @@ export const UserPermission = ({
                         name="Grant All Permissions"
                         isGranted={hasAllGranted}
                         id="all_granted"
+                        disabled={hasAdmin}
                         onUpdate={() => {
                             setHasAllGranted((f) => !f);
                         }}
@@ -243,38 +271,8 @@ export const UserPermission = ({
                             </section>
                             <hr className="border-b-white mt-5 mb-5" />
                             <section className="flex flex-col space-y-1 mt-3">
-                                {currentPermissionGrant?.name ===
-                                    'identity' && (
-                                    <IdentityManagement
-                                        permissions={
-                                            currentPermissionGrant?.data!
-                                        }
-                                    />
-                                )}
-
-                                {currentPermissionGrant?.name === 'tenants' && (
-                                    <TenantManagement
-                                        permissions={
-                                            currentPermissionGrant?.data!
-                                        }
-                                    />
-                                )}
-                                {currentPermissionGrant?.name ===
-                                    'settings' && (
-                                    <SettingManagement
-                                        permissions={
-                                            currentPermissionGrant?.data!
-                                        }
-                                    />
-                                )}
-                                {currentPermissionGrant?.name ===
-                                    'features' && (
-                                    <FeatureManagement
-                                        permissions={
-                                            currentPermissionGrant?.data!
-                                        }
-                                    />
-                                )}
+                                {currentPermissionGrant?.data &&
+                                    renderTogglePermission()}
                             </section>
                         </section>
                     )}
@@ -285,26 +283,16 @@ export const UserPermission = ({
                                     <div key={v4()}>
                                         <h3>{group.displayName}</h3>
                                         <hr className="border-b-white mt-5 mb-5" />
-                                        {group?.permissions?.map((p) => (
-                                            <div key={v4()}>
-                                                <Permission
-                                                    name={p.displayName!}
-                                                    isGranted
-                                                    disabled
-                                                    id={
-                                                        p.name?.concat(
-                                                            `_${group.displayName}`
-                                                        ) as string
-                                                    }
-                                                    className={classNames(
-                                                        'ml-2',
-                                                        {
-                                                            'pl-5': p.parentName
-                                                        }
-                                                    )}
-                                                />
-                                            </div>
-                                        ))}
+                                        <div key={v4()}>
+                                            <TogglePermission
+                                                permissions={group.permissions!}
+                                                type={formatDisplayName(
+                                                    group.displayName!
+                                                )}
+                                                hideSelectAll
+                                                hideSave
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                             </section>

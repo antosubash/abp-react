@@ -6,4 +6,5 @@ export { useTranslation } from './useTranslation';
 export { useUsers } from './useUsers';
 export { usePermissions } from './usePermissions';
 export { useGrantedPolicies } from './useGrantedPolicies';
+export { useUserRoles } from './useUserRoles';
 export * from './QueryConstants';
