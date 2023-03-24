@@ -17,14 +17,15 @@ export const Sidebar = ({ menus }: SidebarProps) => {
     const router = useRouter();
     const [toggleSidebar, setToggleSidebar] = useState(false);
     const parentNode = useRef<HTMLDivElement>(null);
-
+    console.log(toggleSidebar);
     return (
         <section
             ref={parentNode}
             className={classNames(
-                'h-full flex shadow-lg absolute w-[20rem] z-[10] pt-6 pl-2 pr-2 bg-white dark:text-black transition-transform delay-100 ease-in-out -translate-x-[20rem] sm:translate-x-0',
+                'h-full flex shadow-lg absolute w-[15rem] z-[15] pt-6 pl-2 pr-2 bg-white dark:text-black transition-transform delay-100 ease-in-out',
                 {
-                    '-translate-x-0': toggleSidebar
+                    'translate-x-0 sm:-translate-x-[15rem]': toggleSidebar,
+                    '-translate-x-[15rem] sm:translate-x-0': !toggleSidebar
                 }
             )}
         >
@@ -67,7 +68,7 @@ export const Sidebar = ({ menus }: SidebarProps) => {
                     </section>
                 </nav>
             </section>
-            <section className="absolute right-[-2.4rem] sm:hidden">
+            <section className="absolute  right-[-2.4rem] sm:hidden">
                 <Button
                     variant="subtle"
                     size="sm"
