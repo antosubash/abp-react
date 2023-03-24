@@ -1,4 +1,4 @@
-import { useUsers } from '@abpreact/hooks';
+import { useAppConfig, useGrantedPolicies, useUsers } from '@abpreact/hooks';
 import { useMemo, useState } from 'react';
 
 import {
@@ -25,6 +25,7 @@ import { UserPermission } from './UserPermission';
 import { DeleteUser } from './DeleteUser';
 
 export const UserList = () => {
+    const { can } = useGrantedPolicies();
     const { toast } = useToast();
     const [userActionDialog, setUserActionDialog] = useState<{
         userId: string;
@@ -32,31 +33,31 @@ export const UserList = () => {
         dialgoType?: 'edit' | 'permission' | 'delete';
     } | null>();
 
-    const defaultColumns = useMemo<ColumnDef<IdentityUserDto>[]>(
-        () => [
-            {
-                header: 'User Management',
-                columns: [
-                    {
-                        accessorKey: 'userName',
-                        header: 'Username',
-                        cell: (info) => info.getValue()
-                    },
-                    {
-                        accessorKey: 'email',
-                        header: 'Email',
-                        cell: (info) => info.getValue()
-                    },
-                    {
-                        accessorKey: 'isActive',
-                        header: 'Active',
-                        cell: (info) => (info.getValue() ? 'yes' : 'no')
-                    },
-                    {
-                        accessorKey: 'actions',
-                        header: 'Actions',
-                        cell: (info) => (
-                            <section className="flex items-center space-x-2">
+    const defaultColumns: ColumnDef<IdentityUserDto>[] = [
+        {
+            header: 'User Management',
+            columns: [
+                {
+                    accessorKey: 'userName',
+                    header: 'Username',
+                    cell: (info) => info.getValue()
+                },
+                {
+                    accessorKey: 'email',
+                    header: 'Email',
+                    cell: (info) => info.getValue()
+                },
+                {
+                    accessorKey: 'isActive',
+                    header: 'Active',
+                    cell: (info) => (info.getValue() ? 'yes' : 'no')
+                },
+                {
+                    accessorKey: 'actions',
+                    header: 'Actions',
+                    cell: (info) => (
+                        <section className="flex items-center space-x-2">
+                            {can('AbpIdentity.Users.ManagePermissions') && (
                                 <Button
                                     variant="subtle"
                                     onClick={() => {
@@ -75,6 +76,8 @@ export const UserList = () => {
                                         className="text-white"
                                     />
                                 </Button>
+                            )}
+                            {can('AbpIdentity.Users.Update') && (
                                 <Button
                                     variant="subtle"
                                     onClick={() =>
@@ -93,6 +96,8 @@ export const UserList = () => {
                                         className="text-white"
                                     />
                                 </Button>
+                            )}
+                            {can('AbpIdentity.Users.Delete') && (
                                 <Button
                                     variant="destructive"
                                     onClick={() =>
@@ -107,14 +112,13 @@ export const UserList = () => {
                                 >
                                     <TrashIcon width={15} height={15} />
                                 </Button>
-                            </section>
-                        )
-                    }
-                ]
-            }
-        ],
-        []
-    );
+                            )}
+                        </section>
+                    )
+                }
+            ]
+        }
+    ];
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
         pageIndex: 0,

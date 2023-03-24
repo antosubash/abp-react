@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { IdentityUserCreateDto, UserService } from '@abpreact/proxy';
-import { QueryNames } from '@abpreact/hooks';
+import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
 import classNames from 'classnames';
 
 import { Button } from '../Shared/Button';
@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 export type AddUserProps = {};
 
 export const AddUser = ({}: AddUserProps) => {
+    const { can } = useGrantedPolicies();
     const [open, setOpen] = useState(false);
     const [isActive, setIsActive] = useState(true);
     const [lockoutEnabled, setLockoutEnabled] = useState(true);
@@ -58,9 +59,11 @@ export const AddUser = ({}: AddUserProps) => {
                     <h3 className="text-center sm:text-left title font-bold text-xl grow p-0 m-1">
                         User Management
                     </h3>
-                    <Button variant="default" onClick={() => setOpen(true)}>
-                        Create New User
-                    </Button>
+                    {can('AbpIdentity.Users.Create') && (
+                        <Button variant="default" onClick={() => setOpen(true)}>
+                            Create New User
+                        </Button>
+                    )}
                 </section>
                 <DialogContent className="text-white">
                     <DialogHeader>
