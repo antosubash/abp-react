@@ -1,4 +1,4 @@
-import { useAppConfig, useGrantedPolicies, useUsers } from '@abpreact/hooks';
+import { useGrantedPolicies, useUsers } from '@abpreact/hooks';
 import { useMemo, useState } from 'react';
 
 import {
@@ -19,7 +19,6 @@ import Error from '../Shared/Error';
 import { Button } from '../Shared/Button';
 
 import { useToast } from '../Shared/hooks/useToast';
-import { ToastAction } from '../Shared/Toast';
 import { UserEdit } from './UserEdit';
 import { UserPermission } from './UserPermission';
 import { DeleteUser } from './DeleteUser';

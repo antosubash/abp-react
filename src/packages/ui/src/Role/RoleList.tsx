@@ -1,66 +1,78 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRoles } from '@abpreact/hooks';
-
+import {
+    PaginationState,
+    useReactTable,
+    getCoreRowModel,
+    ColumnDef
+} from '@tanstack/react-table';
+import { IdentityRoleDto } from '@abpreact/proxy';
 import {
     AdjustmentsHorizontalIcon,
     PencilIcon,
     TrashIcon
 } from '@heroicons/react/24/solid';
+import { CustomTable } from '../Shared/CustomTable';
 import Loader from '../Shared/Loader';
 import Error from '../Shared/Error';
+import { useToast } from '../Shared/hooks/useToast';
 
 export const RoleList = () => {
-    const columns = [
+    const { toast } = useToast();
+    const defaultColumns: ColumnDef<IdentityRoleDto>[] = [
         {
-            name: 'Name',
-            selector: (row: any) => row.name
-        },
-        {
-            name: 'Is Default',
-            selector: (row: any) => (row.isDefault ? 'yes' : 'no')
-        },
-        {
-            name: 'Is Public',
-            selector: (row: any) => (row.isPublic ? 'yes' : 'no')
-        },
-        {
-            name: 'Permissions',
-            button: true,
-            cell: (row: any) => (
-                <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-            )
-        },
-        {
-            name: 'Edit',
-            button: true,
-            cell: (row: any) => (
-                <PencilIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-            )
-        },
-        {
-            name: 'Delete',
-            button: true,
-            cell: (row: any) => (
-                <TrashIcon className="h-5 w-5 text-red-500 cursor-pointer" />
-            )
+            header: 'Role Management',
+            columns: [
+                {
+                    accessorKey: 'name',
+                    header: 'Name',
+                    cell: (info) => info.getValue()
+                },
+                {
+                    accessorKey: 'is_default',
+                    header: 'Is Default',
+                    cell: (info) =>
+                        info.row.original?.isDefault ? 'Yes' : 'No'
+                },
+                {
+                    accessorKey: 'is_public',
+                    header: 'Is Public',
+                    cell: (info) => (info.row.original?.isPublic ? 'Yes' : 'No')
+                }
+            ]
         }
     ];
 
-    var [skip, setSkip] = useState<number>(0);
-    var [limit, setLimit] = useState<number>(10);
-    var [page, setPage] = useState<number>(0);
+    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10
+    });
 
-    const handlePageChange = (page: number) => {
-        setPage(page);
-        var skip = (page - 1) * limit;
-        setSkip(skip);
-    };
+    const pagination = useMemo(
+        () => ({
+            pageIndex,
+            pageSize
+        }),
+        [pageIndex, pageSize, toast]
+    );
 
-    const handlePerRowsChange = async (newPerPage: number, _page: number) => {
-        setLimit(newPerPage);
-    };
-    var { isLoading, data, isError } = useRoles(page, skip, limit);
+    const { isLoading, data, isError } = useRoles(pageIndex, pageSize);
+    const pageCount = Math.ceil(data?.totalCount! / pageSize);
+
+    const table = useReactTable({
+        data: data?.items ?? [],
+        pageCount: pageCount ?? 0,
+        state: {
+            pagination
+        },
+        columns: defaultColumns,
+        getCoreRowModel: getCoreRowModel(),
+        onPaginationChange: setPagination,
+        manualPagination: true
+    });
+
     if (isLoading) return <Loader />;
     if (isError) return <Error />;
-    return <>Role Table</>;
+
+    return <CustomTable table={table} />;
 };

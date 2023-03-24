@@ -8,25 +8,28 @@ import {
     AdminLayout,
     UserList,
     RoleList,
-    AddUser
+    AddUser,
+    AddRole
 } from '@abpreact/ui';
 import { useI18n } from 'next-localization';
-import { AdminMenus } from '../utils/Constants';
+import { AdminMenus } from '../../utils/Constants';
+import Link from 'next/link';
 
-const Users: NextPage = () => {
+const Roles: NextPage = () => {
     const i18n = useI18n();
     const users = i18n.t('AbpIdentity.Users');
     const roles = i18n.t('AbpIdentity.Roles');
+
     return (
         <AdminLayout menus={AdminMenus}>
             <div className="w-full">
-                <Tabs defaultValue={users}>
+                <Tabs value={roles}>
                     <TabsList className="w-full">
-                        <TabsTrigger value={users} className="w-full">
-                            {users}
+                        <TabsTrigger value={users} className="w-full" asChild>
+                            <Link href={'/users'}>{users}</Link>
                         </TabsTrigger>
-                        <TabsTrigger value={roles} className="w-full">
-                            {roles}
+                        <TabsTrigger value={roles} className="w-full" asChild>
+                            <Link href={'/users/roles'}>{roles}</Link>
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value={users}>
@@ -34,6 +37,7 @@ const Users: NextPage = () => {
                         <UserList />
                     </TabsContent>
                     <TabsContent value={roles}>
+                        <AddRole />
                         <RoleList />
                     </TabsContent>
                 </Tabs>
@@ -42,4 +46,4 @@ const Users: NextPage = () => {
     );
 };
 
-export default Users;
+export default Roles;

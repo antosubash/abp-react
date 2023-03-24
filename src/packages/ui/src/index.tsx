@@ -15,9 +15,6 @@ export { NavBar, type NavBarProps } from './Admin/NavBar';
 export { Sidebar, type SidebarProps } from './Admin/Sidebar';
 export { Dashboard, type DashboardProps } from './Admin/Dashboard';
 
-// role
-export { RoleList } from './Role/RoleList';
-
 // section
 export { Hero, type HeroProps } from './Sections/Hero';
 
@@ -61,3 +58,7 @@ export { UserList } from './User/UserList';
 export { AddUser, type AddUserProps } from './User/AddUser';
 export { UserDropDown } from './User/UserDropDown';
 export { UserMenus, type UserMenusProps } from './User/UserMenus';
+
+// role
+export { RoleList } from './Role/RoleList';
+export { AddRole } from './Role/AddRole';
