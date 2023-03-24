@@ -37,3 +37,7 @@ export enum PermissionsGrant {
     FEATURE_MANAHEMENT = 'Feature management',
     SETTING_MANAGEMENT = 'Setting management'
 }
+
+export enum USER_ROLE {
+    ADMIN = 'admin'
+}
