@@ -6,19 +6,26 @@ import {
     getCoreRowModel,
     ColumnDef
 } from '@tanstack/react-table';
-import { IdentityRoleDto } from '@abpreact/proxy';
-import {
-    AdjustmentsHorizontalIcon,
-    PencilIcon,
-    TrashIcon
-} from '@heroicons/react/24/solid';
+import { IdentityRoleDto, IdentityRoleUpdateDto } from '@abpreact/proxy';
+
+import { PermissionActions } from '../Permission/PermissionActions';
 import { CustomTable } from '../Shared/CustomTable';
 import Loader from '../Shared/Loader';
 import Error from '../Shared/Error';
 import { useToast } from '../Shared/hooks/useToast';
+import { USER_ROLE } from '../utils';
+import { RoleEdit } from './RoleEdit';
+import { DeleteRole } from './DeleteRole';
 
 export const RoleList = () => {
     const { toast } = useToast();
+
+    const [roleActionDialog, setRoleActionDialog] = useState<{
+        roleId: string;
+        roleDto: IdentityRoleUpdateDto;
+        dialgoType?: 'edit' | 'permission' | 'delete';
+    } | null>();
+
     const defaultColumns: ColumnDef<IdentityRoleDto>[] = [
         {
             header: 'Role Management',
@@ -38,6 +45,62 @@ export const RoleList = () => {
                     accessorKey: 'is_public',
                     header: 'Is Public',
                     cell: (info) => (info.row.original?.isPublic ? 'Yes' : 'No')
+                },
+                {
+                    accessorKey: 'actions',
+                    header: 'Actions',
+                    cell: (info) => {
+                        console.log(info.row);
+                        return (
+                            <PermissionActions
+                                actions={[
+                                    {
+                                        icon: 'permission',
+                                        policy: 'AbpIdentity.Roles.ManagePermissions',
+                                        callback: () => {
+                                            setRoleActionDialog({
+                                                roleId: info.row.original
+                                                    .id as string,
+                                                roleDto: info.row
+                                                    .original as IdentityRoleUpdateDto,
+                                                dialgoType: 'permission'
+                                            });
+                                        }
+                                    },
+                                    {
+                                        icon: 'pencil',
+                                        policy: 'AbpIdentity.Roles.Update',
+                                        callback: () => {
+                                            setRoleActionDialog({
+                                                roleId: info.row.original
+                                                    .id as string,
+                                                roleDto: info.row
+                                                    .original as IdentityRoleUpdateDto,
+                                                dialgoType: 'edit'
+                                            });
+                                        }
+                                    },
+                                    {
+                                        icon: 'trash',
+                                        policy: 'AbpIdentity.Roles.Delete',
+                                        visible:
+                                            info.row.original.name?.includes(
+                                                USER_ROLE.ADMIN
+                                            ),
+                                        callback: () => {
+                                            setRoleActionDialog({
+                                                roleId: info.row.original
+                                                    .id as string,
+                                                roleDto: info.row
+                                                    .original as IdentityRoleUpdateDto,
+                                                dialgoType: 'delete'
+                                            });
+                                        }
+                                    }
+                                ]}
+                            />
+                        );
+                    }
                 }
             ]
         }
@@ -74,5 +137,25 @@ export const RoleList = () => {
     if (isLoading) return <Loader />;
     if (isError) return <Error />;
 
-    return <CustomTable table={table} />;
+    return (
+        <>
+            {roleActionDialog?.dialgoType === 'edit' && (
+                <RoleEdit
+                    roleId={roleActionDialog.roleId}
+                    roleDto={roleActionDialog.roleDto}
+                    onDismiss={() => setRoleActionDialog(null)}
+                />
+            )}
+            {roleActionDialog?.dialgoType === 'delete' && (
+                <DeleteRole
+                    role={{
+                        roleId: roleActionDialog.roleId,
+                        roleName: roleActionDialog.roleDto.name
+                    }}
+                    onDismiss={() => setRoleActionDialog(null)}
+                />
+            )}
+            <CustomTable table={table} />
+        </>
+    );
 };

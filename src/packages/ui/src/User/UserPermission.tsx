@@ -215,6 +215,7 @@ export const UserPermission = ({
     const formatDisplayName = (str: string): Management => {
         return str.split(' ')[0].toLowerCase() as Management;
     };
+
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
@@ -289,6 +290,7 @@ export const UserPermission = ({
                                                 type={formatDisplayName(
                                                     group.displayName!
                                                 )}
+                                                disabled={hasAdmin}
                                                 hideSelectAll
                                                 hideSave
                                             />

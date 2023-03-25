@@ -9,33 +9,33 @@ import {
     AlertDialogTitle
 } from '../Shared/AlertDialog';
 
-import { UserService } from '@abpreact/proxy';
+import { RoleService } from '@abpreact/proxy';
 import { useToast } from '../Shared/hooks/useToast';
 import { useEffect, useState } from 'react';
 
-type DeleteUserProps = {
-    user: { userId: string; username: string };
+type DeleteRoleProps = {
+    role: { roleId: string; roleName: string };
     onDismiss: () => void;
 };
-export const DeleteUser = ({
-    user: { userId, username },
+export const DeleteRole = ({
+    role: { roleId, roleName },
     onDismiss
-}: DeleteUserProps) => {
+}: DeleteRoleProps) => {
     const { toast } = useToast();
     const [open, setOpen] = useState<boolean>(false);
     const onYesEvent = async () => {
         try {
-            await UserService.userDelete(userId);
+            await RoleService.roleDelete(roleId);
             toast({
                 title: 'Success',
-                description: `User "${username}" has been deleted successfully.`
+                description: `Role "${roleName}" has been deleted successfully.`
             });
             onDismiss();
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast({
                     title: 'Failed',
-                    description: `There was a problem when deleting the user "${username}". Kindly try again.`,
+                    description: `There was a problem when deleting the role ${roleName}. Kindly try again.`,
                     variant: 'destructive'
                 });
             }
@@ -55,7 +55,7 @@ export const DeleteUser = ({
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         This action cannot be undone. This will permanently
-                        delete your this user "{username}"
+                        delete your role name "{roleName}"
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

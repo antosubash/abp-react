@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import { IdentityRoleCreateDto, RoleService } from '@abpreact/proxy';
-import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
+import { useGrantedPolicies } from '@abpreact/hooks';
 import classNames from 'classnames';
 
 import { Button } from '../Shared/Button';
