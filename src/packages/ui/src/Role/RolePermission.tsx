@@ -1,12 +1,11 @@
 import { useEffect, useState, useCallback, FormEvent, useMemo } from 'react';
 import {
-    IdentityUserUpdateDto,
+    IdentityRoleUpdateDto,
     PermissionGroupDto,
     PermissionGrantInfoDto,
     PermissionsService,
     UpdatePermissionsDto
 } from '@abpreact/proxy';
-import { useQueryClient } from '@tanstack/react-query';
 import { v4 } from 'uuid';
 import { useToast } from '../Shared/hooks/useToast';
 
@@ -18,36 +17,32 @@ import {
     DialogFooter
 } from '../Shared/DialogWrapper';
 import { Button } from '../Shared/Button';
-import { usePermissions, useUserRoles } from '@abpreact/hooks';
+import { usePermissions } from '@abpreact/hooks';
 import { PermissionProvider, USER_ROLE } from '../utils';
 import { Permission, Management } from '../Permission/Permission';
 import { Label } from '../Shared/Label';
 import classNames from 'classnames';
 
 import { TogglePermission } from '../Permission/TogglePermission';
+import { useQueryClient } from '@tanstack/react-query';
 
-type UserPermissionProps = {
-    userDto: IdentityUserUpdateDto;
-    userId: string;
+type RolePermissionProps = {
+    roleDto: IdentityRoleUpdateDto;
     onDismiss: () => void;
 };
 
-export const UserPermission = ({
-    userDto,
-    userId,
-    onDismiss
-}: UserPermissionProps) => {
+export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
-    const userRoles = useUserRoles({ userId });
 
-    // flag determine to enable/disable all the permissions to a user.
+    // flag determine to enable/disable all the permissions to a .
     const [hasAllGranted, setHasAllGranted] = useState(false);
     const [currentPermissionGrant, setCurrentPermissionGrant] = useState<{
         name: Management;
         data: PermissionGrantInfoDto[] | null;
     } | null>();
-    const { data } = usePermissions(PermissionProvider.U, userId);
+
+    const { data } = usePermissions(PermissionProvider.R, roleDto.name);
     const queryClient = useQueryClient();
 
     const [permissionGroups, setPermissionGroups] = useState<
@@ -57,7 +52,7 @@ export const UserPermission = ({
     useEffect(() => {
         setOpen(true);
         return () => {
-            queryClient.invalidateQueries([PermissionProvider.U]);
+            queryClient.invalidateQueries([PermissionProvider.R]);
         };
     }, []);
 
@@ -74,7 +69,7 @@ export const UserPermission = ({
         }
     }, [data]);
 
-    // check if user have all the permissions are granted already.
+    // check if  have all the permissions are granted already.
     useEffect(() => {
         if (permissionGroups.length > 0) {
             const hasAllPermissionGranted = permissionGroups
@@ -164,8 +159,8 @@ export const UserPermission = ({
             };
             try {
                 await PermissionsService.permissionsUpdate(
-                    PermissionProvider.U,
-                    userId,
+                    PermissionProvider.R,
+                    roleDto.name,
                     requestPayload
                 );
                 toast({
@@ -174,7 +169,7 @@ export const UserPermission = ({
                     variant: 'default'
                 });
                 queryClient.invalidateQueries({
-                    queryKey: [PermissionProvider.U]
+                    queryKey: [PermissionProvider.R]
                 });
                 onCloseEvent();
             } catch (err: unknown) {
@@ -195,16 +190,10 @@ export const UserPermission = ({
         onDismiss();
     }, []);
 
-    const hasAdmin = useMemo(() => {
-        if (userRoles?.data?.items) {
-            return (
-                userRoles.data.items.filter((role) =>
-                    role.name?.includes(USER_ROLE.ADMIN)
-                ).length > 0
-            );
-        }
-        return false;
-    }, [userRoles]);
+    const hasAdmin = useMemo(
+        () => roleDto.name.includes(USER_ROLE.ADMIN),
+        [roleDto]
+    );
 
     const renderTogglePermission = useCallback(() => {
         return (
@@ -224,7 +213,7 @@ export const UserPermission = ({
         <Dialog open={open} onOpenChange={onCloseEvent}>
             <DialogContent className="text-white">
                 <DialogHeader>
-                    <DialogTitle>Permissions - {userDto.userName}</DialogTitle>
+                    <DialogTitle>Permissions - {roleDto.name}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={onSubmit}>
                     <Permission

@@ -1,12 +1,12 @@
 import { flexRender, Table } from '@tanstack/react-table';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 export type TableViewProps = {
     table: Table<any>;
 };
 
 const TableView = ({ table }: TableViewProps) => {
-    const renderHeader = () => {
+    const renderHeader = useCallback(() => {
         const headerGroups = table.getHeaderGroups();
         return headerGroups.map((headerGroup) => {
             const headers = headerGroup.headers;
@@ -29,9 +29,9 @@ const TableView = ({ table }: TableViewProps) => {
                 </tr>
             );
         });
-    };
+    }, [table]);
 
-    const renderBody = () => {
+    const renderBody = useCallback(() => {
         const rows = table.getRowModel().rows;
         return rows.map((row) => {
             const cells = row.getVisibleCells();
@@ -56,7 +56,7 @@ const TableView = ({ table }: TableViewProps) => {
                 </tr>
             );
         });
-    };
+    }, [table]);
 
     return (
         <section className="overflow-scroll">

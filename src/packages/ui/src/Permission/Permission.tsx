@@ -2,6 +2,12 @@ import classNames from 'classnames';
 import { useCallback, memo } from 'react';
 import { Checkbox } from '../Shared/Checkbox';
 
+export type Management = 'identity' | 'tenant' | 'setting' | 'feature';
+export type PermissionTracker = {
+    name: string;
+    isGranted: boolean;
+};
+
 type PermissonProps = {
     name: string;
     id: string;

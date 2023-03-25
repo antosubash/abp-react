@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IdentityRoleCreateDto, RoleService } from '@abpreact/proxy';
-import { useGrantedPolicies } from '@abpreact/hooks';
+import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
 import classNames from 'classnames';
 
 import { Button } from '../Shared/Button';
@@ -15,6 +15,7 @@ import {
 } from '../Shared/DialogWrapper';
 import { Input } from '../Shared/Input';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from '@tanstack/react-query';
 
 export type AddUserProps = {};
 
@@ -25,6 +26,7 @@ export const AddRole = ({}: AddUserProps) => {
     const [isPublic, setIsPublic] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
+    const queryClient = useQueryClient();
     const onSubmit = async (data: any) => {
         const newRole = data as IdentityRoleCreateDto;
         newRole.isDefault = isDefault;
@@ -37,6 +39,7 @@ export const AddRole = ({}: AddUserProps) => {
                 description: 'Role Created Successfully',
                 variant: 'default'
             });
+            queryClient.invalidateQueries([QueryNames.GetRoles]);
             setOpen(false);
         } catch (err: unknown) {
             if (err instanceof Error) {
