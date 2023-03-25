@@ -3,12 +3,13 @@ import { v4 } from 'uuid';
 import {
     AdjustmentsHorizontalIcon,
     PencilIcon,
-    TrashIcon
+    TrashIcon,
+    CogIcon
 } from '@heroicons/react/24/solid';
 import { Button } from '../Shared/Button';
 type PermissionActionsProps = {
     actions: Array<{
-        icon: 'permission' | 'trash' | 'pencil';
+        icon: 'permission' | 'trash' | 'pencil' | 'features';
         callback: () => void;
         policy: Policy;
         visible?: boolean;
@@ -33,6 +34,9 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
                 )}
                 {action.icon === 'pencil' && (
                     <PencilIcon width={15} height={15} className="text-white" />
+                )}
+                {action.icon === 'features' && (
+                    <CogIcon width={15} height={15} className="text-white" />
                 )}
             </Button>
         );

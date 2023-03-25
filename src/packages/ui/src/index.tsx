@@ -47,9 +47,8 @@ export { useToast, toast } from './Shared/hooks/useToast';
 
 // tenant
 
-export { TenantList, type TenantListProps } from './Tenant/TenantList';
-export { TenantEdit, type TenantEditProps } from './Tenant/TenantEdit';
-export { TenantCreate, type TenantCreateProps } from './Tenant/TenantCreate';
+export { TenantList } from './Tenant/TenantList';
+export { AddTenant } from './Tenant/AddTenant';
 export { FeatureList, type FeatureListProps } from './Tenant/FeatureList';
 
 // user

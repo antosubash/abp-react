@@ -8,7 +8,6 @@ import {
     AdminLayout,
     UserList,
     RoleList,
-    AddUser,
     AddRole
 } from '@abpreact/ui';
 import { useI18n } from 'next-localization';
@@ -33,7 +32,6 @@ const Roles: NextPage = () => {
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value={users}>
-                        <AddUser />
                         <UserList />
                     </TabsContent>
                     <TabsContent value={roles}>

@@ -64,6 +64,9 @@ const TableView = ({ table }: TableViewProps) => {
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderBody()}</tbody>
             </table>
+            <div className="text-gray-400 p-2">
+                {table.getRowModel().rows.length} total
+            </div>
         </section>
     );
 };
