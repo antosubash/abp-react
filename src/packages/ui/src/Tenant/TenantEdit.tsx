@@ -2,57 +2,88 @@ import { TenantService, TenantUpdateDto } from '@abpreact/proxy';
 import { QueryNames } from '@abpreact/hooks';
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useToast } from '../Shared/hooks/useToast';
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
-    DialogTrigger
+    DialogFooter
 } from '../Shared/DialogWrapper';
 import { Button } from '../Shared/Button';
+import { useForm } from 'react-hook-form';
+import { Input } from '../Shared/Input';
 
 export type TenantEditProps = {
-    name: string;
-    id: string;
-    isOpen: boolean;
-    closeModal: () => void;
+    tenantDto: TenantUpdateDto;
+    tenantId: string;
+    onDismiss: () => void;
 };
 
 export const TenantEdit = ({
-    name,
-    id,
-    isOpen,
-    closeModal
+    tenantDto,
+    tenantId,
+    onDismiss
 }: TenantEditProps) => {
-    const [tenantName, setTenantName] = useState<string>();
     const queryClient = useQueryClient();
-    const tenantUpdate = async () => {
-        const tenant = {} as TenantUpdateDto;
-        tenant.name = tenantName!;
-        const updated = await TenantService.tenantUpdate(id, tenant);
-        if (updated) {
-            queryClient.invalidateQueries([QueryNames.GetTenants]);
-            closeModal();
+    const [open, setOpen] = useState(false);
+    const { toast } = useToast();
+    const { handleSubmit, register } = useForm();
+
+    const onSubmit = async (dto: unknown) => {
+        const tenant = dto as TenantUpdateDto;
+        try {
+            await TenantService.tenantUpdate(tenantId, tenant);
+            toast({
+                title: 'Success',
+                description: 'Tenant name Updated Successfully',
+                variant: 'default'
+            });
+            setOpen(false);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                toast({
+                    title: 'Failed',
+                    description: "Tenant update wasn't successfull.",
+                    variant: 'destructive'
+                });
+            }
         }
     };
 
+    const onCloseEvent = () => {
+        setOpen(false);
+        onDismiss();
+    };
+
     useEffect(() => {
-        setTenantName(name);
-    }, [name]);
+        setOpen(true);
+        return () => {
+            queryClient.invalidateQueries([QueryNames.GetTenants]);
+        };
+    }, []);
 
     return (
-        <Dialog>
-            <DialogTrigger className="flex items-center pb-5" asChild>
-                <h3 className="title font-bold text-xl grow p-0 m-1">
-                    Tenant Management
-                </h3>
-                <Button variant="default">Create New Tenant</Button>
-            </DialogTrigger>
-            <DialogContent>
+        <Dialog open={open} onOpenChange={onCloseEvent}>
+            <DialogContent className="text-white">
                 <DialogHeader>
-                    <DialogTitle>Create a New Tenant</DialogTitle>
+                    <DialogTitle>Upate a Tenant Name</DialogTitle>
                 </DialogHeader>
-                {name}
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <section className="flex flex-col space-y-5">
+                        <Input
+                            required
+                            placeholder="Tenant Name"
+                            defaultValue={tenantDto.name ?? ''}
+                            {...register('name')}
+                        />
+                    </section>
+                    <DialogFooter className="mt-5">
+                        <Button type="submit" variant="outline">
+                            Save
+                        </Button>
+                    </DialogFooter>
+                </form>
             </DialogContent>
         </Dialog>
     );

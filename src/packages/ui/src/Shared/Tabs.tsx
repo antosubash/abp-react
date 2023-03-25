@@ -40,10 +40,7 @@ const TabsContent = forwardRef<
     ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Content
-        className={cn(
-            'mt-2 rounded-md border border-slate-200 p-6 dark:border-slate-700',
-            className
-        )}
+        className={cn('mt-2 rounded-md shadow-lg p-5', className)}
         {...props}
         ref={ref}
     />

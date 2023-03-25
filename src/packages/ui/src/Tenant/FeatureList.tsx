@@ -1,27 +1,74 @@
-import { Tab } from '@headlessui/react';
-import { useFeatures } from '@abpreact/hooks';
+import { QueryNames, useFeatures } from '@abpreact/hooks';
 import { FeatureGroupDto } from '@abpreact/proxy';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from '../Shared/DialogWrapper';
+import { useEffect, useState } from 'react';
+import { useToast } from '../Shared/hooks/useToast';
+import { useQueryClient } from '@tanstack/react-query';
+import { Button } from '../Shared/Button';
+export type FeatureListProps = {
+    onDismiss: () => void;
+};
 
-export type FeatureListProps = {};
+export const FeatureList = ({ onDismiss }: FeatureListProps) => {
+    const { data } = useFeatures('T', undefined);
+    const queryClient = useQueryClient();
+    const [open, setOpen] = useState(false);
+    const { toast } = useToast();
+    const onCloseEvent = () => {
+        setOpen(false);
+        onDismiss();
+    };
 
-export const FeatureList = ({}: FeatureListProps) => {
-    var { data } = useFeatures('T', undefined);
+    console.log(data, 'data');
+
+    useEffect(() => {
+        setOpen(true);
+        return () => {
+            queryClient.invalidateQueries([QueryNames.GetTenants]);
+            queryClient.invalidateQueries(['T']);
+        };
+    }, []);
     return (
-        <Tab.Group>
-            <Tab.List>
-                {data?.groups?.map((el: FeatureGroupDto, index: number) => (
-                    <Tab key={index}>{el.displayName}</Tab>
-                ))}
-            </Tab.List>
-            <Tab.Panels>
-                {data?.groups?.map((el: FeatureGroupDto, index: number) => (
-                    <Tab.Panel key={index}>
-                        {el.features?.map((feature, index) => (
-                            <div key={index}>{feature.displayName}</div>
-                        ))}
-                    </Tab.Panel>
-                ))}
-            </Tab.Panels>
-        </Tab.Group>
+        <section className="p-3">
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className="text-white">
+                    <DialogHeader>
+                        <DialogTitle>Features</DialogTitle>
+                    </DialogHeader>
+                    <div className="border-2 border-black p-5 text-white">
+                        {data?.groups?.map(
+                            (el: FeatureGroupDto, index: number) => (
+                                <div key={index}>{el.displayName}</div>
+                            )
+                        )}
+                        {data?.groups?.map(
+                            (el: FeatureGroupDto, index: number) => (
+                                <div key={index}>
+                                    {el.features?.map((feature, index) => (
+                                        <div key={index}>
+                                            {feature.displayName}
+                                        </div>
+                                    ))}
+                                </div>
+                            )
+                        )}
+                    </div>
+                    <DialogFooter className="mt-5">
+                        <Button variant="outline" onClick={onCloseEvent}>
+                            Cancel
+                        </Button>
+                        <Button type="submit" variant="outline">
+                            Save
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </section>
     );
 };

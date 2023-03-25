@@ -28,6 +28,23 @@ export const RoleList = () => {
         dialgoType?: 'edit' | 'permission' | 'delete';
     } | null>();
 
+    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10
+    });
+
+    const pagination = useMemo(
+        () => ({
+            pageIndex,
+            pageSize
+        }),
+        [pageIndex, pageSize, toast]
+    );
+
+    const { isLoading, data, isError } = useRoles(pageIndex, pageSize);
+    const queryClient = useQueryClient();
+    const pageCount = Math.ceil(data?.totalCount! / pageSize);
+
     const defaultColumns: ColumnDef<IdentityRoleDto>[] = useMemo(
         () => [
             {
@@ -111,23 +128,6 @@ export const RoleList = () => {
         ],
         []
     );
-
-    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10
-    });
-
-    const pagination = useMemo(
-        () => ({
-            pageIndex,
-            pageSize
-        }),
-        [pageIndex, pageSize, toast]
-    );
-
-    const { isLoading, data, isError } = useRoles(pageIndex, pageSize);
-    const queryClient = useQueryClient();
-    const pageCount = Math.ceil(data?.totalCount! / pageSize);
 
     const table = useReactTable({
         data: data?.items ?? [],

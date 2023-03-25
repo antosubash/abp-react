@@ -33,6 +33,7 @@ const Users: NextPage = () => {
                     </TabsList>
                     <TabsContent value={users}>
                         <AddUser />
+
                         <UserList />
                     </TabsContent>
                     <TabsContent value={roles}>

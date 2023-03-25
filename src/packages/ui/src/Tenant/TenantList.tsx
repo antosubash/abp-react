@@ -1,106 +1,158 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTenants } from '@abpreact/hooks';
-import {
-    AdjustmentsHorizontalIcon,
-    PencilIcon,
-    TrashIcon
-} from '@heroicons/react/24/solid';
+
 import { useQueryClient } from '@tanstack/react-query';
+import {
+    PaginationState,
+    useReactTable,
+    getCoreRowModel,
+    ColumnDef
+} from '@tanstack/react-table';
 import { QueryNames } from '@abpreact/hooks';
 import { TenantEdit } from './TenantEdit';
 import { FeatureList } from './FeatureList';
-import { TenantDto, TenantService } from '@abpreact/proxy';
+import { TenantDto, TenantUpdateDto } from '@abpreact/proxy';
 import Loader from '../Shared/Loader';
 import Error from '../Shared/Error';
+import { useToast } from '../Shared/hooks/useToast';
+import { PermissionActions } from '../Permission/PermissionActions';
+import { CustomTable } from '../Shared/CustomTable';
+import { DeleteTenant } from './DeleteTenant';
 
-export type TenantListProps = {};
-
-export const TenantList = (props: TenantListProps) => {
+export const TenantList = () => {
+    const { toast } = useToast();
     const queryClient = useQueryClient();
-    let [isEditOpen, setIsEditOpen] = useState(false);
-    const [tenantToEdit, setTenantToEdit] = useState<TenantDto>();
-    const columns = [
-        {
-            name: 'Name',
-            selector: (row: any) => row.name
+    const [tenantActionDialog, setTenantActionDialog] = useState<{
+        tenantId: string;
+        tenantDto: TenantUpdateDto;
+        dialgoType?: 'edit' | 'manage_features' | 'delete';
+    } | null>();
+
+    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10
+    });
+    const { isLoading, data, isError } = useTenants(pageIndex, pageSize);
+    const pagination = useMemo(
+        () => ({
+            pageIndex,
+            pageSize
+        }),
+        [pageIndex, pageSize, toast]
+    );
+    const pageCount = Math.ceil(data?.totalCount! / pageSize);
+
+    const defaultColumns: ColumnDef<TenantDto>[] = useMemo(
+        () => [
+            {
+                header: 'Tenant Management',
+                columns: [
+                    {
+                        accessorKey: 'name',
+                        header: 'Tenant Name',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'actions',
+                        header: 'Actions',
+                        cell: (info) => {
+                            return (
+                                <PermissionActions
+                                    actions={[
+                                        {
+                                            icon: 'features',
+                                            policy: 'AbpTenantManagement.Tenants.ManageFeatures',
+                                            callback: () => {
+                                                setTenantActionDialog({
+                                                    dialgoType:
+                                                        'manage_features',
+                                                    tenantId:
+                                                        info.row.original.id!,
+                                                    tenantDto: info.row
+                                                        .original as TenantUpdateDto
+                                                });
+                                            }
+                                        },
+                                        {
+                                            icon: 'pencil',
+                                            policy: 'AbpTenantManagement.Tenants.Update',
+                                            callback: () => {
+                                                setTenantActionDialog({
+                                                    dialgoType: 'edit',
+                                                    tenantId:
+                                                        info.row.original.id!,
+                                                    tenantDto: info.row
+                                                        .original as TenantUpdateDto
+                                                });
+                                            }
+                                        },
+                                        {
+                                            icon: 'trash',
+                                            policy: 'AbpTenantManagement.Tenants.Delete',
+                                            callback: () => {
+                                                setTenantActionDialog({
+                                                    tenantId: info.row.original
+                                                        .id as string,
+                                                    tenantDto: info.row
+                                                        .original as TenantUpdateDto,
+                                                    dialgoType: 'delete'
+                                                });
+                                            }
+                                        }
+                                    ]}
+                                />
+                            );
+                        }
+                    }
+                ]
+            }
+        ],
+        [tenantActionDialog]
+    );
+
+    const table = useReactTable({
+        data: data?.items ?? [],
+        pageCount: pageCount ?? 0,
+        state: {
+            pagination
         },
-        {
-            name: 'Permissions',
-            button: true,
-            cell: (row: any) => (
-                <AdjustmentsHorizontalIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
-            )
-        },
-        {
-            name: 'Edit',
-            button: true,
-            cell: (row: any) => (
-                <PencilIcon
-                    className="h-5 w-5 text-blue-500 cursor-pointer"
-                    onClick={() => tenantEdit(row)}
-                />
-            )
-        },
-        {
-            name: 'Delete',
-            button: true,
-            cell: (row: any) => (
-                <TrashIcon
-                    className="h-5 w-5 text-red-500 cursor-pointer"
-                    onClick={() => tenantDelete(row)}
-                />
-            )
-        }
-    ];
-
-    function closeModal() {
-        setIsEditOpen(false);
-    }
-
-    function openModal() {
-        setIsEditOpen(true);
-    }
-
-    const tenantEdit = (row: any) => {
-        setTenantToEdit(row);
-        openModal();
-    };
-
-    const tenantDelete = async (row: any) => {
-        var response = await TenantService.tenantDelete(row.id as string);
-        if (response.status === 204) {
-            queryClient.invalidateQueries([QueryNames.GetTenants]);
-        }
-    };
-
-    var [skip, setSkip] = useState<number>(0);
-    var [limit, setLimit] = useState<number>(10);
-    var [page, setPage] = useState<number>(0);
-
-    const handlePageChange = (page: number) => {
-        setPage(page);
-        var skip = (page - 1) * limit;
-        setSkip(skip);
-    };
-
-    const handlePerRowsChange = async (newPerPage: number, _page: number) => {
-        setLimit(newPerPage);
-    };
-
-    var { isLoading, data, isError } = useTenants(page, skip, limit);
+        columns: defaultColumns,
+        getCoreRowModel: getCoreRowModel(),
+        onPaginationChange: setPagination,
+        manualPagination: true
+    });
 
     if (isLoading) return <Loader />;
     if (isError) return <Error />;
+
     return (
         <>
-            <FeatureList />
-            <TenantEdit
-                isOpen={isEditOpen}
-                closeModal={closeModal}
-                name={tenantToEdit?.name!}
-                id={tenantToEdit?.id!}
-            />
-            Tenant List
+            {tenantActionDialog?.dialgoType === 'edit' && (
+                <TenantEdit
+                    tenantDto={tenantActionDialog.tenantDto}
+                    tenantId={tenantActionDialog.tenantId}
+                    onDismiss={() => {
+                        queryClient.invalidateQueries([QueryNames.GetTenants]);
+                        setTenantActionDialog(null);
+                    }}
+                />
+            )}
+            {tenantActionDialog?.dialgoType === 'delete' && (
+                <DeleteTenant
+                    tenant={{
+                        tenantId: tenantActionDialog.tenantId,
+                        tenantName: tenantActionDialog.tenantDto.name
+                    }}
+                    onDismiss={() => {
+                        queryClient.invalidateQueries([QueryNames.GetTenants]);
+                        setTenantActionDialog(null);
+                    }}
+                />
+            )}
+            {tenantActionDialog?.dialgoType === 'manage_features' && (
+                <FeatureList onDismiss={() => setTenantActionDialog(null)} />
+            )}
+            <CustomTable table={table} />
         </>
     );
 };

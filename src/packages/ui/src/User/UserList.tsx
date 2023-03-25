@@ -30,8 +30,24 @@ export const UserList = () => {
         dialgoType?: 'edit' | 'permission' | 'delete';
     } | null>();
 
-    const myselfHasAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN);
+    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10
+    });
 
+    const defaultData = useMemo(() => [], []);
+
+    const pagination = useMemo(
+        () => ({
+            pageIndex,
+            pageSize
+        }),
+        [pageIndex, pageSize, toast]
+    );
+
+    const { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+    const queryClient = useQueryClient();
+    const pageCount = Math.ceil(data?.totalCount! / pageSize);
     const defaultColumns: ColumnDef<IdentityUserDto>[] = useMemo(
         () => [
             {
@@ -88,9 +104,9 @@ export const UserList = () => {
                                         icon: 'trash',
                                         policy: 'AbpIdentity.Users.Delete',
                                         visible:
-                                            myselfHasAdmin &&
-                                            info.row.original.id ===
-                                                currentUser?.id,
+                                            info.row.original.userName?.includes(
+                                                USER_ROLE.ADMIN
+                                            ),
                                         callback: () => {
                                             setUserActionDialog({
                                                 userId: info.row.original
@@ -110,26 +126,6 @@ export const UserList = () => {
         ],
         []
     );
-
-    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10
-    });
-
-    const defaultData = useMemo(() => [], []);
-
-    const pagination = useMemo(
-        () => ({
-            pageIndex,
-            pageSize
-        }),
-        [pageIndex, pageSize, toast]
-    );
-
-    const { isLoading, data, isError } = useUsers(pageIndex, pageSize);
-    const queryClient = useQueryClient();
-    const pageCount = Math.ceil(data?.totalCount! / pageSize);
-
     const table = useReactTable({
         data: data?.items || defaultData,
         pageCount: pageCount || 0,
