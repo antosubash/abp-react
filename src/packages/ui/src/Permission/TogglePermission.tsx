@@ -15,13 +15,15 @@ type TogglePermissionProps = UsePermissionsChangesProps & {
     hideSelectAll?: boolean;
     hideSave?: boolean;
     onSelectedUpdate?: (permissionDto: PermissionGrantInfoDto) => void;
+    disabled?: boolean;
 };
 export const TogglePermission = ({
     permissions,
     type,
     hideSelectAll,
     hideSave,
-    onSelectedUpdate
+    onSelectedUpdate,
+    disabled
 }: TogglePermissionProps) => {
     const {
         hasAllSelected,
@@ -36,6 +38,7 @@ export const TogglePermission = ({
                 <Permission
                     name="Select All"
                     isGranted={hasAllSelected}
+                    disabled={disabled}
                     id="select_all"
                     onUpdate={onHasAllSelectedUpate}
                 />
@@ -57,6 +60,7 @@ export const TogglePermission = ({
                         className={classNames('ml-5', {
                             'pl-5': dto.parentName
                         })}
+                        disabled={disabled}
                     />
                 </div>
             ))}
