@@ -34,12 +34,12 @@ export const AddUser = ({}: AddUserProps) => {
 
         try {
             await UserService.userCreate(user);
-            await queryClient.invalidateQueries([QueryNames.GetUsers]);
             toast({
                 title: 'Success',
                 description: 'User Created Successfully',
                 variant: 'default'
             });
+            queryClient.invalidateQueries([QueryNames.GetUsers]);
             setOpen(false);
         } catch (err: unknown) {
             if (err instanceof Error) {

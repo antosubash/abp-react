@@ -20,7 +20,8 @@ export function absoluteUrl(path: string) {
 
 // enums
 export enum PermissionProvider {
-    NAME = 'U'
+    U = 'U',
+    R = 'R'
 }
 
 export enum Permissions {

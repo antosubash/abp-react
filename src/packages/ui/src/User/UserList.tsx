@@ -1,4 +1,4 @@
-import { useUsers, useCurrentUser } from '@abpreact/hooks';
+import { useUsers, useCurrentUser, QueryNames } from '@abpreact/hooks';
 import { useMemo, useState } from 'react';
 
 import {
@@ -19,6 +19,7 @@ import { DeleteUser } from './DeleteUser';
 import { PermissionActions } from '../Permission/PermissionActions';
 
 import { USER_ROLE } from '../utils';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const UserList = () => {
     const { toast } = useToast();
@@ -31,81 +32,84 @@ export const UserList = () => {
 
     const myselfHasAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN);
 
-    const defaultColumns: ColumnDef<IdentityUserDto>[] = [
-        {
-            header: 'User Management',
-            columns: [
-                {
-                    accessorKey: 'userName',
-                    header: 'Username',
-                    cell: (info) => info.getValue()
-                },
-                {
-                    accessorKey: 'email',
-                    header: 'Email',
-                    cell: (info) => info.getValue()
-                },
-                {
-                    accessorKey: 'isActive',
-                    header: 'Active',
-                    cell: (info) => (info.getValue() ? 'yes' : 'no')
-                },
-                {
-                    accessorKey: 'actions',
-                    header: 'Actions',
-                    cell: (info) => (
-                        <PermissionActions
-                            actions={[
-                                {
-                                    icon: 'permission',
-                                    policy: 'AbpIdentity.Users.ManagePermissions',
-                                    callback: () => {
-                                        setUserActionDialog({
-                                            userId: info.row.original
-                                                .id as string,
-                                            userDto: info.row
-                                                .original as IdentityUserUpdateDto,
-                                            dialgoType: 'permission'
-                                        });
+    const defaultColumns: ColumnDef<IdentityUserDto>[] = useMemo(
+        () => [
+            {
+                header: 'User Management',
+                columns: [
+                    {
+                        accessorKey: 'userName',
+                        header: 'Username',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'email',
+                        header: 'Email',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'isActive',
+                        header: 'Active',
+                        cell: (info) => (info.getValue() ? 'yes' : 'no')
+                    },
+                    {
+                        accessorKey: 'actions',
+                        header: 'Actions',
+                        cell: (info) => (
+                            <PermissionActions
+                                actions={[
+                                    {
+                                        icon: 'permission',
+                                        policy: 'AbpIdentity.Users.ManagePermissions',
+                                        callback: () => {
+                                            setUserActionDialog({
+                                                userId: info.row.original
+                                                    .id as string,
+                                                userDto: info.row
+                                                    .original as IdentityUserUpdateDto,
+                                                dialgoType: 'permission'
+                                            });
+                                        }
+                                    },
+                                    {
+                                        icon: 'pencil',
+                                        policy: 'AbpIdentity.Users.Update',
+                                        callback: () => {
+                                            setUserActionDialog({
+                                                userId: info.row.original
+                                                    .id as string,
+                                                userDto: info.row
+                                                    .original as IdentityUserUpdateDto,
+                                                dialgoType: 'edit'
+                                            });
+                                        }
+                                    },
+                                    {
+                                        icon: 'trash',
+                                        policy: 'AbpIdentity.Users.Delete',
+                                        visible:
+                                            myselfHasAdmin &&
+                                            info.row.original.id ===
+                                                currentUser?.id,
+                                        callback: () => {
+                                            setUserActionDialog({
+                                                userId: info.row.original
+                                                    .id as string,
+                                                userDto: info.row
+                                                    .original as IdentityUserUpdateDto,
+                                                dialgoType: 'delete'
+                                            });
+                                        }
                                     }
-                                },
-                                {
-                                    icon: 'pencil',
-                                    policy: 'AbpIdentity.Users.Update',
-                                    callback: () => {
-                                        setUserActionDialog({
-                                            userId: info.row.original
-                                                .id as string,
-                                            userDto: info.row
-                                                .original as IdentityUserUpdateDto,
-                                            dialgoType: 'edit'
-                                        });
-                                    }
-                                },
-                                {
-                                    icon: 'trash',
-                                    policy: 'AbpIdentity.Users.Delete',
-                                    visible:
-                                        myselfHasAdmin &&
-                                        info.row.original.id ===
-                                            currentUser?.id,
-                                    callback: () => {
-                                        setUserActionDialog({
-                                            userId: info.row.original
-                                                .id as string,
-                                            userDto: info.row
-                                                .original as IdentityUserUpdateDto,
-                                            dialgoType: 'delete'
-                                        });
-                                    }
-                                }
-                            ]}
-                        />
-                    )
-                }
-            ]
-        }
-    ];
+                                ]}
+                            />
+                        )
+                    }
+                ]
+            }
+        ],
+        []
+    );
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
         pageIndex: 0,
@@ -123,6 +127,7 @@ export const UserList = () => {
     );
 
     const { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+    const queryClient = useQueryClient();
     const pageCount = Math.ceil(data?.totalCount! / pageSize);
 
     const table = useReactTable({
@@ -146,7 +151,10 @@ export const UserList = () => {
                 <UserEdit
                     userId={userActionDialog.userId}
                     userDto={userActionDialog.userDto}
-                    onDismiss={() => setUserActionDialog(null)}
+                    onDismiss={() => {
+                        queryClient.invalidateQueries([QueryNames.GetUsers]);
+                        setUserActionDialog(null);
+                    }}
                 />
             )}
             {userActionDialog &&
@@ -163,7 +171,10 @@ export const UserList = () => {
                         username: userActionDialog.userDto.userName!,
                         userId: userActionDialog.userId
                     }}
-                    onDismiss={() => setUserActionDialog(null)}
+                    onDismiss={() => {
+                        queryClient.invalidateQueries([QueryNames.GetUsers]);
+                        setUserActionDialog(null);
+                    }}
                 />
             )}
             <CustomTable table={table} />
