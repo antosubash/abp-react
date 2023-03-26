@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     Tabs,
     TabsList,
@@ -14,7 +14,7 @@ import { useI18n } from 'next-localization';
 import { AdminMenus } from '../../utils/Constants';
 import Link from 'next/link';
 
-const Users: NextPage = () => {
+const UsersPage: NextPage = () => {
     const i18n = useI18n();
     const users = i18n.t('AbpIdentity.Users');
     const roles = i18n.t('AbpIdentity.Roles');
@@ -33,7 +33,6 @@ const Users: NextPage = () => {
                     </TabsList>
                     <TabsContent value={users}>
                         <AddUser />
-
                         <UserList />
                     </TabsContent>
                     <TabsContent value={roles}>
@@ -45,4 +44,4 @@ const Users: NextPage = () => {
     );
 };
 
-export default Users;
+export default UsersPage;
