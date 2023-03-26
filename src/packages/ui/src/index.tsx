@@ -25,6 +25,7 @@ export { Button, type ButtonProps } from './Shared/Button';
 export { Avatar, AvatarImage, AvatarFallback } from './Shared/Avatar';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './Shared/Tabs';
 export { Input, type InputProps } from './Shared/Input';
+export { Textarea } from './Shared/Textarea';
 export { Label } from './Shared/Label';
 export { CustomTable, type TableViewProps } from './Shared/CustomTable';
 export {
@@ -61,3 +62,7 @@ export { UserMenus, type UserMenusProps } from './User/UserMenus';
 // role
 export { RoleList } from './Role/RoleList';
 export { AddRole } from './Role/AddRole';
+
+// settings
+export { Emailing } from './Settings/Emailing';
+export { FeatureManagement } from './Settings/FeatureManagement';

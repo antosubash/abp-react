@@ -14,7 +14,7 @@ import { useI18n } from 'next-localization';
 import { AdminMenus } from '../../utils/Constants';
 import Link from 'next/link';
 
-const Roles: NextPage = () => {
+const RolesPage: NextPage = () => {
     const i18n = useI18n();
     const users = i18n.t('AbpIdentity.Users');
     const roles = i18n.t('AbpIdentity.Roles');
@@ -44,4 +44,4 @@ const Roles: NextPage = () => {
     );
 };
 
-export default Roles;
+export default RolesPage;
