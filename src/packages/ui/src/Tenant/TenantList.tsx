@@ -150,7 +150,10 @@ export const TenantList = () => {
                 />
             )}
             {tenantActionDialog?.dialgoType === 'manage_features' && (
-                <FeatureList onDismiss={() => setTenantActionDialog(null)} />
+                <FeatureList
+                    onDismiss={() => setTenantActionDialog(null)}
+                    tenantId={tenantActionDialog.tenantId}
+                />
             )}
             <CustomTable table={table} />
         </>
