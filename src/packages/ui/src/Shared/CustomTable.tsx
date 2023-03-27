@@ -1,11 +1,18 @@
 import { flexRender, Table } from '@tanstack/react-table';
 import { memo, useCallback } from 'react';
+import { Pagaination } from './Pagination';
 
-export type TableViewProps = {
-    table: Table<any>;
+export type TableViewProps<T> = {
+    table: Table<T>;
+    totalCount: number;
+    pageSize: number;
 };
 
-const TableView = ({ table }: TableViewProps) => {
+const TableView = <T extends unknown>({
+    table,
+    totalCount,
+    pageSize
+}: TableViewProps<T>) => {
     const renderHeader = useCallback(() => {
         const headerGroups = table.getHeaderGroups();
         return headerGroups.map((headerGroup) => {
@@ -58,14 +65,19 @@ const TableView = ({ table }: TableViewProps) => {
         });
     }, [table]);
 
+    const pageCount = Math.ceil(totalCount! / pageSize);
+
     return (
         <section className="overflow-scroll">
             <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderBody()}</tbody>
             </table>
-            <div className="text-gray-400 p-2 border-t ">
-                {table.getRowModel().rows.length} total
+            <div className="text-gray-400 pt-5 border-t flex items-center">
+                <div className="flex-grow">{totalCount} total</div>
+                {totalCount > 10 && (
+                    <Pagaination<T> pageCount={pageCount} table={table} />
+                )}
             </div>
         </section>
     );

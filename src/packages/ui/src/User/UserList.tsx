@@ -5,6 +5,7 @@ import {
     PaginationState,
     useReactTable,
     getCoreRowModel,
+    getPaginationRowModel,
     ColumnDef
 } from '@tanstack/react-table';
 import { IdentityUserDto, IdentityUserUpdateDto } from '@abpreact/proxy';
@@ -20,10 +21,12 @@ import { PermissionActions } from '../Permission/PermissionActions';
 
 import { USER_ROLE } from '../utils';
 import { useQueryClient } from '@tanstack/react-query';
+import { Button } from '../Shared/Button';
+import { Pagaination } from '../Shared/Pagination';
 
 export const UserList = () => {
     const { toast } = useToast();
-    const currentUser = useCurrentUser();
+
     const [userActionDialog, setUserActionDialog] = useState<{
         userId: string;
         userDto: IdentityUserUpdateDto;
@@ -31,11 +34,9 @@ export const UserList = () => {
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
+        pageIndex: 1,
         pageSize: 10
     });
-
-    const defaultData = useMemo(() => [], []);
 
     const pagination = useMemo(
         () => ({
@@ -45,9 +46,13 @@ export const UserList = () => {
         [pageIndex, pageSize, toast]
     );
 
-    const { isLoading, data, isError } = useUsers(pageIndex, pageSize);
+    const { isLoading, data, isError } = useUsers(
+        pagination.pageIndex,
+        pagination.pageSize
+    );
+
     const queryClient = useQueryClient();
-    const pageCount = Math.ceil(data?.totalCount! / pageSize);
+
     const defaultColumns: ColumnDef<IdentityUserDto>[] = useMemo(
         () => [
             {
@@ -127,8 +132,8 @@ export const UserList = () => {
         []
     );
     const table = useReactTable({
-        data: data?.items || defaultData,
-        pageCount: pageCount || 0,
+        data: data?.items ?? [],
+        pageCount: data?.totalCount ?? -1,
         state: {
             pagination
         },
@@ -173,7 +178,11 @@ export const UserList = () => {
                     }}
                 />
             )}
-            <CustomTable table={table} />
+            <CustomTable<IdentityUserDto>
+                table={table}
+                totalCount={data?.totalCount ?? 0}
+                pageSize={pageSize}
+            />
         </>
     );
 };
