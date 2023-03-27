@@ -119,6 +119,15 @@ export const AddRole = ({}: AddUserProps) => {
                             </div>
                         </section>
                         <DialogFooter className="mt-5">
+                            <Button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setOpen(false);
+                                }}
+                                variant="outline"
+                            >
+                                Cancel
+                            </Button>
                             <Button type="submit" variant="outline">
                                 Save
                             </Button>

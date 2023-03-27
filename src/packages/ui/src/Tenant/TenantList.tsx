@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useTenants } from '@abpreact/hooks';
+import { useTenants, QueryNames } from '@abpreact/hooks';
 
 import { useQueryClient } from '@tanstack/react-query';
 import {
@@ -8,7 +8,7 @@ import {
     getCoreRowModel,
     ColumnDef
 } from '@tanstack/react-table';
-import { QueryNames } from '@abpreact/hooks';
+
 import { TenantEdit } from './TenantEdit';
 import { FeatureList } from './FeatureList';
 import { TenantDto, TenantUpdateDto } from '@abpreact/proxy';
