@@ -29,7 +29,7 @@ export const RoleList = () => {
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
+        pageIndex: 1,
         pageSize: 10
     });
 
@@ -43,7 +43,6 @@ export const RoleList = () => {
 
     const { isLoading, data, isError } = useRoles(pageIndex, pageSize);
     const queryClient = useQueryClient();
-    const pageCount = Math.ceil(data?.totalCount! / pageSize);
 
     const defaultColumns: ColumnDef<IdentityRoleDto>[] = useMemo(
         () => [
@@ -131,7 +130,7 @@ export const RoleList = () => {
 
     const table = useReactTable({
         data: data?.items ?? [],
-        pageCount: pageCount ?? 0,
+        pageCount: data?.totalCount ?? -1,
         state: {
             pagination
         },
@@ -175,7 +174,11 @@ export const RoleList = () => {
                         onDismiss={() => setRoleActionDialog(null)}
                     />
                 )}
-            <CustomTable table={table} />
+            <CustomTable<IdentityRoleDto>
+                table={table}
+                totalCount={data?.totalCount ?? 0}
+                pageSize={pageSize}
+            />
         </>
     );
 };

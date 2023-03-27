@@ -10,6 +10,7 @@ export const useUsers = (pageIndex: number, pageSize: number) => {
             if (pageIndex > 0) {
                 skip = (pageIndex - 1) * pageSize;
             }
+
             const data = await UserService.userGetList('', '', skip, pageSize);
             return data;
         },

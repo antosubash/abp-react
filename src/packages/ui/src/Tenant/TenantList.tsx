@@ -29,7 +29,7 @@ export const TenantList = () => {
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
+        pageIndex: 1,
         pageSize: 10
     });
     const { isLoading, data, isError } = useTenants(pageIndex, pageSize);
@@ -40,7 +40,6 @@ export const TenantList = () => {
         }),
         [pageIndex, pageSize, toast]
     );
-    const pageCount = Math.ceil(data?.totalCount! / pageSize);
 
     const defaultColumns: ColumnDef<TenantDto>[] = useMemo(
         () => [
@@ -112,7 +111,7 @@ export const TenantList = () => {
 
     const table = useReactTable({
         data: data?.items ?? [],
-        pageCount: pageCount ?? 0,
+        pageCount: data?.totalCount ?? -1,
         state: {
             pagination
         },
@@ -155,7 +154,11 @@ export const TenantList = () => {
                     tenantId={tenantActionDialog.tenantId}
                 />
             )}
-            <CustomTable table={table} />
+            <CustomTable<TenantDto>
+                table={table}
+                totalCount={data?.totalCount ?? 0}
+                pageSize={pageSize}
+            />
         </>
     );
 };
