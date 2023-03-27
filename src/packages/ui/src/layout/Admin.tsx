@@ -14,7 +14,7 @@ export interface AdminLayoutProps {
 
 export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
     return (
-        <main className="h-screen relative">
+        <main className="relative">
             <Sidebar menus={menus} />
             <section className="p-2">
                 <section className="flex flex-col w-full">

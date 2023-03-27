@@ -9,4 +9,5 @@ export { useGrantedPolicies, type Policy } from './useGrantedPolicies';
 export { useUserRoles } from './useUserRoles';
 export { useCurrentUser } from './useCurrentUser';
 export { useEmailing } from './useEmailing';
+export { useAssignableRoles } from './useAssignableRoles';
 export * from './QueryConstants';

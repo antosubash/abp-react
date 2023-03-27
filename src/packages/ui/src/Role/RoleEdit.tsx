@@ -117,6 +117,15 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                         </div>
                     </section>
                     <DialogFooter className="mt-5">
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onCloseEvent();
+                            }}
+                            variant="outline"
+                        >
+                            Cancel
+                        </Button>
                         <Button type="submit" variant="outline">
                             Save
                         </Button>
