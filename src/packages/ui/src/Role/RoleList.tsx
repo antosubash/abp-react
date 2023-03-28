@@ -18,10 +18,11 @@ import { RoleEdit } from './RoleEdit';
 import { DeleteRole } from './DeleteRole';
 import { RolePermission } from './RolePermission';
 import { useQueryClient } from '@tanstack/react-query';
+import { Search } from '../Shared/Search';
 
 export const RoleList = () => {
     const { toast } = useToast();
-
+    const [searchStr, setSearchStr] = useState<string | undefined>();
     const [roleActionDialog, setRoleActionDialog] = useState<{
         roleId: string;
         roleDto: IdentityRoleUpdateDto;
@@ -41,7 +42,11 @@ export const RoleList = () => {
         [pageIndex, pageSize, toast]
     );
 
-    const { isLoading, data, isError } = useRoles(pageIndex, pageSize);
+    const { isLoading, data, isError } = useRoles(
+        pageIndex,
+        pageSize,
+        searchStr
+    );
     const queryClient = useQueryClient();
 
     const defaultColumns: ColumnDef<IdentityRoleDto>[] = useMemo(
@@ -128,6 +133,10 @@ export const RoleList = () => {
         []
     );
 
+    const onSearchUpdateEvent = (value: string) => {
+        setSearchStr(value);
+    };
+
     const table = useReactTable({
         data: data?.items ?? [],
         pageCount: data?.totalCount ?? -1,
@@ -174,6 +183,8 @@ export const RoleList = () => {
                         onDismiss={() => setRoleActionDialog(null)}
                     />
                 )}
+
+            <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
             <CustomTable<IdentityRoleDto>
                 table={table}
                 totalCount={data?.totalCount ?? 0}
