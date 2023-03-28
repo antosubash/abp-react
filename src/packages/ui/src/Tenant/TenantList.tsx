@@ -18,10 +18,12 @@ import { useToast } from '../Shared/hooks/useToast';
 import { PermissionActions } from '../Permission/PermissionActions';
 import { CustomTable } from '../Shared/CustomTable';
 import { DeleteTenant } from './DeleteTenant';
+import { Search } from '../Shared/Search';
 
 export const TenantList = () => {
     const { toast } = useToast();
     const queryClient = useQueryClient();
+    const [searchStr, setSearchStr] = useState<string | undefined>();
     const [tenantActionDialog, setTenantActionDialog] = useState<{
         tenantId: string;
         tenantDto: TenantUpdateDto;
@@ -32,7 +34,11 @@ export const TenantList = () => {
         pageIndex: 1,
         pageSize: 10
     });
-    const { isLoading, data, isError } = useTenants(pageIndex, pageSize);
+    const { isLoading, data, isError } = useTenants(
+        pageIndex,
+        pageSize,
+        searchStr
+    );
     const pagination = useMemo(
         () => ({
             pageIndex,
@@ -109,6 +115,10 @@ export const TenantList = () => {
         [tenantActionDialog]
     );
 
+    const onSearchUpdateEvent = (value: string) => {
+        setSearchStr(value);
+    };
+
     const table = useReactTable({
         data: data?.items ?? [],
         pageCount: data?.totalCount ?? -1,
@@ -154,6 +164,7 @@ export const TenantList = () => {
                     tenantId={tenantActionDialog.tenantId}
                 />
             )}
+            <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
             <CustomTable<TenantDto>
                 table={table}
                 totalCount={data?.totalCount ?? 0}

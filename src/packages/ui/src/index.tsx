@@ -41,10 +41,12 @@ export { Toaster } from './Shared/Toaster';
 export { Loader, Error, ThemeSwitcher };
 export { Checkbox } from './Shared/Checkbox';
 export { AlertDialog } from './Shared/AlertDialog';
+export { Search } from './Shared/Search';
 
 // Shared hooks
 
 export { useToast, toast } from './Shared/hooks/useToast';
+export { useDebounce } from './Shared/hooks/useDebounce';
 
 // tenant
 

@@ -23,10 +23,12 @@ import { USER_ROLE } from '../utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Shared/Button';
 import { Pagaination } from '../Shared/Pagination';
+import { Search } from '../Shared/Search';
 
 export const UserList = () => {
     const { toast } = useToast();
 
+    const [searchStr, setSearchStr] = useState<string | undefined>();
     const [userActionDialog, setUserActionDialog] = useState<{
         userId: string;
         userDto: IdentityUserUpdateDto;
@@ -48,7 +50,8 @@ export const UserList = () => {
 
     const { isLoading, data, isError } = useUsers(
         pagination.pageIndex,
-        pagination.pageSize
+        pagination.pageSize,
+        searchStr
     );
 
     const queryClient = useQueryClient();
@@ -131,6 +134,11 @@ export const UserList = () => {
         ],
         []
     );
+
+    const onSearchUpdateEvent = (value: string) => {
+        setSearchStr(value);
+    };
+
     const table = useReactTable({
         data: data?.items ?? [],
         pageCount: data?.totalCount ?? -1,
@@ -178,6 +186,7 @@ export const UserList = () => {
                     }}
                 />
             )}
+            <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
             <CustomTable<IdentityUserDto>
                 table={table}
                 totalCount={data?.totalCount ?? 0}

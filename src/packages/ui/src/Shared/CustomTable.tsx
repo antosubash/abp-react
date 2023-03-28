@@ -66,7 +66,13 @@ const TableView = <T extends unknown>({
     }, [table]);
 
     const pageCount = Math.ceil(totalCount! / pageSize);
-
+    if (totalCount === 0) {
+        return (
+            <section className="p-3 flex justify-center">
+                <h3 className="leading-3">No Records Found</h3>
+            </section>
+        );
+    }
     return (
         <section className="overflow-scroll">
             <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
