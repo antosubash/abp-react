@@ -6,11 +6,19 @@ export const useFeatures = (
     providerName: string | undefined,
     providerKey: string | undefined
 ): UseQueryResult<GetFeatureListResultDto, unknown> => {
-    return useQuery([QueryNames.GetFeatures, providerName], async () => {
-        const data = await FeaturesService.featuresGet(
-            providerName,
-            providerKey
-        );
-        return data;
-    });
+    return useQuery(
+        [QueryNames.GetFeatures, providerName],
+        async () => {
+            const data = await FeaturesService.featuresGet(
+                providerName,
+                providerKey
+            );
+            return data;
+        },
+        {
+            keepPreviousData: false,
+            cacheTime: undefined,
+            refetchOnWindowFocus: false
+        }
+    );
 };

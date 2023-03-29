@@ -20,7 +20,8 @@ export const usePermissions = (
         },
         {
             keepPreviousData: false,
-            cacheTime: undefined
+            cacheTime: undefined,
+            refetchOnWindowFocus: false
         }
     );
 };

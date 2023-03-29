@@ -21,6 +21,11 @@ export const useRoles = (
                 pageSize
             );
             return data;
+        },
+        {
+            keepPreviousData: false,
+            cacheTime: undefined,
+            refetchOnWindowFocus: false
         }
     );
 };

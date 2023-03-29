@@ -21,6 +21,11 @@ export const useTenants = (
                 pageSize
             );
             return data;
+        },
+        {
+            keepPreviousData: false,
+            cacheTime: undefined,
+            refetchOnWindowFocus: false
         }
     );
 };
