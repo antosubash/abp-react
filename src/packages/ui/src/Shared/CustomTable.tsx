@@ -36,7 +36,7 @@ const TableView = <T extends unknown>({
                 </tr>
             );
         });
-    }, [table]);
+    }, []);
 
     const renderBody = useCallback(() => {
         const rows = table.getRowModel().rows;
@@ -63,7 +63,7 @@ const TableView = <T extends unknown>({
                 </tr>
             );
         });
-    }, [table]);
+    }, []);
 
     if (totalCount === 0) {
         return (

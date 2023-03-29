@@ -24,7 +24,13 @@ export const Pagination = <T extends unknown>({
             temp.push(i);
         }
         setNumbers(temp);
-    }, [pageCount]);
+    }, []);
+
+    // table.getCanNextPage() doesn't seem to be working. So, it is just a work around.
+    const canNextPage =
+        table.getState().pagination.pageIndex >= 0 &&
+        table.getState().pagination.pageIndex < pageCount - 1;
+
     return (
         <section className="pagination flex items-center space-x-1">
             <Button
@@ -64,7 +70,7 @@ export const Pagination = <T extends unknown>({
             <Button
                 size="sm"
                 variant="default"
-                disabled={!table.getCanNextPage()}
+                disabled={!canNextPage}
                 onClick={() => table.nextPage()}
             >
                 <ChevronRightIcon width={24} height={24} />
@@ -72,8 +78,8 @@ export const Pagination = <T extends unknown>({
             <Button
                 size="sm"
                 variant="default"
-                disabled={!table.getCanNextPage()}
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!canNextPage}
+                onClick={() => table.setPageIndex(pageCount - 1)}
             >
                 <ChevronDoubleRightIcon width={24} height={24} />
             </Button>

@@ -13,12 +13,12 @@ export const useUsers = (
         async () => {
             let skip = 0;
             if (pageIndex > 0) {
-                skip = (pageIndex - 1) * pageSize;
+                skip = pageIndex * pageSize;
             }
 
             const data = await UserService.userGetList(
-                filter ?? undefined,
-                sorting ?? undefined,
+                filter ? filter : undefined,
+                sorting ? sorting : undefined,
                 skip,
                 pageSize
             );
