@@ -49,13 +49,13 @@ export const AddTenant = () => {
     return (
         <section className="p-3">
             <Dialog open={open} onOpenChange={setOpen}>
-                <section className="flex flex-col sm:flex-row sm:items-center pb-5">
-                    <h3 className="text-center sm:text-left title font-bold text-xl grow p-0 m-1">
+                <section className="flex items-center justify-between pb-5">
+                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
                         Tenant Management
                     </h3>
                     {can('AbpTenantManagement.Tenants.Create') && (
                         <Button variant="default" onClick={() => setOpen(true)}>
-                            Create New Tenant
+                            <span className="truncate">Create New Tenant</span>
                         </Button>
                     )}
                 </section>
