@@ -21,8 +21,6 @@ import { PermissionActions } from '../Permission/PermissionActions';
 
 import { USER_ROLE } from '../utils';
 import { useQueryClient } from '@tanstack/react-query';
-import { Button } from '../Shared/Button';
-import { Pagaination } from '../Shared/Pagination';
 import { Search } from '../Shared/Search';
 
 export const UserList = () => {
@@ -36,7 +34,7 @@ export const UserList = () => {
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10
     });
 
@@ -45,7 +43,7 @@ export const UserList = () => {
             pageIndex,
             pageSize
         }),
-        [pageIndex, pageSize, toast]
+        [pageIndex, pageSize, toast, searchStr]
     );
 
     const { isLoading, data, isError } = useUsers(

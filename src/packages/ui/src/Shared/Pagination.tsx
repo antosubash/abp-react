@@ -8,20 +8,19 @@ import {
     ChevronDoubleLeftIcon,
     ChevronDoubleRightIcon
 } from '@heroicons/react/24/solid';
-import classNames from 'classnames';
 
 type PaginationProps<T> = {
     pageCount: number;
     table: Table<T>;
 };
-export const Pagaination = <T extends unknown>({
+export const Pagination = <T extends unknown>({
     pageCount,
     table
 }: PaginationProps<T>) => {
     const [numbers, setNumbers] = useState<number[]>([]);
     useEffect(() => {
         const temp = [];
-        for (let i = 1; i <= pageCount; i++) {
+        for (let i = 0; i < pageCount; i++) {
             temp.push(i);
         }
         setNumbers(temp);
@@ -53,12 +52,12 @@ export const Pagaination = <T extends unknown>({
                         size="sm"
                         variant="default"
                         key={v4()}
-                        disabled={table.getState().pagination.pageIndex === n}
+                        disabled={table.getState().pagination.pageIndex === idx}
                         onClick={() => {
                             table.setPageIndex(n);
                         }}
                     >
-                        {n}
+                        {n + 1}
                     </Button>
                 ))}
             </div>

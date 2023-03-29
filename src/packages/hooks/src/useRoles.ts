@@ -5,18 +5,19 @@ import { QueryNames } from './QueryConstants';
 export const useRoles = (
     pageIndex: number,
     pageSize: number,
-    filter?: string | undefined
+    filter?: string | undefined,
+    sorting?: string | undefined
 ) => {
     return useQuery(
-        [QueryNames.GetRoles, pageIndex, pageSize, filter],
+        [QueryNames.GetRoles, pageIndex, pageSize, filter, sorting],
         async () => {
             let skip = 0;
             if (pageIndex > 0) {
                 skip = (pageIndex - 1) * pageSize;
             }
             const data = await RoleService.roleGetList(
-                filter,
-                '',
+                filter ?? undefined,
+                sorting ?? undefined,
                 skip,
                 pageSize
             );

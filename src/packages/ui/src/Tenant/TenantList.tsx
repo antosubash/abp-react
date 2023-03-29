@@ -31,7 +31,7 @@ export const TenantList = () => {
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-        pageIndex: 1,
+        pageIndex: 0,
         pageSize: 10
     });
     const { isLoading, data, isError } = useTenants(

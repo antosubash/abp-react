@@ -1,6 +1,6 @@
 import { flexRender, Table } from '@tanstack/react-table';
 import { memo, useCallback } from 'react';
-import { Pagaination } from './Pagination';
+import { Pagination } from './Pagination';
 
 export type TableViewProps<T> = {
     table: Table<T>;
@@ -65,7 +65,6 @@ const TableView = <T extends unknown>({
         });
     }, [table]);
 
-    const pageCount = Math.ceil(totalCount! / pageSize);
     if (totalCount === 0) {
         return (
             <section className="p-3 flex justify-center">
@@ -73,6 +72,7 @@ const TableView = <T extends unknown>({
             </section>
         );
     }
+    const pageCount = Math.ceil(totalCount / pageSize);
     return (
         <section className="overflow-scroll">
             <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
@@ -82,7 +82,7 @@ const TableView = <T extends unknown>({
             <div className="text-gray-400 pt-5 border-t flex items-center">
                 <div className="flex-grow">{totalCount} total</div>
                 {totalCount > 10 && (
-                    <Pagaination<T> pageCount={pageCount} table={table} />
+                    <Pagination<T> pageCount={pageCount} table={table} />
                 )}
             </div>
         </section>
