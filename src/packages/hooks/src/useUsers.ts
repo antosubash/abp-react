@@ -5,19 +5,20 @@ import { QueryNames } from './QueryConstants';
 export const useUsers = (
     pageIndex: number,
     pageSize: number,
-    filter?: string | undefined
+    filter?: string | undefined,
+    sorting?: string | undefined
 ) => {
     return useQuery(
-        [QueryNames.GetUsers, pageIndex, pageSize, filter],
+        [QueryNames.GetUsers, pageIndex, pageSize, filter, sorting],
         async () => {
             let skip = 0;
             if (pageIndex > 0) {
-                skip = (pageIndex - 1) * pageSize;
+                skip = pageIndex * pageSize;
             }
 
             const data = await UserService.userGetList(
-                filter,
-                '',
+                filter ? filter : undefined,
+                sorting ? sorting : undefined,
                 skip,
                 pageSize
             );
@@ -25,7 +26,8 @@ export const useUsers = (
         },
         {
             keepPreviousData: false,
-            cacheTime: undefined
+            cacheTime: undefined,
+            refetchOnWindowFocus: false
         }
     );
 };

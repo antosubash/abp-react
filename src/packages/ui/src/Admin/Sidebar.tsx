@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+
 import { useRouter } from 'next/router';
-import { Bars3Icon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { Button } from '../Shared/Button';
 
 export interface SidebarProps {
@@ -11,29 +11,39 @@ export interface SidebarProps {
         Link: string;
         Icon: React.FC;
     }[];
+    toggleSidebar: boolean;
+    onToggle?: (f: boolean) => void;
 }
 
-export const Sidebar = ({ menus }: SidebarProps) => {
+export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
     const router = useRouter();
-    const [toggleSidebar, setToggleSidebar] = useState(false);
-    const parentNode = useRef<HTMLDivElement>(null);
 
     return (
         <section
-            ref={parentNode}
             className={classNames(
-                'h-full flex shadow-lg absolute w-[15rem] z-[15] pt-6 pl-2 pr-2 bg-white dark:text-black transition-transform delay-100 ease-in-out',
+                'h-full flex shadow-lg fixed w-[15rem] z-[15] pt-6 pl-2 pr-2 bg-white dark:text-black transition-transform delay-200 ease-in-out',
                 {
-                    'translate-x-0 sm:-translate-x-[15rem]': toggleSidebar,
-                    '-translate-x-[15rem] sm:translate-x-0': !toggleSidebar
+                    'translate-x-0 sm:-translate-x-[150rem]': toggleSidebar,
+                    '-translate-x-[150rem] sm:translate-x-0': !toggleSidebar
                 }
             )}
         >
             <section className="h-full w-full">
                 <section className="flex items-center">
-                    <Link href="/" className="text-2xl font-bold">
+                    <Link href="/" className="text-2xl font-bold grow">
                         My Startup
                     </Link>
+                    <Button
+                        variant="link"
+                        onClick={() => onToggle?.(false)}
+                        className="sm:hidden"
+                    >
+                        <ChevronLeftIcon
+                            width={24}
+                            height={24}
+                            className="text-black"
+                        />
+                    </Button>
                 </section>
                 <nav className="mt-6">
                     <section className="w-full">
@@ -67,27 +77,6 @@ export const Sidebar = ({ menus }: SidebarProps) => {
                         })}
                     </section>
                 </nav>
-            </section>
-            <section className="absolute  right-[-2.4rem] sm:hidden">
-                <Button
-                    variant="subtle"
-                    size="sm"
-                    onClick={() => setToggleSidebar((v) => !v)}
-                >
-                    {toggleSidebar ? (
-                        <ChevronLeftIcon
-                            className="text-white"
-                            width={24}
-                            height={24}
-                        />
-                    ) : (
-                        <Bars3Icon
-                            className="text-white"
-                            width={24}
-                            height={24}
-                        />
-                    )}
-                </Button>
             </section>
         </section>
     );

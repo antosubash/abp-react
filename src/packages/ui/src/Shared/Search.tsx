@@ -21,13 +21,21 @@ const SearchInput = ({ onUpdate, value }: SearchProps) => {
     const onSearchEvent = useCallback((e: SyntheticEvent) => {
         const target = e.target as HTMLInputElement;
         const { value } = target;
+        if (value.trim().length === 0) {
+            onUpdate('');
+        }
         setSearchTerm(value);
     }, []);
 
     useEffect(() => {
-        onUpdate(searchStr);
-        ref.current?.focus();
+        if (searchStr) onUpdate(searchStr);
     }, [searchStr]);
+
+    useEffect(() => {
+        if (value) {
+            ref.current?.focus();
+        }
+    }, [value]);
 
     return (
         <section className="search mb-10">

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from '../Admin/Sidebar';
 import ThemeSwitcher from '../Shared/ThemeChanger';
 import { UserMenus } from '../User/UserMenus';
-
+import { Bars3Icon, ChevronLeftIcon } from '@heroicons/react/24/solid';
+import { Button } from '../Shared/Button';
 export interface AdminLayoutProps {
     children: React.ReactNode;
     menus: {
@@ -13,12 +14,38 @@ export interface AdminLayoutProps {
 }
 
 export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
+    const [toggleSidebar, setToggleSidebar] = useState(false);
     return (
         <main className="relative">
-            <Sidebar menus={menus} />
-            <section className="p-2">
+            <Sidebar
+                menus={menus}
+                toggleSidebar={toggleSidebar}
+                onToggle={setToggleSidebar}
+            />
+            <section className="h-screen">
                 <section className="flex flex-col w-full">
-                    <header className="w-full h-16 flex items-center justify-between">
+                    <header className="w-full h-16 flex items-center justify-between fixed bg-white">
+                        <section className="sm:hidden pl-5 pt-2">
+                            <Button
+                                variant="subtle"
+                                size="sm"
+                                onClick={() => setToggleSidebar((v) => !v)}
+                            >
+                                {toggleSidebar ? (
+                                    <ChevronLeftIcon
+                                        className="text-white"
+                                        width={24}
+                                        height={24}
+                                    />
+                                ) : (
+                                    <Bars3Icon
+                                        className="text-white"
+                                        width={24}
+                                        height={24}
+                                    />
+                                )}
+                            </Button>
+                        </section>
                         <section className="relative flex flex-col justify-end h-full px-3 w-full">
                             <section className="relative flex items-center w-full space-x-4 justify-end">
                                 <ThemeSwitcher />
@@ -27,7 +54,9 @@ export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
                             </section>
                         </section>
                     </header>
-                    <section className="mt-2 sm:pl-[15rem]">{children}</section>
+                    <section className="ml-2 mr-2 mt-24 sm:pl-[15rem]">
+                        {children}
+                    </section>
                 </section>
             </section>
         </main>
