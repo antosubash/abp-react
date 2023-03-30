@@ -27,13 +27,7 @@ const ChangePasswordPage: NextPage = () => {
                         <Link href={'/profile/change_password'}> {cp}</Link>
                     </TabsTrigger>
                 </TabsList>
-                <TabsContent value={ps}>
-                    <section>
-                        <h3>Personal Settings</h3>
-                        <hr className="mt-3 mb-3" />
-                        <ProfileSettings />
-                    </section>
-                </TabsContent>
+
                 <TabsContent value={cp}>
                     <section>
                         <h3>Change Password</h3>

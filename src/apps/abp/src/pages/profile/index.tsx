@@ -34,13 +34,6 @@ const ProfilePage: NextPage = () => {
                         <ProfileSettings />
                     </section>
                 </TabsContent>
-                <TabsContent value={cp}>
-                    <section>
-                        <h3>Change Password</h3>
-                        <hr className="mt-3 mb-3" />
-                        <ChangePassword />
-                    </section>
-                </TabsContent>
             </Tabs>
         </AdminLayout>
     );
