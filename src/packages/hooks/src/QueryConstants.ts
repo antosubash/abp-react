@@ -8,5 +8,6 @@ export const QueryNames = {
     GetPermissions: 'GetPermissions',
     GetUserRoles: 'GetUserRoles',
     GetEmailing: 'GetEmailing',
-    GetAssignableRoles: 'GetAssignableRoles'
+    GetAssignableRoles: 'GetAssignableRoles',
+    GetProfile: 'GetProfile'
 };

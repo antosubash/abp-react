@@ -6,7 +6,11 @@ import ThemeSwitcher from './Shared/ThemeChanger';
 
 // layout
 export { LandingLayout, type LandingLayoutProps } from './layout/Landing';
-export { AdminLayout, type AdminLayoutProps } from './layout/Admin';
+export {
+    AdminLayout,
+    type AdminLayoutProps,
+    type SubMenu
+} from './layout/Admin';
 export { MainLayout, type MainLayoutProps } from './layout/Main';
 
 // admin
@@ -42,6 +46,27 @@ export { Loader, Error, ThemeSwitcher };
 export { Checkbox } from './Shared/Checkbox';
 export { AlertDialog } from './Shared/AlertDialog';
 export { Search } from './Shared/Search';
+export {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger
+} from './Shared/Accordion';
+export { Card } from './Shared/Card';
+export {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger
+} from './Shared/DropdownMenu';
 
 // Shared hooks
 
@@ -68,3 +93,7 @@ export { AddRole } from './Role/AddRole';
 // settings
 export { Emailing } from './Settings/Emailing';
 export { FeatureManagement } from './Settings/FeatureManagement';
+
+// profile settings
+export { ProfileSettings } from './Profile/ProfileSettings';
+export { ChangePassword } from './Profile/ChangePassword';

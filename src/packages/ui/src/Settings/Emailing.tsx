@@ -62,7 +62,7 @@ export const Emailing = () => {
         }
     };
     return (
-        <section className="emailing p-10">
+        <section className="emailing p-5 xl:p-10">
             {openTestEmail && (
                 <TestEmail onDismiss={() => setOpenTestEmail(false)} />
             )}

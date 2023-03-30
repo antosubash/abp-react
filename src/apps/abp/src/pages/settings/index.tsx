@@ -12,7 +12,7 @@ import Link from 'next/link';
 import React from 'react';
 import { AdminMenus } from '../../utils/Constants';
 
-const Settings: NextPage = () => {
+const SettingsPage: NextPage = () => {
     const emailing = 'emailing';
     const featureManagement = 'feature_management';
     return (
@@ -43,4 +43,4 @@ const Settings: NextPage = () => {
     );
 };
 
-export default Settings;
+export default SettingsPage;

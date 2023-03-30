@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 import { LandingLayout } from '@abpreact/ui';
 import { Menus } from '../utils/Constants';
 
-const Index: NextPage = () => {
+const LandingPage: NextPage = () => {
     return <LandingLayout menus={Menus}></LandingLayout>;
 };
 
-export default Index;
+export default LandingPage;
