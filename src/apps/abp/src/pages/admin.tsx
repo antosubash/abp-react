@@ -4,6 +4,7 @@ import { FaRocket, FaCubes, FaChevronRight } from 'react-icons/fa';
 import { AdminMenus } from '../utils/Constants';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const AdminPage: NextPage = () => {
     const session = useSession();
@@ -31,10 +32,11 @@ const AdminPage: NextPage = () => {
                 </div>
                 <Card className="flex m-5 justify-evenly">
                     <figure className=" min-w-[10rem]">
-                        <img
+                        <Image
                             src="https://abp.io/assets/png/mastering-abp-framework.webp"
                             alt="Abp Guide"
                             width="300"
+                            height="300"
                         />
                     </figure>
                     <div className="ml-5 space-y-2 w-[30rem]">
@@ -75,7 +77,7 @@ const AdminPage: NextPage = () => {
                     </div>
                 </Card>
                 <h3 className="text-xl text-gray-400 text-center pt-10">
-                    Let's improve your application!
+                    {`Let's improve your application!`}
                 </h3>
                 <h4 className="text-center text-gray-800">
                     Here are some links to help you get started:
