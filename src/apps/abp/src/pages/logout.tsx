@@ -2,7 +2,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export default function Logout() {
+export default function LogoutPage() {
     const router = useRouter();
     const session = useSession();
     useEffect(() => {
@@ -13,5 +13,5 @@ export default function Logout() {
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    return <></>;
+    return false;
 }

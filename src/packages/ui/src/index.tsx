@@ -93,3 +93,7 @@ export { AddRole } from './Role/AddRole';
 // settings
 export { Emailing } from './Settings/Emailing';
 export { FeatureManagement } from './Settings/FeatureManagement';
+
+// profile settings
+export { ProfileSettings } from './Profile/ProfileSettings';
+export { ChangePassword } from './Profile/ChangePassword';

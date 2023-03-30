@@ -12,13 +12,13 @@ import {
 import { AdminMenus } from '../../utils/Constants';
 import Link from 'next/link';
 
-const ProfilePage: NextPage = () => {
+const ChangePasswordPage: NextPage = () => {
     const ps = 'Personal Settings';
     const cp = 'Change Password';
 
     return (
         <AdminLayout menus={AdminMenus}>
-            <Tabs defaultValue={ps} className="w-full">
+            <Tabs defaultValue={cp} className="w-full">
                 <TabsList className="w-full">
                     <TabsTrigger value={ps} className="w-full" asChild>
                         <Link href={'/profile'}> {ps}</Link>
@@ -46,4 +46,4 @@ const ProfilePage: NextPage = () => {
     );
 };
 
-export default ProfilePage;
+export default ChangePasswordPage;

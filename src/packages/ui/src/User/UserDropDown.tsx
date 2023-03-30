@@ -64,7 +64,7 @@ export const UserDropDown = () => {
                                 router.push('/logout');
                             }}
                         >
-                            Sign out
+                            Log out
                         </Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>

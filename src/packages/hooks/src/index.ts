@@ -10,4 +10,5 @@ export { useUserRoles } from './useUserRoles';
 export { useCurrentUser } from './useCurrentUser';
 export { useEmailing } from './useEmailing';
 export { useAssignableRoles } from './useAssignableRoles';
+export { useProfile } from './useProfile';
 export * from './QueryConstants';

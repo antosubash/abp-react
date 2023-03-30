@@ -5,7 +5,7 @@ import { AdminMenus } from '../utils/Constants';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
-const Admin: NextPage = () => {
+const AdminPage: NextPage = () => {
     const session = useSession();
     return (
         <AdminLayout menus={AdminMenus}>
@@ -249,4 +249,4 @@ const Admin: NextPage = () => {
     );
 };
 
-export default Admin;
+export default AdminPage;

@@ -9,7 +9,7 @@ import { NextPage } from 'next';
 import React from 'react';
 import { AdminMenus } from '../../utils/Constants';
 
-const Tenants: NextPage = () => {
+const TenantsPage: NextPage = () => {
     return (
         <AdminLayout menus={AdminMenus}>
             <div className="w-full">
@@ -24,4 +24,4 @@ const Tenants: NextPage = () => {
     );
 };
 
-export default Tenants;
+export default TenantsPage;
