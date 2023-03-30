@@ -11,7 +11,7 @@ import {
     AddRole
 } from '@abpreact/ui';
 import { useI18n } from 'next-localization';
-import { AdminMenus } from '../../utils/Constants';
+import { AdminMenus } from '../../../utils/Constants';
 import Link from 'next/link';
 
 const RolesPage: NextPage = () => {
@@ -25,10 +25,10 @@ const RolesPage: NextPage = () => {
                 <Tabs value={roles}>
                     <TabsList className="w-full">
                         <TabsTrigger value={users} className="w-full" asChild>
-                            <Link href={'/users'}>{users}</Link>
+                            <Link href={'/admin/users'}>{users}</Link>
                         </TabsTrigger>
                         <TabsTrigger value={roles} className="w-full" asChild>
-                            <Link href={'/users/roles'}>{roles}</Link>
+                            <Link href={'/admin/users/roles'}>{roles}</Link>
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value={users}>

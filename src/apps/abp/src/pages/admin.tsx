@@ -1,6 +1,13 @@
 import type { NextPage } from 'next';
-import { AdminLayout, Button, Card } from '@abpreact/ui';
-import { FaRocket, FaCubes, FaChevronRight } from 'react-icons/fa';
+import { AdminLayout, Card } from '@abpreact/ui';
+import {
+    FaRocket,
+    FaCubes,
+    FaChevronRight,
+    FaPlus,
+    FaTwitter,
+    FaGithub
+} from 'react-icons/fa';
 import { AdminMenus } from '../utils/Constants';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -12,25 +19,24 @@ const AdminPage: NextPage = () => {
         <AdminLayout menus={AdminMenus}>
             <section className="home">
                 <div className="grid w-full justify-center space-y-10">
-                    <h1 className="p-3 bg-green-400 text-white rounded-lg leading-5">
-                        <span className="flex items-center">
-                            <FaRocket width={24} height={24} className="mr-1" />
-                            <span className="font-extrabold mr-1">
-                                Congratulations,
-                            </span>
-                            <span className="font-semibold mr-1">
-                                AbpTemplate
-                            </span>
-                            is successfully running!
-                        </span>
-                    </h1>
+                    <div className="p-3 bg-green-400 text-white rounded-lg leading-5">
+                        <h1 className="inline-block text-center">
+                            <FaRocket
+                                width={24}
+                                height={24}
+                                className="mr-1 inline"
+                            />
+                            Congratulations, AbpTemplate is successfully
+                            running!
+                        </h1>
+                    </div>
                     <h3 className="text-center text-xl">
                         Welcome,{' '}
                         {session?.data?.user?.name ??
                             'Please update your name under profile.'}
                     </h3>
                 </div>
-                <Card className="flex m-5 justify-evenly">
+                <Card className="flex flex-col md:flex-row m-5 justify-evenly">
                     <figure className=" min-w-[10rem]">
                         <Image
                             src="https://abp.io/assets/png/mastering-abp-framework.webp"
@@ -39,7 +45,7 @@ const AdminPage: NextPage = () => {
                             height="300"
                         />
                     </figure>
-                    <div className="ml-5 space-y-2 w-[30rem]">
+                    <div className="sm:ml-5 space-y-2 md:w-[30rem]">
                         <span className="uppercase text-gray-400">
                             The Offical guide
                         </span>
@@ -54,10 +60,10 @@ const AdminPage: NextPage = () => {
                                 application development techniques.
                             </p>
                         </article>
-                        <div className="space-x-5 text-white flex">
+                        <div className="text-white  flex flex-col sm:flex-row sm:items-center sm:space-x-5">
                             <Link
                                 href="https://www.amazon.com/gp/product/B097Z2DM8Q/ref=dbs_a_def_rwt_hsch_vapi_tkin_p1_i0"
-                                className="p-0 hover:underline rounded"
+                                className="p-0 hover:underline rounded mb-2"
                                 target="_blank"
                             >
                                 <span className="bg-green-400 block p-3">
@@ -65,7 +71,7 @@ const AdminPage: NextPage = () => {
                                 </span>
                             </Link>
                             <Link
-                                className="p-0 hover:underline rounded"
+                                className="p-0 hover:underline rounded mb-2"
                                 href="https://www.packtpub.com/product/mastering-abp-framework/9781801079242"
                                 target="_blank"
                             >
@@ -79,11 +85,11 @@ const AdminPage: NextPage = () => {
                 <h3 className="text-xl text-gray-400 text-center pt-10">
                     {`Let's improve your application!`}
                 </h3>
-                <h4 className="text-center text-gray-800">
+                <h4 className="text-center text-gray-800 pb-10">
                     Here are some links to help you get started:
                 </h4>
-                <Card className="grid sm:grid-cols-3 gap-1 m-5">
-                    <section className="sm:border-r-2 flex flex-col items-center space-y-5">
+                <Card className="grid gap-5 sm:grid-cols-3 sm:gap-1 m-5">
+                    <section className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
                         <FaCubes
                             width={48}
                             height={48}
@@ -106,7 +112,7 @@ const AdminPage: NextPage = () => {
                             <FaChevronRight />
                         </Link>
                     </section>
-                    <section className="sm:border-r-2 flex flex-col items-center space-y-5">
+                    <section className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
                         <FaCubes
                             width={48}
                             height={48}
@@ -127,7 +133,7 @@ const AdminPage: NextPage = () => {
                             <FaChevronRight />
                         </Link>
                     </section>
-                    <section className="flex flex-col items-center space-y-5">
+                    <section className="flex flex-col items-center space-y-5 mt-20">
                         <FaCubes
                             width={48}
                             height={48}
@@ -246,6 +252,167 @@ const AdminPage: NextPage = () => {
                         </Link>
                     </section>
                 </Card>
+                <h3 className="text-xl text-gray-400 text-center pt-10">
+                    {`Meet the ABP Commercial`}
+                </h3>
+                <h4 className="text-center text-gray-800 pb-10">
+                    A Complete Web Application Platform Built on the ABP
+                    Framework
+                </h4>
+                <Card className="m-5">
+                    <article className="w-full flex justify-center">
+                        <p className="text-center w-1/2">
+                            ABP Commercial is a platform based on the open
+                            source ABP framework. It provides pre-built
+                            application modules, rapid application development
+                            tooling, professional UI themes, premium support and
+                            more.
+                        </p>
+                    </article>
+                    <section className="grid lg:grid-cols-3 sm:gap-1">
+                        <div className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">
+                                Startup Templates
+                            </h4>
+                            <Link
+                                href="https://commercial.abp.io/startup-templates?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+
+                        <div className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">
+                                Application Modules
+                            </h4>
+                            <Link
+                                href="https://commercial.abp.io/modules?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+
+                        <div className="flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">
+                                Developer Tools
+                            </h4>
+                            <Link
+                                href="https://commercial.abp.io/tools?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+
+                        <div className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">UI Themes</h4>
+                            <Link
+                                href="https://commercial.abp.io/themes?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+
+                        <div className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">
+                                Premium Support
+                            </h4>
+                            <Link
+                                href="https://support.abp.io/QA/Questions?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+
+                        <div className="flex flex-col items-center space-y-5 mt-20">
+                            <FaPlus
+                                width={48}
+                                height={48}
+                                className="text-blue-800 text-2xl"
+                            />
+                            <h4 className="leading text-gray-500">
+                                Additional Services
+                            </h4>
+                            <Link
+                                href="https://commercial.abp.io/additional-services?ref=tmpl"
+                                className="underline text-gray-800 flex items-center"
+                            >
+                                <span>Details</span>
+                                <FaChevronRight />
+                            </Link>
+                        </div>
+                    </section>
+                </Card>
+
+                <div className="social flex flex-col justify-center items-center sm:flex-row sm:items-center sm:space-x-4 mt-20 mb-10">
+                    <Link
+                        href="https://twitter.com/abpframework"
+                        className="hover:underline text-gray-800 flex items-center pb-5"
+                    >
+                        <FaTwitter
+                            width={48}
+                            height={48}
+                            className="text-blue-800 text-2xl mr-1"
+                        />
+                        <span>Abp Framework</span>
+                    </Link>
+                    <Link
+                        href="https://twitter.com/abpcommercial"
+                        className="hover:underline text-gray-800 flex items-center  pb-5"
+                    >
+                        <FaTwitter
+                            width={48}
+                            height={48}
+                            className="text-blue-800 text-2xl mr-1"
+                        />
+                        <span>Abp Commerical</span>
+                    </Link>
+                    <Link
+                        href="https://github.com/abpframework/abp"
+                        className="hover:underline text-gray-800 flex items-center  pb-5"
+                    >
+                        <FaGithub
+                            width={48}
+                            height={48}
+                            className="text-blue-800 text-2xl mr-1"
+                        />
+                        <span>abpframework</span>
+                    </Link>
+                </div>
             </section>
         </AdminLayout>
     );
