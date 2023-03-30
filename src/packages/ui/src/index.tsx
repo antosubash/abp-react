@@ -52,6 +52,7 @@ export {
     AccordionItem,
     AccordionTrigger
 } from './Shared/Accordion';
+export { Card } from './Shared/Card';
 
 // Shared hooks
 

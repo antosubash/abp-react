@@ -14,7 +14,10 @@ const AccordionItem = forwardRef<
 >(({ className, ...props }, ref) => (
     <AccordionPrimitive.Item
         ref={ref}
-        className={cn('transition-all pl-4 pr-1', className)}
+        className={cn(
+            'transition-all pl-4 pr-1 w-full border-b-2 border-opacity-0 hover:border-opacity-5',
+            className
+        )}
         {...props}
     />
 ));
@@ -28,12 +31,12 @@ const AccordionTrigger = forwardRef<
         <AccordionPrimitive.Trigger
             ref={ref}
             className={cn(
-                'flex flex-1 items-center justify-between py-4 font-medium transition-all [&[data-state=open]>svg]:rotate-180',
+                'flex items-center flex-1 justify-between py-4 font-medium transition-all [&[data-state=open]>svg]:rotate-180',
                 className
             )}
             {...props}
         >
-            {children}
+            <div className="flex items-center">{children}</div>
             <ChevronDown className="h-4 w-4 transition-transform duration-200" />
         </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

@@ -19,6 +19,36 @@ export interface SidebarProps {
     onToggle?: (f: boolean) => void;
 }
 
+const CustomeLink = ({
+    m,
+    path,
+    icon,
+    className
+}: {
+    m: SubMenu;
+    path: string;
+    icon?: React.ReactNode;
+    className?: string;
+}) => {
+    return (
+        <Link href={m.link!} passHref={true} className="block">
+            <section
+                className={classNames(
+                    'w-full cursor-pointer font-thin flex items-center p-4 transition-colors duration-200 justify-start bg-gradient-to-r',
+                    {
+                        'text-white border-black from-slate-500 to-slate-300':
+                            m.link === path
+                    },
+                    className
+                )}
+            >
+                {icon && <span className="text-left">{icon}</span>}
+                <span className="mx-4 text-sm font-normal">{m.name}</span>
+            </section>
+        </Link>
+    );
+};
+
 export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
     const router = useRouter();
 
@@ -49,26 +79,12 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                         </AccordionTrigger>
                         <AccordionContent>
                             {menu.children.map((c) => (
-                                <Link
-                                    href={c.link!}
-                                    passHref={true}
-                                    className="block"
+                                <CustomeLink
+                                    m={c}
+                                    path={router.asPath}
                                     key={v4()}
-                                >
-                                    <section
-                                        className={classNames(
-                                            'w-full cursor-pointer font-thin flex items-center p-4 my-2 transition-colors duration-200 justify-start bg-gradient-to-r',
-                                            {
-                                                'text-blue-500 border-blue-500 from-white to-blue-100 border-r-4':
-                                                    c.link === router.asPath
-                                            }
-                                        )}
-                                    >
-                                        <span className="mx-4 text-sm font-normal">
-                                            {c.name}
-                                        </span>
-                                    </section>
-                                </Link>
+                                    className="ml-5"
+                                />
                             ))}
                         </AccordionContent>
                     </AccordionItem>
@@ -77,27 +93,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
         }
 
         return (
-            <Link
-                href={menu.link!}
-                passHref={true}
-                className="block"
-                key={v4()}
-            >
-                <section
-                    className={classNames(
-                        'w-full cursor-pointer font-thin flex items-center p-4 my-2 transition-colors duration-200 justify-start bg-gradient-to-r',
-                        {
-                            'text-blue-500 border-blue-500 from-white to-blue-100 border-r-4':
-                                menu.link === router.asPath
-                        }
-                    )}
-                >
-                    <span className="text-left">{Icon}</span>
-                    <span className="mx-4 text-sm font-normal">
-                        {menu.name}
-                    </span>
-                </section>
-            </Link>
+            <CustomeLink m={menu} path={router.asPath} key={v4()} icon={Icon} />
         );
     };
     return (
