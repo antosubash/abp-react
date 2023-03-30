@@ -53,6 +53,20 @@ export {
     AccordionTrigger
 } from './Shared/Accordion';
 export { Card } from './Shared/Card';
+export {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger
+} from './Shared/DropdownMenu';
 
 // Shared hooks
 
