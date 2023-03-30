@@ -4,16 +4,26 @@ import ThemeSwitcher from '../Shared/ThemeChanger';
 import { UserMenus } from '../User/UserMenus';
 import { Bars3Icon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { Button } from '../Shared/Button';
-export interface AdminLayoutProps {
-    children: React.ReactNode;
-    menus: {
-        Name: string;
-        Link: string;
-        Icon: React.FC;
-    }[];
+
+type Menu = {
+    name: string;
+    link?: string;
+    icon?: React.FC;
+};
+
+export interface SubMenu extends Menu {
+    children?: Menu[];
 }
 
-export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
+export interface AdminLayoutProps<T> {
+    children: React.ReactNode;
+    menus: SubMenu[];
+}
+
+export const AdminLayout = <T extends unknown>({
+    menus,
+    children
+}: AdminLayoutProps<T>) => {
     const [toggleSidebar, setToggleSidebar] = useState(false);
     return (
         <main className="relative">
@@ -54,7 +64,7 @@ export const AdminLayout = ({ menus, children }: AdminLayoutProps) => {
                             </section>
                         </section>
                     </header>
-                    <section className="ml-2 mr-2 mt-24 sm:pl-[15rem]">
+                    <section className="ml-2 mr-2 mt-24 sm:pl-[20rem]">
                         {children}
                     </section>
                 </section>

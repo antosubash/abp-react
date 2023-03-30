@@ -1,4 +1,5 @@
-import { FaChalkboard, FaDatabase, FaUserCog, FaUsers } from 'react-icons/fa';
+import { FaDatabase, FaCogs, FaUsers, FaHome, FaWrench } from 'react-icons/fa';
+import { SubMenu } from '@abpreact/ui';
 export const Menus = [
     {
         Name: 'How it works',
@@ -14,26 +15,40 @@ export const Menus = [
     }
 ];
 
-export const AdminMenus = [
+export const AdminMenus: SubMenu[] = [
     {
-        Name: 'Dashboard',
-        Link: '/admin',
-        Icon: FaChalkboard
+        name: 'Home',
+        link: '/admin',
+        icon: FaHome
     },
     {
-        Name: 'Users',
-        Link: '/users',
-        Icon: FaUsers
+        name: 'Administration',
+        icon: FaWrench,
+        children: [
+            {
+                name: 'Roles',
+                link: '/users/roles'
+            },
+            {
+                name: 'Users',
+                link: '/users'
+            }
+        ]
     },
     {
-        Name: 'Tenants',
-        Link: '/tenants',
-        Icon: FaDatabase
+        name: 'Tenant Management',
+        icon: FaUsers,
+        children: [
+            {
+                name: 'Tenants',
+                link: '/tenants'
+            }
+        ]
     },
     {
-        Name: 'Settings',
-        Link: '/settings',
-        Icon: FaUserCog
+        name: 'Settings',
+        link: '/settings',
+        icon: FaCogs
     }
 ];
 
