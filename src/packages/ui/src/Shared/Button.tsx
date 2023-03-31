@@ -11,13 +11,13 @@ const buttonVariants = cva('btn', {
             outline: 'btn-outline',
             subtle: 'btn-primary',
             ghost: 'btn-ghost',
-            link: 'btn-link'
+            link: 'btn-link',
+            active: 'btn-active'
         },
         size: {
             default: 'btn-md',
             sm: 'btn-sm',
-            lg: 'btn-lg',
-            md: 'btn-md'
+            lg: 'btn-lg'
         },
         shape: {
             default: '',
@@ -34,15 +34,21 @@ const buttonVariants = cva('btn', {
 
 export interface ButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-        VariantProps<typeof buttonVariants> {}
+        VariantProps<typeof buttonVariants> {
+    fluid?: boolean;
+}
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, ...props }, ref) => {
+    ({ className, variant, size, shape, ...props }, ref) => {
         return (
             <button
-                className={cn(buttonVariants({ variant, size, className }), {
-                    'btn-disabled': props.disabled
-                })}
+                className={cn(
+                    buttonVariants({ variant, size, shape, className }),
+                    {
+                        'btn-disabled': props.disabled,
+                        'btn-block': !!props?.fluid
+                    }
+                )}
                 ref={ref}
                 {...props}
             />

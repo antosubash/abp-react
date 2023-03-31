@@ -16,6 +16,7 @@ type TogglePermissionProps = UsePermissionsChangesProps & {
     hideSave?: boolean;
     onSelectedUpdate?: (permissionDto: PermissionGrantInfoDto) => void;
     disabled?: boolean;
+    onCancelEvent?: () => void;
 };
 export const TogglePermission = ({
     permissions,
@@ -23,7 +24,8 @@ export const TogglePermission = ({
     hideSelectAll,
     hideSave,
     onSelectedUpdate,
-    disabled
+    disabled,
+    onCancelEvent
 }: TogglePermissionProps) => {
     const {
         hasAllSelected,
@@ -66,7 +68,18 @@ export const TogglePermission = ({
             ))}
             {!hideSave && (
                 <DialogFooter>
-                    <Button type="submit" variant="outline">
+                    {onCancelEvent && (
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onCancelEvent();
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                    )}
+
+                    <Button type="submit" variant="subtle">
                         Save
                     </Button>
                 </DialogFooter>

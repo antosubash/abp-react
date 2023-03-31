@@ -195,7 +195,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
 
                         <DialogFooter className="mt-5">
                             <Button
-                                variant="outline"
+                                variant="subtle"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     onResetToDefaultEvent();
@@ -204,7 +204,6 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
                                 Reset to default
                             </Button>
                             <Button
-                                variant="outline"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     onCloseEvent();
@@ -212,7 +211,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" variant="outline">
+                            <Button type="submit" variant="subtle">
                                 Save
                             </Button>
                         </DialogFooter>

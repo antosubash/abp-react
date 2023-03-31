@@ -79,7 +79,7 @@ export const TenantEdit = ({
                         />
                     </section>
                     <DialogFooter className="mt-5">
-                        <Button type="submit" variant="outline">
+                        <Button type="submit" variant="subtle">
                             Save
                         </Button>
                     </DialogFooter>

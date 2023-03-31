@@ -86,7 +86,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
                         <Textarea label="Body" {...register('body')} />
                     </section>
                     <DialogFooter className="mt-5">
-                        <Button type="submit" variant="outline">
+                        <Button type="submit" variant="subtle">
                             Send
                         </Button>
                         <Button
@@ -94,7 +94,6 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
                                 e.preventDefault();
                                 onCloseEvent();
                             }}
-                            variant="outline"
                         >
                             Close
                         </Button>

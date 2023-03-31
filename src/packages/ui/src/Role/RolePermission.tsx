@@ -201,6 +201,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                 key={currentPermissionGrant!.name}
                 permissions={currentPermissionGrant?.data ?? []}
                 type={currentPermissionGrant!.name}
+                onCancelEvent={onCloseEvent}
             />
         );
     }, [currentPermissionGrant?.data]);
@@ -211,7 +212,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
 
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent className="text-white">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Permissions - {roleDto.name}</DialogTitle>
                 </DialogHeader>
@@ -235,17 +236,15 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                             permission: PermissionGroupDto,
                                             idx: number
                                         ) => (
-                                            <div
-                                                key={idx}
-                                                className={classNames({
-                                                    'bg-slate-400':
+                                            <div key={idx}>
+                                                <Button
+                                                    fluid={true}
+                                                    variant={
                                                         currentPermissionGrant?.data ===
                                                         permission?.permissions
-                                                })}
-                                            >
-                                                <Button
-                                                    variant="link"
-                                                    className="w-full"
+                                                            ? 'default'
+                                                            : 'active'
+                                                    }
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
@@ -263,7 +262,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                     )}
                                 </div>
                             </section>
-                            <hr className="border-b-white mt-5 mb-5" />
+                            <hr className="border-b-neutral-100 mt-5 mb-5" />
                             <section className="flex flex-col space-y-1 mt-3">
                                 {currentPermissionGrant?.data &&
                                     renderTogglePermission()}
@@ -276,7 +275,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                 {permissionGroups.map((group) => (
                                     <div key={v4()}>
                                         <h3>{group.displayName}</h3>
-                                        <hr className="border-b-white mt-5 mb-5" />
+                                        <hr className="border-b-neutral-100 mt-5 mb-5" />
                                         <div key={v4()}>
                                             <TogglePermission
                                                 permissions={group.permissions!}
@@ -292,7 +291,15 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                 ))}
                             </section>
                             <DialogFooter>
-                                <Button type="submit" variant="outline">
+                                <Button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        onCloseEvent();
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button type="submit" variant="subtle">
                                     Save
                                 </Button>
                             </DialogFooter>

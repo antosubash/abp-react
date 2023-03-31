@@ -65,7 +65,7 @@ export const AddRole = ({}: AddUserProps) => {
                         </Button>
                     )}
                 </section>
-                <DialogContent className="text-white">
+                <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Create a New Role</DialogTitle>
                     </DialogHeader>
@@ -92,7 +92,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isDefault"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-medium leading-none text-neutral-100"
                                 >
                                     Is Default
                                 </label>
@@ -112,7 +112,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isPublic"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-medium leading-none text-neutral-100"
                                 >
                                     Is Public
                                 </label>
@@ -124,11 +124,10 @@ export const AddRole = ({}: AddUserProps) => {
                                     e.preventDefault();
                                     setOpen(false);
                                 }}
-                                variant="outline"
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" variant="outline">
+                            <Button type="submit" variant="subtle">
                                 Save
                             </Button>
                         </DialogFooter>

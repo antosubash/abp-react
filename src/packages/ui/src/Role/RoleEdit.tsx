@@ -122,11 +122,10 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                                 e.preventDefault();
                                 onCloseEvent();
                             }}
-                            variant="outline"
                         >
                             Cancel
                         </Button>
-                        <Button type="submit" variant="outline">
+                        <Button type="submit" variant="subtle">
                             Save
                         </Button>
                     </DialogFooter>

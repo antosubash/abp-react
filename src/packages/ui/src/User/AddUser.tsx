@@ -65,7 +65,7 @@ export const AddUser = ({}: AddUserProps) => {
                         </Button>
                     )}
                 </section>
-                <DialogContent className="text-white">
+                <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Create a New User</DialogTitle>
                     </DialogHeader>
@@ -109,7 +109,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isActive"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm text-neutral-100 font-medium leading-none "
                                 >
                                     Active
                                 </label>
@@ -130,7 +130,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="lockoutEnabled"
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm text-neutral-100 font-medium leading-none "
                                 >
                                     Lock account after failed login attempts
                                 </label>
@@ -142,11 +142,10 @@ export const AddUser = ({}: AddUserProps) => {
                                     e.preventDefault();
                                     setOpen(false);
                                 }}
-                                variant="outline"
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" variant="outline">
+                            <Button type="submit" variant="subtle">
                                 Save
                             </Button>
                         </DialogFooter>

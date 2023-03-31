@@ -87,11 +87,10 @@ export const AddTenant = () => {
                                     e.preventDefault();
                                     setOpen(false);
                                 }}
-                                variant="outline"
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" variant="outline">
+                            <Button type="submit" variant="subtle">
                                 Save
                             </Button>
                         </DialogFooter>
