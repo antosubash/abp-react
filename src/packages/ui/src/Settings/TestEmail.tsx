@@ -62,7 +62,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
 
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent className="text-white">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Send Test Email</DialogTitle>
                 </DialogHeader>

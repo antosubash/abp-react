@@ -29,7 +29,7 @@ const ProfilePage: NextPage = () => {
                 </TabsList>
                 <TabsContent value={ps}>
                     <section>
-                        <h3>Personal Settings</h3>
+                        <h3 className="text-neutral-100">Personal Settings</h3>
                         <hr className="mt-3 mb-3" />
                         <ProfileSettings />
                     </section>

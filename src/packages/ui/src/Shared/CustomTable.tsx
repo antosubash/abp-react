@@ -45,7 +45,7 @@ const TableView = <T extends unknown>({
             return (
                 <tr
                     key={row.id}
-                    className="hover:bg-gray-50 hover:text-black transition delay-75 ease-in"
+                    className="hover:bg-neutral-50/80 hover:text-neutral-800 transition delay-75 ease-in"
                 >
                     {cells.map((cell) => {
                         return (
@@ -68,19 +68,21 @@ const TableView = <T extends unknown>({
     if (totalCount === 0) {
         return (
             <section className="p-3 flex justify-center">
-                <h3 className="leading-3">No Records Found</h3>
+                <h3 className="leading-3 text-neutral-100">No Records Found</h3>
             </section>
         );
     }
     const pageCount = Math.ceil(totalCount / pageSize);
     return (
-        <section className="overflow-scroll">
-            <table className="w-full divide-y text-left divide-gray-200 table-auto sm:overflow-x-auto lg:table-fixed">
+        <section className="overflow-auto">
+            <table className="w-full divide-y text-left divide-neutral-200 table-auto sm:overflow-x-auto lg:table-fixed bg-neutral text-neutral-100">
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderBody()}</tbody>
             </table>
-            <div className="text-gray-400 pt-5 border-t flex items-center">
-                <div className="flex-grow">{totalCount} total</div>
+            <div className="text-neutral-400 pt-5 border-t flex items-center">
+                <div className="flex-grow text-neutral-100">
+                    {totalCount} total
+                </div>
                 {totalCount > 10 && (
                     <Pagination<T> pageCount={pageCount} table={table} />
                 )}

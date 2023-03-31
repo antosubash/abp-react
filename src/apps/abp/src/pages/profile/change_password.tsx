@@ -30,7 +30,7 @@ const ChangePasswordPage: NextPage = () => {
 
                 <TabsContent value={cp}>
                     <section>
-                        <h3>Change Password</h3>
+                        <h3 className="text-neutral-100">Change Password</h3>
                         <hr className="mt-3 mb-3" />
                         <ChangePassword />
                     </section>

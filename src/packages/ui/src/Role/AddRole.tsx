@@ -56,7 +56,7 @@ export const AddRole = ({}: AddUserProps) => {
         <section className="p-3">
             <Dialog open={open} onOpenChange={setOpen}>
                 <section className="flex items-center justify-between pb-5">
-                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
+                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate text-neutral-100">
                         Role Management
                     </h3>
                     {can('AbpIdentity.Roles.Create') && (

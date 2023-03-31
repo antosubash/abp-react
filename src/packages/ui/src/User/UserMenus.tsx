@@ -26,7 +26,6 @@ export const UserMenus = ({}: UserMenusProps) => {
                     Login
                 </Button>
                 <Button
-                    variant="subtle"
                     onClick={() =>
                         (location.href = `${process.env.NEXT_PUBLIC_API_URL}/Account/Register`)
                     }

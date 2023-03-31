@@ -59,7 +59,7 @@ export const UserDropDown = () => {
                         <Link
                             href="#"
                             passHref={true}
-                            className="px-4 py-2 text-md text-neutral"
+                            className="px-4 py-2 text-md text-neutral-100"
                             onClick={() => {
                                 router.push('/logout');
                             }}

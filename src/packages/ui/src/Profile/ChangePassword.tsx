@@ -17,6 +17,15 @@ export const ChangePassword = () => {
     });
 
     const onSubmit = async (data: unknown) => {
+        if (shouldDisabled()) {
+            toast({
+                title: 'Password Incorrect',
+                description:
+                    'Please check New Password and Confirm New Password',
+                variant: 'destructive'
+            });
+            return;
+        }
         try {
             const requestBody = data as ChangePasswordInput;
             await ProfileService.profileChangePassword(requestBody);
@@ -81,13 +90,7 @@ export const ChangePassword = () => {
                     }}
                 />
 
-                <Button
-                    type="submit"
-                    variant="subtle"
-                    disabled={shouldDisabled()}
-                >
-                    Save
-                </Button>
+                <Button type="submit">Save</Button>
             </form>
         </section>
     );

@@ -19,7 +19,7 @@ export const NavBar = ({ menus }: NavBarProps) => {
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">My Startup</Link>
             </div>
-            <ul className=" items-center hidden md:flex">
+            <ul className="items-center hidden md:flex">
                 {menus.map((menu, index) => {
                     return (
                         <li
@@ -52,7 +52,7 @@ export const NavBar = ({ menus }: NavBarProps) => {
             <div
                 id="mobileNav"
                 className={classNames(
-                    'px-4 py-6 fixed top-0 bg-white left-0 h-full w-full z-20 animate-fade-in-down ',
+                    'px-4 py-6 fixed top-0 bg-neutral-100 left-0 h-full w-full z-20 animate-fade-in-down ',
                     { hidden: !isVisible }
                 )}
             >

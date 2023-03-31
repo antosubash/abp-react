@@ -66,7 +66,7 @@ export const Emailing = () => {
             {openTestEmail && (
                 <TestEmail onDismiss={() => setOpenTestEmail(false)} />
             )}
-            <h3 className="text-xl font-medium">Emailing</h3>
+            <h3 className="text-xl text-neutral-100 font-medium">Emailing</h3>
             <hr className="border mt-2" />
             <div className="pt-5">
                 <form onSubmit={handleSubmit(onSubmitEvent)}>
@@ -124,7 +124,7 @@ export const Emailing = () => {
                             />
                             <label
                                 htmlFor="ssl"
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                className="text-sm font-medium leading-none text-neutral-100"
                             >
                                 Enable ssl
                             </label>
@@ -151,7 +151,7 @@ export const Emailing = () => {
                             />
                             <label
                                 htmlFor="credentials"
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                className="text-sm font-medium leading-none text-neutral-100"
                             >
                                 Use default credentials
                             </label>
@@ -186,12 +186,11 @@ export const Emailing = () => {
                     </div>
                     <hr className="border mt-2" />
                     <div className="space-y-5 space-x-5 w-full">
-                        <Button type="submit" size="lg" variant="default">
+                        <Button type="submit" variant="default">
                             Save
                         </Button>
                         <Button
                             variant="default"
-                            size="lg"
                             onClick={(e) => {
                                 e.preventDefault();
                                 setOpenTestEmail(true);
