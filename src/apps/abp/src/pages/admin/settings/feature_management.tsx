@@ -10,24 +10,24 @@ import {
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
-import { AdminMenus } from '../../utils/Constants';
+import { AdminMenus } from '../../../utils/Constants';
 
-const SettingsPage: NextPage = () => {
+const FeatureManagementPage: NextPage = () => {
     const emailing = 'emailing';
     const featureManagement = 'feature_management';
     return (
         <AdminLayout menus={AdminMenus}>
-            <Tabs value={emailing}>
+            <Tabs value={featureManagement} orientation="vertical">
                 <TabsList className="w-full">
                     <TabsTrigger value={emailing} className="w-full" asChild>
-                        <Link href={'/settings'}>Emailing</Link>
+                        <Link href={'/admin/settings'}>Emailing</Link>
                     </TabsTrigger>
                     <TabsTrigger
                         value={featureManagement}
                         className="w-full"
                         asChild
                     >
-                        <Link href={'/settings/feature_management'}>
+                        <Link href={'/admin/settings/feature_management'}>
                             Feature management
                         </Link>
                     </TabsTrigger>
@@ -43,4 +43,4 @@ const SettingsPage: NextPage = () => {
     );
 };
 
-export default SettingsPage;
+export default FeatureManagementPage;

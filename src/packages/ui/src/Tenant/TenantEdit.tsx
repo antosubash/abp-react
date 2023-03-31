@@ -79,7 +79,15 @@ export const TenantEdit = ({
                         />
                     </section>
                     <DialogFooter className="mt-5">
-                        <Button type="submit" variant="outline">
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onCloseEvent();
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button type="submit" variant="subtle">
                             Save
                         </Button>
                     </DialogFooter>

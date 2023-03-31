@@ -27,11 +27,11 @@ export const AdminMenus: SubMenu[] = [
         children: [
             {
                 name: 'Roles',
-                link: '/users/roles'
+                link: '/admin/users/roles'
             },
             {
                 name: 'Users',
-                link: '/users'
+                link: '/admin/users'
             }
         ]
     },
@@ -41,13 +41,13 @@ export const AdminMenus: SubMenu[] = [
         children: [
             {
                 name: 'Tenants',
-                link: '/tenants'
+                link: '/admin/tenants'
             }
         ]
     },
     {
         name: 'Settings',
-        link: '/settings',
+        link: '/admin/settings',
         icon: FaCogs
     }
 ];

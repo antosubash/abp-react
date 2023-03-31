@@ -50,7 +50,7 @@ export const AddTenant = () => {
         <section className="p-3">
             <Dialog open={open} onOpenChange={setOpen}>
                 <section className="flex items-center justify-between pb-5">
-                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
+                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate text-neutral-100">
                         Tenant Management
                     </h3>
                     {can('AbpTenantManagement.Tenants.Create') && (
@@ -59,7 +59,7 @@ export const AddTenant = () => {
                         </Button>
                     )}
                 </section>
-                <DialogContent className="text-white">
+                <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Create a New Tenant</DialogTitle>
                     </DialogHeader>
@@ -87,11 +87,10 @@ export const AddTenant = () => {
                                     e.preventDefault();
                                     setOpen(false);
                                 }}
-                                variant="outline"
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" variant="outline">
+                            <Button type="submit" variant="subtle">
                                 Save
                             </Button>
                         </DialogFooter>

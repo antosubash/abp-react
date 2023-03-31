@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
 import {
@@ -42,7 +42,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
     const [open, setOpen] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
-    const [roles, setRoles] = useState<RoleType[]>();
+    const [roles, setRoles] = useState<RoleType[]>([]);
     const userRole = useUserRoles({ userId });
     const assignableRoles = useAssignableRoles();
 
@@ -55,7 +55,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                 description: 'User Updated Successfully',
                 variant: 'default'
             });
-            setOpen(false);
+            onCloseEvent();
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast({
@@ -86,10 +86,15 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
         }
     }, [userRole.data?.items]);
 
-    const onRoleAssignEvent = (role: IdentityRoleDto) => {
-        if (roles && roles?.length > 0) {
+    const onRoleAssignEvent = useCallback(
+        (role: IdentityRoleDto) => {
             const hasAssignedRoleExistAlready = roles.findIndex(
                 (r) => role.id === r.id
+            );
+
+            console.log(
+                hasAssignedRoleExistAlready,
+                'hasAssignedRoleExistAlready'
             );
             if (hasAssignedRoleExistAlready !== -1) {
                 roles.splice(hasAssignedRoleExistAlready, 1);
@@ -98,8 +103,9 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                 roles.push({ name: role.name!, id: role.id! });
                 setRoles([...roles]);
             }
-        }
-    };
+        },
+        [roles]
+    );
 
     const onRoleAssignedSaveEvent = async (e: MouseEvent) => {
         e.preventDefault();
@@ -111,7 +117,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
     };
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent className="text-white">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Upate a User: {userDto.userName}</DialogTitle>
                 </DialogHeader>
@@ -166,11 +172,10 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                                         e.preventDefault();
                                         onCloseEvent();
                                     }}
-                                    variant="outline"
                                 >
                                     Cancel
                                 </Button>
-                                <Button type="submit" variant="outline">
+                                <Button type="submit" variant="subtle">
                                     Save
                                 </Button>
                             </DialogFooter>
@@ -179,7 +184,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                     <TabsContent value={TABS_NAME.USERS_ROLE_ASSIGN}>
                         {assignableRoles?.isLoading && <Loader />}
                         {assignableRoles?.isError && (
-                            <div className="p-10 bg-red-500 text-white text-3xl">
+                            <div className="p-10 bg-error text-neutral-50 text-3xl">
                                 There was an error while featching roles
                                 information for the {userDto.userName}
                             </div>
@@ -208,7 +213,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                                             />
                                             <label
                                                 htmlFor={r.id}
-                                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                className="text-sm text-neutral-100 font-medium leading-none"
                                             >
                                                 {r.name}
                                             </label>
@@ -222,13 +227,12 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                                     e.preventDefault();
                                     onCloseEvent();
                                 }}
-                                variant="outline"
                             >
                                 Cancel
                             </Button>
                             <Button
                                 onClick={onRoleAssignedSaveEvent}
-                                variant="outline"
+                                variant="subtle"
                             >
                                 Save
                             </Button>

@@ -45,12 +45,7 @@ export default withAuth(
     {
         callbacks: {
             authorized: ({ req, token }) => {
-                const adminPaths = [
-                    '/admin',
-                    '/users',
-                    '/tenants',
-                    '/settings'
-                ];
+                const adminPaths = ['/admin'];
                 const isAdminPath = adminPaths.some((path) => {
                     return req.nextUrl.pathname.startsWith(path);
                 });

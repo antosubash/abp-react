@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/router';
 import { Button } from '../Shared/Button';
 import { SubMenu } from '../layout/Admin';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 export interface SidebarProps {
     menus: SubMenu[];
@@ -36,14 +36,17 @@ const CustomeLink = ({
                 className={classNames(
                     'w-full cursor-pointer font-thin flex items-center p-4 transition-colors duration-200 justify-start bg-gradient-to-r',
                     {
-                        'text-white border-black from-slate-500 to-slate-300':
-                            m.link === path
+                        'text-neutral-100 bg-blue-700': m.link === path
                     },
                     className
                 )}
             >
-                {icon && <span className="text-left">{icon}</span>}
-                <span className="mx-4 text-sm font-normal">{m.name}</span>
+                {icon && (
+                    <span className="text-left text-secondary">{icon}</span>
+                )}
+                <span className="mx-4 text-sm font-normal text-neutral-100">
+                    {m.name}
+                </span>
             </section>
         </Link>
     );
@@ -72,8 +75,10 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                 >
                     <AccordionItem value={menu.name}>
                         <AccordionTrigger>
-                            <span className="text-left">{Icon}</span>
-                            <span className="mx-4 text-sm font-normal">
+                            <span className="text-left text-secondary">
+                                {Icon}
+                            </span>
+                            <span className="mx-4 text-sm font-normal text-neutral-100">
                                 {menu.name}
                             </span>
                         </AccordionTrigger>
@@ -99,7 +104,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
     return (
         <section
             className={classNames(
-                'h-full flex shadow-lg fixed w-[20rem] z-[15] pt-6 pl-2 pr-2 bg-white dark:text-black transition-transform delay-200 ease-in-out',
+                'h-full flex shadow-lg fixed w-[20rem] z-[15] pt-6 pl-2 pr-2 bg-neutral transition-transform delay-200 ease-in-out',
                 {
                     'translate-x-0 sm:-translate-x-[150rem]': toggleSidebar,
                     '-translate-x-[150rem] sm:translate-x-0': !toggleSidebar
@@ -108,7 +113,10 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
         >
             <section className="h-full w-full">
                 <section className="flex items-center">
-                    <Link href="/" className="text-2xl font-bold grow">
+                    <Link
+                        href="/"
+                        className="text-2xl font-bold grow text-neutral-200"
+                    >
                         My Startup
                     </Link>
                     <Button
@@ -119,7 +127,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                         <ChevronLeftIcon
                             width={24}
                             height={24}
-                            className="text-black"
+                            className="text-neutral-800"
                         />
                     </Button>
                 </section>

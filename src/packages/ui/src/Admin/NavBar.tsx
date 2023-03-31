@@ -19,7 +19,7 @@ export const NavBar = ({ menus }: NavBarProps) => {
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">My Startup</Link>
             </div>
-            <ul className=" items-center hidden md:flex">
+            <ul className="items-center hidden md:flex">
                 {menus.map((menu, index) => {
                     return (
                         <li
@@ -42,12 +42,17 @@ export const NavBar = ({ menus }: NavBarProps) => {
                 className="md:hidden"
                 onClick={() => setIsVisible(true)}
             >
-                {/* <Image src="/img/Menu.svg" alt="Menu icon" height={16} width={16} /> */}
+                <Image
+                    src="/img/Menu.svg"
+                    alt="Menu icon"
+                    height={24}
+                    width={24}
+                />
             </div>
             <div
                 id="mobileNav"
                 className={classNames(
-                    'px-4 py-6 fixed top-0 left-0 h-full w-full  z-20 animate-fade-in-down ',
+                    'px-4 py-6 fixed top-0 bg-neutral-100 left-0 h-full w-full z-20 animate-fade-in-down ',
                     { hidden: !isVisible }
                 )}
             >
@@ -60,8 +65,8 @@ export const NavBar = ({ menus }: NavBarProps) => {
                         src="/img/Cross.svg"
                         alt=""
                         className="h-16 w-16"
-                        height={16}
-                        width={16}
+                        height={24}
+                        width={24}
                     />
                 </div>
                 <ul className="flex flex-col mx-8 my-24 items-center text-3xl">
@@ -73,6 +78,12 @@ export const NavBar = ({ menus }: NavBarProps) => {
                         );
                     })}
                 </ul>
+                <section className="flex flex-col">
+                    <h3 className="text-center text-xl leading-3 mb-5">
+                        Login or Create an Account.
+                    </h3>
+                    <UserMenus />
+                </section>
             </div>
         </nav>
     );

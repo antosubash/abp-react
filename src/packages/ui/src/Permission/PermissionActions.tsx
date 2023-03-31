@@ -21,7 +21,13 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
         if (!can(action.policy) || action.visible) return false;
         const variant = action.icon === 'trash' ? 'destructive' : 'subtle';
         return (
-            <Button key={v4()} variant={variant} onClick={action.callback}>
+            <Button
+                key={v4()}
+                variant={variant}
+                onClick={action.callback}
+                shape="square"
+                size="sm"
+            >
                 {action.icon === 'permission' && (
                     <AdjustmentsHorizontalIcon
                         width={15}

@@ -7,7 +7,7 @@ import {
 } from '@abpreact/ui';
 import { NextPage } from 'next';
 import React from 'react';
-import { AdminMenus } from '../../utils/Constants';
+import { AdminMenus } from '../../../utils/Constants';
 
 const TenantsPage: NextPage = () => {
     return (

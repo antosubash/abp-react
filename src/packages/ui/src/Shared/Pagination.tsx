@@ -49,10 +49,10 @@ export const Pagination = <T extends unknown>({
             >
                 <ChevronLeftIcon width={24} height={24} />
             </Button>
-            <div className="block pr-2 pl-2 sm:hidden">
+            <div className="block pr-2 pl-2 lg:hidden">
                 {table.getState().pagination.pageIndex} / {pageCount}
             </div>
-            <div className="hidden sm:inline-block sm:space-x-2 sm:mr-1 sm:ml-1">
+            <div className="hidden lg:inline-block sm:space-x-2 sm:mr-1 sm:ml-1">
                 {numbers.map((n, idx) => (
                     <Button
                         size="sm"

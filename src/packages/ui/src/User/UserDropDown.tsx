@@ -35,31 +35,31 @@ export const UserDropDown = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuGroup>
-                        <DropdownMenuItem className="hover:bg-gray-600 transition">
+                        <DropdownMenuItem className="hover:bg-neutral-600 transition">
                             <Link
                                 href="/admin"
                                 passHref={true}
-                                className="px-4 py-2 text-md text-white"
+                                className="px-4 py-2 text-md text-neutral-100"
                             >
                                 Admin
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gray-600 transition">
+                        <DropdownMenuItem className="hover:bg-neutral-600 transition">
                             <Link
                                 href="/profile"
                                 passHref={true}
-                                className="px-4 py-2 text-md text-white"
+                                className="px-4 py-2 text-md text-neutral-100"
                             >
                                 Profile
                             </Link>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="hover:bg-gray-600 transition">
+                    <DropdownMenuItem className="hover:bg-neutral-600 transition">
                         <Link
                             href="#"
                             passHref={true}
-                            className="px-4 py-2 text-md text-white"
+                            className="px-4 py-2 text-md text-neutral-100"
                             onClick={() => {
                                 router.push('/logout');
                             }}
