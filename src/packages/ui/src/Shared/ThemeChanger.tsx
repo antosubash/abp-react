@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react';
-import { themeChange } from 'theme-change';
-
+import { Check, BoxSelectIcon } from 'lucide-react';
 import { Button } from './Button';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuLabel,
+    DropdownMenuItem,
     DropdownMenuTrigger
 } from './DropdownMenu';
-import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
+
+const themes = ['light', 'dark', 'cupcake', 'halloween'];
 const ThemeSwitcher = () => {
+    const [currTheme, setCurrTheme] = useState<string>('');
     useEffect(() => {
-        document.documentElement.setAttribute(
-            'data-theme',
-            getCurrentSelectedTheme()
-        );
+        const t = getCurrentSelectedTheme();
+        setCurrTheme(t);
+        document.documentElement.setAttribute('data-theme', t);
     }, []);
 
     const updateThemeSettings = (theme: string) => {
         localStorage.setItem('theme', theme);
         document.documentElement.setAttribute('data-theme', theme);
+        setCurrTheme(theme);
     };
 
     const getCurrentSelectedTheme = () => {
@@ -35,32 +36,25 @@ const ThemeSwitcher = () => {
                     Theme
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuItem>
-                    <Button
-                        variant="ghost"
-                        onClick={() => updateThemeSettings('light')}
-                    >
-                        Light
-                    </Button>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem onClick={() => updateThemeSettings('dark')}>
-                    <Button
-                        variant="ghost"
-                        onClick={() => updateThemeSettings('light')}
-                    >
-                        Dark
-                    </Button>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Button
-                        variant="ghost"
-                        onClick={() => updateThemeSettings('cupcake')}
-                    >
-                        Cupcake
-                    </Button>
-                </DropdownMenuItem>
+            <DropdownMenuContent className="w-[10rem]">
+                {themes.map((t) => (
+                    <DropdownMenuItem key={t}>
+                        <Button
+                            fluid
+                            variant={t === currTheme ? 'active' : 'transparent'}
+                            onClick={() => updateThemeSettings(t)}
+                        >
+                            <span className="w-full inline-flex items-center justify-between">
+                                {t === currTheme ? (
+                                    <Check width={16} height={16} />
+                                ) : (
+                                    <BoxSelectIcon width={16} height={16} />
+                                )}
+                                <span className="capitalize">{t}</span>
+                            </span>
+                        </Button>
+                    </DropdownMenuItem>
+                ))}
             </DropdownMenuContent>
         </DropdownMenu>
     );

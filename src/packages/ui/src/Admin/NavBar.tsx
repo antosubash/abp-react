@@ -52,7 +52,7 @@ export const NavBar = ({ menus }: NavBarProps) => {
             <div
                 id="mobileNav"
                 className={classNames(
-                    'px-4 py-6 fixed top-0 bg-neutral-100 left-0 h-full w-full z-20 animate-fade-in-down ',
+                    'px-4 py-6 fixed top-0 left-0 h-full w-full z-20 animate-fade-in-down ',
                     { hidden: !isVisible }
                 )}
             >

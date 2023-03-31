@@ -34,9 +34,9 @@ const CustomeLink = ({
         <Link href={m.link!} passHref={true} className="block">
             <section
                 className={classNames(
-                    'w-full cursor-pointer font-thin flex items-center p-4 transition-colors duration-200 justify-start bg-gradient-to-r',
+                    'w-full cursor-pointer font-thin flex items-center p-4 transition-colors duration-200 justify-start',
                     {
-                        'text-neutral-100 bg-blue-700': m.link === path
+                        'bg-secondary': m.link === path
                     },
                     className
                 )}
@@ -44,7 +44,12 @@ const CustomeLink = ({
                 {icon && (
                     <span className="text-left text-secondary">{icon}</span>
                 )}
-                <span className="mx-4 text-sm font-normal text-neutral-100">
+                <span
+                    className={classNames('mx-4 text-sm font-normal', {
+                        'text-base-content': m.link !== path,
+                        'text-primary-content': m.link === path
+                    })}
+                >
                     {m.name}
                 </span>
             </section>
@@ -78,7 +83,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                             <span className="text-left text-secondary">
                                 {Icon}
                             </span>
-                            <span className="mx-4 text-sm font-normal text-neutral-100">
+                            <span className="mx-4 text-sm font-normal text-base-content">
                                 {menu.name}
                             </span>
                         </AccordionTrigger>
@@ -104,7 +109,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
     return (
         <section
             className={classNames(
-                'h-full flex shadow-lg fixed w-[20rem] z-[15] pt-6 pl-2 pr-2 bg-neutral transition-transform delay-200 ease-in-out',
+                'h-full flex shadow-lg fixed w-[20rem] z-[15] pt-6 pl-2 pr-2  bg-base-100 text-base-content transition-transform delay-200 ease-in-out',
                 {
                     'translate-x-0 sm:-translate-x-[150rem]': toggleSidebar,
                     '-translate-x-[150rem] sm:translate-x-0': !toggleSidebar
@@ -113,10 +118,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
         >
             <section className="h-full w-full">
                 <section className="flex items-center">
-                    <Link
-                        href="/"
-                        className="text-2xl font-bold grow text-neutral-200"
-                    >
+                    <Link href="/" className="text-2xl font-bold grow ">
                         My Startup
                     </Link>
                     <Button
@@ -124,11 +126,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                         onClick={() => onToggle?.(false)}
                         className="sm:hidden"
                     >
-                        <ChevronLeftIcon
-                            width={24}
-                            height={24}
-                            className="text-neutral-800"
-                        />
+                        <ChevronLeftIcon width={24} height={24} />
                     </Button>
                 </section>
                 <nav className="mt-6">

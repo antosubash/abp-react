@@ -88,7 +88,7 @@ const DropdownMenuItem = forwardRef<
     <DropdownMenuPrimitive.Item
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm font-medium outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
+            'relative flex cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm font-medium outline-none focus:border-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-500',
             inset && 'pl-8',
             className
         )}
@@ -104,7 +104,7 @@ const DropdownMenuCheckboxItem = forwardRef<
     <DropdownMenuPrimitive.CheckboxItem
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-medium outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
+            'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-medium outline-none focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
             className
         )}
         checked={checked}
@@ -128,7 +128,7 @@ const DropdownMenuRadioItem = forwardRef<
     <DropdownMenuPrimitive.RadioItem
         ref={ref}
         className={cn(
-            'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-medium outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
+            'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm font-medium outline-none focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
             className
         )}
         {...props}
@@ -152,7 +152,7 @@ const DropdownMenuLabel = forwardRef<
     <DropdownMenuPrimitive.Label
         ref={ref}
         className={cn(
-            'px-2 py-1.5 text-sm font-semibold text-slate-900 dark:text-slate-300',
+            'px-2 py-1.5 text-sm font-semibold text-neutral-100',
             inset && 'pl-8',
             className
         )}
@@ -167,10 +167,7 @@ const DropdownMenuSeparator = forwardRef<
 >(({ className, ...props }, ref) => (
     <DropdownMenuPrimitive.Separator
         ref={ref}
-        className={cn(
-            '-mx-1 my-1 h-px bg-slate-100 dark:bg-slate-700',
-            className
-        )}
+        className={cn('-mx-1 my-1 h-px bg-neutral-800', className)}
         {...props}
     />
 ));
@@ -183,7 +180,7 @@ const DropdownMenuShortcut = ({
     return (
         <span
             className={cn(
-                'ml-auto text-xs tracking-widest text-slate-500',
+                'ml-auto text-xs tracking-widest text-neutral-500',
                 className
             )}
             {...props}

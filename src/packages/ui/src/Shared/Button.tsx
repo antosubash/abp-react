@@ -12,7 +12,8 @@ const buttonVariants = cva('btn', {
             subtle: 'btn-primary',
             ghost: 'btn-ghost',
             link: 'btn-link',
-            active: 'btn-active'
+            active: 'btn-active',
+            transparent: 'transparent'
         },
         size: {
             default: 'btn-md',
@@ -45,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 className={cn(
                     buttonVariants({ variant, size, shape, className }),
                     {
-                        'btn-disabled': props.disabled,
+                        'btn-disabled': !!props?.disabled,
                         'btn-block': !!props?.fluid
                     }
                 )}
