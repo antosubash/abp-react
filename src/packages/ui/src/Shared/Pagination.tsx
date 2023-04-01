@@ -33,7 +33,7 @@ export const Pagination = <T extends unknown>({
                 </span>
             );
         }
-        console.log(idx, 'idx', '---', table.getState().pagination.pageIndex);
+
         return (
             <Button
                 size="sm"

@@ -90,7 +90,9 @@ export const ChangePassword = () => {
                     }}
                 />
 
-                <Button type="submit">Save</Button>
+                <Button type="submit" variant="subtle">
+                    Save
+                </Button>
             </form>
         </section>
     );

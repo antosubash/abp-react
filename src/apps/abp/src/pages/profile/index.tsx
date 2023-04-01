@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 import React from 'react';
 import {
     AdminLayout,
-    ChangePassword,
     ProfileSettings,
     Tabs,
     TabsContent,
@@ -29,7 +28,9 @@ const ProfilePage: NextPage = () => {
                 </TabsList>
                 <TabsContent value={ps}>
                     <section>
-                        <h3 className="text-neutral-100">Personal Settings</h3>
+                        <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
+                            Personal Settings
+                        </h3>
                         <hr className="mt-3 mb-3" />
                         <ProfileSettings />
                     </section>

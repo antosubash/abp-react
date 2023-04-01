@@ -26,7 +26,7 @@ const TabsTrigger = forwardRef<
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Trigger
         className={cn(
-            'inline-flex min-w-[100px] text-primary-content items-center justify-center rounded-[0.185rem] px-3 py-1.5  text-sm font-medium  transition-all  disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-2 data-[state=active]:text-lg data-[state=active]:uppercase data-[state=active]:shadow-lg',
+            'inline-flex min-w-[100px] truncate text-primary-content items-center justify-center rounded-[0.185rem] px-3 py-1.5  text-sm font-medium  transition-all  disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-2 data-[state=active]:text-md data-[state=active]:uppercase data-[state=active]:shadow-lg',
             className
         )}
         {...props}
@@ -40,7 +40,10 @@ const TabsContent = forwardRef<
     ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
     <TabsPrimitive.Content
-        className={cn('mt-2 rounded-md shadow-lg p-5 bg-base-100', className)}
+        className={cn(
+            'mt-2 rounded-md shadow-lg md:min-h-fit min-h-screen p-5 bg-base-100',
+            className
+        )}
         {...props}
         ref={ref}
     />

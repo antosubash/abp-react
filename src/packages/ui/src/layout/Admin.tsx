@@ -4,6 +4,8 @@ import ThemeSwitcher from '../Shared/ThemeChanger';
 import { UserMenus } from '../User/UserMenus';
 import { Bars3Icon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { Button } from '../Shared/Button';
+import { useCurrentUser } from '@abpreact/hooks';
+import { AuthenticationFailure } from '../Shared/auth/AuthenticationFailure';
 
 type Menu = {
     name: string;
@@ -25,8 +27,17 @@ export const AdminLayout = <T extends unknown>({
     children
 }: AdminLayoutProps<T>) => {
     const [toggleSidebar, setToggleSidebar] = useState(false);
+    const currentUser = useCurrentUser();
+
     return (
         <main className="relative">
+            {currentUser && !currentUser?.isAuthenticated && (
+                <AuthenticationFailure
+                    onCloseEvent={() => {
+                        console.log('Authenticated closed');
+                    }}
+                />
+            )}
             <Sidebar
                 menus={menus}
                 toggleSidebar={toggleSidebar}
