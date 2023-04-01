@@ -13,6 +13,7 @@ import {
     OpenAPI as ApiOptions,
     AbpApplicationConfigurationService
 } from '@abpreact/proxy';
+
 import { Meta, Toaster } from '@abpreact/ui';
 import i18n from '../utils/i18n';
 import App from 'next/app';

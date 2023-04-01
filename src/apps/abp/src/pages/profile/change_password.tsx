@@ -3,7 +3,6 @@ import React from 'react';
 import {
     AdminLayout,
     ChangePassword,
-    ProfileSettings,
     Tabs,
     TabsContent,
     TabsList,
@@ -30,7 +29,9 @@ const ChangePasswordPage: NextPage = () => {
 
                 <TabsContent value={cp}>
                     <section>
-                        <h3 className="text-neutral-100">Change Password</h3>
+                        <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
+                            Change Password
+                        </h3>
                         <hr className="mt-3 mb-3" />
                         <ChangePassword />
                     </section>

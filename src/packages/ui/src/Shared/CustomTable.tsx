@@ -81,8 +81,8 @@ const TableView = <T extends unknown>({
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderBody()}</tbody>
             </table>
-            <div className="border-t flex items-center  p-5">
-                <div className="flex-grow text-base-content">
+            <div className="border-t  p-5 flex flex-col lg:items-center lg:flex-row">
+                <div className="flex-grow text-base-content pb-2">
                     {totalCount} total
                 </div>
                 {totalCount > 10 && (

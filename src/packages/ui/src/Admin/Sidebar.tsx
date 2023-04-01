@@ -41,9 +41,7 @@ const CustomeLink = ({
                     className
                 )}
             >
-                {icon && (
-                    <span className="text-left text-secondary">{icon}</span>
-                )}
+                {icon && <span className="text-left text-primary">{icon}</span>}
                 <span
                     className={classNames('mx-4 text-sm font-normal', {
                         'text-base-content': m.link !== path,
@@ -80,7 +78,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                 >
                     <AccordionItem value={menu.name}>
                         <AccordionTrigger>
-                            <span className="text-left text-secondary">
+                            <span className="text-left text-primary">
                                 {Icon}
                             </span>
                             <span className="mx-4 text-sm font-normal text-base-content">
