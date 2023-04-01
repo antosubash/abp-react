@@ -8,7 +8,7 @@ import {
     ChevronDoubleLeftIcon,
     ChevronDoubleRightIcon
 } from '@heroicons/react/24/solid';
-
+import { getPages } from '../utils';
 type PaginationProps<T> = {
     pageCount: number;
     table: Table<T>;
@@ -17,28 +17,45 @@ export const Pagination = <T extends unknown>({
     pageCount,
     table
 }: PaginationProps<T>) => {
-    const [numbers, setNumbers] = useState<number[]>([]);
-    useEffect(() => {
-        const temp = [];
-        for (let i = 0; i < pageCount; i++) {
-            temp.push(i);
-        }
-        setNumbers(temp);
-    }, []);
+    const [numbers, setNumbers] = useState([]);
+    const counts = getPages(pageCount, table.getState().pagination.pageIndex);
 
     // table.getCanNextPage() doesn't seem to be working. So, it is just a work around.
     const canNextPage =
         table.getState().pagination.pageIndex >= 0 &&
         table.getState().pagination.pageIndex < pageCount - 1;
 
-    const pVariant = !table.getCanPreviousPage() ? 'active' : 'subtle';
-    const nVariant = !canNextPage ? 'active' : 'subtle';
-
+    const renderButtons = (count: number | string, idx: number) => {
+        if (count === 'SPACER') {
+            return (
+                <span key={v4()} className="text-primary">
+                    ...
+                </span>
+            );
+        }
+        console.log(idx, 'idx', '---', table.getState().pagination.pageIndex);
+        return (
+            <Button
+                size="sm"
+                variant="subtle"
+                key={v4()}
+                disabled={
+                    table.getState().pagination.pageIndex === Number(count) - 1
+                }
+                onClick={() => {
+                    table.setPageIndex(Number(count) - 1);
+                }}
+            >
+                {count}
+            </Button>
+        );
+    };
     return (
         <section className="pagination flex items-center space-x-1">
             <Button
                 size="sm"
-                variant={pVariant}
+                variant="subtle"
+                disabled={!table.getCanPreviousPage()}
                 onClick={() => {
                     if (!table.getCanPreviousPage()) return;
                     table.setPageIndex(0);
@@ -48,7 +65,8 @@ export const Pagination = <T extends unknown>({
             </Button>
             <Button
                 size="sm"
-                variant={pVariant}
+                variant="subtle"
+                disabled={!table.getCanPreviousPage()}
                 onClick={() => {
                     if (!table.getCanPreviousPage()) return;
                     table.previousPage();
@@ -60,28 +78,12 @@ export const Pagination = <T extends unknown>({
                 {table.getState().pagination.pageIndex} / {pageCount}
             </div>
             <div className="hidden lg:inline-block sm:space-x-2 sm:mr-1 sm:ml-1">
-                {numbers.map((n, idx) => (
-                    <Button
-                        size="sm"
-                        variant={
-                            table.getState().pagination.pageIndex === idx
-                                ? 'active'
-                                : 'subtle'
-                        }
-                        key={v4()}
-                        onClick={() => {
-                            if (table.getState().pagination.pageIndex === idx)
-                                return;
-                            table.setPageIndex(n);
-                        }}
-                    >
-                        {n + 1}
-                    </Button>
-                ))}
+                {counts.map(renderButtons)}
             </div>
             <Button
                 size="sm"
-                variant={nVariant}
+                variant="subtle"
+                disabled={!canNextPage}
                 onClick={() => {
                     if (!canNextPage) {
                         return;
@@ -93,7 +95,8 @@ export const Pagination = <T extends unknown>({
             </Button>
             <Button
                 size="sm"
-                variant={nVariant}
+                variant="subtle"
+                disabled={!canNextPage}
                 onClick={() => {
                     if (!canNextPage) {
                         return;
