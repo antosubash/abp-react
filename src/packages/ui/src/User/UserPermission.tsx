@@ -253,8 +253,8 @@ export const UserPermission = ({
                                                     variant={
                                                         currentPermissionGrant?.data ===
                                                         permission?.permissions
-                                                            ? 'default'
-                                                            : 'active'
+                                                            ? 'subtle'
+                                                            : 'default'
                                                     }
                                                     onClick={(e) => {
                                                         e.preventDefault();
@@ -273,7 +273,7 @@ export const UserPermission = ({
                                     )}
                                 </div>
                             </section>
-                            <hr className="border-b-neutral-100 mt-5 mb-5" />
+                            <hr className="border-b-primary mt-5 mb-5" />
                             <section className="flex flex-col space-y-1 mt-3">
                                 {currentPermissionGrant?.data &&
                                     renderTogglePermission()}
@@ -285,10 +285,10 @@ export const UserPermission = ({
                             <section className="grid grid-cols-2 gap-2 mt-2">
                                 {permissionGroups.map((group) => (
                                     <div key={v4()}>
-                                        <h3 className="text-neutral-300">
+                                        <h3 className="text-base-content">
                                             {group.displayName}
                                         </h3>
-                                        <hr className="border-b-neutral-100 mt-5 mb-5" />
+                                        <hr className="border-b-primary mt-5 mb-5" />
                                         <div key={v4()}>
                                             <TogglePermission
                                                 permissions={group.permissions!}

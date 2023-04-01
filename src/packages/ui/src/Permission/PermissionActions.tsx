@@ -32,17 +32,25 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
                     <AdjustmentsHorizontalIcon
                         width={15}
                         height={15}
-                        className="text-white"
+                        className="text-primary-content"
                     />
                 )}
                 {action.icon === 'trash' && (
                     <TrashIcon width={15} height={15} className="text-white" />
                 )}
                 {action.icon === 'pencil' && (
-                    <PencilIcon width={15} height={15} className="text-white" />
+                    <PencilIcon
+                        width={15}
+                        height={15}
+                        className="text-primary-content"
+                    />
                 )}
                 {action.icon === 'features' && (
-                    <CogIcon width={15} height={15} className="text-white" />
+                    <CogIcon
+                        width={15}
+                        height={15}
+                        className="text-primary-content"
+                    />
                 )}
             </Button>
         );

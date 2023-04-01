@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         try {
             const currentSession = await fetch('/api/auth/session');
             const currentSessionJson = await currentSession.json();
+
             return currentSessionJson.accessToken || '';
         } catch (err: unknown) {
             if (err instanceof Error) {

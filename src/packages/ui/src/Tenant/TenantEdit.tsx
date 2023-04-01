@@ -65,7 +65,7 @@ export const TenantEdit = ({
 
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent className="text-white">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Upate a Tenant Name</DialogTitle>
                 </DialogHeader>
@@ -73,7 +73,7 @@ export const TenantEdit = ({
                     <section className="flex flex-col space-y-5">
                         <Input
                             required
-                            placeholder="Tenant Name"
+                            label="Tenant Name"
                             defaultValue={tenantDto.name ?? ''}
                             {...register('name')}
                         />

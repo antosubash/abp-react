@@ -9,7 +9,7 @@ export const Card = ({ children, className }: CardProps) => {
     return (
         <section
             className={classNames(
-                'bg-neutral rounded-lg p-5 shadow-lg text-neutral-100',
+                'rounded-lg p-5 shadow-lg text-base-content bg-base-100',
                 className
             )}
         >

@@ -18,7 +18,7 @@ const TableView = <T extends unknown>({
         return headerGroups.map((headerGroup) => {
             const headers = headerGroup.headers;
             return (
-                <tr key={headerGroup.id} className="first:hidden">
+                <tr key={headerGroup.id} className="first:hidden ">
                     {headers.map((header) => {
                         if (header.isPlaceholder) return false;
                         return (
@@ -45,7 +45,7 @@ const TableView = <T extends unknown>({
             return (
                 <tr
                     key={row.id}
-                    className="hover:bg-neutral-50/80 hover:text-neutral-800 transition delay-75 ease-in"
+                    className="hover:bg-base-200 hover:text-base-content transition delay-75 ease-in border-b-primary border-b"
                 >
                     {cells.map((cell) => {
                         return (
@@ -68,19 +68,21 @@ const TableView = <T extends unknown>({
     if (totalCount === 0) {
         return (
             <section className="p-3 flex justify-center">
-                <h3 className="leading-3 text-neutral-100">No Records Found</h3>
+                <h3 className="leading-3 text-base-content">
+                    No Records Found
+                </h3>
             </section>
         );
     }
     const pageCount = Math.ceil(totalCount / pageSize);
     return (
         <section className="overflow-auto">
-            <table className="w-full divide-y text-left divide-neutral-200 table-auto sm:overflow-x-auto lg:table-fixed bg-neutral text-neutral-100">
+            <table className="w-full divide-y text-left divide-base-200 table-auto sm:overflow-x-auto lg:table-fixed text-base-content">
                 <thead>{renderHeader()}</thead>
                 <tbody>{renderBody()}</tbody>
             </table>
-            <div className="text-neutral-400 pt-5 border-t flex items-center">
-                <div className="flex-grow text-neutral-100">
+            <div className="border-t flex items-center  p-5">
+                <div className="flex-grow text-base-content">
                     {totalCount} total
                 </div>
                 {totalCount > 10 && (

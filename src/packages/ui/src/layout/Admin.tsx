@@ -34,7 +34,7 @@ export const AdminLayout = <T extends unknown>({
             />
             <section className="h-screen overflow-auto">
                 <section className="flex flex-col w-full">
-                    <header className="w-full pt-5 pb-5 flex items-center justify-between fixed bg-neutral shadow-md">
+                    <header className="w-full pt-5 pb-5 flex  items-center bg-base-100 text-base-content justify-between fixed shadow-md">
                         <section className="sm:hidden pl-5 pt-2">
                             <Button
                                 variant="subtle"

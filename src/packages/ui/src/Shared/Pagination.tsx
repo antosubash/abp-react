@@ -31,21 +31,28 @@ export const Pagination = <T extends unknown>({
         table.getState().pagination.pageIndex >= 0 &&
         table.getState().pagination.pageIndex < pageCount - 1;
 
+    const pVariant = !table.getCanPreviousPage() ? 'active' : 'subtle';
+    const nVariant = !canNextPage ? 'active' : 'subtle';
+
     return (
         <section className="pagination flex items-center space-x-1">
             <Button
                 size="sm"
-                variant="default"
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.setPageIndex(0)}
+                variant={pVariant}
+                onClick={() => {
+                    if (!table.getCanPreviousPage()) return;
+                    table.setPageIndex(0);
+                }}
             >
                 <ChevronDoubleLeftIcon width={24} height={24} />
             </Button>
             <Button
                 size="sm"
-                variant="default"
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.previousPage()}
+                variant={pVariant}
+                onClick={() => {
+                    if (!table.getCanPreviousPage()) return;
+                    table.previousPage();
+                }}
             >
                 <ChevronLeftIcon width={24} height={24} />
             </Button>
@@ -56,10 +63,15 @@ export const Pagination = <T extends unknown>({
                 {numbers.map((n, idx) => (
                     <Button
                         size="sm"
-                        variant="default"
+                        variant={
+                            table.getState().pagination.pageIndex === idx
+                                ? 'active'
+                                : 'subtle'
+                        }
                         key={v4()}
-                        disabled={table.getState().pagination.pageIndex === idx}
                         onClick={() => {
+                            if (table.getState().pagination.pageIndex === idx)
+                                return;
                             table.setPageIndex(n);
                         }}
                     >
@@ -69,17 +81,25 @@ export const Pagination = <T extends unknown>({
             </div>
             <Button
                 size="sm"
-                variant="default"
-                disabled={!canNextPage}
-                onClick={() => table.nextPage()}
+                variant={nVariant}
+                onClick={() => {
+                    if (!canNextPage) {
+                        return;
+                    }
+                    table.nextPage();
+                }}
             >
                 <ChevronRightIcon width={24} height={24} />
             </Button>
             <Button
                 size="sm"
-                variant="default"
-                disabled={!canNextPage}
-                onClick={() => table.setPageIndex(pageCount - 1)}
+                variant={nVariant}
+                onClick={() => {
+                    if (!canNextPage) {
+                        return;
+                    }
+                    table.setPageIndex(pageCount - 1);
+                }}
             >
                 <ChevronDoubleRightIcon width={24} height={24} />
             </Button>

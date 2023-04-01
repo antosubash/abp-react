@@ -32,7 +32,7 @@ class MyDocument extends Document {
                         src="https://umami.antosubash.com/umami.js"
                     ></script>
                 </Head>
-                <body className="bg-neutral">
+                <body className="bg-base-100  text-base-content">
                     <Main />
                     <NextScript />
                 </body>

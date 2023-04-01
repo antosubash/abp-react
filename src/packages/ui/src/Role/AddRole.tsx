@@ -56,11 +56,11 @@ export const AddRole = ({}: AddUserProps) => {
         <section className="p-3">
             <Dialog open={open} onOpenChange={setOpen}>
                 <section className="flex items-center justify-between pb-5">
-                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate text-neutral-100">
+                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
                         Role Management
                     </h3>
                     {can('AbpIdentity.Roles.Create') && (
-                        <Button variant="default" onClick={() => setOpen(true)}>
+                        <Button variant="subtle" onClick={() => setOpen(true)}>
                             <span className="truncate">Create New Role</span>
                         </Button>
                     )}
@@ -85,6 +85,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="isDefault"
                                     name="isDefault"
+                                    variant="subtle"
                                     checked={isDefault}
                                     onCheckedChange={(checked) =>
                                         setIsDefault(!!checked.valueOf())
@@ -92,7 +93,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isDefault"
-                                    className="text-sm font-medium leading-none text-neutral-100"
+                                    className="text-sm font-medium leading-none"
                                 >
                                     Is Default
                                 </label>
@@ -105,6 +106,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="isPublic"
                                     name="isPublic"
+                                    variant="subtle"
                                     checked={isPublic}
                                     onCheckedChange={(checked) =>
                                         setIsPublic(!!checked.valueOf())
@@ -112,7 +114,7 @@ export const AddRole = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isPublic"
-                                    className="text-sm font-medium leading-none text-neutral-100"
+                                    className="text-sm font-medium leading-none "
                                 >
                                     Is Public
                                 </label>

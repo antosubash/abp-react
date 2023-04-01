@@ -6,7 +6,7 @@ export const Dashboard = ({}: DashboardProps) => {
     const session = useSession();
     return (
         <div>
-            <h1 className="text-4xl text-neutral-200 font-semibold ">
+            <h1 className="text-4xl font-semibold ">
                 Hello, {session.data?.user?.name}!
             </h1>
         </div>

@@ -56,11 +56,11 @@ export const AddUser = ({}: AddUserProps) => {
         <section className="p-3">
             <Dialog open={open} onOpenChange={setOpen}>
                 <section className="flex items-center justify-between pb-5">
-                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate text-neutral-100">
+                    <h3 className="title text-xl grow p-0 m-1 truncate">
                         User Management
                     </h3>
                     {can('AbpIdentity.Users.Create') && (
-                        <Button variant="default" onClick={() => setOpen(true)}>
+                        <Button variant="subtle" onClick={() => setOpen(true)}>
                             <span className="truncate"> Create New User</span>
                         </Button>
                     )}
@@ -101,6 +101,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="isActive"
                                     name="isActive"
+                                    variant="subtle"
                                     defaultChecked
                                     checked={isActive}
                                     onCheckedChange={(checked) =>
@@ -109,7 +110,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="isActive"
-                                    className="text-sm text-neutral-100 font-medium leading-none "
+                                    className="text-sm font-medium leading-none "
                                 >
                                     Active
                                 </label>
@@ -122,6 +123,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="lockoutEnabled"
                                     name="lockoutEnabled"
+                                    variant="subtle"
                                     defaultChecked
                                     checked={lockoutEnabled}
                                     onCheckedChange={(checked) =>
@@ -130,7 +132,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 />
                                 <label
                                     htmlFor="lockoutEnabled"
-                                    className="text-sm text-neutral-100 font-medium leading-none "
+                                    className="text-sm font-medium leading-none "
                                 >
                                     Lock account after failed login attempts
                                 </label>

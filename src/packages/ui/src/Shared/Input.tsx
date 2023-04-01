@@ -14,13 +14,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         return (
             <section className="grid w-full items-center gap-1.5">
                 {label && (
-                    <Label htmlFor={id} className="text-neutral-100">
+                    <Label htmlFor={id} className="text-primary">
                         {label}
                     </Label>
                 )}
                 <input
                     className={cn(
-                        'flex h-10 w-full text-neutral-100 rounded-md border border-neutral-300 bg-transparent py-2 px-3 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        'flex h-10 w-full text-base-content rounded-md border  bg-transparent py-2 px-3 text-sm placeholder:text-base-content focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
                         className
                     )}
                     ref={ref}

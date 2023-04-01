@@ -51,15 +51,15 @@ const DialogContent = forwardRef<
             ref={ref}
             className={cn(
                 'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 grid w-full gap-4 rounded-b-lg p-6 sm:max-w-xl lg:max-w-2xl sm:rounded-lg',
-                'bg-neutral-800',
+                'bg-base-100',
                 className
             )}
             {...props}
         >
             {children}
-            <DialogPrimitive.Close className="absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-neutral-100 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-50">
-                <X className="h-4 w-4 text-error hover:animate-spin" />
-                <span className="sr-only">Close</span>
+            <DialogPrimitive.Close className="absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-primary">
+                <X className="h-4 w-4 text-base-content hover:animate-spin" />
+                <span className="sr-only ">Close</span>
             </DialogPrimitive.Close>
         </DialogPrimitive.Content>
     </DialogPortal>
@@ -100,7 +100,7 @@ const DialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
     <DialogPrimitive.Title
         ref={ref}
-        className={cn('text-lg font-semibold text-neutral-100', className)}
+        className={cn('text-lg font-semibold', className)}
         {...props}
     />
 ));
@@ -112,7 +112,7 @@ const DialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
     <DialogPrimitive.Description
         ref={ref}
-        className={cn('text-sm text-neutral-200', className)}
+        className={cn('text-sm text-base-content', className)}
         {...props}
     />
 ));

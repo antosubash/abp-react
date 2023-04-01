@@ -1,72 +1,82 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { Avatar, AvatarFallback, AvatarImage } from '../Shared/Avatar';
+import { BoxSelect, Check } from 'lucide-react';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger
 } from '../Shared/DropdownMenu';
 import { useRouter } from 'next/router';
+import { Button } from '../Shared/Button';
+import { useMemo } from 'react';
+import { v4 } from 'uuid';
+import { useCurrentUser } from '@abpreact/hooks';
+import { USER_ROLE } from '../utils';
+
 export const UserDropDown = () => {
     const session = useSession();
     const router = useRouter();
-
-    const hasAdmin = session.data?.user?.userRole?.includes('admin');
+    const currentUser = useCurrentUser();
+    const hasAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN);
     const picture = session.data?.user?.image;
-    const name = session?.data?.user?.name;
+
+    const menus = useMemo(() => {
+        return [
+            {
+                link: '/admin',
+                visible: hasAdmin,
+                name: 'admin',
+                seprator: false
+            },
+            {
+                link: '/profile',
+                visible: true,
+                name: 'profile',
+                seprator: true
+            },
+            {
+                link: '/logout',
+                visible: true,
+                name: 'log out',
+                seprator: false
+            }
+        ];
+    }, [hasAdmin]);
 
     return (
         <div className="relative inline-block z-50">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Avatar className="cursor-pointer">
-                        <AvatarImage src={picture!} alt={name!} />
-                        <AvatarFallback>V</AvatarFallback>
+                        <AvatarImage src={picture!} alt={currentUser?.name!} />
+                        <AvatarFallback className="uppercase">
+                            {currentUser?.name?.charAt(0) ?? ''}
+                        </AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <DropdownMenuGroup>
-                        <DropdownMenuItem className="hover:bg-neutral-600 transition">
+                <DropdownMenuContent className="w-[10rem]">
+                    {menus.map((m) => (
+                        <DropdownMenuItem key={v4()}>
                             <Link
-                                href="/admin"
+                                href={m.link}
                                 passHref={true}
-                                className="px-4 py-2 text-md text-neutral-100"
+                                className="w-full block"
                             >
-                                Admin
+                                <Button
+                                    fluid
+                                    variant={
+                                        router.asPath === m.link
+                                            ? 'default'
+                                            : 'subtle'
+                                    }
+                                >
+                                    {m.name}
+                                </Button>
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-neutral-600 transition">
-                            <Link
-                                href="/profile"
-                                passHref={true}
-                                className="px-4 py-2 text-md text-neutral-100"
-                            >
-                                Profile
-                            </Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="hover:bg-neutral-600 transition">
-                        <Link
-                            href="#"
-                            passHref={true}
-                            className="px-4 py-2 text-md text-neutral-100"
-                            onClick={() => {
-                                router.push('/logout');
-                            }}
-                        >
-                            Log out
-                        </Link>
-                    </DropdownMenuItem>
+                    ))}
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

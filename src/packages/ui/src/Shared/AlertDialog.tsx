@@ -50,7 +50,7 @@ const AlertDialogContent = forwardRef<
             ref={ref}
             className={cn(
                 'animate-in fade-in-90 slide-in-from-bottom-10 sm:zoom-in-90 sm:slide-in-from-bottom-0 fixed z-50 grid w-full max-w-lg scale-100 gap-4 p-6 opacity-100 sm:rounded-lg md:w-full',
-                'bg-neutral-800',
+                'bg-base-100',
                 className
             )}
             {...props}
@@ -93,7 +93,7 @@ const AlertDialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Title
         ref={ref}
-        className={cn('text-lg font-semibold text-neutral-100', className)}
+        className={cn('text-lg font-semibold ', className)}
         {...props}
     />
 ));
@@ -105,7 +105,7 @@ const AlertDialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Description
         ref={ref}
-        className={cn('text-sm text-neutral-200', className)}
+        className={cn('text-sm ', className)}
         {...props}
     />
 ));
@@ -118,7 +118,7 @@ const AlertDialogAction = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Action
         ref={ref}
-        className={cn('btn btn-primary', className)}
+        className={cn('btn btn-primary text-primary-content', className)}
         {...props}
     />
 ));
@@ -130,7 +130,7 @@ const AlertDialogCancel = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Cancel
         ref={ref}
-        className={cn('btn btn-secondary', className)}
+        className={cn('btn btn-secondary text-secondary-content', className)}
         {...props}
     />
 ));

@@ -6,13 +6,15 @@ import { cn } from '../utils';
 const buttonVariants = cva('btn', {
     variants: {
         variant: {
-            default: 'btn-secondary',
-            destructive: 'btn-error',
-            outline: 'btn-outline',
-            subtle: 'btn-primary',
-            ghost: 'btn-ghost',
-            link: 'btn-link',
-            active: 'btn-active'
+            default:
+                'btn-secondary border-secondary-focus text-secondary-content',
+            destructive: 'btn-error border-error-focus text-error-content',
+            outline: 'btn-outline border-outline-focus text-outline-content',
+            subtle: 'btn-primary border-primary-focus text-primary-content',
+            ghost: 'btn-ghost border-ghost-focus text-ghost-content',
+            link: 'btn-link border-link-focus text-link-content',
+            active: 'btn-active border-active-focus text-active-content',
+            transparent: 'transparent'
         },
         size: {
             default: 'btn-md',
@@ -45,7 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 className={cn(
                     buttonVariants({ variant, size, shape, className }),
                     {
-                        'btn-disabled': props.disabled,
+                        'btn-disabled': !!props?.disabled,
                         'btn-block': !!props?.fluid
                     }
                 )}
