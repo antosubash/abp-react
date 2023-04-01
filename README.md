@@ -1,14 +1,14 @@
 # ABP React
 
-This repo is a work in progress. It only has a landing page and a login page. The User Management, Role Management, Tenant Management and Settings Management pages are not yet implemented. Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2)
+This repo is a work in progress(preparing for beta release). It only has a landing page and a login page. The User Management, Role Management, Tenant Management, Settings Management and profile pages are implemented. Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2)
 
 ## What is this?
 
-This is a React UI for the [ABP Framework](https://abp.io/). It is a work in progress and is not ready for production use. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend. It is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
+This is a React UI for the [ABP Framework](https://abp.io/). We are working on a beta release and it is offically not ready for production, However, you can use it with your own risk. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend. It is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Demo
 
-You can see a demo of the app [here](https://abpreact.antosubash.com/).
+You can see a demo of the app [here](https://abpreact.antosubash.com/)
 
 ## LightHouse Score
 
