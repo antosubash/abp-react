@@ -63,19 +63,19 @@ const AdminPage: NextPage = () => {
                         <div className="  flex flex-col sm:flex-row sm:items-center sm:space-x-5">
                             <Link
                                 href="https://www.amazon.com/gp/product/B097Z2DM8Q/ref=dbs_a_def_rwt_hsch_vapi_tkin_p1_i0"
-                                className="p-0 hover:underline rounded mb-2"
+                                className="p-0  rounded mb-2 btn-primary"
                                 target="_blank"
                             >
-                                <span className="btn-primary block p-3">
+                                <span className="text-primary-content block p-3">
                                     Buy on Amazon US
                                 </span>
                             </Link>
                             <Link
-                                className="p-0 hover:underline rounded mb-2"
+                                className="p-0 rounded mb-2 btn-secondary"
                                 href="https://www.packtpub.com/product/mastering-abp-framework/9781801079242"
                                 target="_blank"
                             >
-                                <span className="bg-secondary block p-3">
+                                <span className="text-secondary-content block p-3">
                                     Buy on PACKT
                                 </span>
                             </Link>
@@ -106,7 +106,7 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://docs.abp.io/en/abp/latest?ref=tmpl"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>See Documents</span>
                             <FaChevronRight />
@@ -127,7 +127,7 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://docs.abp.io/en/abp/latest/Samples/Index?ref=tmpl"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>All samples</span>
                             <FaChevronRight />
@@ -148,14 +148,14 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://community.abp.io/"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>Community</span>
                             <FaChevronRight />
                         </Link>
                         <Link
                             href="https://docs.abp.io/en/abp/latest/Contribution/Index?ref=tmpl"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>Contribute</span>
                             <FaChevronRight />
@@ -176,7 +176,7 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://blog.abp.io/abp?ref=tmpl"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>See Blogs</span>
                             <FaChevronRight />
@@ -198,13 +198,13 @@ const AdminPage: NextPage = () => {
                             <div className="flex space-x-2 pt-2 justify-center">
                                 <Link
                                     href="https://github.com/antosubash/AbpReact/issues/"
-                                    className="bg-secondary p-1 px-3 hover:underline"
+                                    className="btn-primary text-primary-content p-1 px-3 "
                                 >
                                     Issue
                                 </Link>
                                 <Link
                                     href="https://github.com/antosubash/AbpReact/fork"
-                                    className="bg-secondary p-1 px-3 hover:underline"
+                                    className="btn-primary text-primary-content p-1 px-3"
                                 >
                                     Fork
                                 </Link>
@@ -212,7 +212,7 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://github.com/antosubash/AbpReact/issues/new?template=feature.md"
-                            className="underline flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>Request a feature</span>
                             <FaChevronRight />
@@ -234,14 +234,14 @@ const AdminPage: NextPage = () => {
                         </article>
                         <Link
                             href="https://stackoverflow.com/questions/tagged/abp"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>Questions</span>
                             <FaChevronRight />
                         </Link>
                         <Link
                             href="https://stackoverflow.com/questions/ask"
-                            className="underline  flex items-center"
+                            className="underline flex items-center transition hover:text-primary"
                         >
                             <span>Ask a Question</span>
                             <FaChevronRight />
@@ -277,7 +277,7 @@ const AdminPage: NextPage = () => {
                             </h4>
                             <Link
                                 href="https://commercial.abp.io/startup-templates?ref=tmpl"
-                                className="underline  flex items-center"
+                                className="underline flex items-center transition hover:text-primary"
                             >
                                 <span>Details</span>
                                 <FaChevronRight />
@@ -295,7 +295,7 @@ const AdminPage: NextPage = () => {
                             </h4>
                             <Link
                                 href="https://commercial.abp.io/modules?ref=tmpl"
-                                className="underline  flex items-center"
+                                className="underline flex items-center transition hover:text-primary"
                             >
                                 <span>Details</span>
                                 <FaChevronRight />
@@ -313,7 +313,7 @@ const AdminPage: NextPage = () => {
                             </h4>
                             <Link
                                 href="https://commercial.abp.io/tools?ref=tmpl"
-                                className="underline  flex items-center"
+                                className="underline flex items-center transition hover:text-primary"
                             >
                                 <span>Details</span>
                                 <FaChevronRight />
@@ -347,7 +347,7 @@ const AdminPage: NextPage = () => {
                             </h4>
                             <Link
                                 href="https://support.abp.io/QA/Questions?ref=tmpl"
-                                className="underline  flex items-center"
+                                className="underline flex items-center transition hover:text-primary"
                             >
                                 <span>Details</span>
                                 <FaChevronRight />
@@ -365,7 +365,7 @@ const AdminPage: NextPage = () => {
                             </h4>
                             <Link
                                 href="https://commercial.abp.io/additional-services?ref=tmpl"
-                                className="underline  flex items-center"
+                                className="underline flex items-center transition hover:text-primary"
                             >
                                 <span>Details</span>
                                 <FaChevronRight />
@@ -377,7 +377,7 @@ const AdminPage: NextPage = () => {
                 <div className="social flex flex-col justify-center items-center sm:flex-row sm:items-center sm:space-x-4 mt-20 mb-10">
                     <Link
                         href="https://twitter.com/abpframework"
-                        className="hover:underline  flex items-center pb-5"
+                        className="hover:underline  flex items-center  pb-5 transition hover:text-primary"
                     >
                         <FaTwitter
                             width={48}
@@ -388,7 +388,7 @@ const AdminPage: NextPage = () => {
                     </Link>
                     <Link
                         href="https://twitter.com/abpcommercial"
-                        className="hover:underline  flex items-center  pb-5"
+                        className="hover:underline  flex items-center  pb-5 transition hover:text-primary"
                     >
                         <FaTwitter
                             width={48}
@@ -399,7 +399,7 @@ const AdminPage: NextPage = () => {
                     </Link>
                     <Link
                         href="https://github.com/abpframework/abp"
-                        className="hover:underline  flex items-center  pb-5"
+                        className="hover:underline  flex items-center  pb-5 transition hover:text-primary"
                     >
                         <FaGithub
                             width={48}

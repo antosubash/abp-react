@@ -134,13 +134,13 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
     return (
         <section className="p-3">
             <Dialog open={open} onOpenChange={onCloseEvent}>
-                <DialogContent className="text-neutral-content">
+                <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Features</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-1 sm:grid-cols-[12rem_minmax(10rem,_1fr)_auto] gap-2 items-baseline">
-                            <div className="bg-neutral-500 p-3">
+                            <div className=" p-3">
                                 {data?.groups?.map((el: FeatureGroupDto) => (
                                     <span key={v4()}>{el.displayName}</span>
                                 ))}
@@ -151,7 +151,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
                                         <h3 className="text-xl font-medium">
                                             {el.displayName}
                                         </h3>
-                                        <hr className="text-neutral-100 w-full mt-2 pb-2" />
+                                        <hr className=" w-full mt-2 pb-2" />
                                         {el.features?.map((feature) => (
                                             <div
                                                 key={v4()}
@@ -177,13 +177,13 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
                                                 />
                                                 <label
                                                     htmlFor={`${feature.name}_enable`}
-                                                    className="text-sm font-medium leading-none text-neutral-100"
+                                                    className="text-sm font-medium leading-none "
                                                 >
                                                     <span className="pl-2 ">
                                                         {feature.displayName}
                                                     </span>
                                                 </label>
-                                                <p className="text-neutral-200 text-xs pl-6 pt-1">
+                                                <p className=" text-xs pl-6 pt-1">
                                                     {feature.description}
                                                 </p>
                                             </div>

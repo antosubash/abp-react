@@ -41,12 +41,10 @@ function PermissionToggle({
                 onCheckedChange={onChangeEvent}
                 checked={isGranted}
                 disabled={disabled}
+                variant="subtle"
                 size="sm"
             />
-            <label
-                htmlFor={id}
-                className="text-sm text-neutral-100 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+            <label htmlFor={id} className="text-sm  font-medium leading-none">
                 {name}
             </label>
         </div>

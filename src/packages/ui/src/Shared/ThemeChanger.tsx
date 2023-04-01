@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Check, BoxSelectIcon } from 'lucide-react';
+
+import { BoxSelect, Check, Palette } from 'lucide-react';
 import { Button } from './Button';
 import {
     DropdownMenu,
@@ -32,8 +33,11 @@ const ThemeSwitcher = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button size="sm" variant="subtle">
-                    Theme
+                <Button size="sm" variant="subtle" className="w-[6rem]">
+                    <span className="w-full inline-flex items-center justify-between">
+                        <Palette width={16} height={16} />
+                        <span className="capitalize">Theme</span>
+                    </span>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[10rem]">
@@ -41,14 +45,14 @@ const ThemeSwitcher = () => {
                     <DropdownMenuItem key={t}>
                         <Button
                             fluid
-                            variant={t === currTheme ? 'active' : 'transparent'}
+                            variant={t === currTheme ? 'default' : 'subtle'}
                             onClick={() => updateThemeSettings(t)}
                         >
                             <span className="w-full inline-flex items-center justify-between">
                                 {t === currTheme ? (
                                     <Check width={16} height={16} />
                                 ) : (
-                                    <BoxSelectIcon width={16} height={16} />
+                                    <BoxSelect width={16} height={16} />
                                 )}
                                 <span className="capitalize">{t}</span>
                             </span>

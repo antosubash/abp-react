@@ -141,26 +141,26 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                             <section className="flex flex-col space-y-5">
                                 <Input
                                     required
-                                    placeholder="Name"
+                                    label="Name"
                                     defaultValue={userDto.name ?? ''}
                                     {...register('name')}
                                 />
 
                                 <Input
                                     required
-                                    placeholder="Surname"
+                                    label="Surname"
                                     defaultValue={userDto.surname ?? ''}
                                     {...register('surname')}
                                 />
                                 <Input
                                     required
-                                    placeholder="Email"
+                                    label="Email"
                                     defaultValue={userDto.email ?? ''}
                                     {...register('email')}
                                 />
                                 <Input
                                     required
-                                    placeholder="Phone Number"
+                                    label="Phone Number"
                                     defaultValue={userDto.phoneNumber ?? ''}
                                     {...register('phoneNumber')}
                                 />
@@ -184,7 +184,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                     <TabsContent value={TABS_NAME.USERS_ROLE_ASSIGN}>
                         {assignableRoles?.isLoading && <Loader />}
                         {assignableRoles?.isError && (
-                            <div className="p-10 bg-error text-neutral-50 text-3xl">
+                            <div className="p-10 bg-error  text-3xl">
                                 There was an error while featching roles
                                 information for the {userDto.userName}
                             </div>
@@ -202,6 +202,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                                             <Checkbox
                                                 id={r.id}
                                                 name={r.name!}
+                                                variant="subtle"
                                                 checked={
                                                     !!roles?.find(
                                                         (l) => l.id === r.id
@@ -213,7 +214,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                                             />
                                             <label
                                                 htmlFor={r.id}
-                                                className="text-sm text-neutral-100 font-medium leading-none"
+                                                className="text-sm  font-medium leading-none"
                                             >
                                                 {r.name}
                                             </label>

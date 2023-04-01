@@ -63,6 +63,7 @@ export const getAuthOptions = (req: any) => {
                 session.accessToken = token.accessToken;
                 session.idToken = token.idToken;
                 session.user.userRole = token.userRole;
+                session.user.name = token.name;
                 return session;
             },
             async jwt({ token, account }: any) {
@@ -73,6 +74,7 @@ export const getAuthOptions = (req: any) => {
                     token.expiresAt = account.expires_at * 1000;
                     const decoded = jwtDecode(account.access_token!) as any;
                     token.userRole = decoded.role;
+                    token.name = decoded.name;
                     return token;
                 } else if (Date.now() < token.expiresAt!) {
                     // If the access token has not expired yet, return it

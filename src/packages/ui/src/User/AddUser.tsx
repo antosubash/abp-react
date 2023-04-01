@@ -60,7 +60,7 @@ export const AddUser = ({}: AddUserProps) => {
                         User Management
                     </h3>
                     {can('AbpIdentity.Users.Create') && (
-                        <Button variant="default" onClick={() => setOpen(true)}>
+                        <Button variant="subtle" onClick={() => setOpen(true)}>
                             <span className="truncate"> Create New User</span>
                         </Button>
                     )}
@@ -101,6 +101,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="isActive"
                                     name="isActive"
+                                    variant="subtle"
                                     defaultChecked
                                     checked={isActive}
                                     onCheckedChange={(checked) =>
@@ -122,6 +123,7 @@ export const AddUser = ({}: AddUserProps) => {
                                 <Checkbox
                                     id="lockoutEnabled"
                                     name="lockoutEnabled"
+                                    variant="subtle"
                                     defaultChecked
                                     checked={lockoutEnabled}
                                     onCheckedChange={(checked) =>

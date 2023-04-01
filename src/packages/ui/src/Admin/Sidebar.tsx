@@ -36,7 +36,7 @@ const CustomeLink = ({
                 className={classNames(
                     'w-full cursor-pointer font-thin flex items-center p-4 transition-colors duration-200 justify-start',
                     {
-                        'bg-secondary': m.link === path
+                        'bg-primary': m.link === path
                     },
                     className
                 )}
@@ -47,7 +47,7 @@ const CustomeLink = ({
                 <span
                     className={classNames('mx-4 text-sm font-normal', {
                         'text-base-content': m.link !== path,
-                        'text-primary-content': m.link === path
+                        'text-primary-content uppercase': m.link === path
                     })}
                 >
                     {m.name}

@@ -242,8 +242,8 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                                     variant={
                                                         currentPermissionGrant?.data ===
                                                         permission?.permissions
-                                                            ? 'default'
-                                                            : 'active'
+                                                            ? 'subtle'
+                                                            : 'default'
                                                     }
                                                     onClick={(e) => {
                                                         e.preventDefault();
@@ -262,7 +262,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                     )}
                                 </div>
                             </section>
-                            <hr className="border-b-neutral-100 mt-5 mb-5" />
+                            <hr className="border-primary mt-5 mb-5" />
                             <section className="flex flex-col space-y-1 mt-3">
                                 {currentPermissionGrant?.data &&
                                     renderTogglePermission()}
@@ -275,7 +275,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                                 {permissionGroups.map((group) => (
                                     <div key={v4()}>
                                         <h3>{group.displayName}</h3>
-                                        <hr className="border-b-neutral-100 mt-5 mb-5" />
+                                        <hr className="border-primary mt-5 mb-5" />
                                         <div key={v4()}>
                                             <TogglePermission
                                                 permissions={group.permissions!}

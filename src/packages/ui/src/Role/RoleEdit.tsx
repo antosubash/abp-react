@@ -62,7 +62,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
 
     return (
         <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent className="text-white">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Upate a Role: {roleDto.name}</DialogTitle>
                 </DialogHeader>
@@ -70,7 +70,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                     <section className="flex flex-col space-y-5">
                         <Input
                             required
-                            placeholder="Name"
+                            label="Name"
                             disabled={roleDto.name.includes(USER_ROLE.ADMIN)}
                             defaultValue={roleDto.name ?? ''}
                             {...register('name')}
@@ -83,6 +83,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                             <Checkbox
                                 id="isDefault"
                                 name="isDefault"
+                                variant="subtle"
                                 checked={isDefault}
                                 onCheckedChange={(checked) =>
                                     setIsDefault(!!checked.valueOf())
@@ -103,6 +104,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                             <Checkbox
                                 id="isPublic"
                                 name="isPublic"
+                                variant="subtle"
                                 checked={isPublic}
                                 onCheckedChange={(checked) =>
                                     setIsPublic(!!checked.valueOf())
