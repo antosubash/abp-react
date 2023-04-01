@@ -46,6 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 className={cn(
                     buttonVariants({ variant, size, shape, className }),
+                    'mt-1 mb-1',
                     {
                         'btn-disabled': !!props?.disabled,
                         'btn-block': !!props?.fluid

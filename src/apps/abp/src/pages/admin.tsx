@@ -18,8 +18,8 @@ const AdminPage: NextPage = () => {
     return (
         <AdminLayout menus={AdminMenus}>
             <section className="home">
-                <div className="grid w-full justify-center space-y-10">
-                    <div className="p-3 bg-success  rounded-lg leading-5">
+                <div className="grid w-full justify-center space-y-10 pt-5">
+                    <div className="p-3 bg-primary  rounded-lg leading-5">
                         <h1 className="inline-block text-center text-primary-content">
                             <FaRocket
                                 width={24}
@@ -45,7 +45,7 @@ const AdminPage: NextPage = () => {
                             height="300"
                         />
                     </figure>
-                    <div className="sm:ml-5 space-y-2 md:w-[30rem]">
+                    <div className="sm:ml-5 space-y-2 md:w-[30rem] mt-5">
                         <span className="uppercase text-primary">
                             The Offical guide
                         </span>
@@ -255,16 +255,15 @@ const AdminPage: NextPage = () => {
                     A Complete Web Application Platform Built on the ABP
                     Framework
                 </h4>
+                <article className="w-full flex justify-center">
+                    <p className="text-center sm:w-1/2">
+                        ABP Commercial is a platform based on the open source
+                        ABP framework. It provides pre-built application
+                        modules, rapid application development tooling,
+                        professional UI themes, premium support and more.
+                    </p>
+                </article>
                 <Card className="m-5">
-                    <article className="w-full flex justify-center">
-                        <p className="text-center w-1/2">
-                            ABP Commercial is a platform based on the open
-                            source ABP framework. It provides pre-built
-                            application modules, rapid application development
-                            tooling, professional UI themes, premium support and
-                            more.
-                        </p>
-                    </article>
                     <section className="grid lg:grid-cols-3 sm:gap-1">
                         <div className="sm:border-r-2 flex flex-col items-center space-y-5 mt-20">
                             <FaPlus

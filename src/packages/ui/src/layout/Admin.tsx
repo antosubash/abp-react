@@ -30,7 +30,7 @@ export const AdminLayout = <T extends unknown>({
     const currentUser = useCurrentUser();
 
     return (
-        <main className="relative">
+        <main>
             {currentUser && !currentUser?.isAuthenticated && (
                 <AuthenticationFailure
                     onCloseEvent={() => {
@@ -43,9 +43,9 @@ export const AdminLayout = <T extends unknown>({
                 toggleSidebar={toggleSidebar}
                 onToggle={setToggleSidebar}
             />
-            <section className="h-screen overflow-auto">
-                <section className="flex flex-col w-full">
-                    <header className="w-full pt-5 pb-5 flex  items-center bg-base-100 text-base-content justify-between fixed shadow-md">
+            <section className="sm:pl-[20rem]">
+                <section className="h-screen overflow-auto relative">
+                    <header className="sm:w-[calc(100%_-_20rem)] w-full pt-5 pb-5 flex  items-center bg-base-100 text-base-content justify-between fixed shadow-md">
                         <section className="sm:hidden pl-5 pt-2">
                             <Button
                                 variant="subtle"
@@ -54,29 +54,27 @@ export const AdminLayout = <T extends unknown>({
                             >
                                 {toggleSidebar ? (
                                     <ChevronLeftIcon
-                                        className="text-neutral-100"
+                                        className="text-primary-content"
                                         width={24}
                                         height={24}
                                     />
                                 ) : (
                                     <Bars3Icon
-                                        className="text-neutral-100"
+                                        className="text-primary-content"
                                         width={24}
                                         height={24}
                                     />
                                 )}
                             </Button>
                         </section>
-                        <section className="relative flex flex-col justify-end h-full px-3 w-full">
+                        <section className="relative flex flex-col justify-end h-full px-3 w-full pt-2">
                             <section className="relative flex items-center w-full space-x-4 justify-end">
                                 <ThemeSwitcher />
                                 <UserMenus />
                             </section>
                         </section>
                     </header>
-                    <section className="ml-2 mr-2 mt-24 sm:pl-[20rem]">
-                        {children}
-                    </section>
+                    <section className="ml-2 mr-2 mt-24">{children}</section>
                 </section>
             </section>
         </main>
