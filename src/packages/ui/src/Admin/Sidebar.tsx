@@ -107,7 +107,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
     return (
         <section
             className={classNames(
-                'h-full flex shadow-lg fixed w-[20rem] z-[15] pt-6 pl-2 pr-2  bg-base-100 text-base-content transition-transform delay-200 ease-in-out',
+                'h-full flex shadow-lg fixed w-[20rem] z-[10] pt-6 pl-2 pr-2  bg-base-100 text-base-content transition-transform delay-200 ease-in-out',
                 {
                     'translate-x-0 sm:-translate-x-[150rem]': toggleSidebar,
                     '-translate-x-[150rem] sm:translate-x-0': !toggleSidebar
@@ -116,7 +116,10 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
         >
             <section className="h-full w-full">
                 <section className="flex items-center">
-                    <Link href="/" className="text-2xl font-bold grow ">
+                    <Link
+                        href="/"
+                        className="text-2xl font-bold grow sm:text-center"
+                    >
                         My Startup
                     </Link>
                     <Button
@@ -127,7 +130,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                         <ChevronLeftIcon width={24} height={24} />
                     </Button>
                 </section>
-                <nav className="mt-6">
+                <nav className="mt-10">
                     <section className="w-full">
                         <Accordion type="single" collapsible>
                             {menus.map(renderElements)}

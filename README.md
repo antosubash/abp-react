@@ -22,15 +22,15 @@ The goal of this project is to provide a React UI for the ABP Framework. It will
 
 ## Features
 
-- [x] Landing Page
-- [x] Login
-- [ ] Register
-- [ ] Forgot Password
-- [ ] Profile
-- [ ] Tenant Management
-- [ ] Role Management
-- [ ] User Management
-- [ ] Settings Management
+-   [x] Landing Page
+-   [x] Login
+-   [x] Register
+-   [x] Forgot Password
+-   [x] Profile
+-   [x] Tenant Management
+-   [x] Role Management
+-   [x] User Management
+-   [x] Settings Management
 
 ## How to run
 
@@ -52,13 +52,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- [ABP Framework](https://abp.io/)
-- [React](https://reactjs.org/)
-- [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+-   [ABP Framework](https://abp.io/)
+-   [React](https://reactjs.org/)
+-   [Next.js](https://nextjs.org/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [Tailwind CSS](https://tailwindcss.com/)
 
 ## Contributors
 
-- [Anto Subash](https://github.com/antosubash)
-- [Sajan](https://github.com/sajanv88)
+-   [Anto Subash](https://github.com/antosubash)
+-   [Sajan](https://github.com/sajanv88)

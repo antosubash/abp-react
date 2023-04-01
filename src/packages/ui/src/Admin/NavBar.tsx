@@ -15,7 +15,7 @@ export interface NavBarProps {
 export const NavBar = ({ menus }: NavBarProps) => {
     const [isVisible, setIsVisible] = useState(false);
     return (
-        <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
+        <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center bg-base-100 shadow-lg z-10">
             <div className="flex items-center text-xl font-bold">
                 <Link href="/" className="truncate">
                     My Startup
@@ -48,8 +48,8 @@ export const NavBar = ({ menus }: NavBarProps) => {
                 <ThemeSwitcher />
 
                 <Menu
-                    width={48}
-                    height={48}
+                    width={32}
+                    height={32}
                     className="text-primary flex-1"
                     onClick={() => setIsVisible(true)}
                 />
