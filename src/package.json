@@ -8,7 +8,8 @@
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "docker": "turbo prune --scope=abp-react --docker",
         "generate": "plop",
-        "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0"
+        "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0",
+        "test:codegen": "pnpm exec playwright codegen"
     },
     "devDependencies": {
         "dotenv-cli": "latest",
