@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import Image from 'next/image';
 import ThemeSwitcher from '../Shared/ThemeChanger';
 import { UserMenus } from '../User/UserMenus';
+import { Cross, Menu } from 'lucide-react';
 
 export interface NavBarProps {
     menus: {
@@ -17,7 +17,9 @@ export const NavBar = ({ menus }: NavBarProps) => {
     return (
         <nav className="fixed flex justify-between py-6 w-full lg:px-48 md:px-12 px-4 content-center  z-10">
             <div className="flex items-center text-xl font-bold">
-                <Link href="/">My Startup</Link>
+                <Link href="/" className="truncate">
+                    My Startup
+                </Link>
             </div>
             <ul className="items-center hidden md:flex">
                 {menus.map((menu, index) => {
@@ -26,7 +28,9 @@ export const NavBar = ({ menus }: NavBarProps) => {
                             key={index}
                             className="growing-underline mx-3  p-4 rounded"
                         >
-                            <a href={menu.Link}>{menu.Name}</a>
+                            <a href={menu.Link} className="truncate">
+                                {menu.Name}
+                            </a>
                         </li>
                     );
                 })}
@@ -39,20 +43,21 @@ export const NavBar = ({ menus }: NavBarProps) => {
             </div>
             <div
                 id="showMenu"
-                className="md:hidden"
-                onClick={() => setIsVisible(true)}
+                className="md:hidden flex items-center justify-center"
             >
-                <Image
-                    src="/img/Menu.svg"
-                    alt="Menu icon"
-                    height={24}
-                    width={24}
+                <ThemeSwitcher />
+
+                <Menu
+                    width={48}
+                    height={48}
+                    className="text-primary flex-1"
+                    onClick={() => setIsVisible(true)}
                 />
             </div>
             <div
                 id="mobileNav"
                 className={classNames(
-                    'px-4 py-6 fixed top-0 left-0 h-full w-full z-20 animate-fade-in-down ',
+                    'px-4 py-6 fixed top-0 left-0 h-full w-full z-20 animate-fade-in-down bg-base-100 ',
                     { hidden: !isVisible }
                 )}
             >
@@ -61,13 +66,7 @@ export const NavBar = ({ menus }: NavBarProps) => {
                     className="flex justify-end"
                     onClick={() => setIsVisible(false)}
                 >
-                    <Image
-                        src="/img/Cross.svg"
-                        alt=""
-                        className="h-16 w-16"
-                        height={24}
-                        width={24}
-                    />
+                    <Cross width={24} height={24} className="text-primary" />
                 </div>
                 <ul className="flex flex-col mx-8 my-24 items-center text-3xl">
                     {menus.map((menu, index) => {
@@ -79,9 +78,6 @@ export const NavBar = ({ menus }: NavBarProps) => {
                     })}
                 </ul>
                 <section className="flex flex-col">
-                    <h3 className="text-center text-xl leading-3 mb-5">
-                        Login or Create an Account.
-                    </h3>
                     <UserMenus />
                 </section>
             </div>

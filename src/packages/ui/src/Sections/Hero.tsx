@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Button } from '../Shared/Button';
 
 export interface HeroProps {}
 
@@ -8,7 +9,7 @@ export const Hero = (props: HeroProps) => {
             <div className="md:flex-1 md:mr-10">
                 <h1 className="text-5xl font-bold mb-7">
                     A headline for your
-                    <span className="bg-underline1 bg-left-bottom bg-no-repeat pb-2 bg-100%">
+                    <span className="bg-underline1 bg-left-bottom bg-no-repeat pb-2 ">
                         cool website
                     </span>
                 </h1>
@@ -17,19 +18,19 @@ export const Hero = (props: HeroProps) => {
                     Laborum harum tempore consectetur voluptas, cumque nobis
                     laboriosam voluptatem.
                 </p>
-                <div>
-                    <button
-                        aria-label="call to action"
-                        className="bg-black px-6 py-4 rounded-lg border-2 border-black border-solid text-white mr-2 mb-2"
+                <div className="flex flex-col space-x-2 sm:flex-row items-center ">
+                    <Button
+                        variant="subtle"
+                        className="w-full sm:w-1/2  mt-2 truncate"
                     >
                         Call to action
-                    </button>
-                    <button
-                        aria-label="secondary action"
-                        className="px-6 py-4 border-2 border-black border-solid rounded-lg"
+                    </Button>
+                    <Button
+                        variant="default"
+                        className="w-full sm:w-1/2  mt-2 truncate"
                     >
                         Secondary action
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className="flex justify-around md:block mt-8 md:mt-0 md:flex-1">
