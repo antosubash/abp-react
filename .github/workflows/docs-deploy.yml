@@ -20,12 +20,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: pnpm
+          cache: yarn
 
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install --frozen-lockfile
       - name: Build website
-        run: pnpm build
+        run: yarn build
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
