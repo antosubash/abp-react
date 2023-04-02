@@ -1,10 +1,14 @@
 # ABP React
 
-This repo is a work in progress(preparing for beta release). It only has a landing page and a login page. The User Management, Role Management, Tenant Management, Settings Management and profile pages are implemented. Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2)
+This repo is a work in progress(preparing for beta release). Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2). This project can be used as a drop-in replacement for the Angular UI of the ABP Framework.
 
 ## What is this?
 
-This is a React UI for the [ABP Framework](https://abp.io/). We are working on a beta release and it is offically not ready for production, However, you can use it with your own risk. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend. It is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
+This is a React UI for the [ABP Framework](https://abp.io/). We are working on a beta release and it is officially not ready for production, However, you can use it with your own risk. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend. It is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
+
+## Why Use ABP React?
+
+The main reason is React and Next.js. In the modern web you need a framework which can build a fast and SEO friendly website. React and Next.js are the best options for that. You can build a static, SSR and CSR website with Next.js. It is also very easy to integrate with ABP Framework.
 
 ## Demo
 
@@ -22,15 +26,24 @@ The goal of this project is to provide a React UI for the ABP Framework. It will
 
 ## Features
 
--   [x] Landing Page
--   [x] Login
--   [x] Register
--   [x] Forgot Password
--   [x] Profile
--   [x] Tenant Management
--   [x] Role Management
--   [x] User Management
--   [x] Settings Management
+- [x] Landing Page
+- [x] Login, Logout, Register, Forgot Password
+- [x] Multilingual
+- [x] Theme Switcher
+- [x] Profile
+- [x] Tenant Management
+- [x] Role Management
+- [x] User Management
+- [x] Settings Management
+- [x] Feature Management
+
+## Roadmap
+
+Most of the features are implemented. We are planning to keep it similar to the ABP Framework Open Source Application. That means all the commercial features will not be implemented.
+
+## Support
+
+If want to build your project with ABP React and need support, you can contact me at [mail@antosubash.com](mailto:mail@antosubash.com)
 
 ## How to run
 
@@ -52,13 +65,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
--   [ABP Framework](https://abp.io/)
--   [React](https://reactjs.org/)
--   [Next.js](https://nextjs.org/)
--   [TypeScript](https://www.typescriptlang.org/)
--   [Tailwind CSS](https://tailwindcss.com/)
+- [ABP Framework](https://abp.io/)
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Contributors
 
--   [Anto Subash](https://github.com/antosubash)
--   [Sajan](https://github.com/sajanv88)
+- [Anto Subash](https://github.com/antosubash)
+- [Sajan](https://github.com/sajanv88)
