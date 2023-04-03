@@ -1,7 +1,7 @@
 name: End to end test
 on:
     pull_request:
-        types: [opened]
+        types: [opened, synchronize]
         paths:
             - 'src/apps/abp/**'
         branches:
@@ -15,6 +15,12 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 18
+            - uses: pnpm/action-setup@v2
+              name: Install pnpm
+              id: pnpm-install
+              with:
+                  version: 7
+                  run_install: false
             - name: Install dependencies
               run: pnpm install
             - name: Install Playwright Browsers
