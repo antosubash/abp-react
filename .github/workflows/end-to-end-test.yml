@@ -1,0 +1,36 @@
+name: End to end test
+on:
+    pull_request:
+        types: [opened, synchronize]
+        branches:
+            - main
+        paths:
+            - 'src/apps/abp/**'
+jobs:
+    test:
+        defaults:
+            run:
+                working-directory: ./src
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - uses: pnpm/action-setup@v2
+              name: Install pnpm
+              id: pnpm-install
+              with:
+                  version: 7
+                  run_install: false
+            - name: Install dependencies
+              run: pnpm install
+            # - name: Run Playwright tests
+            #   run: pnpm test
+            # - uses: actions/upload-artifact@v3
+            #   if: always()
+            #   with:
+            #       name: playwright-report
+            #       path: playwright-report/
+            #       retention-days: 30
