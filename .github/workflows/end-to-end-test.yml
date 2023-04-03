@@ -3,7 +3,7 @@ on:
     pull_request:
         types: [opened, synchronize]
         paths:
-            - 'src/apps/abp/**'
+            - 'src/apps/abp/'
         branches:
             - 'main'
 jobs:
