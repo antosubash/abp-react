@@ -5,7 +5,7 @@ on:
         paths:
             - 'src/apps/abp/**'
         branches:
-            - '*'
+            - 'main'
 jobs:
     test:
         timeout-minutes: 60
