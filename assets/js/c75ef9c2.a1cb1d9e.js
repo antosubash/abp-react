@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkabp_react=self.webpackChunkabp_react||[]).push([[2788],{1824:e=>{e.exports=JSON.parse('{"permalink":"/AbpReact/blog/tags/hello","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
