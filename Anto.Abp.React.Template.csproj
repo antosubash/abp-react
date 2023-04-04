@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageType>Template</PackageType>
+        <Version>1.0.0</Version>
+        <TargetFramework>net7.0</TargetFramework>
+        <PackageId>Anto.Abp.React.Template</PackageId>
+        <Title>Abp React Template</Title>
+        <Authors>Anto Subash</Authors>
+        <Description>Abp React Template</Description>
+        <PackageTags>abp;React;template</PackageTags>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <NoDefaultExcludes>true</NoDefaultExcludes>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/antosubash/AbpReact</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/antosubash/AbpReact</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="**\*" />
+        <Content Include="src\**\*" Exclude="src\**\bin\**;src\**\obj\**;src\node_modules;src\**\node_modules\**;" />
+        <Content Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+</Project>

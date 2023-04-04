@@ -1,0 +1,29 @@
+name: Nuget Publish
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "src/**"
+
+jobs:
+
+  version: 
+    name: Nuget Publish
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Build Package
+      run: dotnet pack --output nupkgs --configuration Release -p PackageVersion=1.0.${{ github.run_number }}
+    - name: Push to Nuget
+      run: dotnet nuget push "nupkgs/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
