@@ -2,6 +2,39 @@
 
 This repo is a work in progress(preparing for beta release). Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2). This project can be used as a drop-in replacement for the Angular UI of the ABP Framework.
 
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/)
+- [pnpm](https://pnpm.js.org/en/installation)
+- [ABP Framework](https://abp.io/)
+- [.Net 7](https://dotnet.microsoft.com/download/dotnet/7.0)
+
+### Installing Template
+
+Install the ABP React .Net Template
+
+```bash
+dotnet new install Anto.Abp.React.Template
+```
+
+### Creating a new project
+
+Create a new project using the template
+
+```bash
+dotnet new abp-react -o MyProjectName
+```
+
+### Running the project
+
+```bash
+cd MyProjectName
+pnpm install
+pnpm dev
+```
+
 ## What is this?
 
 This is a React UI for the [ABP Framework](https://abp.io/). We are working on a beta release and it is officially not ready for production, However, you can use it with your own risk. It uses [AbpTemplate](https://github.com/antosubash/AbpTemplate) as the backend. It is built using [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
