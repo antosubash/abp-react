@@ -11,5 +11,13 @@
         "type": "item"
     },
     "shortName": "abp-react",
-    "preferNameDirectory": true
+    "preferNameDirectory": true,
+	"symbols": {
+		"apiUrl": {
+			"description": "API URL",
+			"type": "parameter",
+			"replaces": "abp.antosubash.com",
+			"defaultValue": "your-api-name.com"
+		}
+	}
 }
