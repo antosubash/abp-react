@@ -53,11 +53,6 @@ export const TenantList = () => {
                 header: 'Tenant Management',
                 columns: [
                     {
-                        accessorKey: 'name',
-                        header: 'Tenant Name',
-                        cell: (info) => info.getValue()
-                    },
-                    {
                         accessorKey: 'actions',
                         header: 'Actions',
                         cell: (info) => {
@@ -108,6 +103,11 @@ export const TenantList = () => {
                                 />
                             );
                         }
+                    },
+                    {
+                        accessorKey: 'name',
+                        header: 'Tenant Name',
+                        cell: (info) => info.getValue()
                     }
                 ]
             }

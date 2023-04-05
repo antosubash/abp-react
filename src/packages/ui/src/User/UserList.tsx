@@ -60,21 +60,6 @@ export const UserList = () => {
                 header: 'User Management',
                 columns: [
                     {
-                        accessorKey: 'userName',
-                        header: 'Username',
-                        cell: (info) => info.getValue()
-                    },
-                    {
-                        accessorKey: 'email',
-                        header: 'Email',
-                        cell: (info) => info.getValue()
-                    },
-                    {
-                        accessorKey: 'isActive',
-                        header: 'Active',
-                        cell: (info) => (info.getValue() ? 'yes' : 'no')
-                    },
-                    {
                         accessorKey: 'actions',
                         header: 'Actions',
                         cell: (info) => (
@@ -126,6 +111,21 @@ export const UserList = () => {
                                 ]}
                             />
                         )
+                    },
+                    {
+                        accessorKey: 'userName',
+                        header: 'Username',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'email',
+                        header: 'Email',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'isActive',
+                        header: 'Active',
+                        cell: (info) => (info.getValue() ? 'yes' : 'no')
                     }
                 ]
             }

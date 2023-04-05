@@ -18,13 +18,13 @@ const TableView = <T extends unknown>({
         return headerGroups.map((headerGroup) => {
             const headers = headerGroup.headers;
             return (
-                <tr key={headerGroup.id} className="first:hidden ">
+                <tr key={headerGroup.id} className="first:hidden">
                     {headers.map((header) => {
                         if (header.isPlaceholder) return false;
                         return (
                             <th
                                 key={header.id}
-                                className="px-3 last:1/2 lg:last:w-1/4"
+                                className="px-3 lg:last:w-1/4 last:1/2 truncate"
                             >
                                 {flexRender(
                                     header.column.columnDef.header,
@@ -45,7 +45,7 @@ const TableView = <T extends unknown>({
             return (
                 <tr
                     key={row.id}
-                    className="hover:bg-base-200 hover:text-base-content transition delay-75 ease-in border-b-primary border-b"
+                    className="hover:bg-primary/90 hover:text-primary-content transition delay-75 ease-in border-b-primary border-b"
                 >
                     {cells.map((cell) => {
                         return (

@@ -1,5 +1,6 @@
 import { Policy, useGrantedPolicies } from '@abpreact/hooks';
 import { v4 } from 'uuid';
+import { Cog } from 'lucide-react';
 import {
     AdjustmentsHorizontalIcon,
     PencilIcon,
@@ -7,6 +8,12 @@ import {
     CogIcon
 } from '@heroicons/react/24/solid';
 import { Button } from '../Shared/Button';
+import {
+    DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem
+} from '../Shared/DropdownMenu';
 type PermissionActionsProps = {
     actions: Array<{
         icon: 'permission' | 'trash' | 'pencil' | 'features';
@@ -19,45 +26,79 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
     const { can } = useGrantedPolicies();
     const renderElement = (action: (typeof actions)[0]) => {
         if (!can(action.policy) || action.visible) return false;
-        const variant = action.icon === 'trash' ? 'destructive' : 'subtle';
+
         return (
-            <Button
-                key={v4()}
-                variant={variant}
-                onClick={action.callback}
-                shape="square"
-                size="sm"
-            >
-                {action.icon === 'permission' && (
-                    <AdjustmentsHorizontalIcon
-                        width={15}
-                        height={15}
-                        className="text-primary-content"
-                    />
-                )}
-                {action.icon === 'trash' && (
-                    <TrashIcon width={15} height={15} className="text-white" />
-                )}
-                {action.icon === 'pencil' && (
-                    <PencilIcon
-                        width={15}
-                        height={15}
-                        className="text-primary-content"
-                    />
-                )}
-                {action.icon === 'features' && (
-                    <CogIcon
-                        width={15}
-                        height={15}
-                        className="text-primary-content"
-                    />
-                )}
-            </Button>
+            <DropdownMenuItem key={v4()}>
+                <Button
+                    variant="subtle"
+                    onClick={action.callback}
+                    fluid
+                    size="sm"
+                >
+                    {action.icon === 'permission' && (
+                        <div className="flex items-center space-x-1">
+                            <AdjustmentsHorizontalIcon
+                                width={15}
+                                height={15}
+                                className="text-primary-content flex-1"
+                            />
+                            <span className="text-primary-content">
+                                Permission
+                            </span>
+                        </div>
+                    )}
+                    {action.icon === 'trash' && (
+                        <div className="flex items-center space-x-1">
+                            <TrashIcon
+                                width={15}
+                                height={15}
+                                className="text-primary-content flex-1"
+                            />
+                            <span className="text-primary-content">Delete</span>
+                        </div>
+                    )}
+                    {action.icon === 'pencil' && (
+                        <div className="flex items-center space-x-1">
+                            <PencilIcon
+                                width={15}
+                                height={15}
+                                className="text-primary-content flex-1"
+                            />
+                            <span className="text-primary-content">Edit</span>
+                        </div>
+                    )}
+                    {action.icon === 'features' && (
+                        <div className="flex items-center space-x-1">
+                            <CogIcon
+                                width={15}
+                                height={15}
+                                className="text-primary-content flex-1"
+                            />
+                            <span className="text-primary-content">
+                                Settings
+                            </span>
+                        </div>
+                    )}
+                </Button>
+            </DropdownMenuItem>
         );
     };
     return (
         <section className="flex items-center space-x-2">
-            {actions.map(renderElement)}
+            <DropdownMenu>
+                <DropdownMenuTrigger key={v4()} asChild>
+                    <Button
+                        variant="subtle"
+                        className="flex items-center space-x-1"
+                    >
+                        <Cog width={16} height={16} />
+                        <span>Actions</span>
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    {actions.map(renderElement)}
+                </DropdownMenuContent>
+            </DropdownMenu>
         </section>
     );
 };

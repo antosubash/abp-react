@@ -55,23 +55,6 @@ export const RoleList = () => {
                 header: 'Role Management',
                 columns: [
                     {
-                        accessorKey: 'name',
-                        header: 'Name',
-                        cell: (info) => info.getValue()
-                    },
-                    {
-                        accessorKey: 'is_default',
-                        header: 'Is Default',
-                        cell: (info) =>
-                            info.row.original?.isDefault ? 'Yes' : 'No'
-                    },
-                    {
-                        accessorKey: 'is_public',
-                        header: 'Is Public',
-                        cell: (info) =>
-                            info.row.original?.isPublic ? 'Yes' : 'No'
-                    },
-                    {
                         accessorKey: 'actions',
                         header: 'Actions',
                         cell: (info) => {
@@ -126,6 +109,23 @@ export const RoleList = () => {
                                 />
                             );
                         }
+                    },
+                    {
+                        accessorKey: 'name',
+                        header: 'Name',
+                        cell: (info) => info.getValue()
+                    },
+                    {
+                        accessorKey: 'is_default',
+                        header: 'Is Default',
+                        cell: (info) =>
+                            info.row.original?.isDefault ? 'Yes' : 'No'
+                    },
+                    {
+                        accessorKey: 'is_public',
+                        header: 'Is Public',
+                        cell: (info) =>
+                            info.row.original?.isPublic ? 'Yes' : 'No'
                     }
                 ]
             }
