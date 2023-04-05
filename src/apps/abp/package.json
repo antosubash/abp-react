@@ -1,5 +1,5 @@
 {
-    "name": "abp-react",
+    "name": "abpreact",
     "private": true,
     "scripts": {
         "dev": "next dev",
