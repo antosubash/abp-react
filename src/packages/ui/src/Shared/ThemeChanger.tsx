@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger
 } from './DropdownMenu';
 
-const themes = ['light', 'dark', 'cupcake', 'halloween'];
+const themes = ['light', 'dark', 'cupcake', 'dracula'];
 const ThemeSwitcher = () => {
     const [currTheme, setCurrTheme] = useState<string>('');
     useEffect(() => {

@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { IdentityUserCreateDto, UserService } from '@abpreact/proxy';
 import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
 import classNames from 'classnames';
+import { Plus } from 'lucide-react';
 
 import { Button } from '../Shared/Button';
 import { Checkbox } from '../Shared/Checkbox';
@@ -61,7 +62,10 @@ export const AddUser = ({}: AddUserProps) => {
                     </h3>
                     {can('AbpIdentity.Users.Create') && (
                         <Button variant="subtle" onClick={() => setOpen(true)}>
-                            <span className="truncate"> Create New User</span>
+                            <Plus width={18} height={18} />
+                            <span className="truncate hidden sm:inline">
+                                Create New User
+                            </span>
                         </Button>
                     )}
                 </section>

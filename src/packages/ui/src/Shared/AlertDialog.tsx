@@ -118,7 +118,7 @@ const AlertDialogAction = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Action
         ref={ref}
-        className={cn('btn btn-primary text-primary-content', className)}
+        className={cn('btn btn-primary text-primary-content m-1', className)}
         {...props}
     />
 ));
@@ -130,7 +130,10 @@ const AlertDialogCancel = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Cancel
         ref={ref}
-        className={cn('btn btn-secondary text-secondary-content', className)}
+        className={cn(
+            'btn btn-secondary text-secondary-content m-1',
+            className
+        )}
         {...props}
     />
 ));

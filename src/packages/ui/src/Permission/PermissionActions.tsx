@@ -38,11 +38,11 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
                     {action.icon === 'permission' && (
                         <div className="flex items-center space-x-1">
                             <AdjustmentsHorizontalIcon
-                                width={15}
-                                height={15}
+                                width={18}
+                                height={18}
                                 className="text-primary-content flex-1"
                             />
-                            <span className="text-primary-content">
+                            <span className="text-primary-content hidden sm:inline">
                                 Permission
                             </span>
                         </div>
@@ -50,31 +50,35 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
                     {action.icon === 'trash' && (
                         <div className="flex items-center space-x-1">
                             <TrashIcon
-                                width={15}
-                                height={15}
+                                width={18}
+                                height={18}
                                 className="text-primary-content flex-1"
                             />
-                            <span className="text-primary-content">Delete</span>
+                            <span className="text-primary-content hidden sm:inline">
+                                Delete
+                            </span>
                         </div>
                     )}
                     {action.icon === 'pencil' && (
                         <div className="flex items-center space-x-1">
                             <PencilIcon
-                                width={15}
-                                height={15}
+                                width={18}
+                                height={18}
                                 className="text-primary-content flex-1"
                             />
-                            <span className="text-primary-content">Edit</span>
+                            <span className="text-primary-content hidden sm:inline">
+                                Edit
+                            </span>
                         </div>
                     )}
                     {action.icon === 'features' && (
                         <div className="flex items-center space-x-1">
                             <CogIcon
-                                width={15}
-                                height={15}
+                                width={18}
+                                height={18}
                                 className="text-primary-content flex-1"
                             />
-                            <span className="text-primary-content">
+                            <span className="text-primary-content hidden sm:inline">
                                 Settings
                             </span>
                         </div>
@@ -89,10 +93,11 @@ export const PermissionActions = ({ actions }: PermissionActionsProps) => {
                 <DropdownMenuTrigger key={v4()} asChild>
                     <Button
                         variant="subtle"
+                        size="sm"
                         className="flex items-center space-x-1"
                     >
                         <Cog width={16} height={16} />
-                        <span>Actions</span>
+                        <span className="hidden sm:inline">Actions</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>

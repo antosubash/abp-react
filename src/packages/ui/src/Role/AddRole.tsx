@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IdentityRoleCreateDto, RoleService } from '@abpreact/proxy';
 import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
 import classNames from 'classnames';
+import { Plus } from 'lucide-react';
 
 import { Button } from '../Shared/Button';
 import { Checkbox } from '../Shared/Checkbox';
@@ -61,7 +62,10 @@ export const AddRole = ({}: AddUserProps) => {
                     </h3>
                     {can('AbpIdentity.Roles.Create') && (
                         <Button variant="subtle" onClick={() => setOpen(true)}>
-                            <span className="truncate">Create New Role</span>
+                            <Plus width={18} height={18} />
+                            <span className="truncate hidden sm:inline">
+                                Create New Role
+                            </span>
                         </Button>
                     )}
                 </section>
