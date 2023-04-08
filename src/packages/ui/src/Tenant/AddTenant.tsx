@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TenantCreateDto, TenantService } from '@abpreact/proxy';
 import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
+import { Plus } from 'lucide-react';
 
 import { Button } from '../Shared/Button';
 
@@ -55,7 +56,10 @@ export const AddTenant = () => {
                     </h3>
                     {can('AbpTenantManagement.Tenants.Create') && (
                         <Button variant="subtle" onClick={() => setOpen(true)}>
-                            <span className="truncate">Create New Tenant</span>
+                            <Plus width={18} height={18} />
+                            <span className="truncate hidden sm:inline">
+                                Create New Tenant
+                            </span>
                         </Button>
                     )}
                 </section>

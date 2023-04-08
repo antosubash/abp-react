@@ -76,11 +76,13 @@ const TableView = <T extends unknown>({
     }
     const pageCount = Math.ceil(totalCount / pageSize);
     return (
-        <section className="overflow-auto">
-            <table className="w-full divide-y text-left divide-base-200 table-auto sm:overflow-x-auto lg:table-fixed text-base-content">
-                <thead>{renderHeader()}</thead>
-                <tbody>{renderBody()}</tbody>
-            </table>
+        <section>
+            <section className="overflow-auto">
+                <table className="w-full divide-y text-left divide-base-200 table-auto sm:overflow-x-auto lg:table-fixed text-base-content">
+                    <thead>{renderHeader()}</thead>
+                    <tbody>{renderBody()}</tbody>
+                </table>
+            </section>
             <div className="border-t  p-5 flex flex-col lg:items-center lg:flex-row">
                 <div className="flex-grow text-base-content pb-2">
                     {totalCount} total
