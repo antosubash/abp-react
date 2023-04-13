@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "build": "dotenv -- turbo run build",
-        "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 dotenv -- turbo run dev",
+        "dev": "dotenv -- turbo run dev",
         "lint": "dotenv -- turbo run lint",
         "clean": "turbo run clean",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -19,7 +19,7 @@
         "plop": "^3.1.2",
         "prettier": "^2.8.7",
         "prettier-plugin-tailwindcss": "^0.2.6",
-        "turbo": "^1.8.8"
+        "turbo": "^1.9.1"
     },
     "packageManager": "pnpm@7.15.0"
 }
