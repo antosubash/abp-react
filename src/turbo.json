@@ -1,26 +1,38 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local", ".env", "NEXT_PUBLIC_API_BASE_URL", "NEXTAUTH_SECRET", "NEXT_PUBLIC_API_URL"],
-  "globalEnv": [
-    "NEXT_PUBLIC_API_BASE_URL",
-    "NEXTAUTH_SECRET",
-    "NEXT_PUBLIC_API_URL",
-    "API_URL"
-  ],
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "env": ["NEXT_PUBLIC_API_BASE_URL", "NEXTAUTH_SECRET", "NEXT_PUBLIC_API_URL"],
-      "outputs": ["dist/**", ".next/**"]
-    },
-    "lint": {},
-    "check-types": {},
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "clean": {
-      "cache": false
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": [
+        "**/.env.*local",
+        ".env",
+        "NEXT_PUBLIC_API_BASE_URL",
+        "NEXTAUTH_SECRET",
+        "NEXT_PUBLIC_API_URL",
+		"NEXTAUTH_CLIENT_ID"
+    ],
+    "globalEnv": [
+        "NEXT_PUBLIC_API_BASE_URL",
+        "NEXTAUTH_SECRET",
+        "NEXT_PUBLIC_API_URL",
+        "NEXTAUTH_CLIENT_ID"
+    ],
+    "pipeline": {
+        "build": {
+            "dependsOn": ["^build"],
+            "env": [
+                "NEXT_PUBLIC_API_BASE_URL",
+                "NEXTAUTH_SECRET",
+                "NEXT_PUBLIC_API_URL",
+				"NEXTAUTH_CLIENT_ID"
+            ],
+            "outputs": ["dist/**", ".next/**"]
+        },
+        "lint": {},
+        "check-types": {},
+        "dev": {
+            "cache": false,
+            "persistent": true
+        },
+        "clean": {
+            "cache": false
+        }
     }
-  }
 }
