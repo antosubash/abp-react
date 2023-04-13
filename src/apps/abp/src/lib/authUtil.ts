@@ -28,7 +28,7 @@ export const getAuthOptions = (req: any) => {
                 wellKnown: `${issuer}/.well-known/openid-configuration`,
                 authorization: {
                     params: {
-                        scope: 'openid profile email offline_access AbpTemplate'
+                        scope: 'openid profile email offline_access AbpTemplate' // TODO: Change this to your scopes
                     }
                 },
                 profile: (

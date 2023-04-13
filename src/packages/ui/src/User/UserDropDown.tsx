@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { Avatar, AvatarFallback, AvatarImage } from '../Shared/Avatar';
-import { BoxSelect, Check } from 'lucide-react';
 import {
     DropdownMenu,
     DropdownMenuContent,
