@@ -2,46 +2,45 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Lets see how to get started with ABP React.
 
 ## Getting Started
 
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Get started by **creating a new application**.
 
 ### What you'll need
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- [Node.js](https://nodejs.org/en/)
+- [pnpm](https://pnpm.js.org/en/installation)
+- [ABP Framework](https://abp.io/)
+- [.Net 7](https://dotnet.microsoft.com/download/dotnet/7.0)
 
-## Generate a new site
+## Generate a new application
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+Install the ABP React .Net Template
 
 ```bash
-cd my-website
-npm run start
+dotnet new install Anto.Abp.React.Template
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### Creating a new project
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+Create a new project using the template
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+```bash
+dotnet new abp-react -o my-project-name
+```
+
+> Note: You can use any name for the project. I used `my-project-name` for this example. keep in mind that the project name should be in kebab case (all lowercase and words separated by hyphens) because it will be used as the name of the packages org name.
+
+### Running the project
+
+```bash
+cd my-project-name
+pnpm install
+pnpm dev
+```
+
+Now you can open the app in your browser by visiting [http://localhost:3000](http://localhost:3000)
