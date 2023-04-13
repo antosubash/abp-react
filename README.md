@@ -4,6 +4,10 @@ This repo is a work in progress(preparing for beta release). Check the Current S
 
 ## Getting Started
 
+### Documentation
+
+You can find the documentation [here](https://antosubash.github.io/AbpReact/)
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
@@ -24,13 +28,15 @@ dotnet new install Anto.Abp.React.Template
 Create a new project using the template
 
 ```bash
-dotnet new abp-react -o MyProjectName
+dotnet new abp-react -o my-project-name
 ```
+
+> Note: You can use any name for the project. I used `my-project-name` for this example. keep in mind that the project name should be in kebab case (all lowercase and words separated by hyphens) because it will be used as the name of the packages org name.
 
 ### Running the project
 
 ```bash
-cd MyProjectName
+cd my-project-name
 pnpm install
 pnpm dev
 ```
@@ -76,7 +82,7 @@ Most of the features are implemented. We are planning to keep it similar to the 
 
 ## Support
 
-If want to build your project with ABP React and need support, you can contact me at [mail@antosubash.com](mailto:mail@antosubash.com)
+If want to build your project with ABP React and need support, you can contact me at [antosubash@outlook.com](mailto:antosubash@outlook.com)
 
 ## How to run
 
