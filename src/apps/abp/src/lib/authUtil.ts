@@ -11,7 +11,7 @@ import { getCookieFromRequest } from './cookieUtils';
 import jwtDecode from 'jwt-decode';
 export const getAuthOptions = (req: any) => {
     const issuer = getCookieFromRequest('next-auth.issuer', req);
-    const clientId = 'AbpReact_Next_App';
+    const clientId = process.env.NEXTAUTH_CLIENT_ID;
     if (!issuer) {
         throw new Error('issuer not found');
     }
