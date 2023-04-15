@@ -12,22 +12,24 @@
     "check-types": "tsc --noEmit"
   },
   "peerDependencies": {
+    "@tanstack/react-query": "4.29.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@tanstack/react-query": "4.24.10"
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@abpreact/proxy": "workspace:*"
+    "@abpreact/proxy": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.11.18",
-    "@types/react": "^18.0.28",
-    "eslint": "^8.34.0",
+    "@tanstack/react-query": "4.29.2",
+    "@types/node": "18.15.11",
+    "@types/react": "^18.0.35",
+    "eslint": "^8.38.0",
     "eslint-config-custom": "workspace:*",
     "postcss": "^8.4.21",
-    "@tanstack/react-query": "4.24.10",
     "tsconfig": "workspace:*",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
   }
 }

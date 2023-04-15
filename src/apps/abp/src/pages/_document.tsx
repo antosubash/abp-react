@@ -25,6 +25,8 @@ class MyDocument extends Document {
                     rel="stylesheet"
                 />
                 <Head>
+
+					{/* TODO: Add your own tracking code here */}
                     <script
                         async
                         defer

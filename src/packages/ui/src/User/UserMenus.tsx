@@ -1,6 +1,5 @@
-import React from 'react';
 import { UserDropDown } from './UserDropDown';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { getCookie } from 'cookies-next';
 import { Button } from '../Shared/Button';
 export interface UserMenusProps {}
