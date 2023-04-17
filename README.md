@@ -2,6 +2,10 @@
 
 This repo is a work in progress(preparing for beta release). Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2). This project can be used as a drop-in replacement for the Angular UI of the ABP Framework.
 
+## Demo
+
+You can see a demo of the app [here](https://abpreact.antosubash.com/)
+
 ## Getting Started
 
 ### Documentation
@@ -48,10 +52,6 @@ This is a React UI for the [ABP Framework](https://abp.io/). We are working on a
 ## Why Use ABP React?
 
 The main reason is React and Next.js. In the modern web you need a framework which can build a fast and SEO friendly website. React and Next.js are the best options for that. You can build a static, SSR and CSR website with Next.js. It is also very easy to integrate with ABP Framework.
-
-## Demo
-
-You can see a demo of the app [here](https://abpreact.antosubash.com/)
 
 ## LightHouse Score
 
