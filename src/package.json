@@ -13,13 +13,13 @@
     },
     "devDependencies": {
         "dotenv-cli": "latest",
-        "eslint": "^8.37.0",
+        "eslint": "^8.39.0",
         "eslint-config-custom": "workspace:0.0.0",
-        "openapi-typescript-codegen": "^0.23.0",
+        "openapi-typescript-codegen": "^0.24.0",
         "plop": "^3.1.2",
-        "prettier": "^2.8.7",
-        "prettier-plugin-tailwindcss": "^0.2.6",
-        "turbo": "^1.9.1"
+        "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.2.8",
+        "turbo": "^1.9.3"
     },
     "packageManager": "pnpm@7.15.0"
 }

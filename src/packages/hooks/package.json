@@ -14,20 +14,20 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@tanstack/react-query": "4.24.10"
+    "@tanstack/react-query": "4.29.5"
   },
   "dependencies": {
     "@abpreact/proxy": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "18.11.18",
-    "@types/react": "^18.0.28",
-    "eslint": "^8.34.0",
+    "@types/node": "20.0.0",
+    "@types/react": "^18.2.5",
+    "eslint": "^8.39.0",
     "eslint-config-custom": "workspace:*",
-    "postcss": "^8.4.21",
-    "@tanstack/react-query": "4.24.10",
+    "postcss": "^8.4.23",
+    "@tanstack/react-query": "4.29.5",
     "tsconfig": "workspace:*",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
   }
 }
