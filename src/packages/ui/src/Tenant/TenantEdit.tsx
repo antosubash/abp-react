@@ -13,6 +13,8 @@ import {
 import { Button } from '../Shared/Button';
 import { useForm } from 'react-hook-form';
 import { Input } from '../Shared/Input';
+import classNames from 'classnames';
+import { Checkbox } from '../Shared/Checkbox';
 
 export type TenantEditProps = {
     tenantDto: TenantUpdateDto;
@@ -27,16 +29,32 @@ export const TenantEdit = ({
 }: TenantEditProps) => {
     const queryClient = useQueryClient();
     const [open, setOpen] = useState(false);
+
+    const [enableHost, setEnableHost] = useState(false);
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
 
+    useEffect(() => {
+        console.log(
+            tenantDto?.extraProperties?.Host,
+            'tenantDto?.extraProperties?.Host'
+        );
+        if (tenantDto?.extraProperties?.Host) {
+            setEnableHost(true);
+        }
+    }, [tenantDto, tenantDto?.extraProperties?.Host]);
+
     const onSubmit = async (dto: unknown) => {
-        const tenant = dto as TenantUpdateDto;
+        const tenant = dto as TenantUpdateDto & { host?: string };
+
         try {
             await TenantService.tenantUpdate(tenantId, tenant);
+            if (enableHost && tenant?.host) {
+                await TenantService.tenantAddHost(tenantId, tenant?.host);
+            }
             toast({
                 title: 'Success',
-                description: 'Tenant name Updated Successfully',
+                description: 'Tenant information updated successfully',
                 variant: 'default'
             });
             setOpen(false);
@@ -78,6 +96,42 @@ export const TenantEdit = ({
                             {...register('name')}
                         />
                     </section>
+                    <div
+                        className={classNames(
+                            'flex items-center space-x-2 pb-2 pt-5'
+                        )}
+                    >
+                        <Checkbox
+                            id="enableHost"
+                            name="enableHost"
+                            variant="subtle"
+                            defaultChecked
+                            checked={enableHost}
+                            onCheckedChange={(checked) =>
+                                setEnableHost(!!checked.valueOf())
+                            }
+                        />
+                        <label
+                            htmlFor="activeHost"
+                            className="text-sm font-medium leading-none "
+                        >
+                            Enable host
+                        </label>
+                    </div>
+                    {enableHost && (
+                        <div className="flex flex-col w-auto pt-5 pb-5">
+                            <section className="flex flex-col w-full space-y-5">
+                                <Input
+                                    required
+                                    {...register('host')}
+                                    defaultValue={
+                                        tenantDto?.extraProperties?.Host
+                                    }
+                                    label="Hose Name"
+                                />
+                            </section>
+                        </div>
+                    )}
                     <DialogFooter className="mt-5">
                         <Button
                             onClick={(e) => {

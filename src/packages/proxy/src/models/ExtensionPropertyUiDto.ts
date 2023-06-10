@@ -12,3 +12,4 @@ export type ExtensionPropertyUiDto = {
     onEditForm?: ExtensionPropertyUiFormDto;
     lookup?: ExtensionPropertyUiLookupDto;
 };
+

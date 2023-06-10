@@ -25,6 +25,7 @@ export type { ControllerInterfaceApiDescriptionModel } from './models/Controller
 export type { CurrentCultureDto } from './models/CurrentCultureDto';
 export type { CurrentTenantDto } from './models/CurrentTenantDto';
 export type { CurrentUserDto } from './models/CurrentUserDto';
+export type { CustomTenantDto } from './models/CustomTenantDto';
 export type { DateTimeFormatDto } from './models/DateTimeFormatDto';
 export type { EmailSettingsDto } from './models/EmailSettingsDto';
 export type { EntityExtensionDto } from './models/EntityExtensionDto';
@@ -83,7 +84,6 @@ export type { RemoteServiceErrorResponse } from './models/RemoteServiceErrorResp
 export type { RemoteServiceValidationErrorInfo } from './models/RemoteServiceValidationErrorInfo';
 export type { ResetPasswordDto } from './models/ResetPasswordDto';
 export type { ReturnValueApiDescriptionModel } from './models/ReturnValueApiDescriptionModel';
-export type { ScopeDto } from './models/ScopeDto';
 export type { SendPasswordResetCodeDto } from './models/SendPasswordResetCodeDto';
 export type { SendTestEmailInput } from './models/SendTestEmailInput';
 export type { TenantCreateDto } from './models/TenantCreateDto';
@@ -115,7 +115,6 @@ export { LoginService } from './services/LoginService';
 export { PermissionsService } from './services/PermissionsService';
 export { ProfileService } from './services/ProfileService';
 export { RoleService } from './services/RoleService';
-export { ScopeService } from './services/ScopeService';
 export { TenantService } from './services/TenantService';
 export { UserService } from './services/UserService';
 export { UserLookupService } from './services/UserLookupService';

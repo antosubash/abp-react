@@ -8,3 +8,4 @@ export type PagedResultDtoOfTenantDto = {
     items?: Array<TenantDto> | null;
     totalCount?: number;
 };
+

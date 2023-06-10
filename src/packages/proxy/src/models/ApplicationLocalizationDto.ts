@@ -7,3 +7,4 @@ import type { ApplicationLocalizationResourceDto } from './ApplicationLocalizati
 export type ApplicationLocalizationDto = {
     resources?: Record<string, ApplicationLocalizationResourceDto> | null;
 };
+

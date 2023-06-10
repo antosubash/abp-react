@@ -18,3 +18,4 @@ export type ActionApiDescriptionModel = {
     allowAnonymous?: boolean | null;
     implementFrom?: string | null;
 };
+

@@ -7,3 +7,4 @@ import type { UpdatePermissionDto } from './UpdatePermissionDto';
 export type UpdatePermissionsDto = {
     permissions?: Array<UpdatePermissionDto> | null;
 };
+

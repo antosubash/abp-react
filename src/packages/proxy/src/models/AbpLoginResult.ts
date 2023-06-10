@@ -8,3 +8,4 @@ export type AbpLoginResult = {
     result?: LoginResultType;
     readonly description?: string | null;
 };
+

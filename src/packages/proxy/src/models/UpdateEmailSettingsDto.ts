@@ -13,3 +13,4 @@ export type UpdateEmailSettingsDto = {
     defaultFromAddress: string;
     defaultFromDisplayName: string;
 };
+

@@ -5,3 +5,4 @@
 export type IdentityUserUpdateRolesDto = {
     roleNames: Array<string>;
 };
+

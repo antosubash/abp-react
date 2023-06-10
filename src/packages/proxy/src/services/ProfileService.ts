@@ -10,6 +10,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class ProfileService {
+
     /**
      * @returns ProfileDto Success
      * @throws ApiError
@@ -24,8 +25,8 @@ export class ProfileService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -35,7 +36,7 @@ export class ProfileService {
      * @throws ApiError
      */
     public static profileUpdate(
-        requestBody?: UpdateProfileDto
+        requestBody?: UpdateProfileDto,
     ): CancelablePromise<ProfileDto> {
         return __request(OpenAPI, {
             method: 'PUT',
@@ -48,8 +49,8 @@ export class ProfileService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -59,7 +60,7 @@ export class ProfileService {
      * @throws ApiError
      */
     public static profileChangePassword(
-        requestBody?: ChangePasswordInput
+        requestBody?: ChangePasswordInput,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -72,8 +73,9 @@ export class ProfileService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
+
 }

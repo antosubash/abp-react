@@ -28,3 +28,4 @@ export type ApplicationConfigurationDto = {
     objectExtensions?: ObjectExtensionsDto;
     extraProperties?: Record<string, any> | null;
 };
+

@@ -11,3 +11,4 @@ export type ExtensionPropertyApiDto = {
     onCreate?: ExtensionPropertyApiCreateDto;
     onUpdate?: ExtensionPropertyApiUpdateDto;
 };
+

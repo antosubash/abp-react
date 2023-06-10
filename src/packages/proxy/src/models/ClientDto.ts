@@ -10,3 +10,4 @@ export type ClientDto = {
     permissions?: string | null;
     type?: string | null;
 };
+

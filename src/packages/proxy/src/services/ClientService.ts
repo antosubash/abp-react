@@ -8,6 +8,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class ClientService {
+
     /**
      * @returns ClientDto Success
      * @throws ApiError
@@ -15,7 +16,7 @@ export class ClientService {
     public static clientGetList(): CancelablePromise<Array<ClientDto>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/client-management'
+            url: '/api/client-management',
         });
     }
 
@@ -35,19 +36,19 @@ export class ClientService {
         postLogoutRedirectUris?: string,
         redirectUris?: string,
         permissions?: string,
-        type?: string
+        type?: string,
     ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/client-management',
             query: {
-                ClientId: clientId,
-                DisplayName: displayName,
-                PostLogoutRedirectUris: postLogoutRedirectUris,
-                RedirectUris: redirectUris,
-                Permissions: permissions,
-                Type: type
-            }
+                'ClientId': clientId,
+                'DisplayName': displayName,
+                'PostLogoutRedirectUris': postLogoutRedirectUris,
+                'RedirectUris': redirectUris,
+                'Permissions': permissions,
+                'Type': type,
+            },
         });
     }
 
@@ -56,13 +57,15 @@ export class ClientService {
      * @returns ClientDto Success
      * @throws ApiError
      */
-    public static clientGet(id: string): CancelablePromise<ClientDto> {
+    public static clientGet(
+        id: string,
+    ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/client-management/{id}',
             path: {
-                id: id
-            }
+                'id': id,
+            },
         });
     }
 
@@ -84,22 +87,22 @@ export class ClientService {
         postLogoutRedirectUris?: string,
         redirectUris?: string,
         permissions?: string,
-        type?: string
+        type?: string,
     ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/client-management/{id}',
             path: {
-                id: id
+                'id': id,
             },
             query: {
-                ClientId: clientId,
-                DisplayName: displayName,
-                PostLogoutRedirectUris: postLogoutRedirectUris,
-                RedirectUris: redirectUris,
-                Permissions: permissions,
-                Type: type
-            }
+                'ClientId': clientId,
+                'DisplayName': displayName,
+                'PostLogoutRedirectUris': postLogoutRedirectUris,
+                'RedirectUris': redirectUris,
+                'Permissions': permissions,
+                'Type': type,
+            },
         });
     }
 
@@ -108,13 +111,15 @@ export class ClientService {
      * @returns any Success
      * @throws ApiError
      */
-    public static clientDelete(id: string): CancelablePromise<any> {
+    public static clientDelete(
+        id: string,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/client-management/{id}',
             path: {
-                id: id
-            }
+                'id': id,
+            },
         });
     }
 
@@ -126,17 +131,17 @@ export class ClientService {
      */
     public static clientAddRedirectUri(
         id: string,
-        redirectUri?: string
+        redirectUri?: string,
     ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/client-management/add-redirect-uri/{id}',
             path: {
-                id: id
+                'id': id,
             },
             query: {
-                redirectUri: redirectUri
-            }
+                'redirectUri': redirectUri,
+            },
         });
     }
 
@@ -148,17 +153,17 @@ export class ClientService {
      */
     public static clientAddPostLogoutRedirectUri(
         id: string,
-        redirectUri?: string
+        redirectUri?: string,
     ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/client-management/add-post-logout-redirect-uri/{id}',
             path: {
-                id: id
+                'id': id,
             },
             query: {
-                redirectUri: redirectUri
-            }
+                'redirectUri': redirectUri,
+            },
         });
     }
 
@@ -170,17 +175,18 @@ export class ClientService {
      */
     public static clientUpdateClientType(
         id: string,
-        clientType?: string
+        clientType?: string,
     ): CancelablePromise<ClientDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/client-management/update-client-type/{id}',
             path: {
-                id: id
+                'id': id,
             },
             query: {
-                clientType: clientType
-            }
+                'clientType': clientType,
+            },
         });
     }
+
 }

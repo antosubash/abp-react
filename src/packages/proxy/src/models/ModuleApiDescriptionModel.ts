@@ -9,3 +9,4 @@ export type ModuleApiDescriptionModel = {
     remoteServiceName?: string | null;
     controllers?: Record<string, ControllerApiDescriptionModel> | null;
 };
+

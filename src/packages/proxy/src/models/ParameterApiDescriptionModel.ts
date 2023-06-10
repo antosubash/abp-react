@@ -14,3 +14,4 @@ export type ParameterApiDescriptionModel = {
     bindingSourceId?: string | null;
     descriptorName?: string | null;
 };
+

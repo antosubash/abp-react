@@ -6,3 +6,4 @@ export type VerifyPasswordResetTokenInput = {
     userId?: string;
     resetToken: string;
 };
+

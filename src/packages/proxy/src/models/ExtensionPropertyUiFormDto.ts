@@ -5,3 +5,4 @@
 export type ExtensionPropertyUiFormDto = {
     isVisible?: boolean;
 };
+

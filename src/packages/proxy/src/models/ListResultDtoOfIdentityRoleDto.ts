@@ -7,3 +7,4 @@ import type { IdentityRoleDto } from './IdentityRoleDto';
 export type ListResultDtoOfIdentityRoleDto = {
     items?: Array<IdentityRoleDto> | null;
 };
+

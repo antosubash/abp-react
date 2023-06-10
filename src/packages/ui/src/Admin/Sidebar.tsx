@@ -19,7 +19,7 @@ export interface SidebarProps {
     onToggle?: (f: boolean) => void;
 }
 
-const CustomeLink = ({
+const CustomLink = ({
     m,
     path,
     icon,
@@ -87,7 +87,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
                         </AccordionTrigger>
                         <AccordionContent>
                             {menu.children.map((c) => (
-                                <CustomeLink
+                                <CustomLink
                                     m={c}
                                     path={router.asPath}
                                     key={v4()}
@@ -101,7 +101,7 @@ export const Sidebar = ({ menus, toggleSidebar, onToggle }: SidebarProps) => {
         }
 
         return (
-            <CustomeLink m={menu} path={router.asPath} key={v4()} icon={Icon} />
+            <CustomLink m={menu} path={router.asPath} key={v4()} icon={Icon} />
         );
     };
     return (

@@ -13,3 +13,4 @@ export type ProfileDto = {
     hasPassword?: boolean;
     concurrencyStamp?: string | null;
 };
+

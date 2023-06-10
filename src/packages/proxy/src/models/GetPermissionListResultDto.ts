@@ -8,3 +8,4 @@ export type GetPermissionListResultDto = {
     entityDisplayName?: string | null;
     groups?: Array<PermissionGroupDto> | null;
 };
+

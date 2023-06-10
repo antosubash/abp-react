@@ -5,3 +5,4 @@
 export type ApplicationAuthConfigurationDto = {
     grantedPolicies?: Record<string, boolean | null> | null;
 };
+
