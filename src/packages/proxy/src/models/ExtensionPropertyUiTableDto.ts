@@ -5,3 +5,4 @@
 export type ExtensionPropertyUiTableDto = {
     isVisible?: boolean;
 };
+

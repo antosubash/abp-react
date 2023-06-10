@@ -8,3 +8,4 @@ export type EntityExtensionDto = {
     properties?: Record<string, ExtensionPropertyDto> | null;
     configuration?: Record<string, any> | null;
 };
+

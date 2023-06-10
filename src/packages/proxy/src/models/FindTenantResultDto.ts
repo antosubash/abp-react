@@ -8,3 +8,4 @@ export type FindTenantResultDto = {
     name?: string | null;
     isActive?: boolean;
 };
+

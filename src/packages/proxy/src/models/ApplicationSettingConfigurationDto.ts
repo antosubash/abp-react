@@ -5,3 +5,4 @@
 export type ApplicationSettingConfigurationDto = {
     values?: Record<string, string | null> | null;
 };
+

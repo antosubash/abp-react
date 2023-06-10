@@ -10,6 +10,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class EmailSettingsService {
+
     /**
      * @returns EmailSettingsDto Success
      * @throws ApiError
@@ -24,8 +25,8 @@ export class EmailSettingsService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -35,7 +36,7 @@ export class EmailSettingsService {
      * @throws ApiError
      */
     public static emailSettingsUpdate(
-        requestBody?: UpdateEmailSettingsDto
+        requestBody?: UpdateEmailSettingsDto,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -48,8 +49,8 @@ export class EmailSettingsService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -59,7 +60,7 @@ export class EmailSettingsService {
      * @throws ApiError
      */
     public static emailSettingsSendTestEmail(
-        requestBody?: SendTestEmailInput
+        requestBody?: SendTestEmailInput,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -72,8 +73,9 @@ export class EmailSettingsService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
+
 }

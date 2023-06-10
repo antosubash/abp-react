@@ -10,3 +10,4 @@ export type MethodParameterApiDescriptionModel = {
     isOptional?: boolean;
     defaultValue?: any;
 };
+

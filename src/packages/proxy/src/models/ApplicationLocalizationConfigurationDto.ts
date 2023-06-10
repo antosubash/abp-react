@@ -16,3 +16,4 @@ export type ApplicationLocalizationConfigurationDto = {
     languagesMap?: Record<string, Array<NameValue> | null> | null;
     languageFilesMap?: Record<string, Array<NameValue> | null> | null;
 };
+

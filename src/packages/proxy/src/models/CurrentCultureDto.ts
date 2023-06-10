@@ -15,3 +15,4 @@ export type CurrentCultureDto = {
     nativeName?: string | null;
     dateTimeFormat?: DateTimeFormatDto;
 };
+

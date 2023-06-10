@@ -9,3 +9,4 @@ export type FeatureGroupDto = {
     displayName?: string | null;
     features?: Array<FeatureDto> | null;
 };
+

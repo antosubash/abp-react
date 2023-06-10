@@ -14,3 +14,4 @@ export type PropertyApiDescriptionModel = {
     maximum?: string | null;
     regex?: string | null;
 };
+

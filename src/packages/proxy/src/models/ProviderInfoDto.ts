@@ -6,3 +6,4 @@ export type ProviderInfoDto = {
     providerName?: string | null;
     providerKey?: string | null;
 };
+

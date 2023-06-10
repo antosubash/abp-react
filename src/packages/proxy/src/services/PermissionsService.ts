@@ -9,6 +9,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class PermissionsService {
+
     /**
      * @param providerName
      * @param providerKey
@@ -17,14 +18,14 @@ export class PermissionsService {
      */
     public static permissionsGet(
         providerName?: string,
-        providerKey?: string
+        providerKey?: string,
     ): CancelablePromise<GetPermissionListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/permission-management/permissions',
             query: {
-                providerName: providerName,
-                providerKey: providerKey
+                'providerName': providerName,
+                'providerKey': providerKey,
             },
             errors: {
                 400: `Bad Request`,
@@ -32,8 +33,8 @@ export class PermissionsService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -47,14 +48,14 @@ export class PermissionsService {
     public static permissionsUpdate(
         providerName?: string,
         providerKey?: string,
-        requestBody?: UpdatePermissionsDto
+        requestBody?: UpdatePermissionsDto,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/permission-management/permissions',
             query: {
-                providerName: providerName,
-                providerKey: providerKey
+                'providerName': providerName,
+                'providerKey': providerKey,
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -64,8 +65,9 @@ export class PermissionsService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
+
 }

@@ -5,3 +5,4 @@
 export type ClockDto = {
     kind?: string | null;
 };
+

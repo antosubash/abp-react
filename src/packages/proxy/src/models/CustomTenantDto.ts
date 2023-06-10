@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CurrentTenantDto = {
-    id?: string | null;
+export type CustomTenantDto = {
+    id?: string;
     name?: string | null;
-    isAvailable?: boolean;
+    host?: string | null;
 };
 

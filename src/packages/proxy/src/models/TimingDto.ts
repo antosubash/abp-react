@@ -7,3 +7,4 @@ import type { TimeZone } from './TimeZone';
 export type TimingDto = {
     timeZone?: TimeZone;
 };
+

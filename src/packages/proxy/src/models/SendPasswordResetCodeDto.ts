@@ -8,3 +8,4 @@ export type SendPasswordResetCodeDto = {
     returnUrl?: string | null;
     returnUrlHash?: string | null;
 };
+

@@ -5,3 +5,4 @@
 export type ApplicationGlobalFeatureConfigurationDto = {
     enabledFeatures?: Array<string> | null;
 };
+

@@ -8,3 +8,4 @@ export type LanguageInfo = {
     displayName?: string | null;
     flagIcon?: string | null;
 };
+

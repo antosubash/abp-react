@@ -6,3 +6,4 @@ export type UpdatePermissionDto = {
     name?: string | null;
     isGranted?: boolean;
 };
+

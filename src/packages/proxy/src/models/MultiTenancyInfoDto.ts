@@ -5,3 +5,4 @@
 export type MultiTenancyInfoDto = {
     isEnabled?: boolean;
 };
+

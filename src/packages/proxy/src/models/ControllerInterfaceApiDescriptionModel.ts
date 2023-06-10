@@ -9,3 +9,4 @@ export type ControllerInterfaceApiDescriptionModel = {
     name?: string | null;
     methods?: Array<InterfaceMethodApiDescriptionModel> | null;
 };
+

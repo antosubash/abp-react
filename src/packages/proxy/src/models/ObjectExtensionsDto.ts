@@ -9,3 +9,4 @@ export type ObjectExtensionsDto = {
     modules?: Record<string, ModuleExtensionDto> | null;
     enums?: Record<string, ExtensionEnumDto> | null;
 };
+

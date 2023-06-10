@@ -8,3 +8,4 @@ export type PagedResultDtoOfIdentityUserDto = {
     items?: Array<IdentityUserDto> | null;
     totalCount?: number;
 };
+

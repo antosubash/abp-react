@@ -15,3 +15,4 @@ export type ControllerApiDescriptionModel = {
     interfaces?: Array<ControllerInterfaceApiDescriptionModel> | null;
     actions?: Record<string, ActionApiDescriptionModel> | null;
 };
+

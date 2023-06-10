@@ -8,19 +8,20 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class AbpTenantService {
+
     /**
      * @param name
      * @returns FindTenantResultDto Success
      * @throws ApiError
      */
     public static abpTenantFindTenantByName(
-        name: string
+        name: string,
     ): CancelablePromise<FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-name/{name}',
             path: {
-                name: name
+                'name': name,
             },
             errors: {
                 400: `Bad Request`,
@@ -28,8 +29,8 @@ export class AbpTenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
 
@@ -39,13 +40,13 @@ export class AbpTenantService {
      * @throws ApiError
      */
     public static abpTenantFindTenantById(
-        id: string
+        id: string,
     ): CancelablePromise<FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-id/{id}',
             path: {
-                id: id
+                'id': id,
             },
             errors: {
                 400: `Bad Request`,
@@ -53,8 +54,9 @@ export class AbpTenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`
-            }
+                501: `Server Error`,
+            },
         });
     }
+
 }
