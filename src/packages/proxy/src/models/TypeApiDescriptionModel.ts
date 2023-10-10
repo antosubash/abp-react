@@ -12,4 +12,3 @@ export type TypeApiDescriptionModel = {
     genericArguments?: Array<string> | null;
     properties?: Array<PropertyApiDescriptionModel> | null;
 };
-

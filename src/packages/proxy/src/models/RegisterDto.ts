@@ -9,4 +9,3 @@ export type RegisterDto = {
     password: string;
     appName: string;
 };
-

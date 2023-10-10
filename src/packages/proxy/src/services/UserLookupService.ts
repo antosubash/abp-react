@@ -9,20 +9,17 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class UserLookupService {
-
     /**
      * @param id
      * @returns UserData Success
      * @throws ApiError
      */
-    public static userLookupFindById(
-        id: string,
-    ): CancelablePromise<UserData> {
+    public static userLookupFindById(id: string): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/{id}',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -30,8 +27,8 @@ export class UserLookupService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -41,13 +38,13 @@ export class UserLookupService {
      * @throws ApiError
      */
     public static userLookupFindByUserName(
-        userName: string,
+        userName: string
     ): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/by-username/{userName}',
             path: {
-                'userName': userName,
+                userName: userName
             },
             errors: {
                 400: `Bad Request`,
@@ -55,8 +52,8 @@ export class UserLookupService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -72,16 +69,16 @@ export class UserLookupService {
         filter?: string,
         sorting?: string,
         skipCount?: number,
-        maxResultCount?: number,
+        maxResultCount?: number
     ): CancelablePromise<ListResultDtoOfUserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/search',
             query: {
-                'Filter': filter,
-                'Sorting': sorting,
-                'SkipCount': skipCount,
-                'MaxResultCount': maxResultCount,
+                Filter: filter,
+                Sorting: sorting,
+                SkipCount: skipCount,
+                MaxResultCount: maxResultCount
             },
             errors: {
                 400: `Bad Request`,
@@ -89,8 +86,8 @@ export class UserLookupService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -100,13 +97,13 @@ export class UserLookupService {
      * @throws ApiError
      */
     public static userLookupGetCount(
-        filter?: string,
+        filter?: string
     ): CancelablePromise<number> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/count',
             query: {
-                'Filter': filter,
+                Filter: filter
             },
             errors: {
                 400: `Bad Request`,
@@ -114,9 +111,8 @@ export class UserLookupService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }

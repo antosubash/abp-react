@@ -11,4 +11,3 @@ export type DateTimeFormatDto = {
     shortTimePattern?: string | null;
     longTimePattern?: string | null;
 };
-

@@ -9,14 +9,13 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class LoginService {
-
     /**
      * @param requestBody
      * @returns AbpLoginResult Success
      * @throws ApiError
      */
     public static loginLogin(
-        requestBody?: UserLoginInfo,
+        requestBody?: UserLoginInfo
     ): CancelablePromise<AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -29,8 +28,8 @@ export class LoginService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -48,8 +47,8 @@ export class LoginService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -59,7 +58,7 @@ export class LoginService {
      * @throws ApiError
      */
     public static loginCheckPassword(
-        requestBody?: UserLoginInfo,
+        requestBody?: UserLoginInfo
     ): CancelablePromise<AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -72,9 +71,8 @@ export class LoginService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }

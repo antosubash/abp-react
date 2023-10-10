@@ -8,4 +8,3 @@ export type TenantCreateDto = {
     adminEmailAddress: string;
     adminPassword: string;
 };
-

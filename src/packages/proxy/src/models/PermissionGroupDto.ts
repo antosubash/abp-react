@@ -11,4 +11,3 @@ export type PermissionGroupDto = {
     displayNameResource?: string | null;
     permissions?: Array<PermissionGrantInfoDto> | null;
 };
-

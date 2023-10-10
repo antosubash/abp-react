@@ -8,4 +8,3 @@ export type ExtensionEnumDto = {
     fields?: Array<ExtensionEnumFieldDto> | null;
     localizationResource?: string | null;
 };
-

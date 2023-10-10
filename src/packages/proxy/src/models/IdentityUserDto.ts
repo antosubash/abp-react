@@ -25,4 +25,3 @@ export type IdentityUserDto = {
     lockoutEnd?: string | null;
     concurrencyStamp?: string | null;
 };
-

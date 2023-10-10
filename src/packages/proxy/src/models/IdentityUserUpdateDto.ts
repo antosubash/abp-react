@@ -15,4 +15,3 @@ export type IdentityUserUpdateDto = {
     password?: string | null;
     concurrencyStamp?: string | null;
 };
-

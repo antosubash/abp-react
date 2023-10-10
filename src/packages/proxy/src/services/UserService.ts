@@ -13,20 +13,17 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class UserService {
-
     /**
      * @param id
      * @returns IdentityUserDto Success
      * @throws ApiError
      */
-    public static userGet(
-        id: string,
-    ): CancelablePromise<IdentityUserDto> {
+    public static userGet(id: string): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -34,8 +31,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -47,13 +44,13 @@ export class UserService {
      */
     public static userUpdate(
         id: string,
-        requestBody?: IdentityUserUpdateDto,
+        requestBody?: IdentityUserUpdateDto
     ): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}',
             path: {
-                'id': id,
+                id: id
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -63,8 +60,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -73,14 +70,12 @@ export class UserService {
      * @returns any Success
      * @throws ApiError
      */
-    public static userDelete(
-        id: string,
-    ): CancelablePromise<any> {
+    public static userDelete(id: string): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/identity/users/{id}',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -88,8 +83,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -105,16 +100,16 @@ export class UserService {
         filter?: string,
         sorting?: string,
         skipCount?: number,
-        maxResultCount?: number,
+        maxResultCount?: number
     ): CancelablePromise<PagedResultDtoOfIdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users',
             query: {
-                'Filter': filter,
-                'Sorting': sorting,
-                'SkipCount': skipCount,
-                'MaxResultCount': maxResultCount,
+                Filter: filter,
+                Sorting: sorting,
+                SkipCount: skipCount,
+                MaxResultCount: maxResultCount
             },
             errors: {
                 400: `Bad Request`,
@@ -122,8 +117,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -133,7 +128,7 @@ export class UserService {
      * @throws ApiError
      */
     public static userCreate(
-        requestBody?: IdentityUserCreateDto,
+        requestBody?: IdentityUserCreateDto
     ): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -146,8 +141,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -157,13 +152,13 @@ export class UserService {
      * @throws ApiError
      */
     public static userGetRoles(
-        id: string,
+        id: string
     ): CancelablePromise<ListResultDtoOfIdentityRoleDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/roles',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -171,8 +166,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -184,13 +179,13 @@ export class UserService {
      */
     public static userUpdateRoles(
         id: string,
-        requestBody?: IdentityUserUpdateRolesDto,
+        requestBody?: IdentityUserUpdateRolesDto
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/roles',
             path: {
-                'id': id,
+                id: id
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -200,8 +195,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -219,8 +214,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -230,13 +225,13 @@ export class UserService {
      * @throws ApiError
      */
     public static userFindByUsername(
-        userName: string,
+        userName: string
     ): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-username/{userName}',
             path: {
-                'userName': userName,
+                userName: userName
             },
             errors: {
                 400: `Bad Request`,
@@ -244,8 +239,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -255,13 +250,13 @@ export class UserService {
      * @throws ApiError
      */
     public static userFindByEmail(
-        email: string,
+        email: string
     ): CancelablePromise<IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-email/{email}',
             path: {
-                'email': email,
+                email: email
             },
             errors: {
                 400: `Bad Request`,
@@ -269,9 +264,8 @@ export class UserService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }

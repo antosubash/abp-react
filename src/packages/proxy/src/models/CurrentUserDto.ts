@@ -19,4 +19,3 @@ export type CurrentUserDto = {
     phoneNumberVerified?: boolean;
     roles?: Array<string> | null;
 };
-

@@ -9,4 +9,3 @@ export type ExtensionPropertyUiLookupDto = {
     valuePropertyName?: string | null;
     filterParamName?: string | null;
 };
-

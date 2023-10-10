@@ -9,7 +9,6 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class FeaturesService {
-
     /**
      * @param providerName
      * @param providerKey
@@ -18,14 +17,14 @@ export class FeaturesService {
      */
     public static featuresGet(
         providerName?: string,
-        providerKey?: string,
+        providerKey?: string
     ): CancelablePromise<GetFeatureListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/feature-management/features',
             query: {
-                'providerName': providerName,
-                'providerKey': providerKey,
+                providerName: providerName,
+                providerKey: providerKey
             },
             errors: {
                 400: `Bad Request`,
@@ -33,8 +32,8 @@ export class FeaturesService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -48,14 +47,14 @@ export class FeaturesService {
     public static featuresUpdate(
         providerName?: string,
         providerKey?: string,
-        requestBody?: UpdateFeaturesDto,
+        requestBody?: UpdateFeaturesDto
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/feature-management/features',
             query: {
-                'providerName': providerName,
-                'providerKey': providerKey,
+                providerName: providerName,
+                providerKey: providerKey
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -65,8 +64,8 @@ export class FeaturesService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -78,14 +77,14 @@ export class FeaturesService {
      */
     public static featuresDelete(
         providerName?: string,
-        providerKey?: string,
+        providerKey?: string
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/feature-management/features',
             query: {
-                'providerName': providerName,
-                'providerKey': providerKey,
+                providerName: providerName,
+                providerKey: providerKey
             },
             errors: {
                 400: `Bad Request`,
@@ -93,9 +92,8 @@ export class FeaturesService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }

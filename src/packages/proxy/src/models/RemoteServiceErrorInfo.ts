@@ -11,4 +11,3 @@ export type RemoteServiceErrorInfo = {
     data?: Record<string, any> | null;
     validationErrors?: Array<RemoteServiceValidationErrorInfo> | null;
 };
-

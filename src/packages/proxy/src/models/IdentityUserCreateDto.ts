@@ -14,4 +14,3 @@ export type IdentityUserCreateDto = {
     roleNames?: Array<string> | null;
     password: string;
 };
-

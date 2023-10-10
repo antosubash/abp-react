@@ -7,5 +7,5 @@ export enum LoginResultType {
     '_2' = 2,
     '_3' = 3,
     '_4' = 4,
-    '_5' = 5,
+    '_5' = 5
 }

@@ -7,4 +7,3 @@ export type UserLoginInfo = {
     password: string;
     rememberMe?: boolean;
 };
-

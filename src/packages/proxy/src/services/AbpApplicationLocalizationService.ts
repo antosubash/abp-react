@@ -8,7 +8,6 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class AbpApplicationLocalizationService {
-
     /**
      * @param cultureName
      * @param onlyDynamics
@@ -17,14 +16,14 @@ export class AbpApplicationLocalizationService {
      */
     public static abpApplicationLocalizationGet(
         cultureName: string,
-        onlyDynamics?: boolean,
+        onlyDynamics?: boolean
     ): CancelablePromise<ApplicationLocalizationDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/application-localization',
             query: {
-                'CultureName': cultureName,
-                'OnlyDynamics': onlyDynamics,
+                CultureName: cultureName,
+                OnlyDynamics: onlyDynamics
             },
             errors: {
                 400: `Bad Request`,
@@ -32,9 +31,8 @@ export class AbpApplicationLocalizationService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }

@@ -9,4 +9,3 @@ export type TimeZone = {
     iana?: IanaTimeZone;
     windows?: WindowsTimeZone;
 };
-

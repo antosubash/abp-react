@@ -10,4 +10,3 @@ export type InterfaceMethodApiDescriptionModel = {
     parametersOnMethod?: Array<MethodParameterApiDescriptionModel> | null;
     returnValue?: ReturnValueApiDescriptionModel;
 };
-

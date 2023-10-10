@@ -7,4 +7,3 @@ export type CustomTenantDto = {
     name?: string | null;
     host?: string | null;
 };
-

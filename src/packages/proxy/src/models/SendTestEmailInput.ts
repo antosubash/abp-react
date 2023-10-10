@@ -8,4 +8,3 @@ export type SendTestEmailInput = {
     subject: string;
     body?: string | null;
 };
-

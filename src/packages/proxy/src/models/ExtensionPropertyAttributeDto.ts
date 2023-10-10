@@ -6,4 +6,3 @@ export type ExtensionPropertyAttributeDto = {
     typeSimple?: string | null;
     config?: Record<string, any> | null;
 };
-

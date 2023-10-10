@@ -6,4 +6,3 @@ export type ChangePasswordInput = {
     currentPassword?: string | null;
     newPassword: string;
 };
-

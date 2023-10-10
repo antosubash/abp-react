@@ -8,4 +8,3 @@ export type IdentityRoleCreateDto = {
     isDefault?: boolean;
     isPublic?: boolean;
 };
-

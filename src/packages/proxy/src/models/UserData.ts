@@ -14,4 +14,3 @@ export type UserData = {
     phoneNumber?: string | null;
     phoneNumberConfirmed?: boolean;
 };
-

@@ -12,21 +12,20 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class TenantService {
-
     /**
      * @param host
      * @returns string Success
      * @throws ApiError
      */
     public static tenantGetTenantGuid(
-        host?: string,
+        host?: string
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy',
             query: {
-                'host': host,
-            },
+                host: host
+            }
         });
     }
 
@@ -38,15 +37,15 @@ export class TenantService {
      */
     public static tenantAddHost(
         id?: string,
-        host?: string,
+        host?: string
     ): CancelablePromise<CustomTenantDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/multi-tenancy',
             query: {
-                'Id': id,
-                'Host': host,
-            },
+                Id: id,
+                Host: host
+            }
         });
     }
 
@@ -56,14 +55,14 @@ export class TenantService {
      * @throws ApiError
      */
     public static tenantGetTenantHost(
-        id: string,
+        id: string
     ): CancelablePromise<CustomTenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/{id}',
             path: {
-                'id': id,
-            },
+                id: id
+            }
         });
     }
 
@@ -72,14 +71,12 @@ export class TenantService {
      * @returns TenantDto Success
      * @throws ApiError
      */
-    public static tenantGet(
-        id: string,
-    ): CancelablePromise<TenantDto> {
+    public static tenantGet(id: string): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants/{id}',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -87,8 +84,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -100,13 +97,13 @@ export class TenantService {
      */
     public static tenantUpdate(
         id: string,
-        requestBody?: TenantUpdateDto,
+        requestBody?: TenantUpdateDto
     ): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/multi-tenancy/tenants/{id}',
             path: {
-                'id': id,
+                id: id
             },
             body: requestBody,
             mediaType: 'application/json',
@@ -116,8 +113,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -126,14 +123,12 @@ export class TenantService {
      * @returns any Success
      * @throws ApiError
      */
-    public static tenantDelete(
-        id: string,
-    ): CancelablePromise<any> {
+    public static tenantDelete(id: string): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/multi-tenancy/tenants/{id}',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -141,8 +136,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -158,16 +153,16 @@ export class TenantService {
         filter?: string,
         sorting?: string,
         skipCount?: number,
-        maxResultCount?: number,
+        maxResultCount?: number
     ): CancelablePromise<PagedResultDtoOfTenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants',
             query: {
-                'Filter': filter,
-                'Sorting': sorting,
-                'SkipCount': skipCount,
-                'MaxResultCount': maxResultCount,
+                Filter: filter,
+                Sorting: sorting,
+                SkipCount: skipCount,
+                MaxResultCount: maxResultCount
             },
             errors: {
                 400: `Bad Request`,
@@ -175,8 +170,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -186,7 +181,7 @@ export class TenantService {
      * @throws ApiError
      */
     public static tenantCreate(
-        requestBody?: TenantCreateDto,
+        requestBody?: TenantCreateDto
     ): CancelablePromise<TenantDto> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -199,8 +194,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -210,13 +205,13 @@ export class TenantService {
      * @throws ApiError
      */
     public static tenantGetDefaultConnectionString(
-        id: string,
+        id: string
     ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -224,8 +219,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -237,16 +232,16 @@ export class TenantService {
      */
     public static tenantUpdateDefaultConnectionString(
         id: string,
-        defaultConnectionString?: string,
+        defaultConnectionString?: string
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',
             path: {
-                'id': id,
+                id: id
             },
             query: {
-                'defaultConnectionString': defaultConnectionString,
+                defaultConnectionString: defaultConnectionString
             },
             errors: {
                 400: `Bad Request`,
@@ -254,8 +249,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
 
@@ -265,13 +260,13 @@ export class TenantService {
      * @throws ApiError
      */
     public static tenantDeleteDefaultConnectionString(
-        id: string,
+        id: string
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/multi-tenancy/tenants/{id}/default-connection-string',
             path: {
-                'id': id,
+                id: id
             },
             errors: {
                 400: `Bad Request`,
@@ -279,9 +274,8 @@ export class TenantService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 500: `Server Error`,
-                501: `Server Error`,
-            },
+                501: `Server Error`
+            }
         });
     }
-
 }
