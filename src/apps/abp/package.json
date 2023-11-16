@@ -35,7 +35,7 @@
         "react-final-table": "^1.5.1",
         "react-hook-form": "^7.43.2",
         "react-icons": "^4.7.1",
-        "sharp": "^0.31.3",
+        "sharp": "^0.32.6",
         "styled-components": "^5.3.6",
         "sweetalert2": "^11.7.2",
         "tailwind-config": "workspace:*",
