@@ -14,12 +14,12 @@ const config = {
   url: 'https://antosubash.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/AbpReact/',
+  baseUrl: '/abp-react/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'antosubash', // Usually your GitHub org/user name.
-  projectName: 'AbpReact', // Usually your repo name.
+  projectName: 'abp-react', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -78,7 +78,7 @@ const config = {
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/antosubash/abpreact',
+            href: 'https://github.com/antosubash/abp-react',
             label: 'GitHub',
             position: 'right',
           },
@@ -122,7 +122,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/antosubash/abpreact',
+                href: 'https://github.com/antosubash/abp-react',
               },
             ],
           },
