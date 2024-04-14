@@ -22,7 +22,7 @@ export const ProfileSettings = () => {
                 description: 'Profile has been updated successfully.',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetProfile]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetProfile]});
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast({
@@ -42,7 +42,7 @@ export const ProfileSettings = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                 <Input
                     type="text"
-                    defaultValue={data.userName!}
+                    defaultValue={data?.userName!}
                     required
                     label="User name"
                     {...register('userName')}
@@ -50,14 +50,14 @@ export const ProfileSettings = () => {
                 <div className="grid sm:grid-cols-2 gap-5">
                     <Input
                         type="text"
-                        defaultValue={data.name!}
+                        defaultValue={data?.name!}
                         required
                         label="Name"
                         {...register('name')}
                     />
                     <Input
                         type="text"
-                        defaultValue={data.surname!}
+                        defaultValue={data?.surname!}
                         required
                         label="Surname"
                         {...register('surname')}
@@ -65,14 +65,14 @@ export const ProfileSettings = () => {
                 </div>
                 <Input
                     type="email"
-                    defaultValue={data.email!}
+                    defaultValue={data?.email!}
                     required
                     label="Email address"
                     {...register('email')}
                 />
                 <Input
                     type="text"
-                    defaultValue={data.phoneNumber!}
+                    defaultValue={data?.phoneNumber!}
                     required
                     label="Phone number"
                     {...register('phoneNumber')}

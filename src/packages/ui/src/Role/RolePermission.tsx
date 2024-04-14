@@ -52,7 +52,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
     useEffect(() => {
         setOpen(true);
         return () => {
-            queryClient.invalidateQueries([PermissionProvider.R]);
+			queryClient.invalidateQueries({ queryKey: [PermissionProvider.R]});
         };
     }, []);
 

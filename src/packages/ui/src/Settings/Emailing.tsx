@@ -50,7 +50,7 @@ export const Emailing = () => {
                 description: 'Email settings updated successfully',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetEmailing]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetEmailing]});
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast({

@@ -2,7 +2,7 @@
 const path = require('path');
 module.exports = {
     reactStrictMode: true,
-    // transpilePackages: ['@abpreact/ui', '@abpreact/hooks', '@abpreact/utils', '@abpreact/proxy' ],
+    transpilePackages: ['@abpreact/ui', '@abpreact/hooks', '@abpreact/utils', '@abpreact/proxy' ],
     output: 'standalone',
     experimental: {
         // this includes files from the monorepo base two directories up

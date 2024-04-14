@@ -159,7 +159,7 @@ export const RoleList = () => {
                     roleId={roleActionDialog.roleId}
                     roleDto={roleActionDialog.roleDto}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetRoles]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles]});
                         setRoleActionDialog(null);
                     }}
                 />
@@ -171,7 +171,7 @@ export const RoleList = () => {
                         roleName: roleActionDialog.roleDto.name
                     }}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetRoles]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles]});
                         setRoleActionDialog(null);
                     }}
                 />

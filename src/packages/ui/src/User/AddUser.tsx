@@ -40,7 +40,7 @@ export const AddUser = ({}: AddUserProps) => {
                 description: 'User Created Successfully',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetUsers]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers]});
             setOpen(false);
         } catch (err: unknown) {
             if (err instanceof Error) {

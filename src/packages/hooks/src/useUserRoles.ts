@@ -6,15 +6,11 @@ type UseUserRolesProps = {
     userId: string;
 };
 export const useUserRoles = ({ userId }: UseUserRolesProps) => {
-    return useQuery(
-        [QueryNames.GetUserRoles, userId],
-        async () => {
-            return await UserService.userGetRoles(userId);
-        },
-        {
-            keepPreviousData: false,
-            cacheTime: undefined,
-            refetchOnWindowFocus: false
-        }
-    );
+	return useQuery({
+		queryKey: [QueryNames.GetUserRoles, userId],
+		queryFn: async () => {
+			const data = await UserService.userGetRoles(userId);
+			return data;
+		},
+	});
 };

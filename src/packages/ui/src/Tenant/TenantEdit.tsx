@@ -77,7 +77,7 @@ export const TenantEdit = ({
     useEffect(() => {
         setOpen(true);
         return () => {
-            queryClient.invalidateQueries([QueryNames.GetTenants]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants]});
         };
     }, []);
 
