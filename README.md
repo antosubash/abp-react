@@ -32,10 +32,14 @@ dotnet new install Anto.Abp.React.Template
 Create a new project using the template
 
 ```bash
-dotnet new abp-react -o my-project-name
+dotnet new abp-react -o my-project-name --apiUrl abp.antosubash.com
 ```
 
 > Note: You can use any name for the project. I used `my-project-name` for this example. keep in mind that the project name should be in kebab case (all lowercase and words separated by hyphens) because it will be used as the name of the packages org name.
+
+### Update the Environment Variables
+
+I have added the sample environment variables in the `.env.sample` file. You can update the values according to your project.
 
 ### Running the project
 
