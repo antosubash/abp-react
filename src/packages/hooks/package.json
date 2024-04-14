@@ -10,19 +10,19 @@
 	"peerDependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"@tanstack/react-query": "4.24.10"
+		"@tanstack/react-query": "5.29.2"
 	},
 	"dependencies": {
 		"@abpreact/proxy": "workspace:*"
 	},
 	"devDependencies": {
-		"@types/node": "18.11.18",
-		"@types/react": "^18.0.28",
-		"eslint": "^8.34.0",
+		"@types/node": "20.12.7",
+		"@types/react": "^18.2.78",
+		"eslint": "^9.0.0",
 		"eslint-config-custom": "workspace:*",
-		"postcss": "^8.4.31",
-		"@tanstack/react-query": "4.24.10",
+		"postcss": "^8.4.38",
+		"@tanstack/react-query": "5.29.2",
 		"tsconfig": "workspace:*",
-		"typescript": "^4.9.5"
+		"typescript": "^5.4.5"
 	}
 }

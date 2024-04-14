@@ -11,11 +11,11 @@
 		"@abpreact/proxy": "workspace:*"
 	},
 	"devDependencies": {
-		"@types/node": "18.11.18",
-		"@types/react": "18.0.26",
-		"eslint": "^8.34.0",
+		"@types/node": "20.12.7",
+		"@types/react": "18.2.78",
+		"eslint": "^9.0.0",
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",
-		"typescript": "^4.9.5"
+		"typescript": "^5.4.5"
 	}
 }
