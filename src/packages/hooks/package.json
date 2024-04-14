@@ -1,33 +1,28 @@
 {
-  "name": "@abpreact/hooks",
-  "version": "0.0.0",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": "./dist"
-  },
-  "license": "MIT",
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "check-types": "tsc --noEmit"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@tanstack/react-query": "4.24.10"
-  },
-  "dependencies": {
-    "@abpreact/proxy": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/node": "18.11.18",
-    "@types/react": "^18.0.28",
-    "eslint": "^8.34.0",
-    "eslint-config-custom": "workspace:*",
-    "postcss": "^8.4.31",
-    "@tanstack/react-query": "4.24.10",
-    "tsconfig": "workspace:*",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
-  }
+	"name": "@abpreact/hooks",
+	"version": "0.0.0",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"check-types": "tsc --noEmit"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"@tanstack/react-query": "4.24.10"
+	},
+	"dependencies": {
+		"@abpreact/proxy": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "18.11.18",
+		"@types/react": "^18.0.28",
+		"eslint": "^8.34.0",
+		"eslint-config-custom": "workspace:*",
+		"postcss": "^8.4.31",
+		"@tanstack/react-query": "4.24.10",
+		"tsconfig": "workspace:*",
+		"typescript": "^4.9.5"
+	}
 }

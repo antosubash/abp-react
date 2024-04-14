@@ -1,9 +1,9 @@
 module.exports = {
     content: [
         // app content
-        `src/**/*.{js,ts,jsx,tsx}`
+        `src/**/*.{ts,tsx}`,
         // include packages if not transpiling
-        // "../../packages/**/*.{js,ts,jsx,tsx}",
+        "../../packages/**/*.{ts,tsx}",
     ],
     plugins: [require('daisyui')],
     daisyui: {
