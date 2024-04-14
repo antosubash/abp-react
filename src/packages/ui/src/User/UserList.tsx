@@ -159,7 +159,7 @@ export const UserList = () => {
                     userId={userActionDialog.userId}
                     userDto={userActionDialog.userDto}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetUsers]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers]});
                         setUserActionDialog(null);
                     }}
                 />
@@ -179,7 +179,7 @@ export const UserList = () => {
                         userId: userActionDialog.userId
                     }}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetUsers]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers]});
                         setUserActionDialog(null);
                     }}
                 />

@@ -58,9 +58,9 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
             });
         });
         return () => {
-            queryClient.invalidateQueries([QueryNames.GetFeatures]);
-            queryClient.invalidateQueries([QueryNames.GetTenants]);
-            queryClient.invalidateQueries([PermissionProvider.T]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetFeatures]});
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants]});
+			queryClient.invalidateQueries({ queryKey: [PermissionProvider.T]});
         };
     }, [onDismiss, data]);
 

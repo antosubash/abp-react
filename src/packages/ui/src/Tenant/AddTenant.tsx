@@ -34,7 +34,7 @@ export const AddTenant = () => {
                 description: 'Tenant Created Successfully',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetTenants]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants]});
             setOpen(false);
         } catch (err: unknown) {
             if (err instanceof Error) {

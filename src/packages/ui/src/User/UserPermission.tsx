@@ -57,7 +57,7 @@ export const UserPermission = ({
     useEffect(() => {
         setOpen(true);
         return () => {
-            queryClient.invalidateQueries([PermissionProvider.U]);
+			queryClient.invalidateQueries({ queryKey: [PermissionProvider.U]});
         };
     }, []);
 

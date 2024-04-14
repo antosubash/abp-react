@@ -141,7 +141,7 @@ export const TenantList = () => {
                     tenantDto={tenantActionDialog.tenantDto}
                     tenantId={tenantActionDialog.tenantId}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetTenants]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants]});
                         setTenantActionDialog(null);
                     }}
                 />
@@ -153,7 +153,7 @@ export const TenantList = () => {
                         tenantName: tenantActionDialog.tenantDto.name
                     }}
                     onDismiss={() => {
-                        queryClient.invalidateQueries([QueryNames.GetTenants]);
+						queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants]});
                         setTenantActionDialog(null);
                     }}
                 />
