@@ -196,6 +196,9 @@ importers:
       '@abpreact/proxy':
         specifier: workspace:*
         version: link:../proxy
+      '@tanstack/react-query':
+        specifier: 5.29.2
+        version: 5.29.2(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -203,9 +206,6 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
-      '@tanstack/react-query':
-        specifier: 5.29.2
-        version: 5.29.2(react@18.2.0)
       '@types/node':
         specifier: 20.12.7
         version: 20.12.7
@@ -1691,6 +1691,7 @@ packages:
 
   /@tanstack/query-core@5.29.0:
     resolution: {integrity: sha512-WgPTRs58hm9CMzEr5jpISe8HXa3qKQ8CxewdYZeVnA54JrPY9B1CZiwsCoLpLkf0dGRZq+LcX5OiJb0bEsOFww==}
+    dev: false
 
   /@tanstack/react-query@5.29.2(react@18.2.0):
     resolution: {integrity: sha512-nyuWILR4u7H5moLGSiifLh8kIqQDLNOHGuSz0rcp+J75fNc8aQLyr5+I2JCHU3n+nJrTTW1ssgAD8HiKD7IFBQ==}
@@ -1699,6 +1700,7 @@ packages:
     dependencies:
       '@tanstack/query-core': 5.29.0
       react: 18.2.0
+    dev: false
 
   /@tanstack/react-table@8.16.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-rKRjnt8ostqN2fercRVOIH/dq7MAmOENCMvVlKx6P9Iokhh6woBGnIZEkqsY/vEJf1jN3TqLOb34xQGLVRuhAg==}

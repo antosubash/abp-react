@@ -23,7 +23,6 @@
 		"eslint": "^8.57.0",
 		"eslint-config-custom": "workspace:*",
 		"postcss": "^8.4.38",
-		"@tanstack/react-query": "5.29.2",
 		"tsconfig": "workspace:*",
 		"typescript": "^5.4.5"
 	}
