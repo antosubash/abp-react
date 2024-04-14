@@ -42,7 +42,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
                 description: 'Test email has been sent Successfully',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetRoles]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles]});
             onCloseEvent();
         } catch (err: unknown) {
             if (err instanceof Error) {

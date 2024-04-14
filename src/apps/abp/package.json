@@ -4,6 +4,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
+		"clean": "rm -rf .next && rm -rf node_modules && rm -rf .turbo",
         "start": "next start",
         "lint": "next lint",
         "test": "playwright test"
@@ -50,7 +51,7 @@
         "@types/node": "20.12.7",
         "@types/react": "18.2.78",
         "autoprefixer": "^10.4.19",
-        "eslint": "9.0.0",
+		"eslint": "^8.57.0",
         "eslint-config-next": "14.2.1",
         "openapi-typescript-codegen": "^0.29.0",
         "postcss": "^8.4.38",

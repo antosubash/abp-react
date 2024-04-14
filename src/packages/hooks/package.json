@@ -5,6 +5,8 @@
 	"types": "./src/index.ts",
 	"license": "MIT",
 	"scripts": {
+		"lint": "eslint --ext .ts,.tsx . --fix",
+		"clean": "rm -rf node_modules",
 		"check-types": "tsc --noEmit"
 	},
 	"peerDependencies": {
@@ -18,7 +20,7 @@
 	"devDependencies": {
 		"@types/node": "20.12.7",
 		"@types/react": "^18.2.78",
-		"eslint": "^9.0.0",
+		"eslint": "^8.57.0",
 		"eslint-config-custom": "workspace:*",
 		"postcss": "^8.4.38",
 		"@tanstack/react-query": "5.29.2",

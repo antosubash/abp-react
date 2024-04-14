@@ -5,6 +5,8 @@
 	"types": "./src/index.tsx",
 	"license": "MIT",
 	"scripts": {
+		"clean": "rm -rf node_modules",
+		"lint": "eslint --ext .ts,.tsx . --fix",
 		"check-types": "tsc --noEmit"
 	},
 	"peerDependencies": {
@@ -42,7 +44,7 @@
 	"devDependencies": {
 		"@types/react": "^18.2.78",
 		"@types/uuid": "^9.0.8",
-		"eslint": "^9.0.0",
+		"eslint": "^8.57.0",
 		"eslint-config-custom": "workspace:*",
 		"postcss": "^8.4.38",
 		"react": "^18.2.0",

@@ -5,6 +5,7 @@
 	"types": "./src/index.ts",
 	"license": "MIT",
 	"scripts": {
+		"clean": "rm -rf node_modules",
 		"check-types": "tsc --noEmit"
 	},
 	"peerDependencies": {
@@ -13,7 +14,7 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"eslint": "^9.0.0",
+		"eslint": "^8.57.0",
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",
 		"typescript": "^5.4.5"

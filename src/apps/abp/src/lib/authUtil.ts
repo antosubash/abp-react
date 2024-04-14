@@ -8,7 +8,7 @@ import {
 import { GetServerSidePropsContext } from 'next';
 import { OpenAPI as ApiOptions } from '@abpreact/proxy';
 import { getCookieFromRequest } from './cookieUtils';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 export const getAuthOptions = (req: any) => {
     const issuer = getCookieFromRequest('next-auth.issuer', req);
     const clientId = process.env.NEXTAUTH_CLIENT_ID;

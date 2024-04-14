@@ -40,7 +40,7 @@ export const AddRole = ({}: AddUserProps) => {
                 description: 'Role Created Successfully',
                 variant: 'default'
             });
-            queryClient.invalidateQueries([QueryNames.GetRoles]);
+			queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles]});
             setOpen(false);
         } catch (err: unknown) {
             if (err instanceof Error) {
