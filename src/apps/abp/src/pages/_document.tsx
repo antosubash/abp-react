@@ -28,8 +28,8 @@ class MyDocument extends Document {
                     <script
                         async
                         defer
-                        data-website-id="d9753d5b-d888-4a04-ae92-79a158cc6ee8"
-                        src="https://umami.antosubash.com/umami.js"
+						data-website-id="63635f6b-c68a-4724-8be3-154d1b221ef8"
+						src="https://umami.antosubash.com/script.js"
                     ></script>
                 </Head>
                 <body className="bg-base-100  text-base-content">
