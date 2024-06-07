@@ -1,5 +1,4 @@
 import "./globals.css";
-import "@abpreact/ui/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
