@@ -1,5 +1,5 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "@abpreact/eslint-config",
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
