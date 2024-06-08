@@ -1,29 +1,23 @@
 {
-    "private": true,
-    "scripts": {
-        "build": "dotenv -- turbo run build",
-        "dev": "dotenv -- turbo run dev",
-        "lint": "dotenv -- turbo run lint",
-        "clean": "turbo run clean",
-        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "docker": "turbo prune --scope=abp-react --docker",
-        "generate": "plop",
-        "gen-api": "openapi --input https://abp.antosubash.com/swagger/v1/swagger.json --output ./packages/proxy/src --client axios NODE_TLS_REJECT_UNAUTHORIZED=0",
-        "test:codegen": "pnpm exec playwright codegen"
-    },
-    "devDependencies": {
-        "dotenv-cli": "7.4.1",
-        "eslint": "^8.57.0",
-        "eslint-config-custom": "workspace:0.0.0",
-        "openapi-typescript-codegen": "^0.29.0",
-        "plop": "^4.0.1",
-        "prettier": "^3.2.5",
-        "prettier-plugin-tailwindcss": "^0.5.13",
-        "turbo": "^1.13.2"
-    },
-    "packageManager": "pnpm@7.15.0",
-	"resolutions": {
-		"@typescript-eslint/eslint-plugin": "6.x",
-		"@typescript-eslint/parser": "6.x"
-	}
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@abpreact/typescript-config": "workspace:*",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@9.1.1",
+  "engines": {
+    "node": ">=18"
+  },
+  "name": "with-tailwind"
 }

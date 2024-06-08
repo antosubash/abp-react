@@ -1,0 +1,5 @@
+{
+  "extends": "tsconfig/react-library.json",
+  "include": [".", "../../apps/abp/types/next-auth.d.ts"],
+  "exclude": ["dist", "build", "node_modules"]
+}
