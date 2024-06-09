@@ -5,7 +5,7 @@
 	"types": "./src/index.ts",
 	"license": "MIT",
 	"scripts": {
-		"clean": "rm -rf node_modules",
+		"clean": "rm -rf node_modules && rm -rf dist",
 		"check-types": "tsc --noEmit"
 	},
 	"peerDependencies": {
