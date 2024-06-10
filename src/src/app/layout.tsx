@@ -3,7 +3,6 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { OpenAPI } from "@/client";
 import { getSession } from "@/lib";
-import { headers } from "next/headers";
 import { cn } from "@/lib/utils";
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!;
@@ -17,6 +16,7 @@ OpenAPI.interceptors.request.use(async (options) => {
   };
   return options;
 });
+
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,7 +33,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  var host = headers().get("host");
   return (
     <html lang="en">
       <body
