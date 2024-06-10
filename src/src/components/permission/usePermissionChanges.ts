@@ -1,6 +1,6 @@
+import { PermissionGrantInfoDto } from '@/client';
 import { useEffect, useState, useCallback } from 'react';
-import { PermissionGrantInfoDto } from '@abpreact/proxy';
-import { Permissions } from '../utils';
+import { Permissions } from '@/lib/utils';
 
 export type UsePermissionsChangesProps = {
     permissions: PermissionGrantInfoDto[];
@@ -84,6 +84,7 @@ export const usePermissionsChanges = ({
                 );
             }
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [permissions, type]
     );
 

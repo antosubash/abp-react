@@ -1,7 +1,7 @@
 import { DialogFooter } from '../Shared/DialogWrapper';
 import { Button } from '../Shared/Button';
 
-import { Permission } from './Permission';
+import { Permission } from './PermissionToggle';
 
 import classNames from 'classnames';
 

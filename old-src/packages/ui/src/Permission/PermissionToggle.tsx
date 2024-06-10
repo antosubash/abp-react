@@ -8,7 +8,7 @@ export type PermissionTracker = {
     isGranted: boolean;
 };
 
-type PermissonProps = {
+type PermissionProps = {
     name: string;
     id: string;
     isGranted: boolean;
@@ -24,7 +24,7 @@ function PermissionToggle({
     className,
     isGranted,
     disabled
-}: PermissonProps) {
+}: PermissionProps) {
     const onChangeEvent = useCallback(() => {
         onUpdate?.();
     }, []);

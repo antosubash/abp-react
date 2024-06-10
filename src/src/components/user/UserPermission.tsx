@@ -20,11 +20,11 @@ import {
 import { Button } from '../Shared/Button';
 import { usePermissions, useUserRoles } from '@abpreact/hooks';
 import { PermissionProvider, USER_ROLE } from '../utils';
-import { Permission, Management } from '../Permission/PermissionToggle';
+import { Permission, Management } from '../permission/PermissionToggle';
 import { Label } from '../Shared/Label';
 import classNames from 'classnames';
 
-import { TogglePermission } from '../Permission/TogglePermission';
+import { TogglePermission } from '../permission/TogglePermission';
 
 type UserPermissionProps = {
     userDto: IdentityUserUpdateDto;

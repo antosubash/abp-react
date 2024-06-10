@@ -19,7 +19,7 @@ import {
 import { Button } from '../Shared/Button';
 import { usePermissions } from '@abpreact/hooks';
 import { PermissionProvider, USER_ROLE } from '../utils';
-import { Permission, Management } from '../Permission/Permission';
+import { Permission, Management } from '../Permission/PermissionToggle';
 import { Label } from '../Shared/Label';
 import classNames from 'classnames';
 

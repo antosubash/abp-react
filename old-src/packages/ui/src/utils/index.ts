@@ -29,14 +29,14 @@ export enum Permissions {
     ROLES = 'AbpIdentity.Roles',
     USERS = 'AbpIdentity.Users',
     TENANTS = 'AbpTenantManagement.Tenants',
-    MANAGAE_HOST_FEATURES = 'FeatureManagement.ManageHostFeatures',
+    MANAGE_HOST_FEATURES = 'FeatureManagement.ManageHostFeatures',
     SETTINGS = 'SettingManagement.Emailing'
 }
 
 export enum PermissionsGrant {
     ROLE_MANAGEMENT = 'Role management',
     TENANT_MANAGEMENT = 'Tenant management',
-    FEATURE_MANAHEMENT = 'Feature management',
+    FEATURE_MANAGEMENT = 'Feature management',
     SETTING_MANAGEMENT = 'Setting management'
 }
 
