@@ -1,28 +1,23 @@
 import React from 'react';
 import { UserDropDown } from './UserDropDown';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { getCookie } from 'cookies-next';
-import { Button } from '../Shared/Button';
+import { Button } from '@/components/ui/button';
+import useSession from '@/useSession';
 export interface UserMenusProps {}
 
 export const UserMenus = ({}: UserMenusProps) => {
     var session = useSession();
     const renderElement = () => {
-        if (session.data) {
+        if (session.session?.isLoggedIn) {
             return <UserDropDown />;
         }
 
         return (
             <div className="flex flex-col sm:flex-row items-center space-x-1">
                 <Button
-                    variant="subtle"
                     size="sm"
                     className="w-full mt-2 sm:w-1/2 sm:mt-0"
                     onClick={() => {
-                        signIn('openiddict', undefined, {
-                            __tenant: getCookie('__tenant') as string
-                            // prompt: "login",
-                        });
+                        location.href = "/admin/login";
                     }}
                 >
                     Login

@@ -1,4 +1,6 @@
-import { useUsers, useCurrentUser, QueryNames } from '@abpreact/hooks';
+"use client";
+import { useUsers } from '@/lib/hooks/useUsers';
+import { QueryNames } from '@/lib/hooks/QueryConstants';
 import { useMemo, useState } from 'react';
 
 import {
@@ -8,20 +10,20 @@ import {
     getPaginationRowModel,
     ColumnDef
 } from '@tanstack/react-table';
-import { IdentityUserDto, IdentityUserUpdateDto } from '@abpreact/proxy';
-import { CustomTable } from '../Shared/CustomTable';
-import Loader from '../Shared/Loader';
-import Error from '../Shared/Error';
+import { IdentityUserDto, IdentityUserUpdateDto } from '@/client';
+import { CustomTable } from '@/components/ui/CustomTable';
+import Loader from '@/components/ui/Loader';
+import Error from '@/components/ui/Error';
 
-import { useToast } from '../Shared/hooks/useToast';
+import { useToast } from '@/components/ui/use-toast';
 import { UserEdit } from './UserEdit';
 import { UserPermission } from './UserPermission';
 import { DeleteUser } from './DeleteUser';
 import { PermissionActions } from '../permission/PermissionActions';
 
-import { USER_ROLE } from '../utils';
+import { USER_ROLE } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
-import { Search } from '../Shared/Search';
+import { Search } from '@/components/ui/Search';
 
 export const UserList = () => {
     const { toast } = useToast();
@@ -43,6 +45,7 @@ export const UserList = () => {
             pageIndex,
             pageSize
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [pageIndex, pageSize, toast, searchStr]
     );
 

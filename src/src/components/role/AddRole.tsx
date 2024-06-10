@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -46,7 +47,7 @@ export const AddRole = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: "Failed",
-          description: "Role creation wasn't successfull.",
+          description: "Role creation wasn't successful.",
           variant: "destructive",
         });
       }

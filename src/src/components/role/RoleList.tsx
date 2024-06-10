@@ -1,3 +1,4 @@
+"use client";
 import { useState, useMemo } from 'react';
 import { PermissionActions } from '../permission/PermissionActions';
 import { RoleEdit } from './RoleEdit';
