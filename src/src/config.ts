@@ -1,4 +1,4 @@
-import { Cog, Home, User, Wrench } from 'lucide-react';
+import { Cog, Home, Users, Database, UserRound } from 'lucide-react';
 
 export const clientConfig = {
     url: process.env.NEXT_PUBLIC_API_URL,
@@ -34,28 +34,19 @@ export const AdminMenus = [
         icon: Home
     },
     {
-        name: 'Administration',
-        icon: Wrench,
-        children: [
-            {
-                name: 'Roles',
-                link: '/admin/users/roles'
-            },
-            {
-                name: 'Users',
-                link: '/admin/users'
-            }
-        ]
+        name: 'Roles',
+        link: '/admin/users/roles',
+        icon: Users
     },
     {
-        name: 'Tenant Management',
-        icon: User,
-        children: [
-            {
-                name: 'Tenants',
-                link: '/admin/tenants'
-            }
-        ]
+        name: 'Users',
+        link: '/admin/users',
+        icon: UserRound
+    },
+    {
+        name: 'Tenants',
+        link: '/admin/tenants',
+        icon: Database
     },
     {
         name: 'Settings',

@@ -15,7 +15,8 @@ export const isTokenExpired = (token: string) => {
 export const refreshToken = async (session: IronSession<SessionData>, client: BaseClient, redis: Redis) => {
     try {
         console.log('Token expired. Refreshing token...');
-        var redisSessionData = await redis.get(session?.userInfo?.sub!);
+        const redisKey = `session:${session?.userInfo?.sub!}`;
+        var redisSessionData = await redis.get(redisKey);
         var parsedSessionData = JSON.parse(redisSessionData!) as RedisSession;
         var tokenSet = await client.refresh(parsedSessionData.refresh_token!);
         session.access_token = tokenSet.access_token;
@@ -24,8 +25,7 @@ export const refreshToken = async (session: IronSession<SessionData>, client: Ba
             access_token: tokenSet.access_token,
             refresh_token: tokenSet.refresh_token,
         } as RedisSession;
-        const sessionKey = `session:${session.userInfo?.sub}`;
-        await redis.set(sessionKey, JSON.stringify(newRedisSessionData));
+        await redis.set(redisKey, JSON.stringify(newRedisSessionData));
         await redis.quit();
         return tokenSet.access_token;
     }

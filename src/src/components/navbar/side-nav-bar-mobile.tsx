@@ -12,9 +12,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import ClientLink from "../ui/client-link";
 export default function SideNavBarMobile() {
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -84,9 +83,7 @@ export default function SideNavBarMobile() {
             </Link>
           </nav>
           <div className="mt-auto">
-            <Card>
-              
-            </Card>
+            <Card></Card>
           </div>
         </SheetContent>
       </Sheet>
@@ -110,12 +107,16 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <Link href="/admin">
+            <DropdownMenuItem>Admin</DropdownMenuItem>
+          </Link>
+          <Link href="/admin/settings">
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+          </Link>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <ClientLink href="/auth/logout" size={"sm"} variant={"link"}>
+            <DropdownMenuItem>Logout</DropdownMenuItem>
+          </ClientLink>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

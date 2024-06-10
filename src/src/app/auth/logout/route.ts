@@ -7,12 +7,14 @@ export async function GET() {
     const session = await getSession();
     const redis = createRedisInstance();
     const redisKey = `session:${session.userInfo?.sub}`;
+    console.log("redisKey: ", redisKey);
     var redisSessionData = await redis.get(redisKey)
+    console.log("redisSessionData: ", redisSessionData);
     var parsedSessionData = JSON.parse(redisSessionData!) as RedisSession;
     const client = await getClient();
     var endSession = client.endSessionUrl({
         post_logout_redirect_uri: clientConfig.post_logout_redirect_uri,
-        id_token_hint: parsedSessionData.refresh_token,
+        id_token_hint: parsedSessionData.access_token,
         state: generators.state()
     });
     session.isLoggedIn = defaultSession.isLoggedIn;
