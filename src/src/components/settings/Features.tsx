@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react';
-import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogTitle
-} from '../Shared/DialogWrapper';
-import { useToast } from '../Shared/hooks/useToast';
 import { useForm } from 'react-hook-form';
-import { useFeatures } from '@abpreact/hooks';
-import { PermissionProvider } from '../utils';
-import { Button } from '../Shared/Button';
+import { useToast } from '../ui/use-toast';
+import { useFeatures } from '@/lib/hooks/useFeatures';
+import { PermissionProvider } from '@/lib/utils';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog';
+import { Button } from '../ui/button';
+
 
 type FeaturesProps = {
     onDismiss: () => void;
@@ -30,26 +26,26 @@ export const Features = ({ onDismiss }: FeaturesProps) => {
     }, []);
 
     return (
-        <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent>
-                <DialogTitle>Features</DialogTitle>
-                <article>
-                    <p>There isn't any available feature.</p>
-                </article>
-                <DialogFooter className="mt-5">
-                    <Button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onCloseEvent();
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button type="submit" variant="subtle">
-                        Save
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+      <Dialog open={open} onOpenChange={onCloseEvent}>
+        <DialogContent>
+          <DialogTitle>Features</DialogTitle>
+          <article>
+            <p>There isn&apos;t any available feature.</p>
+          </article>
+          <DialogFooter className="mt-5">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                onCloseEvent();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type="submit">
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     );
 };

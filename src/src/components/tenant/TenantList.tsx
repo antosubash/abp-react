@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useTenants, QueryNames } from '@abpreact/hooks';
+import { useTenants } from '@/lib/hooks/useTenants';
 
 import { useQueryClient } from '@tanstack/react-query';
 import {
@@ -11,14 +11,15 @@ import {
 
 import { TenantEdit } from './TenantEdit';
 import { FeatureList } from './FeatureList';
-import { TenantDto, TenantUpdateDto } from '@abpreact/proxy';
-import Loader from '../Shared/Loader';
-import Error from '../Shared/Error';
-import { useToast } from '../Shared/hooks/useToast';
+import { TenantDto, TenantUpdateDto } from '@/client';
+import Loader from '@/components/ui/Loader';
+import Error from '@/components/ui/Error';
+import { useToast } from '@/components/ui/use-toast';
 import { PermissionActions } from '../permission/PermissionActions';
-import { CustomTable } from '../Shared/CustomTable';
+import { CustomTable } from '@/components/ui/CustomTable';
 import { DeleteTenant } from './DeleteTenant';
-import { Search } from '../Shared/Search';
+import { Search } from '@/components/ui/Search';
+import { QueryNames } from '@/lib/hooks/QueryConstants';
 
 export const TenantList = () => {
     const { toast } = useToast();
@@ -44,6 +45,7 @@ export const TenantList = () => {
             pageIndex,
             pageSize
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [pageIndex, pageSize, toast]
     );
 
@@ -112,6 +114,7 @@ export const TenantList = () => {
                 ]
             }
         ],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [tenantActionDialog]
     );
 

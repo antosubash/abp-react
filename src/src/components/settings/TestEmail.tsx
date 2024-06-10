@@ -1,21 +1,14 @@
 import { useEffect, useState } from 'react';
-import { EmailSettingsService, SendTestEmailInput } from '@abpreact/proxy';
-import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
-
-import { Button } from '../Shared/Button';
-import { Textarea } from '../Shared/Textarea';
-
-import { useToast } from '../Shared/hooks/useToast';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogFooter
-} from '../Shared/DialogWrapper';
-import { Input } from '../Shared/Input';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies';
+import { useToast } from '../ui/use-toast';
+import { SendTestEmailInput, emailSettingsSendTestEmail } from '@/client';
+import { QueryNames } from '@/lib/hooks/QueryConstants';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Button } from '../ui/button';
 
 export type TestEmailProps = {
     onDismiss: () => void;
@@ -36,7 +29,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
     const onSubmit = async (data: unknown) => {
         try {
             const payload = data as SendTestEmailInput;
-            await EmailSettingsService.emailSettingsSendTestEmail(payload);
+            await emailSettingsSendTestEmail({ requestBody: payload});
             toast({
                 title: 'Success',
                 description: 'Test email has been sent Successfully',
@@ -48,7 +41,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
             if (err instanceof Error) {
                 toast({
                     title: 'Failed',
-                    description: "Test email wasn't successfull.",
+                    description: "Test email wasn't successful.",
                     variant: 'destructive'
                 });
             }
@@ -61,45 +54,39 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
     };
 
     return (
-        <Dialog open={open} onOpenChange={onCloseEvent}>
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>Send Test Email</DialogTitle>
-                </DialogHeader>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <section className="flex flex-col w-full space-y-5">
-                        <Input
-                            required
-                            {...register('senderEmailAddress')}
-                            label="Sender Email Address"
-                        />
-                        <Input
-                            required
-                            {...register('targetEmailAddress')}
-                            label="Target Email Address"
-                        />
-                        <Input
-                            required
-                            {...register('subject')}
-                            label="Subject"
-                        />
-                        <Textarea label="Body" {...register('body')} />
-                    </section>
-                    <DialogFooter className="mt-5">
-                        <Button type="submit" variant="subtle">
-                            Send
-                        </Button>
-                        <Button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onCloseEvent();
-                            }}
-                        >
-                            Close
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
+      <Dialog open={open} onOpenChange={onCloseEvent}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Send Test Email</DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <section className="flex flex-col w-full space-y-5">
+              <Input
+                required
+                {...register("senderEmailAddress")}
+                placeholder="Sender Email Address"
+              />
+              <Input
+                required
+                {...register("targetEmailAddress")}
+                placeholder="Target Email Address"
+              />
+              <Input required {...register("subject")} placeholder="Subject" />
+              <Textarea placeholder="Body" {...register("body")} />
+            </section>
+            <DialogFooter className="mt-5">
+              <Button type="submit">Send</Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onCloseEvent();
+                }}
+              >
+                Close
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     );
 };

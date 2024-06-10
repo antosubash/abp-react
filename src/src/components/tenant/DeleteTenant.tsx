@@ -1,17 +1,8 @@
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle
-} from '../Shared/AlertDialog';
 
-import { TenantService } from '@abpreact/proxy';
-import { useToast } from '../Shared/hooks/useToast';
 import { useEffect, useState } from 'react';
+import { useToast } from '../ui/use-toast';
+import { tenantDelete } from '@/client';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 
 type DeleteTenantProps = {
     tenant: { tenantId: string; tenantName: string };
@@ -26,7 +17,7 @@ export const DeleteTenant = ({
 
     const onYesEvent = async () => {
         try {
-            await TenantService.tenantDelete(tenantId);
+            await tenantDelete({ id: tenantId });
             toast({
                 title: 'Success',
                 description: `Tenant "${tenantName}" has been deleted successfully.`
@@ -48,26 +39,20 @@ export const DeleteTenant = ({
     }, []);
 
     return (
-        <AlertDialog open={open}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>
-                        Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your tenant name "{tenantName}"
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel onClick={onDismiss}>
-                        Cancel
-                    </AlertDialogCancel>
-                    <AlertDialogAction onClick={onYesEvent}>
-                        Yes
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+      <AlertDialog open={open}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              tenant name &quot;{tenantName}&quot;
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={onDismiss}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={onYesEvent}>Yes</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     );
 };

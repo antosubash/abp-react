@@ -24,6 +24,12 @@ export enum USER_ROLE {
   ADMIN = 'admin'
 }
 
+export enum PermissionProvider {
+  U = 'U',
+  R = 'R',
+  T = 'T'
+}
+
 /**
  * Helper method for creating a range of numbers
  * range(1, 5) => [1, 2, 3, 4, 5]

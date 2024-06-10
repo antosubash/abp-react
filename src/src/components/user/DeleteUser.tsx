@@ -1,3 +1,4 @@
+import { userDelete } from '@/client';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -7,10 +8,8 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle
-} from '../Shared/AlertDialog';
-
-import { UserService } from '@abpreact/proxy';
-import { useToast } from '../Shared/hooks/useToast';
+} from '@/components/ui/alert-dialog';
+import { useToast } from '@/components/ui/use-toast';
 import { useEffect, useState } from 'react';
 
 type DeleteUserProps = {
@@ -25,7 +24,7 @@ export const DeleteUser = ({
     const [open, setOpen] = useState<boolean>(false);
     const onYesEvent = async () => {
         try {
-            await UserService.userDelete(userId);
+            await userDelete({ id: userId });
             toast({
                 title: 'Success',
                 description: `User "${username}" has been deleted successfully.`
@@ -47,26 +46,20 @@ export const DeleteUser = ({
     }, []);
 
     return (
-        <AlertDialog open={open}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>
-                        Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your this user "{username}"
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel onClick={onDismiss}>
-                        Cancel
-                    </AlertDialogCancel>
-                    <AlertDialogAction onClick={onYesEvent}>
-                        Yes
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+      <AlertDialog open={open}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              this user &quot;{username}&quot;
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={onDismiss}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={onYesEvent}>Yes</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     );
 };

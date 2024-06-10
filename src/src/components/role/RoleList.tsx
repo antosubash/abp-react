@@ -1,6 +1,4 @@
 import { useState, useMemo } from 'react';
-import { IdentityRoleDto, IdentityRoleUpdateDto } from '@abpreact/proxy';
-
 import { PermissionActions } from '../permission/PermissionActions';
 import { RoleEdit } from './RoleEdit';
 import { DeleteRole } from './DeleteRole';
@@ -13,6 +11,9 @@ import { USER_ROLE } from '@/lib/utils';
 import Loader from '../ui/Loader';
 import Error from '../ui/Error';
 import { QueryNames } from '@/lib/hooks/QueryConstants';
+import { Search } from '../ui/Search';
+import { CustomTable } from '../ui/CustomTable';
+import { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client';
 
 export const RoleList = () => {
     const { toast } = useToast();
@@ -20,7 +21,7 @@ export const RoleList = () => {
     const [roleActionDialog, setRoleActionDialog] = useState<{
         roleId: string;
         roleDto: IdentityRoleUpdateDto;
-        dialgoType?: 'edit' | 'permission' | 'delete';
+        dialogType?: 'edit' | 'permission' | 'delete';
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
@@ -66,7 +67,7 @@ export const RoleList = () => {
                                                         .id as string,
                                                     roleDto: info.row
                                                         .original as IdentityRoleUpdateDto,
-                                                    dialgoType: 'permission'
+                                                    dialogType: 'permission'
                                                 });
                                             }
                                         },
@@ -79,7 +80,7 @@ export const RoleList = () => {
                                                         .id as string,
                                                     roleDto: info.row
                                                         .original as IdentityRoleUpdateDto,
-                                                    dialgoType: 'edit'
+                                                    dialogType: 'edit'
                                                 });
                                             }
                                         },
@@ -96,7 +97,7 @@ export const RoleList = () => {
                                                         .id as string,
                                                     roleDto: info.row
                                                         .original as IdentityRoleUpdateDto,
-                                                    dialgoType: 'delete'
+                                                    dialogType: 'delete'
                                                 });
                                             }
                                         }
@@ -149,7 +150,7 @@ export const RoleList = () => {
 
     return (
         <>
-            {roleActionDialog?.dialgoType === 'edit' && (
+            {roleActionDialog?.dialogType === 'edit' && (
                 <RoleEdit
                     roleId={roleActionDialog.roleId}
                     roleDto={roleActionDialog.roleDto}
@@ -159,7 +160,7 @@ export const RoleList = () => {
                     }}
                 />
             )}
-            {roleActionDialog?.dialgoType === 'delete' && (
+            {roleActionDialog?.dialogType === 'delete' && (
                 <DeleteRole
                     role={{
                         roleId: roleActionDialog.roleId,
@@ -172,7 +173,7 @@ export const RoleList = () => {
                 />
             )}
             {roleActionDialog &&
-                roleActionDialog.dialgoType === 'permission' && (
+                roleActionDialog.dialogType === 'permission' && (
                     <RolePermission
                         roleDto={roleActionDialog.roleDto}
                         onDismiss={() => setRoleActionDialog(null)}

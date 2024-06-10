@@ -1,18 +1,16 @@
-import { QueryNames, useEmailing } from '@abpreact/hooks';
-import {
-    EmailSettingsDto,
-    EmailSettingsService,
-    UpdateEmailSettingsDto
-} from '@abpreact/proxy';
 import { useQueryClient } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '../Shared/Button';
-import { Checkbox } from '../Shared/Checkbox';
-import { useToast } from '../Shared/hooks/useToast';
-import { Input } from '../Shared/Input';
+
 import { TestEmail } from './TestEmail';
+import { useToast } from '../ui/use-toast';
+import { useEmailing } from '@/lib/hooks/useEmailing';
+import { EmailSettingsDto, EmailSettingsUpdateData, UpdateEmailSettingsDto, emailSettingsUpdate } from '@/client';
+import { QueryNames } from '@/lib/hooks/QueryConstants';
+import { Input } from '../ui/input';
+import { Checkbox } from '../ui/checkbox';
+import clsx from 'clsx';
+import { Button } from '../ui/button';
 
 export const Emailing = () => {
     const { toast } = useToast();
@@ -42,9 +40,9 @@ export const Emailing = () => {
 
     const onSubmitEvent = async () => {
         try {
-            await EmailSettingsService.emailSettingsUpdate({
-                ...emailSettingDto
-            } as UpdateEmailSettingsDto);
+            await emailSettingsUpdate({
+              ...emailSettingDto,
+            } as EmailSettingsUpdateData);
             toast({
                 title: 'Success',
                 description: 'Email settings updated successfully',
@@ -62,147 +60,132 @@ export const Emailing = () => {
         }
     };
     return (
-        <section className="emailing p-5 xl:p-10">
-            {openTestEmail && (
-                <TestEmail onDismiss={() => setOpenTestEmail(false)} />
-            )}
-            <h3 className="text-xl font-medium">Emailing</h3>
-            <hr className="border mt-2" />
-            <div className="pt-5">
-                <form onSubmit={handleSubmit(onSubmitEvent)}>
-                    <div className="space-y-5 mb-5">
-                        <Input
-                            type="text"
-                            {...register('defaultFromDisplayName')}
-                            required
-                            label="Default from display name"
-                            value={
-                                emailSettingDto?.defaultFromDisplayName ?? ''
-                            }
-                            onChange={onChangeEvent}
-                        />
-                        <Input
-                            type="email"
-                            {...register('defaultFromAddress')}
-                            required
-                            label="Default from address"
-                            value={emailSettingDto?.defaultFromAddress ?? ''}
-                            onChange={onChangeEvent}
-                        />
-                        <Input
-                            type="text"
-                            {...register('smtpHost')}
-                            label="Host"
-                            value={emailSettingDto?.smtpHost ?? ''}
-                            onChange={onChangeEvent}
-                        />
+      <section className="emailing p-5 xl:p-10">
+        {openTestEmail && (
+          <TestEmail onDismiss={() => setOpenTestEmail(false)} />
+        )}
+        <h3 className="text-xl font-medium">Emailing</h3>
+        <hr className="border mt-2" />
+        <div className="pt-5">
+          <form onSubmit={handleSubmit(onSubmitEvent)}>
+            <div className="space-y-5 mb-5">
+              <Input
+                type="text"
+                {...register("defaultFromDisplayName")}
+                required
+                placeholder="Default from display name"
+                value={emailSettingDto?.defaultFromDisplayName ?? ""}
+                onChange={onChangeEvent}
+              />
+              <Input
+                type="email"
+                {...register("defaultFromAddress")}
+                required
+                placeholder="Default from address"
+                value={emailSettingDto?.defaultFromAddress ?? ""}
+                onChange={onChangeEvent}
+              />
+              <Input
+                type="text"
+                {...register("smtpHost")}
+                placeholder="Host"
+                value={emailSettingDto?.smtpHost ?? ""}
+                onChange={onChangeEvent}
+              />
 
-                        <Input
-                            type="number"
-                            {...register('smtpPort')}
-                            required
-                            label="Port"
-                            value={emailSettingDto?.smtpPort ?? 0}
-                            onChange={onChangeEvent}
-                        />
+              <Input
+                type="number"
+                {...register("smtpPort")}
+                required
+                placeholder="Port"
+                value={emailSettingDto?.smtpPort ?? 0}
+                onChange={onChangeEvent}
+              />
 
-                        <div
-                            className={classNames(
-                                'flex items-center space-x-2'
-                            )}
-                        >
-                            <Checkbox
-                                id="ssl"
-                                {...register('smtpEnableSsl')}
-                                variant="subtle"
-                                checked={emailSettingDto?.smtpEnableSsl}
-                                onCheckedChange={(checked) => {
-                                    setEmailSettingDto({
-                                        ...emailSettingDto,
-                                        smtpEnableSsl: !!checked.valueOf()
-                                    });
-                                }}
-                            />
-                            <label
-                                htmlFor="ssl"
-                                className="text-sm font-medium leading-none "
-                            >
-                                Enable ssl
-                            </label>
-                        </div>
+              <div className={clsx("flex items-center space-x-2")}>
+                <Checkbox
+                  id="ssl"
+                  {...register("smtpEnableSsl")}
+                  checked={emailSettingDto?.smtpEnableSsl}
+                  onCheckedChange={(checked) => {
+                    setEmailSettingDto({
+                      ...emailSettingDto,
+                      smtpEnableSsl: !!checked.valueOf(),
+                    });
+                  }}
+                />
+                <label
+                  htmlFor="ssl"
+                  className="text-sm font-medium leading-none "
+                >
+                  Enable ssl
+                </label>
+              </div>
 
-                        <div
-                            className={classNames(
-                                'flex items-center space-x-2'
-                            )}
-                        >
-                            <Checkbox
-                                id="credentials"
-                                name="smtpUseDefaultCredentials"
-                                variant="subtle"
-                                checked={
-                                    emailSettingDto?.smtpUseDefaultCredentials
-                                }
-                                onCheckedChange={(checked) =>
-                                    setEmailSettingDto({
-                                        ...emailSettingDto,
-                                        smtpUseDefaultCredentials:
-                                            !!checked.valueOf()
-                                    })
-                                }
-                            />
-                            <label
-                                htmlFor="credentials"
-                                className="text-sm font-medium leading-none "
-                            >
-                                Use default credentials
-                            </label>
-                        </div>
-                        {!emailSettingDto?.smtpUseDefaultCredentials && (
-                            <>
-                                <Input
-                                    type="text"
-                                    {...register('smtpDomain')}
-                                    label="Domain"
-                                    value={emailSettingDto?.smtpDomain ?? ''}
-                                    onChange={onChangeEvent}
-                                />
+              <div className={clsx("flex items-center space-x-2")}>
+                <Checkbox
+                  id="credentials"
+                  name="smtpUseDefaultCredentials"
+                  checked={emailSettingDto?.smtpUseDefaultCredentials}
+                  onCheckedChange={(checked) =>
+                    setEmailSettingDto({
+                      ...emailSettingDto,
+                      smtpUseDefaultCredentials: !!checked.valueOf(),
+                    })
+                  }
+                />
+                <label
+                  htmlFor="credentials"
+                  className="text-sm font-medium leading-none "
+                >
+                  Use default credentials
+                </label>
+              </div>
+              {!emailSettingDto?.smtpUseDefaultCredentials && (
+                <>
+                  <Input
+                    type="text"
+                    {...register("smtpDomain")}
+                    placeholder="Domain"
+                    value={emailSettingDto?.smtpDomain ?? ""}
+                    onChange={onChangeEvent}
+                  />
 
-                                <Input
-                                    type="text"
-                                    {...register('smtpUserName')}
-                                    label="User name"
-                                    value={emailSettingDto?.smtpUserName ?? ''}
-                                    onChange={onChangeEvent}
-                                />
+                  <Input
+                    type="text"
+                    {...register("smtpUserName")}
+                    placeholder="User name"
+                    value={emailSettingDto?.smtpUserName ?? ""}
+                    onChange={onChangeEvent}
+                  />
 
-                                <Input
-                                    type="password"
-                                    {...register('smtpPassword')}
-                                    label="Password"
-                                    value={emailSettingDto?.smtpPassword ?? ''}
-                                    onChange={onChangeEvent}
-                                />
-                            </>
-                        )}
-                    </div>
-                    <hr className="border mt-2" />
-                    <div className="space-y-5 space-x-5 w-full">
-                        <Button type="submit" variant="subtle">
-                            Save
-                        </Button>
-                        <Button
-                            variant="default"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setOpenTestEmail(true);
-                            }}
-                        >
-                            Send Test Email
-                        </Button>
-                    </div>
-                </form>
+                  <Input
+                    type="password"
+                    {...register("smtpPassword")}
+                    placeholder="Password"
+                    value={emailSettingDto?.smtpPassword ?? ""}
+                    onChange={onChangeEvent}
+                  />
+                </>
+              )}
             </div>
-        </section>
+            <hr className="border mt-2" />
+            <div className="space-y-5 space-x-5 w-full">
+              <Button type="submit">
+                Save
+              </Button>
+              <Button
+                variant="default"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTestEmail(true);
+                }}
+              >
+                Send Test Email
+              </Button>
+            </div>
+          </form>
+        </div>
+      </section>
     );
 };

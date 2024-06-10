@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button } from '../Shared/Button';
 import { Features } from './Features';
+import { Button } from '../ui/button';
 
 export const FeatureManagement = () => {
     const [showFeatureDialog, setShowFeatureDialog] = useState(false);
@@ -20,7 +20,6 @@ export const FeatureManagement = () => {
                     </p>
                 </article>
                 <Button
-                    variant="subtle"
                     onClick={() => setShowFeatureDialog(true)}
                 >
                     Manage Host Features

@@ -4,9 +4,8 @@ import { v4 } from 'uuid';
 import {
     IdentityRoleDto,
     IdentityUserUpdateDto,
-    UserService
-} from '@abpreact/proxy';
-import { useToast } from '../Shared/hooks/useToast';
+} from '@/client';
+import { useToast } from '@/components/ui/use-toast';
 
 import {
     Dialog,
@@ -14,13 +13,14 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter
-} from '../Shared/DialogWrapper';
-import { Button } from '../Shared/Button';
-import { Input } from '../Shared/Input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../Shared/Tabs';
-import { useAssignableRoles, useUserRoles } from '@abpreact/hooks';
-import Loader from '../Shared/Loader';
-import classNames from 'classnames';
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useUserRoles } from '@/lib/hooks/useUserRoles';
+import { useAssignableRoles } from '@/lib/hooks/useAssignableRoles';
+import Loader from '@/components/ui/Loader';
+import classNames from 'clsx';
 import { Checkbox } from '../Shared/Checkbox';
 
 const TABS_NAME = {

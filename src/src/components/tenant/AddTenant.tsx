@@ -1,21 +1,15 @@
 import { useState } from 'react';
-import { TenantCreateDto, TenantService } from '@abpreact/proxy';
-import { QueryNames, useGrantedPolicies } from '@abpreact/hooks';
 import { Plus } from 'lucide-react';
 
-import { Button } from '../Shared/Button';
-
-import { useToast } from '../Shared/hooks/useToast';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogFooter
-} from '../Shared/DialogWrapper';
-import { Input } from '../Shared/Input';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies';
+import { useToast } from '../ui/use-toast';
+import { TenantCreateDto, tenantCreate } from '@/client';
+import { QueryNames } from '@/lib/hooks/QueryConstants';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 export const AddTenant = () => {
     const { can } = useGrantedPolicies();
@@ -28,7 +22,7 @@ export const AddTenant = () => {
     const onSubmit = async (data: unknown) => {
         const newTenant = data as TenantCreateDto;
         try {
-            await TenantService.tenantCreate(newTenant);
+            await tenantCreate({ requestBody: newTenant });
             toast({
                 title: 'Success',
                 description: 'Tenant Created Successfully',
@@ -40,7 +34,7 @@ export const AddTenant = () => {
             if (err instanceof Error) {
                 toast({
                     title: 'Failed',
-                    description: "Tenant creation wasn't successfull.",
+                    description: "Tenant creation wasn't successful.",
                     variant: 'destructive'
                 });
             }
@@ -48,59 +42,59 @@ export const AddTenant = () => {
     };
 
     return (
-        <section className="p-3">
-            <Dialog open={open} onOpenChange={setOpen}>
-                <section className="flex items-center justify-between pb-5">
-                    <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
-                        Tenant Management
-                    </h3>
-                    {can('AbpTenantManagement.Tenants.Create') && (
-                        <Button variant="subtle" onClick={() => setOpen(true)}>
-                            <Plus width={18} height={18} />
-                            <span className="truncate hidden sm:inline">
-                                Create New Tenant
-                            </span>
-                        </Button>
-                    )}
-                </section>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Create a New Tenant</DialogTitle>
-                    </DialogHeader>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <section className="flex flex-col w-full space-y-5">
-                            <Input
-                                required
-                                {...register('name')}
-                                label="Tenant Name"
-                            />
-                            <Input
-                                required
-                                {...register('adminEmailAddress')}
-                                label="Admin Email Address"
-                            />
-                            <Input
-                                required
-                                {...register('adminPassword')}
-                                label="Admin Password"
-                            />
-                        </section>
-                        <DialogFooter className="mt-5">
-                            <Button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setOpen(false);
-                                }}
-                            >
-                                Cancel
-                            </Button>
-                            <Button type="submit" variant="subtle">
-                                Save
-                            </Button>
-                        </DialogFooter>
-                    </form>
-                </DialogContent>
-            </Dialog>
-        </section>
+      <section className="p-3">
+        <Dialog open={open} onOpenChange={setOpen}>
+          <section className="flex items-center justify-between pb-5">
+            <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
+              Tenant Management
+            </h3>
+            {can("AbpTenantManagement.Tenants.Create") && (
+              <Button onClick={() => setOpen(true)}>
+                <Plus width={18} height={18} />
+                <span className="truncate hidden sm:inline">
+                  Create New Tenant
+                </span>
+              </Button>
+            )}
+          </section>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create a New Tenant</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <section className="flex flex-col w-full space-y-5">
+                <Input
+                  required
+                  {...register("name")}
+                  placeholder="Tenant Name"
+                />
+                <Input
+                  required
+                  {...register("adminEmailAddress")}
+                  placeholder="Admin Email Address"
+                />
+                <Input
+                  required
+                  {...register("adminPassword")}
+                  placeholder="Admin Password"
+                />
+              </section>
+              <DialogFooter className="mt-5">
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">
+                  Save
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </section>
     );
 };
