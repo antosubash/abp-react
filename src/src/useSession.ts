@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SessionData } from "./lib";
+import { SessionData } from "./lib/session-utils";
 
 export default function useSession() {
     const [session, setSession] = useState<SessionData | null>(null);

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { OpenAPI } from "@/client";
-import { getSession } from "@/lib";
+import { getSession } from "@/lib/session-utils";
 import { cn } from "@/lib/utils";
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!;

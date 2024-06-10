@@ -1,9 +1,9 @@
 import { jwtDecode } from "jwt-decode";
 import { RedisSession } from "./redis";
-import { SessionData } from "@/lib";
 import { BaseClient } from "openid-client";
 import Redis from "ioredis";
 import { IronSession } from "iron-session";
+import { SessionData } from "./session-utils";
 
 export const isTokenExpired = (token: string) => {
     var decoded = jwtDecode(token!);
@@ -11,7 +11,6 @@ export const isTokenExpired = (token: string) => {
     var currentTime = new Date().getTime();
     return expirationTime < currentTime;
 }
-
 
 export const refreshToken = async (session: IronSession<SessionData>, client: BaseClient, redis: Redis) => {
     try {

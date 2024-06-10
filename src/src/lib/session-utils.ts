@@ -1,11 +1,11 @@
 import { IronSession, getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { Issuer } from "openid-client";
-import { clientConfig } from "./config";
-import { sessionOptions } from "./sessionOptions";
-import { isTokenExpired, refreshToken } from "./utils/auth";
-import { createRedisInstance } from "./utils/redis";
-import { tenantGetTenantGuid, tenantGetTenantHost } from "./client";
+import { clientConfig } from "../config";
+import { sessionOptions } from "../sessionOptions";
+import { isTokenExpired, refreshToken } from "./auth";
+import { createRedisInstance } from "./redis";
+import { tenantGetTenantGuid, tenantGetTenantHost } from "../client";
 
 export interface SessionData {
     isLoggedIn: boolean;
@@ -50,10 +50,7 @@ export async function getSession(): Promise<IronSession<SessionData>> {
         session.userInfo = defaultSession.userInfo;
         return session;
     }
-
 }
-
-
 
 export async function getClient() {
     const abpIssuer = await Issuer.discover(clientConfig.url!);

@@ -1,4 +1,4 @@
-import { getSession } from '@/lib';
+import { getSession } from '@/lib/session-utils';
 import { headers } from 'next/headers';
 import { tenantGetTenantGuid } from "@/client";
 import { redirect } from 'next/navigation'

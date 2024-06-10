@@ -1,12 +1,11 @@
 import { clientConfig } from '@/config';
-import { getClient, getSession } from '@/lib';
-import { RedisSession, createRedisInstance } from '@/utils/redis';
-import { IncomingMessage } from 'http';
-
-export async function GET(request: IncomingMessage) { 
+import { getClient, getSession } from '@/lib/session-utils';
+import { RedisSession, createRedisInstance } from '@/lib/redis';
+import { NextRequest } from 'next/server';
+export async function GET(request: NextRequest) { 
     const session = await getSession();
     const client = await getClient();
-    const params = client.callbackParams(request);
+    const params = client.callbackParams(request as any);
     const tokenSet = await client.callback(clientConfig.redirect_uri, params, { code_verifier: session.code_verifier });
     const { access_token, refresh_token } = tokenSet;
     session.isLoggedIn = true;
