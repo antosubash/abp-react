@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-api" : "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
