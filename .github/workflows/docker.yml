@@ -9,6 +9,9 @@ on:
 jobs:
 
   build:
+    defaults:
+      run:
+        working-directory: ./src
     env:
       NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
       NEXTAUTH_CLIENT_ID : ${{ secrets.NEXTAUTH_CLIENT_ID }}
@@ -59,7 +62,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - name: Build the abpreact nextjs image
-      run: docker build . --file ./apps/abp/Dockerfile --tag abpreactnextjs:dev
+      run: docker build . --file ./src/Dockerfile --tag abpreactnextjs:dev
     - name: Docker tag next image
       run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
     - name: Push abpreact-nextjs image
