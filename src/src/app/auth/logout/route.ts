@@ -7,9 +7,7 @@ export async function GET() {
     const session = await getSession();
     const redis = createRedisInstance();
     const redisKey = `session:${session.userInfo?.sub}`;
-    console.log("redisKey: ", redisKey);
     var redisSessionData = await redis.get(redisKey)
-    console.log("redisSessionData: ", redisSessionData);
     var parsedSessionData = JSON.parse(redisSessionData!) as RedisSession;
     const client = await getClient();
     var endSession = client.endSessionUrl({

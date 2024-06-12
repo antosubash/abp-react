@@ -15,7 +15,6 @@ export const Features = ({ onDismiss }: FeaturesProps) => {
     const { toast } = useToast();
     const { handleSubmit, register } = useForm();
     const { data } = useFeatures(PermissionProvider.T, 'undefined');
-    console.log(data, 'data');
     const onCloseEvent = () => {
         setOpen(false);
         onDismiss();

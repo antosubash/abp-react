@@ -4,8 +4,7 @@ import { Issuer } from "openid-client";
 import { clientConfig } from "../config";
 import { sessionOptions } from "../sessionOptions";
 import { isTokenExpired, refreshToken } from "./auth";
-import { createRedisInstance } from "./redis";
-import { tenantGetTenantGuid, tenantGetTenantHost } from "../client";
+import { tenantGetTenantGuid } from "../client";
 
 export interface SessionData {
     isLoggedIn: boolean;
@@ -29,6 +28,7 @@ export const defaultSession: SessionData = {
 };
 
 export async function getSession(): Promise<IronSession<SessionData>> {
+    "use server"
     let session = await getIronSession<SessionData>(cookies(), sessionOptions);
     try {
         if (session.access_token && isTokenExpired(session.access_token!)) {

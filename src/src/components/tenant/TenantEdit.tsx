@@ -35,10 +35,6 @@ export const TenantEdit = ({
   const { handleSubmit, register } = useForm();
 
   useEffect(() => {
-    console.log(
-      tenantDto?.extraProperties?.Host,
-      "tenantDto?.extraProperties?.Host"
-    );
     if (tenantDto?.extraProperties?.Host) {
       setEnableHost(true);
     }

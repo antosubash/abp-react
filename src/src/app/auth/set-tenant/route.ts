@@ -11,7 +11,6 @@ export async function GET() {
         return;
     }
     var tenantGuid = await tenantGetTenantGuid({ host: host! });
-    console.log("Tenant Guid: ", tenantGuid);
     session.tenantId = tenantGuid ?? 'default';
     await session.save();
     redirect('/');

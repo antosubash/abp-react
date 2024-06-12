@@ -55,7 +55,6 @@ export const RoleList = () => {
                         accessorKey: 'actions',
                         header: 'Actions',
                         cell: (info) => {
-                            console.log(info.row);
                             return (
                                 <PermissionActions
                                     actions={[
