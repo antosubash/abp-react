@@ -32,10 +32,16 @@ export async function getSession(): Promise<IronSession<SessionData>> {
     let session = await getIronSession<SessionData>(cookies(), sessionOptions);
     try {
         if (session.access_token && isTokenExpired(session.access_token!)) {
-            const redis = createRedisInstance();
-            const client = await getClient();
-            await refreshToken(session, client, redis);
-            return await getSession();
+            await refreshToken();
+            session = await getIronSession<SessionData>(cookies(), sessionOptions);
+            console.log('Token refreshed');
+            console.log('Checking if token is still expired...');
+            if (isTokenExpired(session.access_token!)) {
+                console.log('Token still expired. Logging out...');
+                session.isLoggedIn = defaultSession.isLoggedIn;
+                session.access_token = defaultSession.access_token;
+                session.userInfo = defaultSession.userInfo;
+            }
         }
         if (!session.isLoggedIn) {
             session.isLoggedIn = defaultSession.isLoggedIn;

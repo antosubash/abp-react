@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     const session = await getSession();
     const path = request.nextUrl.pathname;
+    console.log(`POST: ${EXTERNAL_API_URL}${path}${request.nextUrl.search}`);
     return await fetch(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`, {
         method: 'POST',
         headers: {

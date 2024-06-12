@@ -1,4 +1,5 @@
 import { ChangePassword } from "@/components/profile/ChangePassword";
+import { ProfileSettings } from "@/components/profile/ProfileSettings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
@@ -16,7 +17,7 @@ export default function ChangePasswordPage() {
               </Link>
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="Personal Settings">
+          <TabsContent value="Change Password">
             <section>
               <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
                 Change Password
