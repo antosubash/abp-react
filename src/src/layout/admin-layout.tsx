@@ -1,5 +1,6 @@
 import SideBarMenu from "@/components/navbar/side-nav-bar";
 import SideNavBarMobile from "@/components/navbar/side-nav-bar-mobile";
+import ReactQueryProviders from "@/lib/provider/QueryClientProvider";
 
 export function AdminLayout({
   children,
@@ -12,7 +13,7 @@ export function AdminLayout({
       <div className="flex flex-col">
         <SideNavBarMobile />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          {children}
+          <ReactQueryProviders>{children}</ReactQueryProviders>
         </main>
       </div>
     </div>

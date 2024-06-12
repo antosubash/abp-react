@@ -114,18 +114,24 @@ export default async function TopNavBar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <Link href="/admin">
+              <Link href="/admin" className="cursor-pointer">
                 <DropdownMenuItem>Admin</DropdownMenuItem>
               </Link>
-              <Link href="/admin/settings">
+              <Link href="/admin/profile" className="cursor-pointer">
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+              </Link>
+              <Link href="/admin/settings" className="cursor-pointer">
                 <DropdownMenuItem>Settings</DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <ClientLink href="/auth/logout" variant={"link"} size={"sm"}>
-                  Logout
-                </ClientLink>
-              </DropdownMenuItem>
+              <ClientLink
+                href="/auth/logout"
+                variant={"link"}
+                size={"sm"}
+                className="cursor-pointer"
+              >
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </ClientLink>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (

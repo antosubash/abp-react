@@ -1,4 +1,4 @@
-
+"use client";
 import { useProfile } from '@/lib/hooks/useProfile';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';

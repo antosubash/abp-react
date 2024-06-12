@@ -1,6 +1,6 @@
+"use client";
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies';

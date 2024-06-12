@@ -13,7 +13,7 @@ export async function GET() {
         redirect_uri: clientConfig.redirect_uri,
         code_challenge,
         code_challenge_method: 'S256',
-        __tenant: session.tenantId
+        __tenant: session.tenantId === 'default' ? undefined : session.tenantId
     });
     await session.save();
     return Response.redirect(url);

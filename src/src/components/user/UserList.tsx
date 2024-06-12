@@ -32,7 +32,7 @@ export const UserList = () => {
     const [userActionDialog, setUserActionDialog] = useState<{
         userId: string;
         userDto: IdentityUserUpdateDto;
-        dialgoType?: 'edit' | 'permission' | 'delete';
+        dialogType?: 'edit' | 'permission' | 'delete';
     } | null>();
 
     const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
@@ -77,7 +77,7 @@ export const UserList = () => {
                                                     .id as string,
                                                 userDto: info.row
                                                     .original as IdentityUserUpdateDto,
-                                                dialgoType: 'permission'
+                                                dialogType: 'permission'
                                             });
                                         }
                                     },
@@ -90,7 +90,7 @@ export const UserList = () => {
                                                     .id as string,
                                                 userDto: info.row
                                                     .original as IdentityUserUpdateDto,
-                                                dialgoType: 'edit'
+                                                dialogType: 'edit'
                                             });
                                         }
                                     },
@@ -107,7 +107,7 @@ export const UserList = () => {
                                                     .id as string,
                                                 userDto: info.row
                                                     .original as IdentityUserUpdateDto,
-                                                dialgoType: 'delete'
+                                                dialogType: 'delete'
                                             });
                                         }
                                     }
@@ -157,7 +157,7 @@ export const UserList = () => {
 
     return (
         <>
-            {userActionDialog && userActionDialog.dialgoType === 'edit' && (
+            {userActionDialog && userActionDialog.dialogType === 'edit' && (
                 <UserEdit
                     userId={userActionDialog.userId}
                     userDto={userActionDialog.userDto}
@@ -168,14 +168,14 @@ export const UserList = () => {
                 />
             )}
             {userActionDialog &&
-                userActionDialog.dialgoType === 'permission' && (
+                userActionDialog.dialogType === 'permission' && (
                     <UserPermission
                         userId={userActionDialog.userId}
                         userDto={userActionDialog.userDto}
                         onDismiss={() => setUserActionDialog(null)}
                     />
                 )}
-            {userActionDialog && userActionDialog.dialgoType === 'delete' && (
+            {userActionDialog && userActionDialog.dialogType === 'delete' && (
                 <DeleteUser
                     user={{
                         username: userActionDialog.userDto.userName!,

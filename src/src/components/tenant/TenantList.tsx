@@ -1,6 +1,6 @@
+"use client";
 import { useState, useMemo } from 'react';
 import { useTenants } from '@/lib/hooks/useTenants';
-
 import { useQueryClient } from '@tanstack/react-query';
 import {
     PaginationState,
@@ -8,7 +8,6 @@ import {
     getCoreRowModel,
     ColumnDef
 } from '@tanstack/react-table';
-
 import { TenantEdit } from './TenantEdit';
 import { FeatureList } from './FeatureList';
 import { TenantDto, TenantUpdateDto } from '@/client';

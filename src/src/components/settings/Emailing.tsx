@@ -1,7 +1,7 @@
+"use client";
 import { useQueryClient } from '@tanstack/react-query';
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { TestEmail } from './TestEmail';
 import { useToast } from '../ui/use-toast';
 import { useEmailing } from '@/lib/hooks/useEmailing';

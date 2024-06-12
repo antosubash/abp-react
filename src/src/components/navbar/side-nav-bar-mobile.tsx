@@ -17,7 +17,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -88,16 +87,7 @@ export default function SideNavBarMobile() {
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <form>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search products..."
-              className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-            />
-          </div>
-        </form>
+        <form></form>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -107,14 +97,22 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <Link href="/admin">
+          <Link href="/admin" className="cursor-pointer">
             <DropdownMenuItem>Admin</DropdownMenuItem>
           </Link>
-          <Link href="/admin/settings">
+          <Link href="/admin/profile" className="cursor-pointer">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+          </Link>
+          <Link href="/admin/settings" className="cursor-pointer">
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />
-          <ClientLink href="/auth/logout" size={"sm"} variant={"link"}>
+          <ClientLink
+            href="/auth/logout"
+            size={"sm"}
+            variant={"link"}
+            className="cursor-pointer"
+          >
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </ClientLink>
         </DropdownMenuContent>

@@ -1,8 +1,8 @@
+"use client";
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import classNames from 'clsx';
 import { Plus } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/components/ui/use-toast';
@@ -60,7 +60,7 @@ export const AddUser = ({}: AddUserProps) => {
       <section className="p-3">
         <Dialog open={open} onOpenChange={setOpen}>
           <section className="flex items-center justify-between pb-5">
-            <h3 className="title text-xl grow p-0 m-1 truncate">
+            <h3 className="title font-bold text-xl grow p-0 m-1 truncate">
               User Management
             </h3>
             {can("AbpIdentity.Users.Create") && (
@@ -144,9 +144,7 @@ export const AddUser = ({}: AddUserProps) => {
                 >
                   Cancel
                 </Button>
-                <Button type="submit">
-                  Save
-                </Button>
+                <Button type="submit">Save</Button>
               </DialogFooter>
             </form>
           </DialogContent>
