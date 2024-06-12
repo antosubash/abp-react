@@ -1,5 +1,4 @@
 import { ChangePassword } from "@/components/profile/ChangePassword";
-import { ProfileSettings } from "@/components/profile/ProfileSettings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 

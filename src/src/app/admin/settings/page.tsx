@@ -1,5 +1,4 @@
 import { Emailing } from "@/components/settings/Emailing";
-import { FeatureManagement } from "@/components/settings/FeatureManagement";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 
