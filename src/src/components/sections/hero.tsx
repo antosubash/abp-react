@@ -1,31 +1,24 @@
-import Image from "next/legacy/image";
-import { Button } from "../ui/button";
+import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <section className="pt-24 md:mt-0 md:h-screen flex flex-col justify-center text-center md:text-left md:flex-row md:justify-between md:items-center lg:px-48 md:px-12 px-4 ">
-      <div className="md:flex-1 md:mr-10">
-        <h1 className="text-5xl font-bold mb-7">
-          A headline for your
-          <span className="bg-underline1 bg-left-bottom bg-no-repeat pb-2 ">
-            cool website
-          </span>
-        </h1>
-        <p className="font-normal mb-7">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum harum
-          tempore consectetur voluptas, cumque nobis laboriosam voluptatem.
-        </p>
-        <div className="flex flex-col space-x-2 sm:flex-row items-center ">
-          <Button variant="default" className="w-full sm:w-1/2  mt-2 truncate">
-            Call to action
-          </Button>
-          <Button variant="default" className="w-full sm:w-1/2  mt-2 truncate">
-            Secondary action
-          </Button>
+    <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+      <div className="container px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                My new fancy app
+              </h1>
+              <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+            <div className="w-full max-w-sm space-y-2"></div>
+          </div>
+          <Image src="/img/macbook.png" alt="Hero" className="rounded-xl" width={900} height={600} />
         </div>
-      </div>
-      <div className="flex justify-around md:block mt-8 md:mt-0 md:flex-1">
-        <Image src="/img/macbook.png" alt="Macbook" width={500} height={306} />
       </div>
     </section>
   );

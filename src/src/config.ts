@@ -34,14 +34,14 @@ export const AdminMenus = [
         icon: Home
     },
     {
-        name: 'Roles',
-        link: '/admin/users/roles',
-        icon: Users
-    },
-    {
         name: 'Users',
         link: '/admin/users',
         icon: UserRound
+    },
+    {
+        name: 'Roles',
+        link: '/admin/users/roles',
+        icon: Users
     },
     {
         name: 'Tenants',
