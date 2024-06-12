@@ -1,23 +1,21 @@
 import Link from "next/link";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
-
+import { CircleUser, Menu, Package2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ClientLink from "@/components/ui/client-link";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { getSession } from "@/lib/session-utils";
+import { PublicMenus } from "@/config";
 export default async function TopNavBar() {
   const session = await getSession();
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky inset-x-0 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           href="#"
@@ -26,36 +24,17 @@ export default async function TopNavBar() {
           <Package2 className="h-6 w-6" />
           <span className="sr-only">Acme Inc</span>
         </Link>
-        <Link
-          href="#"
-          className="text-foreground transition-colors hover:text-foreground"
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Orders
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Products
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Customers
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Analytics
-        </Link>
+        {PublicMenus.map((menu, index) => {
+          return (
+            <Link
+              key={index}
+              href={menu.Link}
+              className="text-foreground transition-colors hover:text-foreground w-24"
+            >
+              {menu.Name}
+            </Link>
+          );
+        })}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -73,33 +52,17 @@ export default async function TopNavBar() {
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
-            <Link href="#" className="hover:text-foreground">
-              Dashboard
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Products
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Analytics
-            </Link>
+            {PublicMenus.map((menu, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={menu.Link}
+                  className="text-foreground hover:text-foreground"
+                >
+                  {menu.Name}
+                </Link>
+              );
+            })}
           </nav>
         </SheetContent>
       </Sheet>

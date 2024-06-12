@@ -12,7 +12,7 @@ export const clientConfig = {
     post_login_route: `${process.env.NEXT_PUBLIC_APP_URL}`,
 };
 
-export const Menus = [
+export const PublicMenus = [
     {
         Name: 'How it works',
         Link: '#how-it-works'
