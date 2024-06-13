@@ -62,8 +62,10 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <Link href="/admin" className="cursor-pointer">
-            <DropdownMenuItem>Admin</DropdownMenuItem>
+          <Link href="/admin">
+            <DropdownMenuItem className="cursor-pointer">
+              Admin
+            </DropdownMenuItem>
           </Link>
           <Link href="/admin/profile" className="cursor-pointer">
             <DropdownMenuItem>Profile</DropdownMenuItem>

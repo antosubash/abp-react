@@ -1,6 +1,7 @@
 import { clientConfig  } from '@/config';
+import { getSession } from '@/lib/actions';
 import { RedisSession, createRedisInstance } from '@/lib/redis';
-import { defaultSession, getClient, getSession } from '@/lib/session-utils';
+import { defaultSession, getClient } from '@/lib/session-utils';
 import { generators } from 'openid-client';
 
 export async function GET() {

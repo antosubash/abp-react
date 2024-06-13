@@ -1,4 +1,4 @@
-import { getSession } from '@/lib/session-utils';
+import { getSession } from '@/lib/actions';
 import { NextRequest, NextResponse } from 'next/server';
 
 const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL;

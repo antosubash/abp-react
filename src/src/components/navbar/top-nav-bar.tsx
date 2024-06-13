@@ -10,8 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { getSession } from "@/lib/session-utils";
 import { PublicMenus } from "@/config";
+import { getSession } from "@/lib/actions";
 export default async function TopNavBar() {
   const session = await getSession();
   return (

@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { RedisSession, createRedisInstance } from "./redis";
-import { SessionData, getClient, getSession } from "./session-utils";
+import { SessionData, getClient } from "./session-utils";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions } from "@/sessionOptions";

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { OpenAPI } from "@/client";
-import { getSession } from "@/lib/session-utils";
 import { cn } from "@/lib/utils";
 import UmamiAnalytics from "@/components/analytics/umami-analytics";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
+import { getSession } from "@/lib/actions";
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!;
 

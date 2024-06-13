@@ -1,5 +1,6 @@
 import { clientConfig  } from '@/config';
-import { getClient, getSession } from '@/lib/session-utils';
+import { getSession } from '@/lib/actions';
+import { getClient } from '@/lib/session-utils';
 import { generators } from 'openid-client';
 
 export async function GET() {

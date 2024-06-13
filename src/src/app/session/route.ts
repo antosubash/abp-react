@@ -1,4 +1,5 @@
-import { defaultSession, getSession } from "@/lib/session-utils";
+import { getSession } from "@/lib/actions";
+import { defaultSession } from "@/lib/session-utils";
 
 export async function GET() {
     try {

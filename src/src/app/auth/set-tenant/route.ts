@@ -1,8 +1,8 @@
-import { getSession } from '@/lib/session-utils';
 import { headers } from 'next/headers';
 import { tenantGetTenantGuid } from "@/client";
 import { redirect } from 'next/navigation'
 import { OpenAPI } from "@/client";
+import { getSession } from '@/lib/actions';
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!;
 export async function GET() {
     const session = await getSession();
