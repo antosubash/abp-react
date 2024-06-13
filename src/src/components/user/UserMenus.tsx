@@ -4,9 +4,9 @@ import { UserDropDown } from './UserDropDown'
 export interface UserMenusProps {}
 
 export const UserMenus = ({}: UserMenusProps) => {
-  var session = useSession()
+  var { data: session } = useSession()
   const renderElement = () => {
-    if (session.session?.isLoggedIn) {
+    if (session?.isLoggedIn) {
       return <UserDropDown />
     }
 
