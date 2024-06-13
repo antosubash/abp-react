@@ -1,14 +1,14 @@
 'use client'
+import { UpdateProfileDto, profileUpdate } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useProfile } from '@/lib/hooks/useProfile'
 import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import { useToast } from '../ui/use-toast'
-import { UpdateProfileDto, profileUpdate } from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import Loader from '../ui/Loader'
 import Error from '../ui/Error'
-import { Input } from '../ui/input'
+import Loader from '../ui/Loader'
 import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
 
 export const ProfileSettings = () => {
   const { data, isLoading, isError } = useProfile()

@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { Features } from './Features'
 import { Button } from '../ui/button'
+import { Features } from './Features'
 
 export const FeatureManagement = () => {
   const [showFeatureDialog, setShowFeatureDialog] = useState(false)

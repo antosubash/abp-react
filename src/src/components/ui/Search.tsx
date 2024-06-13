@@ -1,6 +1,6 @@
 import { memo, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { useDebounce } from './useDebounce'
 import { Input } from './input'
+import { useDebounce } from './useDebounce'
 
 type SearchProps = {
   onUpdate: (searchStr: string) => void

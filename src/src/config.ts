@@ -1,4 +1,4 @@
-import { Cog, Home, Users, Database, UserRound } from 'lucide-react'
+import { Cog, Database, Home, UserRound, Users } from 'lucide-react'
 
 export const clientConfig = {
   url: process.env.NEXT_PUBLIC_API_URL,

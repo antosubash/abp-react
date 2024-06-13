@@ -1,29 +1,23 @@
 'use client'
-import { useUsers } from '@/lib/hooks/useUsers'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useUsers } from '@/lib/hooks/useUsers'
 import { useMemo, useState } from 'react'
 
-import {
-  PaginationState,
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  ColumnDef,
-} from '@tanstack/react-table'
 import { IdentityUserDto, IdentityUserUpdateDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
-import Loader from '@/components/ui/Loader'
 import Error from '@/components/ui/Error'
+import Loader from '@/components/ui/Loader'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
 import { useToast } from '@/components/ui/use-toast'
+import { PermissionActions } from '../permission/PermissionActions'
+import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
 import { UserPermission } from './UserPermission'
-import { DeleteUser } from './DeleteUser'
-import { PermissionActions } from '../permission/PermissionActions'
 
+import { Search } from '@/components/ui/Search'
 import { USER_ROLE } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import { Search } from '@/components/ui/Search'
 
 export const UserList = () => {
   const { toast } = useToast()

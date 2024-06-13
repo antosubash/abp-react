@@ -1,11 +1,12 @@
+import { OpenAPI } from '@/client'
+import GoogleAnalytics from '@/components/analytics/google-analytics'
+import UmamiAnalytics from '@/components/analytics/umami-analytics'
+import { getSession } from '@/lib/actions'
+import ReactQueryProviders from '@/lib/provider/QueryClientProvider'
+import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
-import { OpenAPI } from '@/client'
-import { cn } from '@/lib/utils'
-import UmamiAnalytics from '@/components/analytics/umami-analytics'
-import GoogleAnalytics from '@/components/analytics/google-analytics'
-import { getSession } from '@/lib/actions'
 
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!
 
@@ -51,7 +52,7 @@ export default function RootLayout({
         )}
       </head>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        {children}
+        <ReactQueryProviders>{children}</ReactQueryProviders>
       </body>
     </html>
   )

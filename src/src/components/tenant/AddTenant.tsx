@@ -1,15 +1,15 @@
 'use client'
-import { useState } from 'react'
-import { Plus } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { useQueryClient } from '@tanstack/react-query'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { useToast } from '../ui/use-toast'
 import { TenantCreateDto, tenantCreate } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { useQueryClient } from '@tanstack/react-query'
+import { Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
 
 export const AddTenant = () => {
   const { can } = useGrantedPolicies()

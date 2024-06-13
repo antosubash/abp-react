@@ -1,21 +1,21 @@
 import { FeatureGroupDto, UpdateFeaturesDto, featuresDelete, featuresUpdate } from '@/client'
-import { v4 } from 'uuid'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import { useEffect, useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
-import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
-import { PermissionProvider } from '@/lib/utils'
-import { useFeatures } from '@/lib/hooks/useFeatures'
-import { useToast } from '../ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useFeatures } from '@/lib/hooks/useFeatures'
+import { PermissionProvider } from '@/lib/utils'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { v4 } from 'uuid'
 import { Checkbox } from '../ui/checkbox'
+import { useToast } from '../ui/use-toast'
 
 export type FeatureListProps = {
   onDismiss: () => void

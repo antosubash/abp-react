@@ -1,6 +1,6 @@
+import { GetFeatureListResultDto, featuresGet } from '@/client'
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { GetFeatureListResultDto, featuresGet } from '@/client'
 
 export const useFeatures = (
   providerName: string | undefined,

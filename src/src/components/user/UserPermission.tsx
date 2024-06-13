@@ -1,27 +1,27 @@
-import { useEffect, useState, useCallback, FormEvent, useMemo } from 'react'
 import {
   IdentityUserUpdateDto,
-  PermissionGroupDto,
   PermissionGrantInfoDto,
+  PermissionGroupDto,
   UpdatePermissionsDto,
   permissionsUpdate,
 } from '@/client'
-import { useQueryClient } from '@tanstack/react-query'
-import { v4 } from 'uuid'
-import { useToast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { useToast } from '@/components/ui/use-toast'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { useUserRoles } from '@/lib/hooks/useUserRoles'
 import { PermissionProvider, USER_ROLE } from '@/lib/utils'
-import { Permission, Management } from '../permission/PermissionToggle'
-import { Label } from '@/components/ui/label'
+import { useQueryClient } from '@tanstack/react-query'
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { v4 } from 'uuid'
+import { Management, Permission } from '../permission/PermissionToggle'
 
 import { TogglePermission } from '../permission/TogglePermission'
 

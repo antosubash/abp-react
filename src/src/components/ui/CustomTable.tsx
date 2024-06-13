@@ -1,5 +1,5 @@
 import { flexRender, Table } from '@tanstack/react-table'
-import { memo, useCallback } from 'react'
+import { useCallback } from 'react'
 import { Pagination } from './table-pagination'
 
 export type TableViewProps<T> = {

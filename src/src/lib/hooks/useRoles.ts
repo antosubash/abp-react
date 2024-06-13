@@ -1,6 +1,6 @@
+import { roleGetList } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { roleGetList } from '@/client'
 
 export const useRoles = (
   pageIndex: number,

@@ -1,18 +1,17 @@
-import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useRouter } from 'next/router'
-import { Button } from '@/components/ui/button'
-import { useMemo } from 'react'
-import { v4 } from 'uuid'
 import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
 import { USER_ROLE } from '@/lib/utils'
-import useSession from '@/useSession'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
+import { v4 } from 'uuid'
 
 export const UserDropDown = () => {
   const router = useRouter()

@@ -1,11 +1,9 @@
-import { useEffect, useState, useCallback, FormEvent, useMemo } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { v4 } from 'uuid'
 
-import { Permission, Management } from '../permission/PermissionToggle'
+import { Management, Permission } from '../permission/PermissionToggle'
 
-import { TogglePermission } from '../permission/TogglePermission'
-import { useQueryClient } from '@tanstack/react-query'
 import {
   IdentityRoleUpdateDto,
   PermissionGrantInfoDto,
@@ -13,12 +11,14 @@ import {
   UpdatePermissionsDto,
   permissionsUpdate,
 } from '@/client'
-import { useToast } from '../ui/use-toast'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { PermissionProvider, USER_ROLE } from '@/lib/utils'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
+import { useQueryClient } from '@tanstack/react-query'
+import { TogglePermission } from '../permission/TogglePermission'
 import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Label } from '../ui/label'
+import { useToast } from '../ui/use-toast'
 
 type RolePermissionProps = {
   roleDto: IdentityRoleUpdateDto

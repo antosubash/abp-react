@@ -1,9 +1,9 @@
-import { Table } from '@tanstack/react-table'
-import { v4 } from 'uuid'
-import { useState } from 'react'
 import { getPages } from '@/lib/utils'
+import { Table } from '@tanstack/react-table'
+import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { useState } from 'react'
+import { v4 } from 'uuid'
 import { Button } from './button'
-import { ChevronRightIcon, ChevronLeftIcon, ChevronLastIcon, ChevronFirstIcon } from 'lucide-react'
 
 type PaginationProps<T> = {
   pageCount: number

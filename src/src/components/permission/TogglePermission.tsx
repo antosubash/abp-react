@@ -1,10 +1,10 @@
 import { PermissionGrantInfoDto } from '@/client'
 import { Permission } from './PermissionToggle'
 
-import { usePermissionsChanges, UsePermissionsChangesProps } from './usePermissionChanges'
-import { DialogFooter } from '../ui/dialog'
-import { Button } from '../ui/button'
 import clsx from 'clsx'
+import { Button } from '../ui/button'
+import { DialogFooter } from '../ui/dialog'
+import { usePermissionsChanges, UsePermissionsChangesProps } from './usePermissionChanges'
 
 type TogglePermissionProps = UsePermissionsChangesProps & {
   hideSelectAll?: boolean

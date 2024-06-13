@@ -1,24 +1,24 @@
+import { IdentityRoleDto, IdentityUserUpdateDto, userUpdate } from '@/client'
+import { useToast } from '@/components/ui/use-toast'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
-import { IdentityRoleDto, IdentityUserUpdateDto, userUpdate } from '@/client'
-import { useToast } from '@/components/ui/use-toast'
 
+import Loader from '@/components/ui/Loader'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useUserRoles } from '@/lib/hooks/useUserRoles'
 import { useAssignableRoles } from '@/lib/hooks/useAssignableRoles'
-import Loader from '@/components/ui/Loader'
+import { useUserRoles } from '@/lib/hooks/useUserRoles'
 import classNames from 'clsx'
-import { Checkbox } from '@/components/ui/checkbox'
 
 const TABS_NAME = {
   USERS_EDIT: 'user_edit',

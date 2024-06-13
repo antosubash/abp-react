@@ -1,6 +1,6 @@
+import { userGetList } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { userGetList } from '@/client'
 
 export const useUsers = (
   pageIndex: number,

@@ -1,10 +1,10 @@
 'use server'
 import { sessionOptions } from '@/sessionOptions'
-import { cookies } from 'next/headers'
-import { SessionData, defaultSession, getClient } from './session-utils'
 import { getIronSession } from 'iron-session'
+import { cookies } from 'next/headers'
 import { isTokenExpired } from './auth'
 import { RedisSession, createRedisInstance } from './redis'
+import { SessionData, defaultSession, getClient } from './session-utils'
 
 export async function getSession() {
   let session = await getIronSession<SessionData>(cookies(), sessionOptions)

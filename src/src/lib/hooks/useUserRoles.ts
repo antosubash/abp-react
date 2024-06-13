@@ -1,6 +1,6 @@
+import { userGetRoles } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { userGetRoles } from '@/client'
 
 type UseUserRolesProps = {
   userId: string

@@ -1,6 +1,6 @@
-import { SessionData } from './lib/session-utils'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './lib/hooks/QueryConstants'
+import { SessionData } from './lib/session-utils'
 
 export default function useSession() {
   return useQuery({

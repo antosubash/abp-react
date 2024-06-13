@@ -1,6 +1,4 @@
 'use client'
-import Link from 'next/link'
-import { CircleUser, Menu, Package2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ClientLink from '@/components/ui/client-link'
 import {
@@ -13,6 +11,8 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { PublicMenus } from '@/config'
 import useSession from '@/useSession'
+import { CircleUser, Menu, Package2 } from 'lucide-react'
+import Link from 'next/link'
 export default function TopNavBar() {
   const sessionData = useSession()
   return (

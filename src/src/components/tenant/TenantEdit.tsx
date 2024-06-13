@@ -1,20 +1,20 @@
 import { TenantUpdateDto, tenantAddHost, tenantUpdate } from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useEffect, useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
-import { useToast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'clsx'
-import { Checkbox } from '@/components/ui/checkbox'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 export type TenantEditProps = {
   tenantDto: TenantUpdateDto

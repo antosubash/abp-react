@@ -1,6 +1,6 @@
 import { Issuer } from 'openid-client'
-import { clientConfig } from '../config'
 import { tenantGetTenantGuid } from '../client'
+import { clientConfig } from '../config'
 import { getSession } from './actions'
 
 export interface SessionData {

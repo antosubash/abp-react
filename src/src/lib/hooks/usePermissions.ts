@@ -1,6 +1,6 @@
+import { GetPermissionListResultDto, permissionsGet } from '@/client'
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { GetPermissionListResultDto, permissionsGet } from '@/client'
 
 export const usePermissions = (
   providerName: string | undefined,

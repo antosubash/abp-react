@@ -1,6 +1,6 @@
+import { abpApplicationLocalizationGet } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { abpApplicationLocalizationGet } from '@/client'
 
 export const useTranslation = () => {
   return useQuery({

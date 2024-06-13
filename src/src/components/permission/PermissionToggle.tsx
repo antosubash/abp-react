@@ -1,5 +1,5 @@
-import { useCallback, memo } from 'react'
 import clsx from 'clsx'
+import { memo, useCallback } from 'react'
 import { Checkbox } from '../ui/checkbox'
 
 export type Management = 'identity' | 'tenant' | 'setting' | 'feature'

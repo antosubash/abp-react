@@ -1,13 +1,13 @@
+import { Policy, useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Cog, CogIcon, PencilIcon, Settings2, Trash } from 'lucide-react'
 import { v4 } from 'uuid'
-import { Cog, Trash, PencilIcon, CogIcon, Settings2 } from 'lucide-react'
+import { Button } from '../ui/button'
 import {
-  DropdownMenuTrigger,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { Button } from '../ui/button'
-import { Policy, useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 type PermissionActionsProps = {
   actions: Array<{
     icon: 'permission' | 'trash' | 'pencil' | 'features'

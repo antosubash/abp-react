@@ -1,13 +1,13 @@
 import { IdentityRoleUpdateDto, roleUpdate } from '@/client'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useToast } from '../ui/use-toast'
 import { USER_ROLE } from '@/lib/utils'
-import { Button } from 'react-day-picker'
-import { DialogHeader, DialogFooter, DialogContent, Dialog, DialogTitle } from '../ui/dialog'
-import { Input } from '../ui/input'
 import clsx from 'clsx'
+import { useEffect, useState } from 'react'
+import { Button } from 'react-day-picker'
+import { useForm } from 'react-hook-form'
 import { Checkbox } from '../ui/checkbox'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
+import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
 
 type RoleEditProps = {
   roleDto: IdentityRoleUpdateDto

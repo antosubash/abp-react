@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useToast } from '../ui/use-toast'
 import { tenantDelete } from '@/client'
+import { useEffect, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,6 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '../ui/alert-dialog'
+import { useToast } from '../ui/use-toast'
 
 type DeleteTenantProps = {
   tenant: { tenantId: string; tenantName: string }

@@ -1,9 +1,9 @@
+import { sessionOptions } from '@/sessionOptions'
+import { getIronSession } from 'iron-session'
 import { jwtDecode } from 'jwt-decode'
+import { cookies } from 'next/headers'
 import { RedisSession, createRedisInstance } from './redis'
 import { SessionData, getClient } from './session-utils'
-import { getIronSession } from 'iron-session'
-import { cookies } from 'next/headers'
-import { sessionOptions } from '@/sessionOptions'
 
 export const isTokenExpired = (token: string) => {
   var decoded = jwtDecode(token!)

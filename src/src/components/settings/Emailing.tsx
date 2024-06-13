@@ -1,21 +1,16 @@
 'use client'
+import { EmailSettingsDto, EmailSettingsUpdateData, emailSettingsUpdate } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useEmailing } from '@/lib/hooks/useEmailing'
 import { useQueryClient } from '@tanstack/react-query'
+import clsx from 'clsx'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { TestEmail } from './TestEmail'
-import { useToast } from '../ui/use-toast'
-import { useEmailing } from '@/lib/hooks/useEmailing'
-import {
-  EmailSettingsDto,
-  EmailSettingsUpdateData,
-  UpdateEmailSettingsDto,
-  emailSettingsUpdate,
-} from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { Input } from '../ui/input'
-import { Checkbox } from '../ui/checkbox'
-import clsx from 'clsx'
 import { Button } from '../ui/button'
+import { Checkbox } from '../ui/checkbox'
+import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
+import { TestEmail } from './TestEmail'
 
 export const Emailing = () => {
   const { toast } = useToast()

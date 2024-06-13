@@ -1,8 +1,8 @@
 import { clientConfig } from '@/config'
-import { getClient } from '@/lib/session-utils'
-import { RedisSession, createRedisInstance } from '@/lib/redis'
-import { NextRequest } from 'next/server'
 import { getSession } from '@/lib/actions'
+import { RedisSession, createRedisInstance } from '@/lib/redis'
+import { getClient } from '@/lib/session-utils'
+import { NextRequest } from 'next/server'
 export async function GET(request: NextRequest) {
   const session = await getSession()
   const client = await getClient()

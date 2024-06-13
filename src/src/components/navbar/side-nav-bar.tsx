@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { Package2 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { AdminMenus } from '@/config'
+import { Package2 } from 'lucide-react'
+import Link from 'next/link'
 export default function SideBarMenu() {
   return (
     <div className="hidden border-r bg-muted/40 md:block">

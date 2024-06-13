@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import { CircleUser, Menu, Package2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -10,8 +8,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import ClientLink from '../ui/client-link'
 import { AdminMenus } from '@/config'
+import { CircleUser, Menu, Package2 } from 'lucide-react'
+import Link from 'next/link'
+import ClientLink from '../ui/client-link'
 export default function SideNavBarMobile() {
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">

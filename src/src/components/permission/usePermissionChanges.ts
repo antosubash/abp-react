@@ -1,6 +1,6 @@
 import { PermissionGrantInfoDto } from '@/client'
-import { useEffect, useState, useCallback } from 'react'
 import { Permissions } from '@/lib/utils'
+import { useCallback, useEffect, useState } from 'react'
 
 export type UsePermissionsChangesProps = {
   permissions: PermissionGrantInfoDto[]

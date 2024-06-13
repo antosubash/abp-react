@@ -1,10 +1,10 @@
 'use client'
-import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { useToast } from '../ui/use-toast'
 import { ProfileChangePasswordData, profileChangePassword } from '@/client'
-import { Input } from '../ui/input'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { useToast } from '../ui/use-toast'
 
 export const ChangePassword = () => {
   const { toast } = useToast()

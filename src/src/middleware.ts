@@ -1,13 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { SessionData } from './lib/session-utils'
 import { getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
+import { SessionData } from './lib/session-utils'
 import { sessionOptions } from './sessionOptions'
 
 export async function middleware(request: NextRequest) {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions)
   if (!session.tenantId && request.nextUrl.pathname !== '/auth/set-tenant') {
     return NextResponse.redirect(new URL('/auth/set-tenant', request.url))
+  }
+
+  if (session.access_token) {
+    console.log('middleware access token:', session.access_token)
   }
 }
 

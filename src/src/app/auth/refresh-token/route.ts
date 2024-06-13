@@ -1,10 +1,10 @@
+import { RedisSession, createRedisInstance } from '@/lib/redis'
+import { SessionData, getClient } from '@/lib/session-utils'
+import { sessionOptions } from '@/sessionOptions'
+import { getIronSession } from 'iron-session'
+import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { sessionOptions } from '@/sessionOptions'
-import { SessionData, getClient } from '@/lib/session-utils'
-import { getIronSession } from 'iron-session'
-import { RedisSession, createRedisInstance } from '@/lib/redis'
-import { NextApiRequest } from 'next'
 export async function GET(request: NextApiRequest) {
   let session = await getIronSession<SessionData>(cookies(), sessionOptions)
   const redisKey = `session:${session?.userInfo?.sub!}`

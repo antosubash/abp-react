@@ -1,6 +1,6 @@
+import { tenantGetList } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { tenantGetList } from '@/client'
 
 export const useTenants = (
   pageIndex: number,
