@@ -1,5 +1,5 @@
-import { AddRole } from "@/components/role/AddRole";
-import { RoleList } from "@/components/role/RoleList";
+import { AddRole } from '@/components/role/AddRole'
+import { RoleList } from '@/components/role/RoleList'
 
 export default function RolesPage() {
   return (
@@ -7,5 +7,5 @@ export default function RolesPage() {
       <AddRole />
       <RoleList />
     </div>
-  );
+  )
 }

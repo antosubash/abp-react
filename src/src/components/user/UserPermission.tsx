@@ -1,100 +1,94 @@
-import { useEffect, useState, useCallback, FormEvent, useMemo } from "react";
+import { useEffect, useState, useCallback, FormEvent, useMemo } from 'react'
 import {
   IdentityUserUpdateDto,
   PermissionGroupDto,
   PermissionGrantInfoDto,
   UpdatePermissionsDto,
   permissionsUpdate,
-} from "@/client";
-import { useQueryClient } from "@tanstack/react-query";
-import { v4 } from "uuid";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { v4 } from 'uuid'
+import { useToast } from '@/components/ui/use-toast'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { usePermissions } from "@/lib/hooks/usePermissions";
-import { useUserRoles } from "@/lib/hooks/useUserRoles";
-import { PermissionProvider, USER_ROLE } from "@/lib/utils";
-import { Permission, Management } from "../permission/PermissionToggle";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { usePermissions } from '@/lib/hooks/usePermissions'
+import { useUserRoles } from '@/lib/hooks/useUserRoles'
+import { PermissionProvider, USER_ROLE } from '@/lib/utils'
+import { Permission, Management } from '../permission/PermissionToggle'
+import { Label } from '@/components/ui/label'
 
-import { TogglePermission } from "../permission/TogglePermission";
+import { TogglePermission } from '../permission/TogglePermission'
 
 type UserPermissionProps = {
-  userDto: IdentityUserUpdateDto;
-  userId: string;
-  onDismiss: () => void;
-};
+  userDto: IdentityUserUpdateDto
+  userId: string
+  onDismiss: () => void
+}
 
-export const UserPermission = ({
-  userDto,
-  userId,
-  onDismiss,
-}: UserPermissionProps) => {
-  const [open, setOpen] = useState(false);
-  const { toast } = useToast();
-  const userRoles = useUserRoles({ userId });
+export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionProps) => {
+  const [open, setOpen] = useState(false)
+  const { toast } = useToast()
+  const userRoles = useUserRoles({ userId })
 
   // flag determine to enable/disable all the permissions to a user.
-  const [hasAllGranted, setHasAllGranted] = useState(false);
+  const [hasAllGranted, setHasAllGranted] = useState(false)
   const [currentPermissionGrant, setCurrentPermissionGrant] = useState<{
-    name: Management;
-    data: PermissionGrantInfoDto[] | null;
-  } | null>();
-  const { data } = usePermissions(PermissionProvider.U, userId);
-  const queryClient = useQueryClient();
+    name: Management
+    data: PermissionGrantInfoDto[] | null
+  } | null>()
+  const { data } = usePermissions(PermissionProvider.U, userId)
+  const queryClient = useQueryClient()
 
-  const [permissionGroups, setPermissionGroups] = useState<
-    PermissionGroupDto[]
-  >([]);
+  const [permissionGroups, setPermissionGroups] = useState<PermissionGroupDto[]>([])
 
   useEffect(() => {
-    setOpen(true);
+    setOpen(true)
     return () => {
-      queryClient.invalidateQueries({ queryKey: [PermissionProvider.U] });
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      queryClient.invalidateQueries({ queryKey: [PermissionProvider.U] })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Update the local state with the remote data and set the view by default management
   useEffect(() => {
     if (data?.groups) {
-      setPermissionGroups([...data?.groups]);
+      setPermissionGroups([...data?.groups])
       // by default assign first permissions
-      const firstPermissionSet = data?.groups[0];
+      const firstPermissionSet = data?.groups[0]
       setCurrentPermissionGrant({
-        name: "identity",
+        name: 'identity',
         data: firstPermissionSet.permissions ?? [],
-      });
+      })
     }
-  }, [data]);
+  }, [data])
 
   // check if user have all the permissions are granted already.
   useEffect(() => {
     if (permissionGroups.length > 0) {
       const hasAllPermissionGranted = permissionGroups
         .map((g) => g.permissions?.every((p) => p.isGranted))
-        .every((e) => e);
-      if (hasAllPermissionGranted) setHasAllGranted(hasAllPermissionGranted);
+        .every((e) => e)
+      if (hasAllPermissionGranted) setHasAllGranted(hasAllPermissionGranted)
     }
-  }, [permissionGroups]);
+  }, [permissionGroups])
 
   useEffect(() => {
     if (permissionGroups.length > 0) {
       permissionGroups.forEach((g) => {
         g.permissions?.forEach((p) => {
-          p.isGranted = hasAllGranted ? true : false;
-        });
-      });
-      setPermissionGroups([...permissionGroups]);
+          p.isGranted = hasAllGranted ? true : false
+        })
+      })
+      setPermissionGroups([...permissionGroups])
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasAllGranted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasAllGranted])
 
   const switchManagement = useCallback(
     (index: number) => {
@@ -102,56 +96,56 @@ export const UserPermission = ({
         if (hasAllGranted) {
           const allPermissionSelected = permissionGroups
             .map((g) => g.permissions?.every((p) => p.isGranted))
-            .every((v) => v);
+            .every((v) => v)
           if (allPermissionSelected) {
-            setHasAllGranted(allPermissionSelected);
-            return;
+            setHasAllGranted(allPermissionSelected)
+            return
           }
         }
 
-        setCurrentPermissionGrant(null);
+        setCurrentPermissionGrant(null)
 
-        const management = permissionGroups[index];
-        const managementName = management.displayName;
+        const management = permissionGroups[index]
+        const managementName = management.displayName
 
-        if (managementName?.toLowerCase()?.includes("identity")) {
+        if (managementName?.toLowerCase()?.includes('identity')) {
           setCurrentPermissionGrant({
-            name: "identity",
+            name: 'identity',
             data: management?.permissions!,
-          });
-          return false;
+          })
+          return false
         }
 
-        if (managementName?.toLowerCase()?.includes("tenant")) {
+        if (managementName?.toLowerCase()?.includes('tenant')) {
           setCurrentPermissionGrant({
-            name: "tenant",
+            name: 'tenant',
             data: management?.permissions!,
-          });
-          return false;
+          })
+          return false
         }
-        if (managementName?.toLowerCase()?.includes("feature")) {
+        if (managementName?.toLowerCase()?.includes('feature')) {
           setCurrentPermissionGrant({
-            name: "feature",
+            name: 'feature',
             data: management?.permissions!,
-          });
-          return false;
+          })
+          return false
         }
-        if (managementName?.toLowerCase()?.includes("setting")) {
+        if (managementName?.toLowerCase()?.includes('setting')) {
           setCurrentPermissionGrant({
-            name: "setting",
+            name: 'setting',
             data: management?.permissions!,
-          });
-          return false;
+          })
+          return false
         }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [permissionGroups]
-  );
+  )
 
   const onSubmit = useCallback(
     async (e: FormEvent) => {
-      e.preventDefault();
+      e.preventDefault()
       const payload = permissionGroups
         ?.map((p) =>
           p!.permissions!.map((grant) => ({
@@ -159,55 +153,51 @@ export const UserPermission = ({
             isGranted: grant.isGranted,
           }))
         )
-        .flat();
+        .flat()
       const requestPayload: UpdatePermissionsDto = {
         permissions: payload,
-      };
+      }
       try {
         await permissionsUpdate({
           providerKey: PermissionProvider.U,
           providerName: userId,
           requestBody: requestPayload,
-        });
+        })
         toast({
-          title: "Success",
-          description: "Permission Updated Successfully",
-          variant: "default",
-        });
+          title: 'Success',
+          description: 'Permission Updated Successfully',
+          variant: 'default',
+        })
         queryClient.invalidateQueries({
           queryKey: [PermissionProvider.U],
-        });
-        onCloseEvent();
+        })
+        onCloseEvent()
       } catch (err: unknown) {
         if (err instanceof Error) {
           toast({
-            title: "Failed",
+            title: 'Failed',
             description: "Permission update wasn't successful.",
-            variant: "destructive",
-          });
+            variant: 'destructive',
+          })
         }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [permissionGroups]
-  );
+  )
 
   const onCloseEvent = useCallback(() => {
-    setOpen(false);
-    onDismiss();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setOpen(false)
+    onDismiss()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const hasAdmin = useMemo(() => {
     if (userRoles?.data?.items) {
-      return (
-        userRoles.data.items.filter((role) =>
-          role.name?.includes(USER_ROLE.ADMIN)
-        ).length > 0
-      );
+      return userRoles.data.items.filter((role) => role.name?.includes(USER_ROLE.ADMIN)).length > 0
     }
-    return false;
-  }, [userRoles]);
+    return false
+  }, [userRoles])
 
   const renderTogglePermission = useCallback(() => {
     return (
@@ -217,13 +207,13 @@ export const UserPermission = ({
         type={currentPermissionGrant!.name}
         onCancelEvent={onCloseEvent}
       />
-    );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPermissionGrant?.data]);
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPermissionGrant?.data])
 
   const formatDisplayName = (str: string): Management => {
-    return str.split(" ")[0].toLowerCase() as Management;
-  };
+    return str.split(' ')[0].toLowerCase() as Management
+  }
 
   return (
     <Dialog open={open} onOpenChange={onCloseEvent}>
@@ -238,50 +228,47 @@ export const UserPermission = ({
             id="all_granted"
             disabled={hasAdmin}
             onUpdate={() => {
-              setHasAllGranted((f) => !f);
+              setHasAllGranted((f) => !f)
             }}
             className="ml-2"
           />
           {!hasAllGranted && (
-            <section className="flex pt-5 flex-col">
+            <section className="flex flex-col pt-5">
               <section className="flex flex-col">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 justify-center content-center">
-                  {permissionGroups?.map(
-                    (permission: PermissionGroupDto, idx: number) => (
-                      <div key={idx}>
-                        <Button
-                          variant={
-                            currentPermissionGrant?.data ===
-                            permission?.permissions
-                              ? "secondary"
-                              : "default"
-                          }
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            switchManagement(idx);
-                          }}
-                        >
-                          <Label>{permission?.displayName}</Label>
-                        </Button>
-                      </div>
-                    )
-                  )}
+                <div className="grid grid-cols-1 content-center justify-center gap-1 sm:grid-cols-2">
+                  {permissionGroups?.map((permission: PermissionGroupDto, idx: number) => (
+                    <div key={idx}>
+                      <Button
+                        variant={
+                          currentPermissionGrant?.data === permission?.permissions
+                            ? 'secondary'
+                            : 'default'
+                        }
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          switchManagement(idx)
+                        }}
+                      >
+                        <Label>{permission?.displayName}</Label>
+                      </Button>
+                    </div>
+                  ))}
                 </div>
               </section>
-              <hr className="border-b-primary mt-5 mb-5" />
-              <section className="flex flex-col space-y-1 mt-3">
+              <hr className="mb-5 mt-5 border-b-primary" />
+              <section className="mt-3 flex flex-col space-y-1">
                 {currentPermissionGrant?.data && renderTogglePermission()}
               </section>
             </section>
           )}
           {hasAllGranted && (
             <>
-              <section className="grid grid-cols-2 gap-2 mt-2">
+              <section className="mt-2 grid grid-cols-2 gap-2">
                 {permissionGroups.map((group) => (
                   <div key={v4()}>
                     <h3 className="text-base-content">{group.displayName}</h3>
-                    <hr className="border-b-primary mt-5 mb-5" />
+                    <hr className="mb-5 mt-5 border-b-primary" />
                     <div key={v4()}>
                       <TogglePermission
                         permissions={group.permissions!}
@@ -297,20 +284,18 @@ export const UserPermission = ({
               <DialogFooter>
                 <Button
                   onClick={(e) => {
-                    e.preventDefault();
-                    onCloseEvent();
+                    e.preventDefault()
+                    onCloseEvent()
                   }}
                 >
                   Cancel
                 </Button>
-                <Button type="submit">
-                  Save
-                </Button>
+                <Button type="submit">Save</Button>
               </DialogFooter>
             </>
           )}
         </form>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

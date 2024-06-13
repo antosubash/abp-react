@@ -1,11 +1,7 @@
-import Link from "next/link";
-import {
-  Package2,
-} from "lucide-react";
-import {
-  Card,
-} from "@/components/ui/card";
-import { AdminMenus } from "@/config";
+import Link from 'next/link'
+import { Package2 } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import { AdminMenus } from '@/config'
 export default function SideBarMenu() {
   return (
     <div className="hidden border-r bg-muted/40 md:block">
@@ -28,16 +24,14 @@ export default function SideBarMenu() {
                   {menu.icon && <menu.icon className="h-4 w-4" />}
                   {menu.name}
                 </Link>
-              );
+              )
             })}
           </nav>
         </div>
         <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0">
-            
-          </Card>
+          <Card x-chunk="dashboard-02-chunk-0"></Card>
         </div>
       </div>
     </div>
-  );
+  )
 }

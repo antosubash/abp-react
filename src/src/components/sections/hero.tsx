@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export const Hero = () => {
   return (
@@ -10,16 +10,22 @@ export const Hero = () => {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 My new fancy app
               </h1>
-              <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <p className="max-w-[600px] text-gray-500 dark:text-gray-400 md:text-xl">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
             <div className="w-full max-w-sm space-y-2"></div>
           </div>
-          <Image src="/img/macbook.png" alt="Hero" className="rounded-xl" width={900} height={600} />
+          <Image
+            src="/img/macbook.png"
+            alt="Hero"
+            className="rounded-xl"
+            width={900}
+            height={600}
+          />
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

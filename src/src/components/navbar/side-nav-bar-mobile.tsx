@@ -1,21 +1,17 @@
-import Link from "next/link";
-import {
-  CircleUser,
-  Menu,
-  Package2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import Link from 'next/link'
+import { CircleUser, Menu, Package2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import ClientLink from "../ui/client-link";
-import { AdminMenus } from "@/config";
+} from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import ClientLink from '../ui/client-link'
+import { AdminMenus } from '@/config'
 export default function SideNavBarMobile() {
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
@@ -28,10 +24,7 @@ export default function SideNavBarMobile() {
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
+            <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
@@ -63,9 +56,7 @@ export default function SideNavBarMobile() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <Link href="/admin">
-            <DropdownMenuItem className="cursor-pointer">
-              Admin
-            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">Admin</DropdownMenuItem>
           </Link>
           <Link href="/admin/profile" className="cursor-pointer">
             <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -74,16 +65,11 @@ export default function SideNavBarMobile() {
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />
-          <ClientLink
-            href="/auth/logout"
-            size={"sm"}
-            variant={"link"}
-            className="cursor-pointer"
-          >
+          <ClientLink href="/auth/logout" size={'sm'} variant={'link'} className="cursor-pointer">
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </ClientLink>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
-  );
+  )
 }

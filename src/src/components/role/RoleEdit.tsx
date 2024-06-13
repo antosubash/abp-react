@@ -1,57 +1,57 @@
-import { IdentityRoleUpdateDto, roleUpdate } from "@/client";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useToast } from "../ui/use-toast";
-import { USER_ROLE } from "@/lib/utils";
-import { Button } from "react-day-picker";
-import { DialogHeader, DialogFooter, DialogContent, Dialog, DialogTitle } from "../ui/dialog";
-import { Input } from "../ui/input";
-import clsx from "clsx";
-import { Checkbox } from "../ui/checkbox";
+import { IdentityRoleUpdateDto, roleUpdate } from '@/client'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useToast } from '../ui/use-toast'
+import { USER_ROLE } from '@/lib/utils'
+import { Button } from 'react-day-picker'
+import { DialogHeader, DialogFooter, DialogContent, Dialog, DialogTitle } from '../ui/dialog'
+import { Input } from '../ui/input'
+import clsx from 'clsx'
+import { Checkbox } from '../ui/checkbox'
 
 type RoleEditProps = {
-  roleDto: IdentityRoleUpdateDto;
-  roleId: string;
-  onDismiss: () => void;
-};
+  roleDto: IdentityRoleUpdateDto
+  roleId: string
+  onDismiss: () => void
+}
 export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
-  const [open, setOpen] = useState(false);
-  const { toast } = useToast();
-  const { handleSubmit, register } = useForm();
-  const [isDefault, setIsDefault] = useState(roleDto.isDefault);
-  const [isPublic, setIsPublic] = useState(roleDto.isPublic);
+  const [open, setOpen] = useState(false)
+  const { toast } = useToast()
+  const { handleSubmit, register } = useForm()
+  const [isDefault, setIsDefault] = useState(roleDto.isDefault)
+  const [isPublic, setIsPublic] = useState(roleDto.isPublic)
 
   const onSubmit = async (data: unknown) => {
-    const role = data as IdentityRoleUpdateDto;
-    role.isDefault = isDefault;
-    role.isPublic = isPublic;
+    const role = data as IdentityRoleUpdateDto
+    role.isDefault = isDefault
+    role.isPublic = isPublic
     try {
-      await roleUpdate({ id: roleId, requestBody: { ...roleDto, ...role } });
+      await roleUpdate({ id: roleId, requestBody: { ...roleDto, ...role } })
       toast({
-        title: "Success",
-        description: "Role Updated Successfully",
-        variant: "default",
-      });
-      setOpen(false);
+        title: 'Success',
+        description: 'Role Updated Successfully',
+        variant: 'default',
+      })
+      setOpen(false)
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast({
-          title: "Failed",
+          title: 'Failed',
           description: "Role update wasn't successfull.",
-          variant: "destructive",
-        });
+          variant: 'destructive',
+        })
       }
     }
-  };
+  }
 
   const onCloseEvent = () => {
-    setOpen(false);
-    onDismiss();
-  };
+    setOpen(false)
+    onDismiss()
+  }
 
   useEffect(() => {
-    setOpen(true);
-  }, []);
+    setOpen(true)
+  }, [])
 
   return (
     <Dialog open={open} onOpenChange={onCloseEvent}>
@@ -65,10 +65,10 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
               required
               placeholder="Name"
               disabled={roleDto.name.includes(USER_ROLE.ADMIN)}
-              defaultValue={roleDto.name ?? ""}
-              {...register("name")}
+              defaultValue={roleDto.name ?? ''}
+              {...register('name')}
             />
-            <div className={clsx("flex items-center space-x-2 pb-2")}>
+            <div className={clsx('flex items-center space-x-2 pb-2')}>
               <Checkbox
                 id="isDefault"
                 name="isDefault"
@@ -82,7 +82,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
                 Is Default
               </label>
             </div>
-            <div className={clsx("flex items-center space-x-2 pb-2")}>
+            <div className={clsx('flex items-center space-x-2 pb-2')}>
               <Checkbox
                 id="isPublic"
                 name="isPublic"
@@ -100,18 +100,16 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
           <DialogFooter className="mt-5">
             <Button
               onClick={(e) => {
-                e.preventDefault();
-                onCloseEvent();
+                e.preventDefault()
+                onCloseEvent()
               }}
             >
               Cancel
             </Button>
-            <Button type="submit">
-              Save
-            </Button>
+            <Button type="submit">Save</Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

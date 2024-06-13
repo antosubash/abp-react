@@ -1,6 +1,6 @@
-import { AddTenant } from "@/components/tenant/AddTenant";
-import { TenantList } from "@/components/tenant/TenantList";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { AddTenant } from '@/components/tenant/AddTenant'
+import { TenantList } from '@/components/tenant/TenantList'
+import { Tabs, TabsContent } from '@/components/ui/tabs'
 
 export default function TenantPage() {
   return (
@@ -12,5 +12,5 @@ export default function TenantPage() {
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

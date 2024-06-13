@@ -1,12 +1,8 @@
-import SideBarMenu from "@/components/navbar/side-nav-bar";
-import SideNavBarMobile from "@/components/navbar/side-nav-bar-mobile";
-import ReactQueryProviders from "@/lib/provider/QueryClientProvider";
+import SideBarMenu from '@/components/navbar/side-nav-bar'
+import SideNavBarMobile from '@/components/navbar/side-nav-bar-mobile'
+import ReactQueryProviders from '@/lib/provider/QueryClientProvider'
 
-export function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export function AdminLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <SideBarMenu />
@@ -17,7 +13,7 @@ export function AdminLayout({
         </main>
       </div>
     </div>
-  );
+  )
 }
 
-export default AdminLayout;
+export default AdminLayout

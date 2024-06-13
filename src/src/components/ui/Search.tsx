@@ -1,43 +1,36 @@
-import {
-  memo,
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { useDebounce } from "./useDebounce";
-import { Input } from "./input";
+import { memo, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { useDebounce } from './useDebounce'
+import { Input } from './input'
 
 type SearchProps = {
-  onUpdate: (searchStr: string) => void;
-  value: string;
-};
+  onUpdate: (searchStr: string) => void
+  value: string
+}
 const SearchInput = ({ onUpdate, value }: SearchProps) => {
-  const [searchTerm, setSearchTerm] = useState<string>(value);
-  const ref = useRef<HTMLInputElement>(null);
-  const searchStr = useDebounce<string>(searchTerm);
+  const [searchTerm, setSearchTerm] = useState<string>(value)
+  const ref = useRef<HTMLInputElement>(null)
+  const searchStr = useDebounce<string>(searchTerm)
 
   const onSearchEvent = useCallback((e: SyntheticEvent) => {
-    const target = e.target as HTMLInputElement;
-    const { value } = target;
+    const target = e.target as HTMLInputElement
+    const { value } = target
     if (value.trim().length === 0) {
-      onUpdate("");
+      onUpdate('')
     }
-    setSearchTerm(value);
+    setSearchTerm(value)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
-    if (searchStr) onUpdate(searchStr);
+    if (searchStr) onUpdate(searchStr)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchStr]);
+  }, [searchStr])
 
   useEffect(() => {
     if (value) {
-      ref.current?.focus();
+      ref.current?.focus()
     }
-  }, [value]);
+  }, [value])
 
   return (
     <section className="search mb-10">
@@ -49,7 +42,7 @@ const SearchInput = ({ onUpdate, value }: SearchProps) => {
         onChange={onSearchEvent}
       />
     </section>
-  );
-};
+  )
+}
 
-export const Search = memo(SearchInput);
+export const Search = memo(SearchInput)

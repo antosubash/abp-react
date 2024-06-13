@@ -1,21 +1,18 @@
-import React from "react";
+import React from 'react'
 
 interface GoogleAnalyticsProps {
-  trackingId: string;
+  trackingId: string
 }
 
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ trackingId }) => {
   if (!trackingId) {
-    console.error("Google Analytics tracking ID is required.");
-    return null;
+    console.error('Google Analytics tracking ID is required.')
+    return null
   }
 
   return (
     <>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
-      ></script>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}></script>
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -27,7 +24,7 @@ const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ trackingId }) => {
         }}
       ></script>
     </>
-  );
-};
+  )
+}
 
-export default GoogleAnalytics;
+export default GoogleAnalytics

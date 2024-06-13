@@ -1,26 +1,23 @@
-import Link from "next/link";
-import { CircleUser, Menu, Package2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import ClientLink from "@/components/ui/client-link";
+import Link from 'next/link'
+import { CircleUser, Menu, Package2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import ClientLink from '@/components/ui/client-link'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { PublicMenus } from "@/config";
-import { getSession } from "@/lib/actions";
+} from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { PublicMenus } from '@/config'
+import { getSession } from '@/lib/actions'
 export default async function TopNavBar() {
-  const session = await getSession();
+  const session = await getSession()
   return (
     <header className="sticky inset-x-0 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <Link
-          href="#"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
+        <Link href="#" className="flex items-center gap-2 text-lg font-semibold md:text-base">
           <Package2 className="h-6 w-6" />
           <span className="sr-only">Acme Inc</span>
         </Link>
@@ -29,11 +26,11 @@ export default async function TopNavBar() {
             <Link
               key={index}
               href={menu.Link}
-              className="text-foreground transition-colors hover:text-foreground w-24"
+              className="w-24 text-foreground transition-colors hover:text-foreground"
             >
               {menu.Name}
             </Link>
-          );
+          )
         })}
       </nav>
       <Sheet>
@@ -45,10 +42,7 @@ export default async function TopNavBar() {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
+            <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
@@ -61,7 +55,7 @@ export default async function TopNavBar() {
                 >
                   {menu.Name}
                 </Link>
-              );
+              )
             })}
           </nav>
         </SheetContent>
@@ -89,8 +83,8 @@ export default async function TopNavBar() {
               <DropdownMenuSeparator />
               <ClientLink
                 href="/auth/logout"
-                variant={"link"}
-                size={"sm"}
+                variant={'link'}
+                size={'sm'}
                 className="cursor-pointer"
               >
                 <DropdownMenuItem>Logout</DropdownMenuItem>
@@ -102,5 +96,5 @@ export default async function TopNavBar() {
         )}
       </div>
     </header>
-  );
+  )
 }
