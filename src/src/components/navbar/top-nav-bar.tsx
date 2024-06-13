@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { CircleUser, Menu, Package2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -11,9 +12,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { PublicMenus } from '@/config'
-import { getSession } from '@/lib/actions'
-export default async function TopNavBar() {
-  const session = await getSession()
+import useSession from '@/useSession'
+export default function TopNavBar() {
+  const sessionData = useSession()
   return (
     <header className="sticky inset-x-0 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -62,7 +63,7 @@ export default async function TopNavBar() {
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <form className="ml-auto flex-1 sm:flex-initial"></form>
-        {session.isLoggedIn ? (
+        {sessionData.data?.isLoggedIn ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">

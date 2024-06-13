@@ -10,4 +10,5 @@ export const QueryNames = {
   GetEmailing: 'GetEmailing',
   GetAssignableRoles: 'GetAssignableRoles',
   GetProfile: 'GetProfile',
+  GetSession: 'GetSession',
 }
