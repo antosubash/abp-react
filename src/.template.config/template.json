@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Anto Subash",
+    "classifications": [
+        "React",
+        "ABP",
+        "Typescript"
+    ],
+    "identity": "Anto.Abp.React.Template",
+    "sourceName": "abpreact",
+    "name": "An ABP React Template",
+    "description": "An ABP React Template",
+    "tags": {
+        "language": "typescript",
+        "type": "item"
+    },
+    "shortName": "abp-react",
+    "preferNameDirectory": true,
+    "symbols": {
+        "apiUrl": {
+            "description": "API URL",
+            "type": "parameter",
+            "replaces": "abp.antosubash.com",
+            "defaultValue": "your-api-name.com"
+        }
+    }
+}
