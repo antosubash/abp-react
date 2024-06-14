@@ -17,6 +17,8 @@ jobs:
       NEXTAUTH_CLIENT_ID : ${{ secrets.NEXTAUTH_CLIENT_ID }}
       NEXT_PUBLIC_APP_URL : ${{ secrets.NEXT_PUBLIC_APP_URL }}
       NEXT_PUBLIC_SCOPE: ${{ secrets.NEXT_PUBLIC_SCOPE }}
+      NEXT_PUBLIC_UMAMI_SCRIPT_URL: ${{ secrets.NEXT_PUBLIC_UMAMI_SCRIPT_URL }}
+      NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
     runs-on: ubuntu-latest
 
     steps:
