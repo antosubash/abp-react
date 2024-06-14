@@ -9,5 +9,6 @@ export default function useSession() {
       const response = await fetch('/session')
       return (await response.json()) as SessionData
     },
+    refetchOnWindowFocus: true
   })
 }

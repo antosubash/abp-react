@@ -9,10 +9,6 @@ export async function middleware(request: NextRequest) {
   if (!session.tenantId && request.nextUrl.pathname !== '/auth/set-tenant') {
     return NextResponse.redirect(new URL('/auth/set-tenant', request.url))
   }
-
-  if (session.access_token) {
-    console.log('middleware access token:', session.access_token)
-  }
 }
 
 export const config = {
