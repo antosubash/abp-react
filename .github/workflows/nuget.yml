@@ -1,10 +1,9 @@
-name: Nuget Publish
+name: Publish NuGet Package
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - "src/**"
+    tags:
+      - 'v*.*.*'
 
 jobs:
 
@@ -19,11 +18,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
+    - name: Get version from tag
+      id: get_version
+      run: echo "##[set-output name=VERSION;]${GITHUB_REF#refs/tags/v}"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Build Package
-      run: dotnet pack --output nupkgs --configuration Release -p PackageVersion=1.0.${{ github.run_number }}
+      run: dotnet pack --output nupkgs --configuration Release -p /p:PackageVersion=${{ steps.get_version.outputs.VERSION }}
     - name: Push to Nuget
       run: dotnet nuget push "nupkgs/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate
