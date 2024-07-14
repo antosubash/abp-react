@@ -71,6 +71,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^8.0.1",
     "@tanstack/eslint-plugin-query": "^5.43.1",
     "@types/node": "^20.12.8",
     "@types/react": "^18.3.1",
@@ -86,6 +87,7 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.4",
     "release-it": "^17.6.0",
+    "release-it-changelogen": "^0.1.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5"
   },
@@ -99,6 +101,25 @@
   },
   "release-it": {
     "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "parserOpts": {
+          "mergePattern": "^Merge pull request #(\\d+) from (.*)$"
+        },
+        "preset": {
+          "name": "angular"
+        },
+        "infile": "CHANGELOG.md"
+      },
+      "release-it-changelogen": {
+        "disableVersion": true,
+        "templates": {
+          "commitMessage": "chore(release): v{{newVersion}}",
+          "tagMessage": "v{{newVersion}}",
+          "tagBody": "v{{newVersion}}"
+        }
+      }
+    },
     "github": {
       "release": true
     }
