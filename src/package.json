@@ -9,7 +9,8 @@
     "lint": "next lint --fix",
     "format": "prettier --write .",
     "prepare": "husky",
-    "gen-api": "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client"
+    "gen-api": "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client",
+    "release": "release-it"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
@@ -84,6 +85,7 @@
     "postcss": "^8.4.38",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.4",
+    "release-it": "^17.6.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5"
   },
@@ -94,5 +96,11 @@
     "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
       "prettier --write"
     ]
+  },
+  "release-it": {
+    "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+    "github": {
+      "release": true
+    }
   }
 }
