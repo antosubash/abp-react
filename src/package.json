@@ -125,12 +125,11 @@
     },
     "git": {
       "requireBranch": "main",
-      "commitMessage": "chore: release v${version}"
+      "commitMessage": "chore: release v${version}",
+      "requireCleanWorkingDir": false
     },
     "hooks": {
-      "before:init": [
-        "git update-index -q --refresh"
-      ]
+      
     }
   }
 }
