@@ -24,6 +24,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: git config
+      run: |
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
     - name: Install Node.js
       uses: actions/setup-node@v3
@@ -56,6 +60,11 @@ jobs:
 
     - name: Build
       run: pnpm run build
+    - name: Bump version and release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: npx release-it
 
     - name: Docker Login
       uses: docker/login-action@v2
