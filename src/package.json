@@ -126,12 +126,6 @@
     "git": {
       "requireBranch": "main",
       "commitMessage": "chore: release v${version}"
-    },
-    "hooks": {
-      "before:init": [
-        "git pull"
-      ],
-      "after:bump": "npx auto-changelog -p"
     }
   }
 }
