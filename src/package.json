@@ -127,9 +127,6 @@
       "requireBranch": "main",
       "commitMessage": "chore: release v${version}",
       "requireCleanWorkingDir": false
-    },
-    "hooks": {
-      
     }
   }
 }
