@@ -130,8 +130,7 @@
     "hooks": {
       "before:init": [
         "git update-index -q --refresh"
-      ],
-      "after:bump": "npx auto-changelog -p"
+      ]
     }
   }
 }
