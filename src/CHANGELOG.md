@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.0.2...v2.1.0)
+
+### 🚀 Enhancements
+
+- Add How It Works and Pricing sections to public landing page ([d72e120](https://github.com/antosubash/abp-react/commit/d72e120))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.0.1...v2.0.2)
+
+## v2.1.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.0.2...v2.1.0)
+
+### 🚀 Enhancements
+
+- Add How It Works and Pricing sections to public landing page ([d72e120](https://github.com/antosubash/abp-react/commit/d72e120))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
