@@ -1,6 +1,36 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.0.1...v2.0.2)
+
+### 🩹 Fixes
+
+- Updated the public landing page ([edc83ae](https://github.com/antosubash/abp-react/commit/edc83ae))
+
+### 🏡 Chore
+
+- Update public landing page text ([c544db4](https://github.com/antosubash/abp-react/commit/c544db4))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.0.0...v2.0.1)
+
+## v2.0.2
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.0.1...v2.0.2)
+
+### 🩹 Fixes
+
+- Updated the public landing page ([edc83ae](https://github.com/antosubash/abp-react/commit/edc83ae))
+
+### 🏡 Chore
+
+- Update public landing page text ([c544db4](https://github.com/antosubash/abp-react/commit/c544db4))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
