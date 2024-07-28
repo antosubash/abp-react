@@ -2,7 +2,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { SVGProps } from 'react'
 import TopNavBar from '@/components/navbar/top-nav-bar'
-
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-[100dvh]">
@@ -83,6 +91,94 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </section>
+        <section className="w-full py-12 md:py-24 lg:py-32" id="how-it-works">
+          <div className="container px-4 md:px-6">
+            <div className="mx-auto max-w-3xl space-y-4 text-center">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">How It Works</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                A Seamless Development Workflow
+              </h2>
+              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Our platform streamlines the entire development process, from building and testing
+                to deploying and scaling. Say goodbye to infrastructure management and focus on what
+                matters most - creating amazing web experiences.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32" id="pricing">
+          <div className="container px-4 md:px-6">
+            <div className="mx-auto max-w-3xl space-y-4 text-center">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Pricing</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                Flexible Pricing for Every Team
+              </h2>
+              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Choose the plan that best fits your needs and scale as your business grows. Our
+                transparent pricing ensures you only pay for what you use.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Starter</CardTitle>
+                    <CardDescription>Perfect for small teams</CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-4">
+                    <div className="text-4xl font-bold">$29</div>
+                    <div className="text-muted-foreground">per month</div>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>1 user</li>
+                      <li>100GB storage</li>
+                      <li>1 custom domain</li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button className="w-full">Get Started</Button>
+                  </CardFooter>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Pro</CardTitle>
+                    <CardDescription>For growing teams</CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-4">
+                    <div className="text-4xl font-bold">$99</div>
+                    <div className="text-muted-foreground">per month</div>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>5 users</li>
+                      <li>1TB storage</li>
+                      <li>5 custom domains</li>
+                      <li>Advanced analytics</li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button className="w-full">Get Started</Button>
+                  </CardFooter>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Enterprise</CardTitle>
+                    <CardDescription>For large organizations</CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-4">
+                    <div className="text-4xl font-bold">Custom</div>
+                    <div className="text-muted-foreground">Tailored to your needs</div>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>Unlimited users</li>
+                      <li>Unlimited storage</li>
+                      <li>Unlimited custom domains</li>
+                      <li>Enterprise-grade security</li>
+                      <li>Dedicated support</li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button className="w-full">Contact Sales</Button>
+                  </CardFooter>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container px-4 md:px-6">
             <div className="mx-auto max-w-3xl space-y-4 text-center">
@@ -91,8 +187,8 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 Stay tuned for our launch!
               </h2>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We&apos;re working hard to bring you the best platform for building the web. Sign
-                up to be the first to know when we launch.
+                We&apos;re working hard to bring you the best platform for building the web. Sign up
+                to be the first to know when we launch.
               </p>
               <Link
                 href="#"
