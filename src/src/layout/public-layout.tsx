@@ -91,8 +91,8 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 Stay tuned for our launch!
               </h2>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We're working hard to bring you the best platform for building the web. Sign up to
-                be the first to know when we launch.
+                We&apos;re working hard to bring you the best platform for building the web. Sign
+                up to be the first to know when we launch.
               </p>
               <Link
                 href="#"
