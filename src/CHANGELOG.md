@@ -1,6 +1,12 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.0...v2.1.1)
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.0.2...v2.1.0)
+
+## v2.1.1
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.0...v2.1.1)
 
 ### 🚀 Enhancements
 
