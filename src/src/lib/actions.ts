@@ -7,7 +7,7 @@ import { RedisSession, createRedisInstance } from './redis'
 import { SessionData, defaultSession, getClient } from './session-utils'
 
 export async function getSession() {
-  let session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  let session = await getIronSession<SessionData>(await cookies(), sessionOptions)
   try {
     if (session.access_token && isTokenExpired(session.access_token!)) {
       const redisKey = `session:${session?.userInfo?.sub!}`

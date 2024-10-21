@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!
 export async function GET() {
   const session = await getSession()
-  var host = headers().get('host')
+  var host = await (await headers()).get('host')
   if (session.tenantId) {
     return
   }
