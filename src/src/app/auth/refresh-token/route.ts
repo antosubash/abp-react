@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 export async function GET(request: NextRequest) {
-  let session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  let session = await getIronSession<SessionData>(await cookies(), sessionOptions)
   const redisKey = `session:${session?.userInfo?.sub!}`
   const redis = createRedisInstance()
   const client = await getClient()

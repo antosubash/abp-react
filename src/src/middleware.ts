@@ -5,7 +5,7 @@ import { SessionData } from './lib/session-utils'
 import { sessionOptions } from './sessionOptions'
 
 export async function middleware(request: NextRequest) {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+  const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
   if (!session.tenantId && request.nextUrl.pathname !== '/auth/set-tenant') {
     return NextResponse.redirect(new URL('/auth/set-tenant', request.url))
   }

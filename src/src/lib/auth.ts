@@ -16,7 +16,7 @@ export const refreshToken = async () => {
   'use server'
   try {
     console.log('Token expired. Refreshing token...')
-    const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+    const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
     const redisKey = `session:${session?.userInfo?.sub!}`
     const redis = createRedisInstance()
     const client = await getClient()

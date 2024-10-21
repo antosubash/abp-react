@@ -26,11 +26,11 @@ export const defaultSession: SessionData = {
 
 // export async function getSession(): Promise<IronSession<SessionData>> {
 //     "use server"
-//     let session = await getIronSession<SessionData>(cookies(), sessionOptions);
+//     let session = await getIronSession<SessionData>(await cookies(), sessionOptions);
 //     try {
 //         if (session.access_token && isTokenExpired(session.access_token!)) {
 //             await refreshToken();
-//             session = await getIronSession<SessionData>(cookies(), sessionOptions);
+//             session = await getIronSession<SessionData>(await cookies(), sessionOptions);
 //             console.log('Token refreshed');
 //             console.log('Checking if token is still expired...');
 //             if (isTokenExpired(session.access_token!)) {
