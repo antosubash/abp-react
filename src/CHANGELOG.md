@@ -1,8 +1,32 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.1...v2.1.2)
+
+### 🩹 Fixes
+
+- Auth working ([4153cf3](https://github.com/antosubash/abp-react/commit/4153cf3))
+- Calendar component button icons ([ca39e8f](https://github.com/antosubash/abp-react/commit/ca39e8f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.1.0...v2.1.1)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.0.2...v2.1.0)
+
+## v2.1.2
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.1...v2.1.2)
+
+### 🩹 Fixes
+
+- Auth working ([4153cf3](https://github.com/antosubash/abp-react/commit/4153cf3))
+- Calendar component button icons ([ca39e8f](https://github.com/antosubash/abp-react/commit/ca39e8f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.1.1
 
