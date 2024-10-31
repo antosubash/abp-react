@@ -4,18 +4,11 @@ import {getSession} from '@/lib/actions'
 import {createRedisInstance, RedisSession} from '@/lib/redis'
 import {getClientConfig} from '@/lib/session-utils'
 import {NextRequest} from 'next/server'
-import {headers} from "next/headers";
 
 export async function GET(request: NextRequest) {
   const session = await getSession()
   const openIdClientConfig = await getClientConfig()
-  const currentUrl = new URL(request.url)
-  const headersList = await headers()
-  currentUrl.host = headersList.get('host')!
-  // remove the port if it exists in the host only in production
-  if (process.env.NODE_ENV === 'production') {
-    currentUrl.host = currentUrl.host.split(':')[0]
-  }
+  const currentUrl = new URL(clientConfig.redirect_uri)
   const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
     pkceCodeVerifier: session.code_verifier,
     expectedState: session.state
