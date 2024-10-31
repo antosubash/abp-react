@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.2...v2.2.3)
+
+### 🩹 Fixes
+
+- Used redirect url as current url. ([54d82c0](https://github.com/antosubash/abp-react/commit/54d82c0))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.1...v2.2.2)
+
+## v2.2.3
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.2...v2.2.3)
+
+### 🩹 Fixes
+
+- Used redirect url as current url. ([54d82c0](https://github.com/antosubash/abp-react/commit/54d82c0))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
