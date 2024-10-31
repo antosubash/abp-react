@@ -10,7 +10,12 @@ export async function GET(request: NextRequest) {
   const session = await getSession()
   const openIdClientConfig = await getClientConfig()
   const currentUrl = new URL(request.url)
-  currentUrl.host = (await headers()).get('host')!
+  const headersList = await headers()
+  currentUrl.host = headersList.get('host')!
+  // remove the port if it exists in the host only in production
+  if (process.env.NODE_ENV === 'production') {
+    currentUrl.host = currentUrl.host.split(':')[0]
+  }
   const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
     pkceCodeVerifier: session.code_verifier,
     expectedState: session.state
