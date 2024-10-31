@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.0...v2.2.1)
+
+### 🩹 Fixes
+
+- Updated the current url generation logic ([b84eb5f](https://github.com/antosubash/abp-react/commit/b84eb5f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.1.2...v2.2.0)
+
+## v2.2.1
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.0...v2.2.1)
+
+### 🩹 Fixes
+
+- Updated the current url generation logic ([b84eb5f](https://github.com/antosubash/abp-react/commit/b84eb5f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🚀 Enhancements
 
