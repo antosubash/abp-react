@@ -76,7 +76,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
     if (permissionGroups.length > 0) {
       permissionGroups.forEach((g) => {
         g.permissions?.forEach((p) => {
-          p.isGranted = hasAllGranted ? true : false
+          p.isGranted = hasAllGranted
         })
       })
       setPermissionGroups([...permissionGroups])
@@ -233,7 +233,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                             ? 'secondary'
                             : 'default'
                         }
-                        onClick={(e) => {
+                        onClick={(e: { preventDefault: () => void; stopPropagation: () => void }) => {
                           e.preventDefault()
                           e.stopPropagation()
                           switchManagement(idx)
@@ -272,7 +272,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
               </section>
               <DialogFooter>
                 <Button
-                  onClick={(e) => {
+                    onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}

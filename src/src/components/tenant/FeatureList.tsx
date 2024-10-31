@@ -51,9 +51,9 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       })
     })
     return () => {
-      queryClient.invalidateQueries({ queryKey: [QueryNames.GetFeatures] })
-      queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] })
-      queryClient.invalidateQueries({ queryKey: [PermissionProvider.T] })
+      queryClient.invalidateQueries({queryKey: [QueryNames.GetFeatures]}).then()
+      queryClient.invalidateQueries({queryKey: [QueryNames.GetTenants]}).then()
+      queryClient.invalidateQueries({queryKey: [PermissionProvider.T]}).then()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onDismiss, data])
@@ -66,7 +66,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
     }
   }
 
-  const onSubmit = async (data: unknown) => {
+  const onSubmit = async () => {
     try {
       const featureUpdateDto = {} as UpdateFeaturesDto
       featureUpdateDto.features = [
@@ -95,7 +95,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Features update wasn't successfull.",
+          description: "Feature update failed.",
           variant: 'destructive',
         })
       }
@@ -174,15 +174,15 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
 
             <DialogFooter className="mt-5">
               <Button
-                onClick={(e) => {
+                  onClick={async (e: { preventDefault: () => void }) => {
                   e.preventDefault()
-                  onResetToDefaultEvent()
+                    await onResetToDefaultEvent()
                 }}
               >
                 Reset to default
               </Button>
               <Button
-                onClick={(e) => {
+                  onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   onCloseEvent()
                 }}

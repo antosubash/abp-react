@@ -4,13 +4,33 @@ import { NextRequest, NextResponse } from 'next/server'
 import { SessionData } from './lib/session-utils'
 import { sessionOptions } from './sessionOptions'
 
-export async function middleware(request: NextRequest) {
+/**
+ * Middleware function to check for tenant ID in the session.
+ * If the tenant ID is not present, the user is redirected to the set-tenant page.
+ * This middleware runs for every request.
+ *
+ * @param {NextRequest} request - The incoming request object.
+ * @returns {Promise<NextResponse | undefined>} - The response object or undefined.
+ */
+export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
   const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
+
+  // Check if tenantId is present in the session
   if (!session.tenantId && request.nextUrl.pathname !== '/auth/set-tenant') {
-    return NextResponse.redirect(new URL('/auth/set-tenant', request.url))
+    // Redirect to set-tenant page if tenantId is not present
+    let redirectUrl = new URL('/auth/set-tenant', request.nextUrl.origin)
+    // Validate the redirect URL
+    if (redirectUrl.origin === request.nextUrl.origin) {
+      // Redirect to set-tenant page if tenantId is not present
+      return NextResponse.redirect(redirectUrl)
+    }
   }
 }
 
+/**
+ * Configuration object for the middleware matcher.
+ * Specifies which paths the middleware should run for.
+ */
 export const config = {
   matcher: [
     /*

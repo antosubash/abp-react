@@ -1,5 +1,11 @@
 import { Cog, Database, Home, UserRound, Users } from 'lucide-react'
+import React from "react";
 
+/**
+ * Configuration for the OpenID client.
+ * This constant holds most of the environment variables in a single place.
+ * It was created for convenience. If you don't like it, you can remove it and update the codebase everywhere it is used.
+ */
 export const clientConfig = {
   url: process.env.NEXT_PUBLIC_API_URL,
   audience: process.env.NEXT_PUBLIC_API_URL,
@@ -10,9 +16,16 @@ export const clientConfig = {
   response_type: 'code',
   grant_type: 'authorization_code',
   post_login_route: `${process.env.NEXT_PUBLIC_APP_URL}`,
+  code_challenge_method: 'S256'
 }
 
-export const PublicMenus = [
+/**
+ * List of menus shown on the public pages.
+ * Each menu item contains a name and a link.
+ *
+ * @type {Array<{Name: string, Link: string}>}
+ */
+export const PublicMenus: Array<{ Name: string; Link: string }> = [
   {
     Name: 'How it works',
     Link: '#how-it-works',
@@ -27,7 +40,13 @@ export const PublicMenus = [
   },
 ]
 
-export const AdminMenus = [
+/**
+ * List of menus shown in the Admin layout.
+ * Each menu item contains a name, link, and icon.
+ *
+ * @type {Array<{name: string, link: string, icon: React.ComponentType}>}
+ */
+export const AdminMenus: Array<{ name: string; link: string; icon: React.ComponentType; }> = [
   {
     name: 'Home',
     link: '/admin',

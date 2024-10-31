@@ -1,10 +1,21 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-export function cn(...inputs: ClassValue[]) {
+/**
+ * Combines class names using `clsx` and merges them using `twMerge`.
+ *
+ * @param {...ClassValue[]} inputs - The class names to combine and merge.
+ * @returns {string} - The combined and merged class names.
+ */
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
+/**
+ * Enum for various permissions.
+ * @readonly
+ * @enum {string}
+ */
 export enum Permissions {
   ROLES = 'AbpIdentity.Roles',
   USERS = 'AbpIdentity.Users',
@@ -13,17 +24,20 @@ export enum Permissions {
   SETTINGS = 'SettingManagement.Emailing',
 }
 
-export enum PermissionsGrant {
-  ROLE_MANAGEMENT = 'Role management',
-  TENANT_MANAGEMENT = 'Tenant management',
-  FEATURE_MANAGEMENT = 'Feature management',
-  SETTING_MANAGEMENT = 'Setting management',
-}
-
+/**
+ * Enum for user roles.
+ * @readonly
+ * @enum {string}
+ */
 export enum USER_ROLE {
   ADMIN = 'admin',
 }
 
+/**
+ * Enum for permission providers.
+ * @readonly
+ * @enum {string}
+ */
 export enum PermissionProvider {
   U = 'U',
   R = 'R',
@@ -31,10 +45,13 @@ export enum PermissionProvider {
 }
 
 /**
- * Helper method for creating a range of numbers
- * range(1, 5) => [1, 2, 3, 4, 5]
+ * Helper method for creating a range of numbers.
+ *
+ * @param {number} from - The starting number of the range.
+ * @param {number} to - The ending number of the range.
+ * @returns {number[]} - An array containing the range of numbers.
  */
-const range = (from: number, to: number) => {
+const range = (from: number, to: number): number[] => {
   let i = from
   const range = []
 
@@ -46,11 +63,14 @@ const range = (from: number, to: number) => {
   return range
 }
 
+/**
+ * Generates an array of page numbers for pagination controls.
+ *
+ * @param {number} totalPages - The total number of pages.
+ * @param {number} currentPage - The current active page.
+ * @returns {(number | 'SPACER')[]} - An array of page numbers and spacers.
+ */
 export const getPages = (totalPages: number, currentPage: number): (number | 'SPACER')[] => {
-  /**
-   * totalNumbers: the total page numbers to show on the control
-   * totalBlocks: totalNumbers + 2 to cover for the spacers
-   */
   const totalNumbers = 5
   const totalBlocks = totalNumbers + 2
 
@@ -60,30 +80,26 @@ export const getPages = (totalPages: number, currentPage: number): (number | 'SP
 
     let pages: Array<number | 'SPACER'> = range(startPage, endPage)
 
-    /**
-     * hasLeftSpill: has hidden pages to the left
-     * hasRightSpill: has hidden pages to the right
-     * spillOffset: number of hidden pages either to the left or to the right
-     */
     const hasLeftSpill = startPage > 2
     const hasRightSpill = totalPages - endPage > 1
     const spillOffset = totalNumbers - (pages.length + 3)
+
     switch (true) {
-      // handle: (1) ... {6} [7] (8)
+        // handle: (1) ... {6} [7] (8)
       case hasLeftSpill && !hasRightSpill: {
         const extraPages = range(startPage - spillOffset, startPage - 1)
         pages = ['SPACER', ...extraPages, ...pages]
         break
       }
 
-      // handle: (1) {2} [3] {4} ... (8)
+        // handle: (1) {2} [3] {4} ... (8)
       case !hasLeftSpill && hasRightSpill: {
         const extraPages = range(endPage + 1, endPage + spillOffset)
         pages = [...pages, ...extraPages, 'SPACER']
         break
       }
 
-      // handle: (1) ... {3} [4] {5} ... (8)
+        // handle: (1) ... {3} [4] {5} ... (8)
       case hasLeftSpill && hasRightSpill:
       default: {
         pages = ['SPACER', ...pages, 'SPACER']

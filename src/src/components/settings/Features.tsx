@@ -11,9 +11,6 @@ type FeaturesProps = {
 }
 export const Features = ({ onDismiss }: FeaturesProps) => {
   const [open, setOpen] = useState(false)
-  const { toast } = useToast()
-  const { handleSubmit, register } = useForm()
-  const { data } = useFeatures(PermissionProvider.T, 'undefined')
   const onCloseEvent = () => {
     setOpen(false)
     onDismiss()
@@ -32,7 +29,7 @@ export const Features = ({ onDismiss }: FeaturesProps) => {
         </article>
         <DialogFooter className="mt-5">
           <Button
-            onClick={(e) => {
+              onClick={(e: { preventDefault: () => void }) => {
               e.preventDefault()
               onCloseEvent()
             }}

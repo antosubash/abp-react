@@ -1,20 +1,24 @@
 import { clientConfig } from '@/config'
+import * as client from 'openid-client'
 import { getSession } from '@/lib/actions'
 import { RedisSession, createRedisInstance } from '@/lib/redis'
-import { getClient } from '@/lib/session-utils'
+import {getClientConfig} from '@/lib/session-utils'
 import { NextRequest } from 'next/server'
 export async function GET(request: NextRequest) {
   const session = await getSession()
-  const client = await getClient()
-  const params = client.callbackParams(request as any)
-  const tokenSet = await client.callback(clientConfig.redirect_uri, params, {
-    code_verifier: session.code_verifier,
+  const openIdClientConfig = await getClientConfig()
+  const currentUrl = new URL(request.url)
+  const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
+    pkceCodeVerifier: session.code_verifier,
+    expectedState: session.state
   })
   const { access_token, refresh_token } = tokenSet
   session.isLoggedIn = true
   session.access_token = access_token
+  let claims = tokenSet.claims()!
+  const {sub} = claims
   // call userinfo endpoint to get user info
-  const userinfo = await client.userinfo(tokenSet)
+  const userinfo = await client.fetchUserInfo(openIdClientConfig, access_token, sub)
   // store userinfo in session
   session.userInfo = {
     sub: userinfo.sub,

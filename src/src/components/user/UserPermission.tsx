@@ -82,7 +82,7 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
     if (permissionGroups.length > 0) {
       permissionGroups.forEach((g) => {
         g.permissions?.forEach((p) => {
-          p.isGranted = hasAllGranted ? true : false
+          p.isGranted = hasAllGranted
         })
       })
       setPermissionGroups([...permissionGroups])
@@ -244,7 +244,7 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
                             ? 'secondary'
                             : 'default'
                         }
-                        onClick={(e) => {
+                        onClick={(e: any) => {
                           e.preventDefault()
                           e.stopPropagation()
                           switchManagement(idx)
@@ -283,7 +283,7 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
               </section>
               <DialogFooter>
                 <Button
-                  onClick={(e) => {
+                    onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}

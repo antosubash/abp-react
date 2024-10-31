@@ -116,7 +116,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
           )}
           <DialogFooter className="mt-5">
             <Button
-              onClick={(e) => {
+                onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCloseEvent()
               }}

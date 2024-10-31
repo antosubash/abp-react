@@ -15,7 +15,6 @@ export type TestEmailProps = {
 }
 
 export const TestEmail = ({ onDismiss }: TestEmailProps) => {
-  const { can } = useGrantedPolicies()
   const [open, setOpen] = useState(false)
 
   const { toast } = useToast()
@@ -77,7 +76,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
           <DialogFooter className="mt-5">
             <Button type="submit">Send</Button>
             <Button
-              onClick={(e) => {
+                onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCloseEvent()
               }}

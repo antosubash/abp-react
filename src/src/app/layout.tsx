@@ -1,24 +1,14 @@
-import { OpenAPI } from '@/client'
 import GoogleAnalytics from '@/components/analytics/google-analytics'
 import UmamiAnalytics from '@/components/analytics/umami-analytics'
-import { getSession } from '@/lib/actions'
 import ReactQueryProviders from '@/lib/provider/QueryClientProvider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
+import React from "react";
+import {setUpLayoutConfig} from "@/lib/auth";
 
-OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!
-
-OpenAPI.interceptors.request.use(async (options) => {
-  const session = await getSession()
-  options.headers = {
-    ...options.headers,
-    Authorization: `Bearer ${session.access_token}`,
-    __tenant: session.tenantId ?? '',
-  }
-  return options
-})
+setUpLayoutConfig()
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -41,6 +31,7 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+          <title>Abp React</title>
         {process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL && process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
           <UmamiAnalytics
             scriptUrl={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}

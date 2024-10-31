@@ -157,7 +157,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
 
               <DialogFooter className="mt-5">
                 <Button
-                  onClick={(e) => {
+                    onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}
@@ -196,7 +196,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
             )}
             <DialogFooter className="mt-5">
               <Button
-                onClick={(e) => {
+                  onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   onCloseEvent()
                 }}

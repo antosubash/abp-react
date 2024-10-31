@@ -164,7 +164,7 @@ export const Emailing = () => {
             <Button type="submit">Save</Button>
             <Button
               variant="default"
-              onClick={(e) => {
+              onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 setOpenTestEmail(true)
               }}
