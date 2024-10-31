@@ -1,6 +1,30 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.2...v2.2.0)
+
+### 🚀 Enhancements
+
+- Openid client v6 with more other improvements ([2ddc9eb](https://github.com/antosubash/abp-react/commit/2ddc9eb))
+- Openid client v6 with more other improvements ([6f1eb8a](https://github.com/antosubash/abp-react/commit/6f1eb8a))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.1.1...v2.1.2)
+
+## v2.2.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.1.2...v2.2.0)
+
+### 🚀 Enhancements
+
+- Openid client v6 with more other improvements ([2ddc9eb](https://github.com/antosubash/abp-react/commit/2ddc9eb))
+- Openid client v6 with more other improvements ([6f1eb8a](https://github.com/antosubash/abp-react/commit/6f1eb8a))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
