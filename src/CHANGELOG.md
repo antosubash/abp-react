@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.1...v2.2.2)
+
+### 🩹 Fixes
+
+- Removed port from the current url in production ([75594e2](https://github.com/antosubash/abp-react/commit/75594e2))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.0...v2.2.1)
+
+## v2.2.2
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.1...v2.2.2)
+
+### 🩹 Fixes
+
+- Removed port from the current url in production ([75594e2](https://github.com/antosubash/abp-react/commit/75594e2))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
