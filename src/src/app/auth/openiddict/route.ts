@@ -1,13 +1,16 @@
-import { clientConfig } from '@/config'
+import {clientConfig} from '@/config'
 import * as client from 'openid-client'
-import { getSession } from '@/lib/actions'
-import { RedisSession, createRedisInstance } from '@/lib/redis'
+import {getSession} from '@/lib/actions'
+import {createRedisInstance, RedisSession} from '@/lib/redis'
 import {getClientConfig} from '@/lib/session-utils'
-import { NextRequest } from 'next/server'
+import {NextRequest} from 'next/server'
+import {headers} from "next/headers";
+
 export async function GET(request: NextRequest) {
   const session = await getSession()
   const openIdClientConfig = await getClientConfig()
   const currentUrl = new URL(request.url)
+  currentUrl.host = (await headers()).get('host')!
   const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
     pkceCodeVerifier: session.code_verifier,
     expectedState: session.state
