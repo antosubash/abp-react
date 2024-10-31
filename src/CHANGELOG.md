@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.3...v2.2.4)
+
+### 🩹 Fixes
+
+- Updated the current url again to support proxy request ([b4d2266](https://github.com/antosubash/abp-react/commit/b4d2266))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.2...v2.2.3)
+
+## v2.2.4
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.3...v2.2.4)
+
+### 🩹 Fixes
+
+- Updated the current url again to support proxy request ([b4d2266](https://github.com/antosubash/abp-react/commit/b4d2266))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
