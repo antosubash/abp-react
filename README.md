@@ -1,6 +1,6 @@
 # ABP React
 
-This repo is a work in progress(preparing for beta release). Check the Current Status in the [Project Board](https://github.com/users/antosubash/projects/2). This project can be used as a drop-in replacement for the Angular UI of the ABP Framework.
+This project can be used as a drop-in replacement for the Angular UI of the ABP Framework.
 
 ## Demo
 
