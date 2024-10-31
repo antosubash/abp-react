@@ -4,11 +4,15 @@ import {getSession} from '@/lib/actions'
 import {createRedisInstance, RedisSession} from '@/lib/redis'
 import {getClientConfig} from '@/lib/session-utils'
 import {NextRequest} from 'next/server'
+import {headers} from "next/headers";
 
 export async function GET(request: NextRequest) {
   const session = await getSession()
   const openIdClientConfig = await getClientConfig()
-  const currentUrl = new URL(clientConfig.redirect_uri)
+  const headerList = await headers()
+  const host = headerList.get('x-forwarded-host') || headerList.get('host') || 'localhost'
+  const protocol = headerList.get('x-forwarded-proto') || 'https'
+  const currentUrl = new URL(`${protocol}://${host}${request.nextUrl.pathname}${request.nextUrl.search}`)
   const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
     pkceCodeVerifier: session.code_verifier,
     expectedState: session.state
