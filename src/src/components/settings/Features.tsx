@@ -1,10 +1,6 @@
-import { useFeatures } from '@/lib/hooks/useFeatures'
-import { PermissionProvider } from '@/lib/utils'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Button } from '../ui/button'
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog'
-import { useToast } from '../ui/use-toast'
+import {useEffect, useState} from 'react'
+import {Button} from '../ui/button'
+import {Dialog, DialogContent, DialogFooter, DialogTitle} from '../ui/dialog'
 
 type FeaturesProps = {
   onDismiss: () => void
