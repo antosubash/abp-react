@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.5...v2.2.6)
+
+### 🩹 Fixes
+
+- Update Docker build context and Dockerfile path in GitHub Actions workflow ([ada7e57](https://github.com/antosubash/abp-react/commit/ada7e57))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.4...v2.2.5)
+
+## v2.2.6
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.5...v2.2.6)
+
+### 🩹 Fixes
+
+- Update Docker build context and Dockerfile path in GitHub Actions workflow ([ada7e57](https://github.com/antosubash/abp-react/commit/ada7e57))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
