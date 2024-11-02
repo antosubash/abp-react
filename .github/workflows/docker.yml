@@ -67,19 +67,30 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: npx release-it
+    - name: Get version from package.json
+      id: get_version
+      run: |
+        VERSION=$(jq -r '.version' package.json)
+        echo "Version: $VERSION"
+        echo "version=$VERSION" >> $GITHUB_ENV
 
-    - name: Docker Login
-      uses: docker/login-action@v2
+    - name: Use version
+      run: echo "The version is ${{ env.version }}"
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
       with:
-        registry: registry.antosubash.com
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    - name: Build the abpreact nextjs image
-      run: docker build . --file ./Dockerfile --tag abpreactnextjs:dev
-    - name: Docker tag next image
-      run: docker tag abpreactnextjs:dev registry.antosubash.com/abpreactnextjs:dev
-    - name: Push abpreact-nextjs image
-      run: docker push registry.antosubash.com/abpreactnextjs:dev
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Docker Build and Push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository }}:latest
+          ghcr.io/${{ github.repository }}:${{ env.version }}
     - name: Send Http Post Request to Deploy NextJs App
       uses: fjogeleit/http-request-action@v1
       with:
