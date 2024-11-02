@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.4...v2.2.5)
+
+### 🩹 Fixes
+
+- Update GitHub Actions workflow to use GitHub Container Registry and retrieve version from package.json ([bf2b408](https://github.com/antosubash/abp-react/commit/bf2b408))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.3...v2.2.4)
+
+## v2.2.5
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.4...v2.2.5)
+
+### 🩹 Fixes
+
+- Update GitHub Actions workflow to use GitHub Container Registry and retrieve version from package.json ([bf2b408](https://github.com/antosubash/abp-react/commit/bf2b408))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
