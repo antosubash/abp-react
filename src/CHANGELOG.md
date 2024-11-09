@@ -1,6 +1,28 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.7...v2.2.8)
+
+### 🏡 Chore
+
+- Update README for .NET version and improve grammar and punctuation ([81247d2](https://github.com/antosubash/abp-react/commit/81247d2))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.6...v2.2.7)
+
+## v2.2.8
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.7...v2.2.8)
+
+### 🏡 Chore
+
+- Update README for .NET version and improve grammar and punctuation ([81247d2](https://github.com/antosubash/abp-react/commit/81247d2))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
