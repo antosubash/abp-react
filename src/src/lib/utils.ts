@@ -4,6 +4,10 @@ import { twMerge } from 'tailwind-merge'
 /**
  * Combines class names using `clsx` and merges them using `twMerge`.
  *
+ * This function takes multiple class name inputs, combines them using the `clsx` utility,
+ * and then merges them using the `twMerge` utility to ensure that Tailwind CSS classes
+ * are properly merged without conflicts.
+ *
  * @param {...ClassValue[]} inputs - The class names to combine and merge.
  * @returns {string} - The combined and merged class names.
  */
@@ -13,6 +17,11 @@ export function cn(...inputs: ClassValue[]): string {
 
 /**
  * Enum for various permissions.
+ *
+ * This enum defines a set of string constants representing different permissions
+ * within the application. These permissions are used to control access to various
+ * features and functionalities.
+ *
  * @readonly
  * @enum {string}
  */
@@ -26,6 +35,11 @@ export enum Permissions {
 
 /**
  * Enum for user roles.
+ *
+ * This enum defines a set of string constants representing different user roles
+ * within the application. These roles are used to categorize users and assign
+ * appropriate permissions.
+ *
  * @readonly
  * @enum {string}
  */
@@ -35,6 +49,11 @@ export enum USER_ROLE {
 
 /**
  * Enum for permission providers.
+ *
+ * This enum defines a set of string constants representing different permission
+ * providers within the application. These providers are used to manage and assign
+ * permissions to users and roles.
+ *
  * @readonly
  * @enum {string}
  */
@@ -46,6 +65,9 @@ export enum PermissionProvider {
 
 /**
  * Helper method for creating a range of numbers.
+ *
+ * This function generates an array of numbers starting from the `from` parameter
+ * and ending at the `to` parameter, inclusive.
  *
  * @param {number} from - The starting number of the range.
  * @param {number} to - The ending number of the range.
@@ -65,6 +87,10 @@ const range = (from: number, to: number): number[] => {
 
 /**
  * Generates an array of page numbers for pagination controls.
+ *
+ * This function creates an array of page numbers and spacers ('SPACER') for pagination
+ * based on the total number of pages and the current active page. It ensures that the
+ * pagination controls are concise and user-friendly.
  *
  * @param {number} totalPages - The total number of pages.
  * @param {number} currentPage - The current active page.
