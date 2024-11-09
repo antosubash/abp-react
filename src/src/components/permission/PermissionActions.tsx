@@ -16,6 +16,14 @@ type PermissionActionsProps = {
     visible?: boolean
   }>
 }
+/**
+ * Component that renders a dropdown menu with various action buttons based on the provided actions.
+ * Each action is rendered as a button with an icon and a label, and is only visible if the user has the required policy.
+ *
+ * @param {PermissionActionsProps} props - The props for the component.
+ * @param {Array} props.actions - The list of actions to be rendered in the dropdown menu.
+ * @returns {JSX.Element} The rendered PermissionActions component.
+ */
 export const PermissionActions = ({ actions }: PermissionActionsProps) => {
   const { can } = useGrantedPolicies()
   const renderElement = (action: (typeof actions)[0]) => {

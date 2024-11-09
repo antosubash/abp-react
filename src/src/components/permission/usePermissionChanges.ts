@@ -2,11 +2,25 @@ import { PermissionGrantInfoDto } from '@/client'
 import { Permissions } from '@/lib/utils'
 import { useCallback, useEffect, useState } from 'react'
 
+/**
+ * Hook to manage permission changes for different types of entities.
+ * 
+ * @param {UsePermissionsChangesProps} props - The properties for the hook.
+ * @returns {Object} - An object containing the state and handlers for permission changes.
+ */
 export type UsePermissionsChangesProps = {
   permissions: PermissionGrantInfoDto[]
   type: 'identity' | 'tenant' | 'feature' | 'setting'
 }
 
+/**
+ * Helper function to update the permission data based on the selected permission.
+ * 
+ * @param {PermissionGrantInfoDto[]} data - The current permission data.
+ * @param {PermissionGrantInfoDto} selectedData - The selected permission data.
+ * @param {`${Permissions}`} permission - The permission to be updated.
+ * @param {Function} setData - The function to update the permission data state.
+ */
 const helper = (
   data: PermissionGrantInfoDto[],
   selectedData: PermissionGrantInfoDto,
@@ -51,6 +65,11 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
   const [hasAllSelected, setHasAllSelected] = useState(false)
   const [data, setData] = useState<PermissionGrantInfoDto[]>(permissions)
 
+  /**
+   * Handler for changes in the current permission.
+   * 
+   * @param {number} idx - The index of the selected permission.
+   */
   const onCurrentPermissionChanges = useCallback(
     (idx: number) => {
       const selectedData = data[idx]
@@ -78,6 +97,9 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
     [permissions, type]
   )
 
+  /**
+   * Handler to update the state when all permissions are selected or deselected.
+   */
   const onHasAllSelectedUpdate = useCallback(() => {
     setHasAllSelected((f) => {
       data.forEach((d) => (d.isGranted = !f))

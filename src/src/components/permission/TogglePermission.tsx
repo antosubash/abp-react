@@ -13,6 +13,20 @@ type TogglePermissionProps = UsePermissionsChangesProps & {
   disabled?: boolean
   onCancelEvent?: () => void
 }
+/**
+ * TogglePermission component allows toggling permissions with optional "Select All" and "Save" functionalities.
+ *
+ * @param {TogglePermissionProps} props - The properties for the TogglePermission component.
+ * @param {PermissionGrantInfoDto[]} props.permissions - The list of permissions to be displayed and toggled.
+ * @param {string} props.type - The type of permissions being handled.
+ * @param {boolean} [props.hideSelectAll] - Flag to hide the "Select All" option.
+ * @param {boolean} [props.hideSave] - Flag to hide the "Save" button.
+ * @param {Function} [props.onSelectedUpdate] - Callback function to handle updates when a permission is selected.
+ * @param {boolean} [props.disabled] - Flag to disable the permission toggles.
+ * @param {Function} [props.onCancelEvent] - Callback function to handle the cancel event.
+ *
+ * @returns {JSX.Element} The rendered TogglePermission component.
+ */
 export const TogglePermission = ({
   permissions,
   type,

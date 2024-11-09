@@ -17,6 +17,19 @@ type PermissionProps = {
   disabled?: boolean
 }
 
+/**
+ * A component that renders a toggle switch for permissions.
+ *
+ * @param {PermissionProps} props - The properties for the PermissionToggle component.
+ * @param {string} props.name - The name of the permission.
+ * @param {string} props.id - The unique identifier for the permission.
+ * @param {function} props.onUpdate - The callback function to be called when the permission is updated.
+ * @param {string} [props.className] - Additional CSS classes to apply to the component.
+ * @param {boolean} props.isGranted - Indicates whether the permission is granted.
+ * @param {boolean} props.disabled - Indicates whether the toggle is disabled.
+ *
+ * @returns {JSX.Element} The rendered PermissionToggle component.
+ */
 function PermissionToggle({ name, id, onUpdate, className, isGranted, disabled }: PermissionProps) {
   const onChangeEvent = useCallback(() => {
     onUpdate?.()
