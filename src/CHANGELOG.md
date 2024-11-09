@@ -1,6 +1,34 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.6...v2.2.7)
+
+### 🏡 Chore
+
+- Add documentation comments for custom hooks and Redis functions ([9f611b4](https://github.com/antosubash/abp-react/commit/9f611b4))
+- Add documentation comments for custom hooks related to roles, tenants, translations, user roles, and users ([a073d25](https://github.com/antosubash/abp-react/commit/a073d25))
+- Add documentation comments for various components and routes in the admin and auth sections ([43fb2f8](https://github.com/antosubash/abp-react/commit/43fb2f8))
+- Add documentation comments for analytics and permission components ([2cfcdd6](https://github.com/antosubash/abp-react/commit/2cfcdd6))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.5...v2.2.6)
+
+## v2.2.7
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.6...v2.2.7)
+
+### 🏡 Chore
+
+- Add documentation comments for custom hooks and Redis functions ([9f611b4](https://github.com/antosubash/abp-react/commit/9f611b4))
+- Add documentation comments for custom hooks related to roles, tenants, translations, user roles, and users ([a073d25](https://github.com/antosubash/abp-react/commit/a073d25))
+- Add documentation comments for various components and routes in the admin and auth sections ([43fb2f8](https://github.com/antosubash/abp-react/commit/43fb2f8))
+- Add documentation comments for analytics and permission components ([2cfcdd6](https://github.com/antosubash/abp-react/commit/2cfcdd6))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
