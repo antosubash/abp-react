@@ -3,6 +3,22 @@ import { getSession } from '@/lib/actions'
 import { RedisSession, createRedisInstance } from '@/lib/redis'
 import {defaultSession, getClientConfig} from '@/lib/session-utils'
 import * as client from 'openid-client'
+/**
+ * Handles the GET request for logging out a user.
+ * 
+ * This function performs the following steps:
+ * 1. Retrieves the current session.
+ * 2. Creates a Redis instance and fetches session data from Redis.
+ * 3. Parses the session data.
+ * 4. Retrieves OpenID client configuration.
+ * 5. Constructs the end session URL using the OpenID client configuration.
+ * 6. Resets the session to default values.
+ * 7. Deletes the session data from Redis.
+ * 8. Saves the updated session.
+ * 9. Redirects the user to the end session URL.
+ * 
+ * @returns {Promise<Response>} A promise that resolves to a redirect response to the end session URL.
+ */
 export async function GET() {
   const session = await getSession()
   const redis = createRedisInstance()

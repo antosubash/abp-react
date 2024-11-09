@@ -6,6 +6,22 @@ import {getClientConfig} from '@/lib/session-utils'
 import {NextRequest} from 'next/server'
 import {headers} from "next/headers";
 
+/**
+ * Handles the GET request for OpenID Connect authentication.
+ * 
+ * This function performs the following steps:
+ * 1. Retrieves the current session.
+ * 2. Fetches the OpenID client configuration.
+ * 3. Constructs the current URL from the request headers.
+ * 4. Performs the authorization code grant flow to obtain tokens.
+ * 5. Updates the session with the access token and user information.
+ * 6. Saves the session.
+ * 7. Stores the access and refresh tokens in Redis.
+ * 8. Redirects the user to the post-login route.
+ * 
+ * @param {NextRequest} request - The incoming request object.
+ * @returns {Promise<Response>} - A promise that resolves to a redirect response.
+ */
 export async function GET(request: NextRequest) {
   const session = await getSession()
   const openIdClientConfig = await getClientConfig()

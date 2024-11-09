@@ -1,4 +1,10 @@
 import { abpApplicationConfigurationGet } from '@/client'
+/**
+ * The AdminIndex component is an asynchronous function that fetches the application configuration
+ * and displays a welcome message along with the current user's configuration details.
+ *
+ * @returns A React component that renders a welcome message and the current user's configuration in JSON format.
+ */
 export default async function AdminIndex() {
   const appConfig = await abpApplicationConfigurationGet()
   return (
