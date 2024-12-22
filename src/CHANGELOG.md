@@ -1,6 +1,12 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.8...v2.2.9)
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.7...v2.2.8)
+
+## v2.2.9
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.8...v2.2.9)
 
 ### 🏡 Chore
 
