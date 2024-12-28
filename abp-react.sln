@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anto.Abp.React.Template", "Anto.Abp.React.Template.csproj", "{E273F611-97C9-4CE1-9799-03AF14EA20A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E273F611-97C9-4CE1-9799-03AF14EA20A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E273F611-97C9-4CE1-9799-03AF14EA20A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E273F611-97C9-4CE1-9799-03AF14EA20A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E273F611-97C9-4CE1-9799-03AF14EA20A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3AABC003-0264-4629-ACD5-C45A2C762D78}
+	EndGlobalSection
+EndGlobal
