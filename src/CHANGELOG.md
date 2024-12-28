@@ -1,8 +1,32 @@
 
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.9...v2.2.10)
+
+### 🏡 Chore
+
+- Update Dockerfile for improved build process and dependencies ([34de32c](https://github.com/antosubash/abp-react/commit/34de32c))
+- Update Dockerfile to copy next.config.mjs and add Visual Studio solution file ([2ce5678](https://github.com/antosubash/abp-react/commit/2ce5678))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.8...v2.2.9)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.7...v2.2.8)
+
+## v2.2.10
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.9...v2.2.10)
+
+### 🏡 Chore
+
+- Update Dockerfile for improved build process and dependencies ([34de32c](https://github.com/antosubash/abp-react/commit/34de32c))
+- Update Dockerfile to copy next.config.mjs and add Visual Studio solution file ([2ce5678](https://github.com/antosubash/abp-react/commit/2ce5678))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.2.9
 
