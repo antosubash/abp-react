@@ -1,6 +1,12 @@
+# Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.10...v2.2.11)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.9...v2.2.10)
+
+## v2.2.11
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.10...v2.2.11)
 
 ### 🏡 Chore
 
@@ -392,7 +398,7 @@
 
 - Anto Subash ([@antosubash](http://github.com/antosubash))
 
-# Changelog
+
 
 
 ## v1.0.1
