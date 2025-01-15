@@ -153,9 +153,8 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
       }
       try {
         await permissionsUpdate({
-          providerKey: PermissionProvider.R,
-          providerName: roleDto.name,
-          requestBody: requestPayload,
+          query: { providerKey: PermissionProvider.R, providerName: roleDto.name },
+          body: requestPayload,
         })
         toast({
           title: 'Success',
@@ -233,7 +232,10 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
                             ? 'secondary'
                             : 'default'
                         }
-                        onClick={(e: { preventDefault: () => void; stopPropagation: () => void }) => {
+                        onClick={(e: {
+                          preventDefault: () => void
+                          stopPropagation: () => void
+                        }) => {
                           e.preventDefault()
                           e.stopPropagation()
                           switchManagement(idx)
@@ -272,7 +274,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
               </section>
               <DialogFooter>
                 <Button
-                    onClick={(e: { preventDefault: () => void }) => {
+                  onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}

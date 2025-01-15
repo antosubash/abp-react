@@ -47,8 +47,8 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
     const user = data as IdentityUserUpdateDto
     try {
       await userUpdate({
-        id: userId,
-        requestBody: { ...userDto, ...user },
+        path: { id: userId },
+        body: { ...userDto, ...user },
       })
       toast({
         title: 'Success',

@@ -21,7 +21,9 @@ export const DeleteRole = ({ role: { roleId, roleName }, onDismiss }: DeleteRole
   const [open, setOpen] = useState<boolean>(false)
   const onYesEvent = async () => {
     try {
-      await roleDelete({ id: roleId })
+      await roleDelete({
+        path: { id: roleId },
+      })
       toast({
         title: 'Success',
         description: `Role "${roleName}" has been deleted successfully.`,

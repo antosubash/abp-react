@@ -25,7 +25,9 @@ export const DeleteTenant = ({
 
   const onYesEvent = async () => {
     try {
-      await tenantDelete({ id: tenantId })
+      await tenantDelete({
+        path: { id: tenantId },
+      })
       toast({
         title: 'Success',
         description: `Tenant "${tenantName}" has been deleted successfully.`,

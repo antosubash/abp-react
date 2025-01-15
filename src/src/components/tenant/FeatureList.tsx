@@ -81,9 +81,8 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       ]
 
       await featuresUpdate({
-        providerKey: PermissionProvider.T,
-        providerName: tenantId,
-        requestBody: featureUpdateDto,
+        body: featureUpdateDto,
+        query: { providerKey: PermissionProvider.T, providerName: tenantId },
       })
       toast({
         title: 'Success',
@@ -105,8 +104,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
   const onResetToDefaultEvent = async () => {
     try {
       await featuresDelete({
-        providerKey: PermissionProvider.T,
-        providerName: tenantId,
+        query: { providerKey: PermissionProvider.T, providerName: tenantId },
       })
       toast({
         title: 'Success',

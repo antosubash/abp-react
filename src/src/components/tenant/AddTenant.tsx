@@ -22,7 +22,9 @@ export const AddTenant = () => {
   const onSubmit = async (data: unknown) => {
     const newTenant = data as TenantCreateDto
     try {
-      await tenantCreate({ requestBody: newTenant })
+      await tenantCreate({
+        body: newTenant,
+      })
       toast({
         title: 'Success',
         description: 'Tenant Created Successfully',

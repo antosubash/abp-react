@@ -41,13 +41,15 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
 
     try {
       await tenantUpdate({
-        id: tenantId,
-        requestBody: tenant,
+        body: tenant,
+        path: { id: tenantId },
       })
       if (enableHost && tenant?.host) {
         await tenantAddHost({
-          id: tenantId,
-          host: tenant.host,
+          query: {
+            id: tenantId,
+            host: tenant.host,
+          },
         })
       }
       toast({
@@ -116,7 +118,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
           )}
           <DialogFooter className="mt-5">
             <Button
-                onClick={(e: { preventDefault: () => void }) => {
+              onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCloseEvent()
               }}

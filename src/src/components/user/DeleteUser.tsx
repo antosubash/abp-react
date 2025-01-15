@@ -21,7 +21,9 @@ export const DeleteUser = ({ user: { userId, username }, onDismiss }: DeleteUser
   const [open, setOpen] = useState<boolean>(false)
   const onYesEvent = async () => {
     try {
-      await userDelete({ id: userId })
+      await userDelete({
+        path: { id: userId },
+      })
       toast({
         title: 'Success',
         description: `User "${username}" has been deleted successfully.`,

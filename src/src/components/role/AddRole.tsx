@@ -29,7 +29,9 @@ export const AddRole = ({}: AddUserProps) => {
     newRole.isPublic = isPublic
 
     try {
-      await roleCreate({ requestBody: newRole })
+      await roleCreate({
+        body: newRole,
+      })
       toast({
         title: 'Success',
         description: 'Role Created Successfully',

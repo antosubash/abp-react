@@ -1,7 +1,7 @@
 import * as client from 'openid-client'
-import {tenantGetTenantGuid} from '@/client'
-import {clientConfig} from '@/config'
-import {getSession} from './actions'
+import { tenantGetTenantGuid } from '@/client'
+import { clientConfig } from '@/config'
+import { getSession } from './actions'
 
 /**
  * Interface representing session data.
@@ -60,6 +60,9 @@ export async function setTenantWithHost(host: string) {
   if (session.tenantId) {
     return
   }
-  session.tenantId = await tenantGetTenantGuid({host: host})
+  const { data } = await tenantGetTenantGuid({
+    query: { host: host }
+  })
+  session.tenantId = data
   await session.save()
 }

@@ -159,9 +159,8 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
       }
       try {
         await permissionsUpdate({
-          providerKey: PermissionProvider.U,
-          providerName: userId,
-          requestBody: requestPayload,
+          body: requestPayload,
+          query: { providerKey: PermissionProvider.U, providerName: userId },
         })
         toast({
           title: 'Success',

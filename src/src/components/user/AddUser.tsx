@@ -36,7 +36,7 @@ export const AddUser = ({}: AddUserProps) => {
 
     try {
       await userCreate({
-        requestBody: user,
+        body: user,
       })
       toast({
         title: 'Success',

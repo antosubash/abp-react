@@ -26,7 +26,10 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
     role.isDefault = isDefault
     role.isPublic = isPublic
     try {
-      await roleUpdate({ id: roleId, requestBody: { ...roleDto, ...role } })
+      await roleUpdate({
+        body: { ...roleDto, ...role },
+        path: { id: roleId },
+      })
       toast({
         title: 'Success',
         description: 'Role Updated Successfully',
@@ -57,7 +60,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
     <Dialog open={open} onOpenChange={onCloseEvent}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Upate a Role: {roleDto.name}</DialogTitle>
+          <DialogTitle>Update a Role: {roleDto.name}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <section className="flex flex-col space-y-5">

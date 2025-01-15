@@ -27,7 +27,9 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
   const onSubmit = async (data: unknown) => {
     try {
       const payload = data as SendTestEmailInput
-      await emailSettingsSendTestEmail({ requestBody: payload })
+      await emailSettingsSendTestEmail({
+        body: payload,
+      })
       toast({
         title: 'Success',
         description: 'Test email has been sent Successfully',

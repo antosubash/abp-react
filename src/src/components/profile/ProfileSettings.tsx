@@ -18,7 +18,9 @@ export const ProfileSettings = () => {
 
   const onSubmit = async (data: UpdateProfileDto) => {
     try {
-      await profileUpdate({ requestBody: data })
+      await profileUpdate({
+        body: data,
+      })
       toast({
         title: 'Success',
         description: 'Profile has been updated successfully.',
