@@ -1,6 +1,38 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.12...v2.2.13)
+
+### 💅 Refactors
+
+- Update return types from JSX.Element to React.ReactElement for consistency ([09af409](https://github.com/antosubash/abp-react/commit/09af409))
+
+### 🏡 Chore
+
+- Update dependencies and devDependencies to latest versions ([7634400](https://github.com/antosubash/abp-react/commit/7634400))
+- Update Node.js and pnpm versions in Docker workflow ([7f7bb99](https://github.com/antosubash/abp-react/commit/7f7bb99))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.11...v2.2.12)
+
+## v2.2.13
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.12...v2.2.13)
+
+### 💅 Refactors
+
+- Update return types from JSX.Element to React.ReactElement for consistency ([09af409](https://github.com/antosubash/abp-react/commit/09af409))
+
+### 🏡 Chore
+
+- Update dependencies and devDependencies to latest versions ([7634400](https://github.com/antosubash/abp-react/commit/7634400))
+- Update Node.js and pnpm versions in Docker workflow ([7f7bb99](https://github.com/antosubash/abp-react/commit/7f7bb99))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
