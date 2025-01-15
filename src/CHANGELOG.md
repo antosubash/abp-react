@@ -1,8 +1,34 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.11...v2.2.12)
+
+### 💅 Refactors
+
+- Update API hooks to destructure response data and remove unused files ([4dcddaf](https://github.com/antosubash/abp-react/commit/4dcddaf))
+- Update API calls to destructure response data and improve session handling ([91e58b9](https://github.com/antosubash/abp-react/commit/91e58b9))
+- Update API calls to use destructured request parameters for improved clarity ([35bb188](https://github.com/antosubash/abp-react/commit/35bb188))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.10...v2.2.11)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.9...v2.2.10)
+
+## v2.2.12
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.11...v2.2.12)
+
+### 💅 Refactors
+
+- Update API hooks to destructure response data and remove unused files ([4dcddaf](https://github.com/antosubash/abp-react/commit/4dcddaf))
+- Update API calls to destructure response data and improve session handling ([91e58b9](https://github.com/antosubash/abp-react/commit/91e58b9))
+- Update API calls to use destructured request parameters for improved clarity ([35bb188](https://github.com/antosubash/abp-react/commit/35bb188))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.2.11
 
