@@ -14,7 +14,7 @@ const getHeaders = async (method: RequestMethod): Promise<HeadersInit> => {
   return {
     Authorization: `Bearer ${session.access_token}`,
     'Content-Type': 'application/json',
-    ...(session.tenantId !== 'default' && { __tenant: session.tenantId }),
+    __tenant: session.tenantId ?? '',
   }
 }
 
@@ -35,12 +35,10 @@ const makeApiRequest = async (
       cache: 'no-store',
     }
 
-    console.log('API request options:', options)
-    console.log(`Making ${method} request to ${url}`)
 
 
     const response = await fetch(url, options)
-    
+
     // Clone the response to handle streaming
     const clonedResponse = response.clone()
 

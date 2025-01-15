@@ -79,19 +79,13 @@ export const refreshToken = async () => {
  * @returns {void}
  */
 export const setUpLayoutConfig = async () => {
-  const session = await getSession()
   APIClient.setConfig({
     baseUrl: process.env.NEXT_PUBLIC_API_URL!,
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-      __tenant: session.tenantId ?? ''
-    }
   })
-
   APIClient.interceptors.request.use(async (options) => {
     const session = await getSession()
-    options.headers.append('Authorization', `Bearer ${session.access_token}`)
-    options.headers.append('__tenant', session.tenantId ?? '')
+    options.headers.set('Authorization', `Bearer ${session.access_token}`)
+    options.headers.set('__tenant', session.tenantId ?? '')
     return options
   })
 }
