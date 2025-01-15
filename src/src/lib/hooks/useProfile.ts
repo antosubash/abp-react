@@ -16,7 +16,7 @@ export const useProfile = (): UseQueryResult<ProfileDto, unknown> => {
   return useQuery({
     queryKey: [QueryNames.GetProfile],
     queryFn: async () => {
-      const data = await profileGet()
+      const { data } = await profileGet()
       return data
     },
   })

@@ -28,13 +28,15 @@ export const useUsers = (
       if (pageIndex > 0) {
         skip = pageIndex * pageSize
       }
-      const data = await userGetList({
-        maxResultCount: pageSize,
-        skipCount: skip,
-        filter: filter,
-        sorting: sorting,
+      const response = await userGetList({
+        query: {
+          maxResultCount: pageSize,
+          skipCount: skip,
+          filter: filter,
+          sorting: sorting,
+        }
       })
-      return data
+      return response.data
     },
   })
 }

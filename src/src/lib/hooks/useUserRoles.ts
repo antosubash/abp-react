@@ -1,6 +1,7 @@
 import { userGetRoles } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
+import path from 'path'
 
 type UseUserRolesProps = {
   userId: string
@@ -19,7 +20,11 @@ export const useUserRoles = ({ userId }: UseUserRolesProps) => {
   return useQuery({
     queryKey: [QueryNames.GetUserRoles, userId],
     queryFn: async () => {
-      const data = await userGetRoles({ id: userId })
+      const { data } = await userGetRoles({
+        path: {
+          id: userId
+        }
+      })
       return data
     },
   })

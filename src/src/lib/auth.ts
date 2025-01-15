@@ -3,10 +3,10 @@ import { getIronSession } from 'iron-session'
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
 import { RedisSession, createRedisInstance } from './redis'
-import {SessionData, getClientConfig} from './session-utils'
+import { SessionData, getClientConfig } from './session-utils'
 import * as client from 'openid-client'
-import {OpenAPI} from "@/client";
-import {getSession} from "@/lib/actions";
+import { client as APIClient } from "@/client";
+import { getSession } from "@/lib/actions";
 /**
  * Checks if the given JWT token is expired.
  *
@@ -78,15 +78,20 @@ export const refreshToken = async () => {
  * 
  * @returns {void}
  */
-export const setUpLayoutConfig = () => {
-  OpenAPI.BASE = process.env.NEXT_PUBLIC_API_URL!
-
-  OpenAPI.interceptors.request.use(async (options) => {
-    const session = await getSession()
-    options.headers = {
+export const setUpLayoutConfig = async () => {
+  const session = await getSession()
+  APIClient.setConfig({
+    baseUrl: process.env.NEXT_PUBLIC_API_URL!,
+    headers: {
       Authorization: `Bearer ${session.access_token}`,
-      __tenant: session.tenantId ?? '',
+      __tenant: session.tenantId ?? ''
     }
+  })
+
+  APIClient.interceptors.request.use(async (options) => {
+    const session = await getSession()
+    options.headers.append('Authorization', `Bearer ${session.access_token}`)
+    options.headers.append('__tenant', session.tenantId ?? '')
     return options
   })
 }

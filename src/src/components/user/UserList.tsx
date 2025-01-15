@@ -2,136 +2,71 @@
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useUsers } from '@/lib/hooks/useUsers'
 import { useMemo, useState } from 'react'
-
 import { IdentityUserDto, IdentityUserUpdateDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-
 import { useToast } from '@/components/ui/use-toast'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
 import { UserPermission } from './UserPermission'
-
 import { Search } from '@/components/ui/Search'
 import { USER_ROLE } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 
+type UserActionDialogState = {
+  userId: string
+  userDto: IdentityUserUpdateDto
+  dialogType: 'edit' | 'permission' | 'delete'
+} | null
+
 export const UserList = () => {
   const { toast } = useToast()
+  const queryClient = useQueryClient()
 
-  const [searchStr, setSearchStr] = useState<string | undefined>()
-  const [userActionDialog, setUserActionDialog] = useState<{
-    userId: string
-    userDto: IdentityUserUpdateDto
-    dialogType?: 'edit' | 'permission' | 'delete'
-  } | null>()
-
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+  const [searchStr, setSearchStr] = useState<string>('')
+  const [userActionDialog, setUserActionDialog] = useState<UserActionDialogState>(null)
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   })
 
-  const pagination = useMemo(
-    () => ({
-      pageIndex,
-      pageSize,
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [pageIndex, pageSize, toast, searchStr]
-  )
-
-  const { isLoading, data, isError } = useUsers(
+  const { isLoading, data, isError, error } = useUsers(
     pagination.pageIndex,
     pagination.pageSize,
-    searchStr
+    searchStr || undefined
   )
 
-  const queryClient = useQueryClient()
-
-  const defaultColumns: ColumnDef<IdentityUserDto>[] = useMemo(
-    () => [
-      {
-        header: 'User Management',
-        columns: [
-          {
-            accessorKey: 'actions',
-            header: 'Actions',
-            cell: (info) => (
-              <PermissionActions
-                actions={[
-                  {
-                    icon: 'permission',
-                    policy: 'AbpIdentity.Users.ManagePermissions',
-                    callback: () => {
-                      setUserActionDialog({
-                        userId: info.row.original.id as string,
-                        userDto: info.row.original as IdentityUserUpdateDto,
-                        dialogType: 'permission',
-                      })
-                    },
-                  },
-                  {
-                    icon: 'pencil',
-                    policy: 'AbpIdentity.Users.Update',
-                    callback: () => {
-                      setUserActionDialog({
-                        userId: info.row.original.id as string,
-                        userDto: info.row.original as IdentityUserUpdateDto,
-                        dialogType: 'edit',
-                      })
-                    },
-                  },
-                  {
-                    icon: 'trash',
-                    policy: 'AbpIdentity.Users.Delete',
-                    visible: info.row.original.userName?.includes(USER_ROLE.ADMIN),
-                    callback: () => {
-                      setUserActionDialog({
-                        userId: info.row.original.id as string,
-                        userDto: info.row.original as IdentityUserUpdateDto,
-                        dialogType: 'delete',
-                      })
-                    },
-                  },
-                ]}
-              />
-            ),
-          },
-          {
-            accessorKey: 'userName',
-            header: 'Username',
-            cell: (info) => info.getValue(),
-          },
-          {
-            accessorKey: 'email',
-            header: 'Email',
-            cell: (info) => info.getValue(),
-          },
-          {
-            accessorKey: 'isActive',
-            header: 'Active',
-            cell: (info) => (info.getValue() ? 'yes' : 'no'),
-          },
-        ],
-      },
-    ],
-    []
-  )
-
-  const onSearchUpdateEvent = (value: string) => {
-    setSearchStr(value)
+  const handleActionComplete = () => {
+    queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers] })
+    setUserActionDialog(null)
   }
+
+  const columns = useMemo(() => getUserColumns({
+    onEdit: (user) => setUserActionDialog({
+      userId: user.id!,
+      userDto: user as IdentityUserUpdateDto,
+      dialogType: 'edit'
+    }),
+    onPermission: (user) => setUserActionDialog({
+      userId: user.id!,
+      userDto: user as IdentityUserUpdateDto,
+      dialogType: 'permission'
+    }),
+    onDelete: (user) => setUserActionDialog({
+      userId: user.id!,
+      userDto: user as IdentityUserUpdateDto,
+      dialogType: 'delete'
+    })
+  }), [])
 
   const table = useReactTable({
     data: data?.items ?? [],
     pageCount: data?.totalCount ?? -1,
-    state: {
-      pagination,
-    },
-    columns: defaultColumns,
+    state: { pagination },
+    columns,
     getCoreRowModel: getCoreRowModel(),
     onPaginationChange: setPagination,
     manualPagination: true,
@@ -142,41 +77,96 @@ export const UserList = () => {
 
   return (
     <>
-      {userActionDialog && userActionDialog.dialogType === 'edit' && (
-        <UserEdit
-          userId={userActionDialog.userId}
-          userDto={userActionDialog.userDto}
-          onDismiss={() => {
-            queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers] })
-            setUserActionDialog(null)
-          }}
-        />
+      {userActionDialog && (
+        <>
+          {userActionDialog.dialogType === 'edit' && (
+            <UserEdit
+              userId={userActionDialog.userId}
+              userDto={userActionDialog.userDto}
+              onDismiss={handleActionComplete}
+            />
+          )}
+          {userActionDialog.dialogType === 'permission' && (
+            <UserPermission
+              userId={userActionDialog.userId}
+              userDto={userActionDialog.userDto}
+              onDismiss={handleActionComplete}
+            />
+          )}
+          {userActionDialog.dialogType === 'delete' && (
+            <DeleteUser
+              user={{
+                username: userActionDialog.userDto.userName!,
+                userId: userActionDialog.userId,
+              }}
+              onDismiss={handleActionComplete}
+            />
+          )}
+        </>
       )}
-      {userActionDialog && userActionDialog.dialogType === 'permission' && (
-        <UserPermission
-          userId={userActionDialog.userId}
-          userDto={userActionDialog.userDto}
-          onDismiss={() => setUserActionDialog(null)}
-        />
-      )}
-      {userActionDialog && userActionDialog.dialogType === 'delete' && (
-        <DeleteUser
-          user={{
-            username: userActionDialog.userDto.userName!,
-            userId: userActionDialog.userId,
-          }}
-          onDismiss={() => {
-            queryClient.invalidateQueries({ queryKey: [QueryNames.GetUsers] })
-            setUserActionDialog(null)
-          }}
-        />
-      )}
-      <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
+      <Search 
+        onUpdate={setSearchStr} 
+        value={searchStr}
+      />
       <CustomTable<IdentityUserDto>
         table={table}
         totalCount={data?.totalCount ?? 0}
-        pageSize={pageSize}
+        pageSize={pagination.pageSize}
       />
     </>
   )
 }
+
+// Add this to a separate file: columns.ts
+const getUserColumns = (actions: {
+  onEdit: (user: IdentityUserDto) => void
+  onPermission: (user: IdentityUserDto) => void
+  onDelete: (user: IdentityUserDto) => void
+}): ColumnDef<IdentityUserDto>[] => [
+  {
+    header: 'User Management',
+    columns: [
+      {
+        accessorKey: 'actions',
+        header: 'Actions',
+        cell: (info) => (
+          <PermissionActions
+            actions={[
+              {
+                icon: 'permission',
+                policy: 'AbpIdentity.Users.ManagePermissions',
+                callback: () => actions.onPermission(info.row.original),
+              },
+              {
+                icon: 'pencil',
+                policy: 'AbpIdentity.Users.Update',
+                callback: () => actions.onEdit(info.row.original),
+              },
+              {
+                icon: 'trash',
+                policy: 'AbpIdentity.Users.Delete',
+                visible: !info.row.original.userName?.includes(USER_ROLE.ADMIN),
+                callback: () => actions.onDelete(info.row.original),
+              },
+            ]}
+          />
+        ),
+      },
+      {
+        accessorKey: 'userName',
+        header: 'Username',
+        cell: (info) => info.getValue(),
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
+        cell: (info) => info.getValue(),
+      },
+      {
+        accessorKey: 'isActive',
+        header: 'Active',
+        cell: (info) => (info.getValue() ? 'yes' : 'no'),
+      },
+    ],
+  },
+]

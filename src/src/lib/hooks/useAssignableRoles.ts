@@ -15,7 +15,7 @@ export const useAssignableRoles = () => {
   return useQuery({
     queryKey: [QueryNames.GetAssignableRoles],
     queryFn: async () => {
-      const data = await userGetAssignableRoles()
+      const { data } = await userGetAssignableRoles()
       return data
     },
   })

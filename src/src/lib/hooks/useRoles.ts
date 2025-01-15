@@ -28,11 +28,13 @@ export const useRoles = (
       if (pageIndex > 0) {
         skip = pageIndex * pageSize
       }
-      const data = await roleGetList({
-        maxResultCount: pageSize,
-        skipCount: skip,
-        filter: filter,
-        sorting: sorting,
+      const { data } = await roleGetList({
+        query: {
+          maxResultCount: pageSize,
+          skipCount: skip,
+          filter: filter,
+          sorting: sorting,
+        }
       })
       return data
     },

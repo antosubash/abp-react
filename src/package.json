@@ -9,10 +9,11 @@
     "lint": "next lint --fix",
     "format": "prettier --write .",
     "prepare": "husky",
-    "gen-api": "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client",
+    "gen-api": "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client -c @hey-api/client-fetch",
     "release": "release-it"
   },
   "dependencies": {
+    "@hey-api/client-fetch": "^0.7.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",

@@ -16,7 +16,9 @@ export const useFeatures = (
   return useQuery({
     queryKey: [QueryNames.GetFeatures, providerName, providerKey],
     queryFn: async () => {
-      const data = await featuresGet({ providerName, providerKey })
+      const { data } = await featuresGet({
+        query: { providerName, providerKey }
+      })
       return data
     },
   })

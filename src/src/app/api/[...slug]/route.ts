@@ -3,94 +3,93 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL
 
-/**
- * Handles GET requests by forwarding them to an external API.
- * Retrieves the current session and uses the access token for authorization.
- *
- * @param {NextRequest} request - The incoming request object from Next.js.
- * @returns {Promise<Response>} - The response from the external API or an error response.
- */
-export async function GET(request: NextRequest): Promise<Response> {
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+interface ApiError extends Error {
+  status?: number;
+}
+
+const getHeaders = async (method: RequestMethod): Promise<HeadersInit> => {
   const session = await getSession()
-  console.log('GET')
-  const path = request.nextUrl.pathname
-  console.log(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`)
-  try {
-    return await fetch(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${session.access_token}`,
-        __tenant: session.tenantId === 'default' ? undefined : session.tenantId,
-      } as any,
-    })
-  } catch (e) {
-    return NextResponse.json({ error: e }, { status: 500 })
+  return {
+    Authorization: `Bearer ${session.access_token}`,
+    'Content-Type': 'application/json',
+    ...(session.tenantId !== 'default' && { __tenant: session.tenantId }),
   }
 }
 
-/**
- * Handles POST requests by forwarding them to an external API.
- * Retrieves the current session and uses the access token for authorization.
- *
- * @param {NextRequest} request - The incoming request object from Next.js.
- * @returns {Promise<Response>} - The response from the external API.
- */
-export async function POST(request: NextRequest) {
-  const session = await getSession()
-  const path = request.nextUrl.pathname
-  console.log(`POST: ${EXTERNAL_API_URL}${path}${request.nextUrl.search}`)
-  return await fetch(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-      'Content-Type': 'application/json',
-      __tenant: session.tenantId === 'default' ? undefined : session.tenantId,
-    } as any,
-    body: request.body,
-    duplex: 'half',
-  } as any)
+const makeApiRequest = async (
+  request: NextRequest,
+  method: RequestMethod,
+  includeBody = false
+): Promise<Response> => {
+  try {
+    const path = request.nextUrl.pathname
+    const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
+    const headers = await getHeaders(method)
+
+    const options: RequestInit = {
+      method,
+      headers,
+      ...(includeBody && { body: request.body }),
+      cache: 'no-store',
+    }
+
+    console.log('API request options:', options)
+    console.log(`Making ${method} request to ${url}`)
+
+
+    const response = await fetch(url, options)
+    
+    // Clone the response to handle streaming
+    const clonedResponse = response.clone()
+
+    if (!response.ok) {
+      let errorMessage: string;
+      try {
+        const errorData = await clonedResponse.json();
+        errorMessage = errorData.error || `API request failed with status ${response.status}`;
+      } catch {
+        errorMessage = `API request failed with status ${response.status}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    // Handle different content types
+    const contentType = response.headers.get('content-type');
+    if (contentType?.includes('application/json')) {
+      const data = await clonedResponse.json();
+      return NextResponse.json(data, {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    }
+
+    return response;
+  } catch (error) {
+    const apiError = error as ApiError;
+    console.error('API request error:', apiError);
+    return NextResponse.json(
+      { error: apiError.message },
+      { status: apiError.status || 500 }
+    );
+  }
 }
 
-/**
- * Handles PUT requests by forwarding them to an external API.
- * Retrieves the current session and uses the access token for authorization.
- *
- * @param {NextRequest} request - The incoming request object from Next.js.
- * @returns {Promise<Response>} - The response from the external API.
- */
-export async function PUT(request: NextRequest) {
-  const session = await getSession()
-  const path = request.nextUrl.pathname
-  console.log(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`)
-  return await fetch(`${EXTERNAL_API_URL}${path}${request.nextUrl.search}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-      'Content-Type': 'application/json',
-      __tenant: session.tenantId === 'default' ? undefined : session.tenantId,
-    } as any,
-    body: request.body,
-    duplex: 'half',
-  } as any)
+export async function GET(request: NextRequest): Promise<Response> {
+  return makeApiRequest(request, 'GET')
 }
 
-/**
- * Handles DELETE requests by forwarding them to an external API.
- * Retrieves the current session and uses the access token for authorization.
- *
- * @param {NextRequest} request - The incoming request object from Next.js.
- * @returns {Promise<Response>} - The response from the external API.
- */
-export async function DELETE(request: NextRequest) {
-  const session = await getSession()
-  const path = request.nextUrl.pathname
-  const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
-  return await fetch(url, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-      'Content-Type': 'application/json',
-      __tenant: session.tenantId === 'default' ? undefined : session.tenantId,
-    } as any,
-  })
+export async function POST(request: NextRequest): Promise<Response> {
+  return makeApiRequest(request, 'POST', true)
+}
+
+export async function PUT(request: NextRequest): Promise<Response> {
+  return makeApiRequest(request, 'PUT', true)
+}
+
+export async function DELETE(request: NextRequest): Promise<Response> {
+  return makeApiRequest(request, 'DELETE')
 }

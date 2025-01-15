@@ -28,11 +28,13 @@ export const useTenants = (
       if (pageIndex > 0) {
         skip = pageIndex * pageSize
       }
-      const data = await tenantGetList({
-        maxResultCount: pageSize,
-        skipCount: skip,
-        filter: filter,
-        sorting: sorting,
+      const { data } = await tenantGetList({
+        query: {
+          maxResultCount: pageSize,
+          skipCount: skip,
+          filter: filter,
+          sorting: sorting,
+        }
       })
       return data
     },

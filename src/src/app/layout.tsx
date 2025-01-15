@@ -1,14 +1,14 @@
 import GoogleAnalytics from '@/components/analytics/google-analytics'
 import UmamiAnalytics from '@/components/analytics/umami-analytics'
+import { setUpLayoutConfig } from '@/lib/auth'
 import ReactQueryProviders from '@/lib/provider/QueryClientProvider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
+import React from 'react'
 import './globals.css'
-import React from "react";
-import {setUpLayoutConfig} from "@/lib/auth";
 
-setUpLayoutConfig()
+await setUpLayoutConfig()
 
 const fontSans = FontSans({
   subsets: ['latin'],

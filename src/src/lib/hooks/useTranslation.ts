@@ -14,7 +14,9 @@ export const useTranslation = () => {
   return useQuery({
     queryKey: [QueryNames.GetTranslations],
     queryFn: async () => {
-      const data = await abpApplicationLocalizationGet({ cultureName: 'en' })
+      const { data } = await abpApplicationLocalizationGet({
+        query: { CultureName: 'en' },
+      })
       return data
     },
   })
