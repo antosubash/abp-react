@@ -88,6 +88,13 @@ jobs:
         context: ./src
         file: ./src/Dockerfile
         push: true
+        build-args: |
+          NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+          NEXTAUTH_CLIENT_ID=${{ secrets.NEXTAUTH_CLIENT_ID }}
+          NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_SCOPE=${{ secrets.NEXT_PUBLIC_SCOPE }}
+          NEXT_PUBLIC_UMAMI_SCRIPT_URL=${{ secrets.NEXT_PUBLIC_UMAMI_SCRIPT_URL }}
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
         tags: |
           ghcr.io/${{ github.repository }}:latest
           ghcr.io/${{ github.repository }}:${{ env.version }}
