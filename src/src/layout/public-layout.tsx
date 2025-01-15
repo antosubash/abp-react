@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { SVGProps } from 'react'
+import { JSX, SVGProps } from 'react'
 import TopNavBar from '@/components/navbar/top-nav-bar'
 import {
   Card,

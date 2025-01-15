@@ -25,7 +25,7 @@ export const metadata: Metadata = {
  * It includes meta tags, favicon, and optionally includes analytics scripts if the environment variables are set.
  *
  * @param {Readonly<{ children: React.ReactNode }>} props - The props object containing children elements to be rendered within the layout.
- * @returns {JSX.Element} The root layout component.
+ * @returns {React.ReactElement} The root layout component.
  */
 export default function RootLayout({
   children,

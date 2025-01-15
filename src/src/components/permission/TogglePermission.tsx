@@ -25,7 +25,7 @@ type TogglePermissionProps = UsePermissionsChangesProps & {
  * @param {boolean} [props.disabled] - Flag to disable the permission toggles.
  * @param {Function} [props.onCancelEvent] - Callback function to handle the cancel event.
  *
- * @returns {JSX.Element} The rendered TogglePermission component.
+ * @returns {React.ReactElement} The rendered TogglePermission component.
  */
 export const TogglePermission = ({
   permissions,

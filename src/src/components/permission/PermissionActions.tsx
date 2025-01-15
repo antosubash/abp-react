@@ -22,7 +22,7 @@ type PermissionActionsProps = {
  *
  * @param {PermissionActionsProps} props - The props for the component.
  * @param {Array} props.actions - The list of actions to be rendered in the dropdown menu.
- * @returns {JSX.Element} The rendered PermissionActions component.
+ * @returns {React.ReactElement} The rendered PermissionActions component.
  */
 export const PermissionActions = ({ actions }: PermissionActionsProps) => {
   const { can } = useGrantedPolicies()

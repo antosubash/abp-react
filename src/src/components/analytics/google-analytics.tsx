@@ -15,7 +15,7 @@ interface GoogleAnalyticsProps {
  * // Usage example:
  * <GoogleAnalytics trackingId="UA-XXXXXXXXX-X" />
  *
- * @returns {JSX.Element | null} Returns the Google Analytics script tags or null if trackingId is not provided.
+ * @returns {React.ReactElement | null} Returns the Google Analytics script tags or null if trackingId is not provided.
  */
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ trackingId }) => {
   if (!trackingId) {

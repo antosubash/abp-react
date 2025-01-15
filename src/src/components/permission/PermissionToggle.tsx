@@ -28,7 +28,7 @@ type PermissionProps = {
  * @param {boolean} props.isGranted - Indicates whether the permission is granted.
  * @param {boolean} props.disabled - Indicates whether the toggle is disabled.
  *
- * @returns {JSX.Element} The rendered PermissionToggle component.
+ * @returns {React.ReactElement} The rendered PermissionToggle component.
  */
 function PermissionToggle({ name, id, onUpdate, className, isGranted, disabled }: PermissionProps) {
   const onChangeEvent = useCallback(() => {

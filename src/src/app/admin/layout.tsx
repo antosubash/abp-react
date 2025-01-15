@@ -7,7 +7,7 @@ import React from "react";
  *
  * @param {Object} props - The properties object.
  * @param {React.ReactNode} props.children - The child components to be rendered within the AdminLayout.
- * @returns {JSX.Element} The rendered AdminLayout component with children.
+ * @returns {React.ReactElement} The rendered AdminLayout component with children.
  */
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return <AdminLayout>{children}</AdminLayout>
