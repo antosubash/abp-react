@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.13...v2.2.14)
+
+### 💅 Refactors
+
+- Enhance error handling when fetching tenant GUID in GET request ([4e41545](https://github.com/antosubash/abp-react/commit/4e41545))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.12...v2.2.13)
+
+## v2.2.14
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.13...v2.2.14)
+
+### 💅 Refactors
+
+- Enhance error handling when fetching tenant GUID in GET request ([4e41545](https://github.com/antosubash/abp-react/commit/4e41545))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
