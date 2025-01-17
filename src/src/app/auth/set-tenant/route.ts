@@ -3,6 +3,7 @@ import { getSession } from '@/lib/actions'
 import { setUpLayoutConfig } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+
 /**
  * Handles the GET request to set the tenant for the current session.
  * 
@@ -17,14 +18,21 @@ import { redirect } from 'next/navigation'
 export async function GET() {
   await setUpLayoutConfig()
   const session = await getSession()
-  const host = (await headers()).get('host');
+  const host = (await headers()).get('host')
+
   if (session.tenantId) {
     return
   }
-  const { data } = await tenantGetTenantGuid({
-    query: { host: host! }
-  });
-  session.tenantId = data ?? 'default'
+
+  try {
+    const { data } = await tenantGetTenantGuid({ query: { host: host! } })
+    console.log('Fetched tenant GUID:', data)
+    session.tenantId = data ?? 'default'
+  } catch (error) {
+    console.error('Failed to fetch tenant GUID:', error)
+    session.tenantId = 'default'
+  }
+
   await session.save()
   redirect('/')
 }
