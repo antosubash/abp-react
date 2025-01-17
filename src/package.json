@@ -1,6 +1,6 @@
 {
   "name": "abp-react",
-  "version": "2.2.14",
+  "version": "2.2.15",
   "private": true,
   "scripts": {
     "dev": "next dev",

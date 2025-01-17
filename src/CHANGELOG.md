@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.14...v2.2.15)
+
+### 🏡 Chore
+
+- Add build arguments for Docker workflow to enhance configuration ([99c7621](https://github.com/antosubash/abp-react/commit/99c7621))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.13...v2.2.14)
+
+## v2.2.15
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.14...v2.2.15)
+
+### 🏡 Chore
+
+- Add build arguments for Docker workflow to enhance configuration ([99c7621](https://github.com/antosubash/abp-react/commit/99c7621))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
