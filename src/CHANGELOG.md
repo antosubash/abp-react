@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.17...v2.2.18)
+
+### 🩹 Fixes
+
+- Handle default tenantId in login route ([0b5e812](https://github.com/antosubash/abp-react/commit/0b5e812))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.16...v2.2.17)
+
+## v2.2.18
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.17...v2.2.18)
+
+### 🩹 Fixes
+
+- Handle default tenantId in login route ([0b5e812](https://github.com/antosubash/abp-react/commit/0b5e812))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
