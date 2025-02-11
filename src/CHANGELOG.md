@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.15...v2.2.16)
+
+### 🏡 Chore
+
+- Update base image to node:21-slim in Dockerfile ([b4e6a07](https://github.com/antosubash/abp-react/commit/b4e6a07))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.14...v2.2.15)
+
+## v2.2.16
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.15...v2.2.16)
+
+### 🏡 Chore
+
+- Update base image to node:21-slim in Dockerfile ([b4e6a07](https://github.com/antosubash/abp-react/commit/b4e6a07))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
