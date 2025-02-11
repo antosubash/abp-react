@@ -18,9 +18,10 @@ export async function GET() {
   const openIdClientConfig = await getClientConfig()
   let tenantId = session.tenantId
 
-  if (!tenantId || tenantId === 'default') {
+  if (!tenantId || tenantId === 'default' || (typeof tenantId === 'object' && Object.keys(tenantId).length === 0)) {
     tenantId = ''
   }
+
 
   console.log('Login route: tenantId:', tenantId)
 
