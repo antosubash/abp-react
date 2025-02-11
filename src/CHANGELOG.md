@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.18...v2.2.19)
+
+### 🩹 Fixes
+
+- Enhance tenantId validation in login route ([559a418](https://github.com/antosubash/abp-react/commit/559a418))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.17...v2.2.18)
+
+## v2.2.19
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.18...v2.2.19)
+
+### 🩹 Fixes
+
+- Enhance tenantId validation in login route ([559a418](https://github.com/antosubash/abp-react/commit/559a418))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
