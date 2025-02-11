@@ -16,12 +16,20 @@ export async function GET() {
   let code_verifier = client.randomPKCECodeVerifier()
   let code_challenge = await client.calculatePKCECodeChallenge(code_verifier)
   const openIdClientConfig = await getClientConfig()
+  let tenantId = session.tenantId
+
+  if (!tenantId || tenantId === 'default') {
+    tenantId = ''
+  }
+
+  console.log('Login route: tenantId:', tenantId)
+
   let parameters: Record<string, string> = {
     "redirect_uri": clientConfig.redirect_uri,
     "scope": clientConfig.scope!,
     code_challenge,
     "code_challenge_method": clientConfig.code_challenge_method,
-    "__tenant": session.tenantId === 'default' ? "" : session.tenantId!,
+    "__tenant": tenantId,
   }
   let state!: string
   if (!openIdClientConfig.serverMetadata().supportsPKCE()) {
