@@ -9,13 +9,18 @@ interface ApiError extends Error {
   status?: number;
 }
 
-const getHeaders = async (method: RequestMethod): Promise<HeadersInit> => {
+const getHeaders = async (request: NextRequest, method: RequestMethod): Promise<HeadersInit> => {
   const session = await getSession()
-  return {
-    Authorization: `Bearer ${session.access_token}`,
-    'Content-Type': 'application/json',
-    __tenant: session.tenantId ?? '',
-  }
+  
+  // Create a new headers object from the incoming request
+  const headers = new Headers(request.headers)
+  
+  // Add or override specific headers
+  headers.set('Authorization', `Bearer ${session.access_token}`)
+  headers.set('Content-Type', 'application/json')
+  headers.set('__tenant', session.tenantId ?? '')
+  
+  return headers
 }
 
 const makeApiRequest = async (
@@ -26,7 +31,7 @@ const makeApiRequest = async (
   try {
     const path = request.nextUrl.pathname
     const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
-    const headers = await getHeaders(method)
+    const headers = await getHeaders(request, method)
 
     const options: RequestInit = {
       method,
@@ -35,44 +40,31 @@ const makeApiRequest = async (
       cache: 'no-store',
     }
 
-
-
     const response = await fetch(url, options)
 
-    // Clone the response to handle streaming
-    const clonedResponse = response.clone()
-
     if (!response.ok) {
-      let errorMessage: string;
-      try {
-        const errorData = await clonedResponse.json();
-        errorMessage = errorData.error || `API request failed with status ${response.status}`;
-      } catch {
-        errorMessage = `API request failed with status ${response.status}`;
-      }
-      throw new Error(errorMessage);
+      const errorData = await response.clone().json().catch(() => null)
+      throw Object.assign(
+        new Error(errorData?.error || `API request failed with status ${response.status}`),
+        { status: response.status }
+      )
     }
 
-    // Handle different content types
-    const contentType = response.headers.get('content-type');
-    if (contentType?.includes('application/json')) {
-      const data = await clonedResponse.json();
-      return NextResponse.json(data, {
-        status: response.status,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    }
+    // Forward the response with original headers
+    const responseHeaders = new Headers(response.headers)
+    const data = await response.json().catch(() => response)
 
-    return response;
+    return NextResponse.json(data, {
+      status: response.status,
+      headers: responseHeaders,
+    })
   } catch (error) {
-    const apiError = error as ApiError;
-    console.error('API request error:', apiError);
+    const apiError = error as ApiError
+    console.error('API request error:', apiError)
     return NextResponse.json(
       { error: apiError.message },
       { status: apiError.status || 500 }
-    );
+    )
   }
 }
 
