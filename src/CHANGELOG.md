@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.21...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add version display and update version.json in workflow ([7910211](https://github.com/antosubash/abp-react/commit/7910211))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.20...v2.2.21)
+
+## v2.3.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.21...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add version display and update version.json in workflow ([7910211](https://github.com/antosubash/abp-react/commit/7910211))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
