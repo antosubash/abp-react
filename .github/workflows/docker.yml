@@ -74,6 +74,10 @@ jobs:
         echo "Version: $VERSION"
         echo "version=$VERSION" >> $GITHUB_ENV
 
+    - name: Update version.json
+      run: |
+        echo "{\"version\": \"${{ env.version }}\"}" > public/version.json
+
     - name: Use version
       run: echo "The version is ${{ env.version }}"
     - name: Log in to GitHub Container Registry

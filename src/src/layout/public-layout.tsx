@@ -1,16 +1,17 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { JSX, SVGProps } from 'react'
 import TopNavBar from '@/components/navbar/top-nav-bar'
+import { Button } from '@/components/ui/button'
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { VersionDisplay } from '@/components/version-display'
+import Image from 'next/image'
+import Link from 'next/link'
+import { JSX, SVGProps } from 'react'
 export function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-[100dvh]">
@@ -210,6 +211,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
           <Link href="#" className="text-xs hover:underline underline-offset-4" prefetch={false}>
             Privacy
           </Link>
+          <VersionDisplay />
         </nav>
       </footer>
     </div>
