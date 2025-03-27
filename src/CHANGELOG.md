@@ -1,8 +1,30 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.20...v2.2.21)
+
+### 💅 Refactors
+
+- Improve header management in API requests ([7d7954d](https://github.com/antosubash/abp-react/commit/7d7954d))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.19...v2.2.20)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.18...v2.2.19)
+
+## v2.2.21
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.2.20...v2.2.21)
+
+### 💅 Refactors
+
+- Improve header management in API requests ([7d7954d](https://github.com/antosubash/abp-react/commit/7d7954d))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.2.20
 
