@@ -30,10 +30,10 @@ export const useTenants = (
       }
       const { data } = await tenantGetList({
         query: {
-          maxResultCount: pageSize,
-          skipCount: skip,
-          filter: filter,
-          sorting: sorting,
+          MaxResultCount: pageSize,
+          SkipCount: skip,
+          Filter: filter,
+          Sorting: sorting,
         }
       })
       return data

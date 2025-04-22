@@ -2,20 +2,20 @@
 
 export type AbpLoginResult = {
     result?: LoginResultType;
-    readonly description?: (string) | null;
+    readonly description?: string | null;
 };
 
 export type ActionApiDescriptionModel = {
-    uniqueName?: (string) | null;
-    name?: (string) | null;
-    httpMethod?: (string) | null;
-    url?: (string) | null;
-    supportedVersions?: Array<(string)> | null;
+    uniqueName?: string | null;
+    name?: string | null;
+    httpMethod?: string | null;
+    url?: string | null;
+    supportedVersions?: Array<string> | null;
     parametersOnMethod?: Array<MethodParameterApiDescriptionModel> | null;
     parameters?: Array<ParameterApiDescriptionModel> | null;
     returnValue?: ReturnValueApiDescriptionModel;
-    allowAnonymous?: (boolean) | null;
-    implementFrom?: (string) | null;
+    allowAnonymous?: boolean | null;
+    implementFrom?: string | null;
 };
 
 export type ApplicationApiDescriptionModel = {
@@ -29,7 +29,7 @@ export type ApplicationApiDescriptionModel = {
 
 export type ApplicationAuthConfigurationDto = {
     grantedPolicies?: {
-        [key: string]: (boolean);
+        [key: string]: boolean;
     } | null;
 };
 
@@ -45,25 +45,23 @@ export type ApplicationConfigurationDto = {
     timing?: TimingDto;
     clock?: ClockDto;
     objectExtensions?: ObjectExtensionsDto;
-    extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    extraProperties?: {} | null;
 };
 
 export type ApplicationFeatureConfigurationDto = {
     values?: {
-        [key: string]: ((string) | null);
+        [key: string]: string | null;
     } | null;
 };
 
 export type ApplicationGlobalFeatureConfigurationDto = {
-    enabledFeatures?: Array<(string)> | null;
+    enabledFeatures?: Array<string> | null;
 };
 
 export type ApplicationLocalizationConfigurationDto = {
     values?: {
         [key: string]: {
-            [key: string]: (string);
+            [key: string]: string;
         };
     } | null;
     resources?: {
@@ -71,7 +69,7 @@ export type ApplicationLocalizationConfigurationDto = {
     } | null;
     languages?: Array<LanguageInfo> | null;
     currentCulture?: CurrentCultureDto;
-    defaultResourceName?: (string) | null;
+    defaultResourceName?: string | null;
     languagesMap?: {
         [key: string]: Array<NameValue>;
     } | null;
@@ -89,42 +87,42 @@ export type ApplicationLocalizationDto = {
 
 export type ApplicationLocalizationResourceDto = {
     texts?: {
-        [key: string]: (string);
+        [key: string]: string;
     } | null;
-    baseResources?: Array<(string)> | null;
+    baseResources?: Array<string> | null;
 };
 
 export type ApplicationSettingConfigurationDto = {
     values?: {
-        [key: string]: ((string) | null);
+        [key: string]: string | null;
     } | null;
 };
 
 export type ChangePasswordInput = {
-    currentPassword?: (string) | null;
+    currentPassword?: string | null;
     newPassword: string;
 };
 
 export type ClientDto = {
-    clientId?: (string) | null;
-    displayName?: (string) | null;
-    postLogoutRedirectUris?: (string) | null;
-    redirectUris?: (string) | null;
-    permissions?: (string) | null;
-    type?: (string) | null;
+    clientId?: string | null;
+    displayName?: string | null;
+    postLogoutRedirectUris?: string | null;
+    redirectUris?: string | null;
+    permissions?: string | null;
+    type?: string | null;
 };
 
 export type ClockDto = {
-    kind?: (string) | null;
+    kind?: string | null;
 };
 
 export type ControllerApiDescriptionModel = {
-    controllerName?: (string) | null;
-    controllerGroupName?: (string) | null;
+    controllerName?: string | null;
+    controllerGroupName?: string | null;
     isRemoteService?: boolean;
     isIntegrationService?: boolean;
-    apiVersion?: (string) | null;
-    type?: (string) | null;
+    apiVersion?: string | null;
+    type?: string | null;
     interfaces?: Array<ControllerInterfaceApiDescriptionModel> | null;
     actions?: {
         [key: string]: ActionApiDescriptionModel;
@@ -132,92 +130,90 @@ export type ControllerApiDescriptionModel = {
 };
 
 export type ControllerInterfaceApiDescriptionModel = {
-    type?: (string) | null;
-    name?: (string) | null;
+    type?: string | null;
+    name?: string | null;
     methods?: Array<InterfaceMethodApiDescriptionModel> | null;
 };
 
 export type CurrentCultureDto = {
-    displayName?: (string) | null;
-    englishName?: (string) | null;
-    threeLetterIsoLanguageName?: (string) | null;
-    twoLetterIsoLanguageName?: (string) | null;
+    displayName?: string | null;
+    englishName?: string | null;
+    threeLetterIsoLanguageName?: string | null;
+    twoLetterIsoLanguageName?: string | null;
     isRightToLeft?: boolean;
-    cultureName?: (string) | null;
-    name?: (string) | null;
-    nativeName?: (string) | null;
+    cultureName?: string | null;
+    name?: string | null;
+    nativeName?: string | null;
     dateTimeFormat?: DateTimeFormatDto;
 };
 
 export type CurrentTenantDto = {
-    id?: (string) | null;
-    name?: (string) | null;
+    id?: string | null;
+    name?: string | null;
     isAvailable?: boolean;
 };
 
 export type CurrentUserDto = {
     isAuthenticated?: boolean;
-    id?: (string) | null;
-    tenantId?: (string) | null;
-    impersonatorUserId?: (string) | null;
-    impersonatorTenantId?: (string) | null;
-    impersonatorUserName?: (string) | null;
-    impersonatorTenantName?: (string) | null;
-    userName?: (string) | null;
-    name?: (string) | null;
-    surName?: (string) | null;
-    email?: (string) | null;
+    id?: string | null;
+    tenantId?: string | null;
+    impersonatorUserId?: string | null;
+    impersonatorTenantId?: string | null;
+    impersonatorUserName?: string | null;
+    impersonatorTenantName?: string | null;
+    userName?: string | null;
+    name?: string | null;
+    surName?: string | null;
+    email?: string | null;
     emailVerified?: boolean;
-    phoneNumber?: (string) | null;
+    phoneNumber?: string | null;
     phoneNumberVerified?: boolean;
-    roles?: Array<(string)> | null;
-    sessionId?: (string) | null;
+    roles?: Array<string> | null;
+    sessionId?: string | null;
 };
 
 export type CustomTenantDto = {
     id?: string;
-    name?: (string) | null;
-    host?: (string) | null;
+    name?: string | null;
+    host?: string | null;
 };
 
 export type DateTimeFormatDto = {
-    calendarAlgorithmType?: (string) | null;
-    dateTimeFormatLong?: (string) | null;
-    shortDatePattern?: (string) | null;
-    fullDateTimePattern?: (string) | null;
-    dateSeparator?: (string) | null;
-    shortTimePattern?: (string) | null;
-    longTimePattern?: (string) | null;
+    calendarAlgorithmType?: string | null;
+    dateTimeFormatLong?: string | null;
+    shortDatePattern?: string | null;
+    fullDateTimePattern?: string | null;
+    dateSeparator?: string | null;
+    shortTimePattern?: string | null;
+    longTimePattern?: string | null;
 };
 
 export type EmailSettingsDto = {
-    smtpHost?: (string) | null;
+    smtpHost?: string | null;
     smtpPort?: number;
-    smtpUserName?: (string) | null;
-    smtpPassword?: (string) | null;
-    smtpDomain?: (string) | null;
+    smtpUserName?: string | null;
+    smtpPassword?: string | null;
+    smtpDomain?: string | null;
     smtpEnableSsl?: boolean;
     smtpUseDefaultCredentials?: boolean;
-    defaultFromAddress?: (string) | null;
-    defaultFromDisplayName?: (string) | null;
+    defaultFromAddress?: string | null;
+    defaultFromDisplayName?: string | null;
 };
 
 export type EntityExtensionDto = {
     properties?: {
         [key: string]: ExtensionPropertyDto;
     } | null;
-    configuration?: {
-        [key: string]: unknown;
-    } | null;
+    configuration?: {} | null;
 };
 
 export type ExtensionEnumDto = {
     fields?: Array<ExtensionEnumFieldDto> | null;
-    localizationResource?: (string) | null;
+    localizationResource?: string | null;
 };
 
 export type ExtensionEnumFieldDto = {
-    name?: (string) | null;
+    name?: string | null;
     value?: unknown;
 };
 
@@ -240,23 +236,41 @@ export type ExtensionPropertyApiUpdateDto = {
 };
 
 export type ExtensionPropertyAttributeDto = {
-    typeSimple?: (string) | null;
-    config?: {
-        [key: string]: unknown;
-    } | null;
+    typeSimple?: string | null;
+    config?: {} | null;
 };
 
 export type ExtensionPropertyDto = {
-    type?: (string) | null;
-    typeSimple?: (string) | null;
+    type?: string | null;
+    typeSimple?: string | null;
     displayName?: LocalizableStringDto;
     api?: ExtensionPropertyApiDto;
     ui?: ExtensionPropertyUiDto;
+    policy?: ExtensionPropertyPolicyDto;
     attributes?: Array<ExtensionPropertyAttributeDto> | null;
-    configuration?: {
-        [key: string]: unknown;
-    } | null;
+    configuration?: {} | null;
     defaultValue?: unknown;
+};
+
+export type ExtensionPropertyFeaturePolicyDto = {
+    features?: Array<string> | null;
+    requiresAll?: boolean;
+};
+
+export type ExtensionPropertyGlobalFeaturePolicyDto = {
+    features?: Array<string> | null;
+    requiresAll?: boolean;
+};
+
+export type ExtensionPropertyPermissionPolicyDto = {
+    permissionNames?: Array<string> | null;
+    requiresAll?: boolean;
+};
+
+export type ExtensionPropertyPolicyDto = {
+    globalFeatures?: ExtensionPropertyGlobalFeaturePolicyDto;
+    features?: ExtensionPropertyFeaturePolicyDto;
+    permissions?: ExtensionPropertyPermissionPolicyDto;
 };
 
 export type ExtensionPropertyUiDto = {
@@ -271,11 +285,11 @@ export type ExtensionPropertyUiFormDto = {
 };
 
 export type ExtensionPropertyUiLookupDto = {
-    url?: (string) | null;
-    resultListPropertyName?: (string) | null;
-    displayPropertyName?: (string) | null;
-    valuePropertyName?: (string) | null;
-    filterParamName?: (string) | null;
+    url?: string | null;
+    resultListPropertyName?: string | null;
+    displayPropertyName?: string | null;
+    valuePropertyName?: string | null;
+    filterParamName?: string | null;
 };
 
 export type ExtensionPropertyUiTableDto = {
@@ -283,32 +297,32 @@ export type ExtensionPropertyUiTableDto = {
 };
 
 export type FeatureDto = {
-    name?: (string) | null;
-    displayName?: (string) | null;
-    value?: (string) | null;
+    name?: string | null;
+    displayName?: string | null;
+    value?: string | null;
     provider?: FeatureProviderDto;
-    description?: (string) | null;
+    description?: string | null;
     valueType?: IStringValueType;
     depth?: number;
-    parentName?: (string) | null;
+    parentName?: string | null;
 };
 
 export type FeatureGroupDto = {
-    name?: (string) | null;
-    displayName?: (string) | null;
+    name?: string | null;
+    displayName?: string | null;
     features?: Array<FeatureDto> | null;
 };
 
 export type FeatureProviderDto = {
-    name?: (string) | null;
-    key?: (string) | null;
+    name?: string | null;
+    key?: string | null;
 };
 
 export type FindTenantResultDto = {
     success?: boolean;
-    tenantId?: (string) | null;
-    name?: (string) | null;
-    normalizedName?: (string) | null;
+    tenantId?: string | null;
+    name?: string | null;
+    normalizedName?: string | null;
     isActive?: boolean;
 };
 
@@ -317,135 +331,120 @@ export type GetFeatureListResultDto = {
 };
 
 export type GetPermissionListResultDto = {
-    entityDisplayName?: (string) | null;
+    entityDisplayName?: string | null;
     groups?: Array<PermissionGroupDto> | null;
 };
 
+export type IStringValueType = {
+    readonly name?: string | null;
+    readonly properties?: {} | null;
+    validator?: IValueValidator;
+};
+
+export type IValueValidator = {
+    readonly name?: string | null;
+    readonly properties?: {} | null;
+};
+
 export type IanaTimeZone = {
-    timeZoneName?: (string) | null;
+    timeZoneName?: string | null;
 };
 
 export type IdentityRoleCreateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     name: string;
     isDefault?: boolean;
     isPublic?: boolean;
 };
 
 export type IdentityRoleDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     id?: string;
-    name?: (string) | null;
+    name?: string | null;
     isDefault?: boolean;
     isStatic?: boolean;
     isPublic?: boolean;
-    concurrencyStamp?: (string) | null;
+    concurrencyStamp?: string | null;
+    creationTime?: string;
 };
 
 export type IdentityRoleUpdateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     name: string;
     isDefault?: boolean;
     isPublic?: boolean;
-    concurrencyStamp?: (string) | null;
+    concurrencyStamp?: string | null;
 };
 
 export type IdentityUserCreateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     userName: string;
-    name?: (string) | null;
-    surname?: (string) | null;
+    name?: string | null;
+    surname?: string | null;
     email: string;
-    phoneNumber?: (string) | null;
+    phoneNumber?: string | null;
     isActive?: boolean;
     lockoutEnabled?: boolean;
-    roleNames?: Array<(string)> | null;
+    roleNames?: Array<string> | null;
     password: string;
 };
 
 export type IdentityUserDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     id?: string;
     creationTime?: string;
-    creatorId?: (string) | null;
-    lastModificationTime?: (string) | null;
-    lastModifierId?: (string) | null;
+    creatorId?: string | null;
+    lastModificationTime?: string | null;
+    lastModifierId?: string | null;
     isDeleted?: boolean;
-    deleterId?: (string) | null;
-    deletionTime?: (string) | null;
-    tenantId?: (string) | null;
-    userName?: (string) | null;
-    name?: (string) | null;
-    surname?: (string) | null;
-    email?: (string) | null;
+    deleterId?: string | null;
+    deletionTime?: string | null;
+    tenantId?: string | null;
+    userName?: string | null;
+    name?: string | null;
+    surname?: string | null;
+    email?: string | null;
     emailConfirmed?: boolean;
-    phoneNumber?: (string) | null;
+    phoneNumber?: string | null;
     phoneNumberConfirmed?: boolean;
     isActive?: boolean;
     lockoutEnabled?: boolean;
     accessFailedCount?: number;
-    lockoutEnd?: (string) | null;
-    concurrencyStamp?: (string) | null;
+    lockoutEnd?: string | null;
+    concurrencyStamp?: string | null;
     entityVersion?: number;
-    lastPasswordChangeTime?: (string) | null;
+    lastPasswordChangeTime?: string | null;
 };
 
 export type IdentityUserUpdateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     userName: string;
-    name?: (string) | null;
-    surname?: (string) | null;
+    name?: string | null;
+    surname?: string | null;
     email: string;
-    phoneNumber?: (string) | null;
+    phoneNumber?: string | null;
     isActive?: boolean;
     lockoutEnabled?: boolean;
-    roleNames?: Array<(string)> | null;
-    password?: (string) | null;
-    concurrencyStamp?: (string) | null;
+    roleNames?: Array<string> | null;
+    password?: string | null;
+    concurrencyStamp?: string | null;
 };
 
 export type IdentityUserUpdateRolesDto = {
-    roleNames: Array<(string)>;
+    roleNames: Array<string>;
 };
 
 export type InterfaceMethodApiDescriptionModel = {
-    name?: (string) | null;
+    name?: string | null;
     parametersOnMethod?: Array<MethodParameterApiDescriptionModel> | null;
     returnValue?: ReturnValueApiDescriptionModel;
 };
 
-export type IStringValueType = {
-    readonly name?: (string) | null;
-    readonly properties?: {
-        [key: string]: unknown;
-    } | null;
-    validator?: IValueValidator;
-};
-
-export type IValueValidator = {
-    readonly name?: (string) | null;
-    readonly properties?: {
-        [key: string]: unknown;
-    } | null;
-};
-
 export type LanguageInfo = {
-    cultureName?: (string) | null;
-    uiCultureName?: (string) | null;
-    displayName?: (string) | null;
-    readonly twoLetterISOLanguageName?: (string) | null;
+    cultureName?: string | null;
+    uiCultureName?: string | null;
+    displayName?: string | null;
+    readonly twoLetterISOLanguageName?: string | null;
 };
 
 export type ListResultDtoOfIdentityRoleDto = {
@@ -457,24 +456,24 @@ export type ListResultDtoOfUserData = {
 };
 
 export type LocalizableStringDto = {
-    name?: (string) | null;
-    resource?: (string) | null;
+    name?: string | null;
+    resource?: string | null;
 };
 
 export type LoginResultType = 1 | 2 | 3 | 4 | 5;
 
 export type MethodParameterApiDescriptionModel = {
-    name?: (string) | null;
-    typeAsString?: (string) | null;
-    type?: (string) | null;
-    typeSimple?: (string) | null;
+    name?: string | null;
+    typeAsString?: string | null;
+    type?: string | null;
+    typeSimple?: string | null;
     isOptional?: boolean;
     defaultValue?: unknown;
 };
 
 export type ModuleApiDescriptionModel = {
-    rootPath?: (string) | null;
-    remoteServiceName?: (string) | null;
+    rootPath?: string | null;
+    remoteServiceName?: string | null;
     controllers?: {
         [key: string]: ControllerApiDescriptionModel;
     } | null;
@@ -484,9 +483,7 @@ export type ModuleExtensionDto = {
     entities?: {
         [key: string]: EntityExtensionDto;
     } | null;
-    configuration?: {
-        [key: string]: unknown;
-    } | null;
+    configuration?: {} | null;
 };
 
 export type MultiTenancyInfoDto = {
@@ -494,8 +491,8 @@ export type MultiTenancyInfoDto = {
 };
 
 export type NameValue = {
-    name?: (string) | null;
-    value?: (string) | null;
+    name?: string | null;
+    value?: string | null;
 };
 
 export type ObjectExtensionsDto = {
@@ -523,71 +520,67 @@ export type PagedResultDtoOfTenantDto = {
 };
 
 export type ParameterApiDescriptionModel = {
-    nameOnMethod?: (string) | null;
-    name?: (string) | null;
-    jsonName?: (string) | null;
-    type?: (string) | null;
-    typeSimple?: (string) | null;
+    nameOnMethod?: string | null;
+    name?: string | null;
+    jsonName?: string | null;
+    type?: string | null;
+    typeSimple?: string | null;
     isOptional?: boolean;
     defaultValue?: unknown;
-    constraintTypes?: Array<(string)> | null;
-    bindingSourceId?: (string) | null;
-    descriptorName?: (string) | null;
+    constraintTypes?: Array<string> | null;
+    bindingSourceId?: string | null;
+    descriptorName?: string | null;
 };
 
 export type PermissionGrantInfoDto = {
-    name?: (string) | null;
-    displayName?: (string) | null;
-    parentName?: (string) | null;
+    name?: string | null;
+    displayName?: string | null;
+    parentName?: string | null;
     isGranted?: boolean;
-    allowedProviders?: Array<(string)> | null;
+    allowedProviders?: Array<string> | null;
     grantedProviders?: Array<ProviderInfoDto> | null;
 };
 
 export type PermissionGroupDto = {
-    name?: (string) | null;
-    displayName?: (string) | null;
-    displayNameKey?: (string) | null;
-    displayNameResource?: (string) | null;
+    name?: string | null;
+    displayName?: string | null;
+    displayNameKey?: string | null;
+    displayNameResource?: string | null;
     permissions?: Array<PermissionGrantInfoDto> | null;
 };
 
 export type ProfileDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
-    userName?: (string) | null;
-    email?: (string) | null;
-    name?: (string) | null;
-    surname?: (string) | null;
-    phoneNumber?: (string) | null;
+    readonly extraProperties?: {} | null;
+    userName?: string | null;
+    email?: string | null;
+    name?: string | null;
+    surname?: string | null;
+    phoneNumber?: string | null;
     isExternal?: boolean;
     hasPassword?: boolean;
-    concurrencyStamp?: (string) | null;
+    concurrencyStamp?: string | null;
 };
 
 export type PropertyApiDescriptionModel = {
-    name?: (string) | null;
-    jsonName?: (string) | null;
-    type?: (string) | null;
-    typeSimple?: (string) | null;
+    name?: string | null;
+    jsonName?: string | null;
+    type?: string | null;
+    typeSimple?: string | null;
     isRequired?: boolean;
-    minLength?: (number) | null;
-    maxLength?: (number) | null;
-    minimum?: (string) | null;
-    maximum?: (string) | null;
-    regex?: (string) | null;
+    minLength?: number | null;
+    maxLength?: number | null;
+    minimum?: string | null;
+    maximum?: string | null;
+    regex?: string | null;
 };
 
 export type ProviderInfoDto = {
-    providerName?: (string) | null;
-    providerKey?: (string) | null;
+    providerName?: string | null;
+    providerKey?: string | null;
 };
 
 export type RegisterDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     userName: string;
     emailAddress: string;
     password: string;
@@ -595,12 +588,10 @@ export type RegisterDto = {
 };
 
 export type RemoteServiceErrorInfo = {
-    code?: (string) | null;
-    message?: (string) | null;
-    details?: (string) | null;
-    data?: {
-        [key: string]: unknown;
-    } | null;
+    code?: string | null;
+    message?: string | null;
+    details?: string | null;
+    data?: {} | null;
     validationErrors?: Array<RemoteServiceValidationErrorInfo> | null;
 };
 
@@ -609,8 +600,8 @@ export type RemoteServiceErrorResponse = {
 };
 
 export type RemoteServiceValidationErrorInfo = {
-    message?: (string) | null;
-    members?: Array<(string)> | null;
+    message?: string | null;
+    members?: Array<string> | null;
 };
 
 export type ResetPasswordDto = {
@@ -620,48 +611,42 @@ export type ResetPasswordDto = {
 };
 
 export type ReturnValueApiDescriptionModel = {
-    type?: (string) | null;
-    typeSimple?: (string) | null;
+    type?: string | null;
+    typeSimple?: string | null;
 };
 
 export type SendPasswordResetCodeDto = {
     email: string;
     appName: string;
-    returnUrl?: (string) | null;
-    returnUrlHash?: (string) | null;
+    returnUrl?: string | null;
+    returnUrlHash?: string | null;
 };
 
 export type SendTestEmailInput = {
     senderEmailAddress: string;
     targetEmailAddress: string;
     subject: string;
-    body?: (string) | null;
+    body?: string | null;
 };
 
 export type TenantCreateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     name: string;
     adminEmailAddress: string;
     adminPassword: string;
 };
 
 export type TenantDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     id?: string;
-    name?: (string) | null;
-    concurrencyStamp?: (string) | null;
+    name?: string | null;
+    concurrencyStamp?: string | null;
 };
 
 export type TenantUpdateDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
     name: string;
-    concurrencyStamp?: (string) | null;
+    concurrencyStamp?: string | null;
 };
 
 export type TimeZone = {
@@ -674,20 +659,20 @@ export type TimingDto = {
 };
 
 export type TypeApiDescriptionModel = {
-    baseType?: (string) | null;
+    baseType?: string | null;
     isEnum?: boolean;
-    enumNames?: Array<(string)> | null;
+    enumNames?: Array<string> | null;
     enumValues?: Array<unknown> | null;
-    genericArguments?: Array<(string)> | null;
+    genericArguments?: Array<string> | null;
     properties?: Array<PropertyApiDescriptionModel> | null;
 };
 
 export type UpdateEmailSettingsDto = {
-    smtpHost?: (string) | null;
+    smtpHost?: string | null;
     smtpPort?: number;
-    smtpUserName?: (string) | null;
-    smtpPassword?: (string) | null;
-    smtpDomain?: (string) | null;
+    smtpUserName?: string | null;
+    smtpPassword?: string | null;
+    smtpDomain?: string | null;
     smtpEnableSsl?: boolean;
     smtpUseDefaultCredentials?: boolean;
     defaultFromAddress: string;
@@ -695,8 +680,8 @@ export type UpdateEmailSettingsDto = {
 };
 
 export type UpdateFeatureDto = {
-    name?: (string) | null;
-    value?: (string) | null;
+    name?: string | null;
+    value?: string | null;
 };
 
 export type UpdateFeaturesDto = {
@@ -704,7 +689,7 @@ export type UpdateFeaturesDto = {
 };
 
 export type UpdatePermissionDto = {
-    name?: (string) | null;
+    name?: string | null;
     isGranted?: boolean;
 };
 
@@ -713,31 +698,27 @@ export type UpdatePermissionsDto = {
 };
 
 export type UpdateProfileDto = {
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
-    userName?: (string) | null;
-    email?: (string) | null;
-    name?: (string) | null;
-    surname?: (string) | null;
-    phoneNumber?: (string) | null;
-    concurrencyStamp?: (string) | null;
+    readonly extraProperties?: {} | null;
+    userName?: string | null;
+    email?: string | null;
+    name?: string | null;
+    surname?: string | null;
+    phoneNumber?: string | null;
+    concurrencyStamp?: string | null;
 };
 
 export type UserData = {
     id?: string;
-    tenantId?: (string) | null;
-    userName?: (string) | null;
-    name?: (string) | null;
-    surname?: (string) | null;
+    tenantId?: string | null;
+    userName?: string | null;
+    name?: string | null;
+    surname?: string | null;
     isActive?: boolean;
-    email?: (string) | null;
+    email?: string | null;
     emailConfirmed?: boolean;
-    phoneNumber?: (string) | null;
+    phoneNumber?: string | null;
     phoneNumberConfirmed?: boolean;
-    readonly extraProperties?: {
-        [key: string]: unknown;
-    } | null;
+    readonly extraProperties?: {} | null;
 };
 
 export type UserLoginInfo = {
@@ -752,644 +733,2754 @@ export type VerifyPasswordResetTokenInput = {
 };
 
 export type WindowsTimeZone = {
-    timeZoneId?: (string) | null;
+    timeZoneId?: string | null;
 };
 
 export type AbpApiDefinitionGetData = {
+    body?: never;
+    path?: never;
     query?: {
         IncludeTypes?: boolean;
     };
+    url: '/api/abp/api-definition';
 };
 
-export type AbpApiDefinitionGetResponse = (ApplicationApiDescriptionModel);
+export type AbpApiDefinitionGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AbpApiDefinitionGetError = (RemoteServiceErrorResponse);
+export type AbpApiDefinitionGetError = AbpApiDefinitionGetErrors[keyof AbpApiDefinitionGetErrors];
+
+export type AbpApiDefinitionGetResponses = {
+    /**
+     * OK
+     */
+    200: ApplicationApiDescriptionModel;
+};
+
+export type AbpApiDefinitionGetResponse = AbpApiDefinitionGetResponses[keyof AbpApiDefinitionGetResponses];
 
 export type AbpApplicationConfigurationGetData = {
+    body?: never;
+    path?: never;
     query?: {
         IncludeLocalizationResources?: boolean;
     };
+    url: '/api/abp/application-configuration';
 };
 
-export type AbpApplicationConfigurationGetResponse = (ApplicationConfigurationDto);
+export type AbpApplicationConfigurationGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AbpApplicationConfigurationGetError = (RemoteServiceErrorResponse);
+export type AbpApplicationConfigurationGetError = AbpApplicationConfigurationGetErrors[keyof AbpApplicationConfigurationGetErrors];
+
+export type AbpApplicationConfigurationGetResponses = {
+    /**
+     * OK
+     */
+    200: ApplicationConfigurationDto;
+};
+
+export type AbpApplicationConfigurationGetResponse = AbpApplicationConfigurationGetResponses[keyof AbpApplicationConfigurationGetResponses];
 
 export type AbpApplicationLocalizationGetData = {
+    body?: never;
+    path?: never;
     query: {
         CultureName: string;
         OnlyDynamics?: boolean;
     };
+    url: '/api/abp/application-localization';
 };
 
-export type AbpApplicationLocalizationGetResponse = (ApplicationLocalizationDto);
+export type AbpApplicationLocalizationGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AbpApplicationLocalizationGetError = (RemoteServiceErrorResponse);
+export type AbpApplicationLocalizationGetError = AbpApplicationLocalizationGetErrors[keyof AbpApplicationLocalizationGetErrors];
+
+export type AbpApplicationLocalizationGetResponses = {
+    /**
+     * OK
+     */
+    200: ApplicationLocalizationDto;
+};
+
+export type AbpApplicationLocalizationGetResponse = AbpApplicationLocalizationGetResponses[keyof AbpApplicationLocalizationGetResponses];
 
 export type AbpTenantFindTenantByNameData = {
+    body?: never;
     path: {
         name: string;
     };
+    query?: never;
+    url: '/api/abp/multi-tenancy/tenants/by-name/{name}';
 };
 
-export type AbpTenantFindTenantByNameResponse = (FindTenantResultDto);
+export type AbpTenantFindTenantByNameErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AbpTenantFindTenantByNameError = (RemoteServiceErrorResponse);
+export type AbpTenantFindTenantByNameError = AbpTenantFindTenantByNameErrors[keyof AbpTenantFindTenantByNameErrors];
+
+export type AbpTenantFindTenantByNameResponses = {
+    /**
+     * OK
+     */
+    200: FindTenantResultDto;
+};
+
+export type AbpTenantFindTenantByNameResponse = AbpTenantFindTenantByNameResponses[keyof AbpTenantFindTenantByNameResponses];
 
 export type AbpTenantFindTenantByIdData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/abp/multi-tenancy/tenants/by-id/{id}';
 };
 
-export type AbpTenantFindTenantByIdResponse = (FindTenantResultDto);
+export type AbpTenantFindTenantByIdErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AbpTenantFindTenantByIdError = (RemoteServiceErrorResponse);
+export type AbpTenantFindTenantByIdError = AbpTenantFindTenantByIdErrors[keyof AbpTenantFindTenantByIdErrors];
+
+export type AbpTenantFindTenantByIdResponses = {
+    /**
+     * OK
+     */
+    200: FindTenantResultDto;
+};
+
+export type AbpTenantFindTenantByIdResponse = AbpTenantFindTenantByIdResponses[keyof AbpTenantFindTenantByIdResponses];
 
 export type AccountRegisterData = {
     body?: RegisterDto;
+    path?: never;
+    query?: never;
+    url: '/api/account/register';
 };
 
-export type AccountRegisterResponse = (IdentityUserDto);
+export type AccountRegisterErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AccountRegisterError = (RemoteServiceErrorResponse);
+export type AccountRegisterError = AccountRegisterErrors[keyof AccountRegisterErrors];
+
+export type AccountRegisterResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type AccountRegisterResponse = AccountRegisterResponses[keyof AccountRegisterResponses];
 
 export type AccountSendPasswordResetCodeData = {
     body?: SendPasswordResetCodeDto;
+    path?: never;
+    query?: never;
+    url: '/api/account/send-password-reset-code';
 };
 
-export type AccountSendPasswordResetCodeResponse = (unknown);
+export type AccountSendPasswordResetCodeErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AccountSendPasswordResetCodeError = (RemoteServiceErrorResponse);
+export type AccountSendPasswordResetCodeError = AccountSendPasswordResetCodeErrors[keyof AccountSendPasswordResetCodeErrors];
+
+export type AccountSendPasswordResetCodeResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type AccountVerifyPasswordResetTokenData = {
     body?: VerifyPasswordResetTokenInput;
+    path?: never;
+    query?: never;
+    url: '/api/account/verify-password-reset-token';
 };
 
-export type AccountVerifyPasswordResetTokenResponse = (boolean);
+export type AccountVerifyPasswordResetTokenErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AccountVerifyPasswordResetTokenError = (RemoteServiceErrorResponse);
+export type AccountVerifyPasswordResetTokenError = AccountVerifyPasswordResetTokenErrors[keyof AccountVerifyPasswordResetTokenErrors];
+
+export type AccountVerifyPasswordResetTokenResponses = {
+    /**
+     * OK
+     */
+    200: boolean;
+};
+
+export type AccountVerifyPasswordResetTokenResponse = AccountVerifyPasswordResetTokenResponses[keyof AccountVerifyPasswordResetTokenResponses];
 
 export type AccountResetPasswordData = {
     body?: ResetPasswordDto;
+    path?: never;
+    query?: never;
+    url: '/api/account/reset-password';
 };
 
-export type AccountResetPasswordResponse = (unknown);
+export type AccountResetPasswordErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type AccountResetPasswordError = (RemoteServiceErrorResponse);
+export type AccountResetPasswordError = AccountResetPasswordErrors[keyof AccountResetPasswordErrors];
 
-export type ClientGetListResponse = (Array<ClientDto>);
+export type AccountResetPasswordResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type ClientGetListError = unknown;
+export type ClientGetListData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/client-management';
+};
+
+export type ClientGetListResponses = {
+    /**
+     * OK
+     */
+    200: Array<ClientDto>;
+};
+
+export type ClientGetListResponse = ClientGetListResponses[keyof ClientGetListResponses];
 
 export type ClientCreateData = {
+    body?: never;
+    path?: never;
     query?: {
         ClientId?: string;
         DisplayName?: string;
-        Permissions?: string;
         PostLogoutRedirectUris?: string;
         RedirectUris?: string;
-        Type?: string;
-    };
-};
-
-export type ClientCreateResponse = (ClientDto);
-
-export type ClientCreateError = unknown;
-
-export type ClientGetData = {
-    path: {
-        id: string;
-    };
-};
-
-export type ClientGetResponse = (ClientDto);
-
-export type ClientGetError = unknown;
-
-export type ClientUpdateData = {
-    path: {
-        id: string;
-    };
-    query?: {
-        ClientId?: string;
-        DisplayName?: string;
         Permissions?: string;
-        PostLogoutRedirectUris?: string;
-        RedirectUris?: string;
         Type?: string;
     };
+    url: '/api/client-management';
 };
 
-export type ClientUpdateResponse = (ClientDto);
+export type ClientCreateResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
 
-export type ClientUpdateError = unknown;
+export type ClientCreateResponse = ClientCreateResponses[keyof ClientCreateResponses];
 
 export type ClientDeleteData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/client-management/{id}';
 };
 
-export type ClientDeleteResponse = (unknown);
+export type ClientDeleteResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type ClientDeleteError = unknown;
+export type ClientGetData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/client-management/{id}';
+};
+
+export type ClientGetResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
+
+export type ClientGetResponse = ClientGetResponses[keyof ClientGetResponses];
+
+export type ClientUpdateData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: {
+        ClientId?: string;
+        DisplayName?: string;
+        PostLogoutRedirectUris?: string;
+        RedirectUris?: string;
+        Permissions?: string;
+        Type?: string;
+    };
+    url: '/api/client-management/{id}';
+};
+
+export type ClientUpdateResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
+
+export type ClientUpdateResponse = ClientUpdateResponses[keyof ClientUpdateResponses];
 
 export type ClientAddRedirectUriData = {
+    body?: never;
     path: {
         id: string;
     };
     query?: {
         redirectUri?: string;
     };
+    url: '/api/client-management/add-redirect-uri/{id}';
 };
 
-export type ClientAddRedirectUriResponse = (ClientDto);
+export type ClientAddRedirectUriResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
 
-export type ClientAddRedirectUriError = unknown;
+export type ClientAddRedirectUriResponse = ClientAddRedirectUriResponses[keyof ClientAddRedirectUriResponses];
 
 export type ClientAddPostLogoutRedirectUriData = {
+    body?: never;
     path: {
         id: string;
     };
     query?: {
         redirectUri?: string;
     };
+    url: '/api/client-management/add-post-logout-redirect-uri/{id}';
 };
 
-export type ClientAddPostLogoutRedirectUriResponse = (ClientDto);
+export type ClientAddPostLogoutRedirectUriResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
 
-export type ClientAddPostLogoutRedirectUriError = unknown;
+export type ClientAddPostLogoutRedirectUriResponse = ClientAddPostLogoutRedirectUriResponses[keyof ClientAddPostLogoutRedirectUriResponses];
 
 export type ClientUpdateClientTypeData = {
+    body?: never;
     path: {
         id: string;
     };
     query?: {
         clientType?: string;
     };
+    url: '/api/client-management/update-client-type/{id}';
 };
 
-export type ClientUpdateClientTypeResponse = (ClientDto);
+export type ClientUpdateClientTypeResponses = {
+    /**
+     * OK
+     */
+    200: ClientDto;
+};
 
-export type ClientUpdateClientTypeError = unknown;
+export type ClientUpdateClientTypeResponse = ClientUpdateClientTypeResponses[keyof ClientUpdateClientTypeResponses];
 
-export type DynamicClaimsRefreshResponse = (unknown);
+export type DynamicClaimsRefreshData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/account/dynamic-claims/refresh';
+};
 
-export type DynamicClaimsRefreshError = (RemoteServiceErrorResponse);
+export type DynamicClaimsRefreshErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type EmailSettingsGetResponse = (EmailSettingsDto);
+export type DynamicClaimsRefreshError = DynamicClaimsRefreshErrors[keyof DynamicClaimsRefreshErrors];
 
-export type EmailSettingsGetError = (RemoteServiceErrorResponse);
+export type DynamicClaimsRefreshResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type EmailSettingsGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/setting-management/emailing';
+};
+
+export type EmailSettingsGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type EmailSettingsGetError = EmailSettingsGetErrors[keyof EmailSettingsGetErrors];
+
+export type EmailSettingsGetResponses = {
+    /**
+     * OK
+     */
+    200: EmailSettingsDto;
+};
+
+export type EmailSettingsGetResponse = EmailSettingsGetResponses[keyof EmailSettingsGetResponses];
 
 export type EmailSettingsUpdateData = {
     body?: UpdateEmailSettingsDto;
+    path?: never;
+    query?: never;
+    url: '/api/setting-management/emailing';
 };
 
-export type EmailSettingsUpdateResponse = (unknown);
+export type EmailSettingsUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type EmailSettingsUpdateError = (RemoteServiceErrorResponse);
+export type EmailSettingsUpdateError = EmailSettingsUpdateErrors[keyof EmailSettingsUpdateErrors];
+
+export type EmailSettingsUpdateResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type EmailSettingsSendTestEmailData = {
     body?: SendTestEmailInput;
+    path?: never;
+    query?: never;
+    url: '/api/setting-management/emailing/send-test-email';
 };
 
-export type EmailSettingsSendTestEmailResponse = (unknown);
+export type EmailSettingsSendTestEmailErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type EmailSettingsSendTestEmailError = (RemoteServiceErrorResponse);
+export type EmailSettingsSendTestEmailError = EmailSettingsSendTestEmailErrors[keyof EmailSettingsSendTestEmailErrors];
+
+export type EmailSettingsSendTestEmailResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type FeaturesDeleteData = {
+    body?: never;
+    path?: never;
+    query?: {
+        providerName?: string;
+        providerKey?: string;
+    };
+    url: '/api/feature-management/features';
+};
+
+export type FeaturesDeleteErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type FeaturesDeleteError = FeaturesDeleteErrors[keyof FeaturesDeleteErrors];
+
+export type FeaturesDeleteResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type FeaturesGetData = {
+    body?: never;
+    path?: never;
     query?: {
-        providerKey?: string;
         providerName?: string;
+        providerKey?: string;
     };
+    url: '/api/feature-management/features';
 };
 
-export type FeaturesGetResponse = (GetFeatureListResultDto);
+export type FeaturesGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type FeaturesGetError = (RemoteServiceErrorResponse);
+export type FeaturesGetError = FeaturesGetErrors[keyof FeaturesGetErrors];
+
+export type FeaturesGetResponses = {
+    /**
+     * OK
+     */
+    200: GetFeatureListResultDto;
+};
+
+export type FeaturesGetResponse = FeaturesGetResponses[keyof FeaturesGetResponses];
 
 export type FeaturesUpdateData = {
     body?: UpdateFeaturesDto;
+    path?: never;
     query?: {
-        providerKey?: string;
         providerName?: string;
+        providerKey?: string;
     };
+    url: '/api/feature-management/features';
 };
 
-export type FeaturesUpdateResponse = (unknown);
-
-export type FeaturesUpdateError = (RemoteServiceErrorResponse);
-
-export type FeaturesDeleteData = {
-    query?: {
-        providerKey?: string;
-        providerName?: string;
-    };
+export type FeaturesUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
 };
 
-export type FeaturesDeleteResponse = (unknown);
+export type FeaturesUpdateError = FeaturesUpdateErrors[keyof FeaturesUpdateErrors];
 
-export type FeaturesDeleteError = (RemoteServiceErrorResponse);
+export type FeaturesUpdateResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type LoginLoginData = {
     body?: UserLoginInfo;
+    path?: never;
+    query?: never;
+    url: '/api/account/login';
 };
 
-export type LoginLoginResponse = (AbpLoginResult);
+export type LoginLoginErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type LoginLoginError = (RemoteServiceErrorResponse);
+export type LoginLoginError = LoginLoginErrors[keyof LoginLoginErrors];
 
-export type LoginLogoutResponse = (unknown);
+export type LoginLoginResponses = {
+    /**
+     * OK
+     */
+    200: AbpLoginResult;
+};
 
-export type LoginLogoutError = (RemoteServiceErrorResponse);
+export type LoginLoginResponse = LoginLoginResponses[keyof LoginLoginResponses];
+
+export type LoginLogoutData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/account/logout';
+};
+
+export type LoginLogoutErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type LoginLogoutError = LoginLogoutErrors[keyof LoginLogoutErrors];
+
+export type LoginLogoutResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type LoginCheckPasswordData = {
     body?: UserLoginInfo;
+    path?: never;
+    query?: never;
+    url: '/api/account/check-password';
 };
 
-export type LoginCheckPasswordResponse = (AbpLoginResult);
+export type LoginCheckPasswordErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type LoginCheckPasswordError = (RemoteServiceErrorResponse);
+export type LoginCheckPasswordError = LoginCheckPasswordErrors[keyof LoginCheckPasswordErrors];
+
+export type LoginCheckPasswordResponses = {
+    /**
+     * OK
+     */
+    200: AbpLoginResult;
+};
+
+export type LoginCheckPasswordResponse = LoginCheckPasswordResponses[keyof LoginCheckPasswordResponses];
 
 export type PermissionsGetData = {
+    body?: never;
+    path?: never;
     query?: {
-        providerKey?: string;
         providerName?: string;
+        providerKey?: string;
     };
+    url: '/api/permission-management/permissions';
 };
 
-export type PermissionsGetResponse = (GetPermissionListResultDto);
+export type PermissionsGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type PermissionsGetError = (RemoteServiceErrorResponse);
+export type PermissionsGetError = PermissionsGetErrors[keyof PermissionsGetErrors];
+
+export type PermissionsGetResponses = {
+    /**
+     * OK
+     */
+    200: GetPermissionListResultDto;
+};
+
+export type PermissionsGetResponse = PermissionsGetResponses[keyof PermissionsGetResponses];
 
 export type PermissionsUpdateData = {
     body?: UpdatePermissionsDto;
+    path?: never;
     query?: {
-        providerKey?: string;
         providerName?: string;
+        providerKey?: string;
     };
+    url: '/api/permission-management/permissions';
 };
 
-export type PermissionsUpdateResponse = (unknown);
+export type PermissionsUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type PermissionsUpdateError = (RemoteServiceErrorResponse);
+export type PermissionsUpdateError = PermissionsUpdateErrors[keyof PermissionsUpdateErrors];
 
-export type ProfileGetResponse = (ProfileDto);
+export type PermissionsUpdateResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type ProfileGetError = (RemoteServiceErrorResponse);
+export type ProfileGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/account/my-profile';
+};
+
+export type ProfileGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type ProfileGetError = ProfileGetErrors[keyof ProfileGetErrors];
+
+export type ProfileGetResponses = {
+    /**
+     * OK
+     */
+    200: ProfileDto;
+};
+
+export type ProfileGetResponse = ProfileGetResponses[keyof ProfileGetResponses];
 
 export type ProfileUpdateData = {
     body?: UpdateProfileDto;
+    path?: never;
+    query?: never;
+    url: '/api/account/my-profile';
 };
 
-export type ProfileUpdateResponse = (ProfileDto);
+export type ProfileUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type ProfileUpdateError = (RemoteServiceErrorResponse);
+export type ProfileUpdateError = ProfileUpdateErrors[keyof ProfileUpdateErrors];
+
+export type ProfileUpdateResponses = {
+    /**
+     * OK
+     */
+    200: ProfileDto;
+};
+
+export type ProfileUpdateResponse = ProfileUpdateResponses[keyof ProfileUpdateResponses];
 
 export type ProfileChangePasswordData = {
     body?: ChangePasswordInput;
+    path?: never;
+    query?: never;
+    url: '/api/account/my-profile/change-password';
 };
 
-export type ProfileChangePasswordResponse = (unknown);
+export type ProfileChangePasswordErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type ProfileChangePasswordError = (RemoteServiceErrorResponse);
+export type ProfileChangePasswordError = ProfileChangePasswordErrors[keyof ProfileChangePasswordErrors];
 
-export type RoleGetAllListResponse = (ListResultDtoOfIdentityRoleDto);
+export type ProfileChangePasswordResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type RoleGetAllListError = (RemoteServiceErrorResponse);
+export type RoleGetAllListData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/identity/roles/all';
+};
+
+export type RoleGetAllListErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type RoleGetAllListError = RoleGetAllListErrors[keyof RoleGetAllListErrors];
+
+export type RoleGetAllListResponses = {
+    /**
+     * OK
+     */
+    200: ListResultDtoOfIdentityRoleDto;
+};
+
+export type RoleGetAllListResponse = RoleGetAllListResponses[keyof RoleGetAllListResponses];
 
 export type RoleGetListData = {
+    body?: never;
+    path?: never;
     query?: {
-        ExtraProperties?: {
-            [key: string]: unknown;
-        };
         Filter?: string;
-        MaxResultCount?: number;
-        SkipCount?: number;
         Sorting?: string;
+        SkipCount?: number;
+        MaxResultCount?: number;
+        ExtraProperties?: {};
     };
+    url: '/api/identity/roles';
 };
 
-export type RoleGetListResponse = (PagedResultDtoOfIdentityRoleDto);
+export type RoleGetListErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type RoleGetListError = (RemoteServiceErrorResponse);
+export type RoleGetListError = RoleGetListErrors[keyof RoleGetListErrors];
+
+export type RoleGetListResponses = {
+    /**
+     * OK
+     */
+    200: PagedResultDtoOfIdentityRoleDto;
+};
+
+export type RoleGetListResponse = RoleGetListResponses[keyof RoleGetListResponses];
 
 export type RoleCreateData = {
     body?: IdentityRoleCreateDto;
+    path?: never;
+    query?: never;
+    url: '/api/identity/roles';
 };
 
-export type RoleCreateResponse = (IdentityRoleDto);
+export type RoleCreateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type RoleCreateError = (RemoteServiceErrorResponse);
+export type RoleCreateError = RoleCreateErrors[keyof RoleCreateErrors];
 
-export type RoleGetData = {
+export type RoleCreateResponses = {
+    /**
+     * OK
+     */
+    200: IdentityRoleDto;
+};
+
+export type RoleCreateResponse = RoleCreateResponses[keyof RoleCreateResponses];
+
+export type RoleDeleteData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/roles/{id}';
 };
 
-export type RoleGetResponse = (IdentityRoleDto);
+export type RoleDeleteErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type RoleGetError = (RemoteServiceErrorResponse);
+export type RoleDeleteError = RoleDeleteErrors[keyof RoleDeleteErrors];
+
+export type RoleDeleteResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type RoleGetData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/identity/roles/{id}';
+};
+
+export type RoleGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type RoleGetError = RoleGetErrors[keyof RoleGetErrors];
+
+export type RoleGetResponses = {
+    /**
+     * OK
+     */
+    200: IdentityRoleDto;
+};
+
+export type RoleGetResponse = RoleGetResponses[keyof RoleGetResponses];
 
 export type RoleUpdateData = {
     body?: IdentityRoleUpdateDto;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/roles/{id}';
 };
 
-export type RoleUpdateResponse = (IdentityRoleDto);
-
-export type RoleUpdateError = (RemoteServiceErrorResponse);
-
-export type RoleDeleteData = {
-    path: {
-        id: string;
-    };
+export type RoleUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
 };
 
-export type RoleDeleteResponse = (unknown);
+export type RoleUpdateError = RoleUpdateErrors[keyof RoleUpdateErrors];
 
-export type RoleDeleteError = (RemoteServiceErrorResponse);
+export type RoleUpdateResponses = {
+    /**
+     * OK
+     */
+    200: IdentityRoleDto;
+};
+
+export type RoleUpdateResponse = RoleUpdateResponses[keyof RoleUpdateResponses];
 
 export type TenantGetTenantGuidData = {
+    body?: never;
+    path?: never;
     query?: {
         host?: string;
     };
+    url: '/api/multi-tenancy';
 };
 
-export type TenantGetTenantGuidResponse = (string);
+export type TenantGetTenantGuidResponses = {
+    /**
+     * OK
+     */
+    200: string;
+};
 
-export type TenantGetTenantGuidError = unknown;
+export type TenantGetTenantGuidResponse = TenantGetTenantGuidResponses[keyof TenantGetTenantGuidResponses];
 
 export type TenantAddHostData = {
+    body?: never;
+    path?: never;
     query?: {
-        Host?: string;
         Id?: string;
+        Host?: string;
     };
+    url: '/api/multi-tenancy';
 };
 
-export type TenantAddHostResponse = (CustomTenantDto);
+export type TenantAddHostResponses = {
+    /**
+     * OK
+     */
+    200: CustomTenantDto;
+};
 
-export type TenantAddHostError = unknown;
+export type TenantAddHostResponse = TenantAddHostResponses[keyof TenantAddHostResponses];
 
 export type TenantGetTenantHostData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/multi-tenancy/{id}';
 };
 
-export type TenantGetTenantHostResponse = (CustomTenantDto);
+export type TenantGetTenantHostResponses = {
+    /**
+     * OK
+     */
+    200: CustomTenantDto;
+};
 
-export type TenantGetTenantHostError = unknown;
+export type TenantGetTenantHostResponse = TenantGetTenantHostResponses[keyof TenantGetTenantHostResponses];
+
+export type TenantDeleteData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/multi-tenancy/tenants/{id}';
+};
+
+export type TenantDeleteErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type TenantDeleteError = TenantDeleteErrors[keyof TenantDeleteErrors];
+
+export type TenantDeleteResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
 export type TenantGetData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/multi-tenancy/tenants/{id}';
 };
 
-export type TenantGetResponse = (TenantDto);
+export type TenantGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type TenantGetError = (RemoteServiceErrorResponse);
+export type TenantGetError = TenantGetErrors[keyof TenantGetErrors];
+
+export type TenantGetResponses = {
+    /**
+     * OK
+     */
+    200: TenantDto;
+};
+
+export type TenantGetResponse = TenantGetResponses[keyof TenantGetResponses];
 
 export type TenantUpdateData = {
     body?: TenantUpdateDto;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/multi-tenancy/tenants/{id}';
 };
 
-export type TenantUpdateResponse = (TenantDto);
-
-export type TenantUpdateError = (RemoteServiceErrorResponse);
-
-export type TenantDeleteData = {
-    path: {
-        id: string;
-    };
+export type TenantUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
 };
 
-export type TenantDeleteResponse = (unknown);
+export type TenantUpdateError = TenantUpdateErrors[keyof TenantUpdateErrors];
 
-export type TenantDeleteError = (RemoteServiceErrorResponse);
+export type TenantUpdateResponses = {
+    /**
+     * OK
+     */
+    200: TenantDto;
+};
+
+export type TenantUpdateResponse = TenantUpdateResponses[keyof TenantUpdateResponses];
 
 export type TenantGetListData = {
+    body?: never;
+    path?: never;
     query?: {
         Filter?: string;
-        MaxResultCount?: number;
-        SkipCount?: number;
         Sorting?: string;
+        SkipCount?: number;
+        MaxResultCount?: number;
     };
+    url: '/api/multi-tenancy/tenants';
 };
 
-export type TenantGetListResponse = (PagedResultDtoOfTenantDto);
+export type TenantGetListErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type TenantGetListError = (RemoteServiceErrorResponse);
+export type TenantGetListError = TenantGetListErrors[keyof TenantGetListErrors];
+
+export type TenantGetListResponses = {
+    /**
+     * OK
+     */
+    200: PagedResultDtoOfTenantDto;
+};
+
+export type TenantGetListResponse = TenantGetListResponses[keyof TenantGetListResponses];
 
 export type TenantCreateData = {
     body?: TenantCreateDto;
+    path?: never;
+    query?: never;
+    url: '/api/multi-tenancy/tenants';
 };
 
-export type TenantCreateResponse = (TenantDto);
+export type TenantCreateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type TenantCreateError = (RemoteServiceErrorResponse);
+export type TenantCreateError = TenantCreateErrors[keyof TenantCreateErrors];
 
-export type TenantGetDefaultConnectionStringData = {
+export type TenantCreateResponses = {
+    /**
+     * OK
+     */
+    200: TenantDto;
+};
+
+export type TenantCreateResponse = TenantCreateResponses[keyof TenantCreateResponses];
+
+export type TenantDeleteDefaultConnectionStringData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/multi-tenancy/tenants/{id}/default-connection-string';
 };
 
-export type TenantGetDefaultConnectionStringResponse = (string);
+export type TenantDeleteDefaultConnectionStringErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type TenantGetDefaultConnectionStringError = (RemoteServiceErrorResponse);
+export type TenantDeleteDefaultConnectionStringError = TenantDeleteDefaultConnectionStringErrors[keyof TenantDeleteDefaultConnectionStringErrors];
+
+export type TenantDeleteDefaultConnectionStringResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type TenantGetDefaultConnectionStringData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/multi-tenancy/tenants/{id}/default-connection-string';
+};
+
+export type TenantGetDefaultConnectionStringErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type TenantGetDefaultConnectionStringError = TenantGetDefaultConnectionStringErrors[keyof TenantGetDefaultConnectionStringErrors];
+
+export type TenantGetDefaultConnectionStringResponses = {
+    /**
+     * OK
+     */
+    200: string;
+};
+
+export type TenantGetDefaultConnectionStringResponse = TenantGetDefaultConnectionStringResponses[keyof TenantGetDefaultConnectionStringResponses];
 
 export type TenantUpdateDefaultConnectionStringData = {
+    body?: never;
     path: {
         id: string;
     };
     query?: {
         defaultConnectionString?: string;
     };
+    url: '/api/multi-tenancy/tenants/{id}/default-connection-string';
 };
 
-export type TenantUpdateDefaultConnectionStringResponse = (unknown);
-
-export type TenantUpdateDefaultConnectionStringError = (RemoteServiceErrorResponse);
-
-export type TenantDeleteDefaultConnectionStringData = {
-    path: {
-        id: string;
-    };
+export type TenantUpdateDefaultConnectionStringErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
 };
 
-export type TenantDeleteDefaultConnectionStringResponse = (unknown);
+export type TenantUpdateDefaultConnectionStringError = TenantUpdateDefaultConnectionStringErrors[keyof TenantUpdateDefaultConnectionStringErrors];
 
-export type TenantDeleteDefaultConnectionStringError = (RemoteServiceErrorResponse);
+export type TenantUpdateDefaultConnectionStringResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type TimeZoneSettingsGetResponse = (string);
+export type TimeZoneSettingsGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/setting-management/timezone';
+};
 
-export type TimeZoneSettingsGetError = (RemoteServiceErrorResponse);
+export type TimeZoneSettingsGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type TimeZoneSettingsGetError = TimeZoneSettingsGetErrors[keyof TimeZoneSettingsGetErrors];
+
+export type TimeZoneSettingsGetResponses = {
+    /**
+     * OK
+     */
+    200: string;
+};
+
+export type TimeZoneSettingsGetResponse = TimeZoneSettingsGetResponses[keyof TimeZoneSettingsGetResponses];
 
 export type TimeZoneSettingsUpdateData = {
+    body?: never;
+    path?: never;
     query?: {
         timezone?: string;
     };
+    url: '/api/setting-management/timezone';
 };
 
-export type TimeZoneSettingsUpdateResponse = (unknown);
+export type TimeZoneSettingsUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type TimeZoneSettingsUpdateError = (RemoteServiceErrorResponse);
+export type TimeZoneSettingsUpdateError = TimeZoneSettingsUpdateErrors[keyof TimeZoneSettingsUpdateErrors];
 
-export type TimeZoneSettingsGetTimezonesResponse = (Array<NameValue>);
+export type TimeZoneSettingsUpdateResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type TimeZoneSettingsGetTimezonesError = (RemoteServiceErrorResponse);
+export type TimeZoneSettingsGetTimezonesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/setting-management/timezone/timezones';
+};
 
-export type UserGetData = {
+export type TimeZoneSettingsGetTimezonesErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type TimeZoneSettingsGetTimezonesError = TimeZoneSettingsGetTimezonesErrors[keyof TimeZoneSettingsGetTimezonesErrors];
+
+export type TimeZoneSettingsGetTimezonesResponses = {
+    /**
+     * OK
+     */
+    200: Array<NameValue>;
+};
+
+export type TimeZoneSettingsGetTimezonesResponse = TimeZoneSettingsGetTimezonesResponses[keyof TimeZoneSettingsGetTimezonesResponses];
+
+export type UserDeleteData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/users/{id}';
 };
 
-export type UserGetResponse = (IdentityUserDto);
+export type UserDeleteErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserGetError = (RemoteServiceErrorResponse);
+export type UserDeleteError = UserDeleteErrors[keyof UserDeleteErrors];
+
+export type UserDeleteResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
+
+export type UserGetData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/identity/users/{id}';
+};
+
+export type UserGetErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type UserGetError = UserGetErrors[keyof UserGetErrors];
+
+export type UserGetResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type UserGetResponse = UserGetResponses[keyof UserGetResponses];
 
 export type UserUpdateData = {
     body?: IdentityUserUpdateDto;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/users/{id}';
 };
 
-export type UserUpdateResponse = (IdentityUserDto);
-
-export type UserUpdateError = (RemoteServiceErrorResponse);
-
-export type UserDeleteData = {
-    path: {
-        id: string;
-    };
+export type UserUpdateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
 };
 
-export type UserDeleteResponse = (unknown);
+export type UserUpdateError = UserUpdateErrors[keyof UserUpdateErrors];
 
-export type UserDeleteError = (RemoteServiceErrorResponse);
+export type UserUpdateResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type UserUpdateResponse = UserUpdateResponses[keyof UserUpdateResponses];
 
 export type UserGetListData = {
+    body?: never;
+    path?: never;
     query?: {
-        ExtraProperties?: {
-            [key: string]: unknown;
-        };
         Filter?: string;
-        MaxResultCount?: number;
-        SkipCount?: number;
         Sorting?: string;
+        SkipCount?: number;
+        MaxResultCount?: number;
+        ExtraProperties?: {};
     };
+    url: '/api/identity/users';
 };
 
-export type UserGetListResponse = (PagedResultDtoOfIdentityUserDto);
+export type UserGetListErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserGetListError = (RemoteServiceErrorResponse);
+export type UserGetListError = UserGetListErrors[keyof UserGetListErrors];
+
+export type UserGetListResponses = {
+    /**
+     * OK
+     */
+    200: PagedResultDtoOfIdentityUserDto;
+};
+
+export type UserGetListResponse = UserGetListResponses[keyof UserGetListResponses];
 
 export type UserCreateData = {
     body?: IdentityUserCreateDto;
+    path?: never;
+    query?: never;
+    url: '/api/identity/users';
 };
 
-export type UserCreateResponse = (IdentityUserDto);
+export type UserCreateErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserCreateError = (RemoteServiceErrorResponse);
+export type UserCreateError = UserCreateErrors[keyof UserCreateErrors];
+
+export type UserCreateResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type UserCreateResponse = UserCreateResponses[keyof UserCreateResponses];
 
 export type UserGetRolesData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/users/{id}/roles';
 };
 
-export type UserGetRolesResponse = (ListResultDtoOfIdentityRoleDto);
+export type UserGetRolesErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserGetRolesError = (RemoteServiceErrorResponse);
+export type UserGetRolesError = UserGetRolesErrors[keyof UserGetRolesErrors];
+
+export type UserGetRolesResponses = {
+    /**
+     * OK
+     */
+    200: ListResultDtoOfIdentityRoleDto;
+};
+
+export type UserGetRolesResponse = UserGetRolesResponses[keyof UserGetRolesResponses];
 
 export type UserUpdateRolesData = {
     body?: IdentityUserUpdateRolesDto;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/users/{id}/roles';
 };
 
-export type UserUpdateRolesResponse = (unknown);
+export type UserUpdateRolesErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserUpdateRolesError = (RemoteServiceErrorResponse);
+export type UserUpdateRolesError = UserUpdateRolesErrors[keyof UserUpdateRolesErrors];
 
-export type UserGetAssignableRolesResponse = (ListResultDtoOfIdentityRoleDto);
+export type UserUpdateRolesResponses = {
+    /**
+     * OK
+     */
+    200: unknown;
+};
 
-export type UserGetAssignableRolesError = (RemoteServiceErrorResponse);
+export type UserGetAssignableRolesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/identity/users/assignable-roles';
+};
+
+export type UserGetAssignableRolesErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
+
+export type UserGetAssignableRolesError = UserGetAssignableRolesErrors[keyof UserGetAssignableRolesErrors];
+
+export type UserGetAssignableRolesResponses = {
+    /**
+     * OK
+     */
+    200: ListResultDtoOfIdentityRoleDto;
+};
+
+export type UserGetAssignableRolesResponse = UserGetAssignableRolesResponses[keyof UserGetAssignableRolesResponses];
 
 export type UserFindByUsernameData = {
+    body?: never;
     path: {
         userName: string;
     };
+    query?: never;
+    url: '/api/identity/users/by-username/{userName}';
 };
 
-export type UserFindByUsernameResponse = (IdentityUserDto);
+export type UserFindByUsernameErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserFindByUsernameError = (RemoteServiceErrorResponse);
+export type UserFindByUsernameError = UserFindByUsernameErrors[keyof UserFindByUsernameErrors];
+
+export type UserFindByUsernameResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type UserFindByUsernameResponse = UserFindByUsernameResponses[keyof UserFindByUsernameResponses];
 
 export type UserFindByEmailData = {
+    body?: never;
     path: {
         email: string;
     };
+    query?: never;
+    url: '/api/identity/users/by-email/{email}';
 };
 
-export type UserFindByEmailResponse = (IdentityUserDto);
+export type UserFindByEmailErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserFindByEmailError = (RemoteServiceErrorResponse);
+export type UserFindByEmailError = UserFindByEmailErrors[keyof UserFindByEmailErrors];
+
+export type UserFindByEmailResponses = {
+    /**
+     * OK
+     */
+    200: IdentityUserDto;
+};
+
+export type UserFindByEmailResponse = UserFindByEmailResponses[keyof UserFindByEmailResponses];
 
 export type UserLookupFindByIdData = {
+    body?: never;
     path: {
         id: string;
     };
+    query?: never;
+    url: '/api/identity/users/lookup/{id}';
 };
 
-export type UserLookupFindByIdResponse = (UserData);
+export type UserLookupFindByIdErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserLookupFindByIdError = (RemoteServiceErrorResponse);
+export type UserLookupFindByIdError = UserLookupFindByIdErrors[keyof UserLookupFindByIdErrors];
+
+export type UserLookupFindByIdResponses = {
+    /**
+     * OK
+     */
+    200: UserData;
+};
+
+export type UserLookupFindByIdResponse = UserLookupFindByIdResponses[keyof UserLookupFindByIdResponses];
 
 export type UserLookupFindByUserNameData = {
+    body?: never;
     path: {
         userName: string;
     };
+    query?: never;
+    url: '/api/identity/users/lookup/by-username/{userName}';
 };
 
-export type UserLookupFindByUserNameResponse = (UserData);
+export type UserLookupFindByUserNameErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserLookupFindByUserNameError = (RemoteServiceErrorResponse);
+export type UserLookupFindByUserNameError = UserLookupFindByUserNameErrors[keyof UserLookupFindByUserNameErrors];
+
+export type UserLookupFindByUserNameResponses = {
+    /**
+     * OK
+     */
+    200: UserData;
+};
+
+export type UserLookupFindByUserNameResponse = UserLookupFindByUserNameResponses[keyof UserLookupFindByUserNameResponses];
 
 export type UserLookupSearchData = {
+    body?: never;
+    path?: never;
     query?: {
-        ExtraProperties?: {
-            [key: string]: unknown;
-        };
         Filter?: string;
-        MaxResultCount?: number;
-        SkipCount?: number;
         Sorting?: string;
+        SkipCount?: number;
+        MaxResultCount?: number;
+        ExtraProperties?: {};
     };
+    url: '/api/identity/users/lookup/search';
 };
 
-export type UserLookupSearchResponse = (ListResultDtoOfUserData);
+export type UserLookupSearchErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserLookupSearchError = (RemoteServiceErrorResponse);
+export type UserLookupSearchError = UserLookupSearchErrors[keyof UserLookupSearchErrors];
+
+export type UserLookupSearchResponses = {
+    /**
+     * OK
+     */
+    200: ListResultDtoOfUserData;
+};
+
+export type UserLookupSearchResponse = UserLookupSearchResponses[keyof UserLookupSearchResponses];
 
 export type UserLookupGetCountData = {
+    body?: never;
+    path?: never;
     query?: {
         Filter?: string;
     };
+    url: '/api/identity/users/lookup/count';
 };
 
-export type UserLookupGetCountResponse = (number);
+export type UserLookupGetCountErrors = {
+    /**
+     * Bad Request
+     */
+    400: RemoteServiceErrorResponse;
+    /**
+     * Unauthorized
+     */
+    401: RemoteServiceErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: RemoteServiceErrorResponse;
+    /**
+     * Not Found
+     */
+    404: RemoteServiceErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: RemoteServiceErrorResponse;
+    /**
+     * Not Implemented
+     */
+    501: RemoteServiceErrorResponse;
+};
 
-export type UserLookupGetCountError = (RemoteServiceErrorResponse);
+export type UserLookupGetCountError = UserLookupGetCountErrors[keyof UserLookupGetCountErrors];
+
+export type UserLookupGetCountResponses = {
+    /**
+     * OK
+     */
+    200: number;
+};
+
+export type UserLookupGetCountResponse = UserLookupGetCountResponses[keyof UserLookupGetCountResponses];
+
+export type ClientOptions = {
+    baseUrl: 'https://abp.antosubash.com' | (string & {});
+};

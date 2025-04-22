@@ -30,10 +30,10 @@ export const useRoles = (
       }
       const { data } = await roleGetList({
         query: {
-          maxResultCount: pageSize,
-          skipCount: skip,
-          filter: filter,
-          sorting: sorting,
+          Filter: filter,
+          Sorting: sorting,
+          MaxResultCount: pageSize,
+          SkipCount: skip,
         }
       })
       return data

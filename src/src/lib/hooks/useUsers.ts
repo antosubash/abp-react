@@ -30,10 +30,10 @@ export const useUsers = (
       }
       const response = await userGetList({
         query: {
-          maxResultCount: pageSize,
-          skipCount: skip,
-          filter: filter,
-          sorting: sorting,
+          MaxResultCount: pageSize,
+          SkipCount: skip,
+          Filter: filter,
+          Sorting: sorting,
         }
       })
       return response.data

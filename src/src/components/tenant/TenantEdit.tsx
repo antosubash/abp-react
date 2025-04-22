@@ -16,8 +16,12 @@ import classNames from 'clsx'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+export type TenantExtraProperties = {
+  Host?: string;
+}
+
 export type TenantEditProps = {
-  tenantDto: TenantUpdateDto
+  tenantDto: TenantUpdateDto & { extraProperties?: TenantExtraProperties }
   tenantId: string
   onDismiss: () => void
 }
@@ -31,7 +35,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
   const { handleSubmit, register } = useForm()
 
   useEffect(() => {
-    if (tenantDto?.extraProperties?.Host) {
+    if (tenantDto.extraProperties?.Host) {
       setEnableHost(true)
     }
   }, [tenantDto, tenantDto?.extraProperties?.Host])
@@ -47,8 +51,8 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
       if (enableHost && tenant?.host) {
         await tenantAddHost({
           query: {
-            id: tenantId,
-            host: tenant.host,
+            Host: tenant.host,
+            Id: tenantId,
           },
         })
       }

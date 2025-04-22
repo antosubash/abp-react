@@ -13,7 +13,7 @@ import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeleteTenant } from './DeleteTenant'
 import { FeatureList } from './FeatureList'
-import { TenantEdit } from './TenantEdit'
+import { TenantEdit, TenantExtraProperties } from './TenantEdit'
 
 export const TenantList = () => {
   const { toast } = useToast()
@@ -21,7 +21,7 @@ export const TenantList = () => {
   const [searchStr, setSearchStr] = useState<string | undefined>()
   const [tenantActionDialog, setTenantActionDialog] = useState<{
     tenantId: string
-    tenantDto: TenantUpdateDto
+    tenantDto: TenantUpdateDto & { extraProperties?: TenantExtraProperties }
     dialgoType?: 'edit' | 'manage_features' | 'delete'
   } | null>()
 
@@ -58,7 +58,10 @@ export const TenantList = () => {
                         setTenantActionDialog({
                           dialgoType: 'manage_features',
                           tenantId: info.row.original.id!,
-                          tenantDto: info.row.original as TenantUpdateDto,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
                     },
@@ -69,7 +72,10 @@ export const TenantList = () => {
                         setTenantActionDialog({
                           dialgoType: 'edit',
                           tenantId: info.row.original.id!,
-                          tenantDto: info.row.original as TenantUpdateDto,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
                     },
@@ -79,7 +85,10 @@ export const TenantList = () => {
                       callback: () => {
                         setTenantActionDialog({
                           tenantId: info.row.original.id as string,
-                          tenantDto: info.row.original as TenantUpdateDto,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                           dialgoType: 'delete',
                         })
                       },
