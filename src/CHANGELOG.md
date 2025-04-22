@@ -1,8 +1,30 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.1...v2.3.2)
+
+### 🏡 Chore
+
+- Update dependencies and enhance tenant management ([8079258](https://github.com/antosubash/abp-react/commit/8079258))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.0...v2.3.1)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.2.21...v2.3.0)
+
+## v2.3.2
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.1...v2.3.2)
+
+### 🏡 Chore
+
+- Update dependencies and enhance tenant management ([8079258](https://github.com/antosubash/abp-react/commit/8079258))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.3.1
 
