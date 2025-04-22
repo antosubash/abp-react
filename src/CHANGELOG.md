@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.2...v2.3.3)
+
+### 🩹 Fixes
+
+- Update baseUrl in client configuration to an empty string ([71d0b3f](https://github.com/antosubash/abp-react/commit/71d0b3f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.1...v2.3.2)
+
+## v2.3.3
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.2...v2.3.3)
+
+### 🩹 Fixes
+
+- Update baseUrl in client configuration to an empty string ([71d0b3f](https://github.com/antosubash/abp-react/commit/71d0b3f))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
