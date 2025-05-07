@@ -6,29 +6,126 @@ sidebar_position: 1
 
 ## Introduction
 
-This guide will explain how the authentication works in ABP React.
-
-## NextAuth.js
-
-NextAuth.js is a library that provides authentication for Next.js applications. It supports multiple authentication providers. We will use it to handle the authentication in ABP React. You can find more details about NextAuth.js [here](https://next-auth.js.org/).
+ABP React implements a secure authentication system using OpenID Connect with PKCE (Proof Key for Code Exchange) flow. This guide explains how authentication works in the application.
 
 ## Authentication Flow
 
-The authentication flow is as follows:
+The authentication process follows these steps:
 
-1. The user clicks on the login button.
-2. The user is redirected to the login page.
-3. The user enters the credentials and clicks on the login button.
-4. The user is redirected to the callback page.
-5. The user is redirected to the home page.
+1. User clicks the login button
+2. System generates a PKCE code verifier and challenge
+3. User is redirected to the OpenID Connect authorization endpoint
+4. After successful authentication, user is redirected back to the callback URL
+5. System exchanges the authorization code for tokens
+6. Tokens are stored securely in Redis
+7. User session is established with iron-session
 
-This flow is the same for all the authentication providers. We will setup a custom authentication provider in the next-auth because there is no provider for OpenIddict yet. You can find more details about the authentication flow [here](https://next-auth.js.org/getting-started/client#authentication-flow).
+## OpenID Connect Configuration
 
-## OpenID Connect
+The application uses OpenID Connect with the following configuration:
 
-To set up the authentication, you need to set up an OpenID Connect server.
-Abp Application uses [OpenIddict](https://github.com/openiddict/openiddict-core) for authentication. You have to create an client with the authorization code flow. Make sure to set the redirect uri to `http://localhost:3000/api/auth/callback/openiddict`. You can find more details about the OpenIddict configuration [here](https://docs.abp.io/en/abp/latest/Authentication/OpenId-Connect).
+```typescript
+const clientConfig = {
+  url: process.env.NEXT_PUBLIC_API_URL,
+  audience: process.env.NEXT_PUBLIC_API_URL,
+  client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+  scope: process.env.NEXT_PUBLIC_SCOPE,
+  redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/auth/openiddict`,
+  post_logout_redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}`,
+  response_type: 'code',
+  grant_type: 'authorization_code',
+  post_login_route: `${process.env.NEXT_PUBLIC_APP_URL}`,
+  code_challenge_method: 'S256'
+}
+```
 
-## NextAuth.js Configuration
+### Required Environment Variables
 
-NextAuth.js is configured in the `/pages/api/auth/[...nextauth].ts` api endpoint. You can find the file in the api directory of the abp app folder. You can find more details about the configuration [here](https://next-auth.js.org/configuration/initialization).
+- `NEXT_PUBLIC_API_URL`: Your ABP API URL
+- `NEXT_PUBLIC_CLIENT_ID`: OpenID Connect client ID
+- `NEXT_PUBLIC_SCOPE`: Required OAuth scopes
+- `NEXT_PUBLIC_APP_URL`: Your application URL
+- `SESSION_PASSWORD`: Secret key for session encryption
+
+## Session Management
+
+The application uses two layers of session management:
+
+1. **Iron Session**: For secure client-side session storage
+2. **Redis**: For server-side token storage
+
+### Session Data Structure
+
+```typescript
+interface SessionData {
+  isLoggedIn: boolean
+  access_token?: string
+  code_verifier?: string
+  state?: string
+  userInfo?: {
+    sub: string
+    name: string
+    email: string
+    email_verified: boolean
+  }
+  tenantId?: string
+}
+```
+
+## Token Refresh
+
+The application automatically handles token refresh:
+
+1. Checks token expiration before each request
+2. Uses refresh token to obtain new access token
+3. Updates both Redis and session storage
+4. Maintains user session without requiring re-authentication
+
+## Multi-tenancy Support
+
+The application includes built-in multi-tenancy support:
+
+1. Tenant ID is determined from the host header
+2. Tenant context is maintained in the session
+3. Tenant ID is included in API requests
+4. Automatic tenant resolution on application startup
+
+## Security Features
+
+- PKCE flow for enhanced security
+- Secure session storage with iron-session
+- Redis-based token storage
+- Automatic token refresh
+- CSRF protection
+- Secure cookie configuration
+
+## API Integration
+
+The authentication token is automatically included in API requests:
+
+```typescript
+APIClient.interceptors.request.use(async (options) => {
+  const session = await getSession()
+  options.headers.set('Authorization', `Bearer ${session.access_token}`)
+  options.headers.set('__tenant', session.tenantId ?? '')
+  return options
+})
+```
+
+## Logout Process
+
+The logout process:
+
+1. Clears session data
+2. Removes tokens from Redis
+3. Redirects to OpenID Connect end session endpoint
+4. Redirects to post-logout URL
+
+## Best Practices
+
+1. Always use environment variables for sensitive configuration
+2. Keep session duration reasonable (default: 1 week)
+3. Use HTTPS in production
+4. Implement proper error handling
+5. Monitor token refresh operations
+6. Regular security audits

@@ -2,15 +2,143 @@
 sidebar_position: 2
 ---
 
-# Next.js Middleware
+# Middleware
 
-Next.js Middleware is a way to extend the functionality of Next.js by adding custom code to the request handling pipeline. This is useful for things like logging, authentication, or custom error handling.
+## Overview
 
-## Middleware in Abp React
+ABP React implements a middleware system that handles critical aspects of the application's request pipeline, particularly focusing on tenant resolution and session management. The middleware runs on every request and ensures proper tenant context and session state.
 
-In Abp React, we have implemented a middleware system that is similar to Next.js Middleware. You can use it to extend the functionality of the application. For example, you can use it to add custom headers to the response, or to add custom error handling. You can also use it to add custom authentication logic. Right now, we have implemented a middleware that checks the user's role and redirects the user to the login page if the user is not authenticated.
+## Core Functionality
 
-## How to use
+The middleware system provides the following key features:
 
-you can find more information about how to use middleware in Next.js documentation [here](https://nextjs.org/docs/advanced-features/middleware).
+1. **Tenant Resolution**
+   - Automatically detects and resolves tenant context from the host header
+   - Maintains tenant information in the session
+   - Redirects to tenant setup if tenant context is missing
+
+2. **Session Management**
+   - Integrates with iron-session for secure session handling
+   - Manages authentication state
+   - Handles tenant-specific session data
+
+## Implementation
+
+### Tenant Resolution Middleware
+
+```typescript
+export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
+  const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
+
+  // Check if tenantId is present in the session
+  if (!session.tenantId && request.nextUrl.pathname !== '/auth/set-tenant') {
+    // Redirect to set-tenant page if tenantId is not present
+    let redirectUrl = new URL('/auth/set-tenant', request.nextUrl.origin)
+    // Validate the redirect URL
+    if (redirectUrl.origin === request.nextUrl.origin) {
+      return NextResponse.redirect(redirectUrl)
+    }
+  }
+}
+```
+
+### Session Data Structure
+
+```typescript
+interface SessionData {
+  isLoggedIn: boolean
+  access_token?: string
+  code_verifier?: string
+  state?: string
+  userInfo?: {
+    sub: string
+    name: string
+    email: string
+    email_verified: boolean
+  }
+  tenantId?: string
+}
+```
+
+## Tenant Resolution Process
+
+1. **Initial Request**
+   - Middleware checks for tenant ID in session
+   - If missing, redirects to `/auth/set-tenant`
+
+2. **Tenant Setup**
+   - Fetches tenant GUID based on host header
+   - Stores tenant ID in session
+   - Redirects back to original request
+
+3. **Subsequent Requests**
+   - Includes tenant ID in API requests
+   - Maintains tenant context throughout the session
+
+## API Integration
+
+The middleware ensures proper tenant context in API requests:
+
+```typescript
+APIClient.interceptors.request.use(async (options) => {
+  const session = await getSession()
+  options.headers.set('Authorization', `Bearer ${session.access_token}`)
+  options.headers.set('__tenant', session.tenantId ?? '')
+  return options
+})
+```
+
+## Best Practices
+
+1. **Security**
+   - Always validate redirect URLs
+   - Use secure session storage
+   - Implement proper error handling
+
+2. **Performance**
+   - Minimize middleware operations
+   - Cache tenant information when possible
+   - Handle edge cases gracefully
+
+3. **Maintenance**
+   - Keep middleware logic simple and focused
+   - Document tenant resolution process
+   - Monitor middleware performance
+
+## Configuration
+
+The middleware can be configured through environment variables:
+
+- `NEXT_PUBLIC_API_URL`: API endpoint for tenant resolution
+- `SESSION_PASSWORD`: Secret key for session encryption
+- `NEXT_PUBLIC_APP_URL`: Application base URL
+
+## Error Handling
+
+The middleware implements robust error handling:
+
+1. **Tenant Resolution Failures**
+   - Falls back to default tenant
+   - Logs resolution errors
+   - Maintains application stability
+
+2. **Session Errors**
+   - Handles session corruption
+   - Provides graceful degradation
+   - Maintains user experience
+
+## Extending Middleware
+
+To extend the middleware functionality:
+
+1. Create new middleware functions
+2. Register them in the middleware chain
+3. Implement proper error handling
+4. Test thoroughly with different scenarios
+
+## Related Components
+
+- [Authentication](/docs/fundamentals/authentication)
+- [Session Management](/docs/fundamentals/session-management)
+- [Multi-tenancy](/docs/fundamentals/multi-tenancy)
 
