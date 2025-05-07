@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.5...v2.3.6)
+
+### 📖 Documentation
+
+- Enhance introduction and authentication documentation ([8a00db8](https://github.com/antosubash/abp-react/commit/8a00db8))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.4...v2.3.5)
+
+## v2.3.6
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.5...v2.3.6)
+
+### 📖 Documentation
+
+- Enhance introduction and authentication documentation ([8a00db8](https://github.com/antosubash/abp-react/commit/8a00db8))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 📖 Documentation
 
