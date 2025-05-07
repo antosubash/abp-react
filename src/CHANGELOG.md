@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.4...v2.3.5)
+
+### 📖 Documentation
+
+- Update README for improved clarity and structure ([12fb681](https://github.com/antosubash/abp-react/commit/12fb681))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.3...v2.3.4)
+
+## v2.3.5
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.4...v2.3.5)
+
+### 📖 Documentation
+
+- Update README for improved clarity and structure ([12fb681](https://github.com/antosubash/abp-react/commit/12fb681))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
