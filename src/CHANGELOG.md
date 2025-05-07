@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.3...v2.3.4)
+
+### 🩹 Fixes
+
+- Update app metadata and enhance admin layout configuration ([dce6dd7](https://github.com/antosubash/abp-react/commit/dce6dd7))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.2...v2.3.3)
+
+## v2.3.4
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.3...v2.3.4)
+
+### 🩹 Fixes
+
+- Update app metadata and enhance admin layout configuration ([dce6dd7](https://github.com/antosubash/abp-react/commit/dce6dd7))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
