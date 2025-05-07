@@ -80,7 +80,7 @@ export const refreshToken = async () => {
  */
 export const setUpLayoutConfig = async () => {
   APIClient.setConfig({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL!,
+    baseUrl: typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_API_URL!,
   })
   APIClient.interceptors.request.use(async (options) => {
     const session = await getSession()

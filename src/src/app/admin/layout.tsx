@@ -1,4 +1,5 @@
 import AdminLayout from '@/layout/admin-layout'
+import { setUpLayoutConfig } from '@/lib/auth';
 import React from "react";
 
 /**
@@ -9,6 +10,7 @@ import React from "react";
  * @param {React.ReactNode} props.children - The child components to be rendered within the AdminLayout.
  * @returns {React.ReactElement} The rendered AdminLayout component with children.
  */
-export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminRootLayout({ children }: { children: React.ReactNode }) {
+  await setUpLayoutConfig()
   return <AdminLayout>{children}</AdminLayout>
 }
