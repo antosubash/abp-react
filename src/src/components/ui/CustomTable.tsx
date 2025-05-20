@@ -68,7 +68,7 @@ const TableView = <T extends unknown>({ table, totalCount, pageSize }: TableView
         </table>
       </section>
       <div className="flex flex-col border-t p-5 lg:flex-row lg:items-center">
-        <div className="text-base-content flex-grow pb-2">{totalCount} total</div>
+        <div className="text-base-content grow pb-2">{totalCount} total</div>
         {totalCount > 10 && <Pagination<T> pageCount={pageCount} table={table} />}
       </div>
     </section>
