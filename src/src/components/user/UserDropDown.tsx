@@ -52,7 +52,7 @@ export const UserDropDown = () => {
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[10rem]">
+        <DropdownMenuContent className="w-40">
           {menus.map((m) => (
             <DropdownMenuItem key={v4()}>
               <Link href={m.link} passHref={true} className="block w-full">

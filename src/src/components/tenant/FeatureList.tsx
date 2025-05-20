@@ -131,7 +131,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
             <DialogTitle>Features</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1 items-baseline gap-2 sm:grid-cols-[12rem_minmax(10rem,_1fr)_auto]">
+            <div className="grid grid-cols-1 items-baseline gap-2 sm:grid-cols-[12rem_minmax(10rem,1fr)_auto]">
               <div className="p-3">
                 {data?.groups?.map((el: FeatureGroupDto) => (
                   <span key={v4()}>{el.displayName}</span>
