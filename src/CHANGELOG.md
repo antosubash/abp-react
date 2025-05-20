@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.6...v2.4.0)
+
+### 🚀 Enhancements
+
+- **upgrade:** Upgraded tailwind v4 ([#209](https://github.com/antosubash/abp-react/pull/209))
+
+### ❤️ Contributors
+
+- Sajan ([@sajanv88](http://github.com/sajanv88))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.5...v2.3.6)
+
+## v2.4.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.3.6...v2.4.0)
+
+### 🚀 Enhancements
+
+- **upgrade:** Upgraded tailwind v4 ([#209](https://github.com/antosubash/abp-react/pull/209))
+
+### ❤️ Contributors
+
+- Sajan ([@sajanv88](http://github.com/sajanv88))
 
 ### 📖 Documentation
 
