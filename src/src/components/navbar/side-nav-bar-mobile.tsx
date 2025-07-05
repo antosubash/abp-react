@@ -78,6 +78,11 @@ export default function SideNavBarMobile() {
                   <div className="flex items-center justify-between">
                     <Link
                       href={menu.link}
+                      onClick={() => {
+                        if (hasSubmenus && !isExpanded) {
+                          toggleMenu(menu.name)
+                        }
+                      }}
                       className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground flex-1 ${
                         isActive ? 'text-foreground bg-accent' : ''
                       }`}

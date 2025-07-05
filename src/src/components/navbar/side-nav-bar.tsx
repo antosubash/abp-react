@@ -64,6 +64,11 @@ export default function SideBarMenu() {
                   <div className="flex items-center justify-between">
                     <Link
                       href={menu.link}
+                      onClick={() => {
+                        if (hasSubmenus && !isExpanded) {
+                          toggleMenu(menu.name)
+                        }
+                      }}
                       className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary flex-1 ${
                         isActive ? 'text-primary bg-primary/10' : ''
                       }`}
