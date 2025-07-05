@@ -64,4 +64,12 @@ export const QueryNames = {
    * Query to get a single page.
    */
   GetPage: 'GetPage',
+  /**
+   * Query to get the list of menu items.
+   */
+  GetMenuItems: 'GetMenuItems',
+  /**
+   * Query to get a single menu item.
+   */
+  GetMenuItem: 'GetMenuItem',
 }

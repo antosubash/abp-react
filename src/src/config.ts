@@ -1,4 +1,4 @@
-import { Cog, Database, Home, MessageSquare, UserRound, Users, FileText, FolderOpen } from 'lucide-react'
+import { Cog, Database, Home, MessageSquare, UserRound, Users, FileText, FolderOpen, Menu } from 'lucide-react'
 import React from "react";
 
 /**
@@ -77,6 +77,11 @@ export const AdminMenus: Array<{
         name: 'Pages',
         link: '/admin/cms/pages',
         icon: FileText,
+      },
+      {
+        name: 'Menu Items',
+        link: '/admin/cms/menus',
+        icon: Menu,
       },
       {
         name: 'Comments',
