@@ -46,6 +46,12 @@ export type Policy =
   | 'FeatureManagement.ManageHostFeatures'
   | 'SettingManagement.Emailing'
   | 'SettingManagement.Emailing.Test'
+  | 'CmsKit.Comments.Create'
+  | 'CmsKit.Comments.Update'
+  | 'CmsKit.Comments.Delete'
+  | 'CmsKit.Pages.Create'
+  | 'CmsKit.Pages.Update'
+  | 'CmsKit.Pages.Delete'
 
 /**
  * Custom hook to check if a specific policy is granted.

@@ -3,19 +3,24 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL
 
+if (!EXTERNAL_API_URL) {
+  console.error('NEXT_PUBLIC_API_URL environment variable is not set')
+  throw new Error('API URL not configured')
+}
+
+
+
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 interface ApiError extends Error {
   status?: number;
 }
 
-const getHeaders = async (request: NextRequest, method: RequestMethod): Promise<HeadersInit> => {
+const getHeaders = async (): Promise<HeadersInit> => {
   const session = await getSession()
   
-  // Create a new headers object from the incoming request
-  const headers = new Headers(request.headers)
+  const headers = new Headers()
   
-  // Add or override specific headers
   headers.set('Authorization', `Bearer ${session.access_token}`)
   headers.set('Content-Type', 'application/json')
   headers.set('__tenant', session.tenantId ?? '')
@@ -31,16 +36,39 @@ const makeApiRequest = async (
   try {
     const path = request.nextUrl.pathname
     const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
-    const headers = await getHeaders(request, method)
+    const headers = await getHeaders()
 
     const options: RequestInit = {
       method,
       headers,
-      ...(includeBody && { body: request.body }),
+      ...(includeBody && { 
+        body: request.body,
+        duplex: 'half'
+      }),
       cache: 'no-store',
     }
 
-    const response = await fetch(url, options)
+    // Add timeout and better error handling
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
+    let response: Response
+    try {
+      response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      })
+      clearTimeout(timeoutId)
+    } catch (fetchError) {
+      clearTimeout(timeoutId)
+      console.error('Fetch error details:', {
+        error: fetchError,
+        cause: (fetchError as any)?.cause,
+        url,
+        method
+      })
+      throw fetchError
+    }
 
     if (!response.ok) {
       const errorData = await response.clone().json().catch(() => null)

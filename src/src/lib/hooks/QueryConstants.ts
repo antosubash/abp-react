@@ -52,4 +52,16 @@ export const QueryNames = {
    * Query to get the session information.
    */
   GetSession: 'GetSession',
+  /**
+   * Query to get the list of comments.
+   */
+  GetComments: 'GetComments',
+  /**
+   * Query to get the list of pages.
+   */
+  GetPages: 'GetPages',
+  /**
+   * Query to get a single page.
+   */
+  GetPage: 'GetPage',
 }
