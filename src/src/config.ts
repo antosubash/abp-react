@@ -1,4 +1,4 @@
-import { Cog, Database, Home, MessageSquare, UserRound, Users, FileText } from 'lucide-react'
+import { Cog, Database, Home, MessageSquare, UserRound, Users, FileText, FolderOpen } from 'lucide-react'
 import React from "react";
 
 /**
@@ -43,10 +43,16 @@ export const PublicMenus: Array<{ Name: string; Link: string }> = [
 /**
  * List of menus shown in the Admin layout.
  * Each menu item contains a name, link, and icon.
+ * Supports nested submenus for 2-level navigation.
  *
- * @type {Array<{name: string, link: string, icon: React.ComponentType}>}
+ * @type {Array<{name: string, link: string, icon: React.ComponentType, submenus?: Array<{name: string, link: string, icon: React.ComponentType}>}>}
  */
-export const AdminMenus: Array<{ name: string; link: string; icon: React.ComponentType; }> = [
+export const AdminMenus: Array<{ 
+  name: string; 
+  link: string; 
+  icon: React.ComponentType; 
+  submenus?: Array<{ name: string; link: string; icon: React.ComponentType; }>;
+}> = [
   {
     name: 'Home',
     link: '/admin',
@@ -63,14 +69,21 @@ export const AdminMenus: Array<{ name: string; link: string; icon: React.Compone
     icon: Users,
   },
   {
-    name: 'Comments',
-    link: '/admin/comments',
-    icon: MessageSquare,
-  },
-  {
     name: 'CMS',
     link: '/admin/cms',
     icon: FileText,
+    submenus: [
+      {
+        name: 'Pages',
+        link: '/admin/cms/pages',
+        icon: FileText,
+      },
+      {
+        name: 'Comments',
+        link: '/admin/cms/comments',
+        icon: MessageSquare,
+      },
+    ],
   },
   {
     name: 'Tenants',
