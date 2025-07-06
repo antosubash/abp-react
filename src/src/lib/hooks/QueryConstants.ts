@@ -72,4 +72,8 @@ export const QueryNames = {
    * Query to get a single menu item.
    */
   GetMenuItem: 'GetMenuItem',
+  /**
+   * Query to get public comments for a specific entity.
+   */
+  GetPublicComments: 'GetPublicComments',
 }

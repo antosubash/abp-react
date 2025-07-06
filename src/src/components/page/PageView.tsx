@@ -1,4 +1,13 @@
 'use client'
+
+/**
+ * PageView Component
+ * 
+ * Displays a CMS page with its content, metadata, and custom styling.
+ * This component handles both the visual presentation and dynamic behavior
+ * of CMS pages including custom styles and scripts.
+ */
+
 import { VoloCmsKitContentsPageDtoReadable } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -6,38 +15,48 @@ import { Separator } from '@/components/ui/separator'
 import { FileText, Code, Palette } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
+import { PageComments } from '@/components/comment/PageComments'
 
 export type PageViewProps = {
   page: VoloCmsKitContentsPageDtoReadable
 }
 
 export const PageView = ({ page }: PageViewProps) => {
-  // Inject custom styles if provided
+  /**
+   * Inject custom CSS styles into the document head
+   * This allows pages to have custom styling without affecting other pages
+   */
   useEffect(() => {
     if (page.style) {
+      // Create a new style element with the page's custom CSS
       const styleElement = document.createElement('style')
       styleElement.textContent = page.style
       document.head.appendChild(styleElement)
       
+      // Cleanup: remove the style element when component unmounts
+      // This prevents styles from persisting after leaving the page
       return () => {
         document.head.removeChild(styleElement)
       }
     }
   }, [page.style])
 
-  // Execute custom scripts if provided
+  /**
+   * Handle custom JavaScript execution for the page
+   * Currently disabled for security reasons - needs proper sandboxing
+   */
   useEffect(() => {
     if (page.script && typeof page.script === 'string' && page.script.trim().length > 0) {
       try {
-        // Log the script content for debugging
+        // Log the script content for debugging purposes
         console.log('Executing page script:', page.script)
         
-        // For now, let's disable script execution to prevent errors
-        // TODO: Implement proper script sandboxing
+        // TODO: Implement proper script sandboxing for security
+        // Script execution is temporarily disabled to prevent security vulnerabilities
         console.warn('Script execution is temporarily disabled for security reasons')
         
-        // Commented out script execution until we can properly sandbox it
-        /*
+        /* 
+        // Future implementation with proper sandboxing:
         // Create a safer execution environment by wrapping in try-catch
         const safeScript = `
           try {
@@ -94,7 +113,7 @@ export const PageView = ({ page }: PageViewProps) => {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      {/* Header */}
+      {/* Page Header with title and navigation buttons */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
@@ -102,6 +121,7 @@ export const PageView = ({ page }: PageViewProps) => {
             <p className="text-muted-foreground">Page Details</p>
           </div>
           <div className="flex gap-2">
+            {/* Navigation buttons */}
             <Link href="/admin/cms/pages">
               <Button variant="outline">Back to Pages</Button>
             </Link>
@@ -112,8 +132,9 @@ export const PageView = ({ page }: PageViewProps) => {
         </div>
       </div>
 
+      {/* Main content grid - sidebar + content area */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Page Information */}
+        {/* Sidebar: Page metadata and information */}
         <div className="lg:col-span-1">
           <Card>
             <CardHeader>
@@ -123,11 +144,13 @@ export const PageView = ({ page }: PageViewProps) => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Page slug - used for URL routing */}
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Slug</label>
                 <p className="text-sm bg-muted p-2 rounded-md font-mono">{page.slug}</p>
               </div>
               
+              {/* Page layout - determines the page structure */}
               <div>
                 <label className="text-sm font-medium text-muted-foreground">Layout</label>
                 <p className="text-sm">{page.layoutName || 'Default'}</p>
@@ -135,6 +158,7 @@ export const PageView = ({ page }: PageViewProps) => {
 
               <Separator />
 
+              {/* Custom script indicator */}
               {page.script && (
                 <div>
                   <label className="text-sm font-medium text-muted-foreground flex items-center gap-1">
@@ -145,6 +169,7 @@ export const PageView = ({ page }: PageViewProps) => {
                 </div>
               )}
 
+              {/* Custom styles indicator */}
               {page.style && (
                 <div>
                   <label className="text-sm font-medium text-muted-foreground flex items-center gap-1">
@@ -158,7 +183,7 @@ export const PageView = ({ page }: PageViewProps) => {
           </Card>
         </div>
 
-        {/* Page Content */}
+        {/* Main content area: Page content display */}
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
@@ -166,11 +191,14 @@ export const PageView = ({ page }: PageViewProps) => {
             </CardHeader>
             <CardContent>
               {page.content ? (
+                // Render HTML content safely using dangerouslySetInnerHTML
+                // Note: This assumes the content is sanitized on the server side
                 <div 
                   className="prose prose-sm max-w-none"
                   dangerouslySetInnerHTML={{ __html: page.content }}
                 />
               ) : (
+                // Empty state when no content is available
                 <div className="text-center py-8 text-muted-foreground">
                   <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
                   <p>No content available for this page.</p>
@@ -179,6 +207,11 @@ export const PageView = ({ page }: PageViewProps) => {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      {/* Comments Section */}
+      <div className="mt-8">
+        <PageComments pageId={page.id!} pageTitle={page.title!} />
       </div>
     </div>
   )
