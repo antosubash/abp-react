@@ -13,6 +13,7 @@ import { DeletePage } from './DeletePage'
 import { Search } from '@/components/ui/Search'
 import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export const PageList = () => {
   const { toast } = useToast()
@@ -37,6 +38,10 @@ export const PageList = () => {
   }
 
   const columns = useMemo(() => getPageColumns({
+    onView: (page) => {
+      // Navigate to view page using slug
+      window.location.href = `/admin/cms/pages/view/${page.slug}`
+    },
     onEdit: (page) => {
       // Navigate to edit page
       window.location.href = `/admin/cms/pages/${page.id}/edit`
@@ -85,6 +90,7 @@ export const PageList = () => {
 }
 
 const getPageColumns = (actions: {
+  onView: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
   onEdit: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
   onDelete: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
 }): ColumnDef<VoloCmsKitAdminPagesPageDtoReadable>[] => [
@@ -95,20 +101,29 @@ const getPageColumns = (actions: {
         accessorKey: 'actions',
         header: 'Actions',
         cell: (info) => (
-          <PermissionActions
-            actions={[
-              {
-                icon: 'pencil',
-                policy: 'CmsKit.Pages.Update',
-                callback: () => actions.onEdit(info.row.original),
-              },
-              {
-                icon: 'trash',
-                policy: 'CmsKit.Pages.Delete',
-                callback: () => actions.onDelete(info.row.original),
-              },
-            ]}
-          />
+          <div className="flex gap-2">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => actions.onView(info.row.original)}
+            >
+              View
+            </Button>
+            <PermissionActions
+              actions={[
+                {
+                  icon: 'pencil',
+                  policy: 'CmsKit.Pages.Update',
+                  callback: () => actions.onEdit(info.row.original),
+                },
+                {
+                  icon: 'trash',
+                  policy: 'CmsKit.Pages.Delete',
+                  callback: () => actions.onDelete(info.row.original),
+                },
+              ]}
+            />
+          </div>
         ),
       },
       {

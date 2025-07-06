@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { pageAdminGetList, pageAdminGet, PagedResultDtoOfVoloCmsKitAdminPagesPageDto } from '@/client'
+import { pageAdminGetList, pageAdminGet, PagedResultDtoOfVoloCmsKitAdminPagesPageDto, pagesPublicFindBySlug } from '@/client'
 
 /**
  * Hook to fetch pages with pagination and filtering.
@@ -69,5 +69,31 @@ export const usePage = (id: string) => {
       return response.data
     },
     enabled: !!id,
+  })
+}
+
+/**
+ * Hook to fetch a single page by slug using the public API.
+ * 
+ * @param {string} slug - The page slug.
+ * @returns {Object} - Query result with page data.
+ */
+export const usePageBySlug = (slug: string) => {
+  return useQuery({
+    queryKey: [QueryNames.GetPages, 'by-slug', slug],
+    queryFn: async () => {
+      try {
+        console.log('Fetching page with slug:', slug)
+        const response = await pagesPublicFindBySlug({
+          query: { slug },
+        })
+        console.log('Page response:', response.data)
+        return response.data
+      } catch (error) {
+        console.error('Error fetching page by slug:', error)
+        return null
+      }
+    },
+    enabled: !!slug,
   })
 } 

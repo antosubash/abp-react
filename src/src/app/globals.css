@@ -89,6 +89,72 @@
   }
 }
 
+/* Prose styling for page content */
+.prose {
+  @apply text-foreground;
+}
+
+.prose h1 {
+  @apply text-2xl font-bold mb-4 text-foreground;
+}
+
+.prose h2 {
+  @apply text-xl font-semibold mb-3 text-foreground;
+}
+
+.prose h3 {
+  @apply text-lg font-medium mb-2 text-foreground;
+}
+
+.prose p {
+  @apply mb-4 text-foreground;
+}
+
+.prose ul {
+  @apply mb-4 list-disc list-inside text-foreground;
+}
+
+.prose ol {
+  @apply mb-4 list-decimal list-inside text-foreground;
+}
+
+.prose li {
+  @apply mb-1 text-foreground;
+}
+
+.prose a {
+  @apply text-primary hover:underline;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-muted pl-4 italic text-muted-foreground;
+}
+
+.prose code {
+  @apply bg-muted px-1 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply bg-muted p-4 rounded overflow-x-auto;
+}
+
+.prose img {
+  @apply max-w-full h-auto rounded;
+}
+
+.prose table {
+  @apply w-full border-collapse border border-border;
+}
+
+.prose th,
+.prose td {
+  @apply border border-border p-2 text-left;
+}
+
+.prose th {
+  @apply bg-muted font-semibold;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
