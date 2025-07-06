@@ -1,5 +1,5 @@
 'use client'
-import { UpdateProfileDto, profileUpdate } from '@/client'
+import { profileUpdate, UpdateProfileDto } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useProfile } from '@/lib/hooks/useProfile'
 import { useQueryClient } from '@tanstack/react-query'

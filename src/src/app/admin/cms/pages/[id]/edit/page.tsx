@@ -1,41 +1,44 @@
 'use client'
-import { VoloCmsKitAdminPagesPageDtoReadable, pageAdminUpdate, UpdatePageInputDtoWritable } from '@/client'
+import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Error from '@/components/ui/Error'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import Loader from '@/components/ui/Loader'
+import { Separator } from '@/components/ui/separator'
+import { Switch } from '@/components/ui/switch'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Switch } from '@/components/ui/switch'
-import { Separator } from '@/components/ui/separator'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { usePage } from '@/lib/hooks/usePages'
 import { useQueryClient } from '@tanstack/react-query'
-import { 
-  ArrowLeft, 
-  Save, 
-  Eye, 
-  Edit3, 
-  FileText, 
-  Code, 
+import {
   AlertCircle,
+  ArrowLeft,
   CheckCircle,
   Clock,
+  Code,
+  Edit3,
+  Eye,
+  FileText,
   History,
-  ExternalLink
+  Save,
 } from 'lucide-react'
-import { useRouter, useParams } from 'next/navigation'
-import { useEffect, useState, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import Loader from '@/components/ui/Loader'
-import Error from '@/components/ui/Error'
+import { useParams, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
 // Rich text editor component
-const RichTextEditor = ({ value, onChange, placeholder }: {
+const RichTextEditor = ({
+  value,
+  onChange,
+  placeholder,
+}: {
   value: string
   onChange: (value: string) => void
   placeholder?: string
@@ -61,19 +64,16 @@ const RichTextEditor = ({ value, onChange, placeholder }: {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label>Content Preview</Label>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => setIsPreview(false)}
-          >
+          <Button type="button" variant="outline" size="sm" onClick={() => setIsPreview(false)}>
             <Edit3 className="w-4 h-4 mr-2" />
             Edit
           </Button>
         </div>
-        <div 
+        <div
           className="border rounded-md p-4 min-h-[300px] bg-background"
-          dangerouslySetInnerHTML={{ __html: value || '<p class="text-muted-foreground">No content to preview</p>' }}
+          dangerouslySetInnerHTML={{
+            __html: value || '<p class="text-muted-foreground">No content to preview</p>',
+          }}
         />
       </div>
     )
@@ -104,12 +104,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: {
           >
             <strong>B</strong>
           </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => setIsPreview(true)}
-          >
+          <Button type="button" variant="outline" size="sm" onClick={() => setIsPreview(true)}>
             <Eye className="w-4 h-4 mr-2" />
             Preview
           </Button>
@@ -120,7 +115,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder={placeholder || "Enter page content (HTML supported)"}
+        placeholder={placeholder || 'Enter page content (HTML supported)'}
         rows={12}
         className="font-mono text-sm"
       />
@@ -163,7 +158,7 @@ export default function EditPage() {
     control,
     reset,
     formState: { errors, isDirty },
-  } = useForm<UpdatePageInputDtoWritable>({
+  } = useForm<UpdatePageInputDto>({
     defaultValues: {
       title: '',
       slug: '',
@@ -172,7 +167,7 @@ export default function EditPage() {
       script: '',
       style: '',
       concurrencyStamp: '',
-    }
+    },
   })
 
   const { data: page, isLoading, isError } = usePage(pageId)
@@ -181,7 +176,12 @@ export default function EditPage() {
 
   // Auto-generate slug from title (only if slug is empty or matches old title)
   useEffect(() => {
-    if (watchedTitle && page && (!watchedSlug || watchedSlug === generateSlug((page as VoloCmsKitAdminPagesPageDtoReadable).title || ''))) {
+    if (
+      watchedTitle &&
+      page &&
+      (!watchedSlug ||
+        watchedSlug === generateSlug((page as VoloCmsKitAdminPagesPageDto).title || ''))
+    ) {
       const generatedSlug = generateSlug(watchedTitle)
       setValue('slug', generatedSlug)
     }
@@ -195,7 +195,7 @@ export default function EditPage() {
   // Load page data into form
   useEffect(() => {
     if (page) {
-      const pageData = page as VoloCmsKitAdminPagesPageDtoReadable
+      const pageData = page as VoloCmsKitAdminPagesPageDto
       reset({
         title: pageData.title || '',
         slug: pageData.slug || '',
@@ -228,7 +228,7 @@ export default function EditPage() {
         const draftData = JSON.parse(savedDraft)
         Object.entries(draftData).forEach(([key, value]) => {
           if (key in draftData && value !== undefined) {
-            setValue(key as keyof UpdatePageInputDtoWritable, value as any)
+            setValue(key as keyof UpdatePageInputDto, value as any)
           }
         })
         toast({
@@ -270,7 +270,7 @@ export default function EditPage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [hasUnsavedChanges])
 
-  const onSubmit = async (data: UpdatePageInputDtoWritable) => {
+  const onSubmit = async (data: UpdatePageInputDto) => {
     if (!can('CmsKit.Pages.Update')) {
       toast({
         title: 'Access Denied',
@@ -353,11 +353,10 @@ export default function EditPage() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <h2 className="text-2xl font-semibold mb-2">Page Not Found</h2>
-            <p className="text-muted-foreground">The page you are looking for doesn&apos;t exist.</p>
-            <Button 
-              onClick={() => router.push('/admin/cms')}
-              className="mt-4"
-            >
+            <p className="text-muted-foreground">
+              The page you are looking for doesn&apos;t exist.
+            </p>
+            <Button onClick={() => router.push('/admin/cms')} className="mt-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to CMS
             </Button>
@@ -374,10 +373,7 @@ export default function EditPage() {
           <div className="text-center">
             <h2 className="text-2xl font-semibold mb-2">Access Denied</h2>
             <p className="text-muted-foreground">You do not have permission to update pages.</p>
-            <Button 
-              onClick={() => router.push('/admin/cms')}
-              className="mt-4"
-            >
+            <Button onClick={() => router.push('/admin/cms')} className="mt-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to CMS
             </Button>
@@ -403,12 +399,7 @@ export default function EditPage() {
                 Unsaved Changes
               </Badge>
             )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={saveDraft}
-              disabled={!hasUnsavedChanges}
-            >
+            <Button variant="outline" size="sm" onClick={saveDraft} disabled={!hasUnsavedChanges}>
               <Save className="w-4 h-4 mr-2" />
               Save Draft
             </Button>
@@ -427,9 +418,7 @@ export default function EditPage() {
                 onCheckedChange={setIsPublished}
                 disabled
               />
-              <Label htmlFor="publish-status">
-                {isPublished ? 'Home Page' : 'Regular Page'}
-              </Label>
+              <Label htmlFor="publish-status">{isPublished ? 'Home Page' : 'Regular Page'}</Label>
             </div>
             <Badge variant={isPublished ? 'default' : 'secondary'}>
               {isPublished ? (
@@ -509,14 +498,19 @@ export default function EditPage() {
                       {...register('title', {
                         required: 'Title is required',
                         minLength: { value: 1, message: 'Title must be at least 1 character' },
-                        maxLength: { value: 200, message: 'Title must be less than 200 characters' },
+                        maxLength: {
+                          value: 200,
+                          message: 'Title must be less than 200 characters',
+                        },
                       })}
                       placeholder="Enter page title"
                     />
                     {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
                     {formErrors.title && (
                       <p className="text-sm text-red-500">
-                        {Array.isArray(formErrors.title) ? formErrors.title.join(', ') : formErrors.title}
+                        {Array.isArray(formErrors.title)
+                          ? formErrors.title.join(', ')
+                          : formErrors.title}
                       </p>
                     )}
                   </div>
@@ -540,7 +534,9 @@ export default function EditPage() {
                     {errors.slug && <p className="text-sm text-red-500">{errors.slug.message}</p>}
                     {formErrors.slug && (
                       <p className="text-sm text-red-500">
-                        {Array.isArray(formErrors.slug) ? formErrors.slug.join(', ') : formErrors.slug}
+                        {Array.isArray(formErrors.slug)
+                          ? formErrors.slug.join(', ')
+                          : formErrors.slug}
                       </p>
                     )}
                     <p className="text-sm text-muted-foreground">
@@ -644,10 +640,13 @@ export default function EditPage() {
                       Slug: /{watchedSlug || 'page-slug'}
                     </p>
                   </div>
-                  <div 
+                  <div
                     className="prose max-w-none"
-                    dangerouslySetInnerHTML={{ 
-                      __html: (watch('content') || '') || '<p class="text-muted-foreground">No content to preview</p>' 
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        watch('content') ||
+                        '' ||
+                        '<p class="text-muted-foreground">No content to preview</p>',
                     }}
                   />
                 </div>
@@ -685,4 +684,4 @@ export default function EditPage() {
       </form>
     </div>
   )
-} 
+}

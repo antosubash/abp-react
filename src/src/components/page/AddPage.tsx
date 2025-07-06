@@ -1,5 +1,5 @@
 'use client'
-import { CreatePageInputDtoReadable, pageAdminCreate } from '@/client'
+import { CreatePageInputDto, pageAdminCreate } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -28,9 +28,9 @@ export const AddPage = ({ onDismiss }: AddPageProps) => {
   const [open, setOpen] = useState(false)
   const { toast } = useToast()
   const queryClient = useQueryClient()
-  const { handleSubmit, register, reset, formState: { errors } } = useForm<CreatePageInputDtoReadable>()
+  const { handleSubmit, register, reset, formState: { errors } } = useForm<CreatePageInputDto>()
 
-  const onSubmit = async (data: CreatePageInputDtoReadable) => {
+  const onSubmit = async (data: CreatePageInputDto) => {
     try {
       await pageAdminCreate({
         body: data,

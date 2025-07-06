@@ -2,7 +2,7 @@
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { usePages } from '@/lib/hooks/usePages'
 import { useMemo, useState } from 'react'
-import { VoloCmsKitAdminPagesPageDtoReadable } from '@/client'
+import { VoloCmsKitAdminPagesPageDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
@@ -80,7 +80,7 @@ export const PageList = () => {
         onUpdate={setSearchStr} 
         value={searchStr}
       />
-      <CustomTable<VoloCmsKitAdminPagesPageDtoReadable>
+      <CustomTable<VoloCmsKitAdminPagesPageDto>
         table={table}
         totalCount={data?.totalCount ?? 0}
         pageSize={pagination.pageSize}
@@ -90,10 +90,10 @@ export const PageList = () => {
 }
 
 const getPageColumns = (actions: {
-  onView: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
-  onEdit: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
-  onDelete: (page: VoloCmsKitAdminPagesPageDtoReadable) => void
-}): ColumnDef<VoloCmsKitAdminPagesPageDtoReadable>[] => [
+  onView: (page: VoloCmsKitAdminPagesPageDto) => void
+  onEdit: (page: VoloCmsKitAdminPagesPageDto) => void
+  onDelete: (page: VoloCmsKitAdminPagesPageDto) => void
+}): ColumnDef<VoloCmsKitAdminPagesPageDto>[] => [
   {
     header: 'Page Management',
     columns: [

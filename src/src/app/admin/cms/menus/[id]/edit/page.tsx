@@ -1,5 +1,5 @@
 'use client'
-import { MenuItemWithDetailsDtoReadable, menuItemAdminUpdate, MenuItemUpdateInputWritable } from '@/client'
+import { MenuItemWithDetailsDto, menuItemAdminUpdate, MenuItemUpdateInput } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -40,7 +40,7 @@ export default function EditMenuItem() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<MenuItemUpdateInputWritable>({
+  } = useForm<MenuItemUpdateInput>({
     defaultValues: {
       displayName: '',
       url: '',
@@ -60,7 +60,7 @@ export default function EditMenuItem() {
   // Load menu item data into form
   useEffect(() => {
     if (menuItem && !isLoading) {
-      const menuItemData = menuItem as MenuItemWithDetailsDtoReadable
+      const menuItemData = menuItem as MenuItemWithDetailsDto
       reset({
         displayName: menuItemData.displayName || '',
         url: menuItemData.url || '',
@@ -76,7 +76,7 @@ export default function EditMenuItem() {
     }
   }, [menuItem, isLoading, reset])
 
-  const onSubmit = async (data: MenuItemUpdateInputWritable) => {
+  const onSubmit = async (data: MenuItemUpdateInput) => {
     setIsSubmitting(true)
     try {
       await menuItemAdminUpdate({

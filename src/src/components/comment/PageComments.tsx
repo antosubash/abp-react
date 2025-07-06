@@ -1,6 +1,6 @@
 'use client'
 
-import { CommentWithDetailsDtoReadable, ListResultDtoOfCommentWithDetailsDto } from '@/client'
+import { CommentWithDetailsDto, ListResultDtoOfCommentWithDetailsDto } from '@/client'
 import { usePublicComments } from '@/lib/hooks/usePublicComments'
 import { AddComment } from './AddComment'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -30,6 +30,8 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
   // Debug logging
   console.log('PageComments - currentUser:', currentUser)
   console.log('PageComments - isAuthenticated:', isAuthenticated)
+  console.log('PageComments - commentsData:', commentsData)
+  console.log('PageComments - commentsData?.items:', (commentsData as any)?.items)
 
   if (isLoading) {
     return (
@@ -69,7 +71,8 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
     )
   }
 
-  const comments = Array.isArray(commentsData) ? commentsData : []
+  // Handle both possible response formats - cast to any to work around type issues
+  const comments = (commentsData as any)?.items || (Array.isArray(commentsData) ? commentsData : [])
 
   return (
     <Card>
@@ -101,7 +104,7 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
               <p>No comments yet. Be the first to comment!</p>
             </div>
           ) : (
-            comments.map((comment: CommentWithDetailsDtoReadable) => (
+            comments.map((comment: CommentWithDetailsDto) => (
               <CommentItem 
                 key={comment.id} 
                 comment={comment} 
@@ -117,7 +120,7 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
 }
 
 type CommentItemProps = {
-  comment: CommentWithDetailsDtoReadable
+  comment: CommentWithDetailsDto
   isAuthenticated: boolean
   pageId: string
 }

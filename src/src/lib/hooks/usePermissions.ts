@@ -12,7 +12,7 @@ import { QueryNames } from './QueryConstants'
 export const usePermissions = (
   providerName: string | undefined,
   providerKey: string | undefined
-): UseQueryResult<GetPermissionListResultDto, unknown> => {
+): UseQueryResult<GetPermissionListResultDto | undefined, unknown> => {
   return useQuery({
     queryKey: [QueryNames.GetPermissions, providerName, providerKey],
     queryFn: async () => {

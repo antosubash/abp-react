@@ -12,7 +12,7 @@ import { QueryNames } from './QueryConstants'
  * @returns {UseQueryResult<ProfileDto, unknown>} The result of the query, which includes
  * the profile data and query status.
  */
-export const useProfile = (): UseQueryResult<ProfileDto, unknown> => {
+export const useProfile = (): UseQueryResult<ProfileDto | undefined, unknown> => {
   return useQuery({
     queryKey: [QueryNames.GetProfile],
     queryFn: async () => {

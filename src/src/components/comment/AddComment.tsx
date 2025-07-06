@@ -1,5 +1,5 @@
 'use client'
-import { CreateCommentInputReadable, commentPublicCreate } from '@/client'
+import { CreateCommentInput, commentPublicCreate } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -28,10 +28,14 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
   const { handleSubmit, register, reset } = useForm()
 
   const onSubmit = async (data: any) => {
-    const comment = data as 
+    console.log('AddComment - form data:', data)
     
+    const comment: CreateCommentInput = {
+      text: data.text,
+      idempotencyToken: crypto.randomUUID()
+    }
     
-    comment.idempotencyToken = crypto.randomUUID()
+    console.log('AddComment - comment object:', comment)
 
     try {
       const result = await commentPublicCreate({
@@ -84,7 +88,12 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
           </DialogHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <section className="flex w-full flex-col space-y-5">
-              <Textarea required {...register('text')} placeholder="Comment text" rows={4} />
+              <Textarea 
+                required 
+                {...register('text', { required: true })} 
+                placeholder="Comment text" 
+                rows={4} 
+              />
             </section>
             <DialogFooter className="mt-5">
               <Button

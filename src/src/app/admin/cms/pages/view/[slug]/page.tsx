@@ -4,7 +4,7 @@ import { usePageBySlug } from '@/lib/hooks/usePages'
 import { useParams } from 'next/navigation'
 import Loader from '@/components/ui/Loader'
 import Error from '@/components/ui/Error'
-import { VoloCmsKitContentsPageDtoReadable } from '@/client'
+import { VoloCmsKitContentsPageDto } from '@/client'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
@@ -38,5 +38,5 @@ export default function PageViewPage() {
     )
   }
 
-  return <PageView page={page as VoloCmsKitContentsPageDtoReadable} />
+  return <PageView page={page as VoloCmsKitContentsPageDto} />
 } 

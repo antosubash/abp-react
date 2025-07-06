@@ -1,5 +1,5 @@
 'use client'
-import { MenuItemCreateInputWritable, menuItemAdminCreate, MenuItemDtoReadable } from '@/client'
+import { menuItemAdminCreate, MenuItemCreateInput } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -36,7 +36,7 @@ export default function CreateMenuItem() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<MenuItemCreateInputWritable>({
+  } = useForm<MenuItemCreateInput>({
     defaultValues: {
       displayName: '',
       url: '',
@@ -56,7 +56,7 @@ export default function CreateMenuItem() {
   // Fetch all menu items for parent selection
   const { data: menuItems } = useMenuItems(0, 1000)
 
-  const onSubmit = async (data: MenuItemCreateInputWritable) => {
+  const onSubmit = async (data: MenuItemCreateInput) => {
     setIsSubmitting(true)
     try {
       await menuItemAdminCreate({

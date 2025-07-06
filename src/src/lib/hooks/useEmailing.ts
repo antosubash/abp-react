@@ -10,7 +10,7 @@ import { QueryNames } from './QueryConstants'
  *
  * @returns {UseQueryResult<EmailSettingsDto, unknown>} The result of the email settings query.
  */
-export const useEmailing = (): UseQueryResult<EmailSettingsDto, unknown> => {
+export const useEmailing = (): UseQueryResult<EmailSettingsDto | undefined, unknown> => {
   return useQuery({
     queryKey: [QueryNames.GetEmailing],
     queryFn: async () => {

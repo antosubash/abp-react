@@ -2,7 +2,7 @@
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useMenuItems } from '@/lib/hooks/useMenuItems'
 import { useState } from 'react'
-import { MenuItemDtoReadable } from '@/client'
+import { MenuItemDto } from '@/client'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { useToast } from '@/components/ui/use-toast'
@@ -27,11 +27,11 @@ export const MenuList = () => {
     setDeleteDialog(null)
   }
 
-  const handleEdit = (menuItem: MenuItemDtoReadable) => {
+  const handleEdit = (menuItem: MenuItemDto) => {
     window.location.href = `/admin/cms/menus/${menuItem.id}/edit`
   }
 
-  const handleDelete = (menuItem: MenuItemDtoReadable) => {
+  const handleDelete = (menuItem: MenuItemDto) => {
     setDeleteDialog({
       menuItemId: menuItem.id!,
       displayName: menuItem.displayName!,

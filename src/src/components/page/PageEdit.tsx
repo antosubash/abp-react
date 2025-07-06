@@ -1,5 +1,5 @@
 'use client'
-import { VoloCmsKitAdminPagesPageDtoReadable, pageAdminUpdate, UpdatePageInputDtoWritable } from '@/client'
+import { VoloCmsKitAdminPagesPageDto, pageAdminUpdate, UpdatePageInputDto } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -19,14 +19,14 @@ import { useForm } from 'react-hook-form'
 
 export type PageEditProps = {
   pageId: string
-  pageDto: VoloCmsKitAdminPagesPageDtoReadable
+  pageDto: VoloCmsKitAdminPagesPageDto
   onDismiss?: () => void
 }
 
 export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
   const { toast } = useToast()
   const queryClient = useQueryClient()
-  const { handleSubmit, register, reset, formState: { errors } } = useForm<UpdatePageInputDtoWritable>()
+  const { handleSubmit, register, reset, formState: { errors } } = useForm<UpdatePageInputDto>()
 
   useEffect(() => {
     if (pageDto) {
@@ -42,7 +42,7 @@ export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
     }
   }, [pageDto, reset])
 
-  const onSubmit = async (data: UpdatePageInputDtoWritable) => {
+  const onSubmit = async (data: UpdatePageInputDto) => {
     try {
       await pageAdminUpdate({
         path: { id: pageId },

@@ -2,7 +2,7 @@
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useComments } from '@/lib/hooks/useComments'
 import { useMemo, useState } from 'react'
-import { CommentWithAuthorDtoReadable } from '@/client'
+import { CommentWithAuthorDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
@@ -17,7 +17,7 @@ import { useQueryClient } from '@tanstack/react-query'
 
 type CommentActionDialogState = {
   commentId: string
-  commentDto: CommentWithAuthorDtoReadable
+  commentDto: CommentWithAuthorDto
   dialogType: 'edit' | 'delete'
 } | null
 
@@ -57,8 +57,8 @@ export const CommentList = () => {
   }), [])
 
   const table = useReactTable({
-    data: data?.items ?? [],
-    pageCount: data?.totalCount ?? -1,
+    data: (data as any)?.items ?? [],
+    pageCount: (data as any)?.totalCount ?? -1,
     state: { pagination },
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -96,9 +96,9 @@ export const CommentList = () => {
         onUpdate={setSearchStr} 
         value={searchStr}
       />
-      <CustomTable<CommentWithAuthorDtoReadable>
+      <CustomTable<CommentWithAuthorDto>
         table={table}
-        totalCount={data?.totalCount ?? 0}
+        totalCount={(data as any)?.totalCount ?? 0}
         pageSize={pagination.pageSize}
       />
     </>
@@ -107,9 +107,9 @@ export const CommentList = () => {
 
 // Add this to a separate file: columns.ts
 const getCommentColumns = (actions: {
-  onEdit: (comment: CommentWithAuthorDtoReadable) => void
-  onDelete: (comment: CommentWithAuthorDtoReadable) => void
-}): ColumnDef<CommentWithAuthorDtoReadable>[] => [
+  onEdit: (comment: CommentWithAuthorDto) => void
+  onDelete: (comment: CommentWithAuthorDto) => void
+}): ColumnDef<CommentWithAuthorDto>[] => [
   {
     header: 'Comment Management',
     columns: [

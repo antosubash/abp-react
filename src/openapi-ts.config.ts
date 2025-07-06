@@ -8,6 +8,7 @@ export default defineConfig({
         '@hey-api/client-fetch',
         {
             name: '@hey-api/typescript',
+            // readOnlyWriteOnlyBehavior: 'off',
         },
     ],
 });

@@ -1,4 +1,4 @@
-import { CommentWithAuthorDtoReadable, commentPublicUpdate, UpdateCommentInputReadable } from '@/client'
+import { CommentWithAuthorDto, commentPublicUpdate, UpdateCommentInput } from '@/client'
 import { useToast } from '@/components/ui/use-toast'
 import { MouseEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -14,7 +14,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 
 type CommentEditProps = {
-  commentDto: CommentWithAuthorDtoReadable
+  commentDto: CommentWithAuthorDto
   commentId: string
   onDismiss: () => void
 }
@@ -24,7 +24,7 @@ export const CommentEdit = ({ commentDto, commentId, onDismiss }: CommentEditPro
   const { handleSubmit, register } = useForm()
 
   const onSubmit = async (data: unknown) => {
-    const comment = data as UpdateCommentInputReadable
+    const comment = data as UpdateCommentInput
     try {
       await commentPublicUpdate({
         path: { id: commentId },

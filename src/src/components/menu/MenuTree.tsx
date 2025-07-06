@@ -1,25 +1,25 @@
 'use client'
-import { MenuItemDtoReadable } from '@/client'
+import { MenuItemDto } from '@/client'
 import { ChevronRight, ChevronDown, Folder, FileText } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
-type TreeMenuItem = MenuItemDtoReadable & {
+type TreeMenuItem = MenuItemDto & {
   children?: TreeMenuItem[]
 }
 
 interface MenuTreeProps {
-  items: MenuItemDtoReadable[]
-  onEdit?: (item: MenuItemDtoReadable) => void
-  onDelete?: (item: MenuItemDtoReadable) => void
+  items: MenuItemDto[]
+  onEdit?: (item: MenuItemDto) => void
+  onDelete?: (item: MenuItemDto) => void
 }
 
 interface TreeNodeProps {
   item: TreeMenuItem
   level: number
-  onEdit?: (item: MenuItemDtoReadable) => void
-  onDelete?: (item: MenuItemDtoReadable) => void
+  onEdit?: (item: MenuItemDto) => void
+  onDelete?: (item: MenuItemDto) => void
 }
 
 const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
@@ -124,7 +124,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
 
 export const MenuTree = ({ items, onEdit, onDelete }: MenuTreeProps) => {
   // Build tree structure
-  const buildTree = (menuItems: MenuItemDtoReadable[]): TreeMenuItem[] => {
+  const buildTree = (menuItems: MenuItemDto[]): TreeMenuItem[] => {
     const itemMap = new Map<string, TreeMenuItem>()
     const rootItems: TreeMenuItem[] = []
 

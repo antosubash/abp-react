@@ -1,5 +1,5 @@
 'use client'
-import { CreatePageInputDtoReadable, pageAdminCreate } from '@/client'
+import { CreatePageInputDto, pageAdminCreate } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -158,7 +158,7 @@ export default function CreatePage() {
     setValue,
     control,
     formState: { errors, isDirty },
-  } = useForm<CreatePageInputDtoReadable>({
+  } = useForm<CreatePageInputDto>({
     defaultValues: {
       title: '',
       slug: '',
@@ -204,7 +204,7 @@ export default function CreatePage() {
         const draftData = JSON.parse(savedDraft)
         Object.entries(draftData).forEach(([key, value]) => {
           if (key in draftData && value !== undefined) {
-            setValue(key as keyof CreatePageInputDtoReadable, value as any)
+            setValue(key as keyof CreatePageInputDto, value as any)
           }
         })
         toast({
@@ -246,7 +246,7 @@ export default function CreatePage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [hasUnsavedChanges])
 
-  const onSubmit = async (data: CreatePageInputDtoReadable) => {
+  const onSubmit = async (data: CreatePageInputDto) => {
     if (!can('CmsKit.Pages.Create')) {
       toast({
         title: 'Access Denied',
@@ -265,7 +265,7 @@ export default function CreatePage() {
       if (response.error) {
         toast({
           title: 'Error',
-          description: response.error.message,
+          description: response.error.toString(),
           variant: 'destructive',
         })
       } else {
