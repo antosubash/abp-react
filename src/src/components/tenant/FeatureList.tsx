@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useFeatures } from '@/lib/hooks/useFeatures'
-import { PermissionProvider } from '@/lib/utils'
+import { PermissionProvider, Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -40,10 +40,10 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
     setOpen(true)
     data?.groups?.forEach((g) => {
       g.features?.forEach((f) => {
-        if (f.name === 'SettingManagement.Enable' && f.value === 'true') {
+        if (f.name === Permissions.SETTINGS_EMAILING && f.value === 'true') {
           setEnableSetting(true)
         } else if (
-          f.name === 'SettingManagement.AllowChangingEmailSettings' &&
+          f.name === Permissions.SETTINGS_EMAILING_TEST &&
           f.value === 'true'
         ) {
           setEnableEmailSetting(true)
@@ -59,9 +59,9 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
   }, [onDismiss, data])
 
   const onCheckedEvent = (value: boolean, name: string) => {
-    if (name === 'SettingManagement.Enable') {
+    if (name === Permissions.SETTINGS_EMAILING) {
       setEnableSetting(value)
-    } else if (name === 'SettingManagement.AllowChangingEmailSettings') {
+    } else if (name === Permissions.SETTINGS_EMAILING_TEST) {
       setEnableEmailSetting(value)
     }
   }
@@ -71,11 +71,11 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       const featureUpdateDto = {} as UpdateFeaturesDto
       featureUpdateDto.features = [
         {
-          name: 'SettingManagement.Enable',
+          name: Permissions.SETTINGS_EMAILING,
           value: enableSetting.toString(),
         },
         {
-          name: 'SettingManagement.AllowChangingEmailSettings',
+          name: Permissions.SETTINGS_EMAILING_TEST,
           value: enableEmailSetting.toString(),
         },
       ]
@@ -148,7 +148,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
                           id={`${feature.name}_enable`}
                           name={feature.name!}
                           checked={
-                            feature.name === 'SettingManagement.Enable'
+                            feature.name === Permissions.SETTINGS_EMAILING
                               ? enableSetting
                               : enableEmailSetting
                           }

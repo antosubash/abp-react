@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { usePage } from '@/lib/hooks/usePages'
 import { useQueryClient } from '@tanstack/react-query'
 import {
@@ -271,7 +272,7 @@ export default function EditPage() {
   }, [hasUnsavedChanges])
 
   const onSubmit = async (data: UpdatePageInputDto) => {
-    if (!can('CmsKit.Pages.Update')) {
+    if (!can(Permissions.CMSKIT_PAGES_UPDATE)) {
       toast({
         title: 'Access Denied',
         description: 'You do not have permission to update pages.',
@@ -366,7 +367,7 @@ export default function EditPage() {
     )
   }
 
-  if (!can('CmsKit.Pages.Update')) {
+  if (!can(Permissions.CMSKIT_PAGES_UPDATE)) {
     return (
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-center min-h-[400px]">

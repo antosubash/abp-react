@@ -2,6 +2,7 @@
 import { TenantCreateDto, tenantCreate } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
@@ -48,7 +49,7 @@ export const AddTenant = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <section className="flex items-center justify-between pb-5">
           <h3 className="title m-1 grow truncate p-0 text-xl font-bold">Tenant Management</h3>
-          {can('AbpTenantManagement.Tenants.Create') && (
+          {can(Permissions.TENANTS_CREATE) && (
             <Button onClick={() => setOpen(true)}>
               <Plus width={18} height={18} />
               <span className="hidden truncate sm:inline">Create New Tenant</span>

@@ -27,7 +27,7 @@ type PermissionActionsProps = {
 export const PermissionActions = ({ actions }: PermissionActionsProps) => {
   const { can } = useGrantedPolicies()
   const renderElement = (action: (typeof actions)[0]) => {
-    if (!can(action.policy) || action.visible) return false
+    if (!can(action.policy) || action.visible === false) return false
 
     return (
       <DropdownMenuItem key={v4()}>

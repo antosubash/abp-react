@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { 
   ArrowLeft, 
@@ -247,7 +248,7 @@ export default function CreatePage() {
   }, [hasUnsavedChanges])
 
   const onSubmit = async (data: CreatePageInputDto) => {
-    if (!can('CmsKit.Pages.Create')) {
+    if (!can(Permissions.CMSKIT_PAGES_CREATE)) {
       toast({
         title: 'Access Denied',
         description: 'You do not have permission to create pages.',
@@ -329,7 +330,7 @@ export default function CreatePage() {
     }
   }
 
-  if (!can('CmsKit.Pages.Create')) {
+  if (!can(Permissions.CMSKIT_PAGES_CREATE)) {
     return (
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-center min-h-[400px]">

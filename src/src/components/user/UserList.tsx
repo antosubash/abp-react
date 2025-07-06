@@ -13,7 +13,7 @@ import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
 import { UserPermission } from './UserPermission'
 import { Search } from '@/components/ui/Search'
-import { USER_ROLE } from '@/lib/utils'
+import { USER_ROLE, Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 
 type UserActionDialogState = {
@@ -134,17 +134,17 @@ const getUserColumns = (actions: {
             actions={[
               {
                 icon: 'permission',
-                policy: 'AbpIdentity.Users.ManagePermissions',
+                policy: Permissions.USERS_MANAGE_PERMISSIONS,
                 callback: () => actions.onPermission(info.row.original),
               },
               {
                 icon: 'pencil',
-                policy: 'AbpIdentity.Users.Update',
+                policy: Permissions.USERS_UPDATE,
                 callback: () => actions.onEdit(info.row.original),
               },
               {
                 icon: 'trash',
-                policy: 'AbpIdentity.Users.Delete',
+                policy: Permissions.USERS_DELETE,
                 visible: !info.row.original.userName?.includes(USER_ROLE.ADMIN),
                 callback: () => actions.onDelete(info.row.original),
               },

@@ -4,6 +4,8 @@ import { ChevronRight, ChevronDown, Folder, FileText } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 
 type TreeMenuItem = MenuItemDto & {
   children?: TreeMenuItem[]
@@ -23,6 +25,7 @@ interface TreeNodeProps {
 }
 
 const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
+  const { can } = useGrantedPolicies()
   const children = item.children || []
   const [isExpanded, setIsExpanded] = useState(level === 0)
   const hasChildren = children.length > 0
@@ -82,7 +85,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
         </div>
 
         <div className="flex items-center gap-2">
-          {onEdit && (
+          {onEdit && can(Permissions.CMSKIT_MENUS_UPDATE) && (
             <Button
               variant="ghost"
               size="sm"
@@ -92,7 +95,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
               <FileText className="h-4 w-4" />
             </Button>
           )}
-          {onDelete && (
+          {onDelete && can(Permissions.CMSKIT_MENUS_DELETE) && (
             <Button
               variant="ghost"
               size="sm"

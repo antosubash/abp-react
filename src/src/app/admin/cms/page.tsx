@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { FileText, MessageSquare, Plus } from 'lucide-react'
 import Link from 'next/link'
 
@@ -41,7 +42,7 @@ export default function CmsPage() {
                 </Button>
               </Link>
             </div>
-            {can('CmsKit.Pages.Create') && (
+            {can(Permissions.CMSKIT_PAGES_CREATE) && (
               <div className="mt-4">
                 <Link href="/admin/cms/pages/create">
                   <Button size="sm" className="w-full">

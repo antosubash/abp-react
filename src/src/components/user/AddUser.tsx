@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'clsx'
 import { Plus } from 'lucide-react'
@@ -61,7 +62,7 @@ export const AddUser = ({}: AddUserProps) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <section className="flex items-center justify-between pb-5">
           <h3 className="title m-1 grow truncate p-0 text-xl font-bold">User Management</h3>
-          {can('AbpIdentity.Users.Create') && (
+          {can(Permissions.USERS_CREATE) && (
             <Button onClick={() => setOpen(true)}>
               <Plus width={18} height={18} />
               <span className="hidden truncate sm:inline">Create New User</span>

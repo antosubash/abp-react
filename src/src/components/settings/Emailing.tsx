@@ -2,6 +2,8 @@
 import { EmailSettingsDto, EmailSettingsUpdateData, emailSettingsUpdate } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useEmailing } from '@/lib/hooks/useEmailing'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
@@ -13,6 +15,7 @@ import { useToast } from '../ui/use-toast'
 import { TestEmail } from './TestEmail'
 
 export const Emailing = () => {
+  const { can } = useGrantedPolicies()
   const { toast } = useToast()
   const { data } = useEmailing()
   const queryClient = useQueryClient()
@@ -161,16 +164,20 @@ export const Emailing = () => {
           </div>
           <hr className="mt-2 border" />
           <div className="w-full space-x-5 space-y-5">
-            <Button type="submit">Save</Button>
-            <Button
-              variant="default"
-              onClick={(e: { preventDefault: () => void }) => {
-                e.preventDefault()
-                setOpenTestEmail(true)
-              }}
-            >
-              Send Test Email
-            </Button>
+            {can(Permissions.SETTINGS_EMAILING) && (
+              <Button type="submit">Save</Button>
+            )}
+            {can(Permissions.SETTINGS_EMAILING_TEST) && (
+              <Button
+                variant="default"
+                onClick={(e: { preventDefault: () => void }) => {
+                  e.preventDefault()
+                  setOpenTestEmail(true)
+                }}
+              >
+                Send Test Email
+              </Button>
+            )}
           </div>
         </form>
       </div>

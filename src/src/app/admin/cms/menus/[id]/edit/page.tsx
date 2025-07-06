@@ -319,13 +319,13 @@ export default function EditMenuItem() {
               </p>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="requiredPermissionName">Required Permission</Label>
-              <Input
-                id="requiredPermissionName"
-                {...register('requiredPermissionName')}
-                placeholder="CmsKit.Pages.Create"
-              />
+                          <div className="space-y-2">
+                <Label htmlFor="requiredPermissionName">Required Permission</Label>
+                <Input
+                  id="requiredPermissionName"
+                  {...register('requiredPermissionName')}
+                  placeholder="Permissions.CMSKIT_PAGES_CREATE"
+                />
               {formErrors.requiredPermissionName && (
                 <p className="text-sm text-red-500">
                   {Array.isArray(formErrors.requiredPermissionName) ? formErrors.requiredPermissionName.join(', ') : formErrors.requiredPermissionName}

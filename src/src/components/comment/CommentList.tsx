@@ -13,6 +13,7 @@ import { DeleteComment } from './DeleteComment'
 import { CommentEdit } from './CommentEdit'
 import { AddComment } from './AddComment'
 import { Search } from '@/components/ui/Search'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 
 type CommentActionDialogState = {
@@ -121,12 +122,12 @@ const getCommentColumns = (actions: {
             actions={[
               {
                 icon: 'pencil',
-                policy: 'CmsKit.Comments.Update',
+                policy: Permissions.CMSKIT_COMMENTS_UPDATE,
                 callback: () => actions.onEdit(info.row.original),
               },
               {
                 icon: 'trash',
-                policy: 'CmsKit.Comments.Delete',
+                policy: Permissions.CMSKIT_COMMENTS_DELETE,
                 callback: () => actions.onDelete(info.row.original),
               },
             ]}

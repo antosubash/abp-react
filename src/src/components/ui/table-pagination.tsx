@@ -1,97 +1,112 @@
 import { getPages } from '@/lib/utils'
 import { Table } from '@tanstack/react-table'
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import { useState } from 'react'
-import { v4 } from 'uuid'
+import { useMemo } from 'react'
 import { Button } from './button'
 
 type PaginationProps<T> = {
   pageCount: number
   table: Table<T>
+  'aria-label'?: string
 }
-export const Pagination = <T extends unknown>({ pageCount, table }: PaginationProps<T>) => {
-  const [numbers, setNumbers] = useState([])
-  const counts = getPages(pageCount, table.getState().pagination.pageIndex)
 
-  // table.getCanNextPage() doesn't seem to be working. So, it is just a work around.
-  const canNextPage =
-    table.getState().pagination.pageIndex >= 0 &&
-    table.getState().pagination.pageIndex < pageCount - 1
+export const Pagination = <T extends Record<string, any>>({ 
+  pageCount, 
+  table,
+  'aria-label': ariaLabel = 'Pagination'
+}: PaginationProps<T>) => {
+  const currentPage = table.getState().pagination.pageIndex
+  const counts = useMemo(() => getPages(pageCount, currentPage), [pageCount, currentPage])
+
+  const canNextPage = currentPage < pageCount - 1
+  const canPreviousPage = currentPage > 0
 
   const renderButtons = (count: number | string, idx: number) => {
     if (count === 'SPACER') {
       return (
-        <span key={v4()} className="text-primary">
+        <span 
+          key={`spacer-${idx}`} 
+          className="text-primary px-2"
+          aria-hidden="true"
+        >
           ...
         </span>
       )
     }
 
+    const pageNumber = Number(count)
+    const isCurrentPage = currentPage === pageNumber - 1
+
     return (
       <Button
         size="sm"
-        key={v4()}
-        disabled={table.getState().pagination.pageIndex === Number(count) - 1}
-        onClick={() => {
-          table.setPageIndex(Number(count) - 1)
-        }}
+        key={`page-${pageNumber}`}
+        variant={isCurrentPage ? 'default' : 'outline'}
+        disabled={isCurrentPage}
+        onClick={() => table.setPageIndex(pageNumber - 1)}
+        aria-current={isCurrentPage ? 'page' : undefined}
+        aria-label={`Go to page ${pageNumber}`}
       >
         {count}
       </Button>
     )
   }
+
   return (
-    <section className="pagination flex items-center space-x-1">
+    <nav 
+      className="pagination flex items-center space-x-1" 
+      aria-label={ariaLabel}
+      role="navigation"
+    >
       <Button
         size="sm"
-        disabled={!table.getCanPreviousPage()}
-        onClick={() => {
-          if (!table.getCanPreviousPage()) return
-          table.setPageIndex(0)
-        }}
+        variant="outline"
+        disabled={!canPreviousPage}
+        onClick={() => table.setPageIndex(0)}
+        aria-label="Go to first page"
       >
-        <ChevronFirstIcon width={24} height={24} />
+        <ChevronFirstIcon className="h-4 w-4" />
       </Button>
+      
       <Button
         size="sm"
-        disabled={!table.getCanPreviousPage()}
-        onClick={() => {
-          if (!table.getCanPreviousPage()) return
-          table.previousPage()
-        }}
+        variant="outline"
+        disabled={!canPreviousPage}
+        onClick={() => table.previousPage()}
+        aria-label="Go to previous page"
       >
-        <ChevronLeftIcon width={24} height={24} />
+        <ChevronLeftIcon className="h-4 w-4" />
       </Button>
-      <div className="block pl-2 pr-2 lg:hidden">
-        {table.getState().pagination.pageIndex} / {pageCount}
+      
+      {/* Mobile pagination info */}
+      <div className="block pl-2 pr-2 lg:hidden text-sm text-base-content/70">
+        {currentPage + 1} / {pageCount}
       </div>
+      
+      {/* Desktop pagination buttons */}
       <div className="hidden sm:ml-1 sm:mr-1 sm:space-x-2 lg:inline-block">
         {counts.map(renderButtons)}
       </div>
+      
       <Button
         size="sm"
+        variant="outline"
         disabled={!canNextPage}
-        onClick={() => {
-          if (!canNextPage) {
-            return
-          }
-          table.nextPage()
-        }}
+        onClick={() => table.nextPage()}
+        aria-label="Go to next page"
       >
-        <ChevronRightIcon width={24} height={24} />
+        <ChevronRightIcon className="h-4 w-4" />
       </Button>
+      
       <Button
         size="sm"
+        variant="outline"
         disabled={!canNextPage}
-        onClick={() => {
-          if (!canNextPage) {
-            return
-          }
-          table.setPageIndex(pageCount - 1)
-        }}
+        onClick={() => table.setPageIndex(pageCount - 1)}
+        aria-label="Go to last page"
       >
-        <ChevronLastIcon width={24} height={24} />
+        <ChevronLastIcon className="h-4 w-4" />
       </Button>
-    </section>
+    </nav>
   )
 }

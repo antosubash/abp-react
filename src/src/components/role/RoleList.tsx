@@ -2,7 +2,7 @@
 import { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useRoles } from '@/lib/hooks/useRoles'
-import { USER_ROLE } from '@/lib/utils'
+import { USER_ROLE, Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
@@ -56,7 +56,7 @@ export const RoleList = () => {
                   actions={[
                     {
                       icon: 'permission',
-                      policy: 'AbpIdentity.Roles.ManagePermissions',
+                      policy: Permissions.ROLES_MANAGE_PERMISSIONS,
                       callback: () => {
                         setRoleActionDialog({
                           roleId: info.row.original.id as string,
@@ -67,7 +67,7 @@ export const RoleList = () => {
                     },
                     {
                       icon: 'pencil',
-                      policy: 'AbpIdentity.Roles.Update',
+                      policy: Permissions.ROLES_UPDATE,
                       callback: () => {
                         setRoleActionDialog({
                           roleId: info.row.original.id as string,
@@ -78,7 +78,7 @@ export const RoleList = () => {
                     },
                     {
                       icon: 'trash',
-                      policy: 'AbpIdentity.Roles.Delete',
+                      policy: Permissions.ROLES_DELETE,
                       visible: info.row.original.name?.includes(USER_ROLE.ADMIN),
                       callback: () => {
                         setRoleActionDialog({

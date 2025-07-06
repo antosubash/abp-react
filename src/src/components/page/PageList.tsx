@@ -11,6 +11,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeletePage } from './DeletePage'
 import { Search } from '@/components/ui/Search'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -113,12 +114,12 @@ const getPageColumns = (actions: {
               actions={[
                 {
                   icon: 'pencil',
-                  policy: 'CmsKit.Pages.Update',
+                  policy: Permissions.CMSKIT_PAGES_UPDATE,
                   callback: () => actions.onEdit(info.row.original),
                 },
                 {
                   icon: 'trash',
-                  policy: 'CmsKit.Pages.Delete',
+                  policy: Permissions.CMSKIT_PAGES_DELETE,
                   callback: () => actions.onDelete(info.row.original),
                 },
               ]}
