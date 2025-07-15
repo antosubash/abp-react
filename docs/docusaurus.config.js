@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Abp React',
-  tagline: 'The headless UI for ABP Framework',
+  title: 'ABP React',
+  tagline: 'Modern React frontend for ABP Framework',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -41,18 +41,22 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/antosubash/abp-react/tree/main/docs/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   // Please change this to your repo.
-        //   // Remove this to remove the "edit this page" links.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        // },
+        blog: {
+          showReadingTime: true,
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/antosubash/abp-react/tree/main/docs/',
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
         },
       }),
     ],
@@ -62,11 +66,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/abp-react-social-card.jpg',
       navbar: {
-        title: 'Abp React Docs',
+        title: 'ABP React',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'ABP React Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -74,12 +78,21 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Documentation',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left'
+          },
           {
             href: 'https://github.com/antosubash/abp-react',
             label: 'GitHub',
+            position: 'right',
+          },
+          {
+            href: 'https://discord.gg/your-server',
+            label: 'Discord',
             position: 'right',
           },
         ],
@@ -88,25 +101,37 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Documentation',
             items: [
               {
-                label: 'Docs',
+                label: 'Getting Started',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Fundamentals',
+                to: '/docs/fundamentals/authentication',
+              },
+              {
+                label: 'Components',
+                to: '/docs/components/ui-components',
+              },
+              {
+                label: 'Tutorials',
+                to: '/docs/tutorials/create-a-page',
               },
             ],
           },
           {
             title: 'Community',
             items: [
-              // {
-              //   label: 'Stack Overflow',
-              //   href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              // },
-              // {
-              //   label: 'Discord',
-              //   href: 'https://discordapp.com/invite/docusaurus',
-              // },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/your-server',
+              },
+              {
+                label: 'GitHub Discussions',
+                href: 'https://github.com/antosubash/abp-react/discussions',
+              },
               {
                 label: 'Twitter',
                 href: 'https://twitter.com/antosubash',
@@ -124,6 +149,14 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/antosubash/abp-react',
               },
+              {
+                label: 'ABP Framework',
+                href: 'https://abp.io',
+              },
+              {
+                label: 'Demo',
+                href: 'https://abpreact.antosubash.com',
+              },
             ],
           },
         ],
@@ -132,8 +165,88 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['bash', 'diff', 'json', 'csharp'],
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'YOUR_APP_ID',
+        // Public API key: it is safe to commit it
+        apiKey: 'YOUR_SEARCH_API_KEY',
+        indexName: 'YOUR_INDEX_NAME',
+        // Optional: see doc section below
+        contextualSearch: true,
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+      },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
+      metadata: [
+        {
+          name: 'keywords',
+          content: 'ABP, React, Next.js, TypeScript, Framework, Frontend, UI, Documentation',
+        },
+        {
+          name: 'description',
+          content: 'Modern React frontend for ABP Framework with Next.js, TypeScript, and Tailwind CSS',
+        },
+        {
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          property: 'og:image',
+          content: 'https://antosubash.github.io/abp-react/img/abp-react-social-card.jpg',
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          name: 'twitter:creator',
+          content: '@antosubash',
+        },
+      ],
     }),
+    
+  plugins: [
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: true,
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'queryString',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: '/img/logo.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: '/manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: 'rgb(37, 194, 160)',
+          },
+        ],
+      },
+    ],
+  ],
 };
 
 module.exports = config;
