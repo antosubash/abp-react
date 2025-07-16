@@ -1,0 +1,271 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Install Playwright browsers
+      run: pnpm test:e2e:install
+      
+    - name: Build application
+      run: pnpm build
+      
+    - name: Start application
+      run: pnpm start &
+      env:
+        NODE_ENV: production
+        
+    - name: Wait for application to start
+      run: |
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+        
+    - name: Run E2E tests
+      run: |
+        pnpm test:e2e --project=${{ matrix.browser }} --reporter=html,junit,json
+      env:
+        CI: true
+        BASE_URL: http://localhost:3000
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report-${{ matrix.browser }}
+        path: |
+          test-results/
+          playwright-report/
+        retention-days: 30
+        
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: playwright-screenshots-${{ matrix.browser }}
+        path: test-results/
+        retention-days: 30
+        
+    - name: Upload videos
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: playwright-videos-${{ matrix.browser }}
+        path: test-results/
+        retention-days: 30
+
+  e2e-performance:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Install Playwright browsers
+      run: pnpm test:e2e:install
+      
+    - name: Build application
+      run: pnpm build
+      
+    - name: Start application
+      run: pnpm start &
+      env:
+        NODE_ENV: production
+        
+    - name: Wait for application to start
+      run: |
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+        
+    - name: Run performance tests
+      run: |
+        pnpm test:e2e performance.spec.ts --project=chromium --reporter=html,junit,json
+      env:
+        CI: true
+        BASE_URL: http://localhost:3000
+        
+    - name: Upload performance results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: performance-test-results
+        path: |
+          test-results/
+          playwright-report/
+        retention-days: 30
+
+  e2e-visual-regression:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Install Playwright browsers
+      run: pnpm test:e2e:install
+      
+    - name: Build application
+      run: pnpm build
+      
+    - name: Start application
+      run: pnpm start &
+      env:
+        NODE_ENV: production
+        
+    - name: Wait for application to start
+      run: |
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+        
+    - name: Run visual regression tests
+      run: |
+        pnpm test:e2e visual-regression.spec.ts --project=chromium --reporter=html,junit,json
+      env:
+        CI: true
+        BASE_URL: http://localhost:3000
+        
+    - name: Upload visual regression results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: visual-regression-results
+        path: |
+          test-results/
+          playwright-report/
+        retention-days: 30
+
+  e2e-mobile:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'pnpm'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Install Playwright browsers
+      run: pnpm test:e2e:install
+      
+    - name: Build application
+      run: pnpm build
+      
+    - name: Start application
+      run: pnpm start &
+      env:
+        NODE_ENV: production
+        
+    - name: Wait for application to start
+      run: |
+        timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+        
+    - name: Run mobile tests
+      run: |
+        pnpm test:e2e --project="Mobile Chrome" --reporter=html,junit,json
+      env:
+        CI: true
+        BASE_URL: http://localhost:3000
+        
+    - name: Upload mobile test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: mobile-test-results
+        path: |
+          test-results/
+          playwright-report/
+        retention-days: 30
+
+  test-summary:
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, e2e-performance, e2e-visual-regression, e2e-mobile]
+    if: always()
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download all test results
+      uses: actions/download-artifact@v4
+      with:
+        path: test-results/
+        
+    - name: Generate test summary
+      run: |
+        echo "## E2E Test Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "- **Browser Tests**: ${{ needs.e2e-tests.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Performance Tests**: ${{ needs.e2e-performance.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Visual Regression**: ${{ needs.e2e-visual-regression.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Mobile Tests**: ${{ needs.e2e-mobile.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- Test reports and screenshots have been uploaded as artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "- Download artifacts to view detailed test results" >> $GITHUB_STEP_SUMMARY 
