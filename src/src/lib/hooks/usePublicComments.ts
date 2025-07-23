@@ -12,18 +12,15 @@ import { QueryNames } from './QueryConstants'
  * @param {string} entityId - The ID of the entity
  * @returns {UseQueryResult} The result of the query, which includes the comment data and query status.
  */
-export const usePublicComments = (
-  entityType: string,
-  entityId: string
-) => {
+export const usePublicComments = (entityType: string, entityId: string) => {
   return useQuery({
     queryKey: [QueryNames.GetPublicComments, entityType, entityId],
     queryFn: async () => {
       const response = await commentPublicGetList({
-        path: { entityType, entityId }
+        path: { entityType, entityId },
       })
       return response.data
     },
     enabled: !!entityType && !!entityId,
   })
-} 
+}

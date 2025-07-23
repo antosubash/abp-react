@@ -1,14 +1,14 @@
-import {clientConfig} from '@/config'
+import { clientConfig } from '@/config'
+import { getSession } from '@/lib/actions'
+import { createRedisInstance, RedisSession } from '@/lib/redis'
+import { getClientConfig } from '@/lib/session-utils'
+import { headers } from 'next/headers'
+import { NextRequest } from 'next/server'
 import * as client from 'openid-client'
-import {getSession} from '@/lib/actions'
-import {createRedisInstance, RedisSession} from '@/lib/redis'
-import {getClientConfig} from '@/lib/session-utils'
-import {NextRequest} from 'next/server'
-import {headers} from "next/headers";
 
 /**
  * Handles the GET request for OpenID Connect authentication.
- * 
+ *
  * This function performs the following steps:
  * 1. Retrieves the current session.
  * 2. Fetches the OpenID client configuration.
@@ -18,7 +18,7 @@ import {headers} from "next/headers";
  * 6. Saves the session.
  * 7. Stores the access and refresh tokens in Redis.
  * 8. Redirects the user to the post-login route.
- * 
+ *
  * @param {NextRequest} request - The incoming request object.
  * @returns {Promise<Response>} - A promise that resolves to a redirect response.
  */
@@ -28,16 +28,18 @@ export async function GET(request: NextRequest) {
   const headerList = await headers()
   const host = headerList.get('x-forwarded-host') || headerList.get('host') || 'localhost'
   const protocol = headerList.get('x-forwarded-proto') || 'https'
-  const currentUrl = new URL(`${protocol}://${host}${request.nextUrl.pathname}${request.nextUrl.search}`)
+  const currentUrl = new URL(
+    `${protocol}://${host}${request.nextUrl.pathname}${request.nextUrl.search}`
+  )
   const tokenSet = await client.authorizationCodeGrant(openIdClientConfig, currentUrl, {
     pkceCodeVerifier: session.code_verifier,
-    expectedState: session.state
+    expectedState: session.state,
   })
   const { access_token, refresh_token } = tokenSet
   session.isLoggedIn = true
   session.access_token = access_token
   let claims = tokenSet.claims()!
-  const {sub} = claims
+  const { sub } = claims
   // call userinfo endpoint to get user info
   const userinfo = await client.fetchUserInfo(openIdClientConfig, access_token, sub)
   // store userinfo in session

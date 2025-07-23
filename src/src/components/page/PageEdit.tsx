@@ -1,5 +1,5 @@
 'use client'
-import { VoloCmsKitAdminPagesPageDto, pageAdminUpdate, UpdatePageInputDto } from '@/client'
+import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -26,7 +26,12 @@ export type PageEditProps = {
 export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
   const { toast } = useToast()
   const queryClient = useQueryClient()
-  const { handleSubmit, register, reset, formState: { errors } } = useForm<UpdatePageInputDto>()
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<UpdatePageInputDto>()
 
   useEffect(() => {
     if (pageDto) {
@@ -76,75 +81,67 @@ export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
           <section className="flex w-full flex-col space-y-5">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
-              <Input 
+              <Input
                 id="title"
-                required 
-                {...register('title', { required: 'Title is required' })} 
-                placeholder="Page title" 
+                required
+                {...register('title', { required: 'Title is required' })}
+                placeholder="Page title"
               />
-              {errors.title && (
-                <p className="text-sm text-red-500">{errors.title.message}</p>
-              )}
+              {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="slug">Slug</Label>
-              <Input 
+              <Input
                 id="slug"
-                required 
-                {...register('slug', { required: 'Slug is required' })} 
-                placeholder="page-slug" 
+                required
+                {...register('slug', { required: 'Slug is required' })}
+                placeholder="page-slug"
               />
-              {errors.slug && (
-                <p className="text-sm text-red-500">{errors.slug.message}</p>
-              )}
+              {errors.slug && <p className="text-sm text-red-500">{errors.slug.message}</p>}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="layoutName">Layout Name</Label>
-              <Input 
+              <Input
                 id="layoutName"
-                {...register('layoutName')} 
-                placeholder="Layout name (optional)" 
+                {...register('layoutName')}
+                placeholder="Layout name (optional)"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="content">Content</Label>
-              <Textarea 
+              <Textarea
                 id="content"
-                {...register('content')} 
-                placeholder="Page content (HTML)" 
+                {...register('content')}
+                placeholder="Page content (HTML)"
                 rows={8}
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="script">Script</Label>
-              <Textarea 
+              <Textarea
                 id="script"
-                {...register('script')} 
-                placeholder="JavaScript code (optional)" 
+                {...register('script')}
+                placeholder="JavaScript code (optional)"
                 rows={4}
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="style">Style</Label>
-              <Textarea 
+              <Textarea
                 id="style"
-                {...register('style')} 
-                placeholder="CSS styles (optional)" 
+                {...register('style')}
+                placeholder="CSS styles (optional)"
                 rows={4}
               />
             </div>
           </section>
           <DialogFooter className="mt-5">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onDismiss?.()}
-            >
+            <Button type="button" variant="outline" onClick={() => onDismiss?.()}>
               Cancel
             </Button>
             <Button type="submit">Save</Button>
@@ -153,4 +150,4 @@ export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
       </DialogContent>
     </Dialog>
   )
-} 
+}

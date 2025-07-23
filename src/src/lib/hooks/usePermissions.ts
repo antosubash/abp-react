@@ -17,7 +17,7 @@ export const usePermissions = (
     queryKey: [QueryNames.GetPermissions, providerName, providerKey],
     queryFn: async () => {
       const { data } = await permissionsGet({
-        query: { providerName, providerKey }
+        query: { providerName, providerKey },
       })
       return data
     },

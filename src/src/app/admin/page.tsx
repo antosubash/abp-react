@@ -1,22 +1,21 @@
 import { abpApplicationConfigurationGet, ApplicationConfigurationDto } from '@/client'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Separator } from '@/components/ui/separator'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { 
-  User, 
-  Mail, 
-  Shield, 
-  Settings, 
-  Users, 
-  Building, 
-  Globe, 
-  Clock,
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import {
+  Building,
   CheckCircle,
+  Clock,
+  Globe,
+  Mail,
+  Phone,
+  Settings,
+  Shield,
+  User,
+  Users,
   XCircle,
-  AlertCircle,
-  Phone
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -44,7 +43,7 @@ export default async function AdminIndex() {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     })
   }
 
@@ -75,9 +74,7 @@ export default async function AdminIndex() {
             <User className="h-5 w-5" />
             User Profile
           </CardTitle>
-          <CardDescription>
-            Your account information and permissions
-          </CardDescription>
+          <CardDescription>Your account information and permissions</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center space-x-4">
@@ -100,8 +97,8 @@ export default async function AdminIndex() {
               </p>
             </div>
             <div className="text-right">
-              <Badge variant={currentUser?.isAuthenticated ? "default" : "destructive"}>
-                {currentUser?.isAuthenticated ? "Authenticated" : "Not Authenticated"}
+              <Badge variant={currentUser?.isAuthenticated ? 'default' : 'destructive'}>
+                {currentUser?.isAuthenticated ? 'Authenticated' : 'Not Authenticated'}
               </Badge>
             </div>
           </div>
@@ -121,7 +118,7 @@ export default async function AdminIndex() {
                   <XCircle className="h-4 w-4 text-red-500" />
                 )}
                 <span className="text-sm">
-                  {currentUser?.emailVerified ? "Verified" : "Not Verified"}
+                  {currentUser?.emailVerified ? 'Verified' : 'Not Verified'}
                 </span>
               </div>
             </div>
@@ -138,7 +135,7 @@ export default async function AdminIndex() {
                   <XCircle className="h-4 w-4 text-red-500" />
                 )}
                 <span className="text-sm">
-                  {currentUser?.phoneNumberVerified ? "Verified" : "Not Verified"}
+                  {currentUser?.phoneNumberVerified ? 'Verified' : 'Not Verified'}
                 </span>
               </div>
             </div>
@@ -175,13 +172,12 @@ export default async function AdminIndex() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {appConfig?.multiTenancy?.isEnabled ? "Enabled" : "Disabled"}
+              {appConfig?.multiTenancy?.isEnabled ? 'Enabled' : 'Disabled'}
             </div>
             <p className="text-xs text-muted-foreground">
-              {appConfig?.multiTenancy?.isEnabled 
-                ? "Multi-tenant mode active" 
-                : "Single tenant mode"
-              }
+              {appConfig?.multiTenancy?.isEnabled
+                ? 'Multi-tenant mode active'
+                : 'Single tenant mode'}
             </p>
           </CardContent>
         </Card>
@@ -193,11 +189,9 @@ export default async function AdminIndex() {
             <Globe className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {appConfig?.currentTenant?.name || "Host"}
-            </div>
+            <div className="text-2xl font-bold">{appConfig?.currentTenant?.name || 'Host'}</div>
             <p className="text-xs text-muted-foreground">
-              {appConfig?.currentTenant?.isAvailable ? "Available" : "Not Available"}
+              {appConfig?.currentTenant?.isAvailable ? 'Available' : 'Not Available'}
             </p>
           </CardContent>
         </Card>
@@ -210,10 +204,12 @@ export default async function AdminIndex() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {currentUser?.sessionId ? "Active" : "No Session"}
+              {currentUser?.sessionId ? 'Active' : 'No Session'}
             </div>
             <p className="text-xs text-muted-foreground">
-              {currentUser?.sessionId ? "Session ID: " + currentUser.sessionId.substring(0, 8) + "..." : "No active session"}
+              {currentUser?.sessionId
+                ? 'Session ID: ' + currentUser.sessionId.substring(0, 8) + '...'
+                : 'No active session'}
             </p>
           </CardContent>
         </Card>
@@ -226,35 +222,45 @@ export default async function AdminIndex() {
             <Settings className="h-5 w-5" />
             Quick Actions
           </CardTitle>
-          <CardDescription>
-            Common administrative tasks
-          </CardDescription>
+          <CardDescription>Common administrative tasks</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/admin/users">
-              <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
+              <Button
+                variant="outline"
+                className="w-full h-auto p-4 flex flex-col items-center gap-2"
+              >
                 <Users className="h-6 w-6" />
                 <span>Manage Users</span>
               </Button>
             </Link>
-            
+
             <Link href="/admin/roles">
-              <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
+              <Button
+                variant="outline"
+                className="w-full h-auto p-4 flex flex-col items-center gap-2"
+              >
                 <Shield className="h-6 w-6" />
                 <span>Manage Roles</span>
               </Button>
             </Link>
-            
+
             <Link href="/admin/tenants">
-              <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
+              <Button
+                variant="outline"
+                className="w-full h-auto p-4 flex flex-col items-center gap-2"
+              >
                 <Building className="h-6 w-6" />
                 <span>Manage Tenants</span>
               </Button>
             </Link>
-            
+
             <Link href="/admin/settings">
-              <Button variant="outline" className="w-full h-auto p-4 flex flex-col items-center gap-2">
+              <Button
+                variant="outline"
+                className="w-full h-auto p-4 flex flex-col items-center gap-2"
+              >
                 <Settings className="h-6 w-6" />
                 <span>System Settings</span>
               </Button>
@@ -267,9 +273,7 @@ export default async function AdminIndex() {
       <Card>
         <CardHeader>
           <CardTitle>System Configuration</CardTitle>
-          <CardDescription>
-            Detailed system configuration information
-          </CardDescription>
+          <CardDescription>Detailed system configuration information</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -277,11 +281,13 @@ export default async function AdminIndex() {
               <div>
                 <h4 className="font-medium mb-2">Localization</h4>
                 <div className="text-sm text-muted-foreground space-y-1">
-                  <p>Current Culture: {appConfig?.localization?.currentCulture?.displayName || 'N/A'}</p>
+                  <p>
+                    Current Culture: {appConfig?.localization?.currentCulture?.displayName || 'N/A'}
+                  </p>
                   <p>Default Resource: {appConfig?.localization?.defaultResourceName || 'N/A'}</p>
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="font-medium mb-2">Timing</h4>
                 <div className="text-sm text-muted-foreground space-y-1">
@@ -290,9 +296,9 @@ export default async function AdminIndex() {
                 </div>
               </div>
             </div>
-            
+
             <Separator />
-            
+
             <div>
               <h4 className="font-medium mb-2">Features</h4>
               <div className="text-sm text-muted-foreground">

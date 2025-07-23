@@ -1,4 +1,4 @@
-import {useQuery, UseQueryResult} from '@tanstack/react-query'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import { QueryNames } from './lib/hooks/QueryConstants'
 import { SessionData } from './lib/session-utils'
 
@@ -18,6 +18,6 @@ export default function useSession(): UseQueryResult<SessionData, Error> {
       const response = await fetch('/session')
       return (await response.json()) as SessionData
     },
-    refetchOnWindowFocus: true
+    refetchOnWindowFocus: true,
   })
 }

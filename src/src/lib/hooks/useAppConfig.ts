@@ -14,7 +14,7 @@ export const useAppConfig = (): UseQueryResult<ApplicationConfigurationDto, unkn
       try {
         const response = await abpApplicationConfigurationGet()
         const data = response.data
-        
+
         // Ensure we return a valid configuration object even if the API returns undefined
         if (!data) {
           console.warn('App config API returned undefined, using default configuration')
@@ -33,7 +33,7 @@ export const useAppConfig = (): UseQueryResult<ApplicationConfigurationDto, unkn
             extraProperties: undefined,
           } as ApplicationConfigurationDto
         }
-        
+
         return data
       } catch (error) {
         console.error('Error fetching app config:', error)

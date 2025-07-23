@@ -1,20 +1,20 @@
 'use client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useUsers } from '@/lib/hooks/useUsers'
-import { useMemo, useState } from 'react'
 import { IdentityUserDto, IdentityUserUpdateDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { Search } from '@/components/ui/Search'
 import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useUsers } from '@/lib/hooks/useUsers'
+import { Permissions, USER_ROLE } from '@/lib/utils'
+import { useQueryClient } from '@tanstack/react-query'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
 import { UserPermission } from './UserPermission'
-import { Search } from '@/components/ui/Search'
-import { USER_ROLE, Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
 
 type UserActionDialogState = {
   userId: string
@@ -44,23 +44,30 @@ export const UserList = () => {
     setUserActionDialog(null)
   }
 
-  const columns = useMemo(() => getUserColumns({
-    onEdit: (user) => setUserActionDialog({
-      userId: user.id!,
-      userDto: user as IdentityUserUpdateDto,
-      dialogType: 'edit'
-    }),
-    onPermission: (user) => setUserActionDialog({
-      userId: user.id!,
-      userDto: user as IdentityUserUpdateDto,
-      dialogType: 'permission'
-    }),
-    onDelete: (user) => setUserActionDialog({
-      userId: user.id!,
-      userDto: user as IdentityUserUpdateDto,
-      dialogType: 'delete'
-    })
-  }), [])
+  const columns = useMemo(
+    () =>
+      getUserColumns({
+        onEdit: (user) =>
+          setUserActionDialog({
+            userId: user.id!,
+            userDto: user as IdentityUserUpdateDto,
+            dialogType: 'edit',
+          }),
+        onPermission: (user) =>
+          setUserActionDialog({
+            userId: user.id!,
+            userDto: user as IdentityUserUpdateDto,
+            dialogType: 'permission',
+          }),
+        onDelete: (user) =>
+          setUserActionDialog({
+            userId: user.id!,
+            userDto: user as IdentityUserUpdateDto,
+            dialogType: 'delete',
+          }),
+      }),
+    []
+  )
 
   const table = useReactTable({
     data: data?.items ?? [],
@@ -104,10 +111,7 @@ export const UserList = () => {
           )}
         </>
       )}
-      <Search 
-        onUpdate={setSearchStr} 
-        value={searchStr}
-      />
+      <Search onUpdate={setSearchStr} value={searchStr} />
       <CustomTable<IdentityUserDto>
         table={table}
         totalCount={data?.totalCount ?? 0}

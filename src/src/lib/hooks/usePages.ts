@@ -1,10 +1,15 @@
+import {
+  pageAdminGet,
+  pageAdminGetList,
+  PagedResultDtoOfVoloCmsKitAdminPagesPageDto,
+  pagesPublicFindBySlug,
+} from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import { pageAdminGetList, pageAdminGet, PagedResultDtoOfVoloCmsKitAdminPagesPageDto, pagesPublicFindBySlug } from '@/client'
 
 /**
  * Hook to fetch pages with pagination and filtering.
- * 
+ *
  * @param {number} pageIndex - The current page index.
  * @param {number} pageSize - The number of items per page.
  * @param {string} filter - Optional filter string for searching pages.
@@ -34,9 +39,12 @@ export const usePages = (
             Sorting: sorting,
           },
         })
-        
+
         // Ensure we return a valid structure even if the API returns undefined
-        const data = response.data as PagedResultDtoOfVoloCmsKitAdminPagesPageDto || { items: [], totalCount: 0 }
+        const data = (response.data as PagedResultDtoOfVoloCmsKitAdminPagesPageDto) || {
+          items: [],
+          totalCount: 0,
+        }
         return {
           items: data.items || [],
           totalCount: data.totalCount || 0,
@@ -55,26 +63,47 @@ export const usePages = (
 
 /**
  * Hook to fetch a single page by ID.
- * 
+ *
  * @param {string} id - The page ID.
  * @returns {Object} - Query result with page data.
  */
 export const usePage = (id: string) => {
+  console.log('usePage hook called with ID:', id)
   return useQuery({
     queryKey: [QueryNames.GetPage, id],
     queryFn: async () => {
+      console.log('Fetching page with ID:', id)
       const response = await pageAdminGet({
         path: { id },
       })
+      console.log('Page response:', response.data)
+
+      // Ensure we return a valid value
+      if (!response.data) {
+        throw new Error('Page not found')
+      }
+
       return response.data
     },
     enabled: !!id,
+    staleTime: 5 * 60 * 1000, // 5 minutes - data is fresh for 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes - keep in cache for 10 minutes
+    refetchOnMount: false, // Don't refetch on mount if data exists
+    refetchOnWindowFocus: false,
+    retry: (failureCount, error) => {
+      // Don't retry if it's a 404 (page not found)
+      if (error instanceof Error && error.message === 'Page not found') {
+        return false
+      }
+      // Retry up to 2 times for other errors
+      return failureCount < 2
+    },
   })
 }
 
 /**
  * Hook to fetch a single page by slug using the public API.
- * 
+ *
  * @param {string} slug - The page slug.
  * @returns {Object} - Query result with page data.
  */
@@ -82,18 +111,27 @@ export const usePageBySlug = (slug: string) => {
   return useQuery({
     queryKey: [QueryNames.GetPages, 'by-slug', slug],
     queryFn: async () => {
-      try {
-        console.log('Fetching page with slug:', slug)
-        const response = await pagesPublicFindBySlug({
-          query: { slug },
-        })
-        console.log('Page response:', response.data)
-        return response.data
-      } catch (error) {
-        console.error('Error fetching page by slug:', error)
-        return null
+      console.log('Fetching page with slug:', slug)
+      const response = await pagesPublicFindBySlug({
+        query: { slug },
+      })
+      console.log('Page response:', response.data)
+
+      // Ensure we return a valid value
+      if (!response.data) {
+        throw new Error('Page not found')
       }
+
+      return response.data
     },
     enabled: !!slug,
+    retry: (failureCount, error) => {
+      // Don't retry if it's a 404 (page not found)
+      if (error instanceof Error && error.message === 'Page not found') {
+        return false
+      }
+      // Retry up to 2 times for other errors
+      return failureCount < 2
+    },
   })
-} 
+}

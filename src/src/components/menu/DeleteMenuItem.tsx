@@ -1,4 +1,5 @@
 'use client'
+import { menuItemAdminDelete } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { menuItemAdminDelete } from '@/client'
 import { Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -58,22 +58,19 @@ export const DeleteMenuItem = ({ menuItem, onDismiss }: DeleteMenuItemProps) => 
             Delete Menu Item
           </DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete the menu item &quot;{menuItem.displayName}&quot;? This action cannot be undone.
+            Are you sure you want to delete the menu item &quot;{menuItem.displayName}&quot;? This
+            action cannot be undone.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={onDismiss} disabled={isDeleting}>
             Cancel
           </Button>
-          <Button
-            variant="destructive"
-            onClick={handleDelete}
-            disabled={isDeleting}
-          >
+          <Button variant="destructive" onClick={handleDelete} disabled={isDeleting}>
             {isDeleting ? 'Deleting...' : 'Delete'}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   )
-} 
+}

@@ -34,7 +34,7 @@ export const useRoles = (
           Sorting: sorting,
           MaxResultCount: pageSize,
           SkipCount: skip,
-        }
+        },
       })
       return data
     },

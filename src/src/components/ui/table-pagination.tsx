@@ -10,10 +10,10 @@ type PaginationProps<T> = {
   'aria-label'?: string
 }
 
-export const Pagination = <T extends Record<string, any>>({ 
-  pageCount, 
+export const Pagination = <T extends Record<string, any>>({
+  pageCount,
   table,
-  'aria-label': ariaLabel = 'Pagination'
+  'aria-label': ariaLabel = 'Pagination',
 }: PaginationProps<T>) => {
   const currentPage = table.getState().pagination.pageIndex
   const counts = useMemo(() => getPages(pageCount, currentPage), [pageCount, currentPage])
@@ -24,11 +24,7 @@ export const Pagination = <T extends Record<string, any>>({
   const renderButtons = (count: number | string, idx: number) => {
     if (count === 'SPACER') {
       return (
-        <span 
-          key={`spacer-${idx}`} 
-          className="text-primary px-2"
-          aria-hidden="true"
-        >
+        <span key={`spacer-${idx}`} className="text-primary px-2" aria-hidden="true">
           ...
         </span>
       )
@@ -53,8 +49,8 @@ export const Pagination = <T extends Record<string, any>>({
   }
 
   return (
-    <nav 
-      className="pagination flex items-center space-x-1" 
+    <nav
+      className="pagination flex items-center space-x-1"
       aria-label={ariaLabel}
       role="navigation"
     >
@@ -67,7 +63,7 @@ export const Pagination = <T extends Record<string, any>>({
       >
         <ChevronFirstIcon className="h-4 w-4" />
       </Button>
-      
+
       <Button
         size="sm"
         variant="outline"
@@ -77,17 +73,17 @@ export const Pagination = <T extends Record<string, any>>({
       >
         <ChevronLeftIcon className="h-4 w-4" />
       </Button>
-      
+
       {/* Mobile pagination info */}
       <div className="block pl-2 pr-2 lg:hidden text-sm text-base-content/70">
         {currentPage + 1} / {pageCount}
       </div>
-      
+
       {/* Desktop pagination buttons */}
       <div className="hidden sm:ml-1 sm:mr-1 sm:space-x-2 lg:inline-block">
         {counts.map(renderButtons)}
       </div>
-      
+
       <Button
         size="sm"
         variant="outline"
@@ -97,7 +93,7 @@ export const Pagination = <T extends Record<string, any>>({
       >
         <ChevronRightIcon className="h-4 w-4" />
       </Button>
-      
+
       <Button
         size="sm"
         variant="outline"

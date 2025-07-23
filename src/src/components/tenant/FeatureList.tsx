@@ -42,18 +42,15 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       g.features?.forEach((f) => {
         if (f.name === Permissions.SETTINGS_EMAILING && f.value === 'true') {
           setEnableSetting(true)
-        } else if (
-          f.name === Permissions.SETTINGS_EMAILING_TEST &&
-          f.value === 'true'
-        ) {
+        } else if (f.name === Permissions.SETTINGS_EMAILING_TEST && f.value === 'true') {
           setEnableEmailSetting(true)
         }
       })
     })
     return () => {
-      queryClient.invalidateQueries({queryKey: [QueryNames.GetFeatures]}).then()
-      queryClient.invalidateQueries({queryKey: [QueryNames.GetTenants]}).then()
-      queryClient.invalidateQueries({queryKey: [PermissionProvider.T]}).then()
+      queryClient.invalidateQueries({ queryKey: [QueryNames.GetFeatures] }).then()
+      queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] }).then()
+      queryClient.invalidateQueries({ queryKey: [PermissionProvider.T] }).then()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onDismiss, data])
@@ -94,7 +91,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Feature update failed.",
+          description: 'Feature update failed.',
           variant: 'destructive',
         })
       }
@@ -172,15 +169,15 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
 
             <DialogFooter className="mt-5">
               <Button
-                  onClick={async (e: { preventDefault: () => void }) => {
+                onClick={async (e: { preventDefault: () => void }) => {
                   e.preventDefault()
-                    await onResetToDefaultEvent()
+                  await onResetToDefaultEvent()
                 }}
               >
                 Reset to default
               </Button>
               <Button
-                  onClick={(e: { preventDefault: () => void }) => {
+                onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   onCloseEvent()
                 }}

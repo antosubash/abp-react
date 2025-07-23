@@ -24,10 +24,10 @@ export default function CmsMenusPage() {
           </Link>
         </div>
       </div>
-      
+
       <div className="space-y-6">
         <MenuList />
       </div>
     </div>
   )
-} 
+}

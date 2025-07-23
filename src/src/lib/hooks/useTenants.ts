@@ -34,7 +34,7 @@ export const useTenants = (
           SkipCount: skip,
           Filter: filter,
           Sorting: sorting,
-        }
+        },
       })
       return data
     },

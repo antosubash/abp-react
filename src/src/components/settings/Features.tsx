@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react'
-import {Button} from '../ui/button'
-import {Dialog, DialogContent, DialogFooter, DialogTitle} from '../ui/dialog'
+import { useEffect, useState } from 'react'
+import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog'
 
 type FeaturesProps = {
   onDismiss: () => void
@@ -25,7 +25,7 @@ export const Features = ({ onDismiss }: FeaturesProps) => {
         </article>
         <DialogFooter className="mt-5">
           <Button
-              onClick={(e: { preventDefault: () => void }) => {
+            onClick={(e: { preventDefault: () => void }) => {
               e.preventDefault()
               onCloseEvent()
             }}

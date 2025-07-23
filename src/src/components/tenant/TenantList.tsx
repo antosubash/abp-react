@@ -61,7 +61,9 @@ export const TenantList = () => {
                           tenantId: info.row.original.id!,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
@@ -75,7 +77,9 @@ export const TenantList = () => {
                           tenantId: info.row.original.id!,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
@@ -88,7 +92,9 @@ export const TenantList = () => {
                           tenantId: info.row.original.id as string,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                           dialgoType: 'delete',
                         })

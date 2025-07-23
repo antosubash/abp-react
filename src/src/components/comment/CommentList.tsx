@@ -1,20 +1,20 @@
 'use client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useComments } from '@/lib/hooks/useComments'
-import { useMemo, useState } from 'react'
 import { CommentWithAuthorDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useToast } from '@/components/ui/use-toast'
-import { PermissionActions } from '../permission/PermissionActions'
-import { DeleteComment } from './DeleteComment'
-import { CommentEdit } from './CommentEdit'
-import { AddComment } from './AddComment'
 import { Search } from '@/components/ui/Search'
+import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useComments } from '@/lib/hooks/useComments'
 import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import { PermissionActions } from '../permission/PermissionActions'
+import { AddComment } from './AddComment'
+import { CommentEdit } from './CommentEdit'
+import { DeleteComment } from './DeleteComment'
 
 type CommentActionDialogState = {
   commentId: string
@@ -44,18 +44,24 @@ export const CommentList = () => {
     setCommentActionDialog(null)
   }
 
-  const columns = useMemo(() => getCommentColumns({
-    onEdit: (comment) => setCommentActionDialog({
-      commentId: comment.id!,
-      commentDto: comment,
-      dialogType: 'edit'
-    }),
-    onDelete: (comment) => setCommentActionDialog({
-      commentId: comment.id!,
-      commentDto: comment,
-      dialogType: 'delete'
-    })
-  }), [])
+  const columns = useMemo(
+    () =>
+      getCommentColumns({
+        onEdit: (comment) =>
+          setCommentActionDialog({
+            commentId: comment.id!,
+            commentDto: comment,
+            dialogType: 'edit',
+          }),
+        onDelete: (comment) =>
+          setCommentActionDialog({
+            commentId: comment.id!,
+            commentDto: comment,
+            dialogType: 'delete',
+          }),
+      }),
+    []
+  )
 
   const table = useReactTable({
     data: (data as any)?.items ?? [],
@@ -93,10 +99,7 @@ export const CommentList = () => {
         </>
       )}
       <AddComment entityType="BlogPost" entityId="all" />
-      <Search 
-        onUpdate={setSearchStr} 
-        value={searchStr}
-      />
+      <Search onUpdate={setSearchStr} value={searchStr} />
       <CustomTable<CommentWithAuthorDto>
         table={table}
         totalCount={(data as any)?.totalCount ?? 0}
@@ -172,4 +175,4 @@ const getCommentColumns = (actions: {
       },
     ],
   },
-] 
+]

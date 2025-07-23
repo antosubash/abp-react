@@ -108,7 +108,7 @@ export const AddUser = ({}: AddUserProps) => {
             </section>
             <DialogFooter className="mt-5">
               <Button
-                  onClick={(e: { preventDefault: () => void }) => {
+                onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   setOpen(false)
                 }}

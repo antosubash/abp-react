@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 /**
  * Hook to manage permission changes for different types of entities.
- * 
+ *
  * @param {UsePermissionsChangesProps} props - The properties for the hook.
  * @returns {Object} - An object containing the state and handlers for permission changes.
  */
@@ -15,7 +15,7 @@ export type UsePermissionsChangesProps = {
 
 /**
  * Helper function to update the permission data based on the selected permission.
- * 
+ *
  * @param {PermissionGrantInfoDto[]} data - The current permission data.
  * @param {PermissionGrantInfoDto} selectedData - The selected permission data.
  * @param {`${Permissions}`} permission - The permission to be updated.
@@ -67,7 +67,7 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
 
   /**
    * Handler for changes in the current permission.
-   * 
+   *
    * @param {number} idx - The index of the selected permission.
    */
   const onCurrentPermissionChanges = useCallback(

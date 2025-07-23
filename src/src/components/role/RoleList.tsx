@@ -2,7 +2,7 @@
 import { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useRoles } from '@/lib/hooks/useRoles'
-import { USER_ROLE, Permissions } from '@/lib/utils'
+import { Permissions, USER_ROLE } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'

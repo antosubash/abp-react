@@ -1,0 +1,5 @@
+export { HeadingBlockConfig } from './config'
+export { HeadingBlock } from './HeadingBlock'
+export { HeadingBlockDefaults } from './HeadingBlockDefaults'
+export { HeadingBlockFields } from './HeadingBlockFields'
+export type { HeadingBlockProps } from './HeadingBlockProps'

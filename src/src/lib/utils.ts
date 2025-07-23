@@ -181,21 +181,21 @@ export const getPages = (totalPages: number, currentPage: number): (number | 'SP
     const spillOffset = totalNumbers - (pages.length + 3)
 
     switch (true) {
-        // handle: (1) ... {6} [7] (8)
+      // handle: (1) ... {6} [7] (8)
       case hasLeftSpill && !hasRightSpill: {
         const extraPages = range(startPage - spillOffset, startPage - 1)
         pages = ['SPACER', ...extraPages, ...pages]
         break
       }
 
-        // handle: (1) {2} [3] {4} ... (8)
+      // handle: (1) {2} [3] {4} ... (8)
       case !hasLeftSpill && hasRightSpill: {
         const extraPages = range(endPage + 1, endPage + spillOffset)
         pages = [...pages, ...extraPages, 'SPACER']
         break
       }
 
-        // handle: (1) ... {3} [4] {5} ... (8)
+      // handle: (1) ... {3} [4] {5} ... (8)
       case hasLeftSpill && hasRightSpill:
       default: {
         pages = ['SPACER', ...pages, 'SPACER']

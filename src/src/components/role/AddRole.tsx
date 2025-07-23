@@ -38,7 +38,7 @@ export const AddRole = ({}: AddUserProps) => {
         description: 'Role Created Successfully',
         variant: 'default',
       })
-      await queryClient.invalidateQueries({queryKey: [QueryNames.GetRoles]})
+      await queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles] })
       setOpen(false)
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -96,7 +96,7 @@ export const AddRole = ({}: AddUserProps) => {
             </section>
             <DialogFooter className="mt-5">
               <Button
-                  onClick={(e: { preventDefault: () => void }) => {
+                onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   setOpen(false)
                 }}

@@ -1,16 +1,14 @@
 'use client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useMenuItems } from '@/lib/hooks/useMenuItems'
-import { useState } from 'react'
 import { MenuItemDto } from '@/client'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
-import { useToast } from '@/components/ui/use-toast'
-import { DeleteMenuItem } from './DeleteMenuItem'
 import { Search } from '@/components/ui/Search'
+import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useMenuItems } from '@/lib/hooks/useMenuItems'
 import { useQueryClient } from '@tanstack/react-query'
-import { Button } from '@/components/ui/button'
-import { Edit3, Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { DeleteMenuItem } from './DeleteMenuItem'
 import { MenuTree } from './MenuTree'
 
 export const MenuList = () => {
@@ -18,7 +16,10 @@ export const MenuList = () => {
   const queryClient = useQueryClient()
 
   const [searchStr, setSearchStr] = useState<string>('')
-  const [deleteDialog, setDeleteDialog] = useState<{ menuItemId: string; displayName: string } | null>(null)
+  const [deleteDialog, setDeleteDialog] = useState<{
+    menuItemId: string
+    displayName: string
+  } | null>(null)
 
   const { isLoading, data, isError } = useMenuItems(0, 1000, searchStr || undefined)
 
@@ -52,19 +53,12 @@ export const MenuList = () => {
           onDismiss={handleDeleteComplete}
         />
       )}
-      
-      <Search 
-        onUpdate={setSearchStr} 
-        value={searchStr}
-      />
-      
+
+      <Search onUpdate={setSearchStr} value={searchStr} />
+
       <div className="border rounded-lg p-4">
-        <MenuTree
-          items={data?.items || []}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
+        <MenuTree items={data?.items || []} onEdit={handleEdit} onDelete={handleDelete} />
       </div>
     </div>
   )
-} 
+}

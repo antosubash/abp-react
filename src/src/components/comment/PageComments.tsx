@@ -1,21 +1,20 @@
 'use client'
 
-import { CommentWithDetailsDto, ListResultDtoOfCommentWithDetailsDto } from '@/client'
-import { usePublicComments } from '@/lib/hooks/usePublicComments'
-import { AddComment } from './AddComment'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { commentPublicCreate, CommentWithDetailsDto } from '@/client'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Separator } from '@/components/ui/separator'
-import { MessageCircle, Reply } from 'lucide-react'
-import { formatDistanceToNow } from 'date-fns'
-import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
-import { commentPublicCreate } from '@/client'
-import { useQueryClient } from '@tanstack/react-query'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
+import { usePublicComments } from '@/lib/hooks/usePublicComments'
+import { useQueryClient } from '@tanstack/react-query'
+import { formatDistanceToNow } from 'date-fns'
+import { MessageCircle, Reply, Send } from 'lucide-react'
+import { useState } from 'react'
+import { AddComment } from './AddComment'
 
 export type PageCommentsProps = {
   pageId: string
@@ -62,9 +61,17 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-muted-foreground">
-            <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p>Failed to load comments.</p>
+          <div className="text-center py-8">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+              <MessageCircle className="h-6 w-6 text-red-600" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Comments Unavailable</h3>
+            <p className="text-muted-foreground mb-4">
+              We&apos;re having trouble loading comments right now. This might be a temporary issue.
+            </p>
+            <Button variant="outline" onClick={() => window.location.reload()} size="sm">
+              Try Again
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -85,16 +92,23 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
       <CardContent className="space-y-6">
         {/* Add Comment Section - Only show if authenticated */}
         {isAuthenticated ? (
-          <div>
+          <div className="pb-4">
             <AddComment entityType="Page" entityId={pageId} />
           </div>
         ) : (
-          <div className="text-center py-4 text-muted-foreground">
-            <p>Please <a href="/auth/login" className="text-primary hover:underline">login</a> to add a comment.</p>
+          <div className="text-center py-6 text-muted-foreground bg-muted/30 rounded-lg">
+            <MessageCircle className="w-8 h-8 mx-auto mb-2 opacity-50" />
+            <p>
+              Please{' '}
+              <a href="/auth/login" className="text-primary hover:underline font-medium">
+                login
+              </a>{' '}
+              to add a comment.
+            </p>
           </div>
         )}
 
-        <Separator />
+        {comments.length > 0 && <Separator />}
 
         {/* Comments List */}
         <div className="space-y-4">
@@ -105,9 +119,9 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
             </div>
           ) : (
             comments.map((comment: CommentWithDetailsDto) => (
-              <CommentItem 
-                key={comment.id} 
-                comment={comment} 
+              <CommentItem
+                key={comment.id}
+                comment={comment}
                 isAuthenticated={isAuthenticated}
                 pageId={pageId}
               />
@@ -139,7 +153,7 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
     .toUpperCase()
     .slice(0, 2)
 
-  const creationDate = comment.creationTime 
+  const creationDate = comment.creationTime
     ? formatDistanceToNow(new Date(comment.creationTime), { addSuffix: true })
     : 'Unknown date'
 
@@ -152,16 +166,16 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
         body: {
           text: replyText,
           repliedCommentId: comment.id,
-          idempotencyToken: crypto.randomUUID()
-        }
+          idempotencyToken: crypto.randomUUID(),
+        },
       })
-      
+
       toast({
         title: 'Success',
         description: 'Reply posted successfully',
         variant: 'default',
       })
-      
+
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPublicComments, 'Page', pageId] })
       setIsReplying(false)
       setReplyText('')
@@ -182,14 +196,14 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
             {authorInitials}
           </AvatarFallback>
         </Avatar>
-        
+
         <div className="flex-1 space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-medium text-sm">{authorName}</span>
               <span className="text-xs text-muted-foreground">{creationDate}</span>
             </div>
-            
+
             {isAuthenticated && (
               <Button
                 variant="ghost"
@@ -202,37 +216,47 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
               </Button>
             )}
           </div>
-          
-          <div className="text-sm">
-            {comment.text}
-          </div>
+
+          <div className="text-sm">{comment.text}</div>
         </div>
       </div>
 
       {/* Reply Form */}
       {isReplying && (
         <div className="ml-14 space-y-3">
-          <Textarea
-            placeholder="Write your reply..."
-            value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
-            rows={3}
-            className="text-sm"
-          />
-          <div className="flex gap-2">
-            <Button size="sm" onClick={handleReply} disabled={!replyText.trim()}>
-              Post Reply
-            </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={() => {
-                setIsReplying(false)
-                setReplyText('')
-              }}
-            >
-              Cancel
-            </Button>
+          <div className="relative">
+            <Textarea
+              placeholder="Write your reply..."
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+              rows={3}
+              className="text-sm resize-none"
+              autoFocus
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-xs text-muted-foreground">{replyText.length}/500 characters</div>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setIsReplying(false)
+                  setReplyText('')
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleReply}
+                disabled={!replyText.trim()}
+                className="min-w-[80px]"
+              >
+                <Send className="w-3 h-3 mr-1" />
+                Reply
+              </Button>
+            </div>
           </div>
         </div>
       )}
@@ -247,21 +271,18 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
                   {(reply.author?.name || 'A').charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              
+
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-xs">{reply.author?.name || 'Anonymous'}</span>
                   <span className="text-xs text-muted-foreground">
-                    {reply.creationTime 
+                    {reply.creationTime
                       ? formatDistanceToNow(new Date(reply.creationTime), { addSuffix: true })
-                      : 'Unknown date'
-                    }
+                      : 'Unknown date'}
                   </span>
                 </div>
-                
-                <div className="text-xs">
-                  {reply.text}
-                </div>
+
+                <div className="text-xs">{reply.text}</div>
               </div>
             </div>
           ))}
@@ -269,4 +290,4 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
       )}
     </div>
   )
-} 
+}

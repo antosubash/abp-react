@@ -1,13 +1,13 @@
-import {emailSettingsSendTestEmail, SendTestEmailInput} from '@/client'
-import {QueryNames} from '@/lib/hooks/QueryConstants'
-import {useQueryClient} from '@tanstack/react-query'
-import {useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {Button} from '../ui/button'
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from '../ui/dialog'
-import {Input} from '../ui/input'
-import {Textarea} from '../ui/textarea'
-import {useToast} from '../ui/use-toast'
+import { emailSettingsSendTestEmail, SendTestEmailInput } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
+import { useToast } from '../ui/use-toast'
 
 export type TestEmailProps = {
   onDismiss: () => void
@@ -77,7 +77,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
           <DialogFooter className="mt-5">
             <Button type="submit">Send</Button>
             <Button
-                onClick={(e: { preventDefault: () => void }) => {
+              onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCloseEvent()
               }}

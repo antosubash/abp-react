@@ -282,7 +282,7 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
               </section>
               <DialogFooter>
                 <Button
-                    onClick={(e: { preventDefault: () => void }) => {
+                  onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}

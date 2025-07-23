@@ -12,10 +12,10 @@ export default function CmsCommentsPage() {
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-6">
         <CommentList />
       </div>
     </div>
   )
-} 
+}

@@ -1,6 +1,6 @@
-import { CommentWithAuthorDto, commentPublicUpdate, UpdateCommentInput } from '@/client'
+import { commentPublicUpdate, CommentWithAuthorDto, UpdateCommentInput } from '@/client'
 import { useToast } from '@/components/ui/use-toast'
-import { MouseEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -75,7 +75,7 @@ export const CommentEdit = ({ commentDto, commentId, onDismiss }: CommentEditPro
 
           <DialogFooter className="mt-5">
             <Button
-                onClick={(e: { preventDefault: () => void }) => {
+              onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCloseEvent()
               }}
@@ -88,4 +88,4 @@ export const CommentEdit = ({ commentDto, commentId, onDismiss }: CommentEditPro
       </DialogContent>
     </Dialog>
   )
-} 
+}

@@ -1,20 +1,19 @@
 'use client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { usePages } from '@/lib/hooks/usePages'
-import { useMemo, useState } from 'react'
 import { VoloCmsKitAdminPagesPageDto } from '@/client'
+import { Button } from '@/components/ui/button'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useToast } from '@/components/ui/use-toast'
-import { PermissionActions } from '../permission/PermissionActions'
-import { DeletePage } from './DeletePage'
 import { Search } from '@/components/ui/Search'
+import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { usePages } from '@/lib/hooks/usePages'
 import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import { PermissionActions } from '../permission/PermissionActions'
+import { DeletePage } from './DeletePage'
 
 export const PageList = () => {
   const { toast } = useToast()
@@ -38,20 +37,25 @@ export const PageList = () => {
     setDeleteDialog(null)
   }
 
-  const columns = useMemo(() => getPageColumns({
-    onView: (page) => {
-      // Navigate to view page using slug
-      window.location.href = `/admin/cms/pages/view/${page.slug}`
-    },
-    onEdit: (page) => {
-      // Navigate to edit page
-      window.location.href = `/admin/cms/pages/${page.id}/edit`
-    },
-    onDelete: (page) => setDeleteDialog({
-      pageId: page.id!,
-      title: page.title!,
-    })
-  }), [])
+  const columns = useMemo(
+    () =>
+      getPageColumns({
+        onView: (page) => {
+          // Navigate to view page using slug
+          window.location.href = `/pages/${page.slug}`
+        },
+        onEdit: (page) => {
+          // Navigate to edit page
+          window.location.href = `/admin/cms/pages/${page.id}/edit`
+        },
+        onDelete: (page) =>
+          setDeleteDialog({
+            pageId: page.id!,
+            title: page.title!,
+          }),
+      }),
+    []
+  )
 
   const table = useReactTable({
     data: data?.items ?? [],
@@ -77,10 +81,7 @@ export const PageList = () => {
           onDismiss={handleDeleteComplete}
         />
       )}
-      <Search 
-        onUpdate={setSearchStr} 
-        value={searchStr}
-      />
+      <Search onUpdate={setSearchStr} value={searchStr} />
       <CustomTable<VoloCmsKitAdminPagesPageDto>
         table={table}
         totalCount={data?.totalCount ?? 0}
@@ -103,11 +104,7 @@ const getPageColumns = (actions: {
         header: 'Actions',
         cell: (info) => (
           <div className="flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => actions.onView(info.row.original)}
-            >
+            <Button size="sm" variant="outline" onClick={() => actions.onView(info.row.original)}>
               View
             </Button>
             <PermissionActions
@@ -149,4 +146,4 @@ const getPageColumns = (actions: {
       },
     ],
   },
-] 
+]

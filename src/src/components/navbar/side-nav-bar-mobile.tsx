@@ -10,21 +10,21 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { CircleUser, Menu, Package2, ChevronDown, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight, CircleUser, Menu, Package2 } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import ClientLink from '../ui/client-link'
 
 export default function SideNavBarMobile() {
   const pathname = usePathname()
-  
+
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
     const expanded = new Set<string>()
-    AdminMenus.forEach(menu => {
+    AdminMenus.forEach((menu) => {
       if (menu.submenus) {
-        const isActive = menu.submenus.some(submenu => pathname === submenu.link)
+        const isActive = menu.submenus.some((submenu) => pathname === submenu.link)
         if (isActive) {
           expanded.add(menu.name)
         }
@@ -32,7 +32,7 @@ export default function SideNavBarMobile() {
     })
     return expanded
   }
-  
+
   const [expandedMenus, setExpandedMenus] = useState<Set<string>>(getInitialExpandedMenus())
 
   const toggleMenu = (menuName: string) => {
@@ -48,7 +48,7 @@ export default function SideNavBarMobile() {
   const isMenuActive = (menuLink: string, submenus?: Array<{ link: string }>) => {
     if (pathname === menuLink) return true
     if (submenus) {
-      return submenus.some(submenu => pathname === submenu.link)
+      return submenus.some((submenu) => pathname === submenu.link)
     }
     return false
   }
@@ -87,7 +87,7 @@ export default function SideNavBarMobile() {
                         isActive ? 'text-foreground bg-accent' : ''
                       }`}
                     >
-                      <menu.icon/>
+                      <menu.icon />
                       {menu.name}
                     </Link>
                     {hasSubmenus && (
@@ -103,7 +103,7 @@ export default function SideNavBarMobile() {
                       </button>
                     )}
                   </div>
-                  
+
                   {hasSubmenus && isExpanded && (
                     <div className="ml-4 mt-1 space-y-1">
                       {menu.submenus!.map((submenu, subIndex) => {

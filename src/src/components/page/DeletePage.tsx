@@ -61,9 +61,7 @@ export const DeletePage = ({ page, onDismiss }: DeletePageProps) => {
           <p>
             Are you sure you want to delete the page <strong>{page.title}</strong>?
           </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            This action cannot be undone.
-          </p>
+          <p className="text-sm text-muted-foreground mt-2">This action cannot be undone.</p>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onDismiss?.()}>
@@ -76,4 +74,4 @@ export const DeletePage = ({ page, onDismiss }: DeletePageProps) => {
       </DialogContent>
     </Dialog>
   )
-} 
+}

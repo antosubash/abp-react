@@ -27,10 +27,10 @@ export default function CmsPagesPage() {
           )}
         </div>
       </div>
-      
+
       <div className="space-y-6">
         <PageList />
       </div>
     </div>
   )
-} 
+}

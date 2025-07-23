@@ -1,131 +1,24 @@
 'use client'
 import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
+import { PuckEditor } from '@/components/puck/PuckEditor'
+import { htmlToPuckData, isPuckData } from '@/components/puck/utils'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import Error from '@/components/ui/Error'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import Loader from '@/components/ui/Loader'
-import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { Permissions } from '@/lib/utils'
 import { usePage } from '@/lib/hooks/usePages'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import {
-  AlertCircle,
-  ArrowLeft,
-  CheckCircle,
-  Clock,
-  Code,
-  Edit3,
-  Eye,
-  FileText,
-  History,
-  Save,
-} from 'lucide-react'
+import { ArrowLeft, Clock, RefreshCw, Save } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-
-// Rich text editor component
-const RichTextEditor = ({
-  value,
-  onChange,
-  placeholder,
-}: {
-  value: string
-  onChange: (value: string) => void
-  placeholder?: string
-}) => {
-  const [isPreview, setIsPreview] = useState(false)
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'b' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault()
-      const textarea = e.target as HTMLTextAreaElement
-      const start = textarea.selectionStart
-      const end = textarea.selectionEnd
-      const text = value
-      const before = text.substring(0, start)
-      const selected = text.substring(start, end)
-      const after = text.substring(end)
-      onChange(before + `<strong>${selected}</strong>` + after)
-    }
-  }
-
-  if (isPreview) {
-    return (
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label>Content Preview</Label>
-          <Button type="button" variant="outline" size="sm" onClick={() => setIsPreview(false)}>
-            <Edit3 className="w-4 h-4 mr-2" />
-            Edit
-          </Button>
-        </div>
-        <div
-          className="border rounded-md p-4 min-h-[300px] bg-background"
-          dangerouslySetInnerHTML={{
-            __html: value || '<p class="text-muted-foreground">No content to preview</p>',
-          }}
-        />
-      </div>
-    )
-  }
-
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <Label>Content</Label>
-        <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              const textarea = document.getElementById('content') as HTMLTextAreaElement
-              if (textarea) {
-                const start = textarea.selectionStart
-                const end = textarea.selectionEnd
-                const text = value
-                const before = text.substring(0, start)
-                const selected = text.substring(start, end)
-                const after = text.substring(end)
-                onChange(before + `<strong>${selected}</strong>` + after)
-              }
-            }}
-            className="text-xs"
-          >
-            <strong>B</strong>
-          </Button>
-          <Button type="button" variant="outline" size="sm" onClick={() => setIsPreview(true)}>
-            <Eye className="w-4 h-4 mr-2" />
-            Preview
-          </Button>
-        </div>
-      </div>
-      <Textarea
-        id="content"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder || 'Enter page content (HTML supported)'}
-        rows={12}
-        className="font-mono text-sm"
-      />
-      <p className="text-sm text-muted-foreground">
-        Use HTML tags for formatting. Ctrl+B to bold selected text.
-      </p>
-    </div>
-  )
-}
 
 // Auto-slug generation utility
 const generateSlug = (title: string): string => {
@@ -145,11 +38,14 @@ export default function EditPage() {
   const router = useRouter()
   const params = useParams()
   const pageId = params.id as string
+
+  // Force re-render when pageId changes
+  const key = `edit-page-${pageId}`
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({})
-  const [activeTab, setActiveTab] = useState('content')
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
   const [isPublished, setIsPublished] = useState(false)
+  const [isFormLoaded, setIsFormLoaded] = useState(false)
 
   const {
     handleSubmit,
@@ -159,7 +55,7 @@ export default function EditPage() {
     control,
     reset,
     formState: { errors, isDirty },
-  } = useForm<UpdatePageInputDto>({
+  } = useForm<any>({
     defaultValues: {
       title: '',
       slug: '',
@@ -171,9 +67,14 @@ export default function EditPage() {
     },
   })
 
-  const { data: page, isLoading, isError } = usePage(pageId)
+  const { data: page, isLoading, isError, error, refetch } = usePage(pageId)
   const watchedTitle = watch('title')
   const watchedSlug = watch('slug')
+
+  // Reset form loaded state when pageId changes
+  useEffect(() => {
+    setIsFormLoaded(false)
+  }, [pageId])
 
   // Auto-generate slug from title (only if slug is empty or matches old title)
   useEffect(() => {
@@ -195,18 +96,74 @@ export default function EditPage() {
 
   // Load page data into form
   useEffect(() => {
+    console.log('EditPage - Loading page data into form:', page)
     if (page) {
       const pageData = page as VoloCmsKitAdminPagesPageDto
+      console.log('EditPage - pageData:', pageData)
+      console.log('EditPage - pageData.content:', pageData.content)
+      console.log('EditPage - pageData.content type:', typeof pageData.content)
+
+      // Convert content to Puck data if it's HTML
+      let puckContent: any = pageData.content
+
+      if (typeof pageData.content === 'string') {
+        console.log('EditPage - Content is string, processing...')
+        try {
+          // Try to parse as JSON first
+          const parsed = JSON.parse(pageData.content)
+          console.log('EditPage - Parsed JSON content:', parsed)
+          if (isPuckData(parsed)) {
+            console.log('EditPage - Content is valid Puck data')
+            puckContent = parsed
+          } else {
+            console.log('EditPage - Content is not Puck data, converting HTML')
+            // Convert HTML to Puck data
+            puckContent = htmlToPuckData(pageData.content)
+          }
+        } catch (error) {
+          console.log('EditPage - Failed to parse as JSON, converting HTML:', error)
+          // If not JSON, convert HTML to Puck data
+          puckContent = htmlToPuckData(pageData.content)
+        }
+      } else if (pageData.content && typeof pageData.content === 'object') {
+        console.log('EditPage - Content is object:', pageData.content)
+        // If it's already an object, ensure it's properly formatted
+        puckContent = isPuckData(pageData.content)
+          ? pageData.content
+          : {
+              content: [],
+              root: { props: { title: pageData.title || 'New Page' } },
+              zones: {},
+            }
+      } else {
+        console.log('EditPage - Content is null/undefined, using default')
+        // Default empty Puck data with welcome block
+        puckContent = {
+          content: [],
+          root: { props: { title: pageData.title || 'New Page' } },
+          zones: {},
+        }
+      }
+
+      console.log('EditPage - Final processed puckContent:', puckContent)
+
+      // Ensure content is a string for the form
+      const contentString =
+        typeof puckContent === 'string' ? puckContent : JSON.stringify(puckContent)
+      console.log('EditPage - Content string for form:', contentString)
+
       reset({
         title: pageData.title || '',
         slug: pageData.slug || '',
         layoutName: pageData.layoutName || '',
-        content: pageData.content || '',
+        content: contentString,
         script: pageData.script || '',
         style: pageData.style || '',
         concurrencyStamp: pageData.concurrencyStamp || '',
       })
       setIsPublished(pageData.isHomePage || false)
+      setIsFormLoaded(true)
+      console.log('EditPage - Form reset completed')
     }
   }, [page, reset])
 
@@ -271,7 +228,7 @@ export default function EditPage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [hasUnsavedChanges])
 
-  const onSubmit = async (data: UpdatePageInputDto) => {
+  const onSubmit = async (data: any) => {
     if (!can(Permissions.CMSKIT_PAGES_UPDATE)) {
       toast({
         title: 'Access Denied',
@@ -283,15 +240,18 @@ export default function EditPage() {
 
     setIsSubmitting(true)
     try {
+      const apiData = { ...data }
       await pageAdminUpdate({
         path: { id: pageId },
-        body: data,
+        body: apiData,
       })
       toast({
         title: 'Success',
         description: 'Page Updated Successfully',
         variant: 'default',
       })
+      // Invalidate both the specific page and the pages list
+      queryClient.invalidateQueries({ queryKey: [QueryNames.GetPage, pageId] })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPages] })
       localStorage.removeItem(`page-draft-${pageId}`) // Clear draft after successful save
       router.push('/admin/cms')
@@ -345,22 +305,41 @@ export default function EditPage() {
     }
   }
 
-  if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading page data...</p>
+          <p className="text-sm text-muted-foreground mt-2">Page ID: {pageId}</p>
+        </div>
+      </div>
+    )
+  }
+  if (isError) {
+    console.error('Page loading error:', error)
+    return <Error />
+  }
 
-  if (!page) {
+  if (!page && !isLoading) {
     return (
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <h2 className="text-2xl font-semibold mb-2">Page Not Found</h2>
             <p className="text-muted-foreground">
-              The page you are looking for doesn&apos;t exist.
+              The page you are looking for doesn&apos;t exist or failed to load.
             </p>
-            <Button onClick={() => router.push('/admin/cms')} className="mt-4">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to CMS
-            </Button>
+            <div className="flex gap-2 justify-center mt-4">
+              <Button onClick={() => router.push('/admin/cms')}>
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to CMS
+              </Button>
+              <Button variant="outline" onClick={() => refetch()}>
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Retry
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -385,33 +364,28 @@ export default function EditPage() {
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-6xl">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <Button variant="ghost" onClick={() => router.push('/admin/cms')}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to CMS
-          </Button>
-          <div className="flex items-center gap-2">
+    <div key={key} className="min-h-screen w-full bg-background">
+      {/* Simple Header */}
+      <div className="border-b bg-background p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="sm" onClick={() => router.push('/admin/cms')}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+            <div>
+              <h1 className="text-lg font-semibold">Edit Page</h1>
+              <p className="text-sm text-muted-foreground">Visual page builder</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
             {hasUnsavedChanges && (
               <Badge variant="secondary" className="flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 Unsaved Changes
               </Badge>
             )}
-            <Button variant="outline" size="sm" onClick={saveDraft} disabled={!hasUnsavedChanges}>
-              <Save className="w-4 h-4 mr-2" />
-              Save Draft
-            </Button>
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Edit Page</h1>
-            <p className="text-muted-foreground">Update page content and settings</p>
-          </div>
-          <div className="flex items-center gap-4">
             <div className="flex items-center space-x-2">
               <Switch
                 id="publish-status"
@@ -419,270 +393,171 @@ export default function EditPage() {
                 onCheckedChange={setIsPublished}
                 disabled
               />
-              <Label htmlFor="publish-status">{isPublished ? 'Home Page' : 'Regular Page'}</Label>
+              <Label htmlFor="publish-status" className="text-sm">
+                {isPublished ? 'Home Page' : 'Regular Page'}
+              </Label>
             </div>
-            <Badge variant={isPublished ? 'default' : 'secondary'}>
-              {isPublished ? (
-                <>
-                  <CheckCircle className="w-3 h-3 mr-1" />
-                  Home Page
-                </>
-              ) : (
-                <>
-                  <History className="w-3 h-3 mr-1" />
-                  Regular Page
-                </>
-              )}
-            </Badge>
+
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                console.log('Manual refresh triggered')
+                refetch()
+              }}
+              disabled={isLoading}
+            >
+              <RefreshCw className="w-4 h-4 mr-2" />
+              {isLoading ? 'Loading...' : 'Refresh'}
+            </Button>
+
+            <Button size="sm" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
+              <Save className="w-4 h-4 mr-2" />
+              {isSubmitting ? 'Saving...' : 'Save Changes'}
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Unsaved Changes Alert */}
-      {hasUnsavedChanges && (
-        <Alert className="mb-6">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            You have unsaved changes. Press Ctrl+S to save as draft, or submit the form to update.
-          </AlertDescription>
-        </Alert>
-      )}
+      {/* Form Fields */}
+      <div className="border-b bg-background p-4">
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="title">Title *</Label>
+              <Input
+                id="title"
+                required
+                {...register('title', {
+                  required: 'Title is required',
+                  minLength: { value: 1, message: 'Title must be at least 1 character' },
+                  maxLength: {
+                    value: 200,
+                    message: 'Title must be less than 200 characters',
+                  },
+                })}
+                placeholder="Enter page title"
+              />
+              {errors.title && (
+                <p className="text-sm text-red-500">{errors.title.message?.toString()}</p>
+              )}
+              {formErrors.title && (
+                <p className="text-sm text-red-500">
+                  {Array.isArray(formErrors.title) ? formErrors.title.join(', ') : formErrors.title}
+                </p>
+              )}
+            </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="content" className="flex items-center gap-2">
-              <FileText className="w-4 h-4" />
-              Content
-            </TabsTrigger>
-            <TabsTrigger value="advanced" className="flex items-center gap-2">
-              <Code className="w-4 h-4" />
-              Advanced
-            </TabsTrigger>
-            <TabsTrigger value="preview" className="flex items-center gap-2">
-              <Eye className="w-4 h-4" />
-              Preview
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Content Tab */}
-          <TabsContent value="content" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Page Information</CardTitle>
-                <CardDescription>Basic page details and content</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {/* General error display */}
-                {Object.keys(formErrors).length > 0 && (
-                  <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      <ul className="mt-2 space-y-1">
-                        {Object.entries(formErrors).map(([field, messages]) => (
-                          <li key={field}>
-                            <strong>{field}:</strong>{' '}
-                            {Array.isArray(messages) ? messages.join(', ') : messages}
-                          </li>
-                        ))}
-                      </ul>
-                    </AlertDescription>
-                  </Alert>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="title">Title *</Label>
-                    <Input
-                      id="title"
-                      required
-                      {...register('title', {
-                        required: 'Title is required',
-                        minLength: { value: 1, message: 'Title must be at least 1 character' },
-                        maxLength: {
-                          value: 200,
-                          message: 'Title must be less than 200 characters',
-                        },
-                      })}
-                      placeholder="Enter page title"
-                    />
-                    {errors.title && <p className="text-sm text-red-500">{errors.title.message}</p>}
-                    {formErrors.title && (
-                      <p className="text-sm text-red-500">
-                        {Array.isArray(formErrors.title)
-                          ? formErrors.title.join(', ')
-                          : formErrors.title}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="slug">Slug *</Label>
-                    <Input
-                      id="slug"
-                      required
-                      {...register('slug', {
-                        required: 'Slug is required',
-                        pattern: {
-                          value: /^[a-z0-9-]+$/,
-                          message: 'Slug can only contain lowercase letters, numbers, and hyphens',
-                        },
-                        minLength: { value: 1, message: 'Slug must be at least 1 character' },
-                        maxLength: { value: 100, message: 'Slug must be less than 100 characters' },
-                      })}
-                      placeholder="page-slug"
-                    />
-                    {errors.slug && <p className="text-sm text-red-500">{errors.slug.message}</p>}
-                    {formErrors.slug && (
-                      <p className="text-sm text-red-500">
-                        {Array.isArray(formErrors.slug)
-                          ? formErrors.slug.join(', ')
-                          : formErrors.slug}
-                      </p>
-                    )}
-                    <p className="text-sm text-muted-foreground">
-                      Auto-generated from title. You can customize it.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="layoutName">Layout Name</Label>
-                  <Input
-                    id="layoutName"
-                    {...register('layoutName')}
-                    placeholder="Layout name (optional)"
-                  />
-                  {formErrors.layoutName && (
-                    <p className="text-sm text-red-500">
-                      {Array.isArray(formErrors.layoutName)
-                        ? formErrors.layoutName.join(', ')
-                        : formErrors.layoutName}
-                    </p>
-                  )}
-                  <p className="text-sm text-muted-foreground">
-                    Specify a custom layout template for this page
-                  </p>
-                </div>
-
-                <Separator />
-
-                <Controller
-                  name="content"
-                  control={control}
-                  render={({ field }) => (
-                    <RichTextEditor
-                      value={field.value || ''}
-                      onChange={field.onChange}
-                      placeholder="Enter page content (HTML supported)"
-                    />
-                  )}
-                />
-                {formErrors.content && (
-                  <p className="text-sm text-red-500">
-                    {Array.isArray(formErrors.content)
-                      ? formErrors.content.join(', ')
-                      : formErrors.content}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Advanced Tab */}
-          <TabsContent value="advanced" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Advanced Settings</CardTitle>
-                <CardDescription>Custom JavaScript and CSS for this page</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="script">JavaScript</Label>
-                    <Textarea
-                      id="script"
-                      {...register('script')}
-                      placeholder="JavaScript code (optional)"
-                      rows={8}
-                      className="font-mono text-sm"
-                    />
-                    <p className="text-sm text-muted-foreground">Custom JavaScript for this page</p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="style">CSS Styles</Label>
-                    <Textarea
-                      id="style"
-                      {...register('style')}
-                      placeholder="CSS styles (optional)"
-                      rows={8}
-                      className="font-mono text-sm"
-                    />
-                    <p className="text-sm text-muted-foreground">Custom CSS styles for this page</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Preview Tab */}
-          <TabsContent value="preview" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Page Preview</CardTitle>
-                <CardDescription>See how your page will look when published</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="border rounded-lg p-6 bg-background">
-                  <div className="mb-4">
-                    <h1 className="text-2xl font-bold mb-2">{watchedTitle || 'Page Title'}</h1>
-                    <p className="text-sm text-muted-foreground">
-                      Slug: /{watchedSlug || 'page-slug'}
-                    </p>
-                  </div>
-                  <div
-                    className="prose max-w-none"
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        watch('content') ||
-                        '' ||
-                        '<p class="text-muted-foreground">No content to preview</p>',
-                    }}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-
-        {/* Action Buttons */}
-        <div className="flex justify-between items-center pt-6 border-t mt-6">
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.push('/admin/cms')}
-              disabled={isSubmitting}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={saveDraft}
-              disabled={!hasUnsavedChanges || isSubmitting}
-            >
-              <Save className="w-4 h-4 mr-2" />
-              Save Draft
-            </Button>
+            <div className="space-y-2">
+              <Label htmlFor="slug">Slug *</Label>
+              <Input
+                id="slug"
+                required
+                {...register('slug', {
+                  required: 'Slug is required',
+                  pattern: {
+                    value: /^[a-z0-9-]+$/,
+                    message: 'Slug can only contain lowercase letters, numbers, and hyphens',
+                  },
+                  minLength: { value: 1, message: 'Slug must be at least 1 character' },
+                  maxLength: { value: 100, message: 'Slug must be less than 100 characters' },
+                })}
+                placeholder="page-slug"
+              />
+              {errors.slug && (
+                <p className="text-sm text-red-500">{errors.slug.message?.toString()}</p>
+              )}
+              {formErrors.slug && (
+                <p className="text-sm text-red-500">
+                  {Array.isArray(formErrors.slug) ? formErrors.slug.join(', ') : formErrors.slug}
+                </p>
+              )}
+              <p className="text-sm text-muted-foreground">
+                Auto-generated from title. You can customize it.
+              </p>
+            </div>
           </div>
-          <Button type="submit" disabled={isSubmitting}>
-            <Save className="w-4 h-4 mr-2" />
-            {isSubmitting ? 'Saving...' : 'Save Changes'}
-          </Button>
+
+          <div className="space-y-2">
+            <Label htmlFor="layoutName">Layout Name</Label>
+            <Input
+              id="layoutName"
+              {...register('layoutName')}
+              placeholder="Layout name (optional)"
+            />
+            {formErrors.layoutName && (
+              <p className="text-sm text-red-500">
+                {Array.isArray(formErrors.layoutName)
+                  ? formErrors.layoutName.join(', ')
+                  : formErrors.layoutName}
+              </p>
+            )}
+            <p className="text-sm text-muted-foreground">
+              Specify a custom layout template for this page
+            </p>
+          </div>
+
+          {/* General error display */}
+          {Object.keys(formErrors).length > 0 && (
+            <Alert variant="destructive">
+              <AlertDescription>Please fix the errors above before submitting.</AlertDescription>
+            </Alert>
+          )}
         </div>
-      </form>
+      </div>
+
+      {/* Main Content - Puck Editor */}
+      <div className="w-full">
+        <Controller
+          name="content"
+          control={control}
+          render={({ field }) => {
+            console.log('EditPage Controller field value:', field.value)
+            console.log('EditPage isFormLoaded:', isFormLoaded)
+
+            if (!isFormLoaded) {
+              return (
+                <div className="flex items-center justify-center min-h-[400px]">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                    <p className="text-muted-foreground">Loading page content...</p>
+                  </div>
+                </div>
+              )
+            }
+
+            // Ensure we pass proper Puck data structure to the editor
+            let puckData = field.value
+            if (typeof field.value === 'string') {
+              try {
+                puckData = JSON.parse(field.value)
+              } catch (error) {
+                console.warn('Failed to parse content as JSON, using default')
+                puckData = {
+                  content: [],
+                  root: { props: { title: 'New Page' } },
+                  zones: {},
+                }
+              }
+            }
+
+            const contentKey = field.value ? JSON.stringify(field.value).slice(0, 50) : 'empty'
+            return (
+              <PuckEditor
+                key={`puck-editor-${contentKey}`} // Force re-render when content changes
+                data={puckData}
+                onChange={(newData) => {
+                  console.log('EditPage PuckEditor onChange called with:', newData)
+                  // Store as JSON string in the form
+                  const dataToStore =
+                    typeof newData === 'string' ? newData : JSON.stringify(newData)
+                  field.onChange(dataToStore)
+                }}
+              />
+            )
+          }}
+        />
+      </div>
     </div>
   )
 }

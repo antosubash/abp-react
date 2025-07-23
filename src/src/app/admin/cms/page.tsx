@@ -15,11 +15,13 @@ export default function CmsPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">CMS Management</h1>
-            <p className="text-muted-foreground">Manage your website content and user interactions</p>
+            <p className="text-muted-foreground">
+              Manage your website content and user interactions
+            </p>
           </div>
         </div>
       </div>
-      
+
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
@@ -27,15 +29,11 @@ export default function CmsPage() {
               <FileText className="h-5 w-5" />
               Pages
             </CardTitle>
-            <CardDescription>
-              Create and manage website pages
-            </CardDescription>
+            <CardDescription>Create and manage website pages</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
-                Manage your website content
-              </span>
+              <span className="text-sm text-muted-foreground">Manage your website content</span>
               <Link href="/admin/cms/pages">
                 <Button variant="outline" size="sm">
                   View Pages
@@ -61,15 +59,11 @@ export default function CmsPage() {
               <MessageSquare className="h-5 w-5" />
               Comments
             </CardTitle>
-            <CardDescription>
-              Manage user comments and feedback
-            </CardDescription>
+            <CardDescription>Manage user comments and feedback</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
-                Review and moderate comments
-              </span>
+              <span className="text-sm text-muted-foreground">Review and moderate comments</span>
               <Link href="/admin/cms/comments">
                 <Button variant="outline" size="sm">
                   View Comments
@@ -81,4 +75,4 @@ export default function CmsPage() {
       </div>
     </div>
   )
-} 
+}

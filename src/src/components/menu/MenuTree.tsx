@@ -1,11 +1,11 @@
 'use client'
 import { MenuItemDto } from '@/client'
-import { ChevronRight, ChevronDown, Folder, FileText } from 'lucide-react'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
+import { ChevronDown, ChevronRight, FileText, Folder } from 'lucide-react'
+import { useState } from 'react'
 
 type TreeMenuItem = MenuItemDto & {
   children?: TreeMenuItem[]
@@ -32,7 +32,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
 
   return (
     <div className="w-full">
-      <div 
+      <div
         className={`flex items-center justify-between p-2 hover:bg-muted/50 rounded-md transition-colors ${
           level > 0 ? 'ml-4' : ''
         }`}
@@ -55,7 +55,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
           ) : (
             <div className="w-6" />
           )}
-          
+
           <div className="flex items-center gap-2">
             {hasChildren ? (
               <Folder className="h-4 w-4 text-blue-500" />
@@ -64,7 +64,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
             )}
             <span className="font-medium">{item.displayName}</span>
           </div>
-          
+
           <div className="flex items-center gap-2 ml-4">
             {item.url && (
               <Badge variant="outline" className="text-xs">
@@ -86,12 +86,7 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
 
         <div className="flex items-center gap-2">
           {onEdit && can(Permissions.CMSKIT_MENUS_UPDATE) && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onEdit(item)}
-              className="h-8 w-8 p-0"
-            >
+            <Button variant="ghost" size="sm" onClick={() => onEdit(item)} className="h-8 w-8 p-0">
               <FileText className="h-4 w-4" />
             </Button>
           )}
@@ -110,15 +105,15 @@ const TreeNode = ({ item, level, onEdit, onDelete }: TreeNodeProps) => {
 
       {isExpanded && hasChildren && (
         <div className="mt-1">
-                     {children.map((child) => (
-             <TreeNode
-               key={child.id}
-               item={child}
-               level={level + 1}
-               onEdit={onEdit}
-               onDelete={onDelete}
-             />
-           ))}
+          {children.map((child) => (
+            <TreeNode
+              key={child.id}
+              item={child}
+              level={level + 1}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          ))}
         </div>
       )}
     </div>
@@ -132,14 +127,14 @@ export const MenuTree = ({ items, onEdit, onDelete }: MenuTreeProps) => {
     const rootItems: TreeMenuItem[] = []
 
     // First pass: create a map of all items
-    menuItems.forEach(item => {
+    menuItems.forEach((item) => {
       if (item.id) {
         itemMap.set(item.id, { ...item, children: [] })
       }
     })
 
     // Second pass: build the tree structure
-    menuItems.forEach(item => {
+    menuItems.forEach((item) => {
       if (item.id) {
         const treeItem = itemMap.get(item.id)
         if (treeItem) {
@@ -164,14 +159,8 @@ export const MenuTree = ({ items, onEdit, onDelete }: MenuTreeProps) => {
   return (
     <div className="space-y-1">
       {treeItems.map((item) => (
-        <TreeNode
-          key={item.id}
-          item={item}
-          level={0}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
+        <TreeNode key={item.id} item={item} level={0} onEdit={onEdit} onDelete={onDelete} />
       ))}
     </div>
   )
-} 
+}

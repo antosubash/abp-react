@@ -73,7 +73,7 @@ export const TogglePermission = ({
         <DialogFooter>
           {onCancelEvent && (
             <Button
-                onClick={(e: { preventDefault: () => void }) => {
+              onClick={(e: { preventDefault: () => void }) => {
                 e.preventDefault()
                 onCancelEvent()
               }}

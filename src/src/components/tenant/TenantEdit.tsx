@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export type TenantExtraProperties = {
-  Host?: string;
+  Host?: string
 }
 
 export type TenantEditProps = {

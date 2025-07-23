@@ -1,12 +1,12 @@
+import { client as APIClient } from '@/client'
+import { getSession } from '@/lib/actions'
 import { sessionOptions } from '@/sessionOptions'
 import { getIronSession } from 'iron-session'
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
+import * as client from 'openid-client'
 import { RedisSession, createRedisInstance } from './redis'
 import { SessionData, getClientConfig } from './session-utils'
-import * as client from 'openid-client'
-import { client as APIClient } from "@/client";
-import { getSession } from "@/lib/actions";
 /**
  * Checks if the given JWT token is expired.
  *
@@ -14,19 +14,19 @@ import { getSession } from "@/lib/actions";
  * @returns `true` if the token is expired, `false` otherwise.
  */
 export const isTokenExpired = (token: string) => {
-  const decoded = jwtDecode(token!);
-  const expirationTime = decoded?.exp! * 1000;
-  const currentTime = new Date().getTime();
+  const decoded = jwtDecode(token!)
+  const expirationTime = decoded?.exp! * 1000
+  const currentTime = new Date().getTime()
   return expirationTime < currentTime
 }
 
 /**
  * Refreshes the authentication token.
- * 
- * This function is intended to be used on the server side. It attempts to refresh the 
- * authentication token when the current token has expired. The function performs the 
+ *
+ * This function is intended to be used on the server side. It attempts to refresh the
+ * authentication token when the current token has expired. The function performs the
  * following steps:
- * 
+ *
  * 1. Logs a message indicating that the token is being refreshed.
  * 2. Retrieves the current session using `getIronSession`.
  * 3. Constructs a Redis key based on the user's subject identifier (`sub`).
@@ -37,9 +37,9 @@ export const isTokenExpired = (token: string) => {
  * 8. Updates the Redis session data with the new access and refresh tokens.
  * 9. Closes the Redis connection.
  * 10. Logs a success message.
- * 
+ *
  * If an error occurs during any of these steps, it logs an error message.
- * 
+ *
  * @async
  * @function
  * @throws Will log an error message if the token refresh process fails.
@@ -52,8 +52,8 @@ export const refreshToken = async () => {
     const redisKey = `session:${session?.userInfo?.sub!}`
     const redis = createRedisInstance()
     const clientConfig = await getClientConfig()
-    const redisSessionData = await redis.get(redisKey);
-    const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession;
+    const redisSessionData = await redis.get(redisKey)
+    const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
     const tokenSet = await client.refreshTokenGrant(clientConfig, parsedSessionData.refresh_token!)
     console.log('Token refreshed. New token:', tokenSet.access_token)
     session.access_token = tokenSet.access_token
@@ -61,7 +61,7 @@ export const refreshToken = async () => {
     const newRedisSessionData = {
       access_token: tokenSet.access_token,
       refresh_token: tokenSet.refresh_token,
-    } as RedisSession;
+    } as RedisSession
     await redis.set(redisKey, JSON.stringify(newRedisSessionData))
     await redis.quit()
     console.log('Token refreshed successfully.')
@@ -72,10 +72,10 @@ export const refreshToken = async () => {
 
 /**
  * Configures the layout settings for the application.
- * 
+ *
  * This function sets the base URL for the OpenAPI client using the environment variable `NEXT_PUBLIC_API_URL`.
  * It also sets up an interceptor for requests to include the authorization token and tenant ID in the headers.
- * 
+ *
  * @returns {void}
  */
 export const setUpLayoutConfig = async () => {

@@ -1,20 +1,20 @@
 'use client'
 import { Card } from '@/components/ui/card'
 import { AdminMenus } from '@/config'
-import { Package2, ChevronDown, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight, Package2 } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 export default function SideBarMenu() {
   const pathname = usePathname()
-  
+
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
     const expanded = new Set<string>()
-    AdminMenus.forEach(menu => {
+    AdminMenus.forEach((menu) => {
       if (menu.submenus) {
-        const isActive = menu.submenus.some(submenu => pathname === submenu.link)
+        const isActive = menu.submenus.some((submenu) => pathname === submenu.link)
         if (isActive) {
           expanded.add(menu.name)
         }
@@ -22,7 +22,7 @@ export default function SideBarMenu() {
     })
     return expanded
   }
-  
+
   const [expandedMenus, setExpandedMenus] = useState<Set<string>>(getInitialExpandedMenus())
 
   const toggleMenu = (menuName: string) => {
@@ -38,7 +38,7 @@ export default function SideBarMenu() {
   const isMenuActive = (menuLink: string, submenus?: Array<{ link: string }>) => {
     if (pathname === menuLink) return true
     if (submenus) {
-      return submenus.some(submenu => pathname === submenu.link)
+      return submenus.some((submenu) => pathname === submenu.link)
     }
     return false
   }
@@ -73,7 +73,7 @@ export default function SideBarMenu() {
                         isActive ? 'text-primary bg-primary/10' : ''
                       }`}
                     >
-                      {menu.icon && <menu.icon/>}
+                      {menu.icon && <menu.icon />}
                       {menu.name}
                     </Link>
                     {hasSubmenus && (
@@ -89,7 +89,7 @@ export default function SideBarMenu() {
                       </button>
                     )}
                   </div>
-                  
+
                   {hasSubmenus && isExpanded && (
                     <div className="ml-6 mt-1 space-y-1">
                       {menu.submenus!.map((submenu, subIndex) => {

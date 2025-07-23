@@ -164,9 +164,7 @@ export const Emailing = () => {
           </div>
           <hr className="mt-2 border" />
           <div className="w-full space-x-5 space-y-5">
-            {can(Permissions.SETTINGS_EMAILING) && (
-              <Button type="submit">Save</Button>
-            )}
+            {can(Permissions.SETTINGS_EMAILING) && <Button type="submit">Save</Button>}
             {can(Permissions.SETTINGS_EMAILING_TEST) && (
               <Button
                 variant="default"

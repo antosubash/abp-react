@@ -13,17 +13,16 @@ export type TableViewProps<T> = {
   'aria-label'?: string
 }
 
-const TableView = <T extends Record<string, any>>({ 
-  table, 
-  totalCount, 
-  pageSize, 
+const TableView = <T extends Record<string, any>>({
+  table,
+  totalCount,
+  pageSize,
   isLoading = false,
   error = null,
   emptyStateMessage = 'No Records Found',
   className = '',
-  'aria-label': ariaLabel = 'Data table'
+  'aria-label': ariaLabel = 'Data table',
 }: TableViewProps<T>) => {
-  
   const renderHeader = useCallback(() => {
     const headerGroups = table.getHeaderGroups()
     return headerGroups.map((headerGroup) => {
@@ -33,15 +32,20 @@ const TableView = <T extends Record<string, any>>({
           {headers.map((header) => {
             if (header.isPlaceholder) return null
             return (
-                              <th 
-                  key={header.id} 
-                  className="last:1/2 truncate px-3 lg:last:w-1/4"
-                  scope="col"
-                  aria-sort={header.column.getCanSort() ? 
-                    (header.column.getIsSorted() === 'asc' ? 'ascending' : 
-                     header.column.getIsSorted() === 'desc' ? 'descending' : 'none') : 
-                    undefined}
-                >
+              <th
+                key={header.id}
+                className="last:1/2 truncate px-3 lg:last:w-1/4"
+                scope="col"
+                aria-sort={
+                  header.column.getCanSort()
+                    ? header.column.getIsSorted() === 'asc'
+                      ? 'ascending'
+                      : header.column.getIsSorted() === 'desc'
+                        ? 'descending'
+                        : 'none'
+                    : undefined
+                }
+              >
                 {flexRender(header.column.columnDef.header, header.getContext())}
               </th>
             )
@@ -53,12 +57,12 @@ const TableView = <T extends Record<string, any>>({
 
   const renderBody = useCallback(() => {
     const rows = table.getRowModel().rows
-    
+
     if (rows.length === 0) {
       return (
         <tr>
-          <td 
-            colSpan={table.getAllColumns().length} 
+          <td
+            colSpan={table.getAllColumns().length}
             className="text-center py-8 text-base-content/60"
           >
             {emptyStateMessage}
@@ -77,8 +81,8 @@ const TableView = <T extends Record<string, any>>({
         >
           {cells.map((cell) => {
             return (
-              <td 
-                key={cell.id} 
+              <td
+                key={cell.id}
                 className="truncate py-3 pl-3 text-left text-xs"
                 data-cell={cell.column.id}
               >
@@ -151,7 +155,7 @@ const TableView = <T extends Record<string, any>>({
   return (
     <section className={className}>
       <div className="overflow-auto">
-        <table 
+        <table
           className="divide-base-200 text-base-content w-full table-auto divide-y text-left sm:overflow-x-auto lg:table-fixed"
           aria-label={ariaLabel}
           role="table"
@@ -160,17 +164,15 @@ const TableView = <T extends Record<string, any>>({
           <tbody role="rowgroup">{renderBody()}</tbody>
         </table>
       </div>
-      
+
       <div className="flex flex-col border-t p-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="text-base-content/70 text-sm mb-4 lg:mb-0">
           Showing {table.getState().pagination.pageIndex * pageSize + 1} to{' '}
           {Math.min((table.getState().pagination.pageIndex + 1) * pageSize, totalCount)} of{' '}
           {totalCount} total records
         </div>
-        
-        {pageCount > 1 && (
-          <Pagination<T> pageCount={pageCount} table={table} />
-        )}
+
+        {pageCount > 1 && <Pagination<T> pageCount={pageCount} table={table} />}
       </div>
     </section>
   )

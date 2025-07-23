@@ -1,11 +1,11 @@
 'use server'
 import { sessionOptions } from '@/sessionOptions'
-import {getIronSession, IronSession} from 'iron-session'
+import { IronSession, getIronSession } from 'iron-session'
 import { cookies } from 'next/headers'
+import * as client from 'openid-client'
 import { isTokenExpired } from './auth'
 import { RedisSession, createRedisInstance } from './redis'
-import {SessionData, defaultSession, getClientConfig} from './session-utils'
-import * as client from 'openid-client'
+import { SessionData, defaultSession, getClientConfig } from './session-utils'
 
 /**
  * Retrieves the current session, refreshing the access token if it has expired.
@@ -33,7 +33,10 @@ export async function getSession(): Promise<IronSession<SessionData>> {
       const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
 
       // Refresh the access token using the refresh token
-      const tokenSet = await client.refreshTokenGrant(clientConfig, parsedSessionData.refresh_token!)
+      const tokenSet = await client.refreshTokenGrant(
+        clientConfig,
+        parsedSessionData.refresh_token!
+      )
       session.access_token = tokenSet.access_token
       await session.save()
 

@@ -34,9 +34,9 @@ export const useComments = (
           SkipCount: skip,
           Text: filter,
           Sorting: sorting,
-        }
+        },
       })
       return response.data
     },
   })
-} 
+}

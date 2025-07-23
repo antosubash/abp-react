@@ -4,9 +4,9 @@ import { useAppConfig } from './useAppConfig'
 
 /**
  * Represents the various policies that can be granted within the application.
- * 
+ *
  * The available policies are organized by functional groups:
- * 
+ *
  * **Identity Management (AbpIdentity)**
  * - `AbpIdentity.Roles`: Manage roles
  * - `AbpIdentity.Roles.Create`: Create new roles
@@ -19,7 +19,7 @@ import { useAppConfig } from './useAppConfig'
  * - `AbpIdentity.Users.Update.ManageRoles`: Manage roles for users
  * - `AbpIdentity.Users.Delete`: Delete users
  * - `AbpIdentity.Users.ManagePermissions`: Manage permissions for users
- * 
+ *
  * **Tenant Management (AbpTenantManagement)**
  * - `AbpTenantManagement.Tenants`: Manage tenants
  * - `AbpTenantManagement.Tenants.Create`: Create new tenants
@@ -27,19 +27,19 @@ import { useAppConfig } from './useAppConfig'
  * - `AbpTenantManagement.Tenants.Delete`: Delete tenants
  * - `AbpTenantManagement.Tenants.ManageFeatures`: Manage features for tenants
  * - `AbpTenantManagement.Tenants.ManageConnectionStrings`: Manage connection strings for tenants
- * 
+ *
  * **Feature Management (FeatureManagement)**
  * - `FeatureManagement.ManageHostFeatures`: Manage host features
- * 
+ *
  * **Setting Management (SettingManagement)**
  * - `SettingManagement.Emailing`: Manage emailing settings
  * - `SettingManagement.Emailing.Test`: Test emailing settings
  * - `SettingManagement.TimeZone`: Manage time zone settings
- * 
+ *
  * **CmsKit Public (CmsKitPublic)**
  * - `CmsKitPublic.Comments`: Comment management
  * - `CmsKitPublic.Comments.DeleteAll`: Delete all comments
- * 
+ *
  * **CmsKit Admin (CmsKit)**
  * - `CmsKit.Comments`: Comment management
  * - `CmsKit.Comments.Delete`: Delete comments
@@ -69,7 +69,7 @@ import { useAppConfig } from './useAppConfig'
  * - `CmsKit.Menus.Update`: Update menus
  * - `CmsKit.Menus.Delete`: Delete menus
  * - `CmsKit.GlobalResources`: Global resources management
- * 
+ *
  * **Template (AbpTemplate)**
  * - `AbpTemplate.Tenant`: Template tenant management
  * - `AbpTemplate.Tenant.AddHost`: Add host to template tenant
