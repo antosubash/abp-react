@@ -1,6 +1,12 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.4.0...v2.4.1)
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.6...v2.4.0)
+
+## v2.4.1
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.4.0...v2.4.1)
 
 ### 🚀 Enhancements
 
