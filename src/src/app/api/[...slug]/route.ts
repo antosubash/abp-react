@@ -3,23 +3,26 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL
 
+if (!EXTERNAL_API_URL) {
+  console.error('NEXT_PUBLIC_API_URL environment variable is not set')
+  throw new Error('API URL not configured')
+}
+
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 interface ApiError extends Error {
-  status?: number;
+  status?: number
 }
 
-const getHeaders = async (request: NextRequest, method: RequestMethod): Promise<HeadersInit> => {
+const getHeaders = async (): Promise<HeadersInit> => {
   const session = await getSession()
-  
-  // Create a new headers object from the incoming request
-  const headers = new Headers(request.headers)
-  
-  // Add or override specific headers
+
+  const headers = new Headers()
+
   headers.set('Authorization', `Bearer ${session.access_token}`)
   headers.set('Content-Type', 'application/json')
   headers.set('__tenant', session.tenantId ?? '')
-  
+
   return headers
 }
 
@@ -28,22 +31,62 @@ const makeApiRequest = async (
   method: RequestMethod,
   includeBody = false
 ): Promise<Response> => {
+  const startTime = Date.now()
+  const requestId = Math.random().toString(36).substring(7)
+
   try {
     const path = request.nextUrl.pathname
     const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
-    const headers = await getHeaders(request, method)
+
+    const headers = await getHeaders()
 
     const options: RequestInit = {
       method,
       headers,
-      ...(includeBody && { body: request.body }),
+      ...(includeBody && {
+        body: request.body,
+        duplex: 'half',
+      }),
       cache: 'no-store',
     }
 
-    const response = await fetch(url, options)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
+    let response: Response
+    try {
+      response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      })
+      clearTimeout(timeoutId)
+    } catch (fetchError) {
+      clearTimeout(timeoutId)
+      const duration = Date.now() - startTime
+      console.error(`[${requestId}] Fetch error:`, {
+        error: fetchError,
+        cause: (fetchError as any)?.cause,
+        url,
+        method,
+        duration: `${duration}ms`,
+        timestamp: new Date().toISOString(),
+      })
+      throw fetchError
+    }
 
     if (!response.ok) {
-      const errorData = await response.clone().json().catch(() => null)
+      const errorData = await response
+        .clone()
+        .json()
+        .catch(() => null)
+      console.error(`[${requestId}] API request failed:`, {
+        status: response.status,
+        statusText: response.statusText,
+        errorData,
+        url,
+        method,
+        duration: `${Date.now() - startTime}ms`,
+      })
       throw Object.assign(
         new Error(errorData?.error || `API request failed with status ${response.status}`),
         { status: response.status }
@@ -60,11 +103,15 @@ const makeApiRequest = async (
     })
   } catch (error) {
     const apiError = error as ApiError
-    console.error('API request error:', apiError)
-    return NextResponse.json(
-      { error: apiError.message },
-      { status: apiError.status || 500 }
-    )
+    const duration = Date.now() - startTime
+    console.error(`[${requestId}] API request error:`, {
+      error: apiError.message,
+      status: apiError.status,
+      stack: apiError.stack,
+      duration: `${duration}ms`,
+      timestamp: new Date().toISOString(),
+    })
+    return NextResponse.json({ error: apiError.message }, { status: apiError.status || 500 })
   }
 }
 

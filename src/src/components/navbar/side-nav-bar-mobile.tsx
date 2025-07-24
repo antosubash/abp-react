@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -9,10 +10,49 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { CircleUser, Menu, Package2 } from 'lucide-react'
+import { ChevronDown, ChevronRight, CircleUser, Menu, Package2 } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import ClientLink from '../ui/client-link'
+
 export default function SideNavBarMobile() {
+  const pathname = usePathname()
+
+  // Initialize expanded menus based on current path
+  const getInitialExpandedMenus = () => {
+    const expanded = new Set<string>()
+    AdminMenus.forEach((menu) => {
+      if (menu.submenus) {
+        const isActive = menu.submenus.some((submenu) => pathname === submenu.link)
+        if (isActive) {
+          expanded.add(menu.name)
+        }
+      }
+    })
+    return expanded
+  }
+
+  const [expandedMenus, setExpandedMenus] = useState<Set<string>>(getInitialExpandedMenus())
+
+  const toggleMenu = (menuName: string) => {
+    const newExpandedMenus = new Set(expandedMenus)
+    if (newExpandedMenus.has(menuName)) {
+      newExpandedMenus.delete(menuName)
+    } else {
+      newExpandedMenus.add(menuName)
+    }
+    setExpandedMenus(newExpandedMenus)
+  }
+
+  const isMenuActive = (menuLink: string, submenus?: Array<{ link: string }>) => {
+    if (pathname === menuLink) return true
+    if (submenus) {
+      return submenus.some((submenu) => pathname === submenu.link)
+    }
+    return false
+  }
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -28,16 +68,64 @@ export default function SideNavBarMobile() {
               <Package2 className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
-            {AdminMenus.map((menu) => (
-              <Link
-                key={menu.name}
-                href={menu.link}
-                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-              >
-                <menu.icon/>
-                {menu.name}
-              </Link>
-            ))}
+            {AdminMenus.map((menu) => {
+              const isActive = isMenuActive(menu.link, menu.submenus)
+              const isExpanded = expandedMenus.has(menu.name)
+              const hasSubmenus = menu.submenus && menu.submenus.length > 0
+
+              return (
+                <div key={menu.name}>
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={menu.link}
+                      onClick={() => {
+                        if (hasSubmenus && !isExpanded) {
+                          toggleMenu(menu.name)
+                        }
+                      }}
+                      className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground flex-1 ${
+                        isActive ? 'text-foreground bg-accent' : ''
+                      }`}
+                    >
+                      <menu.icon />
+                      {menu.name}
+                    </Link>
+                    {hasSubmenus && (
+                      <button
+                        onClick={() => toggleMenu(menu.name)}
+                        className="p-1 hover:bg-accent rounded-sm transition-colors"
+                      >
+                        {isExpanded ? (
+                          <ChevronDown className="h-4 w-4" />
+                        ) : (
+                          <ChevronRight className="h-4 w-4" />
+                        )}
+                      </button>
+                    )}
+                  </div>
+
+                  {hasSubmenus && isExpanded && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      {menu.submenus!.map((submenu, subIndex) => {
+                        const isSubmenuActive = pathname === submenu.link
+                        return (
+                          <Link
+                            key={subIndex}
+                            href={submenu.link}
+                            className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground text-sm ${
+                              isSubmenuActive ? 'text-foreground bg-accent' : ''
+                            }`}
+                          >
+                            <submenu.icon />
+                            {submenu.name}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </nav>
           <div className="mt-auto">
             <Card></Card>

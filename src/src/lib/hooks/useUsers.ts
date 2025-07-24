@@ -34,7 +34,7 @@ export const useUsers = (
           SkipCount: skip,
           Filter: filter,
           Sorting: sorting,
-        }
+        },
       })
       return response.data
     },

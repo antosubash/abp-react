@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 /**
  * Hook to manage permission changes for different types of entities.
- * 
+ *
  * @param {UsePermissionsChangesProps} props - The properties for the hook.
  * @returns {Object} - An object containing the state and handlers for permission changes.
  */
@@ -15,7 +15,7 @@ export type UsePermissionsChangesProps = {
 
 /**
  * Helper function to update the permission data based on the selected permission.
- * 
+ *
  * @param {PermissionGrantInfoDto[]} data - The current permission data.
  * @param {PermissionGrantInfoDto} selectedData - The selected permission data.
  * @param {`${Permissions}`} permission - The permission to be updated.
@@ -67,7 +67,7 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
 
   /**
    * Handler for changes in the current permission.
-   * 
+   *
    * @param {number} idx - The index of the selected permission.
    */
   const onCurrentPermissionChanges = useCallback(
@@ -81,14 +81,34 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
       }, 0)
 
       if (type === 'identity') {
+        // Handle Identity permissions - Roles and Users
         helper(data, selectedData, Permissions.ROLES, setData)
         helper(data, selectedData, Permissions.USERS, setData)
+        helper(data, selectedData, Permissions.ROLES_CREATE, setData)
+        helper(data, selectedData, Permissions.ROLES_UPDATE, setData)
+        helper(data, selectedData, Permissions.ROLES_DELETE, setData)
+        helper(data, selectedData, Permissions.ROLES_MANAGE_PERMISSIONS, setData)
+        helper(data, selectedData, Permissions.USERS_CREATE, setData)
+        helper(data, selectedData, Permissions.USERS_UPDATE, setData)
+        helper(data, selectedData, Permissions.USERS_UPDATE_MANAGE_ROLES, setData)
+        helper(data, selectedData, Permissions.USERS_DELETE, setData)
+        helper(data, selectedData, Permissions.USERS_MANAGE_PERMISSIONS, setData)
       } else if (type === 'tenant') {
+        // Handle Tenant permissions
         helper(data, selectedData, Permissions.TENANTS, setData)
+        helper(data, selectedData, Permissions.TENANTS_CREATE, setData)
+        helper(data, selectedData, Permissions.TENANTS_UPDATE, setData)
+        helper(data, selectedData, Permissions.TENANTS_DELETE, setData)
+        helper(data, selectedData, Permissions.TENANTS_MANAGE_FEATURES, setData)
+        helper(data, selectedData, Permissions.TENANTS_MANAGE_CONNECTION_STRINGS, setData)
       } else if (type === 'feature') {
+        // Handle Feature permissions
         helper(data, selectedData, Permissions.MANAGE_HOST_FEATURES, setData)
       } else if (type === 'setting') {
-        helper(data, selectedData, Permissions.SETTINGS, setData)
+        // Handle Setting permissions
+        helper(data, selectedData, Permissions.SETTINGS_EMAILING, setData)
+        helper(data, selectedData, Permissions.SETTINGS_EMAILING_TEST, setData)
+        helper(data, selectedData, Permissions.SETTINGS_TIMEZONE, setData)
       } else {
         throw new Error('usePermissionsChanges hook received an unknown type property!')
       }

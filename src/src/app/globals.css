@@ -1,12 +1,13 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
+@import '@measured/puck/dist/index.css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans:
-    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--font-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -89,6 +90,207 @@
   }
 }
 
+/* Prose styling for page content */
+.prose {
+  @apply text-foreground;
+}
+
+.prose h1 {
+  @apply text-foreground mb-4 text-2xl font-bold;
+}
+
+.prose h2 {
+  @apply text-foreground mb-3 text-xl font-semibold;
+}
+
+.prose h3 {
+  @apply text-foreground mb-2 text-lg font-medium;
+}
+
+.prose p {
+  @apply text-foreground mb-4;
+}
+
+.prose ul {
+  @apply text-foreground mb-4 list-inside list-disc;
+}
+
+.prose ol {
+  @apply text-foreground mb-4 list-inside list-decimal;
+}
+
+.prose li {
+  @apply text-foreground mb-1;
+}
+
+.prose a {
+  @apply text-primary hover:underline;
+}
+
+.prose blockquote {
+  @apply border-muted text-muted-foreground border-l-4 pl-4 italic;
+}
+
+.prose code {
+  @apply bg-muted rounded px-1 py-0.5 font-mono text-sm;
+}
+
+.prose pre {
+  @apply bg-muted overflow-x-auto rounded p-4;
+}
+
+.prose img {
+  @apply h-auto max-w-full rounded;
+}
+
+.prose table {
+  @apply border-border w-full border-collapse border;
+}
+
+.prose th,
+.prose td {
+  @apply border-border border p-2 text-left;
+}
+
+.prose th {
+  @apply bg-muted font-semibold;
+}
+
+/* Puck Editor Custom Styles */
+.puck-editor {
+  @apply bg-background text-foreground h-full;
+}
+
+.puck-editor .puck {
+  @apply h-full;
+}
+
+.puck-editor .puck-canvas {
+  @apply h-full;
+}
+
+.puck-editor .puck-sidebar {
+  @apply bg-card border-border;
+}
+
+.puck-editor .puck-sidebar-header {
+  @apply bg-card text-card-foreground;
+}
+
+.puck-editor .puck-component-list {
+  @apply bg-card;
+}
+
+.puck-editor .puck-component-item {
+  @apply hover:bg-muted border-border;
+}
+
+.puck-editor .puck-field {
+  @apply bg-background text-foreground border-border;
+}
+
+.puck-editor .puck-field input,
+.puck-editor .puck-field textarea,
+.puck-editor .puck-field select {
+  @apply bg-background text-foreground border-border;
+}
+
+.puck-editor .puck-field input:focus,
+.puck-editor .puck-field textarea:focus,
+.puck-editor .puck-field select:focus {
+  @apply ring-ring border-ring;
+}
+
+.puck-editor .puck-button {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.puck-editor .puck-button-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/90;
+}
+
+.puck-editor .puck-button-outline {
+  @apply bg-background text-foreground border-border hover:bg-muted border;
+}
+
+.puck-editor .puck-dropzone {
+  @apply border-border bg-muted/50 border-dashed;
+}
+
+.puck-editor .puck-dropzone:hover {
+  @apply border-primary bg-muted;
+}
+
+.puck-editor .puck-dropzone-active {
+  @apply border-primary bg-primary/10;
+}
+
+.puck-editor .puck-selected {
+  @apply ring-primary ring-2;
+}
+
+.puck-editor .puck-toolbar {
+  @apply bg-card border-border;
+}
+
+.puck-editor .puck-toolbar-button {
+  @apply bg-background text-foreground hover:bg-muted border-border;
+}
+
+.puck-editor .puck-toolbar-button:hover {
+  @apply bg-muted;
+}
+
+.puck-editor .puck-toolbar-button-active {
+  @apply bg-primary text-primary-foreground;
+}
+
+.puck-editor .puck-modal {
+  @apply bg-background text-foreground;
+}
+
+.puck-editor .puck-modal-overlay {
+  @apply bg-background/80;
+}
+
+.puck-editor .puck-modal-content {
+  @apply bg-card border-border;
+}
+
+.puck-editor .puck-modal-header {
+  @apply bg-card text-card-foreground border-border;
+}
+
+.puck-editor .puck-modal-body {
+  @apply bg-card text-card-foreground;
+}
+
+.puck-editor .puck-modal-footer {
+  @apply bg-card text-card-foreground border-border;
+}
+
+/* Enhanced Puck Editor Styles for Full-Screen Experience */
+.puck-editor .puck-sidebar {
+  @apply border-border border-r;
+}
+
+.puck-editor .puck-canvas {
+  @apply bg-background;
+}
+
+.puck-editor .puck-dropzone {
+  @apply border-muted-foreground/25 hover:border-primary/50 border-2 border-dashed transition-colors;
+}
+
+.puck-editor .puck-dropzone-active {
+  @apply border-primary bg-primary/5;
+}
+
+/* Welcome Block Styles */
+.puck-editor .welcome-block {
+  @apply animate-in fade-in duration-300;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -141,22 +343,14 @@
 */
 
 :root {
-  --sidebar:
-    hsl(0 0% 98%);
-  --sidebar-foreground:
-    hsl(240 5.3% 26.1%);
-  --sidebar-primary:
-    hsl(240 5.9% 10%);
-  --sidebar-primary-foreground:
-    hsl(0 0% 98%);
-  --sidebar-accent:
-    hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground:
-    hsl(240 5.9% 10%);
-  --sidebar-border:
-    hsl(220 13% 91%);
-  --sidebar-ring:
-    hsl(217.2 91.2% 59.8%);
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 /*
@@ -164,22 +358,14 @@
 */
 
 .dark {
-  --sidebar:
-    hsl(240 5.9% 10%);
-  --sidebar-foreground:
-    hsl(240 4.8% 95.9%);
-  --sidebar-primary:
-    hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground:
-    hsl(0 0% 100%);
-  --sidebar-accent:
-    hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground:
-    hsl(240 4.8% 95.9%);
-  --sidebar-border:
-    hsl(240 3.7% 15.9%);
-  --sidebar-ring:
-    hsl(217.2 91.2% 59.8%);
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 /*
@@ -187,22 +373,14 @@
 */
 
 @theme inline {
-  --color-sidebar:
-    var(--sidebar);
-  --color-sidebar-foreground:
-    var(--sidebar-foreground);
-  --color-sidebar-primary:
-    var(--sidebar-primary);
-  --color-sidebar-primary-foreground:
-    var(--sidebar-primary-foreground);
-  --color-sidebar-accent:
-    var(--sidebar-accent);
-  --color-sidebar-accent-foreground:
-    var(--sidebar-accent-foreground);
-  --color-sidebar-border:
-    var(--sidebar-border);
-  --color-sidebar-ring:
-    var(--sidebar-ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 /*

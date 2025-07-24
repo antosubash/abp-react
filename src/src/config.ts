@@ -1,5 +1,5 @@
-import { Cog, Database, Home, UserRound, Users } from 'lucide-react'
-import React from "react";
+import { Cog, Database, FileText, Home, Menu, MessageSquare, UserRound, Users } from 'lucide-react'
+import React from 'react'
 
 /**
  * Configuration for the OpenID client.
@@ -16,7 +16,7 @@ export const clientConfig = {
   response_type: 'code',
   grant_type: 'authorization_code',
   post_login_route: `${process.env.NEXT_PUBLIC_APP_URL}`,
-  code_challenge_method: 'S256'
+  code_challenge_method: 'S256',
 }
 
 /**
@@ -43,10 +43,16 @@ export const PublicMenus: Array<{ Name: string; Link: string }> = [
 /**
  * List of menus shown in the Admin layout.
  * Each menu item contains a name, link, and icon.
+ * Supports nested submenus for 2-level navigation.
  *
- * @type {Array<{name: string, link: string, icon: React.ComponentType}>}
+ * @type {Array<{name: string, link: string, icon: React.ComponentType, submenus?: Array<{name: string, link: string, icon: React.ComponentType}>}>}
  */
-export const AdminMenus: Array<{ name: string; link: string; icon: React.ComponentType; }> = [
+export const AdminMenus: Array<{
+  name: string
+  link: string
+  icon: React.ComponentType
+  submenus?: Array<{ name: string; link: string; icon: React.ComponentType }>
+}> = [
   {
     name: 'Home',
     link: '/admin',
@@ -61,6 +67,28 @@ export const AdminMenus: Array<{ name: string; link: string; icon: React.Compone
     name: 'Roles',
     link: '/admin/users/roles',
     icon: Users,
+  },
+  {
+    name: 'CMS',
+    link: '/admin/cms',
+    icon: FileText,
+    submenus: [
+      {
+        name: 'Pages',
+        link: '/admin/cms/pages',
+        icon: FileText,
+      },
+      {
+        name: 'Menu Items',
+        link: '/admin/cms/menus',
+        icon: Menu,
+      },
+      {
+        name: 'Comments',
+        link: '/admin/cms/comments',
+        icon: MessageSquare,
+      },
+    ],
   },
   {
     name: 'Tenants',

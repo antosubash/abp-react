@@ -2,6 +2,7 @@
 import { IdentityRoleCreateDto, roleCreate } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { Plus } from 'lucide-react'
@@ -37,7 +38,7 @@ export const AddRole = ({}: AddUserProps) => {
         description: 'Role Created Successfully',
         variant: 'default',
       })
-      await queryClient.invalidateQueries({queryKey: [QueryNames.GetRoles]})
+      await queryClient.invalidateQueries({ queryKey: [QueryNames.GetRoles] })
       setOpen(false)
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -55,7 +56,7 @@ export const AddRole = ({}: AddUserProps) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <section className="flex items-center justify-between pb-5">
           <h3 className="title m-1 grow truncate p-0 text-xl font-bold">Role Management</h3>
-          {can('AbpIdentity.Roles.Create') && (
+          {can(Permissions.ROLES_CREATE) && (
             <Button onClick={() => setOpen(true)}>
               <Plus width={18} height={18} />
               <span className="hidden truncate sm:inline">Create New Role</span>
@@ -95,7 +96,7 @@ export const AddRole = ({}: AddUserProps) => {
             </section>
             <DialogFooter className="mt-5">
               <Button
-                  onClick={(e: { preventDefault: () => void }) => {
+                onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   setOpen(false)
                 }}

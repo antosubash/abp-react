@@ -13,4 +13,4 @@ export function VersionDisplay() {
   }, [])
 
   return <span className="text-xs text-muted-foreground">v{version}</span>
-} 
+}

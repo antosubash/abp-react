@@ -90,7 +90,6 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
     (role: IdentityRoleDto) => {
       const hasAssignedRoleExistAlready = roles.findIndex((r) => role.id === r.id)
 
-      console.log(hasAssignedRoleExistAlready, 'hasAssignedRoleExistAlready')
       if (hasAssignedRoleExistAlready !== -1) {
         roles.splice(hasAssignedRoleExistAlready, 1)
         setRoles([...roles])
@@ -157,7 +156,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
 
               <DialogFooter className="mt-5">
                 <Button
-                    onClick={(e: { preventDefault: () => void }) => {
+                  onClick={(e: { preventDefault: () => void }) => {
                     e.preventDefault()
                     onCloseEvent()
                   }}
@@ -196,7 +195,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
             )}
             <DialogFooter className="mt-5">
               <Button
-                  onClick={(e: { preventDefault: () => void }) => {
+                onClick={(e: { preventDefault: () => void }) => {
                   e.preventDefault()
                   onCloseEvent()
                 }}

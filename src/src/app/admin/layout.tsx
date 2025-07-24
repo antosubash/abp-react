@@ -1,6 +1,6 @@
 import AdminLayout from '@/layout/admin-layout'
-import { setUpLayoutConfig } from '@/lib/auth';
-import React from "react";
+import { setUpLayoutConfig } from '@/lib/auth'
+import React from 'react'
 
 /**
  * AdminRootLayout component serves as the root layout for the admin section of the application.

@@ -1,7 +1,6 @@
 import { userGetRoles } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
-import path from 'path'
 
 type UseUserRolesProps = {
   userId: string
@@ -22,10 +21,25 @@ export const useUserRoles = ({ userId }: UseUserRolesProps) => {
     queryFn: async () => {
       const { data } = await userGetRoles({
         path: {
-          id: userId
-        }
+          id: userId,
+        },
       })
+
+      // Ensure we return a valid value
+      if (!data) {
+        throw new Error('User roles not found')
+      }
+
       return data
+    },
+    enabled: !!userId,
+    retry: (failureCount, error) => {
+      // Don't retry if it's a 404 (user roles not found)
+      if (error instanceof Error && error.message === 'User roles not found') {
+        return false
+      }
+      // Retry up to 2 times for other errors
+      return failureCount < 2
     },
   })
 }

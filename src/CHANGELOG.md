@@ -776,9 +776,6 @@
 
 - Anto Subash ([@antosubash](http://github.com/antosubash))
 
-
-
-
 ## v1.0.1
 
 [compare changes](https://github.com/antosubash/abp-react/compare/1.0.0...v1.0.1)

@@ -12,12 +12,12 @@ import { QueryNames } from './QueryConstants'
 export const useFeatures = (
   providerName: string | undefined,
   providerKey: string | undefined
-): UseQueryResult<GetFeatureListResultDto, unknown> => {
+): UseQueryResult<GetFeatureListResultDto | undefined, unknown> => {
   return useQuery({
     queryKey: [QueryNames.GetFeatures, providerName, providerKey],
     queryFn: async () => {
       const { data } = await featuresGet({
-        query: { providerName, providerKey }
+        query: { providerName, providerKey },
       })
       return data
     },

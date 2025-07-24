@@ -6,13 +6,13 @@ import { redirect } from 'next/navigation'
 
 /**
  * Handles the GET request to set the tenant for the current session.
- * 
+ *
  * This function retrieves the current session and the host from the request headers.
  * If the session already has a tenantId, it returns immediately.
  * Otherwise, it fetches the tenant GUID based on the host and sets it as the tenantId in the session.
  * If no tenant GUID is found, it defaults to 'default'.
  * Finally, it saves the session and redirects to the root path.
- * 
+ *
  * @returns {Promise<void>} A promise that resolves when the session is saved and the redirect is initiated.
  */
 export async function GET() {

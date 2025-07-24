@@ -22,15 +22,85 @@ export function cn(...inputs: ClassValue[]): string {
  * within the application. These permissions are used to control access to various
  * features and functionalities.
  *
+ * The permissions are organized by functional groups:
+ * - Identity Management (AbpIdentity)
+ * - Tenant Management (AbpTenantManagement)
+ * - Feature Management (FeatureManagement)
+ * - Setting Management (SettingManagement)
+ * - CmsKit Public (CmsKitPublic)
+ * - CmsKit Admin (CmsKit)
+ * - Template (AbpTemplate)
+ *
  * @readonly
  * @enum {string}
  */
 export enum Permissions {
+  // Identity Management
   ROLES = 'AbpIdentity.Roles',
+  ROLES_CREATE = 'AbpIdentity.Roles.Create',
+  ROLES_UPDATE = 'AbpIdentity.Roles.Update',
+  ROLES_DELETE = 'AbpIdentity.Roles.Delete',
+  ROLES_MANAGE_PERMISSIONS = 'AbpIdentity.Roles.ManagePermissions',
   USERS = 'AbpIdentity.Users',
+  USERS_CREATE = 'AbpIdentity.Users.Create',
+  USERS_UPDATE = 'AbpIdentity.Users.Update',
+  USERS_UPDATE_MANAGE_ROLES = 'AbpIdentity.Users.Update.ManageRoles',
+  USERS_DELETE = 'AbpIdentity.Users.Delete',
+  USERS_MANAGE_PERMISSIONS = 'AbpIdentity.Users.ManagePermissions',
+
+  // Tenant Management
   TENANTS = 'AbpTenantManagement.Tenants',
+  TENANTS_CREATE = 'AbpTenantManagement.Tenants.Create',
+  TENANTS_UPDATE = 'AbpTenantManagement.Tenants.Update',
+  TENANTS_DELETE = 'AbpTenantManagement.Tenants.Delete',
+  TENANTS_MANAGE_FEATURES = 'AbpTenantManagement.Tenants.ManageFeatures',
+  TENANTS_MANAGE_CONNECTION_STRINGS = 'AbpTenantManagement.Tenants.ManageConnectionStrings',
+
+  // Feature Management
   MANAGE_HOST_FEATURES = 'FeatureManagement.ManageHostFeatures',
-  SETTINGS = 'SettingManagement.Emailing',
+
+  // Setting Management
+  SETTINGS_EMAILING = 'SettingManagement.Emailing',
+  SETTINGS_EMAILING_TEST = 'SettingManagement.Emailing.Test',
+  SETTINGS_TIMEZONE = 'SettingManagement.TimeZone',
+
+  // CmsKit Public
+  CMSKIT_PUBLIC_COMMENTS = 'CmsKitPublic.Comments',
+  CMSKIT_PUBLIC_COMMENTS_DELETE_ALL = 'CmsKitPublic.Comments.DeleteAll',
+
+  // CmsKit Admin
+  CMSKIT_COMMENTS = 'CmsKit.Comments',
+  CMSKIT_COMMENTS_DELETE = 'CmsKit.Comments.Delete',
+  CMSKIT_COMMENTS_UPDATE = 'CmsKit.Comments.Update',
+  CMSKIT_COMMENTS_SETTING_MANAGEMENT = 'CmsKit.Comments.SettingManagement',
+  CMSKIT_TAGS = 'CmsKit.Tags',
+  CMSKIT_TAGS_CREATE = 'CmsKit.Tags.Create',
+  CMSKIT_TAGS_UPDATE = 'CmsKit.Tags.Update',
+  CMSKIT_TAGS_DELETE = 'CmsKit.Tags.Delete',
+  CMSKIT_PAGES = 'CmsKit.Pages',
+  CMSKIT_PAGES_CREATE = 'CmsKit.Pages.Create',
+  CMSKIT_PAGES_UPDATE = 'CmsKit.Pages.Update',
+  CMSKIT_PAGES_DELETE = 'CmsKit.Pages.Delete',
+  CMSKIT_PAGES_SET_AS_HOME_PAGE = 'CmsKit.Pages.SetAsHomePage',
+  CMSKIT_BLOGS = 'CmsKit.Blogs',
+  CMSKIT_BLOGS_CREATE = 'CmsKit.Blogs.Create',
+  CMSKIT_BLOGS_UPDATE = 'CmsKit.Blogs.Update',
+  CMSKIT_BLOGS_DELETE = 'CmsKit.Blogs.Delete',
+  CMSKIT_BLOGS_FEATURES = 'CmsKit.Blogs.Features',
+  CMSKIT_BLOG_POSTS = 'CmsKit.BlogPosts',
+  CMSKIT_BLOG_POSTS_CREATE = 'CmsKit.BlogPosts.Create',
+  CMSKIT_BLOG_POSTS_UPDATE = 'CmsKit.BlogPosts.Update',
+  CMSKIT_BLOG_POSTS_DELETE = 'CmsKit.BlogPosts.Delete',
+  CMSKIT_BLOG_POSTS_PUBLISH = 'CmsKit.BlogPosts.Publish',
+  CMSKIT_MENUS = 'CmsKit.Menus',
+  CMSKIT_MENUS_CREATE = 'CmsKit.Menus.Create',
+  CMSKIT_MENUS_UPDATE = 'CmsKit.Menus.Update',
+  CMSKIT_MENUS_DELETE = 'CmsKit.Menus.Delete',
+  CMSKIT_GLOBAL_RESOURCES = 'CmsKit.GlobalResources',
+
+  // Template
+  ABP_TEMPLATE_TENANT = 'AbpTemplate.Tenant',
+  ABP_TEMPLATE_TENANT_ADD_HOST = 'AbpTemplate.Tenant.AddHost',
 }
 
 /**
@@ -111,21 +181,21 @@ export const getPages = (totalPages: number, currentPage: number): (number | 'SP
     const spillOffset = totalNumbers - (pages.length + 3)
 
     switch (true) {
-        // handle: (1) ... {6} [7] (8)
+      // handle: (1) ... {6} [7] (8)
       case hasLeftSpill && !hasRightSpill: {
         const extraPages = range(startPage - spillOffset, startPage - 1)
         pages = ['SPACER', ...extraPages, ...pages]
         break
       }
 
-        // handle: (1) {2} [3] {4} ... (8)
+      // handle: (1) {2} [3] {4} ... (8)
       case !hasLeftSpill && hasRightSpill: {
         const extraPages = range(endPage + 1, endPage + spillOffset)
         pages = [...pages, ...extraPages, 'SPACER']
         break
       }
 
-        // handle: (1) ... {3} [4] {5} ... (8)
+      // handle: (1) ... {3} [4] {5} ... (8)
       case hasLeftSpill && hasRightSpill:
       default: {
         pages = ['SPACER', ...pages, 'SPACER']

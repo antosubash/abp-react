@@ -52,4 +52,28 @@ export const QueryNames = {
    * Query to get the session information.
    */
   GetSession: 'GetSession',
+  /**
+   * Query to get the list of comments.
+   */
+  GetComments: 'GetComments',
+  /**
+   * Query to get the list of pages.
+   */
+  GetPages: 'GetPages',
+  /**
+   * Query to get a single page.
+   */
+  GetPage: 'GetPage',
+  /**
+   * Query to get the list of menu items.
+   */
+  GetMenuItems: 'GetMenuItems',
+  /**
+   * Query to get a single menu item.
+   */
+  GetMenuItem: 'GetMenuItem',
+  /**
+   * Query to get public comments for a specific entity.
+   */
+  GetPublicComments: 'GetPublicComments',
 }

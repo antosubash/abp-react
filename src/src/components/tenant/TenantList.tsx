@@ -7,6 +7,7 @@ import { Search } from '@/components/ui/Search'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useTenants } from '@/lib/hooks/useTenants'
+import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
@@ -53,41 +54,47 @@ export const TenantList = () => {
                   actions={[
                     {
                       icon: 'features',
-                      policy: 'AbpTenantManagement.Tenants.ManageFeatures',
+                      policy: Permissions.TENANTS_MANAGE_FEATURES,
                       callback: () => {
                         setTenantActionDialog({
                           dialgoType: 'manage_features',
                           tenantId: info.row.original.id!,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
                     },
                     {
                       icon: 'pencil',
-                      policy: 'AbpTenantManagement.Tenants.Update',
+                      policy: Permissions.TENANTS_UPDATE,
                       callback: () => {
                         setTenantActionDialog({
                           dialgoType: 'edit',
                           tenantId: info.row.original.id!,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                         })
                       },
                     },
                     {
                       icon: 'trash',
-                      policy: 'AbpTenantManagement.Tenants.Delete',
+                      policy: Permissions.TENANTS_DELETE,
                       callback: () => {
                         setTenantActionDialog({
                           tenantId: info.row.original.id as string,
                           tenantDto: {
                             ...info.row.original,
-                            extraProperties: info.row.original.extraProperties ? (info.row.original.extraProperties as TenantExtraProperties) : undefined
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
                           } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
                           dialgoType: 'delete',
                         })
