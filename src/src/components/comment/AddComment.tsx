@@ -28,21 +28,16 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
     if (!hasText) return
 
     setIsSubmitting(true)
-    console.log('AddComment - form data:', data)
-
     const comment: CreateCommentInput = {
       text: data.text,
       idempotencyToken: crypto.randomUUID(),
     }
-
-    console.log('AddComment - comment object:', comment)
 
     try {
       const result = await commentPublicCreate({
         path: { entityType, entityId },
         body: comment,
       })
-      console.log('AddComment - result:', result)
       if (result.error) {
         toast({
           title: 'Failed',

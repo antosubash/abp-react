@@ -26,12 +26,6 @@ export const PageComments = ({ pageId, pageTitle }: PageCommentsProps) => {
   const currentUser = useCurrentUser()
   const isAuthenticated = currentUser?.isAuthenticated || false
 
-  // Debug logging
-  console.log('PageComments - currentUser:', currentUser)
-  console.log('PageComments - isAuthenticated:', isAuthenticated)
-  console.log('PageComments - commentsData:', commentsData)
-  console.log('PageComments - commentsData?.items:', (commentsData as any)?.items)
-
   if (isLoading) {
     return (
       <Card>

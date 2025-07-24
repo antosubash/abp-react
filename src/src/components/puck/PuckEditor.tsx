@@ -140,9 +140,6 @@ export const PuckEditor = ({
   // Initialize data with better error handling
   React.useEffect(() => {
     try {
-      console.log('PuckEditor useEffect triggered with data:', data)
-      console.log('PuckEditor isInitialized:', isInitialized)
-
       // Handle different data formats
       let processedData = data
       if (typeof data === 'string') {
@@ -180,7 +177,6 @@ export const PuckEditor = ({
       }
 
       const validData = ensureValidPuckData(processedData)
-      console.log('Processed valid data:', validData)
 
       setPuckData(validData)
       setIsInitialized(true)
@@ -200,22 +196,17 @@ export const PuckEditor = ({
   const handleChange = useCallback(
     (newData: any) => {
       try {
-        console.log('PuckEditor handleChange called with:', newData)
-
         if (!newData) {
           console.warn('Received empty data in handleChange')
           return
         }
 
         const validData = ensureValidPuckData(newData)
-        console.log('PuckEditor validated change data:', validData)
-
         setPuckData(validData)
 
         // Call onChange immediately without debouncing for better responsiveness
         try {
           const dataToSend = JSON.stringify(validData)
-          console.log('PuckEditor calling onChange with:', dataToSend)
           onChange(dataToSend)
         } catch (error) {
           console.error('Error in onChange:', error)
@@ -235,7 +226,6 @@ export const PuckEditor = ({
     (data: any) => {
       try {
         if (onSave) {
-          console.log('Saving data:', data)
           onSave(data)
         }
       } catch (error) {

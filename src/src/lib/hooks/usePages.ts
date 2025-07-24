@@ -68,15 +68,12 @@ export const usePages = (
  * @returns {Object} - Query result with page data.
  */
 export const usePage = (id: string) => {
-  console.log('usePage hook called with ID:', id)
   return useQuery({
     queryKey: [QueryNames.GetPage, id],
     queryFn: async () => {
-      console.log('Fetching page with ID:', id)
       const response = await pageAdminGet({
         path: { id },
       })
-      console.log('Page response:', response.data)
 
       // Ensure we return a valid value
       if (!response.data) {
@@ -111,11 +108,9 @@ export const usePageBySlug = (slug: string) => {
   return useQuery({
     queryKey: [QueryNames.GetPages, 'by-slug', slug],
     queryFn: async () => {
-      console.log('Fetching page with slug:', slug)
       const response = await pagesPublicFindBySlug({
         query: { slug },
       })
-      console.log('Page response:', response.data)
 
       // Ensure we return a valid value
       if (!response.data) {

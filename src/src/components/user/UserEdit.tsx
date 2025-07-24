@@ -90,7 +90,6 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
     (role: IdentityRoleDto) => {
       const hasAssignedRoleExistAlready = roles.findIndex((r) => role.id === r.id)
 
-      console.log(hasAssignedRoleExistAlready, 'hasAssignedRoleExistAlready')
       if (hasAssignedRoleExistAlready !== -1) {
         roles.splice(hasAssignedRoleExistAlready, 1)
         setRoles([...roles])

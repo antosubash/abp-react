@@ -23,12 +23,6 @@ const getHeaders = async (): Promise<HeadersInit> => {
   headers.set('Content-Type', 'application/json')
   headers.set('__tenant', session.tenantId ?? '')
 
-  console.log('Request headers prepared:', {
-    authorization: 'Bearer [REDACTED]',
-    contentType: 'application/json',
-    tenant: session.tenantId || 'none',
-  })
-
   return headers
 }
 
@@ -44,14 +38,6 @@ const makeApiRequest = async (
     const path = request.nextUrl.pathname
     const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
 
-    console.log(`[${requestId}] Starting ${method} request:`, {
-      method,
-      path,
-      fullUrl: url,
-      includeBody,
-      timestamp: new Date().toISOString(),
-    })
-
     const headers = await getHeaders()
 
     const options: RequestInit = {
@@ -64,33 +50,16 @@ const makeApiRequest = async (
       cache: 'no-store',
     }
 
-    console.log(`[${requestId}] Request options:`, {
-      method: options.method,
-      hasBody: !!options.body,
-      cache: options.cache,
-      headersCount: Object.keys(headers).length,
-    })
-
-    // Add timeout and better error handling
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
 
     let response: Response
     try {
-      console.log(`[${requestId}] Making fetch request to external API...`)
       response = await fetch(url, {
         ...options,
         signal: controller.signal,
       })
       clearTimeout(timeoutId)
-
-      const duration = Date.now() - startTime
-      console.log(`[${requestId}] Response received:`, {
-        status: response.status,
-        statusText: response.statusText,
-        duration: `${duration}ms`,
-        headers: Object.fromEntries(response.headers.entries()),
-      })
     } catch (fetchError) {
       clearTimeout(timeoutId)
       const duration = Date.now() - startTime
@@ -128,14 +97,6 @@ const makeApiRequest = async (
     const responseHeaders = new Headers(response.headers)
     const data = await response.json().catch(() => response)
 
-    const duration = Date.now() - startTime
-    console.log(`[${requestId}] Request completed successfully:`, {
-      status: response.status,
-      responseSize: JSON.stringify(data).length,
-      duration: `${duration}ms`,
-      timestamp: new Date().toISOString(),
-    })
-
     return NextResponse.json(data, {
       status: response.status,
       headers: responseHeaders,
@@ -155,37 +116,17 @@ const makeApiRequest = async (
 }
 
 export async function GET(request: NextRequest): Promise<Response> {
-  console.log('GET request received:', {
-    path: request.nextUrl.pathname,
-    search: request.nextUrl.search,
-    headers: Object.fromEntries(request.headers.entries()),
-  })
   return makeApiRequest(request, 'GET')
 }
 
 export async function POST(request: NextRequest): Promise<Response> {
-  console.log('POST request received:', {
-    path: request.nextUrl.pathname,
-    search: request.nextUrl.search,
-    headers: Object.fromEntries(request.headers.entries()),
-  })
   return makeApiRequest(request, 'POST', true)
 }
 
 export async function PUT(request: NextRequest): Promise<Response> {
-  console.log('PUT request received:', {
-    path: request.nextUrl.pathname,
-    search: request.nextUrl.search,
-    headers: Object.fromEntries(request.headers.entries()),
-  })
   return makeApiRequest(request, 'PUT', true)
 }
 
 export async function DELETE(request: NextRequest): Promise<Response> {
-  console.log('DELETE request received:', {
-    path: request.nextUrl.pathname,
-    search: request.nextUrl.search,
-    headers: Object.fromEntries(request.headers.entries()),
-  })
   return makeApiRequest(request, 'DELETE')
 }

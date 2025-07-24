@@ -83,15 +83,10 @@ export default function CreatePage() {
     setFormErrors({})
 
     try {
-      console.log('Form data received:', data)
-      console.log('Content before processing:', data.content)
-
       // Ensure content is properly formatted
       let contentToSubmit = data.content
 
       if (typeof contentToSubmit === 'object') {
-        console.log('Content is object, processing...')
-
         // Update the root title with the page title
         contentToSubmit = {
           ...contentToSubmit,
@@ -104,11 +99,8 @@ export default function CreatePage() {
           },
         }
 
-        console.log('Content after processing:', contentToSubmit)
         contentToSubmit = JSON.stringify(contentToSubmit)
-        console.log('Content after JSON.stringify:', contentToSubmit)
       } else if (typeof contentToSubmit === 'string') {
-        console.log('Content is already string:', contentToSubmit)
       } else {
         console.warn(
           'Content is neither object nor string:',
@@ -128,8 +120,6 @@ export default function CreatePage() {
         style: data.style || '',
         isPublished,
       }
-
-      console.log('Final API data being sent:', apiData)
 
       await pageAdminCreate({
         body: apiData,
@@ -328,7 +318,6 @@ export default function CreatePage() {
           name="content"
           control={control}
           render={({ field }) => {
-            console.log('Controller field value:', field.value)
 
             // Ensure we pass proper Puck data structure to the editor
             let puckData = field.value
@@ -345,14 +334,12 @@ export default function CreatePage() {
               <PuckEditor
                 data={puckData}
                 onChange={(newData) => {
-                  console.log('PuckEditor onChange called with:', newData)
                   // Store as JSON string in the form
                   const dataToStore =
                     typeof newData === 'string' ? newData : JSON.stringify(newData)
                   field.onChange(dataToStore)
                 }}
                 onSave={(data) => {
-                  console.log('PuckEditor onSave called with:', data)
                   const dataToStore = typeof data === 'string' ? data : JSON.stringify(data)
                   field.onChange(dataToStore)
                   handleSubmit(onSubmit)()

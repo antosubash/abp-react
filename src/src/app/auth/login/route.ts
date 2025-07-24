@@ -26,8 +26,6 @@ export async function GET() {
     tenantId = ''
   }
 
-  console.log('Login route: tenantId:', tenantId)
-
   let parameters: Record<string, string> = {
     redirect_uri: clientConfig.redirect_uri,
     scope: clientConfig.scope!,

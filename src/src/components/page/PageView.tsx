@@ -65,11 +65,6 @@ export const PageView = ({ page }: PageViewProps) => {
   useEffect(() => {
     if (page.script && typeof page.script === 'string' && page.script.trim().length > 0) {
       try {
-        // Log the script content for debugging purposes
-        console.log(
-          'Page script detected (execution disabled for security):',
-          page.script.substring(0, 100) + '...'
-        )
 
         // TODO: Implement proper script sandboxing for security
         // Script execution is temporarily disabled to prevent security vulnerabilities
@@ -144,7 +139,6 @@ export const PageView = ({ page }: PageViewProps) => {
         parsedContent = JSON.parse(page.content)
       } catch (error) {
         // If it's not valid JSON, treat it as HTML
-        console.log('Content is not JSON, treating as HTML')
         try {
           return htmlToPuckData(page.content)
         } catch (htmlError) {

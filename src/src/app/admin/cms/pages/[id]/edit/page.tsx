@@ -96,37 +96,27 @@ export default function EditPage() {
 
   // Load page data into form
   useEffect(() => {
-    console.log('EditPage - Loading page data into form:', page)
     if (page) {
       const pageData = page as VoloCmsKitAdminPagesPageDto
-      console.log('EditPage - pageData:', pageData)
-      console.log('EditPage - pageData.content:', pageData.content)
-      console.log('EditPage - pageData.content type:', typeof pageData.content)
 
       // Convert content to Puck data if it's HTML
       let puckContent: any = pageData.content
 
       if (typeof pageData.content === 'string') {
-        console.log('EditPage - Content is string, processing...')
         try {
           // Try to parse as JSON first
           const parsed = JSON.parse(pageData.content)
-          console.log('EditPage - Parsed JSON content:', parsed)
           if (isPuckData(parsed)) {
-            console.log('EditPage - Content is valid Puck data')
             puckContent = parsed
           } else {
-            console.log('EditPage - Content is not Puck data, converting HTML')
             // Convert HTML to Puck data
             puckContent = htmlToPuckData(pageData.content)
           }
         } catch (error) {
-          console.log('EditPage - Failed to parse as JSON, converting HTML:', error)
           // If not JSON, convert HTML to Puck data
           puckContent = htmlToPuckData(pageData.content)
         }
       } else if (pageData.content && typeof pageData.content === 'object') {
-        console.log('EditPage - Content is object:', pageData.content)
         // If it's already an object, ensure it's properly formatted
         puckContent = isPuckData(pageData.content)
           ? pageData.content
@@ -136,7 +126,6 @@ export default function EditPage() {
               zones: {},
             }
       } else {
-        console.log('EditPage - Content is null/undefined, using default')
         // Default empty Puck data with welcome block
         puckContent = {
           content: [],
@@ -145,12 +134,9 @@ export default function EditPage() {
         }
       }
 
-      console.log('EditPage - Final processed puckContent:', puckContent)
-
       // Ensure content is a string for the form
       const contentString =
         typeof puckContent === 'string' ? puckContent : JSON.stringify(puckContent)
-      console.log('EditPage - Content string for form:', contentString)
 
       reset({
         title: pageData.title || '',
@@ -163,7 +149,6 @@ export default function EditPage() {
       })
       setIsPublished(pageData.isHomePage || false)
       setIsFormLoaded(true)
-      console.log('EditPage - Form reset completed')
     }
   }, [page, reset])
 
@@ -402,7 +387,6 @@ export default function EditPage() {
               size="sm"
               variant="outline"
               onClick={() => {
-                console.log('Manual refresh triggered')
                 refetch()
               }}
               disabled={isLoading}
@@ -512,9 +496,6 @@ export default function EditPage() {
           name="content"
           control={control}
           render={({ field }) => {
-            console.log('EditPage Controller field value:', field.value)
-            console.log('EditPage isFormLoaded:', isFormLoaded)
-
             if (!isFormLoaded) {
               return (
                 <div className="flex items-center justify-center min-h-[400px]">
@@ -547,7 +528,6 @@ export default function EditPage() {
                 key={`puck-editor-${contentKey}`} // Force re-render when content changes
                 data={puckData}
                 onChange={(newData) => {
-                  console.log('EditPage PuckEditor onChange called with:', newData)
                   // Store as JSON string in the form
                   const dataToStore =
                     typeof newData === 'string' ? newData : JSON.stringify(newData)
