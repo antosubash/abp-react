@@ -38,6 +38,13 @@ export const ensureValidPuckData = (data: any) => {
     'Hero',
     'ImageBlock',
     'CardBlock',
+    'ButtonBlock',
+    'ContainerBlock',
+    'DividerBlock',
+    'FlexBlock',
+    'GridBlock',
+    'SpacerBlock',
+    'VideoBlock',
   ]
 
   // Helper function to generate a safe string ID
