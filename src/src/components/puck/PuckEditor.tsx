@@ -191,7 +191,7 @@ const ActionBarOverride = ({
     if (selectedItem?.props?.id) {
       refreshPermissions({ item: selectedItem });
     }
-  }, [lockedComponents, selectedItem?.props?.id, refreshPermissions]);
+  }, [lockedComponents, selectedItem, refreshPermissions]);
 
   if (!selectedItem || !selectedItem.props?.id) {
     return (

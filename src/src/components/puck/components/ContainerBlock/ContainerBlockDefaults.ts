@@ -8,5 +8,5 @@ export const ContainerBlockDefaults = {
   margin: '0px' as const,
   alignment: 'left' as const,
   shadow: 'none' as const,
-  items: [],
+  items: undefined,
 } 

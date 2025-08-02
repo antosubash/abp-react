@@ -34,10 +34,6 @@ export const ContainerBlock = ({
     boxSizing: 'border-box' as const,
   }
 
-  if (!items) {
-    return null
-  }
-
   const Items = items
-  return <div style={containerStyle}><Items /></div>   
+  return <div style={containerStyle}>{Items && <Items />}</div>   
 } 

@@ -1,5 +1,5 @@
 export const FlexBlockDefaults = {
-  items: [] as const,
+  items: undefined,
   direction: 'row' as const,
   justify: 'flex-start' as const,
   align: 'stretch' as const,

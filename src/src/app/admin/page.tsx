@@ -19,6 +19,9 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
+// Force dynamic rendering since this page uses server-side API calls and authentication
+export const dynamic = 'force-dynamic'
+
 /**
  * The AdminIndex component is an asynchronous function that fetches the application configuration
  * and displays a comprehensive admin dashboard with user information and system status.

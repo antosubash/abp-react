@@ -28,14 +28,10 @@ export const GridBlock = ({
     width,
   }
 
-  if (!items) {
-    return null
-  }
-
   const Items = items
   return (
     <div style={gridStyle}>
-      <Items />
+      {Items && <Items />}
     </div>
   )
 } 

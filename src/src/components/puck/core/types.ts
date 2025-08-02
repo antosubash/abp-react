@@ -8,7 +8,7 @@ export interface ComponentConfig<T> {
   render: (props: T) => ReactNode
 }
 
-export interface WithLayout<T> extends T {
+export type WithLayout<T> = T & {
   layout?: {
     grow?: boolean
     [key: string]: any

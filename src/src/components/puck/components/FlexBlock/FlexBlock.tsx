@@ -28,14 +28,10 @@ export const FlexBlock = ({
     width,
   }
 
-  if (!items) {
-    return null
-  }
-
   const Items = items
   return (
     <div style={flexStyle}>
-      <Items />
+      {Items && <Items />}
     </div>
   )
 } 
