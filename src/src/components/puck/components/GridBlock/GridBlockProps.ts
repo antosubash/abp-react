@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { Slot } from '../../core/types'
 
 export interface GridBlockProps {
-  children?: ReactNode
+  items?: Slot
   columns?: string
   rows?: string
   gap?: string

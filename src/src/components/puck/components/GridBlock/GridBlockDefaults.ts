@@ -1,5 +1,5 @@
 export const GridBlockDefaults = {
-  children: [] as const,
+  items: [] as const,
   columns: '1fr' as const,
   rows: 'auto' as const,
   gap: '16px' as const,

@@ -1,5 +1,4 @@
 export const ContainerBlockDefaults = {
-  children: [] as const,
   maxWidth: '1200px' as const,
   padding: '24px' as const,
   backgroundColor: 'transparent' as const,
@@ -9,4 +8,5 @@ export const ContainerBlockDefaults = {
   margin: '0px' as const,
   alignment: 'left' as const,
   shadow: 'none' as const,
+  items: [],
 } 

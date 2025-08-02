@@ -44,7 +44,6 @@ export default function EditPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({})
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-  const [isPublished, setIsPublished] = useState(false)
   const [isFormLoaded, setIsFormLoaded] = useState(false)
 
   const {
@@ -147,7 +146,6 @@ export default function EditPage() {
         style: pageData.style || '',
         concurrencyStamp: pageData.concurrencyStamp || '',
       })
-      setIsPublished(pageData.isHomePage || false)
       setIsFormLoaded(true)
     }
   }, [page, reset])
@@ -371,17 +369,7 @@ export default function EditPage() {
                 Unsaved Changes
               </Badge>
             )}
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="publish-status"
-                checked={isPublished}
-                onCheckedChange={setIsPublished}
-                disabled
-              />
-              <Label htmlFor="publish-status" className="text-sm">
-                {isPublished ? 'Home Page' : 'Regular Page'}
-              </Label>
-            </div>
+
 
             <Button
               size="sm"

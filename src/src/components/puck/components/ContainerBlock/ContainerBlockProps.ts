@@ -1,7 +1,6 @@
-import { ReactNode } from 'react'
+import { Slot } from '../../core/types'
 
 export interface ContainerBlockProps {
-  children?: ReactNode
   maxWidth?: string
   padding?: string
   backgroundColor?: string
@@ -11,4 +10,5 @@ export interface ContainerBlockProps {
   margin?: string
   alignment?: 'left' | 'center' | 'right'
   shadow?: 'none' | 'small' | 'medium' | 'large'
+  items?: Slot
 } 

@@ -3,7 +3,6 @@
 import { ContainerBlockProps } from './ContainerBlockProps'
 
 export const ContainerBlock = ({
-  children,
   maxWidth = '1200px',
   padding = '24px',
   backgroundColor = 'transparent',
@@ -13,6 +12,7 @@ export const ContainerBlock = ({
   margin = '0px',
   alignment = 'left',
   shadow = 'none',
+  items,
 }: ContainerBlockProps) => {
   const shadowStyles = {
     none: 'none',
@@ -34,15 +34,10 @@ export const ContainerBlock = ({
     boxSizing: 'border-box' as const,
   }
 
-  return (
-    <div style={containerStyle}>
-      {children && Array.isArray(children) && children.length > 0 ? (
-        children
-      ) : (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#6b7280' }}>
-          Add content to this container
-        </div>
-      )}
-    </div>
-  )
+  if (!items) {
+    return null
+  }
+
+  const Items = items
+  return <div style={containerStyle}><Items /></div>   
 } 

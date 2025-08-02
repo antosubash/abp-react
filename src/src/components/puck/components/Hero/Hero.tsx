@@ -14,6 +14,16 @@ export const Hero = ({
   minHeight = '400px',
   padding = '80px 24px',
 }: HeroProps) => {
+  // Ensure text props are always strings
+  const safeTitle = typeof title === 'string' ? title : 
+                   typeof title === 'object' && title !== null ? JSON.stringify(title) :
+                   'Hero Title'
+  const safeSubtitle = typeof subtitle === 'string' ? subtitle : 
+                      typeof subtitle === 'object' && subtitle !== null ? JSON.stringify(subtitle) :
+                      ''
+  const safeButtonText = typeof buttonText === 'string' ? buttonText : 
+                        typeof buttonText === 'object' && buttonText !== null ? JSON.stringify(buttonText) :
+                        'Learn More'
   return (
     <div
       style={{
@@ -37,9 +47,9 @@ export const Hero = ({
           maxWidth: '800px',
         }}
       >
-        {title}
+        {safeTitle}
       </h1>
-      {subtitle && (
+      {safeSubtitle && (
         <p
           style={{
             fontSize: '20px',
@@ -48,10 +58,10 @@ export const Hero = ({
             maxWidth: '600px',
           }}
         >
-          {subtitle}
+          {safeSubtitle}
         </p>
       )}
-      {showButton && buttonText && (
+      {showButton && safeButtonText && (
         <a
           href={buttonLink}
           style={{
@@ -65,7 +75,7 @@ export const Hero = ({
             transition: 'background-color 0.2s',
           }}
         >
-          {buttonText}
+          {safeButtonText}
         </a>
       )}
     </div>

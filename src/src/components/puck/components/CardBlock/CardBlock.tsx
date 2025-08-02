@@ -16,6 +16,19 @@ export const CardBlock = ({
   padding = '24px',
   borderRadius = '8px',
 }: CardBlockProps) => {
+  // Ensure text props are always strings
+  const safeTitle = typeof title === 'string' ? title : 
+                   typeof title === 'object' && title !== null ? JSON.stringify(title) :
+                   'Card Title'
+  const safeDescription = typeof description === 'string' ? description : 
+                         typeof description === 'object' && description !== null ? JSON.stringify(description) :
+                         'Card description'
+  const safeContent = typeof content === 'string' ? content : 
+                     typeof content === 'object' && content !== null ? JSON.stringify(content) :
+                     ''
+  const safeButtonText = typeof buttonText === 'string' ? buttonText : 
+                        typeof buttonText === 'object' && buttonText !== null ? JSON.stringify(buttonText) :
+                        ''
   return (
     <div
       style={{
@@ -31,7 +44,7 @@ export const CardBlock = ({
       {image && (
         <Image
           src={image}
-          alt={title}
+          alt={safeTitle}
           width={400}
           height={200}
           style={{
@@ -51,19 +64,19 @@ export const CardBlock = ({
           color: '#1f2937',
         }}
       >
-        {title}
+        {safeTitle}
       </h3>
       <p
         style={{
           fontSize: '16px',
           color: '#6b7280',
-          marginBottom: content ? '12px' : '16px',
+          marginBottom: safeContent ? '12px' : '16px',
           lineHeight: '1.5',
         }}
       >
-        {description}
+        {safeDescription}
       </p>
-      {content && (
+      {safeContent && (
         <p
           style={{
             fontSize: '14px',
@@ -72,10 +85,10 @@ export const CardBlock = ({
             lineHeight: '1.6',
           }}
         >
-          {content}
+          {safeContent}
         </p>
       )}
-      {buttonText && (
+      {safeButtonText && (
         <a
           href={buttonLink || '#'}
           style={{
@@ -89,7 +102,7 @@ export const CardBlock = ({
             fontWeight: 'bold',
           }}
         >
-          {buttonText}
+          {safeButtonText}
         </a>
       )}
     </div>

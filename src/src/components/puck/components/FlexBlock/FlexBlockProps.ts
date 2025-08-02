@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { Slot } from '../../core/types'
 
 export interface FlexBlockProps {
-  children?: ReactNode
+  items?: Slot
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
   justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'
   align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'

@@ -22,12 +22,32 @@ import Link from 'next/link'
 /**
  * The AdminIndex component is an asynchronous function that fetches the application configuration
  * and displays a comprehensive admin dashboard with user information and system status.
+ * Next.js will automatically show the loading.tsx component while this page is loading.
  *
  * @returns A React component that renders a modern admin dashboard with user details and system information.
  */
 export default async function AdminIndex() {
-  const { data } = await abpApplicationConfigurationGet()
-  const appConfig = data as ApplicationConfigurationDto
+  const response = await abpApplicationConfigurationGet()
+  let appConfig = response.data as ApplicationConfigurationDto
+
+  // Provide fallback data if appConfig is null or undefined
+  if (!appConfig) {
+    appConfig = {
+      localization: undefined,
+      auth: undefined,
+      setting: undefined,
+      currentUser: undefined,
+      features: undefined,
+      globalFeatures: undefined,
+      multiTenancy: undefined,
+      currentTenant: undefined,
+      timing: undefined,
+      clock: undefined,
+      objectExtensions: undefined,
+      extraProperties: undefined,
+    } as ApplicationConfigurationDto
+  }
+
   const currentUser = appConfig?.currentUser
 
   const getInitials = (name?: string | null, surname?: string | null) => {
@@ -38,13 +58,18 @@ export default async function AdminIndex() {
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return 'N/A'
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    } catch (err) {
+      console.error('Error formatting date:', err)
+      return 'Invalid Date'
+    }
   }
 
   return (

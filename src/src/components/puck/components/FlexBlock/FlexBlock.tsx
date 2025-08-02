@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { FlexBlockProps } from './FlexBlockProps'
 
 export const FlexBlock = ({
-  children,
+  items,
   direction = 'row',
   justify = 'flex-start',
   align = 'stretch',
@@ -28,15 +28,14 @@ export const FlexBlock = ({
     width,
   }
 
+  if (!items) {
+    return null
+  }
+
+  const Items = items
   return (
     <div style={flexStyle}>
-      {children && Array.isArray(children) && children.length > 0 ? (
-        children
-      ) : (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#6b7280' }}>
-          Add content to this flex container
-        </div>
-      )}
+      <Items />
     </div>
   )
 } 

@@ -14,6 +14,10 @@ export const ButtonBlock = ({
   target = '_self',
   padding = '16px',
 }: ButtonBlockProps) => {
+  // Ensure text is always a string
+  const safeText = typeof text === 'string' ? text : 
+                   typeof text === 'object' && text !== null ? JSON.stringify(text) :
+                   'Click me'
   const variantStyles = {
     primary: {
       backgroundColor: '#3b82f6',
@@ -94,7 +98,7 @@ export const ButtonBlock = ({
         }
       }}
     >
-      {text}
+      {safeText}
     </button>
   )
 

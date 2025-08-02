@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { GridBlockProps } from './GridBlockProps'
 
 export const GridBlock = ({
-  children,
+  items,
   columns = '1fr',
   rows = 'auto',
   gap = '16px',
@@ -28,15 +28,14 @@ export const GridBlock = ({
     width,
   }
 
+  if (!items) {
+    return null
+  }
+
+  const Items = items
   return (
     <div style={gridStyle}>
-      {children && Array.isArray(children) && children.length > 0 ? (
-        children
-      ) : (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#6b7280' }}>
-          Add content to this grid
-        </div>
-      )}
+      <Items />
     </div>
   )
 } 

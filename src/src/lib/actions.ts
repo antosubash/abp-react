@@ -21,32 +21,54 @@ import { SessionData, defaultSession, getClientConfig } from './session-utils'
  */
 export async function getSession(): Promise<IronSession<SessionData>> {
   let session = await getIronSession<SessionData>(await cookies(), sessionOptions)
+  
   try {
     // Check if the access token is expired
     if (session.access_token && isTokenExpired(session.access_token!)) {
-      const redisKey = `session:${session?.userInfo?.sub!}`
-      const redis = createRedisInstance()
-      const clientConfig = await getClientConfig()
+      try {
+        const redisKey = `session:${session?.userInfo?.sub!}`
+        const redis = createRedisInstance()
+        const clientConfig = await getClientConfig()
 
-      // Retrieve session data from Redis
-      let redisSessionData = await redis.get(redisKey)
-      const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
+        // Retrieve session data from Redis
+        let redisSessionData = await redis.get(redisKey)
+        
+        if (!redisSessionData) {
+          console.warn('No session data found in Redis, user may need to re-authenticate')
+          throw new Error('No session data in Redis')
+        }
+        
+        const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
 
-      // Refresh the access token using the refresh token
-      const tokenSet = await client.refreshTokenGrant(
-        clientConfig,
-        parsedSessionData.refresh_token!
-      )
-      session.access_token = tokenSet.access_token
-      await session.save()
+        // Check if we have a refresh token
+        if (!parsedSessionData.refresh_token) {
+          console.warn('No refresh token available, user needs to re-authenticate')
+          throw new Error('No refresh token available')
+        }
 
-      // Update Redis with the new session data
-      const newRedisSessionData = {
-        access_token: tokenSet.access_token,
-        refresh_token: tokenSet.refresh_token,
-      } as RedisSession
-      await redis.set(redisKey, JSON.stringify(newRedisSessionData))
-      await redis.quit()
+        // Refresh the access token using the refresh token
+        const tokenSet = await client.refreshTokenGrant(
+          clientConfig,
+          parsedSessionData.refresh_token!
+        )
+        
+        session.access_token = tokenSet.access_token
+        await session.save()
+
+        // Update Redis with the new session data
+        const newRedisSessionData = {
+          access_token: tokenSet.access_token,
+          refresh_token: tokenSet.refresh_token,
+        } as RedisSession
+        await redis.set(redisKey, JSON.stringify(newRedisSessionData))
+        await redis.quit()
+        
+        console.log('Token refreshed successfully')
+      } catch (refreshError) {
+        console.error('Error refreshing token:', refreshError)
+        // Don't throw here, just log the error and continue with the current session
+        // The user will be redirected to login if the token is invalid
+      }
     }
     return session
   } catch (error) {

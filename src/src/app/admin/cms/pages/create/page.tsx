@@ -47,7 +47,6 @@ export default function CreatePage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({})
-  const [isPublished, setIsPublished] = useState(false)
 
   const {
     handleSubmit,
@@ -118,7 +117,6 @@ export default function CreatePage() {
         content: contentToSubmit,
         script: data.script || '',
         style: data.style || '',
-        isPublished,
       }
 
       await pageAdminCreate({
@@ -127,7 +125,7 @@ export default function CreatePage() {
 
       toast({
         title: 'Success',
-        description: `Page ${isPublished ? 'published' : 'created'} successfully.`,
+        description: 'Page created successfully.',
         variant: 'default',
       })
 
@@ -207,16 +205,9 @@ export default function CreatePage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center space-x-2">
-              <Switch id="publish-status" checked={isPublished} onCheckedChange={setIsPublished} />
-              <Label htmlFor="publish-status" className="text-sm">
-                {isPublished ? 'Published' : 'Draft'}
-              </Label>
-            </div>
-
             <Button size="sm" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
               <Save className="w-4 h-4 mr-2" />
-              {isSubmitting ? 'Creating...' : isPublished ? 'Publish' : 'Create Page'}
+              {isSubmitting ? 'Creating...' : 'Create Page'}
             </Button>
           </div>
         </div>

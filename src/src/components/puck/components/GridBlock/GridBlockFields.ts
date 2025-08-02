@@ -1,23 +1,6 @@
 export const GridBlockFields = {
-  children: {
-    type: 'array' as const,
-    label: 'Content',
-    arrayFields: {
-      type: {
-        type: 'select' as const,
-        label: 'Component Type',
-        options: [
-          { label: 'Text Block', value: 'TextBlock' },
-          { label: 'Heading Block', value: 'HeadingBlock' },
-          { label: 'Image Block', value: 'ImageBlock' },
-          { label: 'Button Block', value: 'ButtonBlock' },
-          { label: 'Card Block', value: 'CardBlock' },
-          { label: 'Divider Block', value: 'DividerBlock' },
-          { label: 'Spacer Block', value: 'SpacerBlock' },
-          { label: 'Video Block', value: 'VideoBlock' },
-        ],
-      },
-    },
+  items: {
+    type: 'slot' as const,
   },
   columns: {
     type: 'text' as const,
