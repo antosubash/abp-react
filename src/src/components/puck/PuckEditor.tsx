@@ -2,22 +2,18 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { Alert } from '@/components/ui/alert'
 
-import { Puck, usePuck, createUsePuck, ActionBar, IconButton } from '@measured/puck'
+import { Puck, usePuck, createUsePuck, ActionBar } from '@measured/puck'
 import { 
-  Globe, 
   Lock, 
   Unlock, 
   Eye, 
-  Edit3, 
+  Edit3,
   RefreshCw,
-  AlertTriangle,
-  CheckCircle
+  AlertTriangle
 } from 'lucide-react'
-import React, { useCallback, useState, useEffect, useRef } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { config } from './config'
 import { ensureValidPuckData } from './utils'
 
@@ -31,144 +27,11 @@ export interface PuckEditorProps {
 
 const usePuckHook = createUsePuck<typeof config>()
 
-// Custom Header component with enhanced design
-const CustomHeader = ({ onPublish }: { onPublish: (data: any) => void }) => {
-  const { appState, dispatch } = usePuck()
-  const previewMode = appState.ui.previewMode
-  const [isSaving, setIsSaving] = useState(false)
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
-
-  const toggleMode = () => {
-    dispatch({
-      type: 'setUi',
-      ui: {
-        previewMode: previewMode === 'edit' ? 'interactive' : 'edit',
-      },
-    })
-  }
-
-  const handlePublish = async () => {
-    setIsSaving(true)
-    setSaveStatus('saving')
-    try {
-      await onPublish(appState.data)
-      setSaveStatus('saved')
-      setTimeout(() => setSaveStatus('idle'), 2000)
-    } catch (error) {
-      setSaveStatus('error')
-      setTimeout(() => setSaveStatus('idle'), 3000)
-    } finally {
-      setIsSaving(false)
-    }
-  }
-
-  const getSaveStatusIcon = () => {
-    switch (saveStatus) {
-      case 'saving':
-        return <RefreshCw size="16" className="animate-spin" />
-      case 'saved':
-        return <CheckCircle size="16" className="text-green-600" />
-      case 'error':
-        return <AlertTriangle size="16" className="text-red-600" />
-      default:
-        return <Globe size="16" />
-    }
-  }
-
-  const getSaveStatusText = () => {
-    switch (saveStatus) {
-      case 'saving':
-        return 'Publishing...'
-      case 'saved':
-        return 'Published'
-      case 'error':
-        return 'Failed to publish'
-      default:
-        return 'Publish'
-    }
-  }
-
-  return (
-    <header
-      className="flex flex-wrap gap-4 p-4 px-6 bg-gradient-to-r from-slate-50 to-white text-slate-800 items-center border-b border-slate-200 shadow-sm"
-      onClick={() => dispatch({ type: "setUi", ui: { itemSelector: null } })}
-    >
-      <div className="flex items-center gap-3">
-        <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-          <Edit3 size="16" className="text-white" />
-        </div>
-        <div>
-          <h1 className="font-bold text-lg text-slate-800">Page Editor</h1>
-          <p className="text-xs text-slate-500">Create and edit your content</p>
-        </div>
-      </div>
-      
-      <div className="ml-auto flex items-center gap-3">
-        {/* Mode Toggle */}
-        <div className="flex items-center bg-slate-100 rounded-lg p-1">
-          <Button 
-            onClick={toggleMode} 
-            variant={previewMode === 'edit' ? 'default' : 'ghost'}
-            size="sm"
-            className={`h-8 px-3 text-xs font-medium transition-all ${
-              previewMode === 'edit' 
-                ? 'bg-white shadow-sm text-slate-800' 
-                : 'text-slate-600 hover:text-slate-800'
-            }`}
-          >
-            <Edit3 size="14" className="mr-1" />
-            Edit
-          </Button>
-          <Button 
-            onClick={toggleMode} 
-            variant={previewMode === 'interactive' ? 'default' : 'ghost'}
-            size="sm"
-            className={`h-8 px-3 text-xs font-medium transition-all ${
-              previewMode === 'interactive' 
-                ? 'bg-white shadow-sm text-slate-800' 
-                : 'text-slate-600 hover:text-slate-800'
-            }`}
-          >
-            <Eye size="14" className="mr-1" />
-            Preview
-          </Button>
-        </div>
-
-        <div className="w-px h-8 bg-slate-200 mx-2"></div>
-
-        {/* Publish Button */}
-        <Button
-          onClick={handlePublish}
-          disabled={isSaving}
-          className={`flex items-center gap-2 font-medium transition-all ${
-            saveStatus === 'saved' 
-              ? 'bg-green-600 hover:bg-green-700' 
-              : saveStatus === 'error'
-              ? 'bg-red-600 hover:bg-red-700'
-              : 'bg-blue-600 hover:bg-blue-700'
-          }`}
-          size="sm"
-        >
-          {getSaveStatusIcon()}
-          {getSaveStatusText()}
-        </Button>
-      </div>
-    </header>
-  )
-}
 
 
 
-// Custom header for better branding
-const CustomHeaderComponent = ({ dataKey }: { dataKey: string }) => {
-  return (
-    <CustomHeader
-      onPublish={async (data: any) => {
-        localStorage.setItem(dataKey, JSON.stringify(data))
-      }}
-    />
-  )
-}
+
+
 
 // Enhanced Action Bar with better visual design
 const ActionBarOverride = ({ 
@@ -410,7 +273,7 @@ export const PuckEditor = ({
   }
 
   return (
-    <div className={`w-full bg-slate-50 ${className}`}>
+    <div className={`w-full ${className}`}>
       <Puck
         key={JSON.stringify(puckData)}
         config={configOverride}
@@ -422,7 +285,6 @@ export const PuckEditor = ({
           actionBar: (props) => (
             <ActionBarOverride {...props} lockedComponents={lockedComponents} setLockedComponents={setLockedComponents} />
           ),
-          header: () => <CustomHeaderComponent dataKey="puck-editor-data" />,
         }}
       />
     </div>
