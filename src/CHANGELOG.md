@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.0...v2.5.1)
+
+### 🩹 Fixes
+
+- Updated the home page ([#216](https://github.com/antosubash/abp-react/pull/216))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.4.2...v2.5.0)
+
+## v2.5.1
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.0...v2.5.1)
+
+### 🩹 Fixes
+
+- Updated the home page ([#216](https://github.com/antosubash/abp-react/pull/216))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🚀 Enhancements
 
