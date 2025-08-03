@@ -27,16 +27,12 @@ export const clientConfig = {
  */
 export const PublicMenus: Array<{ Name: string; Link: string }> = [
   {
-    Name: 'How it works',
-    Link: '#how-it-works',
-  },
-  {
     Name: 'Features',
     Link: '#features',
   },
   {
-    Name: 'Pricing',
-    Link: '#pricing',
+    Name: 'Getting Started',
+    Link: '#getting-started',
   },
 ]
 
@@ -45,13 +41,13 @@ export const PublicMenus: Array<{ Name: string; Link: string }> = [
  * Each menu item contains a name, link, and icon.
  * Supports nested submenus for 2-level navigation.
  *
- * @type {Array<{name: string, link: string, icon: React.ComponentType, submenus?: Array<{name: string, link: string, icon: React.ComponentType}>}>}
+ * @type {Array<{name: string, link: string, icon: React.ComponentType<{className?: string}>, submenus?: Array<{name: string, link: string, icon: React.ComponentType<{className?: string}>}>}>}
  */
 export const AdminMenus: Array<{
   name: string
   link: string
-  icon: React.ComponentType
-  submenus?: Array<{ name: string; link: string; icon: React.ComponentType }>
+  icon: React.ComponentType<{ className?: string }>
+  submenus?: Array<{ name: string; link: string; icon: React.ComponentType<{ className?: string }> }>
 }> = [
   {
     name: 'Home',
@@ -101,3 +97,4 @@ export const AdminMenus: Array<{
     icon: Cog,
   },
 ]
+
