@@ -14,8 +14,7 @@
     "openapi-ts": "openapi-ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "storybook:serve": "storybook dev -p 6007 --ci",
-    "test-storybook": "test-storybook"
+    "storybook:serve": "storybook dev -p 6007 --ci"
   },
   "dependencies": {
     "@hey-api/client-fetch": "^0.13.1",

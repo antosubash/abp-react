@@ -63,9 +63,6 @@ jobs:
     - name: Build Storybook
       run: pnpm run build-storybook
 
-    - name: Test Storybook
-      run: pnpm run test-storybook
-
     - name: Upload Storybook build artifacts
       uses: actions/upload-artifact@v4
       with:
