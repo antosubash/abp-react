@@ -15,7 +15,7 @@ import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { usePage } from '@/lib/hooks/usePages'
 import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, Clock, RefreshCw, Save } from 'lucide-react'
+import { ArrowLeft, Clock, RefreshCw, Save, Eye } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -44,7 +44,6 @@ export default function EditPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({})
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-  const [isPublished, setIsPublished] = useState(false)
   const [isFormLoaded, setIsFormLoaded] = useState(false)
 
   const {
@@ -147,7 +146,6 @@ export default function EditPage() {
         style: pageData.style || '',
         concurrencyStamp: pageData.concurrencyStamp || '',
       })
-      setIsPublished(pageData.isHomePage || false)
       setIsFormLoaded(true)
     }
   }, [page, reset])
@@ -239,7 +237,9 @@ export default function EditPage() {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPage, pageId] })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPages] })
       localStorage.removeItem(`page-draft-${pageId}`) // Clear draft after successful save
-      router.push('/admin/cms')
+      
+      // Remove the redirect - stay on the current page
+      // router.push('/admin/cms')
     } catch (err: unknown) {
       console.error('Page update error:', err)
 
@@ -371,17 +371,7 @@ export default function EditPage() {
                 Unsaved Changes
               </Badge>
             )}
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="publish-status"
-                checked={isPublished}
-                onCheckedChange={setIsPublished}
-                disabled
-              />
-              <Label htmlFor="publish-status" className="text-sm">
-                {isPublished ? 'Home Page' : 'Regular Page'}
-              </Label>
-            </div>
+
 
             <Button
               size="sm"
@@ -394,6 +384,23 @@ export default function EditPage() {
               <RefreshCw className="w-4 h-4 mr-2" />
               {isLoading ? 'Loading...' : 'Refresh'}
             </Button>
+
+            {page && (page as VoloCmsKitAdminPagesPageDto).slug && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  const slug = (page as VoloCmsKitAdminPagesPageDto).slug
+                  if (slug) {
+                    window.open(`/pages/${slug}`, '_blank')
+                  }
+                }}
+                disabled={!page || !(page as VoloCmsKitAdminPagesPageDto).slug}
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                View Page
+              </Button>
+            )}
 
             <Button size="sm" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
               <Save className="w-4 h-4 mr-2" />

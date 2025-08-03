@@ -79,13 +79,34 @@ export const refreshToken = async () => {
  * @returns {void}
  */
 export const setUpLayoutConfig = async () => {
-  APIClient.setConfig({
-    baseUrl: typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_API_URL!,
-  })
-  APIClient.interceptors.request.use(async (options) => {
-    const session = await getSession()
-    options.headers.set('Authorization', `Bearer ${session.access_token}`)
-    options.headers.set('__tenant', session.tenantId ?? '')
-    return options
-  })
+  try {
+    APIClient.setConfig({
+      baseUrl: typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_API_URL!,
+    })
+    
+    APIClient.interceptors.request.use(async (options) => {
+      try {
+        const session = await getSession()
+        
+        // Only set authorization header if we have a valid access token
+        if (session.access_token) {
+          options.headers.set('Authorization', `Bearer ${session.access_token}`)
+        }
+        
+        // Set tenant header if available
+        if (session.tenantId) {
+          options.headers.set('__tenant', session.tenantId)
+        }
+        
+        return options
+      } catch (error) {
+        console.error('Error in request interceptor:', error)
+        // Return options without auth headers if session fails
+        return options
+      }
+    })
+  } catch (error) {
+    console.error('Error setting up layout config:', error)
+    // Continue without setting up interceptors if there's an error
+  }
 }

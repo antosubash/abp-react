@@ -11,6 +11,10 @@ export const HeadingBlock = ({
   color = '#1f2937',
   margin = '16px',
 }: HeadingBlockProps) => {
+  // Ensure title is always a string
+  const safeTitle = typeof title === 'string' ? title : 
+                   typeof title === 'object' && title !== null ? JSON.stringify(title) :
+                   'Enter your heading here...'
   const fontSizeMap = {
     sm: '14px',
     base: '16px',
@@ -43,19 +47,19 @@ export const HeadingBlock = ({
   const renderHeading = () => {
     switch (level) {
       case 'h1':
-        return <h1 style={styles}>{title}</h1>
+        return <h1 style={styles}>{safeTitle}</h1>
       case 'h2':
-        return <h2 style={styles}>{title}</h2>
+        return <h2 style={styles}>{safeTitle}</h2>
       case 'h3':
-        return <h3 style={styles}>{title}</h3>
+        return <h3 style={styles}>{safeTitle}</h3>
       case 'h4':
-        return <h4 style={styles}>{title}</h4>
+        return <h4 style={styles}>{safeTitle}</h4>
       case 'h5':
-        return <h5 style={styles}>{title}</h5>
+        return <h5 style={styles}>{safeTitle}</h5>
       case 'h6':
-        return <h6 style={styles}>{title}</h6>
+        return <h6 style={styles}>{safeTitle}</h6>
       default:
-        return <h1 style={styles}>{title}</h1>
+        return <h1 style={styles}>{safeTitle}</h1>
     }
   }
 

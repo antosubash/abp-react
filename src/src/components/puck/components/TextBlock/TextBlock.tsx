@@ -13,6 +13,10 @@ export const TextBlock = ({
   lineHeight = 'normal',
   padding = '16px',
 }: TextBlockProps) => {
+  // Ensure text is always a string
+  const safeText = typeof text === 'string' ? text : 
+                   typeof text === 'object' && text !== null ? JSON.stringify(text) :
+                   'Enter your text content here...'
   const fontSizeMap = {
     sm: '14px',
     base: '16px',
@@ -57,9 +61,9 @@ export const TextBlock = ({
   const renderText = () => {
     switch (type) {
       case 'heading':
-        return <h2 style={styles}>{text}</h2>
+        return <h2 style={styles}>{safeText}</h2>
       case 'subheading':
-        return <h3 style={styles}>{text}</h3>
+        return <h3 style={styles}>{safeText}</h3>
       case 'quote':
         return (
           <blockquote
@@ -70,11 +74,11 @@ export const TextBlock = ({
               fontStyle: 'italic',
             }}
           >
-            {text}
+            {safeText}
           </blockquote>
         )
       default:
-        return <p style={styles}>{text}</p>
+        return <p style={styles}>{safeText}</p>
     }
   }
 
