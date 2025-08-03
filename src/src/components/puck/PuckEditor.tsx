@@ -13,7 +13,7 @@ import {
   RefreshCw,
   AlertTriangle
 } from 'lucide-react'
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useMemo } from 'react'
 import { config } from './config'
 import { ensureValidPuckData } from './utils'
 
@@ -26,12 +26,6 @@ export interface PuckEditorProps {
 }
 
 const usePuckHook = createUsePuck<typeof config>()
-
-
-
-
-
-
 
 // Enhanced Action Bar with better visual design
 const ActionBarOverride = ({ 
@@ -108,54 +102,60 @@ export const PuckEditor = ({
   const [isInitialized, setIsInitialized] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const [puckData, setPuckData] = useState<any>(null)
   const [lockedComponents, setLockedComponents] = useState<Record<string, boolean>>({})
 
-  React.useEffect(() => {
+  // Process and validate the initial data
+  const processedData = useMemo(() => {
     try {
-      let processedData = data
+      let processed = data
       
       // Ensure we have valid data
       if (typeof data === 'string') {
         try {
-          processedData = JSON.parse(data)
+          processed = JSON.parse(data)
         } catch (parseError) {
-          processedData = null
+          processed = null
         }
       }
       
       // Validate the processed data structure
-      if (!processedData || 
-          typeof processedData !== 'object' || 
-          !processedData.content || 
-          !Array.isArray(processedData.content)) {
-        processedData = {
+      if (!processed || 
+          typeof processed !== 'object' || 
+          !processed.content || 
+          !Array.isArray(processed.content)) {
+        processed = {
           content: [],
           root: { props: { title: 'New Page' } },
           zones: {},
         }
       }
       
-      const validData = ensureValidPuckData(processedData)
-      setPuckData(validData)
-      setIsInitialized(true)
-      setHasError(false)
+      return ensureValidPuckData(processed) as any
     } catch (error) {
       console.error('PuckEditor data processing error:', error)
       setHasError(true)
       setErrorMessage('Failed to load page content. Please try refreshing the page.')
-      const fallbackData = ensureValidPuckData(null)
-      setPuckData(fallbackData)
-      setIsInitialized(true)
+      return {
+        content: [],
+        root: { props: { title: 'New Page' }, id: 'root' },
+        zones: {},
+      }
     }
   }, [data])
+
+  // Initialize the editor once
+  useEffect(() => {
+    if (processedData && !isInitialized) {
+      setIsInitialized(true)
+      setHasError(false)
+    }
+  }, [processedData, isInitialized])
 
   const handleChange = useCallback(
     (newData: any) => {
       try {
         if (!newData) return
         const validData = ensureValidPuckData(newData)
-        setPuckData(validData)
         try {
           const dataToSend = JSON.stringify(validData)
           onChange(dataToSend)
@@ -191,7 +191,7 @@ export const PuckEditor = ({
     setIsInitialized(false)
   }, [])
 
-  const configOverride = {
+  const configOverride = useMemo(() => ({
     ...config,
     components: {
       ...Object.keys(config.components).reduce((acc, componentKey) => {
@@ -215,7 +215,7 @@ export const PuckEditor = ({
         }
       }, {}),
     },
-  }
+  }), [lockedComponents])
 
   if (hasError) {
     return (
@@ -242,7 +242,7 @@ export const PuckEditor = ({
     )
   }
 
-  if (!isInitialized || !puckData) {
+  if (!isInitialized || !processedData) {
     return (
       <div className="flex items-center justify-center min-h-[400px] bg-slate-50">
         <div className="text-center">
@@ -256,9 +256,7 @@ export const PuckEditor = ({
     )
   }
 
-  if (!puckData.content || !Array.isArray(puckData.content)) {
-    const fallbackData = ensureValidPuckData(null)
-    setPuckData(fallbackData)
+  if (!processedData.content || !Array.isArray(processedData.content)) {
     return (
       <div className="flex items-center justify-center min-h-[400px] bg-slate-50">
         <div className="text-center">
@@ -275,16 +273,16 @@ export const PuckEditor = ({
   return (
     <div className={`w-full ${className}`}>
       <Puck
-        key={JSON.stringify(puckData)}
         config={configOverride}
-        data={puckData}
+        data={processedData}
         onChange={handleChange}
         iframe={{ enabled: false }}
-        permissions={{ lockable: true }}
+        permissions={{ lockable: true, publish: false }} // Disable publish functionality
         overrides={{
           actionBar: (props) => (
             <ActionBarOverride {...props} lockedComponents={lockedComponents} setLockedComponents={setLockedComponents} />
           ),
+          header: () => <div />, // Empty header to remove publish button
         }}
       />
     </div>

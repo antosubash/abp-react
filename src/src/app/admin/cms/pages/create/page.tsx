@@ -132,7 +132,8 @@ export default function CreatePage() {
       // Invalidate and refetch pages list
       queryClient.invalidateQueries({ queryKey: ['pages'] })
 
-      router.push('/admin/cms/pages')
+      // Remove the redirect - stay on the current page
+      // router.push('/admin/cms/pages')
     } catch (error: any) {
       console.error('Error creating page:', error)
 

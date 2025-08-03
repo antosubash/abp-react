@@ -237,7 +237,9 @@ export default function EditPage() {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPage, pageId] })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPages] })
       localStorage.removeItem(`page-draft-${pageId}`) // Clear draft after successful save
-      router.push('/admin/cms')
+      
+      // Remove the redirect - stay on the current page
+      // router.push('/admin/cms')
     } catch (err: unknown) {
       console.error('Page update error:', err)
 
