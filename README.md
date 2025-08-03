@@ -211,6 +211,26 @@ Storybook provides:
 - Accessibility testing
 - Visual regression testing
 
+### CI/CD Integration
+
+Storybook is fully integrated into the CI/CD pipeline:
+
+- **Automatic Building**: Storybook is built on every push to main and pull request
+- **Testing**: Storybook tests run automatically to ensure component quality
+- **Docker Deployment**: Storybook is containerized and deployed to GitHub Container Registry
+- **Artifact Storage**: Storybook build artifacts are stored for 30 days
+
+#### CI Workflow Features:
+
+1. **Storybook Build Job**: Builds and tests Storybook on every change
+2. **Docker Image**: Creates and pushes Storybook Docker image to GHCR
+
+#### Accessing Storybook:
+
+- **Development**: `http://localhost:6006` (run `pnpm storybook`)
+- **Docker**: `http://localhost:80` (run `docker run -p 80:80 ghcr.io/your-repo/storybook:latest`)
+- **CI Artifacts**: Download Storybook build artifacts from GitHub Actions
+
 ## 🐳 Docker Support
 
 ABP React includes Docker support for easy deployment:
