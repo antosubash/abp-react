@@ -62,6 +62,8 @@ jobs:
 
     - name: Build
       run: pnpm run build
+    - name: Build Storybook
+      run: pnpm run build-storybook
     - name: Bump version and release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

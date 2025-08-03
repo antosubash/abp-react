@@ -169,7 +169,7 @@ export const RolePermission = ({ roleDto, onDismiss }: RolePermissionProps) => {
         if (err instanceof Error) {
           toast({
             title: 'Failed',
-            description: "Permission update wasn't successfull.",
+            description: "Permission update wasn&apos;t successfull.",
             variant: 'destructive',
           })
         }

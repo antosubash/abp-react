@@ -40,7 +40,7 @@ export const CommentEdit = ({ commentDto, commentId, onDismiss }: CommentEditPro
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Comment update wasn't successful.",
+          description: "Comment update wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

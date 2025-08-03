@@ -9,5 +9,4 @@ export const CarouselBlockConfig: ComponentConfig<CarouselBlockProps> = {
   defaultProps: CarouselBlockDefaults,
   render: CarouselBlock,
   label: 'Carousel',
-  category: 'Media',
 } 

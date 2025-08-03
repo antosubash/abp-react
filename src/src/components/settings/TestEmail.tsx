@@ -41,7 +41,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Test email wasn't successful.",
+          description: "Test email wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

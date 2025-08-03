@@ -54,7 +54,7 @@ export const Emailing = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Email settings wasn't successfull.",
+          description: "Email settings wasn&apos;t successfull.",
           variant: 'destructive',
         })
       }

@@ -41,7 +41,7 @@ export const DeletePage = ({ page, onDismiss }: DeletePageProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page deletion wasn't successful.",
+          description: "Page deletion wasn&apos;t successful.",
           variant: 'destructive',
         })
       }
