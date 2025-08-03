@@ -15,7 +15,7 @@ import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { usePage } from '@/lib/hooks/usePages'
 import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, Clock, RefreshCw, Save } from 'lucide-react'
+import { ArrowLeft, Clock, RefreshCw, Save, Eye } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -384,6 +384,23 @@ export default function EditPage() {
               <RefreshCw className="w-4 h-4 mr-2" />
               {isLoading ? 'Loading...' : 'Refresh'}
             </Button>
+
+            {page && (page as VoloCmsKitAdminPagesPageDto).slug && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  const slug = (page as VoloCmsKitAdminPagesPageDto).slug
+                  if (slug) {
+                    window.open(`/pages/${slug}`, '_blank')
+                  }
+                }}
+                disabled={!page || !(page as VoloCmsKitAdminPagesPageDto).slug}
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                View Page
+              </Button>
+            )}
 
             <Button size="sm" disabled={isSubmitting} onClick={handleSubmit(onSubmit)}>
               <Save className="w-4 h-4 mr-2" />
