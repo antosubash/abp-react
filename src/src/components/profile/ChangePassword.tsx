@@ -38,7 +38,7 @@ export const ChangePassword = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Password update wasn't successful.",
+          description: "Password update wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

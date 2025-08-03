@@ -40,7 +40,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role update wasn't successfull.",
+          description: "Role update wasn&apos;t successfull.",
           variant: 'destructive',
         })
       }

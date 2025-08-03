@@ -1,10 +1,34 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.4.2...v2.5.0)
+
+### 🚀 Enhancements
+
+- Add CarouselBlock support to Puck configuration ([5c50b36](https://github.com/antosubash/abp-react/commit/5c50b36))
+- Storybook ([#215](https://github.com/antosubash/abp-react/pull/215))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.4.1...v2.4.2)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.4.0...v2.4.1)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.3.6...v2.4.0)
+
+## v2.5.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.4.2...v2.5.0)
+
+### 🚀 Enhancements
+
+- Add CarouselBlock support to Puck configuration ([5c50b36](https://github.com/antosubash/abp-react/commit/5c50b36))
+- Storybook ([#215](https://github.com/antosubash/abp-react/pull/215))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.4.2
 

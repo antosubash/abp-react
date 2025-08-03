@@ -54,7 +54,7 @@ export const AddPage = ({ onDismiss }: AddPageProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page creation wasn't successful.",
+          description: "Page creation wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

@@ -13,6 +13,7 @@ import { TextBlockConfig } from './components/TextBlock/config'
 import { VideoBlockConfig } from './components/VideoBlock/config'
 import { WelcomeBlockConfig } from './components/WelcomeBlock/config'
 import { GalleryBlockConfig } from './components/GalleryBlock/config'
+import { CarouselBlockConfig } from './components/CarouselBlock/config'
 
 
 
@@ -31,6 +32,7 @@ import type { TextBlockProps } from './components/TextBlock/TextBlockProps'
 import type { VideoBlockProps } from './components/VideoBlock/VideoBlockProps'
 import type { WelcomeBlockProps } from './components/WelcomeBlock/WelcomeBlockProps'
 import type { GalleryBlockProps } from './components/GalleryBlock/GalleryBlockProps'
+import type { CarouselBlockProps } from './components/CarouselBlock/CarouselBlockProps'
 
 type Props = {
   HeadingBlock: HeadingBlockProps
@@ -47,6 +49,7 @@ type Props = {
   SpacerBlock: SpacerBlockProps
   VideoBlock: VideoBlockProps
   GalleryBlock: GalleryBlockProps
+  CarouselBlock: CarouselBlockProps
 }
 
 export const config: Config<Props> = {
@@ -65,6 +68,7 @@ export const config: Config<Props> = {
     SpacerBlock: SpacerBlockConfig,
     VideoBlock: VideoBlockConfig,
     GalleryBlock: GalleryBlockConfig,
+    CarouselBlock: CarouselBlockConfig,
   },
   categories: {
     content: {
@@ -77,7 +81,7 @@ export const config: Config<Props> = {
     },
     media: {
       title: 'Media',
-      components: ['ImageBlock', 'VideoBlock', 'GalleryBlock'],
+      components: ['ImageBlock', 'VideoBlock', 'GalleryBlock', 'CarouselBlock'],
     },
     interactive: {
       title: 'Interactive',

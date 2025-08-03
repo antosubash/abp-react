@@ -1,15 +1,10 @@
-import { Hero } from '@/components/sections/hero'
-import PublicLayout from '@/layout/public-layout'
+import { redirect } from 'next/navigation'
+
 /**
- * The Home component is an asynchronous function that returns a JSX element.
- * It uses the PublicLayout component to wrap the Hero component.
+ * The Home component redirects to the Storybook introduction welcome page.
  *
- * @returns {React.ReactElement} The rendered JSX element.
+ * @returns {void} Redirects to Storybook
  */
 export default async function Home() {
-  return (
-    <PublicLayout>
-      <Hero />
-    </PublicLayout>
-  )
+  redirect('/?path=/story/introduction-welcome--welcome')
 }
