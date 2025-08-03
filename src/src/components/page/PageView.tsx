@@ -237,7 +237,7 @@ export const PageView = ({ page }: PageViewProps) => {
                 </div>
                 <CardTitle>{page.title}</CardTitle>
                 <CardDescription>
-                  {contentError || renderError || "This page doesn't have any content yet."}
+                  {contentError || renderError || "This page doesn&apos;t have any content yet."}
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">

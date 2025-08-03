@@ -60,7 +60,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User update wasn't successfull.",
+          description: "User update wasn&apos;t successfull.",
           variant: 'destructive',
         })
       }

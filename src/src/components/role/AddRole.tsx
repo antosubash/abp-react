@@ -44,7 +44,7 @@ export const AddRole = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role creation wasn't successful.",
+          description: "Role creation wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

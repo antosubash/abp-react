@@ -141,11 +141,11 @@ export const CarouselBlockFields = {
   responsive: {
     type: 'object' as const,
     label: 'Responsive Settings',
-    fields: {
+    objectFields: {
       mobile: {
         type: 'object' as const,
         label: 'Mobile',
-        fields: {
+        objectFields: {
           height: {
             type: 'text' as const,
             label: 'Height (CSS value)',
@@ -171,7 +171,7 @@ export const CarouselBlockFields = {
       tablet: {
         type: 'object' as const,
         label: 'Tablet',
-        fields: {
+        objectFields: {
           height: {
             type: 'text' as const,
             label: 'Height (CSS value)',
@@ -197,7 +197,7 @@ export const CarouselBlockFields = {
       desktop: {
         type: 'object' as const,
         label: 'Desktop',
-        fields: {
+        objectFields: {
           height: {
             type: 'text' as const,
             label: 'Height (CSS value)',

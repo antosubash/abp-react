@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { action } from 'storybook/actions'
 import { ButtonBlock } from './ButtonBlock'
 
@@ -231,12 +231,11 @@ export const Interactive: Story = {
     text: 'Click me!',
     variant: 'primary',
     size: 'medium',
-    onClick: action('onClick'),
   },
   parameters: {
     docs: {
       description: {
-        story: 'An interactive button example with explicit action function. Try clicking it to see the hover effects and action logging.',
+        story: 'An interactive button example. Try clicking it to see the hover effects.',
       },
     },
   },

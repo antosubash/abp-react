@@ -150,7 +150,7 @@ export const Intro = () => {
             Explore Components
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Start exploring the components in Storybook to see what's available!
+            Start exploring the components in Storybook to see what&apos;s available!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

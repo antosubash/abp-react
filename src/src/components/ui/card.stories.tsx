@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { action } from 'storybook/actions'
 import {
   Card,
@@ -115,7 +115,7 @@ export const BlogPostCard: Story = {
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground mb-4">
-          React is a JavaScript library for building user interfaces. In this guide, we'll cover the fundamentals...
+          React is a JavaScript library for building user interfaces. In this guide, we&apos;ll cover the fundamentals...
         </p>
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">

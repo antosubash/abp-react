@@ -37,7 +37,7 @@ export const AddTenant = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Tenant creation wasn't successful.",
+          description: "Tenant creation wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

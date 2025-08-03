@@ -50,7 +50,7 @@ export const AddUser = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User creation wasn't successful.",
+          description: "User creation wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

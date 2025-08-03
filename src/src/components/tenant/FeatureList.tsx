@@ -113,7 +113,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Features wasn't able to reset tp default.",
+          description: "Features wasn&apos;t able to reset tp default.",
           variant: 'destructive',
         })
       }

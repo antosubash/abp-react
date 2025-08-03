@@ -31,7 +31,7 @@ export const ProfileSettings = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Profile update wasn't successful.",
+          description: "Profile update wasn&apos;t successful.",
           variant: 'destructive',
         })
       }

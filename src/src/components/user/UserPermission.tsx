@@ -175,7 +175,7 @@ export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionPro
         if (err instanceof Error) {
           toast({
             title: 'Failed',
-            description: "Permission update wasn't successful.",
+            description: "Permission update wasn&apos;t successful.",
             variant: 'destructive',
           })
         }
