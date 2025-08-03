@@ -10,14 +10,16 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, CircleUser, Menu, Package2 } from 'lucide-react'
+import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Zap, Settings, User, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import ClientLink from '../ui/client-link'
+import useSession from '@/useSession'
 
 export default function SideNavBarMobile() {
   const pathname = usePathname()
+  const sessionData = useSession()
 
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
@@ -62,73 +64,112 @@ export default function SideNavBarMobile() {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col">
-          <nav className="grid gap-2 text-lg font-medium">
-            <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-              <Package2 className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
-            </Link>
-            {AdminMenus.map((menu) => {
-              const isActive = isMenuActive(menu.link, menu.submenus)
-              const isExpanded = expandedMenus.has(menu.name)
-              const hasSubmenus = menu.submenus && menu.submenus.length > 0
+        <SheetContent side="left" className="flex flex-col w-[300px] sm:w-[400px]">
+          <div className="flex flex-col h-full">
+            {/* Mobile Logo */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="relative">
+                <Package2 className="h-6 w-6 text-primary" />
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              </div>
+              <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                AbpReact
+              </span>
+              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                Admin
+              </span>
+            </div>
+            
+            {/* Mobile Navigation */}
+            <nav className="flex-1 space-y-2">
+              {AdminMenus.map((menu) => {
+                const isActive = isMenuActive(menu.link, menu.submenus)
+                const isExpanded = expandedMenus.has(menu.name)
+                const hasSubmenus = menu.submenus && menu.submenus.length > 0
 
-              return (
-                <div key={menu.name}>
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href={menu.link}
-                      onClick={() => {
-                        if (hasSubmenus && !isExpanded) {
-                          toggleMenu(menu.name)
-                        }
-                      }}
-                      className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground flex-1 ${
-                        isActive ? 'text-foreground bg-accent' : ''
-                      }`}
-                    >
-                      <menu.icon />
-                      {menu.name}
-                    </Link>
-                    {hasSubmenus && (
-                      <button
-                        onClick={() => toggleMenu(menu.name)}
-                        className="p-1 hover:bg-accent rounded-sm transition-colors"
+                return (
+                  <div key={menu.name}>
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={menu.link}
+                        onClick={() => {
+                          if (hasSubmenus && !isExpanded) {
+                            toggleMenu(menu.name)
+                          }
+                        }}
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 flex-1 group ${
+                          isActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                        }`}
                       >
-                        {isExpanded ? (
-                          <ChevronDown className="h-4 w-4" />
-                        ) : (
-                          <ChevronRight className="h-4 w-4" />
+                        {menu.icon && (
+                          <menu.icon className={`h-4 w-4 transition-colors ${
+                            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+                          }`} />
                         )}
-                      </button>
+                        <span className="font-medium">{menu.name}</span>
+                        {isActive && (
+                          <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
+                        )}
+                      </Link>
+                      {hasSubmenus && (
+                        <button
+                          onClick={() => toggleMenu(menu.name)}
+                          className="p-1 hover:bg-accent rounded-sm transition-colors"
+                        >
+                          {isExpanded ? (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                          ) : (
+                            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                          )}
+                        </button>
+                      )}
+                    </div>
+
+                    {hasSubmenus && isExpanded && (
+                      <div className="ml-6 mt-1 space-y-1">
+                        {menu.submenus!.map((submenu, subIndex) => {
+                          const isSubmenuActive = pathname === submenu.link
+                          return (
+                            <Link
+                              key={subIndex}
+                              href={submenu.link}
+                              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
+                                isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                              }`}
+                            >
+                              {submenu.icon && (
+                                <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
+                                  isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+                                }`} />
+                              )}
+                              <span className="font-medium">{submenu.name}</span>
+                              {isSubmenuActive && (
+                                <div className="ml-auto w-1 h-1 bg-primary rounded-full"></div>
+                              )}
+                            </Link>
+                          )
+                        })}
+                      </div>
                     )}
                   </div>
-
-                  {hasSubmenus && isExpanded && (
-                    <div className="ml-4 mt-1 space-y-1">
-                      {menu.submenus!.map((submenu, subIndex) => {
-                        const isSubmenuActive = pathname === submenu.link
-                        return (
-                          <Link
-                            key={subIndex}
-                            href={submenu.link}
-                            className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground text-sm ${
-                              isSubmenuActive ? 'text-foreground bg-accent' : ''
-                            }`}
-                          >
-                            <submenu.icon />
-                            {submenu.name}
-                          </Link>
-                        )
-                      })}
-                    </div>
-                  )}
+                )
+              })}
+            </nav>
+            
+            {/* Mobile Quick Actions */}
+            <div className="mt-auto pt-4 border-t">
+              <Card className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Zap className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">Quick Actions</p>
+                    <p className="text-xs text-muted-foreground">Access common tasks</p>
+                  </div>
                 </div>
-              )
-            })}
-          </nav>
-          <div className="mt-auto">
-            <Card></Card>
+              </Card>
+            </div>
           </div>
         </SheetContent>
       </Sheet>
@@ -137,24 +178,50 @@ export default function SideNavBarMobile() {
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
+          <Button variant="ghost" size="sm" className="relative h-8 w-8 rounded-full">
+            <CircleUser className="h-4 w-4" />
             <span className="sr-only">Toggle user menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <Link href="/admin">
-            <DropdownMenuItem className="cursor-pointer">Admin</DropdownMenuItem>
+        <DropdownMenuContent className="w-56" align="end" forceMount>
+                     <div className="flex items-center justify-start gap-2 p-2">
+             <div className="flex flex-col space-y-1 leading-none">
+               <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
+               <p className="w-[200px] truncate text-sm text-muted-foreground">
+                 {sessionData.data?.userInfo?.email || 'No email available'}
+               </p>
+             </div>
+           </div>
+          <DropdownMenuSeparator />
+          <Link href="/admin" className="cursor-pointer">
+            <DropdownMenuItem className="flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Dashboard
+            </DropdownMenuItem>
           </Link>
           <Link href="/admin/profile" className="cursor-pointer">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
           </Link>
           <Link href="/admin/settings" className="cursor-pointer">
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Settings
+            </DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />
-          <ClientLink href="/auth/logout" size={'sm'} variant={'link'} className="cursor-pointer">
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+          <ClientLink
+            href="/auth/logout"
+            variant={'ghost'}
+            size={'sm'}
+            className="cursor-pointer w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/20"
+          >
+            <DropdownMenuItem className="flex items-center gap-2 text-red-600">
+              <LogOut className="h-4 w-4" />
+              Logout
+            </DropdownMenuItem>
           </ClientLink>
         </DropdownMenuContent>
       </DropdownMenu>

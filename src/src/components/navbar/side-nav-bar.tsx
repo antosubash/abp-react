@@ -1,7 +1,7 @@
 'use client'
 import { Card } from '@/components/ui/card'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, Package2 } from 'lucide-react'
+import { ChevronDown, ChevronRight, Package2, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -47,9 +47,17 @@ export default function SideBarMenu() {
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" />
-            <span className="">Acme Inc</span>
+          <Link href="/" className="flex items-center gap-2 font-semibold group">
+            <div className="relative">
+              <Package2 className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            </div>
+            <span className="font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              AbpReact
+            </span>
+            <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+              Admin
+            </span>
           </Link>
         </div>
         <div className="flex-1">
@@ -69,12 +77,19 @@ export default function SideBarMenu() {
                           toggleMenu(menu.name)
                         }
                       }}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary flex-1 ${
-                        isActive ? 'text-primary bg-primary/10' : ''
+                      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 flex-1 group ${
+                        isActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
                       }`}
                     >
-                      {menu.icon && <menu.icon />}
-                      {menu.name}
+                      {menu.icon && (
+                        <menu.icon className={`h-4 w-4 transition-colors ${
+                          isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+                        }`} />
+                      )}
+                      <span className="font-medium">{menu.name}</span>
+                      {isActive && (
+                        <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
+                      )}
                     </Link>
                     {hasSubmenus && (
                       <button
@@ -82,9 +97,9 @@ export default function SideBarMenu() {
                         className="p-1 hover:bg-accent rounded-sm transition-colors"
                       >
                         {isExpanded ? (
-                          <ChevronDown className="h-4 w-4" />
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
                         ) : (
-                          <ChevronRight className="h-4 w-4" />
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
                         )}
                       </button>
                     )}
@@ -98,12 +113,19 @@ export default function SideBarMenu() {
                           <Link
                             key={subIndex}
                             href={submenu.link}
-                            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary text-sm ${
-                              isSubmenuActive ? 'text-primary bg-primary/10' : ''
+                            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
+                              isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
                             }`}
                           >
-                            {submenu.icon && <submenu.icon />}
-                            {submenu.name}
+                            {submenu.icon && (
+                              <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
+                                isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+                              }`} />
+                            )}
+                            <span className="font-medium">{submenu.name}</span>
+                            {isSubmenuActive && (
+                              <div className="ml-auto w-1 h-1 bg-primary rounded-full"></div>
+                            )}
                           </Link>
                         )
                       })}
@@ -115,7 +137,17 @@ export default function SideBarMenu() {
           </nav>
         </div>
         <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0"></Card>
+          <Card className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Zap className="h-4 w-4 text-primary" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-foreground">Quick Actions</p>
+                <p className="text-xs text-muted-foreground">Access common tasks</p>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
     </div>
