@@ -2,6 +2,15 @@
 @import 'tw-animate-css';
 @import '@measured/puck/dist/index.css';
 
+/* Custom utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {

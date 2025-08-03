@@ -45,6 +45,7 @@ export const ensureValidPuckData = (data: any) => {
     'GridBlock',
     'SpacerBlock',
     'VideoBlock',
+    'GalleryBlock',
   ]
 
   // Helper function to generate a safe string ID

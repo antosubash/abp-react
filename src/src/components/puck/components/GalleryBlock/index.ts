@@ -1,0 +1,7 @@
+export { GalleryBlock } from './GalleryBlock'
+export { GalleryBlockConfig } from './config'
+export type { GalleryBlockProps } from './GalleryBlockProps'
+export type { GalleryItem as GalleryItemType, GalleryItemProps } from './GalleryItemProps'
+export { GalleryItem } from './GalleryItem'
+export { Lightbox } from './Lightbox'
+export type { LightboxProps } from './LightboxProps' 
