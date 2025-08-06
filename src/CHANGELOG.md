@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.6...v2.5.7)
+
+### 🏡 Chore
+
+- **docs:** Refine documentation structure and content ([4f6d906](https://github.com/antosubash/abp-react/commit/4f6d906))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.5...v2.5.6)
+
+## v2.5.7
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.6...v2.5.7)
+
+### 🏡 Chore
+
+- **docs:** Refine documentation structure and content ([4f6d906](https://github.com/antosubash/abp-react/commit/4f6d906))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
