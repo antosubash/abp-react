@@ -1,4 +1,4 @@
-import { userGetRoles } from '@/client'
+import { userGetRoles, userFindByUsername } from '@/client'
 import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
 
@@ -19,9 +19,39 @@ export const useUserRoles = ({ userId }: UseUserRolesProps) => {
   return useQuery({
     queryKey: [QueryNames.GetUserRoles, userId],
     queryFn: async () => {
+      // Don't make the API call if userId is empty
+      if (!userId) {
+        return { items: [] }
+      }
+
+      // Check if userId looks like a GUID (user ID) or username
+      const isGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)
+      
+      let actualUserId = userId
+
+      // If it's not a GUID, assume it's a username and get the user ID first
+      if (!isGuid) {
+        try {
+          const userResponse = await userFindByUsername({
+            path: {
+              userName: userId,
+            },
+          })
+          
+          if (userResponse.data?.id) {
+            actualUserId = userResponse.data.id
+          } else {
+            throw new Error('User not found')
+          }
+        } catch (error) {
+          console.error('Error finding user by username:', error)
+          throw new Error('User not found')
+        }
+      }
+
       const { data } = await userGetRoles({
         path: {
-          id: userId,
+          id: actualUserId,
         },
       })
 

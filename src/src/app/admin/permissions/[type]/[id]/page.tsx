@@ -13,12 +13,16 @@ import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { useUserRoles } from '@/lib/hooks/useUserRoles'
+import { useUserExists } from '@/lib/hooks/useUserExists'
 import { PermissionProvider, USER_ROLE } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { permissionsUpdate, UpdatePermissionsDto } from '@/client'
 
 const getManagementIcon = (type: string) => {
-  switch (type.toLowerCase()) {
+  // Extract the first part of the group name (before the first dot)
+  const firstPart = type.split('.')[0]?.toLowerCase()
+  
+  switch (firstPart) {
     case 'identity':
       return <Users className="h-4 w-4" />
     case 'tenant':
@@ -27,13 +31,18 @@ const getManagementIcon = (type: string) => {
       return <Settings className="h-4 w-4" />
     case 'feature':
       return <Zap className="h-4 w-4" />
+    case 'cmskit':
+      return <Shield className="h-4 w-4" />
     default:
       return <Shield className="h-4 w-4" />
   }
 }
 
 const getManagementColor = (type: string) => {
-  switch (type.toLowerCase()) {
+  // Extract the first part of the group name (before the first dot)
+  const firstPart = type.split('.')[0]?.toLowerCase()
+  
+  switch (firstPart) {
     case 'identity':
       return 'bg-blue-100 text-blue-800 border-blue-200'
     case 'tenant':
@@ -42,6 +51,8 @@ const getManagementColor = (type: string) => {
       return 'bg-purple-100 text-purple-800 border-purple-200'
     case 'feature':
       return 'bg-orange-100 text-orange-800 border-orange-200'
+    case 'cmskit':
+      return 'bg-indigo-100 text-indigo-800 border-indigo-200'
     default:
       return 'bg-gray-100 text-gray-800 border-gray-200'
   }
@@ -63,18 +74,46 @@ export default function PermissionsPage() {
   const entityType = params.type as 'role' | 'user'
   const entityId = params.id as string
   
-  const userRoles = useUserRoles({ userId: entityType === 'user' ? entityId : '' })
+  // Check if user exists when entity type is user
+  const userExists = useUserExists({ 
+    username: entityType === 'user' ? entityId : '' 
+  })
+  
+  // Only fetch user roles if we have a valid user ID and entity type is user
+  const userRoles = useUserRoles({ 
+    userId: entityType === 'user' && entityId ? entityId : '' 
+  })
   
   const { data, isLoading: permissionsLoading } = usePermissions(
     entityType === 'role' ? PermissionProvider.R : PermissionProvider.U,
-    entityId
+    entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
   )
 
   useEffect(() => {
     if (data?.groups) {
-      setPermissionGroups([...data.groups])
-      if (data.groups.length > 0) {
-        setActiveTab(data.groups[0].displayName || '')
+      // Group permissions by the first two parts when split by dots
+      const groupedPermissions = data.groups.reduce((acc: any[], group) => {
+        group.permissions?.forEach((permission: any) => {
+          const parts = permission.name.split('.')
+          const groupKey = parts.length >= 2 ? `${parts[0]}.${parts[1]}` : parts[0]
+          
+          let existingGroup = acc.find(g => g.displayName === groupKey)
+          if (!existingGroup) {
+            existingGroup = {
+              displayName: groupKey,
+              permissions: []
+            }
+            acc.push(existingGroup)
+          }
+          
+          existingGroup.permissions.push(permission)
+        })
+        return acc
+      }, [])
+      
+      setPermissionGroups(groupedPermissions)
+      if (groupedPermissions.length > 0) {
+        setActiveTab(groupedPermissions[0].displayName || '')
       }
     }
   }, [data])
@@ -139,13 +178,13 @@ export default function PermissionsPage() {
         permissions: payload,
       }
       
-      await permissionsUpdate({
-        query: { 
-          providerKey: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U, 
-          providerName: entityId
-        },
-        body: requestPayload,
-      })
+             await permissionsUpdate({
+         query: { 
+           providerKey: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U, 
+           providerName: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
+         },
+         body: requestPayload,
+       })
       
       toast({
         title: 'Success',
@@ -187,13 +226,70 @@ export default function PermissionsPage() {
     total + (group.permissions?.filter((p: any) => p.isGranted).length || 0), 0
   )
 
-  if (permissionsLoading) {
+  // Show loading state
+  if (permissionsLoading || (entityType === 'user' && userExists.isLoading)) {
     return (
       <div className="container mx-auto p-6">
         <div className="flex items-center justify-center py-12">
           <div className="flex items-center gap-2">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
             <span>Loading permissions...</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error if user doesn't exist
+  if (entityType === 'user' && userExists.data === null && !userExists.isLoading) {
+    return (
+      <div className="container mx-auto p-6">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-4">
+              <XCircle className="h-12 w-12 text-red-500" />
+            </div>
+            <h2 className="text-xl font-semibold mb-2">User Not Found</h2>
+            <p className="text-muted-foreground mb-4">
+              The user &quot;{entityId}&quot; does not exist in the system.
+            </p>
+            <Button onClick={handleBack} variant="outline">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error if permission management API is not available
+  if (entityType === 'user' && userExists.data && !permissionsLoading && !data?.groups) {
+    return (
+      <div className="container mx-auto p-6">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-4">
+              <AlertTriangle className="h-12 w-12 text-orange-500" />
+            </div>
+            <h2 className="text-xl font-semibold mb-2">Permission Management Unavailable</h2>
+            <p className="text-muted-foreground mb-4">
+              The permission management system is currently unavailable. This might be due to:
+            </p>
+            <ul className="text-sm text-muted-foreground mb-6 text-left max-w-md mx-auto space-y-1">
+              <li>• Backend configuration issues</li>
+              <li>• Permission management module not enabled</li>
+              <li>• Insufficient permissions to view user permissions</li>
+            </ul>
+            <div className="flex gap-2 justify-center">
+              <Button onClick={handleBack} variant="outline">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Go Back
+              </Button>
+              <Button onClick={() => window.location.reload()} variant="default">
+                Try Again
+              </Button>
+            </div>
           </div>
         </div>
       </div>

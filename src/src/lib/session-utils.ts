@@ -63,6 +63,15 @@ export async function setTenantWithHost(host: string) {
   const { data } = await tenantGetTenantGuid({
     query: { host: host },
   })
-  session.tenantId = data
+  
+  console.log('Tenant data received:', {
+    data,
+    type: typeof data,
+    isString: typeof data === 'string',
+    isObject: typeof data === 'object'
+  })
+  
+  // Ensure we store a string, not an object
+  session.tenantId = typeof data === 'string' ? data : String(data)
   await session.save()
 }
