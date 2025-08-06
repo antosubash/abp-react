@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.7...v2.5.8)
+
+### 💅 Refactors
+
+- Remove Quick Actions from admin pages and loading component ([62a590e](https://github.com/antosubash/abp-react/commit/62a590e))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.6...v2.5.7)
+
+## v2.5.8
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.7...v2.5.8)
+
+### 💅 Refactors
+
+- Remove Quick Actions from admin pages and loading component ([62a590e](https://github.com/antosubash/abp-react/commit/62a590e))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
