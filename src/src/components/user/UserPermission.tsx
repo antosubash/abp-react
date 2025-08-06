@@ -1,5 +1,5 @@
+import { useRouter } from 'next/navigation'
 import { IdentityUserUpdateDto } from '@/client'
-import { EnhancedPermissionDialog } from '../permission/EnhancedPermissionDialog'
 
 type UserPermissionProps = {
   userDto: IdentityUserUpdateDto
@@ -8,11 +8,19 @@ type UserPermissionProps = {
 }
 
 export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionProps) => {
+  const router = useRouter()
+  
+  const handleOpenPermissions = () => {
+    router.push(`/admin/permissions/user/${userDto.userName}`)
+    onDismiss()
+  }
+  
   return (
-    <EnhancedPermissionDialog
-      entity={userDto}
-      entityType="user"
-      onDismiss={onDismiss}
-    />
+    <button
+      onClick={handleOpenPermissions}
+      className="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground rounded-md transition-colors"
+    >
+      Manage Permissions
+    </button>
   )
 }
