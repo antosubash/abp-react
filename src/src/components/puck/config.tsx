@@ -1,7 +1,7 @@
 import type { Config } from '@measured/puck'
 import { ButtonBlockConfig } from './components/ButtonBlock/config'
 import { CardBlockConfig } from './components/CardBlock/config'
-import { CodeBlockConfig } from './components/CodeBlock/config'
+
 import { ContainerBlockConfig } from './components/ContainerBlock/config'
 import { DividerBlockConfig } from './components/DividerBlock/config'
 import { FlexBlockConfig } from './components/FlexBlock/config'
@@ -25,7 +25,7 @@ import { CarouselBlockConfig } from './components/CarouselBlock/config'
 // Import prop types from each component
 import type { ButtonBlockProps } from './components/ButtonBlock/ButtonBlockProps'
 import type { CardBlockProps } from './components/CardBlock/CardBlockProps'
-import type { CodeBlockProps } from './components/CodeBlock/CodeBlockProps'
+
 import type { ContainerBlockProps } from './components/ContainerBlock/ContainerBlockProps'
 import type { DividerBlockProps } from './components/DividerBlock/DividerBlockProps'
 import type { FlexBlockProps } from './components/FlexBlock/FlexBlockProps'
@@ -52,7 +52,7 @@ type Props = {
   ImageBlock: ImageBlockProps
   CardBlock: CardBlockProps
   ButtonBlock: ButtonBlockProps
-  CodeBlock: CodeBlockProps
+
   ContainerBlock: ContainerBlockProps
   DividerBlock: DividerBlockProps
   FlexBlock: FlexBlockProps
@@ -76,7 +76,7 @@ export const config: Config<Props> = {
     ImageBlock: ImageBlockConfig,
     CardBlock: CardBlockConfig,
     ButtonBlock: ButtonBlockConfig,
-    CodeBlock: CodeBlockConfig,
+
     ContainerBlock: ContainerBlockConfig,
     DividerBlock: DividerBlockConfig,
     FlexBlock: FlexBlockConfig,
@@ -93,7 +93,7 @@ export const config: Config<Props> = {
   categories: {
     content: {
       title: 'Content',
-      components: ['TextBlock', 'HeadingBlock', 'WelcomeBlock', 'QuoteBlock', 'ListBlock', 'CodeBlock'],
+      components: ['TextBlock', 'HeadingBlock', 'WelcomeBlock', 'QuoteBlock', 'ListBlock'],
     },
     layout: {
       title: 'Layout',
