@@ -1,0 +1,181 @@
+.cta {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.ctaContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ctaDescription {
+  font-size: 1.25rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.ctaFeatures {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.ctaFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ctaFeatureIcon {
+  font-size: 1.25rem;
+}
+
+.ctaImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.codeBlock {
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 500px;
+}
+
+.codeHeader {
+  background: #334155;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.codeDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.codeDot:nth-child(2) {
+  background: #f59e0b;
+}
+
+.codeDot:nth-child(3) {
+  background: #10b981;
+}
+
+.codeTitle {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.codeContent {
+  padding: 1.5rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.codeLine {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+}
+
+.codeLine:last-child {
+  margin-bottom: 0;
+}
+
+.codePrompt {
+  color: #10b981;
+  margin-right: 0.5rem;
+}
+
+.codeComment {
+  color: #64748b;
+  font-style: italic;
+}
+
+@media screen and (max-width: 996px) {
+  .cta {
+    padding: 2rem 0;
+  }
+
+  .ctaContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaDescription {
+    font-size: 1.1rem;
+  }
+
+  .ctaButtons {
+    justify-content: center;
+  }
+
+  .ctaFeatures {
+    justify-content: center;
+  }
+
+  .ctaImage {
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ctaButtons .button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .ctaFeatures {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .codeBlock {
+    max-width: 100%;
+  }
+} 

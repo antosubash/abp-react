@@ -8,7 +8,7 @@ const darkCodeTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'ABP React',
-  tagline: 'Modern React frontend for ABP Framework',
+  tagline: 'Modern React frontend for ABP Framework - Build powerful web applications with Next.js, TypeScript, and Tailwind CSS',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
