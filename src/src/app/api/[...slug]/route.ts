@@ -1,13 +1,6 @@
 import { getSession } from '@/lib/actions'
 import { NextRequest, NextResponse } from 'next/server'
 
-const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL
-
-if (!EXTERNAL_API_URL) {
-  console.error('NEXT_PUBLIC_API_URL environment variable is not set')
-  throw new Error('API URL not configured')
-}
-
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 interface ApiError extends Error {
@@ -31,6 +24,12 @@ const makeApiRequest = async (
   method: RequestMethod,
   includeBody = false
 ): Promise<Response> => {
+  const EXTERNAL_API_URL = process.env.NEXT_PUBLIC_API_URL
+
+  if (!EXTERNAL_API_URL) {
+    console.error('NEXT_PUBLIC_API_URL environment variable is not set')
+    throw new Error('API URL not configured')
+  }
   const startTime = Date.now()
   const requestId = Math.random().toString(36).substring(7)
 
