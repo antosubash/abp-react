@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.1...v2.5.2)
+
+### 💅 Refactors
+
+- Move API URL validation to makeApiRequest function ([d8e2326](https://github.com/antosubash/abp-react/commit/d8e2326))
+
+### ❤️ Contributors
+
+- Anto Subash <antosubash@live.com>
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.0...v2.5.1)
+
+## v2.5.2
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.1...v2.5.2)
+
+### 💅 Refactors
+
+- Move API URL validation to makeApiRequest function ([d8e2326](https://github.com/antosubash/abp-react/commit/d8e2326))
+
+### ❤️ Contributors
+
+- Anto Subash <antosubash@live.com>
 
 ### 🩹 Fixes
 
