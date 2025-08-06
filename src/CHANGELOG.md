@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.4...v2.5.5)
+
+### 🏡 Chore
+
+- Update Node.js version in docs-deploy workflow ([3b21f8e](https://github.com/antosubash/abp-react/commit/3b21f8e))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.3...v2.5.4)
+
+## v2.5.5
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.4...v2.5.5)
+
+### 🏡 Chore
+
+- Update Node.js version in docs-deploy workflow ([3b21f8e](https://github.com/antosubash/abp-react/commit/3b21f8e))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
