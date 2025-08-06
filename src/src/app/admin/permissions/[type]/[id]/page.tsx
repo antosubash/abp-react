@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { usePermissions } from '@/lib/hooks/usePermissions'
 import { useUserRoles } from '@/lib/hooks/useUserRoles'
 import { useUserExists } from '@/lib/hooks/useUserExists'
+import { useTranslation } from '@/lib/hooks/useTranslation'
 import { PermissionProvider, USER_ROLE } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { permissionsUpdate, UpdatePermissionsDto } from '@/client'
@@ -81,13 +82,33 @@ export default function PermissionsPage() {
   
   // Only fetch user roles if we have a valid user ID and entity type is user
   const userRoles = useUserRoles({ 
-    userId: entityType === 'user' && entityId ? entityId : '' 
+    userId: entityType === 'user' && userExists.data?.id ? userExists.data.id : '' 
   })
   
   const { data, isLoading: permissionsLoading } = usePermissions(
     entityType === 'role' ? PermissionProvider.R : PermissionProvider.U,
-    entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
+    entityType === 'user' ? userExists.data?.id : entityId
   )
+
+  // Get translations for permission names
+  const { data: translationData } = useTranslation()
+
+  // Helper function to get translated permission name
+  const getTranslatedPermissionName = (permissionName: string): string => {
+    if (!translationData?.resources) {
+      return permissionName
+    }
+
+    // Try to find translation in different resources
+    for (const resourceName in translationData.resources) {
+      const resource = translationData.resources[resourceName]
+      if (resource?.texts && resource.texts[permissionName]) {
+        return resource.texts[permissionName]
+      }
+    }
+
+    return permissionName
+  }
 
   useEffect(() => {
     if (data?.groups) {
@@ -133,10 +154,13 @@ export default function PermissionsPage() {
 
   const filteredGroups = searchTerm ? permissionGroups.map(group => ({
     ...group,
-    permissions: group.permissions?.filter((permission: any) =>
-      permission.displayName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      permission.name?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    permissions: group.permissions?.filter((permission: any) => {
+      const translatedName = getTranslatedPermissionName(permission.name)
+      return (
+        translatedName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        permission.name?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })
   })).filter(group => group.permissions && group.permissions.length > 0) : permissionGroups
 
   const handlePermissionChange = () => {
@@ -178,19 +202,19 @@ export default function PermissionsPage() {
         permissions: payload,
       }
       
-             await permissionsUpdate({
-         query: { 
-           providerKey: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U, 
-           providerName: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
-         },
-         body: requestPayload,
-       })
-      
-      toast({
-        title: 'Success',
-        description: 'Permissions updated successfully',
-        variant: 'default',
+      const result = await permissionsUpdate({
+        query: { 
+          providerName: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U, 
+          providerKey: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
+        },
+        body: requestPayload,
       })
+      
+       toast({
+         title: 'Success',
+         description: 'Permissions updated successfully',
+         variant: 'default',
+       })
       
       queryClient.invalidateQueries({
         queryKey: [entityType === 'role' ? PermissionProvider.R : PermissionProvider.U],
@@ -198,6 +222,7 @@ export default function PermissionsPage() {
       
       setHasChanges(false)
     } catch (err: unknown) {
+      console.error('Error updating permissions:', err)
       toast({
         title: 'Error',
         description: 'Failed to update permissions. Please try again.',
@@ -470,10 +495,12 @@ export default function PermissionsPage() {
                                     <XCircle className="h-4 w-4 text-gray-400" />
                                   )}
                                 </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="font-medium text-sm sm:text-base truncate">{permission.displayName}</div>
-                                  <div className="text-xs sm:text-sm text-muted-foreground truncate">{permission.name}</div>
-                                </div>
+                                                                 <div className="min-w-0 flex-1">
+                                   <div className="font-medium text-sm sm:text-base truncate">
+                                     {getTranslatedPermissionName(permission.name)}
+                                   </div>
+                                   <div className="text-xs sm:text-sm text-muted-foreground truncate">{permission.name}</div>
+                                 </div>
                               </div>
                               <Button
                                 variant={permission.isGranted ? "outline" : "default"}

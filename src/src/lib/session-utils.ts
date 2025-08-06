@@ -72,6 +72,10 @@ export async function setTenantWithHost(host: string) {
   })
   
   // Ensure we store a string, not an object
-  session.tenantId = typeof data === 'string' ? data : String(data)
+  if (data) {
+    session.tenantId = typeof data === 'string' ? data : String(data)
+  } else {
+    session.tenantId = ''
+  }
   await session.save()
 }

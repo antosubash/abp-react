@@ -1,6 +1,7 @@
 import SideBarMenu from '@/components/navbar/side-nav-bar'
 import SideNavBarMobile from '@/components/navbar/side-nav-bar-mobile'
 import { AdminErrorBoundary } from '@/components/ui/AdminErrorBoundary'
+import { Toaster } from '@/components/ui/toaster'
 
 export function AdminLayout({ children }: { children: React.ReactNode }): React.ReactElement {
   return (
@@ -12,6 +13,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }): React.
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</main>
         </div>
       </div>
+      <Toaster />
     </AdminErrorBoundary>
   )
 }

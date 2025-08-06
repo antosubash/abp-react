@@ -28,6 +28,8 @@ const getHeaders = async (): Promise<HeadersInit> => {
     headers.set('Content-Type', 'application/json')
     headers.set('__tenant', session.tenantId ?? '')
 
+    console.log('tenantId', session.tenantId)
+
     return headers
   } catch (error) {
     console.error('Error getting headers:', error)
@@ -54,19 +56,6 @@ const makeApiRequest = async (
     const url = `${EXTERNAL_API_URL}${path}${request.nextUrl.search}`
 
     const headers = await getHeaders()
-
-    console.log(`[${requestId}] Making API request:`, {
-      method,
-      url,
-      externalApiUrl: EXTERNAL_API_URL,
-      path,
-      search: request.nextUrl.search,
-      headers: headers instanceof Headers ? Object.fromEntries(headers.entries()) : headers,
-      sessionInfo: {
-        hasAccessToken: headers instanceof Headers ? !!headers.get('Authorization') : false,
-        tenantId: headers instanceof Headers ? headers.get('__tenant') : 'unknown'
-      }
-    })
 
     const options: RequestInit = {
       method,
@@ -134,9 +123,17 @@ const makeApiRequest = async (
       )
     }
 
-    // Forward the response with original headers
+    // Handle 204 No Content responses
+    if (response.status === 204) {
+      return new NextResponse(null, {
+        status: 204,
+        headers: response.headers,
+      })
+    }
+
+    // Forward the response with original headers for other status codes
     const responseHeaders = new Headers(response.headers)
-    const data = await response.json().catch(() => response)
+    const data = await response.json().catch(() => null)
 
     return NextResponse.json(data, {
       status: response.status,
