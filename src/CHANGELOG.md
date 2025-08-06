@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.2...v2.5.3)
+
+### 🏡 Chore
+
+- Update Docusaurus configuration and dependencies ([61130ef](https://github.com/antosubash/abp-react/commit/61130ef))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.1...v2.5.2)
+
+## v2.5.3
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.2...v2.5.3)
+
+### 🏡 Chore
+
+- Update Docusaurus configuration and dependencies ([61130ef](https://github.com/antosubash/abp-react/commit/61130ef))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
