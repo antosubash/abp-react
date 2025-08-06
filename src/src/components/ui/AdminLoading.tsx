@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Loader2, Settings, User, Building, Globe } from 'lucide-react'
+import { Loader2, User, Building, Globe } from 'lucide-react'
 
 export function AdminLoading() {
   return (
@@ -78,23 +78,6 @@ export function AdminLoading() {
         </Card>
       </div>
 
-      {/* Loading Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Settings className="h-5 w-5" />
-            Quick Actions
-          </CardTitle>
-          <CardDescription>Loading administrative tasks...</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-muted rounded animate-pulse" />
-            ))}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 } 

@@ -1,6 +1,5 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Zap, Settings, User, LogOut } from 'lucide-react'
+import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Settings, User, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -155,21 +154,6 @@ export default function SideNavBarMobile() {
                 )
               })}
             </nav>
-            
-            {/* Mobile Quick Actions */}
-            <div className="mt-auto pt-4 border-t">
-              <Card className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20 mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Zap className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-foreground">Quick Actions</p>
-                    <p className="text-xs text-muted-foreground">Access common tasks</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
           </div>
         </SheetContent>
       </Sheet>
@@ -195,7 +179,7 @@ export default function SideNavBarMobile() {
           <DropdownMenuSeparator />
           <Link href="/admin" className="cursor-pointer">
             <DropdownMenuItem className="flex items-center gap-2">
-              <Zap className="h-4 w-4" />
+              <Package2 className="h-4 w-4" />
               Dashboard
             </DropdownMenuItem>
           </Link>

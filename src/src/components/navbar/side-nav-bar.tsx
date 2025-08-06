@@ -1,7 +1,6 @@
 'use client'
-import { Card } from '@/components/ui/card'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, Package2, Zap } from 'lucide-react'
+import { ChevronDown, ChevronRight, Package2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -135,19 +134,6 @@ export default function SideBarMenu() {
               )
             })}
           </nav>
-        </div>
-        <div className="mt-auto p-4">
-          <Card className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                <Zap className="h-4 w-4 text-primary" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">Quick Actions</p>
-                <p className="text-xs text-muted-foreground">Access common tasks</p>
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
     </div>

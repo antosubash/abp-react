@@ -1,7 +1,6 @@
 import { abpApplicationConfigurationGet, ApplicationConfigurationDto } from '@/client'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -11,13 +10,10 @@ import {
   Globe,
   Mail,
   Phone,
-  Settings,
   Shield,
   User,
-  Users,
   XCircle,
 } from 'lucide-react'
-import Link from 'next/link'
 
 // Force dynamic rendering since this page uses server-side API calls and authentication
 export const dynamic = 'force-dynamic'
@@ -242,60 +238,6 @@ export default async function AdminIndex() {
           </CardContent>
         </Card>
       </div>
-
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Settings className="h-5 w-5" />
-            Quick Actions
-          </CardTitle>
-          <CardDescription>Common administrative tasks</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/admin/users">
-              <Button
-                variant="outline"
-                className="w-full h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Users className="h-6 w-6" />
-                <span>Manage Users</span>
-              </Button>
-            </Link>
-
-            <Link href="/admin/roles">
-              <Button
-                variant="outline"
-                className="w-full h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Shield className="h-6 w-6" />
-                <span>Manage Roles</span>
-              </Button>
-            </Link>
-
-            <Link href="/admin/tenants">
-              <Button
-                variant="outline"
-                className="w-full h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Building className="h-6 w-6" />
-                <span>Manage Tenants</span>
-              </Button>
-            </Link>
-
-            <Link href="/admin/settings">
-              <Button
-                variant="outline"
-                className="w-full h-auto p-4 flex flex-col items-center gap-2"
-              >
-                <Settings className="h-6 w-6" />
-                <span>System Settings</span>
-              </Button>
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* System Configuration Details */}
       <Card>
