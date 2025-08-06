@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { themes } = require('prism-react-renderer');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -43,12 +44,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/antosubash/abp-react/tree/main/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/antosubash/abp-react/tree/main/docs/',
-        },
+
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -80,21 +76,12 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          {
-            to: '/blog',
-            label: 'Blog',
-            position: 'left'
-          },
+
           {
             href: 'https://github.com/antosubash/abp-react',
             label: 'GitHub',
             position: 'right',
-          },
-          {
-            href: 'https://discord.gg/your-server',
-            label: 'Discord',
-            position: 'right',
-          },
+          }
         ],
       },
       footer: {
@@ -125,10 +112,6 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Discord',
-                href: 'https://discord.gg/your-server',
-              },
-              {
                 label: 'GitHub Discussions',
                 href: 'https://github.com/antosubash/abp-react/discussions',
               },
@@ -141,10 +124,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/antosubash/abp-react',
