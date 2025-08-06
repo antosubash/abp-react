@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.5...v2.5.6)
+
+### 🏡 Chore
+
+- **docs:** Updated yarn.lock ([6aceca2](https://github.com/antosubash/abp-react/commit/6aceca2))
+
+### ❤️ Contributors
+
+- Anto Subash <antosubash@live.com>
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.4...v2.5.5)
+
+## v2.5.6
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.5...v2.5.6)
+
+### 🏡 Chore
+
+- **docs:** Updated yarn.lock ([6aceca2](https://github.com/antosubash/abp-react/commit/6aceca2))
+
+### ❤️ Contributors
+
+- Anto Subash <antosubash@live.com>
 
 ### 🏡 Chore
 
