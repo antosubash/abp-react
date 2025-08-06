@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.3...v2.5.4)
+
+### 🏡 Chore
+
+- **docs:** Enhance homepage and feature presentation ([3ebab02](https://github.com/antosubash/abp-react/commit/3ebab02))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.2...v2.5.3)
+
+## v2.5.4
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.3...v2.5.4)
+
+### 🏡 Chore
+
+- **docs:** Enhance homepage and feature presentation ([3ebab02](https://github.com/antosubash/abp-react/commit/3ebab02))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
