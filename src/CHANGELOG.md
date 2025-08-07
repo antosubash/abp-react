@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.9...v2.5.10)
+
+### 🏡 Chore
+
+- Update Storybook dependencies to version 9.1.1 and adjust accessibility testing options in preview.ts ([b763962](https://github.com/antosubash/abp-react/commit/b763962))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.8...v2.5.9)
+
+## v2.5.10
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.9...v2.5.10)
+
+### 🏡 Chore
+
+- Update Storybook dependencies to version 9.1.1 and adjust accessibility testing options in preview.ts ([b763962](https://github.com/antosubash/abp-react/commit/b763962))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
