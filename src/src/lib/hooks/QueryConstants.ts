@@ -76,4 +76,8 @@ export const QueryNames = {
    * Query to get public comments for a specific entity.
    */
   GetPublicComments: 'GetPublicComments',
+  /**
+   * Query to get a user by username.
+   */
+  GetUserByUsername: 'GetUserByUsername',
 }

@@ -27,10 +27,11 @@ export async function GET() {
   try {
     const { data } = await tenantGetTenantGuid({ query: { host: host! } })
     console.log('Fetched tenant GUID:', data)
-    session.tenantId = data ?? 'default'
+    // Ensure tenantId is always a string
+    session.tenantId = data ? String(data) : ''
   } catch (error) {
     console.error('Failed to fetch tenant GUID:', error)
-    session.tenantId = 'default'
+    session.tenantId = ''
   }
 
   await session.save()

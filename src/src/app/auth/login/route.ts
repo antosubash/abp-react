@@ -18,12 +18,14 @@ export async function GET() {
   const openIdClientConfig = await getClientConfig()
   let tenantId = session.tenantId
 
-  if (
-    !tenantId ||
-    tenantId === 'default' ||
-    (typeof tenantId === 'object' && Object.keys(tenantId).length === 0)
-  ) {
+  // Ensure tenantId is always a string and handle edge cases
+  if (!tenantId || 
+      tenantId === 'default' || 
+      (typeof tenantId === 'object' && Object.keys(tenantId).length === 0) ||
+      typeof tenantId !== 'string') {
     tenantId = ''
+  } else {
+    tenantId = String(tenantId)
   }
 
   let parameters: Record<string, string> = {

@@ -16,10 +16,19 @@ export const usePermissions = (
   return useQuery({
     queryKey: [QueryNames.GetPermissions, providerName, providerKey],
     queryFn: async () => {
-      const { data } = await permissionsGet({
-        query: { providerName, providerKey },
-      })
-      return data
+      if (!providerName || !providerKey) {
+        return { groups: [] }
+      }
+      try {
+        const { data } = await permissionsGet({
+          query: { providerName, providerKey },
+        })
+        return data || { groups: [] }
+      } catch (error) {
+        console.error('Error fetching permissions:', error)
+        return { groups: [] }
+      }
     },
+    enabled: !!providerName && !!providerKey,
   })
 }

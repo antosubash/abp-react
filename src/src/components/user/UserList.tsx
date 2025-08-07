@@ -53,12 +53,8 @@ export const UserList = () => {
             userDto: user as IdentityUserUpdateDto,
             dialogType: 'edit',
           }),
-        onPermission: (user) =>
-          setUserActionDialog({
-            userId: user.id!,
-            userDto: user as IdentityUserUpdateDto,
-            dialogType: 'permission',
-          }),
+                 onPermission: (user) =>
+           window.location.href = `/admin/permissions/user/${user.userName}`,
         onDelete: (user) =>
           setUserActionDialog({
             userId: user.id!,
@@ -93,13 +89,7 @@ export const UserList = () => {
               onDismiss={handleActionComplete}
             />
           )}
-          {userActionDialog.dialogType === 'permission' && (
-            <UserPermission
-              userId={userActionDialog.userId}
-              userDto={userActionDialog.userDto}
-              onDismiss={handleActionComplete}
-            />
-          )}
+          {/* Permission navigation is handled by UserPermission component */}
           {userActionDialog.dialogType === 'delete' && (
             <DeleteUser
               user={{

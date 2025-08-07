@@ -54,17 +54,13 @@ export const RoleList = () => {
               return (
                 <PermissionActions
                   actions={[
-                    {
-                      icon: 'permission',
-                      policy: Permissions.ROLES_MANAGE_PERMISSIONS,
-                      callback: () => {
-                        setRoleActionDialog({
-                          roleId: info.row.original.id as string,
-                          roleDto: info.row.original as IdentityRoleUpdateDto,
-                          dialogType: 'permission',
-                        })
-                      },
-                    },
+                                         {
+                       icon: 'permission',
+                       policy: Permissions.ROLES_MANAGE_PERMISSIONS,
+                       callback: () => {
+                         window.location.href = `/admin/permissions/role/${info.row.original.name}`
+                       },
+                     },
                     {
                       icon: 'pencil',
                       policy: Permissions.ROLES_UPDATE,
@@ -157,12 +153,7 @@ export const RoleList = () => {
           }}
         />
       )}
-      {roleActionDialog && roleActionDialog.dialogType === 'permission' && (
-        <RolePermission
-          roleDto={roleActionDialog.roleDto}
-          onDismiss={() => setRoleActionDialog(null)}
-        />
-      )}
+      {/* Permission navigation is handled by RolePermission component */}
 
       <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
       <CustomTable<IdentityRoleDto>

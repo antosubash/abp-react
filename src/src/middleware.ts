@@ -16,6 +16,12 @@ import { sessionOptions } from './sessionOptions'
 export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
   const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
 
+  // Ensure tenantId is always a string
+  if (session.tenantId && typeof session.tenantId !== 'string') {
+    session.tenantId = String(session.tenantId)
+    await session.save()
+  }
+
   // Check if user is trying to access admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
     // Check if user is not logged in
