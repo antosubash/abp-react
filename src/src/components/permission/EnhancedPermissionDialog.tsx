@@ -177,6 +177,18 @@ export const EnhancedPermissionDialog = ({
     })
   }, [])
 
+  const onCloseEvent = useCallback(() => {
+    if (hasChanges) {
+      if (confirm('You have unsaved changes. Are you sure you want to close?')) {
+        setOpen(false)
+        onDismiss()
+      }
+    } else {
+      setOpen(false)
+      onDismiss()
+    }
+  }, [hasChanges, onDismiss])
+
   const onSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -224,19 +236,7 @@ export const EnhancedPermissionDialog = ({
     } finally {
       setIsLoading(false)
     }
-  }, [permissionGroups, entityType, entity, userId, queryClient, toast])
-
-  const onCloseEvent = useCallback(() => {
-    if (hasChanges) {
-      if (confirm('You have unsaved changes. Are you sure you want to close?')) {
-        setOpen(false)
-        onDismiss()
-      }
-    } else {
-      setOpen(false)
-      onDismiss()
-    }
-  }, [hasChanges, onDismiss])
+  }, [permissionGroups, entityType, entity, userId, queryClient, toast, onCloseEvent])
 
   const entityName = entityType === 'role' 
     ? (entity as IdentityRoleUpdateDto).name 

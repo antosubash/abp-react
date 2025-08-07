@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { TableBlock } from './TableBlock'
 
 const meta: Meta<typeof TableBlock> = {

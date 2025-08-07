@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { TestimonialBlockProps } from './TestimonialBlockProps'
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
@@ -44,12 +45,12 @@ export const TestimonialBlock = ({
   const renderAvatar = () => {
     if (!avatar) return null
     return (
-      <img
+      <Image
         src={avatar}
         alt={author}
+        width={48}
+        height={48}
         style={{
-          width: '48px',
-          height: '48px',
           borderRadius: '50%',
           objectFit: 'cover',
           marginBottom: '12px',
@@ -92,7 +93,7 @@ export const TestimonialBlock = ({
       {renderStars()}
       {renderAvatar()}
       <blockquote style={quoteStyles}>
-        "{quote}"
+        &ldquo;{quote}&rdquo;
       </blockquote>
       <div>
         <div style={authorStyles}>{author}</div>

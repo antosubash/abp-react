@@ -98,7 +98,7 @@ export const QuoteBlock = ({
   return (
     <div style={{ padding: '16px' }}>
       <blockquote style={getQuoteStyles()}>
-        "{quote}"
+        &ldquo;{quote}&rdquo;
         {(author || source) && (
           <footer style={attributionStyles}>
             {author && <cite>{author}</cite>}

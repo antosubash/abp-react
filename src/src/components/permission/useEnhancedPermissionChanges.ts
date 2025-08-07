@@ -51,8 +51,8 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
       // Track the change
       const change: PermissionChange = {
         permissionName: selectedData.name!,
-        oldValue,
-        newValue: selectedData.isGranted,
+        oldValue: oldValue ?? false,
+        newValue: selectedData.isGranted ?? false,
         timestamp: Date.now()
       }
       
@@ -74,8 +74,8 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
       // Track the change
       const change: PermissionChange = {
         permissionName: selectedData.name!,
-        oldValue,
-        newValue: selectedData.isGranted,
+        oldValue: oldValue ?? false,
+        newValue: selectedData.isGranted ?? false,
         timestamp: Date.now()
       }
       
@@ -139,7 +139,7 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
       // Track changes for all permissions
       const newChanges: PermissionChange[] = data.map(permission => ({
         permissionName: permission.name!,
-        oldValue: permission.isGranted,
+        oldValue: permission.isGranted ?? false,
         newValue,
         timestamp: Date.now()
       }))
