@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.8...v2.5.9)
+
+### 🩹 Fixes
+
+- More cms and permission updates ([#217](https://github.com/antosubash/abp-react/pull/217))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.7...v2.5.8)
+
+## v2.5.9
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.8...v2.5.9)
+
+### 🩹 Fixes
+
+- More cms and permission updates ([#217](https://github.com/antosubash/abp-react/pull/217))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
