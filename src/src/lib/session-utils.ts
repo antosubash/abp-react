@@ -1,7 +1,5 @@
-import { tenantGetTenantGuid } from '@/client'
 import { clientConfig } from '@/config'
 import * as client from 'openid-client'
-import { getSession } from './actions'
 
 /**
  * Interface representing session data.
@@ -48,34 +46,21 @@ export async function getClientConfig() {
 }
 
 /**
- * Sets the tenant ID in the session based on the provided host.
- * This function updates the session with the tenant ID associated with the given host.
- * If the session already has a tenant ID, it does nothing. Otherwise, it fetches the tenant ID and saves it in the session.
+ * Utility function to validate tenant ID format.
+ * This function checks if a tenant ID is in a valid format.
  *
- * @param {string} host - The host to get the tenant ID for.
- * @returns {Promise<void>}
+ * @param {any} tenantId - The tenant ID to validate.
+ * @returns {boolean} - True if the tenant ID is valid, false otherwise.
  */
-export async function setTenantWithHost(host: string) {
-  const session = await getSession()
-  if (session.tenantId) {
-    return
+export function isValidTenantId(tenantId: any): boolean {
+  if (!tenantId) return false
+  if (typeof tenantId === 'object') return false
+  if (typeof tenantId === 'string') {
+    const trimmed = tenantId.trim()
+    return trimmed !== '' && 
+           trimmed !== 'null' && 
+           trimmed !== 'undefined' && 
+           trimmed !== '[object Object]'
   }
-  const { data } = await tenantGetTenantGuid({
-    query: { host: host },
-  })
-  
-  console.log('Tenant data received:', {
-    data,
-    type: typeof data,
-    isString: typeof data === 'string',
-    isObject: typeof data === 'object'
-  })
-  
-  // Ensure we store a string, not an object
-  if (data) {
-    session.tenantId = typeof data === 'string' ? data : String(data)
-  } else {
-    session.tenantId = ''
-  }
-  await session.save()
+  return true
 }
