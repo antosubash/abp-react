@@ -3,7 +3,6 @@ import { getSession } from '@/lib/actions'
 import { setUpLayoutConfig } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { isGuid } from '@/lib/session-utils'
 
 /**
  * Handles the GET request to set the tenant for the current session.
@@ -28,9 +27,8 @@ export async function GET() {
   try {
     const { data } = await tenantGetTenantGuid({ query: { host: host! } })
     console.log('Fetched tenant GUID:', data)
-    const raw = data ? (typeof data === 'string' ? data : String(data)) : ''
-    const candidate = raw.trim()
-    session.tenantId = candidate && candidate !== 'default' && isGuid(candidate) ? candidate : ''
+    // Ensure tenantId is always a string
+    session.tenantId = data ? String(data) : ''
   } catch (error) {
     console.error('Failed to fetch tenant GUID:', error)
     session.tenantId = ''
