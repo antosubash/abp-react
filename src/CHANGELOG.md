@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.10...v2.5.11)
+
+### 💅 Refactors
+
+- Simplify tenantId handling in authentication routes ([add1d14](https://github.com/antosubash/abp-react/commit/add1d14))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.9...v2.5.10)
+
+## v2.5.11
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.10...v2.5.11)
+
+### 💅 Refactors
+
+- Simplify tenantId handling in authentication routes ([add1d14](https://github.com/antosubash/abp-react/commit/add1d14))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🏡 Chore
 
