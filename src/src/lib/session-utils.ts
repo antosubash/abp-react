@@ -48,6 +48,15 @@ export async function getClientConfig() {
 }
 
 /**
+ * Validates whether a string is a GUID (UUID v1-5).
+ */
+export function isGuid(value: string): boolean {
+  return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/.test(
+    value
+  )
+}
+
+/**
  * Sets the tenant ID in the session based on the provided host.
  * This function updates the session with the tenant ID associated with the given host.
  * If the session already has a tenant ID, it does nothing. Otherwise, it fetches the tenant ID and saves it in the session.
@@ -71,11 +80,9 @@ export async function setTenantWithHost(host: string) {
     isObject: typeof data === 'object'
   })
   
-  // Ensure we store a string, not an object
-  if (data) {
-    session.tenantId = typeof data === 'string' ? data : String(data)
-  } else {
-    session.tenantId = ''
-  }
+  // Ensure we store a GUID or empty string
+  const raw = data ? (typeof data === 'string' ? data : String(data)) : ''
+  const candidate = raw.trim()
+  session.tenantId = candidate && candidate !== 'default' && isGuid(candidate) ? candidate : ''
   await session.save()
 }
