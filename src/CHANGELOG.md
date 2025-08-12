@@ -1,6 +1,36 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.12...v2.5.13)
+
+### 🩹 Fixes
+
+- Improve tenantId validation in middleware and clean up logging ([a98f3ba](https://github.com/antosubash/abp-react/commit/a98f3ba))
+
+### 💅 Refactors
+
+- Enhance tenant ID validation utility ([2799295](https://github.com/antosubash/abp-react/commit/2799295))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.11...v2.5.12)
+
+## v2.5.13
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.12...v2.5.13)
+
+### 🩹 Fixes
+
+- Improve tenantId validation in middleware and clean up logging ([a98f3ba](https://github.com/antosubash/abp-react/commit/a98f3ba))
+
+### 💅 Refactors
+
+- Enhance tenant ID validation utility ([2799295](https://github.com/antosubash/abp-react/commit/2799295))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 💅 Refactors
 
