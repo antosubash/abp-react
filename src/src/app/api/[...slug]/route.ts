@@ -28,8 +28,6 @@ const getHeaders = async (): Promise<HeadersInit> => {
     headers.set('Content-Type', 'application/json')
     headers.set('__tenant', session.tenantId ?? '')
 
-    console.log('tenantId', session.tenantId)
-
     return headers
   } catch (error) {
     console.error('Error getting headers:', error)

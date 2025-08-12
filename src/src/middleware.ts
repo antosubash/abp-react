@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse | u
   }
 
   // Check if tenantId is present in the session (exclude auth routes and public routes)
-  if (!session.tenantId && 
+  if (session.tenantId === undefined || session.tenantId === null && 
       request.nextUrl.pathname !== '/auth/set-tenant' && 
       !request.nextUrl.pathname.startsWith('/auth/') &&
       request.nextUrl.pathname !== '/' &&
