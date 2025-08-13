@@ -14,39 +14,61 @@ import { sessionOptions } from './sessionOptions'
  * @returns {Promise<NextResponse | undefined>} - The response object or undefined.
  */
 export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
-  const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
+  try {
+    const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
 
-  // Ensure tenantId is always a string
-  if (session.tenantId && typeof session.tenantId !== 'string') {
-    session.tenantId = String(session.tenantId)
-    await session.save()
-  }
+    // Ensure tenantId is always a string
+    if (session.tenantId && typeof session.tenantId !== 'string') {
+      session.tenantId = String(session.tenantId)
+      await session.save()
+    }
 
-  // Check if user is trying to access admin routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    // Check if user is not logged in
-    if (!session.isLoggedIn || !session.access_token) {
-      // Redirect to login page
-      let redirectUrl = new URL('/auth/login', request.nextUrl.origin)
+    // Check if user is trying to access admin routes
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+      // Check if user is not logged in
+      if (!session.isLoggedIn || !session.access_token) {
+        // Redirect to login page
+        let redirectUrl = new URL('/auth/login', request.nextUrl.origin)
+        // Validate the redirect URL
+        if (redirectUrl.origin === request.nextUrl.origin) {
+          return NextResponse.redirect(redirectUrl)
+        }
+      }
+    }
+
+    // Check if tenantId is missing and redirect to set-tenant if needed
+    // Exclude auth routes, public routes, and the set-tenant route itself to prevent loops
+    const isAuthRoute = request.nextUrl.pathname.startsWith('/auth/')
+    const isPublicRoute = request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/pages/')
+    const isSetTenantRoute = request.nextUrl.pathname === '/auth/set-tenant'
+    
+    // Only redirect if tenantId is missing AND we're not already on an excluded route
+    if ((session.tenantId === undefined || session.tenantId === null || session.tenantId === '') && 
+        !isAuthRoute && !isPublicRoute && !isSetTenantRoute) {
+      // Redirect to set-tenant page if tenantId is not present
+      let redirectUrl = new URL('/auth/set-tenant', request.nextUrl.origin)
       // Validate the redirect URL
       if (redirectUrl.origin === request.nextUrl.origin) {
         return NextResponse.redirect(redirectUrl)
       }
     }
-  }
-
-  // Check if tenantId is present in the session (exclude auth routes and public routes)
-  if (session.tenantId === undefined || session.tenantId === null && 
-      request.nextUrl.pathname !== '/auth/set-tenant' && 
-      !request.nextUrl.pathname.startsWith('/auth/') &&
-      request.nextUrl.pathname !== '/' &&
-      !request.nextUrl.pathname.startsWith('/pages/')) {
-    // Redirect to set-tenant page if tenantId is not present
-    let redirectUrl = new URL('/auth/set-tenant', request.nextUrl.origin)
-    // Validate the redirect URL
-    if (redirectUrl.origin === request.nextUrl.origin) {
-      // Redirect to set-tenant page if tenantId is not present
-      return NextResponse.redirect(redirectUrl)
+  } catch (error) {
+    // If there's an error getting the session, log it but don't redirect
+    // This prevents middleware errors from causing redirect loops
+    console.error('Middleware error:', error)
+    
+    // For auth routes, allow the request to continue
+    if (request.nextUrl.pathname.startsWith('/auth/')) {
+      return
+    }
+    
+    // For other routes, redirect to set-tenant as a fallback
+    const isPublicRoute = request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/pages/')
+    if (!isPublicRoute) {
+      let redirectUrl = new URL('/auth/set-tenant', request.nextUrl.origin)
+      if (redirectUrl.origin === request.nextUrl.origin) {
+        return NextResponse.redirect(redirectUrl)
+      }
     }
   }
 }

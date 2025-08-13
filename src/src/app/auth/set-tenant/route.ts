@@ -1,6 +1,5 @@
 import { tenantGetTenantGuid } from '@/client'
 import { getSession } from '@/lib/actions'
-import { setUpLayoutConfig } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -16,24 +15,53 @@ import { redirect } from 'next/navigation'
  * @returns {Promise<void>} A promise that resolves when the session is saved and the redirect is initiated.
  */
 export async function GET() {
-  await setUpLayoutConfig()
   const session = await getSession()
   const host = (await headers()).get('host')
 
-  if (session.tenantId) {
-    return
+  // If session already has a valid tenantId, redirect to home to prevent loops
+  if (session.tenantId && session.tenantId !== '' && session.tenantId !== 'null' && session.tenantId !== 'undefined') {
+    console.log('Session already has tenantId:', session.tenantId)
+    redirect('/')
   }
 
   try {
     const { data } = await tenantGetTenantGuid({ query: { host: host! } })
     console.log('Fetched tenant GUID:', data)
-    // Ensure tenantId is always a string
-    session.tenantId = data ? String(data) : ''
+    
+    // Ensure tenantId is always a string and handle edge cases
+    // Check for empty objects, null, undefined, empty strings, and invalid values
+    if (data && 
+        data !== 'null' && 
+        data !== 'undefined' && 
+        data !== '' && 
+        typeof data === 'object' && 
+        Object.keys(data).length > 0) {
+      // Valid data object with properties
+      session.tenantId = String(data)
+    } else if (data && typeof data === 'string' && data.trim() !== '') {
+      // Valid string data
+      session.tenantId = data.trim()
+    } else {
+      // Empty object, null, undefined, or empty string - set as default tenant
+      session.tenantId = 'default'
+      console.log('Empty object or invalid tenant data received, setting default tenant')
+    }
   } catch (error) {
     console.error('Failed to fetch tenant GUID:', error)
-    session.tenantId = ''
+    // Set a default tenant on error to prevent infinite loops
+    session.tenantId = 'default'
+    console.log('Error occurred, setting default tenant')
   }
 
-  await session.save()
+  // Ensure the session is saved before redirecting
+  try {
+    await session.save()
+    console.log('Session saved with tenantId:', session.tenantId)
+  } catch (saveError) {
+    console.error('Failed to save session:', saveError)
+    // Even if save fails, redirect to prevent infinite loops
+  }
+
+  // Redirect to home page
   redirect('/')
 }
