@@ -154,14 +154,18 @@ export const Intro = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="/storybook" 
+              href="https://abp-react-storybook.antosubash.com" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Open Storybook
             </a>
             <a 
-              href="/docs" 
-              className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              href="https://antosubash.github.io/abp-react/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               View Documentation
             </a>

@@ -84,12 +84,25 @@ export default function TopNavBar() {
               </Link>
               
               <Link
+                href="https://abp-react-storybook.antosubash.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-md hover:bg-accent"
+              >
+                <Palette className="h-4 w-4" />
+                Components
+                <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
+              
+              <Link
                 href="https://antosubash.github.io/abp-react/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-1 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-md hover:bg-accent"
               >
                 <BookOpen className="h-4 w-4" />
                 Docs
-                <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <ExternalLink className="h-3 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
               
               <Link
@@ -143,14 +156,18 @@ export default function TopNavBar() {
                       Resources
                     </h3>
                     <Link
-                      href="/storybook"
+                      href="https://abp-react-storybook.antosubash.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-accent rounded-md"
                     >
                       <Palette className="h-4 w-4" />
                       Components
                     </Link>
                     <Link
-                      href="/docs"
+                      href="https://antosubash.github.io/abp-react/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-accent rounded-md"
                     >
                       <BookOpen className="h-4 w-4" />

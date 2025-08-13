@@ -334,13 +334,13 @@ export default async function Home() {
                   Explore Admin Panel
                 </Button>
               </Link>
-              <Link href="/storybook">
+              <Link href="https://abp-react-storybook.antosubash.com" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <Palette className="w-4 h-4 mr-2" />
                   View Storybook
                 </Button>
               </Link>
-              <Link href="/docs">
+              <Link href="https://antosubash.github.io/abp-react/" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <Code className="w-4 h-4 mr-2" />
                   Documentation
