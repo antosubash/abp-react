@@ -37,6 +37,15 @@ ABP React is a comprehensive React UI implementation that serves as a drop-in re
 - Role assignment and management
 - User permissions and feature access
 
+### Content Management System (CMS)
+- **Visual Page Builder**: Drag-and-drop interface powered by Puck
+- **Component Library**: 20+ pre-built content blocks
+- **Real-time Preview**: See changes instantly as you build
+- **Responsive Design**: Built-in mobile-first design tools
+- **Comment System**: User engagement and moderation
+- **Menu Management**: Dynamic navigation with visual builder
+- **Multi-tenant Support**: Tenant-specific content isolation
+
 ### Modern Development Stack
 - **Next.js 14+**: React framework with App Router
 - **TypeScript**: Full type safety and IntelliSense
@@ -44,6 +53,7 @@ ABP React is a comprehensive React UI implementation that serves as a drop-in re
 - **shadcn/ui**: High-quality, accessible UI components
 - **React Hook Form**: Performant form handling
 - **Zustand**: Lightweight state management
+- **Puck**: Visual page builder for content creation
 
 ## Quick Start
 

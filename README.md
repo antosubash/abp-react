@@ -70,10 +70,12 @@ Check out the live demo at [https://abpreact.antosubash.com/](https://abpreact.a
 
 - 📝 **Content Management System (CMS)**
   - Visual page builder with Puck editor
-  - Drag-and-drop interface
-  - Rich text editing
-  - Component library
-  - Page templates and layouts
+  - Drag-and-drop interface with 20+ content blocks
+  - Real-time preview and responsive design
+  - Comment system with moderation tools
+  - Dynamic menu management with visual builder
+  - Multi-tenant content isolation
+  - SEO optimization and performance tools
 
 - ⚙️ **System Features**
   - Multilingual support

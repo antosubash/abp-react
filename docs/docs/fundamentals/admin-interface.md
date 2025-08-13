@@ -288,61 +288,324 @@ Configure tenant-specific features:
 
 ### CMS Dashboard (`/admin/cms`)
 
-The CMS section provides content management capabilities:
+The CMS section provides comprehensive content management capabilities:
 
 #### Available Modules
 
-- **Pages**: Website page management
-- **Comments**: User comment moderation
-- **Menu Items**: Navigation menu administration
+- **Pages**: Visual page builder with drag-and-drop interface
+- **Comments**: User comment moderation and engagement
+- **Menu Items**: Dynamic navigation menu administration
+- **Visual Editor**: Puck-powered page builder
+- **Content Blocks**: Pre-built components for rapid development
 
 ### Page Management (`/admin/cms/pages`)
 
-Manage website pages with:
+Manage website pages with advanced visual editing:
 
 #### Page Features
 
-- **Page Creation**: Create new website pages
-- **Content Editing**: Rich text editing capabilities
-- **URL Management**: SEO-friendly URL configuration
-- **Meta Data**: Page titles, descriptions, keywords
-- **Publishing**: Draft and published states
+- **Visual Page Builder**: Drag-and-drop interface powered by Puck
+- **Component Library**: 20+ pre-built content blocks
+- **Real-time Preview**: See changes instantly as you build
+- **Responsive Design**: Built-in mobile-first design tools
+- **SEO Optimization**: Meta tags, descriptions, and URL management
+- **Publishing Workflow**: Draft, preview, and publish states
+- **Version Control**: Track content changes over time
 
 #### Page Structure
 
 ```typescript
-// Page data structure
+// Enhanced page data structure
 interface Page {
   id: string
   title: string
   slug: string
-  content: string
+  content: string // Puck JSON data for visual editor
   metaDescription?: string
   isPublished: boolean
   creationTime: Date
   lastModificationTime?: Date
+  seoTitle?: string
+  seoKeywords?: string[]
+  featuredImage?: string
+  authorId?: string
+  category?: string
+  tags?: string[]
+}
+```
+
+#### Visual Page Builder
+
+The page builder provides an intuitive interface for content creation:
+
+```typescript
+// Example page content structure using Puck
+const pageContent = {
+  content: [
+    {
+      type: 'Hero',
+      props: {
+        title: 'Welcome to Our Site',
+        subtitle: 'Build amazing content visually',
+        backgroundImage: '/images/hero.jpg',
+        showButton: true,
+        buttonText: 'Get Started'
+      }
+    },
+    {
+      type: 'GridBlock',
+      props: {
+        columns: 3,
+        gap: 'medium'
+      },
+      children: [
+        {
+          type: 'CardBlock',
+          props: {
+            title: 'Feature 1',
+            content: 'Description of feature 1'
+          }
+        }
+        // ... more cards
+      ]
+    }
+  ]
 }
 ```
 
 ### Comment Management (`/admin/cms/comments`)
 
-Moderate and manage user comments:
+Advanced comment moderation and engagement system:
 
 #### Comment Features
 
-- **Comment List**: View all comments across the site
-- **Moderation**: Approve, reject, or delete comments
-- **Reply Management**: Handle comment threads
-- **Author Information**: View comment author details
-- **Content Filtering**: Search and filter comments
+- **Real-time Moderation**: Approve, reject, or edit comments instantly
+- **Spam Protection**: AI-powered spam detection and filtering
+- **User Management**: Track comment authors and engagement
+- **Content Filtering**: Filter by status, date, user, or content type
+- **Moderation Queue**: Efficient workflow for comment review
+- **User Engagement**: Respond to comments and encourage discussion
 
 #### Comment Actions
 
-- Approve/reject comments
-- Edit comment content
-- Delete inappropriate comments
-- Reply to user comments
-- Ban/unban users
+```typescript
+// Enhanced comment actions
+const commentActions = [
+  { action: 'approve', label: 'Approve Comment', icon: 'check' },
+  { action: 'reject', label: 'Reject Comment', icon: 'x' },
+  { action: 'edit', label: 'Edit Comment', icon: 'edit' },
+  { action: 'delete', label: 'Delete Comment', icon: 'trash' },
+  { action: 'spam', label: 'Mark as Spam', icon: 'shield' },
+  { action: 'reply', label: 'Reply to Comment', icon: 'message-circle' }
+]
+```
+
+#### Comment Analytics
+
+Track comment engagement and moderation metrics:
+
+```typescript
+// Comment analytics data
+interface CommentAnalytics {
+  totalComments: number
+  approvedComments: number
+  pendingComments: number
+  rejectedComments: number
+  spamComments: number
+  averageResponseTime: number
+  topCommenters: Array<{
+    userId: string
+    username: string
+    commentCount: number
+  }>
+}
+```
+
+### Menu Management (`/admin/cms/menus`)
+
+Advanced navigation menu system with visual management:
+
+#### Menu Features
+
+- **Visual Menu Builder**: Drag-and-drop menu organization
+- **Hierarchical Structure**: Unlimited nested menu levels
+- **Dynamic Ordering**: Real-time menu reordering
+- **Active States**: Smart menu visibility control
+- **Multi-level Navigation**: Complex navigation structures
+- **Mobile Optimization**: Responsive menu behavior
+- **Menu Templates**: Reusable menu configurations
+
+#### Menu Structure
+
+```typescript
+// Enhanced menu item structure
+interface MenuItem {
+  id: string
+  name: string
+  link: string
+  icon?: string
+  order: number
+  parentId?: string
+  isActive: boolean
+  target?: '_blank' | '_self' | '_parent' | '_top'
+  cssClass?: string
+  description?: string
+  image?: string
+  children?: MenuItem[]
+  permissions?: string[]
+  tenantId?: string
+}
+```
+
+#### Menu Builder Interface
+
+The menu builder provides visual tools for menu creation:
+
+```typescript
+// Menu builder configuration
+const menuBuilderConfig = {
+  dragAndDrop: true,
+  maxDepth: 5,
+  allowExternalLinks: true,
+  autoGenerateSlugs: true,
+  seoOptimization: true,
+  mobileResponsive: true
+}
+```
+
+### Content Block System
+
+The CMS includes a comprehensive component library:
+
+#### Available Block Categories
+
+- **Content Blocks**: Text, headings, quotes, lists
+- **Layout Blocks**: Containers, grids, flexboxes, spacers
+- **Media Blocks**: Images, videos, galleries, carousels
+- **Interactive Blocks**: Buttons, forms, testimonials
+- **Utility Blocks**: Dividers, separators, placeholders
+
+#### Block Configuration
+
+Each content block is fully configurable:
+
+```typescript
+// Example block configuration
+const blockConfig = {
+  fields: {
+    title: { type: 'text', label: 'Title', required: true },
+    content: { type: 'textarea', label: 'Content' },
+    image: { type: 'image', label: 'Image' },
+    style: { type: 'select', options: ['default', 'modern', 'classic'] }
+  },
+  defaultProps: {
+    title: 'Default Title',
+    content: 'Default content',
+    style: 'default'
+  },
+  validation: {
+    title: { minLength: 3, maxLength: 100 },
+    content: { minLength: 10 }
+  }
+}
+```
+
+### CMS Permissions and Security
+
+#### Permission System
+
+The CMS uses ABP Framework's comprehensive permission system:
+
+```typescript
+// CMS-specific permissions
+const cmsPermissions = {
+  // Page management
+  'CmsKit.Pages': 'Manage all pages',
+  'CmsKit.Pages.Create': 'Create new pages',
+  'CmsKit.Pages.Update': 'Edit existing pages',
+  'CmsKit.Pages.Delete': 'Delete pages',
+  'CmsKit.Pages.SetAsHomePage': 'Set page as home page',
+  
+  // Comment management
+  'CmsKit.Comments': 'Manage all comments',
+  'CmsKit.Comments.Delete': 'Delete comments',
+  'CmsKit.Comments.Update': 'Edit comments',
+  'CmsKit.Comments.SettingManagement': 'Manage comment settings',
+  
+  // Menu management
+  'CmsKit.Menus': 'Manage navigation menus',
+  'CmsKit.Menus.Create': 'Create menu items',
+  'CmsKit.Menus.Update': 'Edit menu items',
+  'CmsKit.Menus.Delete': 'Delete menu items',
+  
+  // Blog and content
+  'CmsKit.Blogs': 'Manage blog functionality',
+  'CmsKit.BlogPosts': 'Manage blog posts',
+  'CmsKit.Tags': 'Manage content tags'
+}
+```
+
+#### Role-based Access Control
+
+Create specialized roles for content management:
+
+```typescript
+// Content Editor role
+const contentEditorRole = {
+  name: 'Content Editor',
+  permissions: [
+    'CmsKit.Pages.Create',
+    'CmsKit.Pages.Update',
+    'CmsKit.Comments.Update',
+    'CmsKit.Tags.Create'
+  ]
+}
+
+// Content Moderator role
+const contentModeratorRole = {
+  name: 'Content Moderator',
+  permissions: [
+    'CmsKit.Comments.Update',
+    'CmsKit.Comments.Delete',
+    'CmsKit.Comments.SettingManagement'
+  ]
+}
+```
+
+### Multi-tenant CMS Support
+
+#### Tenant-specific Content
+
+Each tenant can have completely isolated content:
+
+```typescript
+// Tenant CMS configuration
+const tenantCmsConfig = {
+  contentIsolation: true,
+  sharedTemplates: false,
+  customThemes: true,
+  featureFlags: {
+    'CmsKit.Pages': true,
+    'CmsKit.Comments': true,
+    'CmsKit.Menus': true,
+    'CmsKit.Blogs': true
+  }
+}
+```
+
+#### Content Sharing Options
+
+Configure content sharing between tenants:
+
+```typescript
+// Content sharing configuration
+const contentSharing = {
+  globalTemplates: true,
+  sharedComponents: false,
+  contentSyndication: true,
+  crossTenantSearch: false
+}
+```
 
 ## System Settings
 

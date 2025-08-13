@@ -103,8 +103,16 @@ const config = {
                 to: '/docs/components/ui-components',
               },
               {
+                label: 'CMS Components',
+                to: '/docs/components/cms-components',
+              },
+              {
                 label: 'Tutorials',
                 to: '/docs/tutorials/create-a-page',
+              },
+              {
+                label: 'CMS Tutorials',
+                to: '/docs/tutorials/cms-tutorials',
               },
             ],
           },
