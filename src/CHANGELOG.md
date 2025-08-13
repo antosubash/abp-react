@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.14...v2.5.15)
+
+### 📖 Documentation
+
+- Update README and links for Storybook and documentation ([aac309d](https://github.com/antosubash/abp-react/commit/aac309d))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.13...v2.5.14)
+
+## v2.5.15
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.14...v2.5.15)
+
+### 📖 Documentation
+
+- Update README and links for Storybook and documentation ([aac309d](https://github.com/antosubash/abp-react/commit/aac309d))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
