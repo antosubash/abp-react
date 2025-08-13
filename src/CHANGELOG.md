@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.15...v2.5.16)
+
+### 📖 Documentation
+
+- Enhance CMS documentation and features ([3ad83e4](https://github.com/antosubash/abp-react/commit/3ad83e4))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.14...v2.5.15)
+
+## v2.5.16
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.15...v2.5.16)
+
+### 📖 Documentation
+
+- Enhance CMS documentation and features ([3ad83e4](https://github.com/antosubash/abp-react/commit/3ad83e4))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 📖 Documentation
 
