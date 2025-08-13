@@ -1,6 +1,28 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.13...v2.5.14)
+
+### 🩹 Fixes
+
+- Enhance middleware and set-tenant route for tenantId handling ([074478b](https://github.com/antosubash/abp-react/commit/074478b))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.12...v2.5.13)
+
+## v2.5.14
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.13...v2.5.14)
+
+### 🩹 Fixes
+
+- Enhance middleware and set-tenant route for tenantId handling ([074478b](https://github.com/antosubash/abp-react/commit/074478b))
+
+### ❤️ Contributors
+
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ### 🩹 Fixes
 
