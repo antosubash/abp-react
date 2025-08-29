@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Button } from './button'
 
-const Error = () => {
+const ErrorContainer = () => {
   const router = useRouter()
   return (
     <div className="bg-base-200 flex flex-col-reverse items-center justify-center gap-1 px-4 py-24 md:gap-28 md:px-44 md:py-20 lg:flex-row lg:px-24 lg:py-24">
@@ -33,4 +33,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default ErrorContainer

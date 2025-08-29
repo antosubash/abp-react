@@ -5,7 +5,7 @@ import { profileUpdate, type UpdateProfileDto } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useProfile } from '@/lib/hooks/useProfile'
 import { Button } from '../ui/button'
-import Error from '../ui/Error'
+import ErrorContainer from '../ui/Error'
 import { Input } from '../ui/input'
 import Loader from '../ui/Loader'
 import { useToast } from '../ui/use-toast'
@@ -28,7 +28,7 @@ export const ProfileSettings = () => {
       })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetProfile] })
     } catch (err: unknown) {
-      if (err instanceof Error) {
+      if (err instanceof ErrorContainer) {
         toast({
           title: 'Failed',
           description: 'Profile update wasn&apos;t successful.',
@@ -39,7 +39,7 @@ export const ProfileSettings = () => {
   }
 
   if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isError) return <ErrorContainer />
 
   return (
     <section className="mt-10">

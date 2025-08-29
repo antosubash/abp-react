@@ -14,7 +14,7 @@ import { htmlToPuckData, isPuckData, type PuckData } from '@/components/puck/uti
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import Error from '@/components/ui/Error'
+import ErrorContainer from '@/components/ui/Error'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useToast } from '@/components/ui/use-toast'
@@ -280,7 +280,7 @@ export default function EditPage() {
             variant: 'destructive',
           })
         }
-      } else if (err instanceof Error) {
+      } else if (err instanceof ErrorContainer) {
         toast({
           title: 'Error',
           description: (err as Error).message,
@@ -311,7 +311,7 @@ export default function EditPage() {
   }
   if (isError) {
     console.error('Page loading error:', error)
-    return <Error />
+    return <ErrorContainer />
   }
 
   if (!page && !isLoading) {

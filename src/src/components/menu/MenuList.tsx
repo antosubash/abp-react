@@ -2,7 +2,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import type { MenuItemDto } from '@/client'
-import Error from '@/components/ui/Error'
+import ErrorContainer from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { Search } from '@/components/ui/Search'
 import { useToast } from '@/components/ui/use-toast'
@@ -40,7 +40,7 @@ export const MenuList = () => {
   }
 
   if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isError) return <ErrorContainer />
 
   return (
     <div className="space-y-4">

@@ -13,7 +13,7 @@ import { useRoles } from '@/lib/hooks/useRoles'
 import { Permissions, USER_ROLE } from '@/lib/utils'
 import { PermissionActions } from '../permission/PermissionActions'
 import { CustomTable } from '../ui/CustomTable'
-import Error from '../ui/Error'
+import ErrorContainer from '../ui/Error'
 import Loader from '../ui/Loader'
 import { Search } from '../ui/Search'
 import { useToast } from '../ui/use-toast'
@@ -131,7 +131,7 @@ export const RoleList = () => {
   })
 
   if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isError) return <ErrorContainer />
 
   return (
     <>

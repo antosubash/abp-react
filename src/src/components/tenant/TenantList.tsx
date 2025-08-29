@@ -9,7 +9,7 @@ import {
 import { useMemo, useState } from 'react'
 import type { TenantDto, TenantUpdateDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
-import Error from '@/components/ui/Error'
+import ErrorContainer from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { Search } from '@/components/ui/Search'
 import { useToast } from '@/components/ui/use-toast'
@@ -139,7 +139,7 @@ export const TenantList = () => {
   })
 
   if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isError) return <ErrorContainer />
 
   return (
     <>
