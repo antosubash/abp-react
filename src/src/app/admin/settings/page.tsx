@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import { Emailing } from '@/components/settings/Emailing'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import Link from 'next/link'
 
 export default function SettingsPage() {
   const emailing = 'emailing'
@@ -19,7 +19,7 @@ export default function SettingsPage() {
         <TabsContent value={emailing}>
           <Emailing />
         </TabsContent>
-        <TabsContent value={featureManagement}></TabsContent>
+        <TabsContent value={featureManagement} />
       </Tabs>
     </div>
   )

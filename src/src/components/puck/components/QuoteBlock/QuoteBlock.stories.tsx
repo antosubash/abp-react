@@ -80,10 +80,11 @@ export const WithSource: Story = {
 
 export const LongQuote: Story = {
   args: {
-    quote: 'Success is not final, failure is not fatal: it is the courage to continue that counts. The way to get started is to quit talking and begin doing.',
+    quote:
+      'Success is not final, failure is not fatal: it is the courage to continue that counts. The way to get started is to quit talking and begin doing.',
     author: 'Winston Churchill',
     style: 'large',
     alignment: 'center',
     fontSize: 'xl',
   },
-} 
+}

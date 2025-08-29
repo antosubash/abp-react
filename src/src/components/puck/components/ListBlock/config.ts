@@ -7,4 +7,4 @@ export const ListBlockConfig = {
   fields: ListBlockFields,
   defaultProps: ListBlockDefaults,
   render: ListBlock,
-} 
+}

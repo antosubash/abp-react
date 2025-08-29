@@ -1,13 +1,13 @@
 'use client'
-import { CreateCommentInput, commentPublicCreate } from '@/client'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { useToast } from '@/components/ui/use-toast'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useQueryClient } from '@tanstack/react-query'
 import { MessageCircle, Send, X } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { type CreateCommentInput, commentPublicCreate } from '@/client'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { useToast } from '@/components/ui/use-toast'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
 
 export type AddCommentProps = {
   entityType: string
@@ -41,7 +41,7 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
       if (result.error) {
         toast({
           title: 'Failed',
-          description: "Comment creation wasn&apos;t successful.",
+          description: 'Comment creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       } else {
@@ -58,7 +58,7 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
       }
     } catch (err: unknown) {
       console.error('Comment creation error:', err)
-      let errorMessage = "Comment creation wasn&apos;t successful."
+      let errorMessage = 'Comment creation wasn&apos;t successful.'
 
       if (err instanceof Error) {
         if (err.message.includes('network') || err.message.includes('fetch')) {

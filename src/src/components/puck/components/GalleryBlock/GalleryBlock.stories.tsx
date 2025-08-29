@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { GalleryBlock } from './GalleryBlock'
 
@@ -9,7 +8,8 @@ const meta: Meta<typeof GalleryBlock> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A powerful gallery component for displaying a collection of images in various layouts.',
+        component:
+          'A powerful gallery component for displaying a collection of images in various layouts.',
       },
     },
   },
@@ -69,13 +69,43 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const mockImages = [
-  { id: '1', src: 'https://picsum.photos/400/300?random=1', alt: 'Image 1', caption: 'Caption for Image 1' },
-  { id: '2', src: 'https://picsum.photos/400/400?random=2', alt: 'Image 2', caption: 'Caption for Image 2' },
-  { id: '3', src: 'https://picsum.photos/400/250?random=3', alt: 'Image 3', caption: 'Caption for Image 3' },
-  { id: '4', src: 'https://picsum.photos/300/400?random=4', alt: 'Image 4', caption: 'Caption for Image 4' },
-  { id: '5', src: 'https://picsum.photos/400/350?random=5', alt: 'Image 5', caption: 'Caption for Image 5' },
-  { id: '6', src: 'https://picsum.photos/350/400?random=6', alt: 'Image 6', caption: 'Caption for Image 6' },
-];
+  {
+    id: '1',
+    src: 'https://picsum.photos/400/300?random=1',
+    alt: 'Image 1',
+    caption: 'Caption for Image 1',
+  },
+  {
+    id: '2',
+    src: 'https://picsum.photos/400/400?random=2',
+    alt: 'Image 2',
+    caption: 'Caption for Image 2',
+  },
+  {
+    id: '3',
+    src: 'https://picsum.photos/400/250?random=3',
+    alt: 'Image 3',
+    caption: 'Caption for Image 3',
+  },
+  {
+    id: '4',
+    src: 'https://picsum.photos/300/400?random=4',
+    alt: 'Image 4',
+    caption: 'Caption for Image 4',
+  },
+  {
+    id: '5',
+    src: 'https://picsum.photos/400/350?random=5',
+    alt: 'Image 5',
+    caption: 'Caption for Image 5',
+  },
+  {
+    id: '6',
+    src: 'https://picsum.photos/350/400?random=6',
+    alt: 'Image 6',
+    caption: 'Caption for Image 6',
+  },
+]
 
 export const Grid: Story = {
   args: {
@@ -93,29 +123,29 @@ export const Grid: Story = {
 }
 
 export const Masonry: Story = {
-    args: {
-      ...Grid.args,
-      layout: 'masonry',
-    },
-  }
-  
-  export const Carousel: Story = {
-    args: {
-      ...Grid.args,
-      layout: 'carousel',
-    },
-  }
-  
-  export const Slideshow: Story = {
-    args: {
-      ...Grid.args,
-      layout: 'slideshow',
-    },
-  }
-  
-  export const List: Story = {
-    args: {
-      ...Grid.args,
-      layout: 'list',
-    },
-  }
+  args: {
+    ...Grid.args,
+    layout: 'masonry',
+  },
+}
+
+export const Carousel: Story = {
+  args: {
+    ...Grid.args,
+    layout: 'carousel',
+  },
+}
+
+export const Slideshow: Story = {
+  args: {
+    ...Grid.args,
+    layout: 'slideshow',
+  },
+}
+
+export const List: Story = {
+  args: {
+    ...Grid.args,
+    layout: 'list',
+  },
+}

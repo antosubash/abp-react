@@ -15,7 +15,7 @@ ABP React follows a clean, scalable architecture that separates concerns and pro
 ```
 my-awesome-app/
 ├── .env.sample                 # Environment variables template
-├── .eslintrc.json             # ESLint configuration
+├── biome.json                 # Biome configuration
 ├── .gitignore                 # Git ignore rules
 ├── components.json            # shadcn/ui configuration
 ├── Dockerfile                 # Docker configuration
@@ -23,7 +23,7 @@ my-awesome-app/
 ├── package.json               # Node.js dependencies and scripts
 ├── pnpm-lock.yaml             # Package lock file
 ├── postcss.config.mjs         # PostCSS configuration
-├── prettier.config.js         # Prettier configuration
+
 ├── README.md                  # Project documentation
 ├── tsconfig.json              # TypeScript configuration
 ├── public/                    # Static assets

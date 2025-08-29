@@ -1,5 +1,5 @@
-import { userGetList } from '@/client'
 import { useQuery } from '@tanstack/react-query'
+import { userGetList } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 /**

@@ -1,10 +1,10 @@
 'use client'
+import { Plus } from 'lucide-react'
+import Link from 'next/link'
 import { PageList } from '@/components/page/PageList'
 import { Button } from '@/components/ui/button'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
-import { Plus } from 'lucide-react'
-import Link from 'next/link'
 
 export default function CmsPagesPage() {
   const { can } = useGrantedPolicies()

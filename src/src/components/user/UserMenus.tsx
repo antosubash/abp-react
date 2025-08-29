@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import useSession from '@/useSession'
 import { UserDropDown } from './UserDropDown'
-export interface UserMenusProps {}
+export type UserMenusProps = {}
 
 export const UserMenus = ({}: UserMenusProps) => {
   var { data: session } = useSession()

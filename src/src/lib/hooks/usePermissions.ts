@@ -1,5 +1,5 @@
-import { GetPermissionListResultDto, permissionsGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type GetPermissionListResultDto, permissionsGet } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 /**

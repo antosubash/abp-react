@@ -11,4 +11,4 @@ export interface QuoteBlockProps {
   borderColor?: string
   padding?: string
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full'
-} 
+}

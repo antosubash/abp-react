@@ -9,4 +9,4 @@ export const ContainerBlockDefaults = {
   alignment: 'left' as const,
   shadow: 'none' as const,
   items: undefined,
-} 
+}

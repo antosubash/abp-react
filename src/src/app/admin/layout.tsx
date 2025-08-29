@@ -1,6 +1,6 @@
+import type React from 'react'
 import AdminLayout from '@/layout/admin-layout'
 import { setUpLayoutConfig } from '@/lib/auth'
-import React from 'react'
 
 // Force dynamic rendering for admin pages since they use cookies and server-side features
 export const dynamic = 'force-dynamic'

@@ -1,4 +1,4 @@
-import { memo, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, type SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from './input'
 import { useDebounce } from './useDebounce'
 
@@ -18,12 +18,12 @@ const SearchInput = ({ onUpdate, value }: SearchProps) => {
       onUpdate('')
     }
     setSearchTerm(value)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   }, [])
 
   useEffect(() => {
     if (searchStr) onUpdate(searchStr)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   }, [searchStr])
 
   useEffect(() => {

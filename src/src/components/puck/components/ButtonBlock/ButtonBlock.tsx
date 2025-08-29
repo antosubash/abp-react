@@ -1,7 +1,6 @@
 'use client'
 
-import { ButtonBlockProps } from './ButtonBlockProps'
-
+import type { ButtonBlockProps } from './ButtonBlockProps'
 
 export const ButtonBlock = ({
   text = 'Click me',
@@ -15,9 +14,12 @@ export const ButtonBlock = ({
   padding = '16px',
 }: ButtonBlockProps) => {
   // Ensure text is always a string
-  const safeText = typeof text === 'string' ? text : 
-                   typeof text === 'object' && text !== null ? JSON.stringify(text) :
-                   'Click me'
+  const safeText =
+    typeof text === 'string'
+      ? text
+      : typeof text === 'object' && text !== null
+        ? JSON.stringify(text)
+        : 'Click me'
   const variantStyles = {
     primary: {
       backgroundColor: '#3b82f6',
@@ -117,4 +119,4 @@ export const ButtonBlock = ({
       <ButtonContent />
     </div>
   )
-} 
+}

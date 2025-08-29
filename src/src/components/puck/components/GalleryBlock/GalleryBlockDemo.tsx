@@ -1,7 +1,7 @@
 'use client'
 
 import { GalleryBlock } from './GalleryBlock'
-import { GalleryBlockProps } from './GalleryBlockProps'
+import type { GalleryBlockProps } from './GalleryBlockProps'
 
 const demoImages = [
   {
@@ -141,4 +141,4 @@ export const GalleryBlockDemo = () => {
       </div>
     </div>
   )
-} 
+}

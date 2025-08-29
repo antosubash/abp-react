@@ -1,5 +1,11 @@
 export interface HeroProps {
-  preset?: 'default' | 'modern-gradient' | 'dark-professional' | 'light-clean' | 'bold-bright' | 'minimal'
+  preset?:
+    | 'default'
+    | 'modern-gradient'
+    | 'dark-professional'
+    | 'light-clean'
+    | 'bold-bright'
+    | 'minimal'
   title: string
   subtitle?: string
   backgroundColor?: string

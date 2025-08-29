@@ -10,4 +10,4 @@ export interface VideoBlockProps {
   muted?: boolean
   poster?: string
   padding?: string
-} 
+}

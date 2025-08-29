@@ -1,3 +1,3 @@
-export { VideoBlock } from './VideoBlock'
 export { VideoBlockConfig } from './config'
-export type { VideoBlockProps } from './VideoBlockProps' 
+export { VideoBlock } from './VideoBlock'
+export type { VideoBlockProps } from './VideoBlockProps'

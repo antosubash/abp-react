@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { FlexBlockProps } from './FlexBlockProps'
+import type { FlexBlockProps } from './FlexBlockProps'
 
 export const FlexBlock = ({
   items,
@@ -29,9 +29,5 @@ export const FlexBlock = ({
   }
 
   const Items = items
-  return (
-    <div style={flexStyle}>
-      {Items && <Items />}
-    </div>
-  )
-} 
+  return <div style={flexStyle}>{Items && <Items />}</div>
+}

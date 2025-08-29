@@ -1,9 +1,5 @@
 export const ListBlockDefaults = {
-  items: [
-    'First item in the list',
-    'Second item in the list',
-    'Third item in the list',
-  ],
+  items: ['First item in the list', 'Second item in the list', 'Third item in the list'],
   type: 'unordered' as const,
   style: 'default' as const,
   alignment: 'left' as const,
@@ -14,4 +10,4 @@ export const ListBlockDefaults = {
   backgroundColor: '#ffffff',
   padding: '16px',
   maxWidth: 'full' as const,
-} 
+}

@@ -1,4 +1,19 @@
 'use client'
+import {
+  BookOpen,
+  CircleUser,
+  ExternalLink,
+  Github,
+  LogOut,
+  Menu,
+  Package2,
+  Palette,
+  Settings,
+  User,
+  Zap,
+} from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import ClientLink from '@/components/ui/client-link'
 import {
@@ -11,21 +26,6 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { PublicMenus } from '@/config'
 import useSession from '@/useSession'
-import { 
-  CircleUser, 
-  Menu, 
-  Package2, 
-  Github, 
-  ExternalLink, 
-  BookOpen,
-  Palette,
-  Settings,
-  LogOut,
-  User,
-  Zap
-} from 'lucide-react'
-import Link from 'next/link'
-import { useState } from 'react'
 
 export default function TopNavBar() {
   const sessionData = useSession()
@@ -39,19 +39,24 @@ export default function TopNavBar() {
   }
 
   return (
-    <header className={`sticky inset-x-0 top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b shadow-sm' 
-        : 'bg-background border-b'
-    }`}>
+    <header
+      className={`sticky inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b shadow-sm'
+          : 'bg-background border-b'
+      }`}
+    >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base group">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-lg font-semibold md:text-base group"
+            >
               <div className="relative">
                 <Package2 className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               </div>
               <span className="font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 AbpReact
@@ -68,10 +73,10 @@ export default function TopNavBar() {
                 className="group relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground rounded-md hover:bg-accent"
               >
                 {menu.Name}
-                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent scale-x-0 transition-transform group-hover:scale-x-100"></span>
+                <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent scale-x-0 transition-transform group-hover:scale-x-100" />
               </Link>
             ))}
-            
+
             {/* Additional Navigation Items */}
             <div className="flex items-center gap-1 ml-4 pl-4 border-l">
               <Link
@@ -82,7 +87,7 @@ export default function TopNavBar() {
                 Components
                 <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
-              
+
               <Link
                 href="https://abp-react-storybook.antosubash.com"
                 target="_blank"
@@ -93,7 +98,7 @@ export default function TopNavBar() {
                 Components
                 <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
-              
+
               <Link
                 href="https://antosubash.github.io/abp-react/"
                 target="_blank"
@@ -104,7 +109,7 @@ export default function TopNavBar() {
                 Docs
                 <ExternalLink className="h-3 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
-              
+
               <Link
                 href="https://github.com/antosubash/abp-react"
                 target="_blank"
@@ -133,7 +138,7 @@ export default function TopNavBar() {
                   <Package2 className="h-6 w-6 text-primary" />
                   <span className="font-bold text-lg">AbpReact</span>
                 </div>
-                
+
                 {/* Mobile Navigation */}
                 <nav className="flex-1 space-y-2">
                   <div className="space-y-1">
@@ -150,7 +155,7 @@ export default function TopNavBar() {
                       </Link>
                     ))}
                   </div>
-                  
+
                   <div className="space-y-1 pt-4 border-t">
                     <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
                       Resources
@@ -184,7 +189,7 @@ export default function TopNavBar() {
                     </Link>
                   </div>
                 </nav>
-                
+
                 {/* Mobile User Actions */}
                 <div className="border-t pt-4">
                   {sessionData.data?.isLoggedIn ? (
@@ -229,14 +234,14 @@ export default function TopNavBar() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
-                                     <div className="flex items-center justify-start gap-2 p-2">
-                     <div className="flex flex-col space-y-1 leading-none">
-                       <p className="font-medium">{sessionData.data.userInfo?.name || 'User'}</p>
-                       <p className="w-[200px] truncate text-sm text-muted-foreground">
-                         {sessionData.data.userInfo?.email || 'No email available'}
-                       </p>
-                     </div>
-                   </div>
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      <p className="font-medium">{sessionData.data.userInfo?.name || 'User'}</p>
+                      <p className="w-[200px] truncate text-sm text-muted-foreground">
+                        {sessionData.data.userInfo?.email || 'No email available'}
+                      </p>
+                    </div>
+                  </div>
                   <DropdownMenuSeparator />
                   <Link href="/admin" className="cursor-pointer">
                     <DropdownMenuItem className="flex items-center gap-2">

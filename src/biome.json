@@ -1,0 +1,182 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noUselessSwitchCase": "warn",
+        "noUselessFragments": "warn",
+        "noThisInStatic": "warn",
+        "useSimpleNumberKeys": "warn",
+        "noUselessCatch": "warn",
+        "noEmptyTypeParameters": "warn",
+        "noUselessThisAlias": "warn",
+        "noUselessConstructor": "warn",
+        "noUselessLoneBlockStatements": "warn",
+        "useFlatMap": "warn",
+        "useRegexLiterals": "warn",
+        "noStaticOnlyClass": "warn",
+        "useOptionalChain": "warn",
+        "noUselessEmptyExport": "warn",
+        "noExtraBooleanCast": "warn",
+        "noUselessTypeConstraint": "warn",
+        "noForEach": "warn",
+        "noBannedTypes": "warn",
+        "noAdjacentSpacesInRegex": "warn",
+        "useLiteralKeys": "warn",
+        "noUselessTernary": "warn",
+        "noUselessRename": "warn",
+        "useArrowFunction": "warn",
+        "noExcessiveNestedTestSuites": "warn",
+        "noUselessLabel": "warn"
+      },
+      "correctness": {
+        "noUnreachable": "warn",
+        "noSetterReturn": "warn",
+        "useYield": "warn",
+        "noSwitchDeclarations": "warn",
+        "noUnusedLabels": "warn",
+        "noUnsafeFinally": "warn",
+        "noChildrenProp": "warn",
+        "useIsNan": "warn",
+        "noEmptyPattern": "warn",
+        "noInvalidConstructorSuper": "warn",
+        "noRenderReturnValue": "warn",
+        "noSelfAssign": "warn",
+        "noConstAssign": "warn",
+        "noStringCaseMismatch": "warn",
+        "noPrecisionLoss": "warn",
+        "noGlobalObjectCalls": "warn",
+        "noUnreachableSuper": "warn",
+        "noConstructorReturn": "warn",
+        "noNonoctalDecimalEscape": "warn",
+        "useJsxKeyInIterable": "warn",
+        "noEmptyCharacterClassInRegex": "warn",
+        "noInnerDeclarations": "warn",
+        "noConstantCondition": "warn",
+        "noVoidElementsWithChildren": "warn",
+        "noUnsafeOptionalChaining": "warn",
+        "useExhaustiveDependencies": "warn",
+        "useValidForDirection": "warn",
+        "noInvalidUseBeforeDeclaration": "warn",
+        "noVoidTypeReturn": "warn"
+      },
+      "nursery": {},
+      "performance": {
+        "noDelete": "warn",
+        "noAccumulatingSpread": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtmlWithChildren": "warn",
+        "noGlobalEval": "warn",
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "style": {
+        "useSelfClosingElements": "warn",
+        "noInferrableTypes": "warn",
+        "useConst": "warn",
+        "useShorthandFunctionType": "warn",
+        "useDefaultParameterLast": "warn",
+        "noUnusedTemplateLiteral": "warn",
+        "useExponentiationOperator": "warn",
+        "useEnumInitializers": "warn",
+        "useAsConstAssertion": "warn",
+        "useNodejsImportProtocol": "warn",
+        "useNumberNamespace": "warn",
+        "noNonNullAssertion": "warn",
+        "useLiteralEnumMembers": "warn",
+        "noUselessElse": "warn",
+        "useSingleVarDeclarator": "warn",
+        "noParameterAssign": "warn",
+        "useExportType": "warn",
+        "useImportType": "warn",
+        "useTemplate": "warn"
+      },
+      "suspicious": {
+        "noAsyncPromiseExecutor": "warn",
+        "noLabelVar": "warn",
+        "noDuplicateObjectKeys": "warn",
+        "noUnsafeDeclarationMerging": "warn",
+        "noDoubleEquals": "warn",
+        "noDuplicateParameters": "warn",
+        "noFocusedTests": "warn",
+        "noFunctionAssign": "warn",
+        "noGlobalIsNan": "warn",
+        "noConfusingVoidType": "warn",
+        "useDefaultSwitchClauseLast": "warn",
+        "useIsArray": "warn",
+        "noImplicitAnyLet": "warn",
+        "noEmptyInterface": "warn",
+        "noExplicitAny": "warn",
+        "noAssignInExpressions": "warn",
+        "useGetterReturn": "warn",
+        "useNamespaceKeyword": "warn",
+        "noControlCharactersInRegex": "warn",
+        "noMisleadingCharacterClass": "warn",
+        "noImportAssign": "warn",
+        "noExtraNonNullAssertion": "warn",
+        "noCommentText": "warn",
+        "noFallthroughSwitchClause": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noArrayIndexKey": "warn",
+        "noRedeclare": "warn",
+        "noConfusingLabels": "warn",
+        "noCompareNegZero": "warn",
+        "noConstEnum": "warn",
+        "noMisrefactoredShorthandAssign": "warn",
+        "noCatchAssign": "warn",
+        "noSelfCompare": "warn",
+        "noGlobalAssign": "warn",
+        "noPrototypeBuiltins": "warn",
+        "noClassAssign": "warn",
+        "noDuplicateCase": "warn",
+        "noApproximativeNumericConstant": "warn",
+        "noDebugger": "warn",
+        "noGlobalIsFinite": "warn",
+        "noDuplicateTestHooks": "warn",
+        "noMisleadingInstantiator": "warn",
+        "noRedundantUseStrict": "warn",
+        "noThenProperty": "warn",
+        "noDuplicateClassMembers": "warn",
+        "noSuspiciousSemicolonInJsx": "warn",
+        "noUnsafeNegation": "warn",
+        "noSparseArray": "warn",
+        "noDuplicateJsxProps": "warn",
+        "noExportsInTest": "warn"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "es5",
+      "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    }
+  }
+}

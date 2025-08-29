@@ -12,4 +12,4 @@ export interface TableBlockProps {
   rowBackgroundColor?: string
   rowTextColor?: string
   stripedRowColor?: string
-} 
+}

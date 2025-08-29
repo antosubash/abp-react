@@ -49,4 +49,4 @@ export const ContainerBlockFields = {
   items: {
     type: 'slot' as const,
   },
-} 
+}

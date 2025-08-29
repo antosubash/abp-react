@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { ImageBlock } from './ImageBlock'
 
@@ -73,9 +72,9 @@ export const Default: Story = {
 }
 
 export const RoundedAndShadowed: Story = {
-    args: {
-      ...Default.args,
-      rounded: true,
-      shadow: true,
-    },
-  }
+  args: {
+    ...Default.args,
+    rounded: true,
+    shadow: true,
+  },
+}

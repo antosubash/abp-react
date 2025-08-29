@@ -7,4 +7,4 @@ export const FlexBlockConfig = {
   fields: FlexBlockFields,
   defaultProps: FlexBlockDefaults,
   render: FlexBlock,
-} 
+}

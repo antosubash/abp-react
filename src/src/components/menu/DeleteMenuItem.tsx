@@ -1,4 +1,6 @@
 'use client'
+import { Trash2 } from 'lucide-react'
+import { useState } from 'react'
 import { menuItemAdminDelete } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,8 +12,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { Trash2 } from 'lucide-react'
-import { useState } from 'react'
 
 interface DeleteMenuItemProps {
   menuItem: {

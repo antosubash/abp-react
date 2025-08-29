@@ -1,5 +1,5 @@
-import { refreshToken } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { refreshToken } from '@/lib/auth'
 
 /**
  * Handles the GET request to refresh the authentication token.

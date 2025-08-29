@@ -78,7 +78,8 @@ export const NoRating: Story = {
 
 export const LongQuote: Story = {
   args: {
-    quote: 'This platform has revolutionized how we handle our daily operations. The intuitive interface, powerful features, and exceptional performance have made it an indispensable tool for our team. We\'ve seen a significant improvement in productivity and efficiency since implementing this solution.',
+    quote:
+      "This platform has revolutionized how we handle our daily operations. The intuitive interface, powerful features, and exceptional performance have made it an indispensable tool for our team. We've seen a significant improvement in productivity and efficiency since implementing this solution.",
     author: 'David Rodriguez',
     position: 'Operations Manager',
     company: 'Enterprise Solutions',
@@ -87,4 +88,4 @@ export const LongQuote: Story = {
     alignment: 'left',
     style: 'card',
   },
-} 
+}

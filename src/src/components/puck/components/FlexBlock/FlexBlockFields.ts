@@ -64,4 +64,4 @@ export const FlexBlockFields = {
     type: 'text' as const,
     label: 'Width (CSS value)',
   },
-} 
+}

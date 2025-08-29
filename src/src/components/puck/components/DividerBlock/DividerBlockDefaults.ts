@@ -5,4 +5,4 @@ export const DividerBlockDefaults = {
   height: '1px' as const,
   margin: '24px 0' as const,
   alignment: 'center' as const,
-} 
+}

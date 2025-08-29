@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { GridBlockProps } from './GridBlockProps'
+import type { GridBlockProps } from './GridBlockProps'
 
 export const GridBlock = ({
   items,
@@ -23,7 +23,7 @@ export const GridBlock = ({
     stretch: 'justify-stretch',
     'space-around': 'justify-around',
     'space-between': 'justify-between',
-    'space-evenly': 'justify-evenly'
+    'space-evenly': 'justify-evenly',
   }
 
   // Convert align to Tailwind classes
@@ -32,12 +32,12 @@ export const GridBlock = ({
     end: 'items-end',
     center: 'items-center',
     stretch: 'items-stretch',
-    baseline: 'items-baseline'
+    baseline: 'items-baseline',
   }
 
   // Convert gap to Tailwind classes (approximate mapping)
   const getGapClass = (gap: string) => {
-    const gapValue = parseInt(gap)
+    const gapValue = Number.parseInt(gap)
     if (gapValue <= 8) return 'gap-2'
     if (gapValue <= 12) return 'gap-3'
     if (gapValue <= 16) return 'gap-4'
@@ -50,7 +50,7 @@ export const GridBlock = ({
 
   // Convert padding to Tailwind classes (approximate mapping)
   const getPaddingClass = (padding: string) => {
-    const paddingValue = parseInt(padding)
+    const paddingValue = Number.parseInt(padding)
     if (paddingValue <= 8) return 'p-2'
     if (paddingValue <= 12) return 'p-3'
     if (paddingValue <= 16) return 'p-4'
@@ -64,7 +64,7 @@ export const GridBlock = ({
   // Convert minHeight to Tailwind classes (approximate mapping)
   const getMinHeightClass = (minHeight: string) => {
     if (minHeight === 'auto') return 'min-h-0'
-    const heightValue = parseInt(minHeight)
+    const heightValue = Number.parseInt(minHeight)
     if (heightValue <= 100) return 'min-h-24'
     if (heightValue <= 200) return 'min-h-48'
     if (heightValue <= 300) return 'min-h-72'
@@ -76,7 +76,7 @@ export const GridBlock = ({
   const getWidthClass = (width: string) => {
     if (width === '100%') return 'w-full'
     if (width === 'auto') return 'w-auto'
-    const widthValue = parseInt(width)
+    const widthValue = Number.parseInt(width)
     if (widthValue <= 200) return 'w-48'
     if (widthValue <= 300) return 'w-72'
     if (widthValue <= 400) return 'w-96'
@@ -95,12 +95,12 @@ export const GridBlock = ({
     if (columns === 'repeat(4, 1fr)') return 'grid-cols-4'
     if (columns === 'repeat(5, 1fr)') return 'grid-cols-5'
     if (columns === 'repeat(6, 1fr)') return 'grid-cols-6'
-    
+
     // Responsive patterns
     if (columns.includes('auto-fit') || columns.includes('auto-fill')) {
       return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
     }
-    
+
     // Custom grid - fallback to inline style
     return ''
   }
@@ -164,20 +164,18 @@ export const GridBlock = ({
       style={{
         backgroundColor: backgroundColor !== 'transparent' ? backgroundColor : undefined,
         gridTemplateRows: rows !== 'auto' ? rows : undefined,
-        ...customGridStyle
+        ...customGridStyle,
       }}
     >
       {/* Subtle corner accents */}
       <div className="absolute top-0 left-0 w-8 h-8 bg-gradient-to-br from-blue-500/10 to-transparent rounded-br-full" />
       <div className="absolute bottom-0 right-0 w-8 h-8 bg-gradient-to-tl from-purple-500/10 to-transparent rounded-tl-full" />
-      
+
       {/* Grid content */}
-      <div className="relative z-10 w-full h-full">
-        {Items && <Items />}
-      </div>
-      
+      <div className="relative z-10 w-full h-full">{Items && <Items />}</div>
+
       {/* Subtle border glow on hover */}
       <div className="absolute inset-0 rounded-2xl border-2 border-transparent hover:border-blue-300/20 transition-all duration-500 pointer-events-none" />
     </div>
   )
-} 
+}

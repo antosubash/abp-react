@@ -1,6 +1,6 @@
 'use client'
 
-import { QuoteBlockProps } from './QuoteBlockProps'
+import type { QuoteBlockProps } from './QuoteBlockProps'
 
 export const QuoteBlock = ({
   quote,
@@ -109,4 +109,4 @@ export const QuoteBlock = ({
       </blockquote>
     </div>
   )
-} 
+}

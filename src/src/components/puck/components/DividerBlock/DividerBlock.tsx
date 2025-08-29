@@ -1,6 +1,6 @@
 'use client'
 
-import { DividerBlockProps } from './DividerBlockProps'
+import type { DividerBlockProps } from './DividerBlockProps'
 
 export const DividerBlock = ({
   style = 'solid',
@@ -34,4 +34,4 @@ export const DividerBlock = ({
       <hr style={dividerStyle} />
     </div>
   )
-} 
+}

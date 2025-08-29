@@ -1,4 +1,13 @@
-import { FeatureGroupDto, UpdateFeaturesDto, featuresDelete, featuresUpdate } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { v4 } from 'uuid'
+import {
+  type FeatureGroupDto,
+  featuresDelete,
+  featuresUpdate,
+  type UpdateFeaturesDto,
+} from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -10,10 +19,6 @@ import {
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useFeatures } from '@/lib/hooks/useFeatures'
 import { PermissionProvider, Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { v4 } from 'uuid'
 import { Checkbox } from '../ui/checkbox'
 import { useToast } from '../ui/use-toast'
 
@@ -52,7 +57,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] }).then()
       queryClient.invalidateQueries({ queryKey: [PermissionProvider.T] }).then()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   }, [onDismiss, data])
 
   const onCheckedEvent = (value: boolean, name: string) => {
@@ -113,7 +118,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Features wasn&apos;t able to reset tp default.",
+          description: 'Features wasn&apos;t able to reset tp default.',
           variant: 'destructive',
         })
       }

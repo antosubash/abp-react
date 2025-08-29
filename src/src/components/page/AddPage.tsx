@@ -1,5 +1,9 @@
 'use client'
-import { CreatePageInputDto, pageAdminCreate } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { type CreatePageInputDto, pageAdminCreate } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -15,10 +19,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { Plus } from 'lucide-react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 export type AddPageProps = {
   onDismiss?: () => void
@@ -54,7 +54,7 @@ export const AddPage = ({ onDismiss }: AddPageProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page creation wasn&apos;t successful.",
+          description: 'Page creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

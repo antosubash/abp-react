@@ -1,5 +1,5 @@
-import { tenantDelete } from '@/client'
 import { useEffect, useState } from 'react'
+import { tenantDelete } from '@/client'
 import {
   AlertDialog,
   AlertDialogAction,

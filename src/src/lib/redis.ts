@@ -1,4 +1,4 @@
-import Redis, { RedisOptions } from 'ioredis'
+import Redis, { type RedisOptions } from 'ioredis'
 
 /**
  * Represents a Redis session with access and refresh tokens.
@@ -18,7 +18,7 @@ function getRedisConfiguration(): {
   password: string | undefined
 } {
   return {
-    port: process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : undefined,
+    port: process.env.REDIS_PORT ? Number.parseInt(process.env.REDIS_PORT) : undefined,
     host: process.env.REDIS_HOST,
     password: process.env.REDIS_PASSWORD,
   }
@@ -66,6 +66,6 @@ export function createRedisInstance(config = getRedisConfiguration()) {
 
     return redis
   } catch (e) {
-    throw new Error(`[Redis] Could not create a Redis instance`)
+    throw new Error('[Redis] Could not create a Redis instance')
   }
 }

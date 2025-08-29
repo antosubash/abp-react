@@ -69,4 +69,4 @@ export const VideoBlockFields = {
     type: 'text' as const,
     label: 'Padding (CSS value)',
   },
-} 
+}

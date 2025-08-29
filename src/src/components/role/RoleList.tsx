@@ -1,11 +1,16 @@
 'use client'
-import { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  type PaginationState,
+  useReactTable,
+} from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import type { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useRoles } from '@/lib/hooks/useRoles'
 import { Permissions, USER_ROLE } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { CustomTable } from '../ui/CustomTable'
 import Error from '../ui/Error'
@@ -35,7 +40,7 @@ export const RoleList = () => {
       pageIndex,
       pageSize,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     [pageIndex, pageSize, toast]
   )
 
@@ -54,13 +59,13 @@ export const RoleList = () => {
               return (
                 <PermissionActions
                   actions={[
-                                         {
-                       icon: 'permission',
-                       policy: Permissions.ROLES_MANAGE_PERMISSIONS,
-                       callback: () => {
-                         window.location.href = `/admin/permissions/role/${info.row.original.name}`
-                       },
-                     },
+                    {
+                      icon: 'permission',
+                      policy: Permissions.ROLES_MANAGE_PERMISSIONS,
+                      callback: () => {
+                        window.location.href = `/admin/permissions/role/${info.row.original.name}`
+                      },
+                    },
                     {
                       icon: 'pencil',
                       policy: Permissions.ROLES_UPDATE,

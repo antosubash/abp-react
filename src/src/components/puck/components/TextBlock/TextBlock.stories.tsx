@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { TextBlock } from './TextBlock'
 
@@ -78,32 +77,32 @@ export const Paragraph: Story = {
 }
 
 export const Heading: Story = {
-    args: {
-      ...Paragraph.args,
-      text: 'This is a Heading',
-      type: 'heading',
-      fontSize: '2xl',
-      fontWeight: 'bold',
-    },
-  }
-  
-  export const Subheading: Story = {
-    args: {
-      ...Paragraph.args,
-      text: 'This is a Subheading',
-      type: 'subheading',
-      fontSize: 'xl',
-      fontWeight: 'semibold',
-    },
-  }
-  
-  export const Quote: Story = {
-    args: {
-      ...Paragraph.args,
-      text: 'This is a quote. It is used to highlight a specific piece of text.',
-      type: 'quote',
-      fontSize: 'lg',
-      fontWeight: 'medium',
-      color: '#1f2937',
-    },
-  }
+  args: {
+    ...Paragraph.args,
+    text: 'This is a Heading',
+    type: 'heading',
+    fontSize: '2xl',
+    fontWeight: 'bold',
+  },
+}
+
+export const Subheading: Story = {
+  args: {
+    ...Paragraph.args,
+    text: 'This is a Subheading',
+    type: 'subheading',
+    fontSize: 'xl',
+    fontWeight: 'semibold',
+  },
+}
+
+export const Quote: Story = {
+  args: {
+    ...Paragraph.args,
+    text: 'This is a quote. It is used to highlight a specific piece of text.',
+    type: 'quote',
+    fontSize: 'lg',
+    fontWeight: 'medium',
+    color: '#1f2937',
+  },
+}

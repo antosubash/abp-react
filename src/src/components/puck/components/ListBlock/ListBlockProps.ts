@@ -10,4 +10,4 @@ export interface ListBlockProps {
   backgroundColor?: string
   padding?: string
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | 'full'
-} 
+}

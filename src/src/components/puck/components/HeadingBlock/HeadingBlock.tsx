@@ -1,6 +1,6 @@
 'use client'
 
-import { HeadingBlockProps } from './HeadingBlockProps'
+import type { HeadingBlockProps } from './HeadingBlockProps'
 
 export const HeadingBlock = ({
   title,
@@ -12,9 +12,12 @@ export const HeadingBlock = ({
   margin = '16px',
 }: HeadingBlockProps) => {
   // Ensure title is always a string
-  const safeTitle = typeof title === 'string' ? title : 
-                   typeof title === 'object' && title !== null ? JSON.stringify(title) :
-                   'Enter your heading here...'
+  const safeTitle =
+    typeof title === 'string'
+      ? title
+      : typeof title === 'object' && title !== null
+        ? JSON.stringify(title)
+        : 'Enter your heading here...'
   const fontSizeMap = {
     sm: '14px',
     base: '16px',

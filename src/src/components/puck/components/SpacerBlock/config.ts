@@ -7,4 +7,4 @@ export const SpacerBlockConfig = {
   fields: SpacerBlockFields,
   defaultProps: SpacerBlockDefaults,
   render: SpacerBlock,
-} 
+}

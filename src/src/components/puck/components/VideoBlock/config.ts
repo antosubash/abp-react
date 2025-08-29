@@ -7,4 +7,4 @@ export const VideoBlockConfig = {
   fields: VideoBlockFields,
   defaultProps: VideoBlockDefaults,
   render: VideoBlock,
-} 
+}

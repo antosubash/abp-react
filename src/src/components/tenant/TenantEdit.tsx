@@ -1,4 +1,8 @@
-import { TenantUpdateDto, tenantAddHost, tenantUpdate } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import classNames from 'clsx'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { type TenantUpdateDto, tenantAddHost, tenantUpdate } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -11,10 +15,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useQueryClient } from '@tanstack/react-query'
-import classNames from 'clsx'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 export type TenantExtraProperties = {
   Host?: string
@@ -66,7 +66,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Tenant update wasn&apos;t successfull.",
+          description: 'Tenant update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }
@@ -83,7 +83,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
     return () => {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   }, [])
 
   return (

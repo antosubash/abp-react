@@ -7,16 +7,16 @@
  * This is a clean public-facing page that renders Puck data without editor interface.
  */
 
-import { VoloCmsKitContentsPageDto } from '@/client'
+import { Render } from '@measured/puck'
+import { AlertTriangle, FileText, RefreshCw } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import type { VoloCmsKitContentsPageDto } from '@/client'
 import { PageComments } from '@/components/comment/PageComments'
 import { htmlToPuckData, isPuckData } from '@/components/puck'
 import { config } from '@/components/puck/config'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Render } from '@measured/puck'
-import { AlertTriangle, FileText, RefreshCw } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
 
 export type PageViewProps = {
   page: VoloCmsKitContentsPageDto
@@ -65,7 +65,6 @@ export const PageView = ({ page }: PageViewProps) => {
   useEffect(() => {
     if (page.script && typeof page.script === 'string' && page.script.trim().length > 0) {
       try {
-
         // TODO: Implement proper script sandboxing for security
         // Script execution is temporarily disabled to prevent security vulnerabilities
         console.warn('Script execution is temporarily disabled for security reasons')
@@ -237,7 +236,7 @@ export const PageView = ({ page }: PageViewProps) => {
                 </div>
                 <CardTitle>{page.title}</CardTitle>
                 <CardDescription>
-                  {contentError || renderError || "This page doesn&apos;t have any content yet."}
+                  {contentError || renderError || 'This page doesn&apos;t have any content yet.'}
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">

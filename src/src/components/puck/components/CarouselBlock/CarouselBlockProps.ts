@@ -46,4 +46,4 @@ export interface CarouselBlockProps {
       showDots?: boolean
     }
   }
-} 
+}

@@ -1,6 +1,10 @@
 'use client'
 
-import { commentPublicCreate, CommentWithDetailsDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { formatDistanceToNow } from 'date-fns'
+import { MessageCircle, Reply, Send } from 'lucide-react'
+import { useState } from 'react'
+import { type CommentWithDetailsDto, commentPublicCreate } from '@/client'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -10,10 +14,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
 import { usePublicComments } from '@/lib/hooks/usePublicComments'
-import { useQueryClient } from '@tanstack/react-query'
-import { formatDistanceToNow } from 'date-fns'
-import { MessageCircle, Reply, Send } from 'lucide-react'
-import { useState } from 'react'
 import { AddComment } from './AddComment'
 
 export type PageCommentsProps = {

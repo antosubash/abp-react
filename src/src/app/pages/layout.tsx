@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import TopNavBar from '@/components/navbar/top-nav-bar'
 import { VersionDisplay } from '@/components/version-display'
-import Link from 'next/link'
 
 export default function PagesLayout({ children }: { children: React.ReactNode }) {
   return (

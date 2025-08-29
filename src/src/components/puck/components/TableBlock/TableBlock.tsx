@@ -1,6 +1,6 @@
 'use client'
 
-import { TableBlockProps } from './TableBlockProps'
+import type { TableBlockProps } from './TableBlockProps'
 
 export const TableBlock = ({
   data,
@@ -37,7 +37,7 @@ export const TableBlock = ({
       return data
         .trim()
         .split('\n')
-        .map(row => row.split(',').map(cell => cell.trim()))
+        .map((row) => row.split(',').map((cell) => cell.trim()))
     }
     return data
   }
@@ -45,7 +45,7 @@ export const TableBlock = ({
   // Parse headers if it's a string (comma separated)
   const parseHeaders = (headers: string[] | string | undefined): string[] => {
     if (typeof headers === 'string') {
-      return headers.split(',').map(header => header.trim())
+      return headers.split(',').map((header) => header.trim())
     }
     return headers || []
   }
@@ -134,4 +134,4 @@ export const TableBlock = ({
       </table>
     </div>
   )
-} 
+}

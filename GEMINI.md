@@ -86,7 +86,7 @@ src/
 | **Type Safety** | TypeScript | 5.x | Static type checking |
 | **Testing** | Vitest | Latest | Unit and integration testing |
 | **Documentation** | Storybook | Latest | Component documentation |
-| **Code Quality** | ESLint + Prettier | Latest | Linting and formatting |
+| **Code Quality** | Biome | Latest | Linting and formatting |
 
 ## 🚀 Getting Started
 
@@ -244,8 +244,7 @@ pnpm build-storybook
 ### Code Style
 
 - **TypeScript**: Strict mode enabled, no `any` types
-- **ESLint**: Follow configured rules
-- **Prettier**: Automatic code formatting
+- **Biome**: Linting, formatting, and code quality rules
 - **Conventional Commits**: Follow commit message standards
 
 ### Linting and Formatting
@@ -267,8 +266,7 @@ pnpm type-check
 ### Pre-commit Hooks
 
 The project uses Husky for pre-commit hooks that automatically:
-- Run ESLint
-- Run Prettier
+- Run Biome linting and formatting
 - Run TypeScript checks
 - Run tests
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { WelcomeBlockProps } from './WelcomeBlockProps'
+import type { WelcomeBlockProps } from './WelcomeBlockProps'
 
 export const WelcomeBlock = ({
   title,

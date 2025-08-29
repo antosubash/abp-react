@@ -16,4 +16,4 @@ export interface GalleryItemProps {
   hoverEffect?: 'zoom' | 'overlay' | 'none'
   borderRadius?: string
   shadow?: boolean
-} 
+}

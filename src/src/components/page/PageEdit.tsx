@@ -1,5 +1,12 @@
 'use client'
-import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import {
+  pageAdminUpdate,
+  type UpdatePageInputDto,
+  type VoloCmsKitAdminPagesPageDto,
+} from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -13,9 +20,6 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 
 export type PageEditProps = {
   pageId: string
@@ -64,7 +68,7 @@ export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page update wasn&apos;t successful.",
+          description: 'Page update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

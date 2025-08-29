@@ -74,4 +74,4 @@ export const TableBlockFields = {
     type: 'text' as const,
     label: 'Striped Row Color (hex or CSS color)',
   },
-} 
+}

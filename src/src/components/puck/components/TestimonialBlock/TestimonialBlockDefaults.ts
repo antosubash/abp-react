@@ -10,4 +10,4 @@ export const TestimonialBlockDefaults = {
   backgroundColor: '#ffffff',
   textColor: '#374151',
   padding: '24px',
-} 
+}

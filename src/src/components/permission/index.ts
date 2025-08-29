@@ -1,19 +1,19 @@
 // Core permission components
-export { Permission } from './PermissionToggle'
-export { TogglePermission } from './TogglePermission'
-export { PermissionActions } from './PermissionActions'
 
 // Enhanced permission dialog
 export { EnhancedPermissionDialog } from './EnhancedPermissionDialog'
-
+export { PermissionActions } from './PermissionActions'
 // Permission change history
 export { PermissionChangeHistory } from './PermissionChangeHistory'
-
-// Hooks
-export { usePermissionsChanges } from './usePermissionChanges'
-export { useEnhancedPermissionChanges } from './useEnhancedPermissionChanges'
-
 // Types
 export type { Management, PermissionTracker } from './PermissionToggle'
+export { Permission } from './PermissionToggle'
+export { TogglePermission } from './TogglePermission'
+export type {
+  PermissionChange,
+  UseEnhancedPermissionChangesProps,
+} from './useEnhancedPermissionChanges'
+export { useEnhancedPermissionChanges } from './useEnhancedPermissionChanges'
 export type { UsePermissionsChangesProps } from './usePermissionChanges'
-export type { UseEnhancedPermissionChangesProps, PermissionChange } from './useEnhancedPermissionChanges' 
+// Hooks
+export { usePermissionsChanges } from './usePermissionChanges'

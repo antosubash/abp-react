@@ -1,19 +1,12 @@
 'use client'
 
+import { ActionBar, createUsePuck, Puck, usePuck } from '@measured/puck'
+import { AlertTriangle, Edit3, Eye, Lock, RefreshCw, Unlock } from 'lucide-react'
+import type React from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Alert } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert } from '@/components/ui/alert'
-
-import { Puck, usePuck, createUsePuck, ActionBar } from '@measured/puck'
-import { 
-  Lock, 
-  Unlock, 
-  Eye, 
-  Edit3,
-  RefreshCw,
-  AlertTriangle
-} from 'lucide-react'
-import React, { useCallback, useState, useEffect, useMemo } from 'react'
 import { config } from './config'
 import { ensureValidPuckData } from './utils'
 
@@ -28,27 +21,27 @@ export interface PuckEditorProps {
 const usePuckHook = createUsePuck<typeof config>()
 
 // Enhanced Action Bar with better visual design
-const ActionBarOverride = ({ 
-  children, 
-  label, 
-  parentAction, 
-  lockedComponents, 
-  setLockedComponents 
-}: { 
-  children: React.ReactNode, 
-  label?: string, 
-  parentAction?: React.ReactNode, 
-  lockedComponents: Record<string, boolean>, 
-  setLockedComponents: React.Dispatch<React.SetStateAction<Record<string, boolean>>> 
+const ActionBarOverride = ({
+  children,
+  label,
+  parentAction,
+  lockedComponents,
+  setLockedComponents,
+}: {
+  children: React.ReactNode
+  label?: string
+  parentAction?: React.ReactNode
+  lockedComponents: Record<string, boolean>
+  setLockedComponents: React.Dispatch<React.SetStateAction<Record<string, boolean>>>
 }) => {
-  const { selectedItem, getPermissions, refreshPermissions } = usePuck();
-  const globalPermissions = getPermissions();
-  
+  const { selectedItem, getPermissions, refreshPermissions } = usePuck()
+  const globalPermissions = getPermissions()
+
   useEffect(() => {
     if (selectedItem?.props?.id) {
-      refreshPermissions({ item: selectedItem });
+      refreshPermissions({ item: selectedItem })
     }
-  }, [lockedComponents, selectedItem, refreshPermissions]);
+  }, [lockedComponents, selectedItem, refreshPermissions])
 
   if (!selectedItem || !selectedItem.props?.id) {
     return (
@@ -59,11 +52,11 @@ const ActionBarOverride = ({
         </ActionBar.Group>
         <ActionBar.Group>{children}</ActionBar.Group>
       </ActionBar>
-    );
+    )
   }
 
-  const itemId = selectedItem.props.id;
-  const isLocked = !!lockedComponents[itemId];
+  const itemId = selectedItem.props.id
+  const isLocked = !!lockedComponents[itemId]
 
   return (
     <ActionBar>
@@ -79,8 +72,8 @@ const ActionBarOverride = ({
               setLockedComponents({
                 ...lockedComponents,
                 [itemId]: !isLocked,
-              });
-              refreshPermissions({ item: selectedItem });
+              })
+              refreshPermissions({ item: selectedItem })
             }}
             label={isLocked ? 'Unlock' : 'Lock'}
           >
@@ -89,8 +82,8 @@ const ActionBarOverride = ({
         )}
       </ActionBar.Group>
     </ActionBar>
-  );
-};
+  )
+}
 
 export const PuckEditor = ({
   data,
@@ -108,7 +101,7 @@ export const PuckEditor = ({
   const processedData = useMemo(() => {
     try {
       let processed = data
-      
+
       // Ensure we have valid data
       if (typeof data === 'string') {
         try {
@@ -117,19 +110,21 @@ export const PuckEditor = ({
           processed = null
         }
       }
-      
+
       // Validate the processed data structure
-      if (!processed || 
-          typeof processed !== 'object' || 
-          !processed.content || 
-          !Array.isArray(processed.content)) {
+      if (
+        !processed ||
+        typeof processed !== 'object' ||
+        !processed.content ||
+        !Array.isArray(processed.content)
+      ) {
         processed = {
           content: [],
           root: { props: { title: 'New Page' } },
           zones: {},
         }
       }
-      
+
       return ensureValidPuckData(processed) as any
     } catch (error) {
       console.error('PuckEditor data processing error:', error)
@@ -191,31 +186,35 @@ export const PuckEditor = ({
     setIsInitialized(false)
   }, [])
 
-  const configOverride = useMemo(() => ({
-    ...config,
-    components: {
-      ...Object.keys(config.components).reduce((acc, componentKey) => {
-        const originalComponent = config.components[componentKey as keyof typeof config.components]
-        return {
-          ...acc,
-          [componentKey]: {
-            ...originalComponent,
-            resolvePermissions: (data: any, { permissions }: any) => {
-              if (data?.props?.id && lockedComponents[data.props.id]) {
-                return {
-                  drag: false,
-                  edit: false,
-                  duplicate: false,
-                  delete: false,
+  const configOverride = useMemo(
+    () => ({
+      ...config,
+      components: {
+        ...Object.keys(config.components).reduce((acc, componentKey) => {
+          const originalComponent =
+            config.components[componentKey as keyof typeof config.components]
+          return {
+            ...acc,
+            [componentKey]: {
+              ...originalComponent,
+              resolvePermissions: (data: any, { permissions }: any) => {
+                if (data?.props?.id && lockedComponents[data.props.id]) {
+                  return {
+                    drag: false,
+                    edit: false,
+                    duplicate: false,
+                    delete: false,
+                  }
                 }
-              }
-              return permissions
+                return permissions
+              },
             },
-          },
-        }
-      }, {}),
-    },
-  }), [lockedComponents])
+          }
+        }, {}),
+      },
+    }),
+    [lockedComponents]
+  )
 
   if (hasError) {
     return (
@@ -280,7 +279,11 @@ export const PuckEditor = ({
         permissions={{ lockable: true, publish: false }} // Disable publish functionality
         overrides={{
           actionBar: (props) => (
-            <ActionBarOverride {...props} lockedComponents={lockedComponents} setLockedComponents={setLockedComponents} />
+            <ActionBarOverride
+              {...props}
+              lockedComponents={lockedComponents}
+              setLockedComponents={setLockedComponents}
+            />
           ),
           header: () => <div />, // Empty header to remove publish button
         }}

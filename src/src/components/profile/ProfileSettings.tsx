@@ -1,13 +1,13 @@
 'use client'
-import { profileUpdate, UpdateProfileDto } from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useProfile } from '@/lib/hooks/useProfile'
 import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import Error from '../ui/Error'
-import Loader from '../ui/Loader'
+import { profileUpdate, type UpdateProfileDto } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useProfile } from '@/lib/hooks/useProfile'
 import { Button } from '../ui/button'
+import Error from '../ui/Error'
 import { Input } from '../ui/input'
+import Loader from '../ui/Loader'
 import { useToast } from '../ui/use-toast'
 
 export const ProfileSettings = () => {
@@ -31,7 +31,7 @@ export const ProfileSettings = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Profile update wasn&apos;t successful.",
+          description: 'Profile update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

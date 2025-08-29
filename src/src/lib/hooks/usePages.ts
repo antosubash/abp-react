@@ -1,10 +1,10 @@
+import { useQuery } from '@tanstack/react-query'
 import {
+  type PagedResultDtoOfVoloCmsKitAdminPagesPageDto,
   pageAdminGet,
   pageAdminGetList,
-  PagedResultDtoOfVoloCmsKitAdminPagesPageDto,
   pagesPublicFindBySlug,
 } from '@/client'
-import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from './QueryConstants'
 
 /**

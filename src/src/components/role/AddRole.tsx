@@ -1,13 +1,13 @@
 'use client'
-import { IdentityRoleCreateDto, roleCreate } from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { Permissions } from '@/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { type IdentityRoleCreateDto, roleCreate } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { Permissions } from '@/lib/utils'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
@@ -44,7 +44,7 @@ export const AddRole = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role creation wasn&apos;t successful.",
+          description: 'Role creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

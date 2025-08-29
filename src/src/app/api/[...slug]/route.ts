@@ -1,5 +1,5 @@
+import { type NextRequest, NextResponse } from 'next/server'
 import { getSession } from '@/lib/actions'
-import { NextRequest, NextResponse } from 'next/server'
 
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
@@ -19,7 +19,7 @@ const getHeaders = async (): Promise<HeadersInit> => {
         isLoggedIn: session.isLoggedIn,
         hasUserInfo: !!session.userInfo,
         hasTenantId: !!session.tenantId,
-        sessionKeys: Object.keys(session)
+        sessionKeys: Object.keys(session),
       })
       throw new Error('No access token available in session')
     }
@@ -31,7 +31,9 @@ const getHeaders = async (): Promise<HeadersInit> => {
     return headers
   } catch (error) {
     console.error('Error getting headers:', error)
-    throw new Error(`Failed to get request headers: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    throw new Error(
+      `Failed to get request headers: ${error instanceof Error ? error.message : 'Unknown error'}`
+    )
   }
 }
 
@@ -94,7 +96,7 @@ const makeApiRequest = async (
         .clone()
         .json()
         .catch(() => null)
-      
+
       // Better error message handling
       let errorMessage = `API request failed with status ${response.status}`
       if (errorData?.error) {
@@ -104,7 +106,7 @@ const makeApiRequest = async (
           errorMessage = errorData.error.message || JSON.stringify(errorData.error)
         }
       }
-      
+
       console.error(`[${requestId}] API request failed:`, {
         status: response.status,
         statusText: response.statusText,
@@ -114,11 +116,8 @@ const makeApiRequest = async (
         method,
         duration: `${Date.now() - startTime}ms`,
       })
-      
-      throw Object.assign(
-        new Error(errorMessage),
-        { status: response.status }
-      )
+
+      throw Object.assign(new Error(errorMessage), { status: response.status })
     }
 
     // Handle 204 No Content responses
@@ -140,12 +139,12 @@ const makeApiRequest = async (
   } catch (error) {
     const apiError = error as ApiError
     const duration = Date.now() - startTime
-    
+
     // Better error handling to prevent [object Object] issues
-    const errorMessage = apiError.message || 
-                        (typeof error === 'string' ? error : 'Unknown error occurred')
+    const errorMessage =
+      apiError.message || (typeof error === 'string' ? error : 'Unknown error occurred')
     const errorStatus = apiError.status || 500
-    
+
     console.error(`[${requestId}] API request error:`, {
       error: errorMessage,
       status: errorStatus,
@@ -154,7 +153,7 @@ const makeApiRequest = async (
       timestamp: new Date().toISOString(),
       originalError: error,
     })
-    
+
     return NextResponse.json({ error: errorMessage }, { status: errorStatus })
   }
 }

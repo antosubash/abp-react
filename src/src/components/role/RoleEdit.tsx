@@ -1,9 +1,9 @@
-import { IdentityRoleUpdateDto, roleUpdate } from '@/client'
-import { USER_ROLE } from '@/lib/utils'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Button } from 'react-day-picker'
 import { useForm } from 'react-hook-form'
+import { type IdentityRoleUpdateDto, roleUpdate } from '@/client'
+import { USER_ROLE } from '@/lib/utils'
 import { Checkbox } from '../ui/checkbox'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Input } from '../ui/input'
@@ -40,7 +40,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role update wasn&apos;t successfull.",
+          description: 'Role update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }

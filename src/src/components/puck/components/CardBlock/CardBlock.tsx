@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { CardBlockProps } from './CardBlockProps'
+import type { CardBlockProps } from './CardBlockProps'
 
 export const CardBlock = ({
   title,
@@ -17,24 +17,36 @@ export const CardBlock = ({
   borderRadius = '8px',
 }: CardBlockProps) => {
   // Ensure text props are always strings
-  const safeTitle = typeof title === 'string' ? title : 
-                   typeof title === 'object' && title !== null ? JSON.stringify(title) :
-                   'Card Title'
-  const safeDescription = typeof description === 'string' ? description : 
-                         typeof description === 'object' && description !== null ? JSON.stringify(description) :
-                         'Card description'
-  const safeContent = typeof content === 'string' ? content : 
-                     typeof content === 'object' && content !== null ? JSON.stringify(content) :
-                     ''
-  const safeButtonText = typeof buttonText === 'string' ? buttonText : 
-                        typeof buttonText === 'object' && buttonText !== null ? JSON.stringify(buttonText) :
-                        ''
+  const safeTitle =
+    typeof title === 'string'
+      ? title
+      : typeof title === 'object' && title !== null
+        ? JSON.stringify(title)
+        : 'Card Title'
+  const safeDescription =
+    typeof description === 'string'
+      ? description
+      : typeof description === 'object' && description !== null
+        ? JSON.stringify(description)
+        : 'Card description'
+  const safeContent =
+    typeof content === 'string'
+      ? content
+      : typeof content === 'object' && content !== null
+        ? JSON.stringify(content)
+        : ''
+  const safeButtonText =
+    typeof buttonText === 'string'
+      ? buttonText
+      : typeof buttonText === 'object' && buttonText !== null
+        ? JSON.stringify(buttonText)
+        : ''
 
   // Convert alignment to Tailwind classes
   const alignmentClasses = {
     left: 'text-left',
     center: 'text-center',
-    right: 'text-right'
+    right: 'text-right',
   }
 
   // Enhanced variant classes with more sophisticated styling
@@ -53,12 +65,12 @@ export const CardBlock = ({
       hover:border-blue-300
       shadow-md hover:shadow-xl
       transition-all duration-500 ease-out
-    `
+    `,
   }
 
   // Convert padding to Tailwind classes (approximate mapping)
   const getPaddingClass = (padding: string) => {
-    const paddingValue = parseInt(padding)
+    const paddingValue = Number.parseInt(padding)
     if (paddingValue <= 12) return 'p-4'
     if (paddingValue <= 16) return 'p-5'
     if (paddingValue <= 20) return 'p-6'
@@ -69,7 +81,7 @@ export const CardBlock = ({
 
   // Convert border radius to Tailwind classes (approximate mapping)
   const getBorderRadiusClass = (radius: string) => {
-    const radiusValue = parseInt(radius)
+    const radiusValue = Number.parseInt(radius)
     if (radiusValue <= 4) return 'rounded-lg'
     if (radiusValue <= 6) return 'rounded-xl'
     if (radiusValue <= 8) return 'rounded-2xl'
@@ -120,7 +132,7 @@ export const CardBlock = ({
           <div className="absolute inset-0 rounded-xl group-hover:rounded-2xl border-2 border-transparent group-hover:border-blue-300/30 transition-all duration-500" />
         </div>
       )}
-      
+
       <div className="relative space-y-4">
         {/* Title with enhanced styling */}
         <div className="relative">
@@ -130,12 +142,10 @@ export const CardBlock = ({
           {/* Underline effect */}
           <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-500 ease-out" />
         </div>
-        
+
         {/* Description with improved typography */}
-        <p className="text-gray-600 leading-relaxed text-base font-medium">
-          {safeDescription}
-        </p>
-        
+        <p className="text-gray-600 leading-relaxed text-base font-medium">{safeDescription}</p>
+
         {/* Content with enhanced styling */}
         {safeContent && (
           <div className="relative">
@@ -144,10 +154,12 @@ export const CardBlock = ({
             </p>
           </div>
         )}
-        
+
         {/* Enhanced button */}
         {safeButtonText && (
-          <div className={`pt-4 ${alignment === 'center' ? 'text-center' : alignment === 'right' ? 'text-right' : 'text-left'}`}>
+          <div
+            className={`pt-4 ${alignment === 'center' ? 'text-center' : alignment === 'right' ? 'text-right' : 'text-left'}`}
+          >
             <a
               href={buttonLink || '#'}
               className="
@@ -178,21 +190,21 @@ export const CardBlock = ({
             >
               {/* Button background animation */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
-              
+
               <span className="relative z-10">{safeButtonText}</span>
-              
+
               {/* Enhanced arrow icon */}
-              <svg 
-                className="relative z-10 ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="relative z-10 ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2.5} 
-                  d="M13 7l5 5m0 0l-5 5m5-5H6" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
             </a>

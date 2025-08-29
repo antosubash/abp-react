@@ -5,4 +5,4 @@ export interface DividerBlockProps {
   height?: string
   margin?: string
   alignment?: 'left' | 'center' | 'right'
-} 
+}

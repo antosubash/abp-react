@@ -61,4 +61,4 @@ export const TestimonialBlockFields = {
     type: 'text' as const,
     label: 'Padding (CSS value)',
   },
-} 
+}

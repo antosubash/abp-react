@@ -1,7 +1,7 @@
-import { getPages } from '@/lib/utils'
-import { Table } from '@tanstack/react-table'
+import type { Table } from '@tanstack/react-table'
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { useMemo } from 'react'
+import { getPages } from '@/lib/utils'
 import { Button } from './button'
 
 type PaginationProps<T> = {

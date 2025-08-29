@@ -8,4 +8,4 @@ export const ButtonBlockDefaults = {
   href: '' as const,
   target: '_self' as const,
   padding: '16px' as const,
-} 
+}

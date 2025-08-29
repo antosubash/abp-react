@@ -145,7 +145,7 @@ export const CarouselBlockDemo = () => {
     <div className="space-y-12 p-8">
       <div>
         <h2 className="text-3xl font-bold mb-6">Carousel Block Examples</h2>
-        
+
         {/* Basic Carousel */}
         <div className="mb-8">
           <h3 className="text-xl font-semibold mb-4">Basic Carousel</h3>
@@ -166,4 +166,4 @@ export const CarouselBlockDemo = () => {
       </div>
     </div>
   )
-} 
+}

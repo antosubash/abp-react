@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { CarouselBlock } from './CarouselBlock'
 import { CarouselBlockDefaults } from './CarouselBlockDefaults'
@@ -10,7 +9,8 @@ const meta: Meta<typeof CarouselBlock> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A highly customizable carousel component for showcasing a series of images or content. Supports auto-play, navigation controls, and various styling options.',
+        component:
+          'A highly customizable carousel component for showcasing a series of images or content. Supports auto-play, navigation controls, and various styling options.',
       },
     },
   },
@@ -52,9 +52,9 @@ const meta: Meta<typeof CarouselBlock> = {
       description: 'The width of the carousel container.',
     },
     maxWidth: {
-        control: 'text',
-        description: 'The max-width of the carousel container.',
-      },
+      control: 'text',
+      description: 'The max-width of the carousel container.',
+    },
     padding: {
       control: 'text',
       description: 'The padding of the carousel container.',

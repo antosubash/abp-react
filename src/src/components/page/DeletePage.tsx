@@ -1,4 +1,6 @@
 'use client'
+import { useQueryClient } from '@tanstack/react-query'
+import { Trash2 } from 'lucide-react'
 import { pageAdminDelete } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,8 +12,6 @@ import {
 } from '@/components/ui/dialog'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useQueryClient } from '@tanstack/react-query'
-import { Trash2 } from 'lucide-react'
 
 export type DeletePageProps = {
   page: {
@@ -41,7 +41,7 @@ export const DeletePage = ({ page, onDismiss }: DeletePageProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page deletion wasn&apos;t successful.",
+          description: 'Page deletion wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

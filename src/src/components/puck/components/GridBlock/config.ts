@@ -7,4 +7,4 @@ export const GridBlockConfig = {
   fields: GridBlockFields,
   defaultProps: GridBlockDefaults,
   render: GridBlock,
-} 
+}

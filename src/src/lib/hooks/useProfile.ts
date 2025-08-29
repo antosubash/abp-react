@@ -1,5 +1,5 @@
-import { ProfileDto, profileGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type ProfileDto, profileGet } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 /**

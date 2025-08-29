@@ -129,4 +129,4 @@ export const GalleryBlockFields = {
       { label: 'High', value: 'high' },
     ],
   },
-} 
+}

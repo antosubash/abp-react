@@ -1,4 +1,4 @@
-import { Slot } from '../../core/types'
+import type { Slot } from '../../core/types'
 
 export interface FlexBlockProps {
   items?: Slot
@@ -11,4 +11,4 @@ export interface FlexBlockProps {
   backgroundColor?: string
   minHeight?: string
   width?: string
-} 
+}

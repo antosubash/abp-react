@@ -3,4 +3,4 @@ export interface SpacerBlockProps {
   backgroundColor?: string
   borderTop?: string
   borderBottom?: string
-} 
+}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { userDelete } from '@/client'
 import {
   AlertDialog,
@@ -10,7 +11,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { useEffect, useState } from 'react'
 
 type DeleteUserProps = {
   user: { userId: string; username: string }

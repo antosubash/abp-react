@@ -1,5 +1,5 @@
-import { userFindByUsername } from '@/client'
 import { useQuery } from '@tanstack/react-query'
+import { userFindByUsername } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 type UseUserExistsProps = {
@@ -38,4 +38,4 @@ export const useUserExists = ({ username }: UseUserExistsProps) => {
     enabled: !!username,
     retry: false, // Don't retry if user doesn't exist
   })
-} 
+}

@@ -37,11 +37,7 @@ type Story = StoryObj<typeof meta>
 
 export const Unordered: Story = {
   args: {
-    items: [
-      'First item in the list',
-      'Second item in the list',
-      'Third item in the list',
-    ],
+    items: ['First item in the list', 'Second item in the list', 'Third item in the list'],
     type: 'unordered',
     style: 'default',
     alignment: 'left',
@@ -85,11 +81,7 @@ export const Checklist: Story = {
 
 export const Minimal: Story = {
   args: {
-    items: [
-      'Simple item one',
-      'Simple item two',
-      'Simple item three',
-    ],
+    items: ['Simple item one', 'Simple item two', 'Simple item three'],
     type: 'unordered',
     style: 'minimal',
     alignment: 'left',
@@ -116,12 +108,7 @@ export const Bordered: Story = {
 
 export const TightSpacing: Story = {
   args: {
-    items: [
-      'Compact item 1',
-      'Compact item 2',
-      'Compact item 3',
-      'Compact item 4',
-    ],
+    items: ['Compact item 1', 'Compact item 2', 'Compact item 3', 'Compact item 4'],
     type: 'unordered',
     style: 'default',
     alignment: 'left',
@@ -132,11 +119,7 @@ export const TightSpacing: Story = {
 
 export const LooseSpacing: Story = {
   args: {
-    items: [
-      'Spacious item one',
-      'Spacious item two',
-      'Spacious item three',
-    ],
+    items: ['Spacious item one', 'Spacious item two', 'Spacious item three'],
     type: 'ordered',
     style: 'default',
     alignment: 'left',
@@ -147,11 +130,7 @@ export const LooseSpacing: Story = {
 
 export const CenterAligned: Story = {
   args: {
-    items: [
-      'Centered item 1',
-      'Centered item 2',
-      'Centered item 3',
-    ],
+    items: ['Centered item 1', 'Centered item 2', 'Centered item 3'],
     type: 'unordered',
     style: 'default',
     alignment: 'center',
@@ -162,15 +141,11 @@ export const CenterAligned: Story = {
 
 export const LargeFont: Story = {
   args: {
-    items: [
-      'Large text item one',
-      'Large text item two',
-      'Large text item three',
-    ],
+    items: ['Large text item one', 'Large text item two', 'Large text item three'],
     type: 'checklist',
     style: 'default',
     alignment: 'left',
     fontSize: 'lg',
     spacing: 'normal',
   },
-} 
+}

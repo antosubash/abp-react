@@ -10,4 +10,4 @@ export const VideoBlockDefaults = {
   muted: false as const,
   poster: '' as const,
   padding: '16px' as const,
-} 
+}

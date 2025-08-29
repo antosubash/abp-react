@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { Lock, Mail, Phone, Search, User } from 'lucide-react'
 import { action } from 'storybook/actions'
+import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
-import { Button } from './button'
-import { Search, Mail, Lock, User, Phone } from 'lucide-react'
 
 const meta: Meta<typeof Input> = {
   title: 'UI/Input',
@@ -12,7 +12,8 @@ const meta: Meta<typeof Input> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A flexible input component with consistent styling and accessibility features. Supports all HTML input types and includes proper focus states.',
+        component:
+          'A flexible input component with consistent styling and accessibility features. Supports all HTML input types and includes proper focus states.',
       },
     },
   },
@@ -149,23 +150,29 @@ export const States: Story = {
       </div>
       <div>
         <Label htmlFor="invalid">Invalid</Label>
-        <Input 
-          id="invalid" 
-          placeholder="Invalid input..." 
+        <Input
+          id="invalid"
+          placeholder="Invalid input..."
           aria-invalid="true"
           defaultValue="Invalid value"
         />
       </div>
       <div>
         <Label htmlFor="readonly">Read Only</Label>
-        <Input id="readonly" placeholder="Read only input..." readOnly defaultValue="Read only value" />
+        <Input
+          id="readonly"
+          placeholder="Read only input..."
+          readOnly
+          defaultValue="Read only value"
+        />
       </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Different input states including normal, disabled, required, invalid, and read-only.',
+        story:
+          'Different input states including normal, disabled, required, invalid, and read-only.',
       },
     },
   },
@@ -268,8 +275,9 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'An interactive input example with explicit action functions. Try typing, focusing, and interacting with it. Actions will be logged in the Actions panel.',
+        story:
+          'An interactive input example with explicit action functions. Try typing, focusing, and interacting with it. Actions will be logged in the Actions panel.',
       },
     },
   },
-} 
+}

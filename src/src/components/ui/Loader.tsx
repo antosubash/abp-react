@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react'
+
 const Loader = () => {
   return (
     <div className="z-50 flex min-h-80 w-full items-center justify-center">

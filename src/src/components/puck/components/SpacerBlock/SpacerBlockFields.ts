@@ -15,4 +15,4 @@ export const SpacerBlockFields = {
     type: 'text' as const,
     label: 'Bottom Border (CSS value)',
   },
-} 
+}

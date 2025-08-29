@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import { FeatureManagement } from '@/components/settings/FeatureManagement'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import Link from 'next/link'
 
 export default function FeatureManagementPage() {
   const emailing = 'emailing'
@@ -16,7 +16,7 @@ export default function FeatureManagementPage() {
             <Link href={'/admin/settings/feature_management'}>Feature management</Link>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value={emailing}></TabsContent>
+        <TabsContent value={emailing} />
         <TabsContent value={featureManagement}>
           <FeatureManagement />
         </TabsContent>

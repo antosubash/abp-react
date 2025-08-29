@@ -1,28 +1,41 @@
 'use client'
 
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  AlertTriangle,
+  ArrowLeft,
+  Building,
+  CheckCircle2,
+  Info,
+  Save,
+  Search,
+  Settings,
+  Shield,
+  Users,
+  X,
+  XCircle,
+  Zap,
+} from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { ArrowLeft, Shield, Search, CheckCircle2, XCircle, Users, Settings, Building, Zap, Save, X, AlertTriangle, Info } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { permissionsUpdate, type UpdatePermissionsDto } from '@/client'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useToast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
 import { usePermissions } from '@/lib/hooks/usePermissions'
-import { useUserRoles } from '@/lib/hooks/useUserRoles'
-import { useUserExists } from '@/lib/hooks/useUserExists'
 import { useTranslation } from '@/lib/hooks/useTranslation'
-import { PermissionProvider, USER_ROLE } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { permissionsUpdate, UpdatePermissionsDto } from '@/client'
+import { useUserExists } from '@/lib/hooks/useUserExists'
+import { useUserRoles } from '@/lib/hooks/useUserRoles'
+import { cn, PermissionProvider, USER_ROLE } from '@/lib/utils'
 
 const getManagementIcon = (type: string) => {
   // Extract the first part of the group name (before the first dot)
   const firstPart = type.split('.')[0]?.toLowerCase()
-  
+
   switch (firstPart) {
     case 'identity':
       return <Users className="h-4 w-4" />
@@ -42,7 +55,7 @@ const getManagementIcon = (type: string) => {
 const getManagementColor = (type: string) => {
   // Extract the first part of the group name (before the first dot)
   const firstPart = type.split('.')[0]?.toLowerCase()
-  
+
   switch (firstPart) {
     case 'identity':
       return 'bg-blue-100 text-blue-800 border-blue-200'
@@ -68,23 +81,23 @@ export default function PermissionsPage() {
   const [permissionGroups, setPermissionGroups] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
-  
+
   const { toast } = useToast()
   const queryClient = useQueryClient()
-  
+
   const entityType = params.type as 'role' | 'user'
   const entityId = params.id as string
-  
+
   // Check if user exists when entity type is user
-  const userExists = useUserExists({ 
-    username: entityType === 'user' ? entityId : '' 
+  const userExists = useUserExists({
+    username: entityType === 'user' ? entityId : '',
   })
-  
+
   // Only fetch user roles if we have a valid user ID and entity type is user
-  const userRoles = useUserRoles({ 
-    userId: entityType === 'user' && userExists.data?.id ? userExists.data.id : '' 
+  const userRoles = useUserRoles({
+    userId: entityType === 'user' && userExists.data?.id ? userExists.data.id : '',
   })
-  
+
   const { data, isLoading: permissionsLoading } = usePermissions(
     entityType === 'role' ? PermissionProvider.R : PermissionProvider.U,
     entityType === 'user' ? userExists.data?.id : entityId
@@ -117,21 +130,21 @@ export default function PermissionsPage() {
         group.permissions?.forEach((permission: any) => {
           const parts = permission.name.split('.')
           const groupKey = parts.length >= 2 ? `${parts[0]}.${parts[1]}` : parts[0]
-          
-          let existingGroup = acc.find(g => g.displayName === groupKey)
+
+          let existingGroup = acc.find((g) => g.displayName === groupKey)
           if (!existingGroup) {
             existingGroup = {
               displayName: groupKey,
-              permissions: []
+              permissions: [],
             }
             acc.push(existingGroup)
           }
-          
+
           existingGroup.permissions.push(permission)
         })
         return acc
       }, [])
-      
+
       setPermissionGroups(groupedPermissions)
       if (groupedPermissions.length > 0) {
         setActiveTab(groupedPermissions[0].displayName || '')
@@ -148,35 +161,40 @@ export default function PermissionsPage() {
     }
   }, [permissionGroups])
 
-  const hasAdmin = entityType === 'role' 
-    ? entityId.includes(USER_ROLE.ADMIN)
-    : userRoles?.data?.items?.some(role => role.name?.includes(USER_ROLE.ADMIN)) || false
+  const hasAdmin =
+    entityType === 'role'
+      ? entityId.includes(USER_ROLE.ADMIN)
+      : userRoles?.data?.items?.some((role) => role.name?.includes(USER_ROLE.ADMIN)) || false
 
-  const filteredGroups = searchTerm ? permissionGroups.map(group => ({
-    ...group,
-    permissions: group.permissions?.filter((permission: any) => {
-      const translatedName = getTranslatedPermissionName(permission.name)
-      return (
-        translatedName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        permission.name?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    })
-  })).filter(group => group.permissions && group.permissions.length > 0) : permissionGroups
+  const filteredGroups = searchTerm
+    ? permissionGroups
+        .map((group) => ({
+          ...group,
+          permissions: group.permissions?.filter((permission: any) => {
+            const translatedName = getTranslatedPermissionName(permission.name)
+            return (
+              translatedName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              permission.name?.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          }),
+        }))
+        .filter((group) => group.permissions && group.permissions.length > 0)
+    : permissionGroups
 
   const handlePermissionChange = () => {
     setHasChanges(true)
   }
 
   const handleGrantAll = () => {
-    setHasAllGranted(prev => {
+    setHasAllGranted((prev) => {
       const newValue = !prev
-      setPermissionGroups(groups => 
-        groups.map(group => ({
+      setPermissionGroups((groups) =>
+        groups.map((group) => ({
           ...group,
           permissions: group.permissions?.map((permission: any) => ({
             ...permission,
-            isGranted: newValue
-          }))
+            isGranted: newValue,
+          })),
         }))
       )
       setHasChanges(true)
@@ -187,39 +205,37 @@ export default function PermissionsPage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    
+
     try {
-      const payload = permissionGroups
-        ?.map((p) =>
-          p!.permissions!.map((grant: any) => ({
-            name: grant.name,
-            isGranted: grant.isGranted,
-          }))
-        )
-        .flat()
-        
+      const payload = permissionGroups?.flatMap((p) =>
+        p!.permissions!.map((grant: any) => ({
+          name: grant.name,
+          isGranted: grant.isGranted,
+        }))
+      )
+
       const requestPayload: UpdatePermissionsDto = {
         permissions: payload,
       }
-      
+
       const result = await permissionsUpdate({
-        query: { 
-          providerName: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U, 
-          providerKey: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId
+        query: {
+          providerName: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U,
+          providerKey: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId,
         },
         body: requestPayload,
       })
-      
-       toast({
-         title: 'Success',
-         description: 'Permissions updated successfully',
-         variant: 'default',
-       })
-      
+
+      toast({
+        title: 'Success',
+        description: 'Permissions updated successfully',
+        variant: 'default',
+      })
+
       queryClient.invalidateQueries({
         queryKey: [entityType === 'role' ? PermissionProvider.R : PermissionProvider.U],
       })
-      
+
       setHasChanges(false)
     } catch (err: unknown) {
       console.error('Error updating permissions:', err)
@@ -243,12 +259,14 @@ export default function PermissionsPage() {
     }
   }
 
-  const totalPermissions = permissionGroups.reduce((total, group) => 
-    total + (group.permissions?.length || 0), 0
+  const totalPermissions = permissionGroups.reduce(
+    (total, group) => total + (group.permissions?.length || 0),
+    0
   )
-  
-  const grantedPermissions = permissionGroups.reduce((total, group) => 
-    total + (group.permissions?.filter((p: any) => p.isGranted).length || 0), 0
+
+  const grantedPermissions = permissionGroups.reduce(
+    (total, group) => total + (group.permissions?.filter((p: any) => p.isGranted).length || 0),
+    0
   )
 
   // Show loading state
@@ -257,7 +275,7 @@ export default function PermissionsPage() {
       <div className="container mx-auto p-6">
         <div className="flex items-center justify-center py-12">
           <div className="flex items-center gap-2">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
             <span>Loading permissions...</span>
           </div>
         </div>
@@ -357,15 +375,21 @@ export default function PermissionsPage() {
           <CardContent>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary">{totalPermissions}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-primary">
+                  {totalPermissions}
+                </div>
                 <div className="text-sm text-muted-foreground">Total Permissions</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-green-600">{grantedPermissions}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-green-600">
+                  {grantedPermissions}
+                </div>
                 <div className="text-sm text-muted-foreground">Granted</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-orange-600">{totalPermissions - grantedPermissions}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-orange-600">
+                  {totalPermissions - grantedPermissions}
+                </div>
                 <div className="text-sm text-muted-foreground">Not Granted</div>
               </div>
             </div>
@@ -377,10 +401,9 @@ export default function PermissionsPage() {
           <CardContent className="pt-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className={cn(
-                  "p-2 rounded-lg",
-                  hasAllGranted ? "bg-green-100" : "bg-gray-100"
-                )}>
+                <div
+                  className={cn('p-2 rounded-lg', hasAllGranted ? 'bg-green-100' : 'bg-gray-100')}
+                >
                   {hasAllGranted ? (
                     <CheckCircle2 className="h-5 w-5 text-green-600" />
                   ) : (
@@ -390,12 +413,14 @@ export default function PermissionsPage() {
                 <div>
                   <div className="font-medium text-base sm:text-lg">Grant All Permissions</div>
                   <div className="text-sm text-muted-foreground">
-                    {hasAllGranted ? 'All permissions are granted' : 'Some permissions are not granted'}
+                    {hasAllGranted
+                      ? 'All permissions are granted'
+                      : 'Some permissions are not granted'}
                   </div>
                 </div>
               </div>
               <Button
-                variant={hasAllGranted ? "outline" : "default"}
+                variant={hasAllGranted ? 'outline' : 'default'}
                 onClick={handleGrantAll}
                 disabled={hasAdmin}
                 className="w-full sm:w-auto sm:min-w-[120px]"
@@ -455,7 +480,8 @@ export default function PermissionsPage() {
                       {getManagementIcon(group.displayName || '')}
                       <span className="hidden sm:inline">{group.displayName}</span>
                       <Badge variant="secondary" className="ml-1 text-xs">
-                        {group.permissions?.filter((p: any) => p.isGranted).length || 0}/{group.permissions?.length || 0}
+                        {group.permissions?.filter((p: any) => p.isGranted).length || 0}/
+                        {group.permissions?.length || 0}
                       </Badge>
                     </TabsTrigger>
                   ))}
@@ -471,9 +497,12 @@ export default function PermissionsPage() {
                           {getManagementIcon(group.displayName || '')}
                           <span className="text-base sm:text-lg">{group.displayName}</span>
                         </div>
-                        <Badge 
-                          variant="outline" 
-                          className={cn("self-start sm:ml-auto", getManagementColor(group.displayName || ''))}
+                        <Badge
+                          variant="outline"
+                          className={cn(
+                            'self-start sm:ml-auto',
+                            getManagementColor(group.displayName || '')
+                          )}
                         >
                           {group.permissions?.filter((p: any) => p.isGranted).length || 0} granted
                         </Badge>
@@ -483,27 +512,34 @@ export default function PermissionsPage() {
                       <ScrollArea className="h-[400px] sm:h-[500px] pr-4">
                         <div className="space-y-2 p-4 sm:p-0">
                           {group.permissions?.map((permission: any, idx: number) => (
-                            <div key={permission.name} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors gap-3">
+                            <div
+                              key={permission.name}
+                              className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors gap-3"
+                            >
                               <div className="flex items-center gap-3">
-                                <div className={cn(
-                                  "p-1 rounded flex-shrink-0",
-                                  permission.isGranted ? "bg-green-100" : "bg-gray-100"
-                                )}>
+                                <div
+                                  className={cn(
+                                    'p-1 rounded flex-shrink-0',
+                                    permission.isGranted ? 'bg-green-100' : 'bg-gray-100'
+                                  )}
+                                >
                                   {permission.isGranted ? (
                                     <CheckCircle2 className="h-4 w-4 text-green-600" />
                                   ) : (
                                     <XCircle className="h-4 w-4 text-gray-400" />
                                   )}
                                 </div>
-                                                                 <div className="min-w-0 flex-1">
-                                   <div className="font-medium text-sm sm:text-base truncate">
-                                     {getTranslatedPermissionName(permission.name)}
-                                   </div>
-                                   <div className="text-xs sm:text-sm text-muted-foreground truncate">{permission.name}</div>
-                                 </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="font-medium text-sm sm:text-base truncate">
+                                    {getTranslatedPermissionName(permission.name)}
+                                  </div>
+                                  <div className="text-xs sm:text-sm text-muted-foreground truncate">
+                                    {permission.name}
+                                  </div>
+                                </div>
                               </div>
                               <Button
-                                variant={permission.isGranted ? "outline" : "default"}
+                                variant={permission.isGranted ? 'outline' : 'default'}
                                 size="sm"
                                 onClick={() => {
                                   permission.isGranted = !permission.isGranted
@@ -541,23 +577,23 @@ export default function PermissionsPage() {
               )}
             </div>
             <div className="flex gap-2 w-full sm:w-auto">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={handleBack}
                 disabled={isLoading}
                 className="flex-1 sm:flex-none"
               >
                 Cancel
               </Button>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 onClick={onSubmit}
                 disabled={isLoading || !hasChanges}
                 className="flex-1 sm:flex-none sm:min-w-[120px]"
               >
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                     Saving...
                   </>
                 ) : (
@@ -573,4 +609,4 @@ export default function PermissionsPage() {
       </div>
     </div>
   )
-} 
+}

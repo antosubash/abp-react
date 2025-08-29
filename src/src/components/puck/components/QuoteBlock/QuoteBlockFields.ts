@@ -79,4 +79,4 @@ export const QuoteBlockFields = {
       { label: 'Full', value: 'full' },
     ],
   },
-} 
+}

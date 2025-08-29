@@ -3,4 +3,4 @@ export const SpacerBlockDefaults = {
   backgroundColor: 'transparent' as const,
   borderTop: 'none' as const,
   borderBottom: 'none' as const,
-} 
+}

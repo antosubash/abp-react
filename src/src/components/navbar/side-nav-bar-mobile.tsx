@@ -1,4 +1,17 @@
 'use client'
+import {
+  ChevronDown,
+  ChevronRight,
+  CircleUser,
+  LogOut,
+  Menu,
+  Package2,
+  Settings,
+  User,
+} from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -9,12 +22,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Settings, User, LogOut } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
-import ClientLink from '../ui/client-link'
 import useSession from '@/useSession'
+import ClientLink from '../ui/client-link'
 
 export default function SideNavBarMobile() {
   const pathname = usePathname()
@@ -69,7 +78,7 @@ export default function SideNavBarMobile() {
             <div className="flex items-center gap-2 mb-6">
               <div className="relative">
                 <Package2 className="h-6 w-6 text-primary" />
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               </div>
               <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 AbpReact
@@ -78,7 +87,7 @@ export default function SideNavBarMobile() {
                 Admin
               </span>
             </div>
-            
+
             {/* Mobile Navigation */}
             <nav className="flex-1 space-y-2">
               {AdminMenus.map((menu) => {
@@ -101,13 +110,17 @@ export default function SideNavBarMobile() {
                         }`}
                       >
                         {menu.icon && (
-                          <menu.icon className={`h-4 w-4 transition-colors ${
-                            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                          }`} />
+                          <menu.icon
+                            className={`h-4 w-4 transition-colors ${
+                              isActive
+                                ? 'text-primary'
+                                : 'text-muted-foreground group-hover:text-primary'
+                            }`}
+                          />
                         )}
                         <span className="font-medium">{menu.name}</span>
                         {isActive && (
-                          <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
+                          <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full" />
                         )}
                       </Link>
                       {hasSubmenus && (
@@ -133,17 +146,23 @@ export default function SideNavBarMobile() {
                               key={subIndex}
                               href={submenu.link}
                               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
-                                isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                                isSubmenuActive
+                                  ? 'text-primary bg-primary/10 border border-primary/20'
+                                  : ''
                               }`}
                             >
                               {submenu.icon && (
-                                <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
-                                  isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                                }`} />
+                                <submenu.icon
+                                  className={`h-3.5 w-3.5 transition-colors ${
+                                    isSubmenuActive
+                                      ? 'text-primary'
+                                      : 'text-muted-foreground group-hover:text-primary'
+                                  }`}
+                                />
                               )}
                               <span className="font-medium">{submenu.name}</span>
                               {isSubmenuActive && (
-                                <div className="ml-auto w-1 h-1 bg-primary rounded-full"></div>
+                                <div className="ml-auto w-1 h-1 bg-primary rounded-full" />
                               )}
                             </Link>
                           )
@@ -158,7 +177,7 @@ export default function SideNavBarMobile() {
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <form></form>
+        <form />
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -168,14 +187,14 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
-                     <div className="flex items-center justify-start gap-2 p-2">
-             <div className="flex flex-col space-y-1 leading-none">
-               <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
-               <p className="w-[200px] truncate text-sm text-muted-foreground">
-                 {sessionData.data?.userInfo?.email || 'No email available'}
-               </p>
-             </div>
-           </div>
+          <div className="flex items-center justify-start gap-2 p-2">
+            <div className="flex flex-col space-y-1 leading-none">
+              <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
+              <p className="w-[200px] truncate text-sm text-muted-foreground">
+                {sessionData.data?.userInfo?.email || 'No email available'}
+              </p>
+            </div>
+          </div>
           <DropdownMenuSeparator />
           <Link href="/admin" className="cursor-pointer">
             <DropdownMenuItem className="flex items-center gap-2">

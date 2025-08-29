@@ -1,5 +1,14 @@
 'use client'
-import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import { ArrowLeft, Clock, Eye, RefreshCw, Save } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import {
+  pageAdminUpdate,
+  type UpdatePageInputDto,
+  type VoloCmsKitAdminPagesPageDto,
+} from '@/client'
 import { PuckEditor } from '@/components/puck/PuckEditor'
 import { htmlToPuckData, isPuckData } from '@/components/puck/utils'
 import { Alert, AlertDescription } from '@/components/ui/alert'
@@ -14,11 +23,6 @@ import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { usePage } from '@/lib/hooks/usePages'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, Clock, RefreshCw, Save, Eye } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
 
 // Auto-slug generation utility
 const generateSlug = (title: string): string => {
@@ -237,7 +241,7 @@ export default function EditPage() {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPage, pageId] })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPages] })
       localStorage.removeItem(`page-draft-${pageId}`) // Clear draft after successful save
-      
+
       // Remove the redirect - stay on the current page
       // router.push('/admin/cms')
     } catch (err: unknown) {
@@ -294,7 +298,7 @@ export default function EditPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading page data...</p>
           <p className="text-sm text-muted-foreground mt-2">Page ID: {pageId}</p>
         </div>
@@ -371,7 +375,6 @@ export default function EditPage() {
                 Unsaved Changes
               </Badge>
             )}
-
 
             <Button
               size="sm"
@@ -507,7 +510,7 @@ export default function EditPage() {
               return (
                 <div className="flex items-center justify-center min-h-[400px]">
                   <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
                     <p className="text-muted-foreground">Loading page content...</p>
                   </div>
                 </div>

@@ -1,3 +1,3 @@
-export { SpacerBlock } from './SpacerBlock'
 export { SpacerBlockConfig } from './config'
-export type { SpacerBlockProps } from './SpacerBlockProps' 
+export { SpacerBlock } from './SpacerBlock'
+export type { SpacerBlockProps } from './SpacerBlockProps'

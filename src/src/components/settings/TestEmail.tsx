@@ -1,8 +1,8 @@
-import { emailSettingsSendTestEmail, SendTestEmailInput } from '@/client'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { emailSettingsSendTestEmail, type SendTestEmailInput } from '@/client'
+import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Input } from '../ui/input'
@@ -41,7 +41,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Test email wasn&apos;t successful.",
+          description: 'Test email wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

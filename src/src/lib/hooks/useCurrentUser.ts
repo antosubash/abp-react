@@ -1,4 +1,4 @@
-import { CurrentUserDto } from '@/client'
+import type { CurrentUserDto } from '@/client'
 import { useAppConfig } from './useAppConfig'
 
 /**

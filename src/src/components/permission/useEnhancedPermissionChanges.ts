@@ -1,6 +1,6 @@
-import { PermissionGrantInfoDto } from '@/client'
-import { Permissions } from '@/lib/utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { PermissionGrantInfoDto } from '@/client'
+import { Permissions } from '@/lib/utils'
 
 export type UseEnhancedPermissionChangesProps = {
   permissions: PermissionGrantInfoDto[]
@@ -14,7 +14,10 @@ export interface PermissionChange {
   timestamp: number
 }
 
-export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedPermissionChangesProps) => {
+export const useEnhancedPermissionChanges = ({
+  permissions,
+  type,
+}: UseEnhancedPermissionChangesProps) => {
   const [hasAllSelected, setHasAllSelected] = useState(false)
   const [data, setData] = useState<PermissionGrantInfoDto[]>(permissions)
   const [changes, setChanges] = useState<PermissionChange[]>([])
@@ -22,67 +25,70 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
   const originalDataRef = useRef<PermissionGrantInfoDto[]>(permissions)
 
   // Helper function to update permission data
-  const helper = useCallback((
-    data: PermissionGrantInfoDto[],
-    selectedData: PermissionGrantInfoDto,
-    permission: `${Permissions}`,
-    setData: (data: PermissionGrantInfoDto[]) => void
-  ) => {
-    const parent = data.find((f) => !f.parentName && f.name === permission)
-    const children = data.filter((f) => f.parentName === permission)
+  const helper = useCallback(
+    (
+      data: PermissionGrantInfoDto[],
+      selectedData: PermissionGrantInfoDto,
+      permission: `${Permissions}`,
+      setData: (data: PermissionGrantInfoDto[]) => void
+    ) => {
+      const parent = data.find((f) => !f.parentName && f.name === permission)
+      const children = data.filter((f) => f.parentName === permission)
 
-    if (selectedData.parentName === permission && parent) {
-      const oldValue = selectedData.isGranted
-      if (selectedData.isGranted) {
-        selectedData.isGranted = false
-        parent.isGranted = false
-      } else {
-        selectedData.isGranted = true
-      }
-      
-      // If all the children got granted then updated the parent as well.
-      if (!parent.isGranted) {
-        const hasChildrenSelected = children.every((c) => c.isGranted)
-        if (hasChildrenSelected) {
-          parent.isGranted = true
+      if (selectedData.parentName === permission && parent) {
+        const oldValue = selectedData.isGranted
+        if (selectedData.isGranted) {
+          selectedData.isGranted = false
+          parent.isGranted = false
+        } else {
+          selectedData.isGranted = true
         }
-      }
-      
-      // Track the change
-      const change: PermissionChange = {
-        permissionName: selectedData.name!,
-        oldValue: oldValue ?? false,
-        newValue: selectedData.isGranted ?? false,
-        timestamp: Date.now()
-      }
-      
-      setChanges(prev => [...prev, change])
-      setData([...data])
-      return false
-    }
 
-    if (!selectedData.parentName && selectedData.name === permission) {
-      const oldValue = selectedData.isGranted
-      if (parent && parent.isGranted) {
-        parent.isGranted = false
-        children.forEach((c) => (c.isGranted = false))
-      } else if (parent && !parent.isGranted) {
-        parent.isGranted = true
-        children.forEach((c) => (c.isGranted = true))
+        // If all the children got granted then updated the parent as well.
+        if (!parent.isGranted) {
+          const hasChildrenSelected = children.every((c) => c.isGranted)
+          if (hasChildrenSelected) {
+            parent.isGranted = true
+          }
+        }
+
+        // Track the change
+        const change: PermissionChange = {
+          permissionName: selectedData.name!,
+          oldValue: oldValue ?? false,
+          newValue: selectedData.isGranted ?? false,
+          timestamp: Date.now(),
+        }
+
+        setChanges((prev) => [...prev, change])
+        setData([...data])
+        return false
       }
-      
-      // Track the change
-      const change: PermissionChange = {
-        permissionName: selectedData.name!,
-        oldValue: oldValue ?? false,
-        newValue: selectedData.isGranted ?? false,
-        timestamp: Date.now()
+
+      if (!selectedData.parentName && selectedData.name === permission) {
+        const oldValue = selectedData.isGranted
+        if (parent && parent.isGranted) {
+          parent.isGranted = false
+          children.forEach((c) => (c.isGranted = false))
+        } else if (parent && !parent.isGranted) {
+          parent.isGranted = true
+          children.forEach((c) => (c.isGranted = true))
+        }
+
+        // Track the change
+        const change: PermissionChange = {
+          permissionName: selectedData.name!,
+          oldValue: oldValue ?? false,
+          newValue: selectedData.isGranted ?? false,
+          timestamp: Date.now(),
+        }
+
+        setChanges((prev) => [...prev, change])
+        setData([...data])
       }
-      
-      setChanges(prev => [...prev, change])
-      setData([...data])
-    }
-  }, [])
+    },
+    []
+  )
 
   // Handler for changes in the current permission
   const onCurrentPermissionChanges = useCallback(
@@ -135,17 +141,17 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
   const onHasAllSelectedUpdate = useCallback(() => {
     setHasAllSelected((f) => {
       const newValue = !f
-      
+
       // Track changes for all permissions
-      const newChanges: PermissionChange[] = data.map(permission => ({
+      const newChanges: PermissionChange[] = data.map((permission) => ({
         permissionName: permission.name!,
         oldValue: permission.isGranted ?? false,
         newValue,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       }))
-      
-      setChanges(prev => [...prev, ...newChanges])
-      
+
+      setChanges((prev) => [...prev, ...newChanges])
+
       data.forEach((d) => (d.isGranted = newValue))
       setData([...data])
       return newValue
@@ -162,32 +168,32 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
   // Undo last change
   const undoLastChange = useCallback(() => {
     if (changes.length === 0) return
-    
+
     const lastChange = changes[changes.length - 1]
-    const permission = data.find(p => p.name === lastChange.permissionName)
-    
+    const permission = data.find((p) => p.name === lastChange.permissionName)
+
     if (permission) {
       permission.isGranted = lastChange.oldValue
       setData([...data])
     }
-    
-    setChanges(prev => prev.slice(0, -1))
+
+    setChanges((prev) => prev.slice(0, -1))
   }, [changes, data])
 
   // Get change statistics
   const getChangeStats = useCallback(() => {
-    const granted = changes.filter(c => c.newValue && !c.oldValue).length
-    const revoked = changes.filter(c => !c.newValue && c.oldValue).length
-    
+    const granted = changes.filter((c) => c.newValue && !c.oldValue).length
+    const revoked = changes.filter((c) => !c.newValue && c.oldValue).length
+
     return { granted, revoked, total: changes.length }
   }, [changes])
 
   // Check if data has changed from original
   const hasChanges = useCallback(() => {
     if (data.length !== originalDataRef.current.length) return true
-    
-    return data.some((permission, index) => 
-      permission.isGranted !== originalDataRef.current[index]?.isGranted
+
+    return data.some(
+      (permission, index) => permission.isGranted !== originalDataRef.current[index]?.isGranted
     )
   }, [data])
 
@@ -214,4 +220,4 @@ export const useEnhancedPermissionChanges = ({ permissions, type }: UseEnhancedP
     getChangeStats,
     hasChanges: hasChanges(),
   }
-} 
+}

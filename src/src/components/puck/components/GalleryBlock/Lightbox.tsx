@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { LightboxProps } from './LightboxProps'
+import type { LightboxProps } from './LightboxProps'
 
 export const Lightbox = ({
   isOpen,
@@ -53,17 +53,12 @@ export const Lightbox = ({
 
   if (!isOpen || !currentImage) return null
 
-  const themeClasses = theme === 'dark' 
-    ? 'bg-black/95 text-white' 
-    : 'bg-white/95 text-gray-900'
+  const themeClasses = theme === 'dark' ? 'bg-black/95 text-white' : 'bg-white/95 text-gray-900'
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
 
       {/* Lightbox content */}
       <div className={`relative z-10 w-full h-full flex flex-col ${themeClasses}`}>
@@ -82,7 +77,12 @@ export const Lightbox = ({
             className="p-2 hover:bg-gray-200/20 rounded-full transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -103,7 +103,7 @@ export const Lightbox = ({
               onLoad={() => setIsLoaded(true)}
               priority
             />
-            
+
             {/* Loading indicator */}
             {!isLoaded && (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -119,7 +119,12 @@ export const Lightbox = ({
               className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
           )}
@@ -130,7 +135,12 @@ export const Lightbox = ({
               className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           )}
@@ -146,9 +156,10 @@ export const Lightbox = ({
                   onClick={() => onNavigate(index)}
                   className={`
                     flex-shrink-0 w-16 h-16 rounded overflow-hidden
-                    ${index === currentIndex 
-                      ? 'ring-2 ring-blue-500' 
-                      : 'opacity-60 hover:opacity-100'
+                    ${
+                      index === currentIndex
+                        ? 'ring-2 ring-blue-500'
+                        : 'opacity-60 hover:opacity-100'
                     }
                     transition-all duration-200
                   `}
@@ -168,4 +179,4 @@ export const Lightbox = ({
       </div>
     </div>
   )
-} 
+}

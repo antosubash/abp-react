@@ -31,8 +31,7 @@ Before starting development, ensure you have the following tools installed:
 ### Recommended Tools
 
 - **Visual Studio Code** with extensions:
-  - ESLint
-  - Prettier
+  - Biome
   - TypeScript and JavaScript Language Features
   - Tailwind CSS IntelliSense
   - GitLens
@@ -205,41 +204,52 @@ The project uses strict TypeScript configuration:
 }
 ```
 
-### ESLint Rules
+### Biome Rules
 
-Key ESLint rules to follow:
+Biome is configured with all rules set to warning level for better developer experience:
 
-```javascript
-// .eslintrc.json
+```json
+// biome.json
 {
-  "extends": [
-    "next/core-web-vitals",
-    "@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "prefer-const": "error",
-    "no-var": "error"
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": { "level": "warn" },
+      "correctness": { "level": "warn" },
+      "suspicious": { "level": "warn" },
+      "complexity": { "level": "warn" },
+      "style": { "level": "warn" },
+      "nursery": { "level": "warn" },
+      "a11y": { "level": "warn" },
+      "performance": { "level": "warn" },
+      "security": { "level": "warn" }
+    }
   }
 }
 ```
 
-### Prettier Configuration
+### Biome Formatting
 
-Code formatting rules:
+Code formatting rules are handled by Biome:
 
-```javascript
-// prettier.config.js
-module.exports = {
-  semi: true,
-  trailingComma: 'es5',
-  singleQuote: true,
-  printWidth: 100,
-  tabWidth: 2,
-  useTabs: false,
-};
+```json
+// biome.json
+{
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "es5",
+      "semicolons": "asNeeded"
+    }
+  }
+}
 ```
 
 ## Component Development

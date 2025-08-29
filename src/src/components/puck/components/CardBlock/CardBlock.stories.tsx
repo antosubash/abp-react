@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { CardBlock } from './CardBlock'
 
@@ -9,7 +8,8 @@ const meta: Meta<typeof CardBlock> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A versatile card component for displaying content in a structured format. Supports different styles, alignments, and content types.',
+        component:
+          'A versatile card component for displaying content in a structured format. Supports different styles, alignments, and content types.',
       },
     },
   },
@@ -23,8 +23,8 @@ const meta: Meta<typeof CardBlock> = {
       description: 'The main description or content of the card',
     },
     content: {
-        control: { type: 'text' },
-        description: 'Additional content for the card',
+      control: { type: 'text' },
+      description: 'Additional content for the card',
     },
     image: {
       control: { type: 'text' },
@@ -82,43 +82,43 @@ export const Default: Story = {
 }
 
 export const Outline: Story = {
-    args: {
-      title: 'Outline Card',
-      description: 'This card has an outline style, which is great for a cleaner look.',
-      image: 'https://picsum.photos/400/200',
-      buttonText: 'Read More',
-      buttonLink: '#',
-      variant: 'outline',
-    },
-  }
-  
-  export const Centered: Story = {
-    args: {
-      title: 'Centered Card',
-      description: 'All the content in this card is center-aligned.',
-      image: 'https://picsum.photos/400/200',
-      buttonText: 'Get Started',
-      buttonLink: '#',
-      alignment: 'center',
-    },
-  }
-  
-  export const WithoutImage: Story = {
-    args: {
-      title: 'Card Without an Image',
-      description: 'This card demonstrates how the component looks without an image.',
-      buttonText: 'More Info',
-      buttonLink: '#',
-    },
-  }
-  
-  export const WithExtraContent: Story = {
-    args: {
-      title: 'Card With Extra Content',
-      description: 'This is the main description.',
-      content: 'This is some additional content that can be used to provide more details.',
-      image: 'https://picsum.photos/400/200',
-      buttonText: 'Explore',
-      buttonLink: '#',
-    },
-  }
+  args: {
+    title: 'Outline Card',
+    description: 'This card has an outline style, which is great for a cleaner look.',
+    image: 'https://picsum.photos/400/200',
+    buttonText: 'Read More',
+    buttonLink: '#',
+    variant: 'outline',
+  },
+}
+
+export const Centered: Story = {
+  args: {
+    title: 'Centered Card',
+    description: 'All the content in this card is center-aligned.',
+    image: 'https://picsum.photos/400/200',
+    buttonText: 'Get Started',
+    buttonLink: '#',
+    alignment: 'center',
+  },
+}
+
+export const WithoutImage: Story = {
+  args: {
+    title: 'Card Without an Image',
+    description: 'This card demonstrates how the component looks without an image.',
+    buttonText: 'More Info',
+    buttonLink: '#',
+  },
+}
+
+export const WithExtraContent: Story = {
+  args: {
+    title: 'Card With Extra Content',
+    description: 'This is the main description.',
+    content: 'This is some additional content that can be used to provide more details.',
+    image: 'https://picsum.photos/400/200',
+    buttonText: 'Explore',
+    buttonLink: '#',
+  },
+}

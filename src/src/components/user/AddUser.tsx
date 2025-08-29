@@ -1,5 +1,10 @@
 'use client'
-import { IdentityUserCreateDto, userCreate } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import classNames from 'clsx'
+import { Plus } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { type IdentityUserCreateDto, userCreate } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -14,11 +19,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import classNames from 'clsx'
-import { Plus } from 'lucide-react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 
 export type AddUserProps = {}
 
@@ -50,7 +50,7 @@ export const AddUser = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User creation wasn&apos;t successful.",
+          description: 'User creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

@@ -34,4 +34,4 @@ export const DividerBlockFields = {
       { label: 'Right', value: 'right' },
     ],
   },
-} 
+}

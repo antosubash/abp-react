@@ -114,4 +114,4 @@ export const LargeData: Story = {
     alignment: 'left',
     fontSize: 'sm',
   },
-} 
+}

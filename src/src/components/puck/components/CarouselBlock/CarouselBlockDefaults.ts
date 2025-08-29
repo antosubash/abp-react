@@ -1,4 +1,4 @@
-import { CarouselBlockProps } from './CarouselBlockProps'
+import type { CarouselBlockProps } from './CarouselBlockProps'
 
 export const CarouselBlockDefaults: CarouselBlockProps = {
   slides: [
@@ -72,4 +72,4 @@ export const CarouselBlockDefaults: CarouselBlockProps = {
       showDots: true,
     },
   },
-} 
+}

@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { DividerBlock } from './DividerBlock'
 
@@ -59,31 +58,31 @@ export const Default: Story = {
 }
 
 export const Dashed: Story = {
-    args: {
-      ...Default.args,
-      style: 'dashed',
-    },
-  }
-  
-  export const Dotted: Story = {
-    args: {
-      ...Default.args,
-      style: 'dotted',
-    },
-  }
-  
-  export const Double: Story = {
-    args: {
-      ...Default.args,
-      style: 'double',
-      height: '3px',
-    },
-  }
-  
-  export const Colored: Story = {
-    args: {
-      ...Default.args,
-      color: '#3b82f6',
-      height: '2px',
-    },
-  }
+  args: {
+    ...Default.args,
+    style: 'dashed',
+  },
+}
+
+export const Dotted: Story = {
+  args: {
+    ...Default.args,
+    style: 'dotted',
+  },
+}
+
+export const Double: Story = {
+  args: {
+    ...Default.args,
+    style: 'double',
+    height: '3px',
+  },
+}
+
+export const Colored: Story = {
+  args: {
+    ...Default.args,
+    color: '#3b82f6',
+    height: '2px',
+  },
+}

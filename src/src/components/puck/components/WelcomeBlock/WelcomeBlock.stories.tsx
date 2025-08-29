@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { WelcomeBlock } from './WelcomeBlock'
 
@@ -57,7 +56,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: 'Welcome to the Page Builder!',
-    description: 'This is a welcome block. You can customize the title, description, and other properties.',
+    description:
+      'This is a welcome block. You can customize the title, description, and other properties.',
     showTips: true,
     alignment: 'center',
     backgroundColor: '#f8fafc',
@@ -68,16 +68,16 @@ export const Default: Story = {
 }
 
 export const WithoutTips: Story = {
-    args: {
-      ...Default.args,
-      showTips: false,
-    },
-  }
-  
-  export const CustomColors: Story = {
-    args: {
-      ...Default.args,
-      backgroundColor: '#1f2937',
-      textColor: '#ffffff',
-    },
-  }
+  args: {
+    ...Default.args,
+    showTips: false,
+  },
+}
+
+export const CustomColors: Story = {
+  args: {
+    ...Default.args,
+    backgroundColor: '#1f2937',
+    textColor: '#ffffff',
+  },
+}

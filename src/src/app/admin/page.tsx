@@ -1,8 +1,3 @@
-import { abpApplicationConfigurationGet, ApplicationConfigurationDto } from '@/client'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import {
   Building,
   CheckCircle,
@@ -14,6 +9,11 @@ import {
   User,
   XCircle,
 } from 'lucide-react'
+import { type ApplicationConfigurationDto, abpApplicationConfigurationGet } from '@/client'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 // Force dynamic rendering since this page uses server-side API calls and authentication
 export const dynamic = 'force-dynamic'

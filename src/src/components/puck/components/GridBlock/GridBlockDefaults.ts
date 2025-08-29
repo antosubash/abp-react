@@ -9,4 +9,4 @@ export const GridBlockDefaults = {
   backgroundColor: 'transparent' as const,
   minHeight: 'auto' as const,
   width: '100%' as const,
-} 
+}

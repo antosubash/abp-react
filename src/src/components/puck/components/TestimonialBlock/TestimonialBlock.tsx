@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { TestimonialBlockProps } from './TestimonialBlockProps'
+import type { TestimonialBlockProps } from './TestimonialBlockProps'
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
@@ -92,9 +92,7 @@ export const TestimonialBlock = ({
     <div style={baseStyles}>
       {renderStars()}
       {renderAvatar()}
-      <blockquote style={quoteStyles}>
-        &ldquo;{quote}&rdquo;
-      </blockquote>
+      <blockquote style={quoteStyles}>&ldquo;{quote}&rdquo;</blockquote>
       <div>
         <div style={authorStyles}>{author}</div>
         {(position || company) && (
@@ -107,4 +105,4 @@ export const TestimonialBlock = ({
       </div>
     </div>
   )
-} 
+}

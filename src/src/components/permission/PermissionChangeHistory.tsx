@@ -1,11 +1,11 @@
+import { CheckCircle2, Clock, RotateCcw, Undo2, XCircle } from 'lucide-react'
 import { useMemo } from 'react'
-import { Clock, Undo2, CheckCircle2, XCircle, RotateCcw } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
-import { ScrollArea } from '../ui/scroll-area'
 import { cn } from '@/lib/utils'
-import { PermissionChange } from './useEnhancedPermissionChanges'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { ScrollArea } from '../ui/scroll-area'
+import type { PermissionChange } from './useEnhancedPermissionChanges'
 
 interface PermissionChangeHistoryProps {
   changes: PermissionChange[]
@@ -20,12 +20,12 @@ export const PermissionChangeHistory = ({
   onUndo,
   onReset,
   canUndo,
-  canReset
+  canReset,
 }: PermissionChangeHistoryProps) => {
   const stats = useMemo(() => {
-    const granted = changes.filter(c => c.newValue && !c.oldValue).length
-    const revoked = changes.filter(c => !c.newValue && c.oldValue).length
-    
+    const granted = changes.filter((c) => c.newValue && !c.oldValue).length
+    const revoked = changes.filter((c) => !c.newValue && c.oldValue).length
+
     return { granted, revoked, total: changes.length }
   }, [changes])
 
@@ -107,46 +107,52 @@ export const PermissionChangeHistory = ({
           <h4 className="text-sm font-medium mb-2">Recent Changes</h4>
           <ScrollArea className="h-[200px]">
             <div className="space-y-2">
-              {changes.slice(-10).reverse().map((change, index) => (
-                <div
-                  key={`${change.permissionName}-${change.timestamp}`}
-                  className="flex items-center justify-between p-2 rounded-lg border bg-card"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className={cn(
-                      "p-1 rounded",
-                      change.newValue ? "bg-green-100" : "bg-red-100"
-                    )}>
-                      {change.newValue ? (
-                        <CheckCircle2 className="h-3 w-3 text-green-600" />
-                      ) : (
-                        <XCircle className="h-3 w-3 text-red-600" />
-                      )}
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium">{change.permissionName}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {change.oldValue ? 'Revoked' : 'Granted'} at {formatTime(change.timestamp)}
+              {changes
+                .slice(-10)
+                .reverse()
+                .map((change, index) => (
+                  <div
+                    key={`${change.permissionName}-${change.timestamp}`}
+                    className="flex items-center justify-between p-2 rounded-lg border bg-card"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={cn(
+                          'p-1 rounded',
+                          change.newValue ? 'bg-green-100' : 'bg-red-100'
+                        )}
+                      >
+                        {change.newValue ? (
+                          <CheckCircle2 className="h-3 w-3 text-green-600" />
+                        ) : (
+                          <XCircle className="h-3 w-3 text-red-600" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium">{change.permissionName}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {change.oldValue ? 'Revoked' : 'Granted'} at{' '}
+                          {formatTime(change.timestamp)}
+                        </div>
                       </div>
                     </div>
+                    <Badge
+                      variant="outline"
+                      className={cn(
+                        'text-xs',
+                        change.newValue
+                          ? 'border-green-200 text-green-700 bg-green-50'
+                          : 'border-red-200 text-red-700 bg-red-50'
+                      )}
+                    >
+                      {change.newValue ? 'Granted' : 'Revoked'}
+                    </Badge>
                   </div>
-                  <Badge
-                    variant="outline"
-                    className={cn(
-                      "text-xs",
-                      change.newValue 
-                        ? "border-green-200 text-green-700 bg-green-50" 
-                        : "border-red-200 text-red-700 bg-red-50"
-                    )}
-                  >
-                    {change.newValue ? 'Granted' : 'Revoked'}
-                  </Badge>
-                </div>
-              ))}
+                ))}
             </div>
           </ScrollArea>
         </div>
       </CardContent>
     </Card>
   )
-} 
+}

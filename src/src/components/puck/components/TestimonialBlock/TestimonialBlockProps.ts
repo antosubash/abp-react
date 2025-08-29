@@ -10,4 +10,4 @@ export interface TestimonialBlockProps {
   backgroundColor?: string
   textColor?: string
   padding?: string
-} 
+}

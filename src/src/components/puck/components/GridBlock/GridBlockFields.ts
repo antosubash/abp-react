@@ -54,4 +54,4 @@ export const GridBlockFields = {
     type: 'text' as const,
     label: 'Width (CSS value)',
   },
-} 
+}

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { GalleryItemProps } from './GalleryItemProps'
+import type { GalleryItemProps } from './GalleryItemProps'
 
 export const GalleryItem = ({
   item,
@@ -76,9 +76,7 @@ export const GalleryItem = ({
       />
 
       {/* Loading skeleton */}
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+      {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse" />}
 
       {/* Overlay effect */}
       {hoverEffect === 'overlay' && (
@@ -110,4 +108,4 @@ export const GalleryItem = ({
       )}
     </div>
   )
-} 
+}

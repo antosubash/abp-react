@@ -1,10 +1,8 @@
-import { IdentityRoleDto, IdentityUserUpdateDto, userUpdate } from '@/client'
-import { useToast } from '@/components/ui/use-toast'
-import { MouseEvent, useCallback, useEffect, useState } from 'react'
+import classNames from 'clsx'
+import { type MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
-
-import Loader from '@/components/ui/Loader'
+import { type IdentityRoleDto, type IdentityUserUpdateDto, userUpdate } from '@/client'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -15,10 +13,11 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import Loader from '@/components/ui/Loader'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useToast } from '@/components/ui/use-toast'
 import { useAssignableRoles } from '@/lib/hooks/useAssignableRoles'
 import { useUserRoles } from '@/lib/hooks/useUserRoles'
-import classNames from 'clsx'
 
 const TABS_NAME = {
   USERS_EDIT: 'user_edit',
@@ -60,7 +59,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User update wasn&apos;t successfull.",
+          description: 'User update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }

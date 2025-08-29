@@ -1,7 +1,7 @@
 import type { ComponentConfig } from '@measured/puck'
 import { CarouselBlock } from './CarouselBlock'
-import { CarouselBlockFields } from './CarouselBlockFields'
 import { CarouselBlockDefaults } from './CarouselBlockDefaults'
+import { CarouselBlockFields } from './CarouselBlockFields'
 import type { CarouselBlockProps } from './CarouselBlockProps'
 
 export const CarouselBlockConfig: ComponentConfig<CarouselBlockProps> = {
@@ -9,4 +9,4 @@ export const CarouselBlockConfig: ComponentConfig<CarouselBlockProps> = {
   defaultProps: CarouselBlockDefaults,
   render: CarouselBlock,
   label: 'Carousel',
-} 
+}

@@ -7,4 +7,4 @@ export const ContainerBlockConfig = {
   fields: ContainerBlockFields,
   defaultProps: ContainerBlockDefaults,
   render: ContainerBlock,
-} 
+}

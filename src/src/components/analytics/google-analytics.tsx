@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 interface GoogleAnalyticsProps {
   trackingId: string
@@ -25,7 +25,7 @@ const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ trackingId }) => {
 
   return (
     <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}></script>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`} />
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -35,7 +35,7 @@ const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ trackingId }) => {
             gtag('config', '${trackingId}');
           `,
         }}
-      ></script>
+      />
     </>
   )
 }

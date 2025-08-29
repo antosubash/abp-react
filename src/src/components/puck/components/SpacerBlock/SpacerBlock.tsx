@@ -1,6 +1,6 @@
 'use client'
 
-import { SpacerBlockProps } from './SpacerBlockProps'
+import type { SpacerBlockProps } from './SpacerBlockProps'
 
 export const SpacerBlock = ({
   height = '40px',
@@ -17,4 +17,4 @@ export const SpacerBlock = ({
   }
 
   return <div style={spacerStyle} />
-} 
+}

@@ -15,7 +15,7 @@ export const Hero = () => {
                 incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
-            <div className="w-full max-w-sm space-y-2"></div>
+            <div className="w-full max-w-sm space-y-2" />
           </div>
           <Image
             src="/img/macbook.png"

@@ -1,5 +1,13 @@
 'use client'
-import { TenantDto, TenantUpdateDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  type PaginationState,
+  useReactTable,
+} from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import type { TenantDto, TenantUpdateDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
@@ -8,13 +16,10 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useTenants } from '@/lib/hooks/useTenants'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeleteTenant } from './DeleteTenant'
 import { FeatureList } from './FeatureList'
-import { TenantEdit, TenantExtraProperties } from './TenantEdit'
+import { TenantEdit, type TenantExtraProperties } from './TenantEdit'
 
 export const TenantList = () => {
   const { toast } = useToast()
@@ -36,7 +41,7 @@ export const TenantList = () => {
       pageIndex,
       pageSize,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     [pageIndex, pageSize, toast]
   )
 
@@ -113,7 +118,7 @@ export const TenantList = () => {
         ],
       },
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     [tenantActionDialog]
   )
 

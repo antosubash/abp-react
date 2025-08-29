@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { ContainerBlock } from './ContainerBlock'
 
@@ -9,7 +8,8 @@ const meta: Meta<typeof ContainerBlock> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A container component that wraps other components and provides layout and styling options.',
+        component:
+          'A container component that wraps other components and provides layout and styling options.',
       },
     },
   },
@@ -68,8 +68,7 @@ const MockItems = () => (
     <h3 style={{ margin: 0, paddingBottom: '10px' }}>Hello from inside the container!</h3>
     <p style={{ margin: 0 }}>This is some content rendered by the `items` prop.</p>
   </div>
-);
-
+)
 
 export const Default: Story = {
   args: {

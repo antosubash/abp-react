@@ -1,4 +1,4 @@
-import { GalleryItem } from './GalleryItemProps'
+import type { GalleryItem } from './GalleryItemProps'
 
 export interface LightboxProps {
   isOpen: boolean
@@ -7,4 +7,4 @@ export interface LightboxProps {
   currentIndex: number
   onNavigate: (index: number) => void
   theme: 'light' | 'dark'
-} 
+}

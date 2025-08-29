@@ -1,7 +1,8 @@
 export const HeroDefaults = {
   preset: 'default' as const,
   title: 'Build Something Amazing' as const,
-  subtitle: 'Create stunning websites with our powerful platform. Start your journey today and bring your ideas to life with modern design and cutting-edge technology.' as const,
+  subtitle:
+    'Create stunning websites with our powerful platform. Start your journey today and bring your ideas to life with modern design and cutting-edge technology.' as const,
   backgroundColor: '#0f172a',
   backgroundImage: '',
   backgroundOverlay: 'rgba(15, 23, 42, 0.7)',

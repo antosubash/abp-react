@@ -7,4 +7,4 @@ export const TestimonialBlockConfig = {
   fields: TestimonialBlockFields,
   defaultProps: TestimonialBlockDefaults,
   render: TestimonialBlock,
-} 
+}

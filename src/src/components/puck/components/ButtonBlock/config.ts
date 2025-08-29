@@ -7,4 +7,4 @@ export const ButtonBlockConfig = {
   fields: ButtonBlockFields,
   defaultProps: ButtonBlockDefaults,
   render: ButtonBlock,
-} 
+}

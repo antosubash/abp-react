@@ -1,5 +1,13 @@
 'use client'
-import { CommentWithAuthorDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  type PaginationState,
+  useReactTable,
+} from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import type { CommentWithAuthorDto } from '@/client'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
@@ -8,9 +16,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useComments } from '@/lib/hooks/useComments'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { AddComment } from './AddComment'
 import { CommentEdit } from './CommentEdit'

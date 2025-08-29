@@ -1,7 +1,7 @@
+import * as client from 'openid-client'
 import { clientConfig } from '@/config'
 import { getSession } from '@/lib/actions'
 import { getClientConfig } from '@/lib/session-utils'
-import * as client from 'openid-client'
 /**
  * Handles the GET request for the login route.
  *
@@ -13,22 +13,24 @@ import * as client from 'openid-client'
  */
 export async function GET() {
   const session = await getSession()
-  let code_verifier = client.randomPKCECodeVerifier()
-  let code_challenge = await client.calculatePKCECodeChallenge(code_verifier)
+  const code_verifier = client.randomPKCECodeVerifier()
+  const code_challenge = await client.calculatePKCECodeChallenge(code_verifier)
   const openIdClientConfig = await getClientConfig()
   let tenantId = session.tenantId
 
   // Ensure tenantId is always a string and handle edge cases
-  if (!tenantId || 
-      tenantId === 'default' || 
-      (typeof tenantId === 'object' && Object.keys(tenantId).length === 0) ||
-      typeof tenantId !== 'string') {
+  if (
+    !tenantId ||
+    tenantId === 'default' ||
+    (typeof tenantId === 'object' && Object.keys(tenantId).length === 0) ||
+    typeof tenantId !== 'string'
+  ) {
     tenantId = ''
   } else {
     tenantId = String(tenantId)
   }
 
-  let parameters: Record<string, string> = {
+  const parameters: Record<string, string> = {
     redirect_uri: clientConfig.redirect_uri,
     scope: clientConfig.scope!,
     code_challenge,
@@ -40,7 +42,7 @@ export async function GET() {
     state = client.randomState()
     parameters.state = state
   }
-  let redirectTo = client.buildAuthorizationUrl(openIdClientConfig, parameters)
+  const redirectTo = client.buildAuthorizationUrl(openIdClientConfig, parameters)
   session.code_verifier = code_verifier
   session.state = state
   await session.save()

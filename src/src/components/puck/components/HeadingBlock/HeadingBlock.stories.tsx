@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { HeadingBlock } from './HeadingBlock'
 
@@ -66,33 +65,33 @@ export const Default: Story = {
 }
 
 export const CenteredH2: Story = {
-    args: {
-      ...Default.args,
-      title: 'This is a Centered H2 Heading',
-      level: 'h2',
-      alignment: 'center',
-      fontSize: '2xl',
-    },
-  }
-  
-  export const RightAlignedH3: Story = {
-    args: {
-      ...Default.args,
-      title: 'This is a Right-Aligned H3 Heading',
-      level: 'h3',
-      alignment: 'right',
-      fontSize: 'xl',
-    },
-  }
-  
-  export const CustomStyled: Story = {
-    args: {
-      ...Default.args,
-      title: 'This is a Custom Styled Heading',
-      level: 'h1',
-      alignment: 'center',
-      fontSize: '5xl',
-      fontWeight: 'extrabold',
-      color: '#3b82f6',
-    },
-  }
+  args: {
+    ...Default.args,
+    title: 'This is a Centered H2 Heading',
+    level: 'h2',
+    alignment: 'center',
+    fontSize: '2xl',
+  },
+}
+
+export const RightAlignedH3: Story = {
+  args: {
+    ...Default.args,
+    title: 'This is a Right-Aligned H3 Heading',
+    level: 'h3',
+    alignment: 'right',
+    fontSize: 'xl',
+  },
+}
+
+export const CustomStyled: Story = {
+  args: {
+    ...Default.args,
+    title: 'This is a Custom Styled Heading',
+    level: 'h1',
+    alignment: 'center',
+    fontSize: '5xl',
+    fontWeight: 'extrabold',
+    color: '#3b82f6',
+  },
+}

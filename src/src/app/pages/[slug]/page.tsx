@@ -1,5 +1,9 @@
 'use client'
-import { VoloCmsKitContentsPageDto } from '@/client'
+import { AlertTriangle, Home, RefreshCw, Search } from 'lucide-react'
+import Link from 'next/link'
+import { useParams, useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import type { VoloCmsKitContentsPageDto } from '@/client'
 import { PageView } from '@/components/page/PageView'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -7,10 +11,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Error from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { usePageBySlug } from '@/lib/hooks/usePages'
-import { AlertTriangle, Home, RefreshCw, Search } from 'lucide-react'
-import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
 
 export default function PageViewPage() {
   const params = useParams()
@@ -65,7 +65,8 @@ export default function PageViewPage() {
               </div>
               <CardTitle>Connection Error</CardTitle>
               <CardDescription>
-                We&apos;re having trouble connecting to our servers. This might be a temporary issue.
+                We&apos;re having trouble connecting to our servers. This might be a temporary
+                issue.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

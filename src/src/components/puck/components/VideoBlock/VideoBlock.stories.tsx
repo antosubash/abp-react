@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { VideoBlock } from './VideoBlock'
 
@@ -79,25 +78,25 @@ export const DefaultVideo: Story = {
 }
 
 export const YouTube: Story = {
-    args: {
-      ...DefaultVideo.args,
-      src: 'dQw4w9WgXcQ',
-      type: 'youtube',
-    },
-  }
-  
-  export const Vimeo: Story = {
-    args: {
-      ...DefaultVideo.args,
-      src: '148751763',
-      type: 'vimeo',
-    },
-  }
-  
-  export const AutoplayMuted: Story = {
-    args: {
-      ...DefaultVideo.args,
-      autoplay: true,
-      muted: true,
-    },
-  }
+  args: {
+    ...DefaultVideo.args,
+    src: 'dQw4w9WgXcQ',
+    type: 'youtube',
+  },
+}
+
+export const Vimeo: Story = {
+  args: {
+    ...DefaultVideo.args,
+    src: '148751763',
+    type: 'vimeo',
+  },
+}
+
+export const AutoplayMuted: Story = {
+  args: {
+    ...DefaultVideo.args,
+    autoplay: true,
+    muted: true,
+  },
+}

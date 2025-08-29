@@ -1,6 +1,6 @@
 'use client'
 
-import { TextBlockProps } from './TextBlockProps'
+import type { TextBlockProps } from './TextBlockProps'
 
 export const TextBlock = ({
   text,
@@ -14,9 +14,12 @@ export const TextBlock = ({
   padding = '16px',
 }: TextBlockProps) => {
   // Ensure text is always a string
-  const safeText = typeof text === 'string' ? text : 
-                   typeof text === 'object' && text !== null ? JSON.stringify(text) :
-                   'Enter your text content here...'
+  const safeText =
+    typeof text === 'string'
+      ? text
+      : typeof text === 'object' && text !== null
+        ? JSON.stringify(text)
+        : 'Enter your text content here...'
   const fontSizeMap = {
     sm: '14px',
     base: '16px',

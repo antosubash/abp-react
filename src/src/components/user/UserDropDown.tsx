@@ -1,3 +1,7 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
+import { v4 } from 'uuid'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,10 +12,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
 import { USER_ROLE } from '@/lib/utils'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useMemo } from 'react'
-import { v4 } from 'uuid'
 
 export const UserDropDown = () => {
   const router = useRouter()

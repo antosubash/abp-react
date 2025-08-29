@@ -16,4 +16,4 @@ export const TableBlockDefaults = {
   rowBackgroundColor: '#ffffff',
   rowTextColor: '#374151',
   stripedRowColor: '#f9fafb',
-} 
+}

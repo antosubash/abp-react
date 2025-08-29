@@ -1,3 +1,3 @@
-export { GridBlock } from './GridBlock'
 export { GridBlockConfig } from './config'
-export type { GridBlockProps } from './GridBlockProps' 
+export { GridBlock } from './GridBlock'
+export type { GridBlockProps } from './GridBlockProps'

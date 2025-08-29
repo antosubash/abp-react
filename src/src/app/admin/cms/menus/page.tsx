@@ -1,9 +1,9 @@
 'use client'
+import { Plus } from 'lucide-react'
+import Link from 'next/link'
 import { MenuList } from '@/components/menu/MenuList'
 import { Button } from '@/components/ui/button'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { Plus } from 'lucide-react'
-import Link from 'next/link'
 
 export default function CmsMenusPage() {
   const { can } = useGrantedPolicies()

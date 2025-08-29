@@ -1,5 +1,5 @@
 import { Cog, Database, FileText, Home, Menu, MessageSquare, UserRound, Users } from 'lucide-react'
-import React from 'react'
+import type React from 'react'
 
 /**
  * Configuration for the OpenID client.
@@ -47,7 +47,11 @@ export const AdminMenus: Array<{
   name: string
   link: string
   icon: React.ComponentType<{ className?: string }>
-  submenus?: Array<{ name: string; link: string; icon: React.ComponentType<{ className?: string }> }>
+  submenus?: Array<{
+    name: string
+    link: string
+    icon: React.ComponentType<{ className?: string }>
+  }>
 }> = [
   {
     name: 'Home',
@@ -97,4 +101,3 @@ export const AdminMenus: Array<{
     icon: Cog,
   },
 ]
-

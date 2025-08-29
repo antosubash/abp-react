@@ -1,4 +1,4 @@
-import { Slot } from '../../core/types'
+import type { Slot } from '../../core/types'
 
 export interface ContainerBlockProps {
   maxWidth?: string
@@ -11,4 +11,4 @@ export interface ContainerBlockProps {
   alignment?: 'left' | 'center' | 'right'
   shadow?: 'none' | 'small' | 'medium' | 'large'
   items?: Slot
-} 
+}

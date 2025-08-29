@@ -7,4 +7,4 @@ export const QuoteBlockConfig = {
   fields: QuoteBlockFields,
   defaultProps: QuoteBlockDefaults,
   render: QuoteBlock,
-} 
+}

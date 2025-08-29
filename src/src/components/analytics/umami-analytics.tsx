@@ -1,4 +1,4 @@
-import React from 'react'
+import type React from 'react'
 
 interface UmamiAnalyticsProps {
   scriptUrl: string
@@ -18,7 +18,7 @@ const UmamiAnalytics: React.FC<UmamiAnalyticsProps> = ({ scriptUrl, websiteId })
     console.error('Umami script URL and website ID are required.')
     return null
   }
-  return <script defer src={scriptUrl} data-website-id={websiteId}></script>
+  return <script defer src={scriptUrl} data-website-id={websiteId} />
 }
 
 export default UmamiAnalytics

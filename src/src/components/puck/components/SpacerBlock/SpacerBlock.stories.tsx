@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { SpacerBlock } from './SpacerBlock'
 
@@ -47,18 +46,18 @@ export const Default: Story = {
 }
 
 export const WithColor: Story = {
-    args: {
-      ...Default.args,
-      height: '60px',
-      backgroundColor: '#f0f0f0',
-    },
-  }
-  
-  export const WithBorders: Story = {
-    args: {
-      ...Default.args,
-      height: '80px',
-      borderTop: '2px solid #3b82f6',
-      borderBottom: '2px solid #3b82f6',
-    },
-  }
+  args: {
+    ...Default.args,
+    height: '60px',
+    backgroundColor: '#f0f0f0',
+  },
+}
+
+export const WithBorders: Story = {
+  args: {
+    ...Default.args,
+    height: '80px',
+    borderTop: '2px solid #3b82f6',
+    borderBottom: '2px solid #3b82f6',
+  },
+}

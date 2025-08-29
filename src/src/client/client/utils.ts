@@ -320,9 +320,8 @@ class Interceptors<Interceptor> {
   getInterceptorIndex(id: number | Interceptor): number {
     if (typeof id === 'number') {
       return this._fns[id] ? id : -1
-    } else {
-      return this._fns.indexOf(id)
     }
+    return this._fns.indexOf(id)
   }
   exists(id: number | Interceptor) {
     const index = this.getInterceptorIndex(id)
@@ -341,9 +340,8 @@ class Interceptors<Interceptor> {
     if (this._fns[index]) {
       this._fns[index] = fn
       return id
-    } else {
-      return false
     }
+    return false
   }
 
   use(fn: Interceptor) {

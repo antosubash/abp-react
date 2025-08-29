@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { FlexBlock } from './FlexBlock'
 
@@ -21,7 +20,14 @@ const meta: Meta<typeof FlexBlock> = {
     },
     justify: {
       control: { type: 'select' },
-      options: ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'],
+      options: [
+        'flex-start',
+        'flex-end',
+        'center',
+        'space-between',
+        'space-around',
+        'space-evenly',
+      ],
       description: 'How to justify the flex items.',
     },
     align: {
@@ -66,21 +72,21 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const MockItems = () => (
-    <>
-      <div style={{ padding: '20px', backgroundColor: '#f0f0f0', borderRadius: '8px', flex: 1 }}>
-        <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 1</h3>
-        <p style={{ margin: 0 }}>This is the first item.</p>
-      </div>
-      <div style={{ padding: '20px', backgroundColor: '#e0e0e0', borderRadius: '8px', flex: 1 }}>
-        <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 2</h3>
-        <p style={{ margin: 0 }}>This is the second item.</p>
-      </div>
-      <div style={{ padding: '20px', backgroundColor: '#d0d0d0', borderRadius: '8px', flex: 1 }}>
-        <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 3</h3>
-        <p style={{ margin: 0 }}>This is the third item.</p>
-      </div>
-    </>
-  );
+  <>
+    <div style={{ padding: '20px', backgroundColor: '#f0f0f0', borderRadius: '8px', flex: 1 }}>
+      <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 1</h3>
+      <p style={{ margin: 0 }}>This is the first item.</p>
+    </div>
+    <div style={{ padding: '20px', backgroundColor: '#e0e0e0', borderRadius: '8px', flex: 1 }}>
+      <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 2</h3>
+      <p style={{ margin: 0 }}>This is the second item.</p>
+    </div>
+    <div style={{ padding: '20px', backgroundColor: '#d0d0d0', borderRadius: '8px', flex: 1 }}>
+      <h3 style={{ margin: 0, paddingBottom: '10px' }}>Item 3</h3>
+      <p style={{ margin: 0 }}>This is the third item.</p>
+    </div>
+  </>
+)
 
 export const Default: Story = {
   args: {

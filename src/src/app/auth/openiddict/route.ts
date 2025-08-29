@@ -1,10 +1,10 @@
+import { headers } from 'next/headers'
+import type { NextRequest } from 'next/server'
+import * as client from 'openid-client'
 import { clientConfig } from '@/config'
 import { getSession } from '@/lib/actions'
-import { createRedisInstance, RedisSession } from '@/lib/redis'
+import { createRedisInstance, type RedisSession } from '@/lib/redis'
 import { getClientConfig } from '@/lib/session-utils'
-import { headers } from 'next/headers'
-import { NextRequest } from 'next/server'
-import * as client from 'openid-client'
 
 /**
  * Handles the GET request for OpenID Connect authentication.
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
   const { access_token, refresh_token } = tokenSet
   session.isLoggedIn = true
   session.access_token = access_token
-  let claims = tokenSet.claims()!
+  const claims = tokenSet.claims()!
   const { sub } = claims
   // call userinfo endpoint to get user info
   const userinfo = await client.fetchUserInfo(openIdClientConfig, access_token, sub)

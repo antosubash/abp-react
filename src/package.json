@@ -3,11 +3,14 @@
   "version": "2.5.16",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
-    "format": "prettier --write .",
+    "lint": "npx @biomejs/biome lint .",
+    "lint:fix": "npx @biomejs/biome lint --write .",
+    "format": "npx @biomejs/biome format --write .",
+    "check": "npx @biomejs/biome check .",
+    "check:fix": "npx @biomejs/biome check --write .",
     "prepare": "husky",
     "gen-api": "npx @hey-api/openapi-ts -i https://abp.antosubash.com/swagger/v1/swagger.json -o src/client -c @hey-api/client-fetch",
     "release": "release-it",
@@ -60,13 +63,12 @@
     "iron-session": "^8.0.4",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.525.0",
-    "next": "15.3.5",
+    "next": "15.5.2",
     "next-themes": "^0.4.6",
     "openid-client": "^6.6.2",
-    "prettier-plugin-organize-imports": "^4.1.0",
-    "react": "^19.1.0",
+    "react": "19.1.1",
     "react-day-picker": "^9.8.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "19.1.1",
     "react-hook-form": "^7.60.0",
     "react-resizable-panels": "^3.0.3",
     "recharts": "^3.0.2",
@@ -89,25 +91,17 @@
     "@storybook/addon-vitest": "9.1.1",
     "@storybook/nextjs-vite": "^9.1.1",
     "@tailwindcss/postcss": "^4.1.7",
-    "@tanstack/eslint-plugin-query": "^5.81.2",
     "@types/node": "^22.14.1",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
     "@types/uuid": "^10.0.0",
     "@vitest/browser": "^3.2.4",
     "@vitest/coverage-v8": "^3.2.4",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "15.3.5",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.5.1",
-    "eslint-plugin-storybook": "9.1.1",
     "husky": "^9.1.7",
     "lightningcss-win32-arm64-msvc": "^1.30.1",
     "lint-staged": "^16.1.2",
     "playwright": "^1.54.2",
     "postcss": "^8.5.6",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.13",
     "release-it": "^19.0.3",
     "release-it-changelogen": "^0.1.0",
     "storybook": "9.1.1",
@@ -116,11 +110,8 @@
     "vitest": "^3.2.4"
   },
   "lint-staged": {
-    "*.+(js|jsx|ts|tsx)": [
-      "eslint --fix"
-    ],
     "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
-      "prettier --write"
+      "npx @biomejs/biome check --write"
     ]
   },
   "release-it": {
@@ -151,6 +142,12 @@
       "requireBranch": "main",
       "commitMessage": "chore: release v${version}",
       "requireCleanWorkingDir": false
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.1.12",
+      "@types/react-dom": "19.1.9"
     }
   }
 }

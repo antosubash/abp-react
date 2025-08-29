@@ -1,7 +1,7 @@
 'use client'
-import { ProfileChangePasswordData, profileChangePassword } from '@/client'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { type ProfileChangePasswordData, profileChangePassword } from '@/client'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { useToast } from '../ui/use-toast'
@@ -38,7 +38,7 @@ export const ChangePassword = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Password update wasn&apos;t successful.",
+          description: 'Password update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }
@@ -47,7 +47,8 @@ export const ChangePassword = () => {
   const shouldDisabled = () => {
     if (!password.newPassword.trim() || !password.confirmNewPassword.trim()) {
       return true
-    } else if (password.newPassword.trim() !== password.confirmNewPassword.trim()) {
+    }
+    if (password.newPassword.trim() !== password.confirmNewPassword.trim()) {
       return true
     }
 

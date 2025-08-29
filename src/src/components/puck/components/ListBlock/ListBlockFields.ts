@@ -75,4 +75,4 @@ export const ListBlockFields = {
       { label: 'Full', value: 'full' },
     ],
   },
-} 
+}

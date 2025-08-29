@@ -1,3 +1,3 @@
-export { ListBlock } from './ListBlock'
 export { ListBlockConfig } from './config'
-export type { ListBlockProps } from './ListBlockProps' 
+export { ListBlock } from './ListBlock'
+export type { ListBlockProps } from './ListBlockProps'

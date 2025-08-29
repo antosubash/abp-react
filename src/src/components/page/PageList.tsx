@@ -1,5 +1,13 @@
 'use client'
-import { VoloCmsKitAdminPagesPageDto } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  type PaginationState,
+  useReactTable,
+} from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import type { VoloCmsKitAdminPagesPageDto } from '@/client'
 import { Button } from '@/components/ui/button'
 import { CustomTable } from '@/components/ui/CustomTable'
 import Error from '@/components/ui/Error'
@@ -9,9 +17,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { usePages } from '@/lib/hooks/usePages'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeletePage } from './DeletePage'
 

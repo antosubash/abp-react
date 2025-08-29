@@ -1,11 +1,17 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { CarouselBlockProps, CarouselSlide } from './CarouselBlockProps'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 import { CarouselBlockDefaults } from './CarouselBlockDefaults'
+import type { CarouselBlockProps, CarouselSlide } from './CarouselBlockProps'
 
 export const CarouselBlock = ({
   slides = CarouselBlockDefaults.slides,
@@ -95,9 +101,12 @@ export const CarouselBlock = ({
   const responsiveSettings = getResponsiveSettings()
 
   // Handle dot click
-  const scrollTo = useCallback((index: number) => {
-    api?.scrollTo(index)
-  }, [api])
+  const scrollTo = useCallback(
+    (index: number) => {
+      api?.scrollTo(index)
+    },
+    [api]
+  )
 
   // Handle mouse events for pause on hover
   const handleMouseEnter = useCallback(() => {
@@ -114,7 +123,7 @@ export const CarouselBlock = ({
 
   if (!slides || slides.length === 0) {
     return (
-      <div 
+      <div
         style={{
           height: responsiveSettings.height,
           width,
@@ -201,23 +210,23 @@ export const CarouselBlock = ({
                   className="flex flex-col items-center justify-center"
                 >
                   {slide.title && (
-                    <h2 
+                    <h2
                       className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
                       style={{ textAlign: slide.textAlignment || 'center' }}
                     >
                       {slide.title}
                     </h2>
                   )}
-                  
+
                   {slide.description && (
-                    <p 
+                    <p
                       className="text-lg md:text-xl mb-6 leading-relaxed"
                       style={{ textAlign: slide.textAlignment || 'center' }}
                     >
                       {slide.description}
                     </p>
                   )}
-                  
+
                   {slide.buttonText && slide.buttonUrl && (
                     <Button
                       asChild
@@ -228,9 +237,7 @@ export const CarouselBlock = ({
                         color: slide.backgroundColor || '#000000',
                       }}
                     >
-                      <a href={slide.buttonUrl}>
-                        {slide.buttonText}
-                      </a>
+                      <a href={slide.buttonUrl}>{slide.buttonText}</a>
                     </Button>
                   )}
                 </div>
@@ -280,4 +287,4 @@ export const CarouselBlock = ({
       </Carousel>
     </div>
   )
-} 
+}

@@ -7,4 +7,4 @@ import { AdminLoading } from '@/components/ui/AdminLoading'
  */
 export default function AdminPageLoading() {
   return <AdminLoading />
-} 
+}

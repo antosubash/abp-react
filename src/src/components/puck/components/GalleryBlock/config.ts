@@ -7,4 +7,4 @@ export const GalleryBlockConfig = {
   fields: GalleryBlockFields,
   defaultProps: GalleryBlockDefaults,
   render: GalleryBlock,
-} 
+}

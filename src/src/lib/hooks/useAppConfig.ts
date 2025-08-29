@@ -3,8 +3,9 @@
  * It uses the `abpApplicationConfigurationGet` function to retrieve the configuration data.
  * The data is considered fresh for 1 hour (staleTime: 60 * 60 * 1000).
  */
-import { abpApplicationConfigurationGet, ApplicationConfigurationDto } from '@/client'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type ApplicationConfigurationDto, abpApplicationConfigurationGet } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 export const useAppConfig = (): UseQueryResult<ApplicationConfigurationDto, unknown> => {

@@ -1,4 +1,4 @@
-import { flexRender, Table } from '@tanstack/react-table'
+import { flexRender, type Table } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 import { Pagination } from './table-pagination'
 
@@ -107,7 +107,7 @@ const TableView = <T extends Record<string, any>>({
               <tr>
                 {Array.from({ length: 4 }).map((_, i) => (
                   <th key={i} className="last:1/2 truncate px-3 lg:last:w-1/4">
-                    <div className="h-4 bg-base-300 rounded animate-pulse"></div>
+                    <div className="h-4 bg-base-300 rounded animate-pulse" />
                   </th>
                 ))}
               </tr>
@@ -117,7 +117,7 @@ const TableView = <T extends Record<string, any>>({
                 <tr key={i} className="border-b border-b-primary">
                   {Array.from({ length: 4 }).map((_, j) => (
                     <td key={j} className="truncate py-3 pl-3 text-left text-xs">
-                      <div className="h-3 bg-base-300 rounded animate-pulse"></div>
+                      <div className="h-3 bg-base-300 rounded animate-pulse" />
                     </td>
                   ))}
                 </tr>

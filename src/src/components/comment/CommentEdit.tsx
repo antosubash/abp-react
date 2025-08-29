@@ -1,8 +1,6 @@
-import { commentPublicUpdate, CommentWithAuthorDto, UpdateCommentInput } from '@/client'
-import { useToast } from '@/components/ui/use-toast'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-
+import { type CommentWithAuthorDto, commentPublicUpdate, type UpdateCommentInput } from '@/client'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -12,6 +10,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
+import { useToast } from '@/components/ui/use-toast'
 
 type CommentEditProps = {
   commentDto: CommentWithAuthorDto
@@ -40,7 +39,7 @@ export const CommentEdit = ({ commentDto, commentId, onDismiss }: CommentEditPro
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Comment update wasn&apos;t successful.",
+          description: 'Comment update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

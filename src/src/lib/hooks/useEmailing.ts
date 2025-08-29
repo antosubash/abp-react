@@ -1,5 +1,5 @@
-import { EmailSettingsDto, emailSettingsGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type EmailSettingsDto, emailSettingsGet } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 /**

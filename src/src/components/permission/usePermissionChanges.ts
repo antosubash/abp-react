@@ -1,6 +1,6 @@
-import { PermissionGrantInfoDto } from '@/client'
-import { Permissions } from '@/lib/utils'
 import { useCallback, useEffect, useState } from 'react'
+import type { PermissionGrantInfoDto } from '@/client'
+import { Permissions } from '@/lib/utils'
 
 /**
  * Hook to manage permission changes for different types of entities.
@@ -113,7 +113,7 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
         throw new Error('usePermissionsChanges hook received an unknown type property!')
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     [permissions, type]
   )
 

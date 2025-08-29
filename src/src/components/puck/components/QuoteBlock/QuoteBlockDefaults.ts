@@ -11,4 +11,4 @@ export const QuoteBlockDefaults = {
   borderColor: '#3b82f6',
   padding: '24px',
   maxWidth: 'lg' as const,
-} 
+}

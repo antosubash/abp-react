@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { GalleryBlockProps } from './GalleryBlockProps'
+import type { GalleryBlockProps } from './GalleryBlockProps'
 import { GalleryItem } from './GalleryItem'
-import { Lightbox } from './Lightbox'
 import type { GalleryItem as GalleryItemType } from './GalleryItemProps'
+import { Lightbox } from './Lightbox'
 
 export const GalleryBlock = ({
   layout = 'grid',
@@ -30,7 +30,7 @@ export const GalleryBlock = ({
 
   const handleImageClick = (item: GalleryItemType) => {
     if (lightbox) {
-      const index = images.findIndex(img => img.id === item.id)
+      const index = images.findIndex((img) => img.id === item.id)
       setCurrentImageIndex(index >= 0 ? index : 0)
       setLightboxOpen(true)
     }
@@ -51,7 +51,7 @@ export const GalleryBlock = ({
       if (mobileColumns === 3) return 'grid-cols-3'
       return 'grid-cols-1'
     }
-    
+
     const getTabletCols = () => {
       if (tabletColumns === 1) return 'md:grid-cols-1'
       if (tabletColumns === 2) return 'md:grid-cols-2'
@@ -59,7 +59,7 @@ export const GalleryBlock = ({
       if (tabletColumns === 4) return 'md:grid-cols-4'
       return 'md:grid-cols-2'
     }
-    
+
     const getDesktopCols = () => {
       if (columns === 1) return 'lg:grid-cols-1'
       if (columns === 2) return 'lg:grid-cols-2'
@@ -69,12 +69,12 @@ export const GalleryBlock = ({
       if (columns === 6) return 'lg:grid-cols-6'
       return 'lg:grid-cols-3'
     }
-    
+
     return `${getMobileCols()} ${getTabletCols()} ${getDesktopCols()}`
   }
 
   const getGapClass = () => {
-    const gapValue = parseInt(gap)
+    const gapValue = Number.parseInt(gap)
     if (gapValue <= 8) return 'gap-2'
     if (gapValue <= 12) return 'gap-3'
     if (gapValue <= 16) return 'gap-4'
@@ -85,7 +85,7 @@ export const GalleryBlock = ({
   }
 
   const getPaddingClass = () => {
-    const paddingValue = parseInt(padding)
+    const paddingValue = Number.parseInt(padding)
     if (paddingValue <= 8) return 'p-2'
     if (paddingValue <= 12) return 'p-3'
     if (paddingValue <= 16) return 'p-4'
@@ -114,10 +114,14 @@ export const GalleryBlock = ({
 
   const renderMasonryLayout = () => {
     const getColumnsClass = () => {
-      if (mobileColumns === 1 && tabletColumns === 2 && columns === 3) return 'columns-1 md:columns-2 lg:columns-3'
-      if (mobileColumns === 1 && tabletColumns === 2 && columns === 4) return 'columns-1 md:columns-2 lg:columns-4'
-      if (mobileColumns === 1 && tabletColumns === 3 && columns === 4) return 'columns-1 md:columns-3 lg:columns-4'
-      if (mobileColumns === 2 && tabletColumns === 3 && columns === 4) return 'columns-2 md:columns-3 lg:columns-4'
+      if (mobileColumns === 1 && tabletColumns === 2 && columns === 3)
+        return 'columns-1 md:columns-2 lg:columns-3'
+      if (mobileColumns === 1 && tabletColumns === 2 && columns === 4)
+        return 'columns-1 md:columns-2 lg:columns-4'
+      if (mobileColumns === 1 && tabletColumns === 3 && columns === 4)
+        return 'columns-1 md:columns-3 lg:columns-4'
+      if (mobileColumns === 2 && tabletColumns === 3 && columns === 4)
+        return 'columns-2 md:columns-3 lg:columns-4'
       return 'columns-1 md:columns-2 lg:columns-3' // default
     }
 
@@ -173,7 +177,7 @@ export const GalleryBlock = ({
             borderRadius={borderRadius}
             shadow={shadow}
           />
-          
+
           {images.length > 1 && (
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
               {images.map((_, index) => (
@@ -243,7 +247,7 @@ export const GalleryBlock = ({
   return (
     <div className="w-full">
       {renderLayout()}
-      
+
       {lightbox && (
         <Lightbox
           isOpen={lightboxOpen}
@@ -256,4 +260,4 @@ export const GalleryBlock = ({
       )}
     </div>
   )
-} 
+}

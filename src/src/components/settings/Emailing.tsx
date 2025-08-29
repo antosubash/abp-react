@@ -1,13 +1,13 @@
 'use client'
-import { EmailSettingsDto, EmailSettingsUpdateData, emailSettingsUpdate } from '@/client'
+import { useQueryClient } from '@tanstack/react-query'
+import clsx from 'clsx'
+import { type SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { type EmailSettingsDto, type EmailSettingsUpdateData, emailSettingsUpdate } from '@/client'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useEmailing } from '@/lib/hooks/useEmailing'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import clsx from 'clsx'
-import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 import { Input } from '../ui/input'
@@ -54,7 +54,7 @@ export const Emailing = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Email settings wasn&apos;t successfull.",
+          description: 'Email settings wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }

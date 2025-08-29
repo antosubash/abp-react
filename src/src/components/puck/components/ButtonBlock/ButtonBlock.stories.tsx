@@ -9,7 +9,8 @@ const meta: Meta<typeof ButtonBlock> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A customizable button block component for the Puck visual page builder. Supports various styles, sizes, and configurations.',
+        component:
+          'A customizable button block component for the Puck visual page builder. Supports various styles, sizes, and configurations.',
       },
     },
   },
@@ -262,4 +263,4 @@ export const CustomPadding: Story = {
       },
     },
   },
-} 
+}

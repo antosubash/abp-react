@@ -1,6 +1,6 @@
 'use client'
 
-import { ContainerBlockProps } from './ContainerBlockProps'
+import type { ContainerBlockProps } from './ContainerBlockProps'
 
 export const ContainerBlock = ({
   maxWidth = '1200px',
@@ -35,5 +35,5 @@ export const ContainerBlock = ({
   }
 
   const Items = items
-  return <div style={containerStyle}>{Items && <Items />}</div>   
-} 
+  return <div style={containerStyle}>{Items && <Items />}</div>
+}

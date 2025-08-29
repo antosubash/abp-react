@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Hero } from './Hero'
 
@@ -16,7 +15,14 @@ const meta: Meta<typeof Hero> = {
   argTypes: {
     preset: {
       control: { type: 'select' },
-      options: ['default', 'modern-gradient', 'dark-professional', 'light-clean', 'bold-bright', 'minimal'],
+      options: [
+        'default',
+        'modern-gradient',
+        'dark-professional',
+        'light-clean',
+        'bold-bright',
+        'minimal',
+      ],
       description: 'The preset style of the hero section.',
     },
     title: {
@@ -116,35 +122,35 @@ export const Default: Story = {
 }
 
 export const ModernGradient: Story = {
-    args: {
-      ...Default.args,
-      preset: 'modern-gradient',
-      title: 'Modern & Vibrant',
-      subtitle: 'A hero section with a beautiful gradient background.',
-    },
-  }
-  
-  export const DarkProfessional: Story = {
-    args: {
-      ...Default.args,
-      preset: 'dark-professional',
-      title: 'Professional & Sleek',
-      subtitle: 'A dark and professional hero section for your business.',
-    },
-  }
-  
-  export const LightClean: Story = {
-    args: {
-      ...Default.args,
-      preset: 'light-clean',
-      title: 'Clean & Minimal',
-      subtitle: 'A light and clean hero section for a modern look.',
-    },
-  }
-  
-  export const WithBackgroundImage: Story = {
-    args: {
-      ...Default.args,
-      backgroundImage: 'https://picsum.photos/1920/1080',
-    },
-  }
+  args: {
+    ...Default.args,
+    preset: 'modern-gradient',
+    title: 'Modern & Vibrant',
+    subtitle: 'A hero section with a beautiful gradient background.',
+  },
+}
+
+export const DarkProfessional: Story = {
+  args: {
+    ...Default.args,
+    preset: 'dark-professional',
+    title: 'Professional & Sleek',
+    subtitle: 'A dark and professional hero section for your business.',
+  },
+}
+
+export const LightClean: Story = {
+  args: {
+    ...Default.args,
+    preset: 'light-clean',
+    title: 'Clean & Minimal',
+    subtitle: 'A light and clean hero section for a modern look.',
+  },
+}
+
+export const WithBackgroundImage: Story = {
+  args: {
+    ...Default.args,
+    backgroundImage: 'https://picsum.photos/1920/1080',
+  },
+}

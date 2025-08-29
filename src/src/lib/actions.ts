@@ -1,11 +1,11 @@
 'use server'
-import { sessionOptions } from '@/sessionOptions'
-import { IronSession, getIronSession } from 'iron-session'
+import { getIronSession, type IronSession } from 'iron-session'
 import { cookies } from 'next/headers'
 import * as client from 'openid-client'
+import { sessionOptions } from '@/sessionOptions'
 import { isTokenExpired } from './auth'
-import { RedisSession, createRedisInstance } from './redis'
-import { SessionData, defaultSession, getClientConfig } from './session-utils'
+import { createRedisInstance, type RedisSession } from './redis'
+import { defaultSession, getClientConfig, type SessionData } from './session-utils'
 
 /**
  * Retrieves the current session, refreshing the access token if it has expired.
@@ -20,8 +20,8 @@ import { SessionData, defaultSession, getClientConfig } from './session-utils'
  * The OpenID client is used to handle authentication and token management. The `refreshTokenGrant` method is used to refresh the access token when it has expired, ensuring that the session remains valid without requiring the user to re-authenticate.
  */
 export async function getSession(): Promise<IronSession<SessionData>> {
-  let session = await getIronSession<SessionData>(await cookies(), sessionOptions)
-  
+  const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
+
   try {
     // Check if the access token is expired
     if (session.access_token && isTokenExpired(session.access_token!)) {
@@ -31,13 +31,13 @@ export async function getSession(): Promise<IronSession<SessionData>> {
         const clientConfig = await getClientConfig()
 
         // Retrieve session data from Redis
-        let redisSessionData = await redis.get(redisKey)
-        
+        const redisSessionData = await redis.get(redisKey)
+
         if (!redisSessionData) {
           console.warn('No session data found in Redis, user may need to re-authenticate')
           throw new Error('No session data in Redis')
         }
-        
+
         const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
 
         // Check if we have a refresh token
@@ -51,7 +51,7 @@ export async function getSession(): Promise<IronSession<SessionData>> {
           clientConfig,
           parsedSessionData.refresh_token!
         )
-        
+
         session.access_token = tokenSet.access_token
         await session.save()
 
@@ -62,7 +62,7 @@ export async function getSession(): Promise<IronSession<SessionData>> {
         } as RedisSession
         await redis.set(redisKey, JSON.stringify(newRedisSessionData))
         await redis.quit()
-        
+
         console.log('Token refreshed successfully')
       } catch (refreshError) {
         console.error('Error refreshing token:', refreshError)

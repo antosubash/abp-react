@@ -67,4 +67,4 @@ export const ButtonBlockFields = {
     type: 'text' as const,
     label: 'Padding (CSS value)',
   },
-} 
+}

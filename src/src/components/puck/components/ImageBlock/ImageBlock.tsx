@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { ImageBlockProps } from './ImageBlockProps'
+import type { ImageBlockProps } from './ImageBlockProps'
 
 export const ImageBlock = ({
   src,

@@ -1,3 +1,3 @@
-export { FlexBlock } from './FlexBlock'
 export { FlexBlockConfig } from './config'
-export type { FlexBlockProps } from './FlexBlockProps' 
+export { FlexBlock } from './FlexBlock'
+export type { FlexBlockProps } from './FlexBlockProps'

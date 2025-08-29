@@ -7,4 +7,4 @@ export const TableBlockConfig = {
   fields: TableBlockFields,
   defaultProps: TableBlockDefaults,
   render: TableBlock,
-} 
+}

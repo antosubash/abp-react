@@ -1,11 +1,11 @@
 'use client'
-import { MenuItemDto } from '@/client'
+import { ChevronDown, ChevronRight, FileText, Folder } from 'lucide-react'
+import { useState } from 'react'
+import type { MenuItemDto } from '@/client'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
-import { ChevronDown, ChevronRight, FileText, Folder } from 'lucide-react'
-import { useState } from 'react'
 
 type TreeMenuItem = MenuItemDto & {
   children?: TreeMenuItem[]

@@ -87,7 +87,7 @@ Check out the live demo at [https://abpreact.antosubash.com/](https://abpreact.a
 - 🧪 **Development Tools**
   - Storybook for component documentation
   - TypeScript for type safety
-  - ESLint and Prettier for code quality
+  - Biome for code quality, linting, and formatting
   - Husky for git hooks
   - Vitest for testing
 
@@ -301,8 +301,8 @@ Please ensure your code:
 pnpm dev              # Start development server
 pnpm build            # Build for production
 pnpm start            # Start production server
-pnpm lint             # Run ESLint
-pnpm format           # Format code with Prettier
+pnpm lint             # Run Biome linting
+pnpm format           # Format code with Biome
 
 # Storybook
 pnpm storybook        # Start Storybook

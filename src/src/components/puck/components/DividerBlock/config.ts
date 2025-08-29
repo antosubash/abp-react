@@ -7,4 +7,4 @@ export const DividerBlockConfig = {
   fields: DividerBlockFields,
   defaultProps: DividerBlockDefaults,
   render: DividerBlock,
-} 
+}

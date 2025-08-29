@@ -3,7 +3,7 @@ export const GalleryBlockDefaults = {
   columns: 3 as const,
   gap: '16px' as const,
   padding: '16px' as const,
-  
+
   images: [
     {
       id: '1',
@@ -30,20 +30,20 @@ export const GalleryBlockDefaults = {
       height: 600,
     },
   ],
-  
+
   borderRadius: '8px' as const,
   shadow: true as const,
   hoverEffect: 'zoom' as const,
-  
+
   lightbox: true as const,
   lightboxTheme: 'light' as const,
   showCaptions: true as const,
   showThumbnails: false as const,
-  
+
   mobileColumns: 1 as const,
   tabletColumns: 2 as const,
-  
+
   lazyLoading: true as const,
   aspectRatio: 'auto' as const,
   imageQuality: 'medium' as const,
-} 
+}

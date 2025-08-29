@@ -1,4 +1,4 @@
-import { ReactNode, ComponentType } from 'react'
+import type { ComponentType, ReactNode } from 'react'
 
 export type Slot = ComponentType<any>
 
@@ -13,4 +13,4 @@ export type WithLayout<T> = T & {
     grow?: boolean
     [key: string]: any
   }
-} 
+}

@@ -1,5 +1,5 @@
-import { GetFeatureListResultDto, featuresGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
+import { type UseQueryResult, useQuery } from '@tanstack/react-query'
+import { featuresGet, type GetFeatureListResultDto } from '@/client'
 import { QueryNames } from './QueryConstants'
 
 /**

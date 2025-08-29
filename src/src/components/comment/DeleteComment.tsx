@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { commentAdminDelete } from '@/client'
 import {
   AlertDialog,
@@ -10,7 +11,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { useEffect, useState } from 'react'
 
 type DeleteCommentProps = {
   comment: { commentId: string; text: string }
@@ -26,14 +26,14 @@ export const DeleteComment = ({ comment: { commentId, text }, onDismiss }: Delet
       })
       toast({
         title: 'Success',
-        description: `Comment has been deleted successfully.`,
+        description: 'Comment has been deleted successfully.',
       })
       onDismiss()
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: `There was a problem when deleting the comment. Kindly try again.`,
+          description: 'There was a problem when deleting the comment. Kindly try again.',
           variant: 'destructive',
         })
       }
