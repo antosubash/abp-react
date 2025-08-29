@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { CarouselBlock } from './CarouselBlock'
 import type { CarouselBlockProps } from './CarouselBlockProps'
 

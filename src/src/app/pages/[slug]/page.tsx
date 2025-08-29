@@ -8,7 +8,7 @@ import { PageView } from '@/components/page/PageView'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Error from '@/components/ui/Error'
+import ErrorComponent from '@/components/ui/Error'
 import Loader from '@/components/ui/Loader'
 import { usePageBySlug } from '@/lib/hooks/usePages'
 
@@ -29,7 +29,7 @@ export default function PageViewPage() {
   // Reset retry count when slug changes
   useEffect(() => {
     setRetryCount(0)
-  }, [slug])
+  }, [])
 
   // Loading state with better UX
   if (isLoading) {
@@ -201,7 +201,7 @@ export default function PageViewPage() {
 
   // Render the page with error boundary
   return (
-    <ErrorBoundary fallback={<Error />}>
+    <ErrorBoundary fallback={<ErrorComponent />}>
       <PageView page={page as VoloCmsKitContentsPageDto} />
     </ErrorBoundary>
   )

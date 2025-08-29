@@ -1,21 +1,3 @@
-import {
-  ArrowRight,
-  CheckCircle,
-  Code,
-  Github,
-  Globe,
-  Mail,
-  MessageCircle,
-  Palette,
-  Rocket,
-  Shield,
-  Users,
-} from 'lucide-react'
-import Image from 'next/image'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
 export const Intro = () => {
   return (
     <div className="w-full py-12 md:py-24 lg:py-32">

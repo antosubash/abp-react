@@ -11,9 +11,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
-import { useAppConfig } from '@/lib/hooks/useAppConfig'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { Permissions } from '@/lib/utils'
 
@@ -37,9 +35,25 @@ const getDefaultContent = () => ({
   zones: {},
 })
 
+// Define proper types
+interface PageFormData {
+  title: string
+  slug: string
+  layoutName: string
+  content: Record<string, unknown>
+  script: string
+  style: string
+}
+
+interface ApiError {
+  error?: {
+    details?: Record<string, string[]>
+    message?: string
+  }
+}
+
 export default function CreatePage() {
   const { can } = useGrantedPolicies()
-  const { data: appConfig, isLoading: isAppConfigLoading } = useAppConfig()
   const { toast } = useToast()
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -53,7 +67,7 @@ export default function CreatePage() {
     setValue,
     control,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<PageFormData>({
     defaultValues: {
       title: '',
       slug: '',
@@ -73,7 +87,7 @@ export default function CreatePage() {
     setValue('slug', generatedSlug)
   }
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: PageFormData) => {
     if (isSubmitting) return
 
     setIsSubmitting(true)
@@ -81,29 +95,24 @@ export default function CreatePage() {
 
     try {
       // Ensure content is properly formatted
-      let contentToSubmit = data.content
+      let contentToSubmit: string
 
-      if (typeof contentToSubmit === 'object') {
+      if (typeof data.content === 'object' && data.content !== null) {
         // Update the root title with the page title
-        contentToSubmit = {
-          ...contentToSubmit,
+        const updatedContent = {
+          ...data.content,
           root: {
-            ...contentToSubmit.root,
+            ...(data.content.root as Record<string, unknown>),
             props: {
-              ...contentToSubmit.root?.props,
+              ...((data.content.root as Record<string, unknown>)?.props as Record<string, unknown>),
               title: data.title,
             },
           },
         }
 
-        contentToSubmit = JSON.stringify(contentToSubmit)
-      } else if (typeof contentToSubmit === 'string') {
+        contentToSubmit = JSON.stringify(updatedContent)
       } else {
-        console.warn(
-          'Content is neither object nor string:',
-          typeof contentToSubmit,
-          contentToSubmit
-        )
+        console.warn('Content is not an object:', typeof data.content, data.content)
         // Fallback to default content
         contentToSubmit = JSON.stringify(getDefaultContent())
       }
@@ -111,10 +120,10 @@ export default function CreatePage() {
       const apiData = {
         title: data.title,
         slug: data.slug,
-        layoutName: data.layoutName || '',
+        layoutName: data.layoutName || null,
         content: contentToSubmit,
-        script: data.script || '',
-        style: data.style || '',
+        script: data.script || null,
+        style: data.style || null,
       }
 
       await pageAdminCreate({
@@ -132,42 +141,25 @@ export default function CreatePage() {
 
       // Remove the redirect - stay on the current page
       // router.push('/admin/cms/pages')
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating page:', error)
+      setFormErrors({})
 
-      if (error.response?.data?.error?.details) {
-        setFormErrors(error.response.data.error.details)
-      } else if (error.response?.data?.error?.message) {
-        toast({
-          title: 'Error',
-          description: error.response.data.error.message,
-          variant: 'destructive',
-        })
-      } else {
-        toast({
-          title: 'Error',
-          description: error.message || 'Failed to create page.',
-          variant: 'destructive',
-        })
+      if (error && typeof error === 'object' && 'error' in error) {
+        const errorData = error as ApiError
+        if (errorData.error?.details) {
+          setFormErrors(errorData.error.details)
+        }
       }
+
+      toast({
+        title: 'Error',
+        description: 'Failed to create page. Please check your input and try again.',
+        variant: 'destructive',
+      })
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  // Show loading state while app config is loading
-  if (isAppConfigLoading) {
-    return (
-      <div className="container mx-auto p-4">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-semibold mb-2">Loading...</h2>
-            <p className="text-muted-foreground">Checking permissions...</p>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   if (!can(Permissions.CMSKIT_PAGES_CREATE)) {
@@ -313,7 +305,7 @@ export default function CreatePage() {
             if (typeof field.value === 'string') {
               try {
                 puckData = JSON.parse(field.value)
-              } catch (error) {
+              } catch (_error) {
                 console.warn('Failed to parse content as JSON, using default')
                 puckData = getDefaultContent()
               }

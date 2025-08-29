@@ -110,7 +110,7 @@ export const PermissionChangeHistory = ({
               {changes
                 .slice(-10)
                 .reverse()
-                .map((change, index) => (
+                .map((change, _index) => (
                   <div
                     key={`${change.permissionName}-${change.timestamp}`}
                     className="flex items-center justify-between p-2 rounded-lg border bg-card"

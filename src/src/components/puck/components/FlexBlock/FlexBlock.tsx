@@ -1,6 +1,5 @@
 'use client'
 
-import { ReactNode } from 'react'
 import type { FlexBlockProps } from './FlexBlockProps'
 
 export const FlexBlock = ({

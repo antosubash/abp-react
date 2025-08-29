@@ -16,7 +16,7 @@ import { getClientConfig, type SessionData } from './session-utils'
 export const isTokenExpired = (token: string) => {
   const decoded = jwtDecode(token!)
   const expirationTime = decoded?.exp! * 1000
-  const currentTime = new Date().getTime()
+  const currentTime = Date.now()
   return expirationTime < currentTime
 }
 

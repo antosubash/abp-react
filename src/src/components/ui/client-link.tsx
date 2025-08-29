@@ -39,7 +39,7 @@ export interface ClientLinkProps
 }
 
 const ClientLink = React.forwardRef<HTMLButtonElement, ClientLinkProps>(
-  ({ href, children, className, variant, size, asChild = false, ...props }, ref) => {
+  ({ href, children, className, variant, size, asChild = false, ...props }, _ref) => {
     return (
       <button
         {...props}

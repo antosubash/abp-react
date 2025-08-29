@@ -54,7 +54,7 @@ export const TogglePermission = ({
           <Permission
             name={dto.displayName!}
             isGranted={dto.isGranted!}
-            id={dto.displayName!.toLocaleLowerCase().concat(dto.parentName!)}
+            id={(dto.displayName || '').toLocaleLowerCase().concat(dto.parentName || '')}
             onUpdate={() => {
               onCurrentPermissionChanges(idx)
               if (onSelectedUpdate) {

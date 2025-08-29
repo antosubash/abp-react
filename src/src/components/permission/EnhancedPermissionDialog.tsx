@@ -3,7 +3,6 @@ import {
   AlertTriangle,
   Building,
   CheckCircle2,
-  Filter,
   Info,
   Save,
   Search,
@@ -15,11 +14,9 @@ import {
   Zap,
 } from 'lucide-react'
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
-import { v4 } from 'uuid'
 import {
   type IdentityRoleUpdateDto,
   type IdentityUserUpdateDto,
-  PermissionGrantInfoDto,
   type PermissionGroupDto,
   permissionsUpdate,
   type UpdatePermissionsDto,
@@ -40,10 +37,8 @@ import {
 } from '../ui/dialog'
 import { Input } from '../ui/input'
 import { ScrollArea } from '../ui/scroll-area'
-import { Separator } from '../ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { useToast } from '../ui/use-toast'
-import { TogglePermission } from './TogglePermission'
 
 type Management = 'identity' | 'tenant' | 'setting' | 'feature'
 
@@ -195,12 +190,15 @@ export const EnhancedPermissionDialog = ({
       setIsLoading(true)
 
       try {
-        const payload = permissionGroups?.flatMap((p) =>
-          p!.permissions!.map((grant) => ({
-            name: grant.name,
-            isGranted: grant.isGranted,
-          }))
-        )
+        const payload = permissionGroups
+          ?.flatMap(
+            (p) =>
+              p?.permissions?.map((grant) => ({
+                name: grant.name,
+                isGranted: grant.isGranted,
+              })) || []
+          )
+          .filter((item): item is { name: string; isGranted: boolean } => item !== undefined)
 
         const requestPayload: UpdatePermissionsDto = {
           permissions: payload,
@@ -226,7 +224,7 @@ export const EnhancedPermissionDialog = ({
 
         setHasChanges(false)
         onCloseEvent()
-      } catch (err: unknown) {
+      } catch (_err: unknown) {
         toast({
           title: 'Error',
           description: 'Failed to update permissions. Please try again.',
@@ -436,7 +434,7 @@ export const EnhancedPermissionDialog = ({
                       <CardContent className="p-0 sm:p-6">
                         <ScrollArea className="h-[250px] sm:h-[300px] pr-4">
                           <div className="space-y-2 p-4 sm:p-0">
-                            {group.permissions?.map((permission, idx) => (
+                            {group.permissions?.map((permission, _idx) => (
                               <div
                                 key={permission.name}
                                 className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors gap-3"

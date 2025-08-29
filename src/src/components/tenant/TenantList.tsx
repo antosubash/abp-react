@@ -42,7 +42,7 @@ export const TenantList = () => {
       pageSize,
     }),
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    [pageIndex, pageSize, toast]
+    [pageIndex, pageSize]
   )
 
   const defaultColumns: ColumnDef<TenantDto>[] = useMemo(
@@ -119,7 +119,7 @@ export const TenantList = () => {
       },
     ],
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    [tenantActionDialog]
+    []
   )
 
   const onSearchUpdateEvent = (value: string) => {

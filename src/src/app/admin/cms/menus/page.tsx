@@ -3,11 +3,8 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { MenuList } from '@/components/menu/MenuList'
 import { Button } from '@/components/ui/button'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 
 export default function CmsMenusPage() {
-  const { can } = useGrantedPolicies()
-
   return (
     <div className="container mx-auto p-4">
       <div className="mb-6">

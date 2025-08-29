@@ -67,7 +67,7 @@ export const useEnhancedPermissionChanges = ({
 
       if (!selectedData.parentName && selectedData.name === permission) {
         const oldValue = selectedData.isGranted
-        if (parent && parent.isGranted) {
+        if (parent?.isGranted) {
           parent.isGranted = false
           children.forEach((c) => (c.isGranted = false))
         } else if (parent && !parent.isGranted) {
@@ -200,7 +200,7 @@ export const useEnhancedPermissionChanges = ({
   // Update unsaved changes flag
   useEffect(() => {
     setHasUnsavedChanges(hasChanges())
-  }, [data, hasChanges])
+  }, [hasChanges])
 
   // Initialize state
   useEffect(() => {

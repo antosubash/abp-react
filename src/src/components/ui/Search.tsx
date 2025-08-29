@@ -11,20 +11,23 @@ const SearchInput = ({ onUpdate, value }: SearchProps) => {
   const ref = useRef<HTMLInputElement>(null)
   const searchStr = useDebounce<string>(searchTerm)
 
-  const onSearchEvent = useCallback((e: SyntheticEvent) => {
-    const target = e.target as HTMLInputElement
-    const { value } = target
-    if (value.trim().length === 0) {
-      onUpdate('')
-    }
-    setSearchTerm(value)
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  }, [])
+  const onSearchEvent = useCallback(
+    (e: SyntheticEvent) => {
+      const target = e.target as HTMLInputElement
+      const { value } = target
+      if (value.trim().length === 0) {
+        onUpdate('')
+      }
+      setSearchTerm(value)
+      // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    },
+    [onUpdate]
+  )
 
   useEffect(() => {
     if (searchStr) onUpdate(searchStr)
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  }, [searchStr])
+  }, [searchStr, onUpdate])
 
   useEffect(() => {
     if (value) {

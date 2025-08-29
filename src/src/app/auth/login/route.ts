@@ -32,7 +32,7 @@ export async function GET() {
 
   const parameters: Record<string, string> = {
     redirect_uri: clientConfig.redirect_uri,
-    scope: clientConfig.scope!,
+    scope: clientConfig.scope || 'openid profile email',
     code_challenge,
     code_challenge_method: clientConfig.code_challenge_method,
     __tenant: tenantId,

@@ -141,7 +141,7 @@ export const Hero = ({
 
   // Generate background style
   const getBackgroundStyle = () => {
-    if (backgroundImage && backgroundImage.trim()) {
+    if (backgroundImage?.trim()) {
       return {
         backgroundImage: `url(${backgroundImage})`,
       }
@@ -231,7 +231,7 @@ export const Hero = ({
       aria-label="Hero section"
     >
       {/* Background Image */}
-      {backgroundImage && backgroundImage.trim() && (
+      {backgroundImage?.trim() && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={getBackgroundStyle()}

@@ -20,11 +20,17 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { useMenuItems } from '@/lib/hooks/useMenuItems'
 
+// Define proper error type
+interface ApiError {
+  error?: {
+    details?: Record<string, string[]>
+    message?: string
+  }
+}
+
 export default function CreateMenuItem() {
-  const { can } = useGrantedPolicies()
   const { toast } = useToast()
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -52,7 +58,7 @@ export default function CreateMenuItem() {
     },
   })
 
-  const watchedDisplayName = watch('displayName')
+  const _watchedDisplayName = watch('displayName')
 
   // Fetch all menu items for parent selection
   const { data: menuItems } = useMenuItems(0, 1000)
@@ -74,7 +80,7 @@ export default function CreateMenuItem() {
       console.error('Menu item creation error:', err)
 
       if (err && typeof err === 'object' && 'error' in err) {
-        const errorData = err as any
+        const errorData = err as ApiError
         if (errorData.error?.details) {
           setFormErrors(errorData.error.details)
           const errorMessages = Object.entries(errorData.error.details)

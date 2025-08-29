@@ -49,7 +49,7 @@ const helper = (
   }
 
   if (!selectedData.parentName && selectedData.name === permission) {
-    if (parent && parent.isGranted) {
+    if (parent?.isGranted) {
       parent.isGranted = false
       children.forEach((c) => (c.isGranted = false))
     } else if (parent && !parent.isGranted) {
@@ -114,7 +114,7 @@ export const usePermissionsChanges = ({ permissions, type }: UsePermissionsChang
       }
     },
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    [permissions, type]
+    [permissions, type, data]
   )
 
   /**

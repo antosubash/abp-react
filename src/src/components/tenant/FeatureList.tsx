@@ -58,7 +58,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       queryClient.invalidateQueries({ queryKey: [PermissionProvider.T] }).then()
     }
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  }, [onDismiss, data])
+  }, [data, queryClient.invalidateQueries])
 
   const onCheckedEvent = (value: boolean, name: string) => {
     if (name === Permissions.SETTINGS_EMAILING) {

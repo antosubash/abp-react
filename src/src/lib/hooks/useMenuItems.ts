@@ -17,9 +17,9 @@ export const useMenuItems = (
   filter?: string,
   sorting?: string
 ) => {
-  let skip = 0
+  let _skip = 0
   if (pageIndex > 0) {
-    skip = pageIndex * pageSize
+    _skip = pageIndex * pageSize
   }
 
   return useQuery({

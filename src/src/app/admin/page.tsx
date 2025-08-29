@@ -55,7 +55,7 @@ export default async function AdminIndex() {
     return (first + last).toUpperCase() || 'U'
   }
 
-  const formatDate = (dateString?: string) => {
+  const _formatDate = (dateString?: string) => {
     if (!dateString) return 'N/A'
     try {
       return new Date(dateString).toLocaleDateString('en-US', {
@@ -174,8 +174,8 @@ export default async function AdminIndex() {
                   <span className="text-sm font-medium">Roles</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {currentUser.roles.map((role, index) => (
-                    <Badge key={index} variant="secondary">
+                  {currentUser.roles.map((role) => (
+                    <Badge key={role} variant="secondary">
                       {role}
                     </Badge>
                   ))}
@@ -232,7 +232,7 @@ export default async function AdminIndex() {
             </div>
             <p className="text-xs text-muted-foreground">
               {currentUser?.sessionId
-                ? 'Session ID: ' + currentUser.sessionId.substring(0, 8) + '...'
+                ? `Session ID: ${currentUser.sessionId.substring(0, 8)}...`
                 : 'No active session'}
             </p>
           </CardContent>
@@ -275,8 +275,8 @@ export default async function AdminIndex() {
                 <p>Enabled Features: {appConfig?.globalFeatures?.enabledFeatures?.length || 0}</p>
                 {appConfig?.globalFeatures?.enabledFeatures && (
                   <div className="flex flex-wrap gap-1 mt-2">
-                    {appConfig.globalFeatures.enabledFeatures.slice(0, 5).map((feature, index) => (
-                      <Badge key={index} variant="outline" className="text-xs">
+                    {appConfig.globalFeatures.enabledFeatures.slice(0, 5).map((feature) => (
+                      <Badge key={feature} variant="outline" className="text-xs">
                         {feature}
                       </Badge>
                     ))}

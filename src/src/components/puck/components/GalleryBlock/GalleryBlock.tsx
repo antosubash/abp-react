@@ -74,7 +74,7 @@ export const GalleryBlock = ({
   }
 
   const getGapClass = () => {
-    const gapValue = Number.parseInt(gap)
+    const gapValue = Number.parseInt(gap, 10)
     if (gapValue <= 8) return 'gap-2'
     if (gapValue <= 12) return 'gap-3'
     if (gapValue <= 16) return 'gap-4'
@@ -85,7 +85,7 @@ export const GalleryBlock = ({
   }
 
   const getPaddingClass = () => {
-    const paddingValue = Number.parseInt(padding)
+    const paddingValue = Number.parseInt(padding, 10)
     if (paddingValue <= 8) return 'p-2'
     if (paddingValue <= 12) return 'p-3'
     if (paddingValue <= 16) return 'p-4'

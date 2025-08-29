@@ -108,7 +108,7 @@ export default function SideBarMenu() {
 
                   {hasSubmenus && isExpanded && (
                     <div className="ml-6 mt-1 space-y-1">
-                      {menu.submenus!.map((submenu, subIndex) => {
+                      {menu.submenus?.map((submenu, subIndex) => {
                         const isSubmenuActive = pathname === submenu.link
                         return (
                           <Link

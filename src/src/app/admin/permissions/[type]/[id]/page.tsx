@@ -115,7 +115,7 @@ export default function PermissionsPage() {
     // Try to find translation in different resources
     for (const resourceName in translationData.resources) {
       const resource = translationData.resources[resourceName]
-      if (resource?.texts && resource.texts[permissionName]) {
+      if (resource?.texts?.[permissionName]) {
         return resource.texts[permissionName]
       }
     }
@@ -208,7 +208,7 @@ export default function PermissionsPage() {
 
     try {
       const payload = permissionGroups?.flatMap((p) =>
-        p!.permissions!.map((grant: any) => ({
+        p?.permissions?.map((grant: any) => ({
           name: grant.name,
           isGranted: grant.isGranted,
         }))
@@ -218,7 +218,7 @@ export default function PermissionsPage() {
         permissions: payload,
       }
 
-      const result = await permissionsUpdate({
+      const _result = await permissionsUpdate({
         query: {
           providerName: entityType === 'role' ? PermissionProvider.R : PermissionProvider.U,
           providerKey: entityType === 'user' && userExists.data?.id ? userExists.data.id : entityId,
@@ -511,7 +511,7 @@ export default function PermissionsPage() {
                     <CardContent className="p-0 sm:p-6">
                       <ScrollArea className="h-[400px] sm:h-[500px] pr-4">
                         <div className="space-y-2 p-4 sm:p-0">
-                          {group.permissions?.map((permission: any, idx: number) => (
+                          {group.permissions?.map((permission: any, _idx: number) => (
                             <div
                               key={permission.name}
                               className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors gap-3"

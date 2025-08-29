@@ -279,7 +279,7 @@ export function processPuckData(data: any): any {
  */
 export function walkTree(
   data: any,
-  config: any,
+  _config: any,
   callback: (nestedComponents: any[]) => any[]
 ): any {
   if (!data) return data

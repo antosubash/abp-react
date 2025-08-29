@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { CheckCircle2, Shield, XCircle } from 'lucide-react'
+import { CheckCircle2, XCircle } from 'lucide-react'
 import { memo, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { Badge } from '../ui/badge'
@@ -53,7 +53,7 @@ function PermissionToggle({
   const onChangeEvent = useCallback(() => {
     onUpdate?.()
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  }, [])
+  }, [onUpdate])
 
   if (variant === 'compact') {
     return (

@@ -49,11 +49,7 @@ export const Pagination = <T extends Record<string, any>>({
   }
 
   return (
-    <nav
-      className="pagination flex items-center space-x-1"
-      aria-label={ariaLabel}
-      role="navigation"
-    >
+    <nav className="pagination flex items-center space-x-1" aria-label={ariaLabel}>
       <Button
         size="sm"
         variant="outline"

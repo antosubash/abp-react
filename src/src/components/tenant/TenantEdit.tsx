@@ -84,7 +84,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] })
     }
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  }, [])
+  }, [queryClient.invalidateQueries])
 
   return (
     <Dialog open={open} onOpenChange={onCloseEvent}>

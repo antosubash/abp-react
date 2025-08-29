@@ -24,7 +24,17 @@ export async function GET() {
   const redis = createRedisInstance()
   const redisKey = `session:${session.userInfo?.sub}`
   const redisSessionData = await redis.get(redisKey)
-  const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
+
+  if (!redisSessionData) {
+    // If no session data in Redis, just redirect to logout
+    session.isLoggedIn = defaultSession.isLoggedIn
+    session.access_token = defaultSession.access_token
+    session.userInfo = defaultSession.userInfo
+    await session.save()
+    return Response.redirect(clientConfig.post_logout_redirect_uri)
+  }
+
+  const parsedSessionData = JSON.parse(redisSessionData) as RedisSession
   const openIdClientConfig = await getClientConfig()
   const endSessionUrl = client.buildEndSessionUrl(openIdClientConfig, {
     post_logout_redirect_uri: clientConfig.post_logout_redirect_uri,
@@ -33,7 +43,11 @@ export async function GET() {
   session.isLoggedIn = defaultSession.isLoggedIn
   session.access_token = defaultSession.access_token
   session.userInfo = defaultSession.userInfo
-  await redis.del(session?.userInfo?.sub!)
+
+  if (session.userInfo?.sub) {
+    await redis.del(session.userInfo.sub)
+  }
+
   await session.save()
   return Response.redirect(endSessionUrl.href)
 }

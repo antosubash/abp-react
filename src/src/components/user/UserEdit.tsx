@@ -173,25 +173,23 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
                 There was an error while featching roles information for the {userDto.userName}
               </div>
             )}
-            {!assignableRoles.isLoading && !assignableRoles.isError && (
-              <>
-                {assignableRoles?.data?.items?.map((r) => (
-                  <div key={v4()} className={classNames('flex items-center space-x-2 pb-5')}>
-                    <Checkbox
-                      id={r.id}
-                      name={r.name!}
-                      checked={!!roles?.find((l) => l.id === r.id)}
-                      onCheckedChange={() => {
-                        onRoleAssignEvent(r)
-                      }}
-                    />
-                    <label htmlFor={r.id} className="text-sm font-medium leading-none">
-                      {r.name}
-                    </label>
-                  </div>
-                ))}
-              </>
-            )}
+            {!assignableRoles.isLoading &&
+              !assignableRoles.isError &&
+              assignableRoles?.data?.items?.map((r) => (
+                <div key={v4()} className={classNames('flex items-center space-x-2 pb-5')}>
+                  <Checkbox
+                    id={r.id}
+                    name={r.name!}
+                    checked={!!roles?.find((l) => l.id === r.id)}
+                    onCheckedChange={() => {
+                      onRoleAssignEvent(r)
+                    }}
+                  />
+                  <label htmlFor={r.id} className="text-sm font-medium leading-none">
+                    {r.name}
+                  </label>
+                </div>
+              ))}
             <DialogFooter className="mt-5">
               <Button
                 onClick={(e: { preventDefault: () => void }) => {

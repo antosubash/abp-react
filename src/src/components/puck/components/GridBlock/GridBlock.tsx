@@ -1,6 +1,5 @@
 'use client'
 
-import { ReactNode } from 'react'
 import type { GridBlockProps } from './GridBlockProps'
 
 export const GridBlock = ({
@@ -37,7 +36,7 @@ export const GridBlock = ({
 
   // Convert gap to Tailwind classes (approximate mapping)
   const getGapClass = (gap: string) => {
-    const gapValue = Number.parseInt(gap)
+    const gapValue = Number.parseInt(gap, 10)
     if (gapValue <= 8) return 'gap-2'
     if (gapValue <= 12) return 'gap-3'
     if (gapValue <= 16) return 'gap-4'
@@ -50,7 +49,7 @@ export const GridBlock = ({
 
   // Convert padding to Tailwind classes (approximate mapping)
   const getPaddingClass = (padding: string) => {
-    const paddingValue = Number.parseInt(padding)
+    const paddingValue = Number.parseInt(padding, 10)
     if (paddingValue <= 8) return 'p-2'
     if (paddingValue <= 12) return 'p-3'
     if (paddingValue <= 16) return 'p-4'
@@ -64,7 +63,7 @@ export const GridBlock = ({
   // Convert minHeight to Tailwind classes (approximate mapping)
   const getMinHeightClass = (minHeight: string) => {
     if (minHeight === 'auto') return 'min-h-0'
-    const heightValue = Number.parseInt(minHeight)
+    const heightValue = Number.parseInt(minHeight, 10)
     if (heightValue <= 100) return 'min-h-24'
     if (heightValue <= 200) return 'min-h-48'
     if (heightValue <= 300) return 'min-h-72'
@@ -76,7 +75,7 @@ export const GridBlock = ({
   const getWidthClass = (width: string) => {
     if (width === '100%') return 'w-full'
     if (width === 'auto') return 'w-auto'
-    const widthValue = Number.parseInt(width)
+    const widthValue = Number.parseInt(width, 10)
     if (widthValue <= 200) return 'w-48'
     if (widthValue <= 300) return 'w-72'
     if (widthValue <= 400) return 'w-96'

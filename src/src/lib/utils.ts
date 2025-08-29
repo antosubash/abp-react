@@ -194,9 +194,6 @@ export const getPages = (totalPages: number, currentPage: number): (number | 'SP
         pages = [...pages, ...extraPages, 'SPACER']
         break
       }
-
-      // handle: (1) ... {3} [4] {5} ... (8)
-      case hasLeftSpill && hasRightSpill:
       default: {
         pages = ['SPACER', ...pages, 'SPACER']
         break

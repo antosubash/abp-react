@@ -10,14 +10,13 @@ import {
   type VoloCmsKitAdminPagesPageDto,
 } from '@/client'
 import { PuckEditor } from '@/components/puck/PuckEditor'
-import { htmlToPuckData, isPuckData } from '@/components/puck/utils'
+import { htmlToPuckData, isPuckData, type PuckData } from '@/components/puck/utils'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Error from '@/components/ui/Error'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
@@ -33,6 +32,11 @@ const generateSlug = (title: string): string => {
     .replace(/-+/g, '-')
     .trim()
     .replace(/^-|-$/g, '')
+}
+
+// Extended PuckData interface that includes zones property
+interface ExtendedPuckData extends PuckData {
+  zones?: Record<string, unknown>
 }
 
 export default function EditPage() {
@@ -77,7 +81,7 @@ export default function EditPage() {
   // Reset form loaded state when pageId changes
   useEffect(() => {
     setIsFormLoaded(false)
-  }, [pageId])
+  }, [])
 
   // Auto-generate slug from title (only if slug is empty or matches old title)
   useEffect(() => {
@@ -103,26 +107,26 @@ export default function EditPage() {
       const pageData = page as VoloCmsKitAdminPagesPageDto
 
       // Convert content to Puck data if it's HTML
-      let puckContent: any = pageData.content
+      let puckContent: ExtendedPuckData | string = pageData.content || ''
 
       if (typeof pageData.content === 'string') {
         try {
           // Try to parse as JSON first
           const parsed = JSON.parse(pageData.content)
           if (isPuckData(parsed)) {
-            puckContent = parsed
+            puckContent = parsed as ExtendedPuckData
           } else {
             // Convert HTML to Puck data
-            puckContent = htmlToPuckData(pageData.content)
+            puckContent = htmlToPuckData(pageData.content) as ExtendedPuckData
           }
-        } catch (error) {
+        } catch {
           // If not JSON, convert HTML to Puck data
-          puckContent = htmlToPuckData(pageData.content)
+          puckContent = htmlToPuckData(pageData.content) as ExtendedPuckData
         }
       } else if (pageData.content && typeof pageData.content === 'object') {
         // If it's already an object, ensure it's properly formatted
         puckContent = isPuckData(pageData.content)
-          ? pageData.content
+          ? (pageData.content as ExtendedPuckData)
           : {
               content: [],
               root: { props: { title: pageData.title || 'New Page' } },
@@ -171,11 +175,11 @@ export default function EditPage() {
     if (savedDraft && !page) {
       try {
         const draftData = JSON.parse(savedDraft)
-        Object.entries(draftData).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(draftData)) {
           if (key in draftData && value !== undefined) {
-            setValue(key as keyof UpdatePageInputDto, value as any)
+            setValue(key as keyof UpdatePageInputDto, value as string)
           }
-        })
+        }
         toast({
           title: 'Draft Loaded',
           description: 'Your previous draft has been loaded.',
@@ -522,7 +526,7 @@ export default function EditPage() {
             if (typeof field.value === 'string') {
               try {
                 puckData = JSON.parse(field.value)
-              } catch (error) {
+              } catch (_error) {
                 console.warn('Failed to parse content as JSON, using default')
                 puckData = {
                   content: [],

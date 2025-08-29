@@ -18,7 +18,7 @@ function getRedisConfiguration(): {
   password: string | undefined
 } {
   return {
-    port: process.env.REDIS_PORT ? Number.parseInt(process.env.REDIS_PORT) : undefined,
+    port: process.env.REDIS_PORT ? Number.parseInt(process.env.REDIS_PORT, 10) : undefined,
     host: process.env.REDIS_HOST,
     password: process.env.REDIS_PASSWORD,
   }
@@ -65,7 +65,7 @@ export function createRedisInstance(config = getRedisConfiguration()) {
     })
 
     return redis
-  } catch (e) {
+  } catch (_e) {
     throw new Error('[Redis] Could not create a Redis instance')
   }
 }

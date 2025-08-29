@@ -19,7 +19,6 @@ import { Search } from '../ui/Search'
 import { useToast } from '../ui/use-toast'
 import { DeleteRole } from './DeleteRole'
 import { RoleEdit } from './RoleEdit'
-import { RolePermission } from './RolePermission'
 
 export const RoleList = () => {
   const { toast } = useToast()
@@ -41,7 +40,7 @@ export const RoleList = () => {
       pageSize,
     }),
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    [pageIndex, pageSize, toast]
+    [pageIndex, pageSize]
   )
 
   const { isLoading, data, isError } = useRoles(pageIndex, pageSize, searchStr)

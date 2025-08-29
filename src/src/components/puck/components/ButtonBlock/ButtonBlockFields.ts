@@ -1,5 +1,3 @@
-import type { Field } from '@measured/puck'
-
 export const ButtonBlockFields = {
   text: {
     type: 'text' as const,

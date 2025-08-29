@@ -38,16 +38,32 @@ export async function GET(request: NextRequest) {
   const { access_token, refresh_token } = tokenSet
   session.isLoggedIn = true
   session.access_token = access_token
-  const claims = tokenSet.claims()!
+  const claims = tokenSet.claims()
+
+  if (!claims) {
+    throw new Error('Failed to get token claims')
+  }
+
   const { sub } = claims
   // call userinfo endpoint to get user info
   const userinfo = await client.fetchUserInfo(openIdClientConfig, access_token, sub)
+
+  // Validate required userinfo fields
+  if (
+    !userinfo.sub ||
+    !userinfo.given_name ||
+    !userinfo.email ||
+    userinfo.email_verified === undefined
+  ) {
+    throw new Error('Incomplete user information received')
+  }
+
   // store userinfo in session
   session.userInfo = {
     sub: userinfo.sub,
-    name: userinfo.given_name!,
-    email: userinfo.email!,
-    email_verified: userinfo.email_verified!,
+    name: userinfo.given_name,
+    email: userinfo.email,
+    email_verified: userinfo.email_verified,
   }
 
   await session.save()

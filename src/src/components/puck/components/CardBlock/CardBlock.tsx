@@ -70,7 +70,7 @@ export const CardBlock = ({
 
   // Convert padding to Tailwind classes (approximate mapping)
   const getPaddingClass = (padding: string) => {
-    const paddingValue = Number.parseInt(padding)
+    const paddingValue = Number.parseInt(padding, 10)
     if (paddingValue <= 12) return 'p-4'
     if (paddingValue <= 16) return 'p-5'
     if (paddingValue <= 20) return 'p-6'
@@ -81,7 +81,7 @@ export const CardBlock = ({
 
   // Convert border radius to Tailwind classes (approximate mapping)
   const getBorderRadiusClass = (radius: string) => {
-    const radiusValue = Number.parseInt(radius)
+    const radiusValue = Number.parseInt(radius, 10)
     if (radiusValue <= 4) return 'rounded-lg'
     if (radiusValue <= 6) return 'rounded-xl'
     if (radiusValue <= 8) return 'rounded-2xl'

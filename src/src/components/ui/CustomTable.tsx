@@ -158,10 +158,9 @@ const TableView = <T extends Record<string, any>>({
         <table
           className="divide-base-200 text-base-content w-full table-auto divide-y text-left sm:overflow-x-auto lg:table-fixed"
           aria-label={ariaLabel}
-          role="table"
         >
-          <thead role="rowgroup">{renderHeader()}</thead>
-          <tbody role="rowgroup">{renderBody()}</tbody>
+          <thead>{renderHeader()}</thead>
+          <tbody>{renderBody()}</tbody>
         </table>
       </div>
 

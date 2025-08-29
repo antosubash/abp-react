@@ -173,7 +173,7 @@ const CommentItem = ({ comment, isAuthenticated, pageId }: CommentItemProps) => 
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPublicComments, 'Page', pageId] })
       setIsReplying(false)
       setReplyText('')
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: 'Error',
         description: 'Failed to post reply',

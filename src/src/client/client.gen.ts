@@ -22,6 +22,6 @@ export type CreateClientConfig<T extends DefaultClientOptions = ClientOptions> =
 
 export const client = createClient(
   createConfig<ClientOptions>({
-    baseUrl: typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_API_URL!,
+    baseUrl: 'https://abp.antosubash.com',
   })
 )

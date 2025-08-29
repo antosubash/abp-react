@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { action } from 'storybook/actions'
 import { ButtonBlock } from './ButtonBlock'
 
 const meta: Meta<typeof ButtonBlock> = {

@@ -2,7 +2,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { AlertCircle, ArrowLeft, Save } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   type MenuItemUpdateInput,
@@ -12,7 +12,7 @@ import {
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Error from '@/components/ui/Error'
+import ErrorComponent from '@/components/ui/Error'
 import { Input } from '@/components/ui/input'
 import Loader from '@/components/ui/Loader'
 import { Label } from '@/components/ui/label'
@@ -26,11 +26,17 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { useToast } from '@/components/ui/use-toast'
 import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 import { useMenuItem } from '@/lib/hooks/useMenuItems'
 
+// Define proper error type
+interface ApiError {
+  error?: {
+    details?: Record<string, string[]>
+    message?: string
+  }
+}
+
 export default function EditMenuItem() {
-  const { can } = useGrantedPolicies()
   const { toast } = useToast()
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -38,6 +44,15 @@ export default function EditMenuItem() {
   const menuItemId = params.id as string
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({})
+
+  // Generate unique IDs for form inputs
+  const displayNameId = useId()
+  const urlId = useId()
+  const iconId = useId()
+  const cssClassId = useId()
+  const elementIdId = useId()
+  const requiredPermissionNameId = useId()
+  const isActiveId = useId()
 
   const {
     handleSubmit,
@@ -100,7 +115,7 @@ export default function EditMenuItem() {
       console.error('Menu item update error:', err)
 
       if (err && typeof err === 'object' && 'error' in err) {
-        const errorData = err as any
+        const errorData = err as ApiError
         if (errorData.error?.details) {
           setFormErrors(errorData.error.details)
           const errorMessages = Object.entries(errorData.error.details)
@@ -147,7 +162,7 @@ export default function EditMenuItem() {
   }
 
   if (isLoading) return <Loader />
-  if (isError) return <Error />
+  if (isError) return <ErrorComponent />
 
   if (!menuItem) {
     return (
@@ -208,9 +223,9 @@ export default function EditMenuItem() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="displayName">Display Name *</Label>
+                <Label htmlFor={displayNameId}>Display Name *</Label>
                 <Input
-                  id="displayName"
+                  id={displayNameId}
                   required
                   {...register('displayName', {
                     required: 'Display name is required',
@@ -235,8 +250,8 @@ export default function EditMenuItem() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="url">URL</Label>
-                <Input id="url" {...register('url')} placeholder="https://example.com" />
+                <Label htmlFor={urlId}>URL</Label>
+                <Input id={urlId} {...register('url')} placeholder="https://example.com" />
                 {formErrors.url && (
                   <p className="text-sm text-red-500">
                     {Array.isArray(formErrors.url) ? formErrors.url.join(', ') : formErrors.url}
@@ -248,8 +263,8 @@ export default function EditMenuItem() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="icon">Icon</Label>
-                <Input id="icon" {...register('icon')} placeholder="home, user, settings" />
+                <Label htmlFor={iconId}>Icon</Label>
+                <Input id={iconId} {...register('icon')} placeholder="home, user, settings" />
                 {formErrors.icon && (
                   <p className="text-sm text-red-500">
                     {Array.isArray(formErrors.icon) ? formErrors.icon.join(', ') : formErrors.icon}
@@ -286,8 +301,8 @@ export default function EditMenuItem() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="cssClass">CSS Class</Label>
-                <Input id="cssClass" {...register('cssClass')} placeholder="custom-menu-item" />
+                <Label htmlFor={cssClassId}>CSS Class</Label>
+                <Input id={cssClassId} {...register('cssClass')} placeholder="custom-menu-item" />
                 {formErrors.cssClass && (
                   <p className="text-sm text-red-500">
                     {Array.isArray(formErrors.cssClass)
@@ -300,8 +315,8 @@ export default function EditMenuItem() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="elementId">Element ID</Label>
-              <Input id="elementId" {...register('elementId')} placeholder="menu-item-1" />
+              <Label htmlFor={elementIdId}>Element ID</Label>
+              <Input id={elementIdId} {...register('elementId')} placeholder="menu-item-1" />
               {formErrors.elementId && (
                 <p className="text-sm text-red-500">
                   {Array.isArray(formErrors.elementId)
@@ -313,9 +328,9 @@ export default function EditMenuItem() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="requiredPermissionName">Required Permission</Label>
+              <Label htmlFor={requiredPermissionNameId}>Required Permission</Label>
               <Input
-                id="requiredPermissionName"
+                id={requiredPermissionNameId}
                 {...register('requiredPermissionName')}
                 placeholder="Permissions.CMSKIT_PAGES_CREATE"
               />
@@ -333,11 +348,11 @@ export default function EditMenuItem() {
 
             <div className="flex items-center space-x-2">
               <Switch
-                id="isActive"
+                id={isActiveId}
                 checked={watch('isActive')}
                 onCheckedChange={(checked) => setValue('isActive', checked)}
               />
-              <Label htmlFor="isActive">Active</Label>
+              <Label htmlFor={isActiveId}>Active</Label>
               <p className="text-sm text-muted-foreground ml-2">
                 Whether this menu item is visible
               </p>

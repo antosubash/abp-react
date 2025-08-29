@@ -1,7 +1,7 @@
 'use client'
 
 import { ActionBar, createUsePuck, Puck, usePuck } from '@measured/puck'
-import { AlertTriangle, Edit3, Eye, Lock, RefreshCw, Unlock } from 'lucide-react'
+import { AlertTriangle, Lock, RefreshCw, Unlock } from 'lucide-react'
 import type React from 'react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Alert } from '@/components/ui/alert'
@@ -18,7 +18,7 @@ export interface PuckEditorProps {
   className?: string
 }
 
-const usePuckHook = createUsePuck<typeof config>()
+const _usePuckHook = createUsePuck<typeof config>()
 
 // Enhanced Action Bar with better visual design
 const ActionBarOverride = ({
@@ -41,7 +41,7 @@ const ActionBarOverride = ({
     if (selectedItem?.props?.id) {
       refreshPermissions({ item: selectedItem })
     }
-  }, [lockedComponents, selectedItem, refreshPermissions])
+  }, [selectedItem, refreshPermissions])
 
   if (!selectedItem || !selectedItem.props?.id) {
     return (
@@ -106,7 +106,7 @@ export const PuckEditor = ({
       if (typeof data === 'string') {
         try {
           processed = JSON.parse(data)
-        } catch (parseError) {
+        } catch (_parseError) {
           processed = null
         }
       }
@@ -154,11 +154,11 @@ export const PuckEditor = ({
         try {
           const dataToSend = JSON.stringify(validData)
           onChange(dataToSend)
-        } catch (error) {
+        } catch (_error) {
           setHasError(true)
           setErrorMessage('Failed to save changes. Please try again.')
         }
-      } catch (error) {
+      } catch (_error) {
         setHasError(true)
         setErrorMessage('Failed to update content. Please try again.')
       }
@@ -166,13 +166,13 @@ export const PuckEditor = ({
     [onChange]
   )
 
-  const handleSave = useCallback(
+  const _handleSave = useCallback(
     (data: any) => {
       try {
         if (onSave) {
           onSave(data)
         }
-      } catch (error) {
+      } catch (_error) {
         setHasError(true)
         setErrorMessage('Failed to save. Please try again.')
       }

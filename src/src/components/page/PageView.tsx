@@ -136,7 +136,7 @@ export const PageView = ({ page }: PageViewProps) => {
     if (typeof page.content === 'string') {
       try {
         parsedContent = JSON.parse(page.content)
-      } catch (error) {
+      } catch (_error) {
         // If it's not valid JSON, treat it as HTML
         try {
           return htmlToPuckData(page.content)
@@ -182,7 +182,7 @@ export const PageView = ({ page }: PageViewProps) => {
     setScriptError(null)
     setRenderError(null)
     setContentError(null)
-  }, [page.id])
+  }, [])
 
   return (
     <div className="min-h-screen bg-background">

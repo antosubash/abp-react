@@ -19,7 +19,6 @@ import { Permissions, USER_ROLE } from '@/lib/utils'
 import { PermissionActions } from '../permission/PermissionActions'
 import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
-import { UserPermission } from './UserPermission'
 
 type UserActionDialogState = {
   userId: string
