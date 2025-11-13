@@ -3,10 +3,12 @@ import { AdminMenus } from '@/config'
 import { ChevronDown, ChevronRight, Package2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 
 export default function SideBarMenu() {
   const pathname = usePathname()
+  const { can } = useGrantedPolicies()
 
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
@@ -23,6 +25,29 @@ export default function SideBarMenu() {
   }
 
   const [expandedMenus, setExpandedMenus] = useState<Set<string>>(getInitialExpandedMenus())
+
+  // Filter menus based on permissions
+  const visibleMenus = useMemo(() => {
+    return AdminMenus.filter((menu) => {
+      // If menu has policy, check permission
+      if (menu.policy && !can(menu.policy)) {
+        return false
+      }
+
+      // If menu has submenus, check if at least one submenu is visible
+      if (menu.submenus && menu.submenus.length > 0) {
+        const visibleSubmenus = menu.submenus.filter((submenu) => {
+          // If submenu has policy, check permission; otherwise show it
+          return !submenu.policy || can(submenu.policy)
+        })
+        // Show parent menu only if at least one submenu is visible
+        return visibleSubmenus.length > 0
+      }
+
+      // Menu without policy or with permission is visible
+      return true
+    })
+  }, [can])
 
   const toggleMenu = (menuName: string) => {
     const newExpandedMenus = new Set(expandedMenus)
@@ -61,10 +86,15 @@ export default function SideBarMenu() {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {AdminMenus.map((menu, index) => {
+            {visibleMenus.map((menu, index) => {
               const isActive = isMenuActive(menu.link, menu.submenus)
               const isExpanded = expandedMenus.has(menu.name)
               const hasSubmenus = menu.submenus && menu.submenus.length > 0
+
+              // Filter visible submenus based on permissions
+              const visibleSubmenus = hasSubmenus
+                ? menu.submenus!.filter((submenu) => !submenu.policy || can(submenu.policy))
+                : []
 
               return (
                 <div key={index}>
@@ -90,7 +120,7 @@ export default function SideBarMenu() {
                         <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
                       )}
                     </Link>
-                    {hasSubmenus && (
+                    {hasSubmenus && visibleSubmenus.length > 0 && (
                       <button
                         onClick={() => toggleMenu(menu.name)}
                         className="p-1 hover:bg-accent rounded-sm transition-colors"
@@ -104,9 +134,9 @@ export default function SideBarMenu() {
                     )}
                   </div>
 
-                  {hasSubmenus && isExpanded && (
+                  {hasSubmenus && isExpanded && visibleSubmenus.length > 0 && (
                     <div className="ml-6 mt-1 space-y-1">
-                      {menu.submenus!.map((submenu, subIndex) => {
+                      {visibleSubmenus.map((submenu, subIndex) => {
                         const isSubmenuActive = pathname === submenu.link
                         return (
                           <Link

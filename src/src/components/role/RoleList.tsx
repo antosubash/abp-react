@@ -14,7 +14,6 @@ import { Search } from '../ui/Search'
 import { useToast } from '../ui/use-toast'
 import { DeleteRole } from './DeleteRole'
 import { RoleEdit } from './RoleEdit'
-import { RolePermission } from './RolePermission'
 
 export const RoleList = () => {
   const { toast } = useToast()
@@ -54,13 +53,13 @@ export const RoleList = () => {
               return (
                 <PermissionActions
                   actions={[
-                                         {
-                       icon: 'permission',
-                       policy: Permissions.ROLES_MANAGE_PERMISSIONS,
-                       callback: () => {
-                         window.location.href = `/admin/permissions/role/${info.row.original.name}`
-                       },
-                     },
+                    {
+                      icon: 'permission',
+                      policy: Permissions.ROLES_MANAGE_PERMISSIONS,
+                      callback: () => {
+                        window.location.href = `/admin/permissions/role/${info.row.original.name}`
+                      },
+                    },
                     {
                       icon: 'pencil',
                       policy: Permissions.ROLES_UPDATE,
