@@ -9,18 +9,31 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Settings, User, LogOut } from 'lucide-react'
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { USER_ROLE } from '@/lib/utils'
+import useSession from '@/useSession'
+import {
+  ChevronDown,
+  ChevronRight,
+  CircleUser,
+  LogOut,
+  Menu,
+  Package2,
+  Settings,
+  User,
+} from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import ClientLink from '../ui/client-link'
-import useSession from '@/useSession'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
 
 export default function SideNavBarMobile() {
   const pathname = usePathname()
   const sessionData = useSession()
   const { can } = useGrantedPolicies()
+  const currentUser = useCurrentUser()
+  const isAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN) ?? false
 
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
@@ -99,11 +112,13 @@ export default function SideNavBarMobile() {
               <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 AbpReact
               </span>
-              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
-                Admin
-              </span>
+              {isAdmin && (
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                  Admin
+                </span>
+              )}
             </div>
-            
+
             {/* Mobile Navigation */}
             <nav className="flex-1 space-y-2">
               {visibleMenus.map((menu) => {
@@ -131,9 +146,13 @@ export default function SideNavBarMobile() {
                         }`}
                       >
                         {menu.icon && (
-                          <menu.icon className={`h-4 w-4 transition-colors ${
-                            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                          }`} />
+                          <menu.icon
+                            className={`h-4 w-4 transition-colors ${
+                              isActive
+                                ? 'text-primary'
+                                : 'text-muted-foreground group-hover:text-primary'
+                            }`}
+                          />
                         )}
                         <span className="font-medium">{menu.name}</span>
                         {isActive && (
@@ -163,13 +182,19 @@ export default function SideNavBarMobile() {
                               key={subIndex}
                               href={submenu.link}
                               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
-                                isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                                isSubmenuActive
+                                  ? 'text-primary bg-primary/10 border border-primary/20'
+                                  : ''
                               }`}
                             >
                               {submenu.icon && (
-                                <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
-                                  isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                                }`} />
+                                <submenu.icon
+                                  className={`h-3.5 w-3.5 transition-colors ${
+                                    isSubmenuActive
+                                      ? 'text-primary'
+                                      : 'text-muted-foreground group-hover:text-primary'
+                                  }`}
+                                />
                               )}
                               <span className="font-medium">{submenu.name}</span>
                               {isSubmenuActive && (
@@ -198,14 +223,14 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
-                     <div className="flex items-center justify-start gap-2 p-2">
-             <div className="flex flex-col space-y-1 leading-none">
-               <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
-               <p className="w-[200px] truncate text-sm text-muted-foreground">
-                 {sessionData.data?.userInfo?.email || 'No email available'}
-               </p>
-             </div>
-           </div>
+          <div className="flex items-center justify-start gap-2 p-2">
+            <div className="flex flex-col space-y-1 leading-none">
+              <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
+              <p className="w-[200px] truncate text-sm text-muted-foreground">
+                {sessionData.data?.userInfo?.email || 'No email available'}
+              </p>
+            </div>
+          </div>
           <DropdownMenuSeparator />
           <Link href="/admin" className="cursor-pointer">
             <DropdownMenuItem className="flex items-center gap-2">

@@ -5,10 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useMemo } from 'react'
 import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
+import { USER_ROLE } from '@/lib/utils'
 
 export default function SideBarMenu() {
   const pathname = usePathname()
   const { can } = useGrantedPolicies()
+  const currentUser = useCurrentUser()
+  const isAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN) ?? false
 
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
@@ -79,9 +83,11 @@ export default function SideBarMenu() {
             <span className="font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               AbpReact
             </span>
-            <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
-              Admin
-            </span>
+            {isAdmin && (
+              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                Admin
+              </span>
+            )}
           </Link>
         </div>
         <div className="flex-1">
