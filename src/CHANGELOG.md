@@ -1,6 +1,12 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.16...v2.5.17)
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.15...v2.5.16)
+
+## v2.5.17
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.16...v2.5.17)
 
 ### 📖 Documentation
 
