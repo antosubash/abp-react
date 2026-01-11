@@ -12,13 +12,19 @@ import { AdminMenus } from '@/config'
 import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Settings, User, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import ClientLink from '../ui/client-link'
 import useSession from '@/useSession'
+import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser'
+import { USER_ROLE } from '@/lib/utils'
 
 export default function SideNavBarMobile() {
   const pathname = usePathname()
   const sessionData = useSession()
+  const { can } = useGrantedPolicies()
+  const currentUser = useCurrentUser()
+  const isAdmin = currentUser?.roles?.includes(USER_ROLE.ADMIN) ?? false
 
   // Initialize expanded menus based on current path
   const getInitialExpandedMenus = () => {
@@ -35,6 +41,29 @@ export default function SideNavBarMobile() {
   }
 
   const [expandedMenus, setExpandedMenus] = useState<Set<string>>(getInitialExpandedMenus())
+
+  // Filter menus based on permissions
+  const visibleMenus = useMemo(() => {
+    return AdminMenus.filter((menu) => {
+      // If menu has policy, check permission
+      if (menu.policy && !can(menu.policy)) {
+        return false
+      }
+
+      // If menu has submenus, check if at least one submenu is visible
+      if (menu.submenus && menu.submenus.length > 0) {
+        const visibleSubmenus = menu.submenus.filter((submenu) => {
+          // If submenu has policy, check permission; otherwise show it
+          return !submenu.policy || can(submenu.policy)
+        })
+        // Show parent menu only if at least one submenu is visible
+        return visibleSubmenus.length > 0
+      }
+
+      // Menu without policy or with permission is visible
+      return true
+    })
+  }, [can, AdminMenus])
 
   const toggleMenu = (menuName: string) => {
     const newExpandedMenus = new Set(expandedMenus)
@@ -74,17 +103,24 @@ export default function SideNavBarMobile() {
               <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 AbpReact
               </span>
-              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
-                Admin
-              </span>
+              {isAdmin && (
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                  Admin
+                </span>
+              )}
             </div>
             
             {/* Mobile Navigation */}
             <nav className="flex-1 space-y-2">
-              {AdminMenus.map((menu) => {
+              {visibleMenus.map((menu) => {
                 const isActive = isMenuActive(menu.link, menu.submenus)
                 const isExpanded = expandedMenus.has(menu.name)
                 const hasSubmenus = menu.submenus && menu.submenus.length > 0
+
+                // Filter visible submenus based on permissions
+                const visibleSubmenus = hasSubmenus
+                  ? menu.submenus!.filter((submenu) => !submenu.policy || can(submenu.policy))
+                  : []
 
                 return (
                   <div key={menu.name}>
@@ -110,7 +146,7 @@ export default function SideNavBarMobile() {
                           <div className="ml-auto w-1.5 h-1.5 bg-primary rounded-full"></div>
                         )}
                       </Link>
-                      {hasSubmenus && (
+                      {hasSubmenus && visibleSubmenus.length > 0 && (
                         <button
                           onClick={() => toggleMenu(menu.name)}
                           className="p-1 hover:bg-accent rounded-sm transition-colors"
@@ -124,9 +160,9 @@ export default function SideNavBarMobile() {
                       )}
                     </div>
 
-                    {hasSubmenus && isExpanded && (
+                    {hasSubmenus && isExpanded && visibleSubmenus.length > 0 && (
                       <div className="ml-6 mt-1 space-y-1">
-                        {menu.submenus!.map((submenu, subIndex) => {
+                        {visibleSubmenus.map((submenu, subIndex) => {
                           const isSubmenuActive = pathname === submenu.link
                           return (
                             <Link
