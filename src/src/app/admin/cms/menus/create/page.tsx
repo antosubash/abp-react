@@ -1,8 +1,15 @@
 'use client'
 import { menuItemAdminCreate, MenuItemCreateInput } from '@/client'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { Alert, AlertDescription } from '@/shared/components/ui/alert'
 import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import {
@@ -15,7 +22,6 @@ import {
 import { Switch } from '@/shared/components/ui/switch'
 import { useToast } from '@/shared/components/ui/use-toast'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { useMenuItems } from '@/shared/hooks/useMenuItems'
 import { useQueryClient } from '@tanstack/react-query'
 import { AlertCircle, ArrowLeft, Save } from 'lucide-react'

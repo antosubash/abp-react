@@ -4,8 +4,8 @@ import {
   PagedResultDtoOfVoloCmsKitAdminPagesPageDto,
   pagesPublicFindBySlug,
 } from '@/client'
-import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useQuery } from '@tanstack/react-query'
 
 /**
  * Hook to fetch pages with pagination and filtering.

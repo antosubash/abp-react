@@ -41,7 +41,7 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
       if (result.error) {
         toast({
           title: 'Failed',
-          description: "Comment creation wasn&apos;t successful.",
+          description: 'Comment creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       } else {
@@ -58,7 +58,7 @@ export const AddComment = ({ entityType, entityId }: AddCommentProps) => {
       }
     } catch (err: unknown) {
       console.error('Comment creation error:', err)
-      let errorMessage = "Comment creation wasn&apos;t successful."
+      let errorMessage = 'Comment creation wasn&apos;t successful.'
 
       if (err instanceof Error) {
         if (err.message.includes('network') || err.message.includes('fetch')) {

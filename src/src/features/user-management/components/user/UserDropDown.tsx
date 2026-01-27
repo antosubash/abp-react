@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@/features/user-management/hooks/useCurrentUser'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -6,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
-import { useCurrentUser } from '@/features/user-management/hooks/useCurrentUser'
 import { USER_ROLE } from '@/shared/lib/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

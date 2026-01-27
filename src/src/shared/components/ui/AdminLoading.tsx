@@ -1,5 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { Loader2, User, Building, Globe } from 'lucide-react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
+import { Building, Globe, Loader2, User } from 'lucide-react'
 
 export function AdminLoading() {
   return (
@@ -77,7 +83,6 @@ export function AdminLoading() {
           </CardContent>
         </Card>
       </div>
-
     </div>
   )
-} 
+}

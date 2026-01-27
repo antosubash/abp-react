@@ -11,7 +11,7 @@ import {
 import { useToast } from '@/shared/components/ui/use-toast'
 
 export function Toaster() {
-export { Toaster } from './toaster';
+  export { Toaster } from './toaster'
   const { toasts } = useToast()
 
   return (

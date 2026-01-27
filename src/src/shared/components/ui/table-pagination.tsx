@@ -11,7 +11,6 @@ type PaginationProps<T> = {
 }
 
 export const Pagination = <T extends Record<string, any>>({
-export { Pagination as TablePagination } = <T extends Record<string, any>>({
   pageCount,
   table,
   'aria-label': ariaLabel = 'Pagination',
@@ -31,18 +30,14 @@ export { Pagination as TablePagination } = <T extends Record<string, any>>({
       )
     }
 
-    const pageNumber = Number(count)
-    const isCurrentPage = currentPage === pageNumber - 1
-
     return (
       <Button
+        key={idx}
         size="sm"
-        key={`page-${pageNumber}`}
-        variant={isCurrentPage ? 'default' : 'outline'}
-        disabled={isCurrentPage}
-        onClick={() => table.setPageIndex(pageNumber - 1)}
-        aria-current={isCurrentPage ? 'page' : undefined}
-        aria-label={`Go to page ${pageNumber}`}
+        variant={currentPage === idx ? 'default' : 'outline'}
+        onClick={() => table.setPageIndex(idx as number)}
+        aria-label={`Go to page ${idx + 1}`}
+        aria-current={currentPage === idx ? 'page' : undefined}
       >
         {count}
       </Button>
@@ -50,34 +45,48 @@ export { Pagination as TablePagination } = <T extends Record<string, any>>({
   }
 
   return (
-    <nav
-      className="pagination flex items-center space-x-1"
-      aria-label={ariaLabel}
-      role="navigation"
-    >
-      <Button
-        size="sm"
-        variant="outline"
-        disabled={!canPreviousPage}
-        onClick={() => table.setPageIndex(0)}
-        aria-label="Go to first page"
-      >
-        <ChevronFirstIcon className="h-4 w-4" />
-      </Button>
+    <nav aria-label={ariaLabel}>
+      {/* Mobile pagination buttons */}
+      <div className="flex sm:hidden gap-1 items-center justify-center sm:ml-auto">
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!canPreviousPage}
+          onClick={() => table.setPageIndex(0)}
+          aria-label="Go to first page"
+        >
+          <ChevronFirstIcon className="h-4 w-4" />
+        </Button>
 
-      <Button
-        size="sm"
-        variant="outline"
-        disabled={!canPreviousPage}
-        onClick={() => table.previousPage()}
-        aria-label="Go to previous page"
-      >
-        <ChevronLeftIcon className="h-4 w-4" />
-      </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!canPreviousPage}
+          onClick={() => table.previousPage()}
+          aria-label="Go to previous page"
+        >
+          <ChevronLeftIcon className="h-4 w-4" />
+        </Button>
 
-      {/* Mobile pagination info */}
-      <div className="block pl-2 pr-2 lg:hidden text-sm text-base-content/70">
-        {currentPage + 1} / {pageCount}
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!canNextPage}
+          onClick={() => table.nextPage()}
+          aria-label="Go to next page"
+        >
+          <ChevronRightIcon className="h-4 w-4" />
+        </Button>
+
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!canNextPage}
+          onClick={() => table.setPageIndex(pageCount - 1)}
+          aria-label="Go to last page"
+        >
+          <ChevronLastIcon className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Desktop pagination buttons */}
@@ -89,21 +98,14 @@ export { Pagination as TablePagination } = <T extends Record<string, any>>({
         size="sm"
         variant="outline"
         disabled={!canNextPage}
-        onClick={() => table.nextPage()}
-        aria-label="Go to next page"
-      >
-        <ChevronRightIcon className="h-4 w-4" />
-      </Button>
-
-      <Button
-        size="sm"
-        variant="outline"
-        disabled={!canNextPage}
         onClick={() => table.setPageIndex(pageCount - 1)}
         aria-label="Go to last page"
       >
-        <ChevronLastIcon className="h-4 w-4" />
+        <ChevronRightIcon className="h-4 w-4" />
       </Button>
     </nav>
   )
 }
+
+// Type alias for backwards compatibility
+export { Pagination as TablePagination }

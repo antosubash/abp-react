@@ -1,8 +1,19 @@
 'use client'
 import { VoloCmsKitContentsPageDto } from '@/client'
 import { PageView } from '@/features/cms/components/page/PageView'
-import { Alert, AlertDescription, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Error, Loader } from '@/shared/components/ui'
 import { usePageBySlug } from '@/features/cms/hooks/usePages'
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Error,
+  Loader,
+} from '@/shared/components/ui'
 import { AlertTriangle, Home, RefreshCw, Search } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
@@ -61,7 +72,8 @@ export default function PageViewPage() {
               </div>
               <CardTitle>Connection Error</CardTitle>
               <CardDescription>
-                We&apos;re having trouble connecting to our servers. This might be a temporary issue.
+                We&apos;re having trouble connecting to our servers. This might be a temporary
+                issue.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

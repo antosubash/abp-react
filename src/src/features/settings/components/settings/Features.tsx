@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@/shared/components/ui/dialog'
+import { useEffect, useState } from 'react'
 
 type FeaturesProps = {
   onDismiss: () => void
@@ -38,4 +38,3 @@ export const Features = ({ onDismiss }: FeaturesProps) => {
     </Dialog>
   )
 }
-

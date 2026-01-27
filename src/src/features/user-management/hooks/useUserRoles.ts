@@ -1,6 +1,6 @@
-import { userGetRoles, userFindByUsername } from '@/client'
-import { useQuery } from '@tanstack/react-query'
+import { userFindByUsername, userGetRoles } from '@/client'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useQuery } from '@tanstack/react-query'
 
 type UseUserRolesProps = {
   userId: string
@@ -26,7 +26,7 @@ export const useUserRoles = ({ userId }: UseUserRolesProps) => {
 
       // Check if userId looks like a GUID (user ID) or username
       const isGuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(userId)
-      
+
       let actualUserId = userId
 
       // If it's not a GUID, assume it's a username and get the user ID first
@@ -37,7 +37,7 @@ export const useUserRoles = ({ userId }: UseUserRolesProps) => {
               userName: userId,
             },
           })
-          
+
           if (userResponse.data?.id) {
             actualUserId = userResponse.data.id
           } else {

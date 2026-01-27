@@ -19,7 +19,12 @@ export async function GET() {
   const host = (await headers()).get('host')
 
   // If session already has a valid tenantId, redirect to home to prevent loops
-  if (session.tenantId && session.tenantId !== '' && session.tenantId !== 'null' && session.tenantId !== 'undefined') {
+  if (
+    session.tenantId &&
+    session.tenantId !== '' &&
+    session.tenantId !== 'null' &&
+    session.tenantId !== 'undefined'
+  ) {
     console.log('Session already has tenantId:', session.tenantId)
     redirect('/')
   }
@@ -27,15 +32,17 @@ export async function GET() {
   try {
     const { data } = await tenantGetTenantGuid({ query: { host: host! } })
     console.log('Fetched tenant GUID:', data)
-    
+
     // Ensure tenantId is always a string and handle edge cases
     // Check for empty objects, null, undefined, empty strings, and invalid values
-    if (data && 
-        data !== 'null' && 
-        data !== 'undefined' && 
-        data !== '' && 
-        typeof data === 'object' && 
-        Object.keys(data).length > 0) {
+    if (
+      data &&
+      data !== 'null' &&
+      data !== 'undefined' &&
+      data !== '' &&
+      typeof data === 'object' &&
+      Object.keys(data).length > 0
+    ) {
       // Valid data object with properties
       session.tenantId = String(data)
     } else if (data && typeof data === 'string' && data.trim() !== '') {

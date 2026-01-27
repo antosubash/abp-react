@@ -1,6 +1,6 @@
 import { userGetAssignableRoles } from '@/client'
-import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useQuery } from '@tanstack/react-query'
 
 /**
  * Custom hook to fetch assignable roles using a query.

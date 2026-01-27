@@ -1,20 +1,19 @@
 'use client'
 import { IdentityRoleDto, IdentityRoleUpdateDto } from '@/client'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useRoles } from '@/features/role-management/hooks/useRoles'
-import { Permissions, USER_ROLE } from '@/shared/lib/utils'
-import { useQueryClient } from '@tanstack/react-query'
-import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
 import { PermissionActions } from '@/features/permissions/components/permission/PermissionActions'
+import { useRoles } from '@/features/role-management/hooks/useRoles'
 import { CustomTable } from '@/shared/components/ui/CustomTable'
 import Error from '@/shared/components/ui/Error'
 import Loader from '@/shared/components/ui/Loader'
 import { Search } from '@/shared/components/ui/Search'
 import { useToast } from '@/shared/components/ui/use-toast'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { Permissions, USER_ROLE } from '@/shared/lib/utils'
+import { useQueryClient } from '@tanstack/react-query'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
 import { DeleteRole } from './DeleteRole'
 import { RoleEdit } from './RoleEdit'
-import { RolePermission } from './RolePermission'
 
 export const RoleList = () => {
   const { toast } = useToast()
@@ -54,13 +53,13 @@ export const RoleList = () => {
               return (
                 <PermissionActions
                   actions={[
-                                         {
-                       icon: 'permission',
-                       policy: Permissions.ROLES_MANAGE_PERMISSIONS,
-                       callback: () => {
-                         window.location.href = `/admin/permissions/role/${info.row.original.name}`
-                       },
-                     },
+                    {
+                      icon: 'permission',
+                      policy: Permissions.ROLES_MANAGE_PERMISSIONS,
+                      callback: () => {
+                        window.location.href = `/admin/permissions/role/${info.row.original.name}`
+                      },
+                    },
                     {
                       icon: 'pencil',
                       policy: Permissions.ROLES_UPDATE,
@@ -164,4 +163,3 @@ export const RoleList = () => {
     </>
   )
 }
-

@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import { memo, useCallback } from 'react'
-import { CheckCircle2, XCircle, Shield } from 'lucide-react'
-import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Badge } from '@/shared/components/ui/badge'
+import { Checkbox } from '@/shared/components/ui/checkbox'
 import { cn } from '@/shared/lib/utils'
+import clsx from 'clsx'
+import { CheckCircle2, XCircle } from 'lucide-react'
+import { memo, useCallback } from 'react'
 
 export type Management = 'identity' | 'tenant' | 'setting' | 'feature'
 export type PermissionTracker = {
@@ -39,16 +39,16 @@ type PermissionProps = {
  *
  * @returns {React.ReactElement} The rendered PermissionToggle component.
  */
-function PermissionToggle({ 
-  name, 
-  id, 
-  onUpdate, 
-  className, 
-  isGranted, 
-  disabled, 
+function PermissionToggle({
+  name,
+  id,
+  onUpdate,
+  className,
+  isGranted,
+  disabled,
   description,
   showIcon = true,
-  variant = 'default'
+  variant = 'default',
 }: PermissionProps) {
   const onChangeEvent = useCallback(() => {
     onUpdate?.()
@@ -58,20 +58,12 @@ function PermissionToggle({
   if (variant === 'compact') {
     return (
       <div className={clsx('flex items-center space-x-2 pb-2', className)}>
-        <Checkbox 
-          id={id} 
-          onCheckedChange={onChangeEvent} 
-          checked={isGranted} 
-          disabled={disabled} 
-        />
+        <Checkbox id={id} onCheckedChange={onChangeEvent} checked={isGranted} disabled={disabled} />
         <label htmlFor={id} className="text-sm font-medium leading-none cursor-pointer">
           {name}
         </label>
         {showIcon && (
-          <div className={cn(
-            "p-1 rounded",
-            isGranted ? "bg-green-100" : "bg-gray-100"
-          )}>
+          <div className={cn('p-1 rounded', isGranted ? 'bg-green-100' : 'bg-gray-100')}>
             {isGranted ? (
               <CheckCircle2 className="h-3 w-3 text-green-600" />
             ) : (
@@ -85,25 +77,24 @@ function PermissionToggle({
 
   if (variant === 'detailed') {
     return (
-      <div className={clsx(
-        'flex items-center justify-between p-3 rounded-lg border transition-colors',
-        isGranted ? 'border-green-200 bg-green-50' : 'border-gray-200 hover:bg-muted/50',
-        disabled && 'opacity-50 cursor-not-allowed',
-        className
-      )}>
+      <div
+        className={clsx(
+          'flex items-center justify-between p-3 rounded-lg border transition-colors',
+          isGranted ? 'border-green-200 bg-green-50' : 'border-gray-200 hover:bg-muted/50',
+          disabled && 'opacity-50 cursor-not-allowed',
+          className
+        )}
+      >
         <div className="flex items-center gap-3">
-          <Checkbox 
-            id={id} 
-            onCheckedChange={onChangeEvent} 
-            checked={isGranted} 
-            disabled={disabled} 
+          <Checkbox
+            id={id}
+            onCheckedChange={onChangeEvent}
+            checked={isGranted}
+            disabled={disabled}
           />
           <div className="flex items-center gap-2">
             {showIcon && (
-              <div className={cn(
-                "p-1 rounded",
-                isGranted ? "bg-green-100" : "bg-gray-100"
-              )}>
+              <div className={cn('p-1 rounded', isGranted ? 'bg-green-100' : 'bg-gray-100')}>
                 {isGranted ? (
                   <CheckCircle2 className="h-4 w-4 text-green-600" />
                 ) : (
@@ -115,16 +106,14 @@ function PermissionToggle({
               <label htmlFor={id} className="font-medium cursor-pointer">
                 {name}
               </label>
-              {description && (
-                <div className="text-sm text-muted-foreground">{description}</div>
-              )}
+              {description && <div className="text-sm text-muted-foreground">{description}</div>}
             </div>
           </div>
         </div>
-        <Badge 
-          variant={isGranted ? "default" : "secondary"}
+        <Badge
+          variant={isGranted ? 'default' : 'secondary'}
           className={cn(
-            isGranted ? "bg-green-100 text-green-800 border-green-200" : "bg-gray-100 text-gray-600"
+            isGranted ? 'bg-green-100 text-green-800 border-green-200' : 'bg-gray-100 text-gray-600'
           )}
         >
           {isGranted ? 'Granted' : 'Not Granted'}
@@ -136,18 +125,10 @@ function PermissionToggle({
   // Default variant
   return (
     <div className={clsx('flex items-center space-x-2 pb-2', className)}>
-      <Checkbox 
-        id={id} 
-        onCheckedChange={onChangeEvent} 
-        checked={isGranted} 
-        disabled={disabled} 
-      />
+      <Checkbox id={id} onCheckedChange={onChangeEvent} checked={isGranted} disabled={disabled} />
       <div className="flex items-center gap-2">
         {showIcon && (
-          <div className={cn(
-            "p-1 rounded",
-            isGranted ? "bg-green-100" : "bg-gray-100"
-          )}>
+          <div className={cn('p-1 rounded', isGranted ? 'bg-green-100' : 'bg-gray-100')}>
             {isGranted ? (
               <CheckCircle2 className="h-3 w-3 text-green-600" />
             ) : (
@@ -164,4 +145,3 @@ function PermissionToggle({
 }
 
 export const Permission = memo(PermissionToggle)
-

@@ -1,13 +1,19 @@
 import { emailSettingsSendTestEmail, SendTestEmailInput } from '@/client'
+import { Button } from '@/shared/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog'
+import { Input } from '@/shared/components/ui/input'
+import { Textarea } from '@/shared/components/ui/textarea'
+import { useToast } from '@/shared/components/ui/use-toast'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog'
-import { Input } from '@/shared/components/ui/input'
-import { Textarea } from '@/shared/components/ui/textarea'
-import { useToast } from '@/shared/components/ui/use-toast'
 
 export type TestEmailProps = {
   onDismiss: () => void
@@ -41,7 +47,7 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Test email wasn&apos;t successful.",
+          description: 'Test email wasn&apos;t successful.',
           variant: 'destructive',
         })
       }
@@ -90,4 +96,3 @@ export const TestEmail = ({ onDismiss }: TestEmailProps) => {
     </Dialog>
   )
 }
-

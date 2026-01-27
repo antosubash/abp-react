@@ -1,16 +1,15 @@
 'use client'
 import { IdentityUserDto, IdentityUserUpdateDto } from '@/client'
+import { PermissionActions } from '@/features/permissions/components/permission/PermissionActions'
+import { useUsers } from '@/features/user-management/hooks/useUsers'
 import { CustomTable, Error, Loader, Search, useToast } from '@/shared/components/ui'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useUsers } from '@/features/user-management/hooks/useUsers'
 import { Permissions, USER_ROLE } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
-import { PermissionActions } from '@/features/permissions/components/permission/PermissionActions'
 import { DeleteUser } from './DeleteUser'
 import { UserEdit } from './UserEdit'
-import { UserPermission } from './UserPermission'
 
 type UserActionDialogState = {
   userId: string
@@ -49,8 +48,7 @@ export const UserList = () => {
             userDto: user as IdentityUserUpdateDto,
             dialogType: 'edit',
           }),
-                 onPermission: (user) =>
-           window.location.href = `/admin/permissions/user/${user.userName}`,
+        onPermission: (user) => (window.location.href = `/admin/permissions/user/${user.userName}`),
         onDelete: (user) =>
           setUserActionDialog({
             userId: user.id!,

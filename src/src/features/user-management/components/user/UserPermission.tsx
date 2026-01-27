@@ -1,5 +1,5 @@
-import { useRouter } from 'next/navigation'
 import { IdentityUserUpdateDto } from '@/client'
+import { useRouter } from 'next/navigation'
 
 type UserPermissionProps = {
   userDto: IdentityUserUpdateDto
@@ -9,12 +9,12 @@ type UserPermissionProps = {
 
 export const UserPermission = ({ userDto, userId, onDismiss }: UserPermissionProps) => {
   const router = useRouter()
-  
+
   const handleOpenPermissions = () => {
     router.push(`/admin/permissions/user/${userDto.userName}`)
     onDismiss()
   }
-  
+
   return (
     <button
       onClick={handleOpenPermissions}

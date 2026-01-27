@@ -1,5 +1,7 @@
 'use client'
+import { AdminMenus } from '@/config'
 import { Button } from '@/shared/components/ui/button'
+import ClientLink from '@/shared/components/ui/client-link'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,15 +10,23 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/shared/components/ui/sheet'
-import { AdminMenus } from '@/config'
-import { ChevronDown, ChevronRight, CircleUser, Menu, Package2, Settings, User, LogOut } from 'lucide-react'
+import useSession from '@/useSession'
+import {
+  ChevronDown,
+  ChevronRight,
+  CircleUser,
+  LogOut,
+  Menu,
+  Package2,
+  Settings,
+  User,
+} from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import ClientLink from '@/shared/components/ui/client-link'
-import useSession from '@/useSession'
 
-export default function SideNavBarMobile() {
+function SideNavBarMobile() {
+export default SideNavBarMobile;
   const pathname = usePathname()
   const sessionData = useSession()
 
@@ -78,7 +88,7 @@ export default function SideNavBarMobile() {
                 Admin
               </span>
             </div>
-            
+
             {/* Mobile Navigation */}
             <nav className="flex-1 space-y-2">
               {AdminMenus.map((menu) => {
@@ -101,9 +111,13 @@ export default function SideNavBarMobile() {
                         }`}
                       >
                         {menu.icon && (
-                          <menu.icon className={`h-4 w-4 transition-colors ${
-                            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                          }`} />
+                          <menu.icon
+                            className={`h-4 w-4 transition-colors ${
+                              isActive
+                                ? 'text-primary'
+                                : 'text-muted-foreground group-hover:text-primary'
+                            }`}
+                          />
                         )}
                         <span className="font-medium">{menu.name}</span>
                         {isActive && (
@@ -133,13 +147,19 @@ export default function SideNavBarMobile() {
                               key={subIndex}
                               href={submenu.link}
                               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
-                                isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                                isSubmenuActive
+                                  ? 'text-primary bg-primary/10 border border-primary/20'
+                                  : ''
                               }`}
                             >
                               {submenu.icon && (
-                                <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
-                                  isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                                }`} />
+                                <submenu.icon
+                                  className={`h-3.5 w-3.5 transition-colors ${
+                                    isSubmenuActive
+                                      ? 'text-primary'
+                                      : 'text-muted-foreground group-hover:text-primary'
+                                  }`}
+                                />
                               )}
                               <span className="font-medium">{submenu.name}</span>
                               {isSubmenuActive && (
@@ -168,14 +188,14 @@ export default function SideNavBarMobile() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
-                     <div className="flex items-center justify-start gap-2 p-2">
-             <div className="flex flex-col space-y-1 leading-none">
-               <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
-               <p className="w-[200px] truncate text-sm text-muted-foreground">
-                 {sessionData.data?.userInfo?.email || 'No email available'}
-               </p>
-             </div>
-           </div>
+          <div className="flex items-center justify-start gap-2 p-2">
+            <div className="flex flex-col space-y-1 leading-none">
+              <p className="font-medium">{sessionData.data?.userInfo?.name || 'Admin User'}</p>
+              <p className="w-[200px] truncate text-sm text-muted-foreground">
+                {sessionData.data?.userInfo?.email || 'No email available'}
+              </p>
+            </div>
+          </div>
           <DropdownMenuSeparator />
           <Link href="/admin" className="cursor-pointer">
             <DropdownMenuItem className="flex items-center gap-2">
@@ -212,4 +232,3 @@ export default function SideNavBarMobile() {
     </header>
   )
 }
-

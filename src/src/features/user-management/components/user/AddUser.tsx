@@ -1,8 +1,18 @@
 'use client'
 import { IdentityUserCreateDto, userCreate } from '@/client'
-import { Button, Checkbox, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Input, useToast } from '@/shared/components/ui'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  useToast,
+} from '@/shared/components/ui'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'clsx'
@@ -40,7 +50,7 @@ export const AddUser = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User creation wasn&apos;t successful.",
+          description: 'User creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

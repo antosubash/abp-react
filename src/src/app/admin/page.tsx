@@ -1,5 +1,16 @@
 import { abpApplicationConfigurationGet, ApplicationConfigurationDto } from '@/client'
-import { Avatar, AvatarFallback, AvatarImage, Badge, Card, CardContent, CardDescription, CardHeader, CardTitle, Separator } from '@/shared/components/ui'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Badge,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Separator,
+} from '@/shared/components/ui'
 import {
   Building,
   CheckCircle,

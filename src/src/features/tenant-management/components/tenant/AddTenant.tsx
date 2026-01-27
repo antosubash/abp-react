@@ -1,16 +1,22 @@
 'use client'
 import { TenantCreateDto, tenantCreate } from '@/client'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { Button } from '@/shared/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog'
+import { Input } from '@/shared/components/ui/input'
+import { useToast } from '@/shared/components/ui/use-toast'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog'
-import { Input } from '@/shared/components/ui/input'
-import { useToast } from '@/shared/components/ui/use-toast'
 
 export const AddTenant = () => {
   const { can } = useGrantedPolicies()
@@ -37,7 +43,7 @@ export const AddTenant = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Tenant creation wasn&apos;t successful.",
+          description: 'Tenant creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }
@@ -87,4 +93,3 @@ export const AddTenant = () => {
     </section>
   )
 }
-

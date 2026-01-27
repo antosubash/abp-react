@@ -1,5 +1,4 @@
 import { roleDelete } from '@/client'
-import { useEffect, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,6 +10,7 @@ import {
   AlertDialogTitle,
 } from '@/shared/components/ui/alert-dialog'
 import { useToast } from '@/shared/components/ui/use-toast'
+import { useEffect, useState } from 'react'
 
 type DeleteRoleProps = {
   role: { roleId: string; roleName: string }
@@ -62,4 +62,3 @@ export const DeleteRole = ({ role: { roleId, roleName }, onDismiss }: DeleteRole
     </AlertDialog>
   )
 }
-

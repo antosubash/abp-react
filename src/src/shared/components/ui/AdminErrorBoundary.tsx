@@ -1,7 +1,13 @@
 'use client'
 import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
+import { AlertTriangle, Home, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 import { Component, ReactNode } from 'react'
 
@@ -43,7 +49,8 @@ export class AdminErrorBoundary extends Component<Props, State> {
                 Admin Page Error
               </CardTitle>
               <CardDescription>
-                Something went wrong while loading the admin page. This might be due to network issues, authentication problems, or a temporary server error.
+                Something went wrong while loading the admin page. This might be due to network
+                issues, authentication problems, or a temporary server error.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -56,8 +63,8 @@ export class AdminErrorBoundary extends Component<Props, State> {
                 </div>
               )}
               <div className="flex gap-2">
-                <Button 
-                  onClick={this.handleRetry} 
+                <Button
+                  onClick={this.handleRetry}
                   variant="outline"
                   className="flex items-center gap-2"
                 >
@@ -82,4 +89,4 @@ export class AdminErrorBoundary extends Component<Props, State> {
 
     return this.props.children
   }
-} 
+}

@@ -47,7 +47,11 @@ export const AdminMenus: Array<{
   name: string
   link: string
   icon: React.ComponentType<{ className?: string }>
-  submenus?: Array<{ name: string; link: string; icon: React.ComponentType<{ className?: string }> }>
+  submenus?: Array<{
+    name: string
+    link: string
+    icon: React.ComponentType<{ className?: string }>
+  }>
 }> = [
   {
     name: 'Home',
@@ -97,4 +101,3 @@ export const AdminMenus: Array<{
     icon: Cog,
   },
 ]
-

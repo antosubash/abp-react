@@ -21,7 +21,7 @@ import { SessionData, defaultSession, getClientConfig } from './session-utils'
  */
 export async function getSession(): Promise<IronSession<SessionData>> {
   let session = await getIronSession<SessionData>(await cookies(), sessionOptions)
-  
+
   try {
     // Check if the access token is expired
     if (session.access_token && isTokenExpired(session.access_token!)) {
@@ -32,12 +32,12 @@ export async function getSession(): Promise<IronSession<SessionData>> {
 
         // Retrieve session data from Redis
         let redisSessionData = await redis.get(redisKey)
-        
+
         if (!redisSessionData) {
           console.warn('No session data found in Redis, user may need to re-authenticate')
           throw new Error('No session data in Redis')
         }
-        
+
         const parsedSessionData = JSON.parse(redisSessionData!) as RedisSession
 
         // Check if we have a refresh token
@@ -51,7 +51,7 @@ export async function getSession(): Promise<IronSession<SessionData>> {
           clientConfig,
           parsedSessionData.refresh_token!
         )
-        
+
         session.access_token = tokenSet.access_token
         await session.save()
 
@@ -62,7 +62,7 @@ export async function getSession(): Promise<IronSession<SessionData>> {
         } as RedisSession
         await redis.set(redisKey, JSON.stringify(newRedisSessionData))
         await redis.quit()
-        
+
         console.log('Token refreshed successfully')
       } catch (refreshError) {
         console.error('Error refreshing token:', refreshError)

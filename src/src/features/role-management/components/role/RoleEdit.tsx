@@ -1,13 +1,19 @@
 import { IdentityRoleUpdateDto, roleUpdate } from '@/client'
+import { Checkbox } from '@/shared/components/ui/checkbox'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog'
+import { Input } from '@/shared/components/ui/input'
+import { useToast } from '@/shared/components/ui/use-toast'
 import { USER_ROLE } from '@/shared/lib/utils'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Button } from 'react-day-picker'
 import { useForm } from 'react-hook-form'
-import { Checkbox } from '@/shared/components/ui/checkbox'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog'
-import { Input } from '@/shared/components/ui/input'
-import { useToast } from '@/shared/components/ui/use-toast'
 
 type RoleEditProps = {
   roleDto: IdentityRoleUpdateDto
@@ -40,7 +46,7 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role update wasn&apos;t successfull.",
+          description: 'Role update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }
@@ -116,4 +122,3 @@ export const RoleEdit = ({ roleDto, roleId, onDismiss }: RoleEditProps) => {
     </Dialog>
   )
 }
-

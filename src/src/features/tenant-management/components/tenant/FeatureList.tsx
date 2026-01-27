@@ -1,5 +1,7 @@
 import { FeatureGroupDto, UpdateFeaturesDto, featuresDelete, featuresUpdate } from '@/client'
+import { useFeatures } from '@/features/settings/hooks/useFeatures'
 import { Button } from '@/shared/components/ui/button'
+import { Checkbox } from '@/shared/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -7,15 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/components/ui/dialog'
+import { useToast } from '@/shared/components/ui/use-toast'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useFeatures } from '@/features/settings/hooks/useFeatures'
 import { PermissionProvider, Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
-import { Checkbox } from '@/shared/components/ui/checkbox'
-import { useToast } from '@/shared/components/ui/use-toast'
 
 export type FeatureListProps = {
   onDismiss: () => void
@@ -113,7 +113,7 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Features wasn&apos;t able to reset tp default.",
+          description: 'Features wasn&apos;t able to reset tp default.',
           variant: 'destructive',
         })
       }
@@ -192,4 +192,3 @@ export const FeatureList = ({ onDismiss, tenantId }: FeatureListProps) => {
     </section>
   )
 }
-

@@ -57,10 +57,12 @@ export function isValidTenantId(tenantId: any): boolean {
   if (typeof tenantId === 'object') return false
   if (typeof tenantId === 'string') {
     const trimmed = tenantId.trim()
-    return trimmed !== '' && 
-           trimmed !== 'null' && 
-           trimmed !== 'undefined' && 
-           trimmed !== '[object Object]'
+    return (
+      trimmed !== '' &&
+      trimmed !== 'null' &&
+      trimmed !== 'undefined' &&
+      trimmed !== '[object Object]'
+    )
   }
   return true
 }

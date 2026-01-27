@@ -1,7 +1,7 @@
 'use client'
 import { PageList } from '@/features/cms/components/page/PageList'
-import { Button } from '@/shared/components/ui/button'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { Button } from '@/shared/components/ui/button'
 import { Permissions } from '@/shared/lib/utils'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'

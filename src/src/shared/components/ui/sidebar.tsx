@@ -16,7 +16,12 @@ import {
   SheetTitle,
 } from '@/shared/components/ui/sheet'
 import { Skeleton } from '@/shared/components/ui/skeleton'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/shared/components/ui/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/shared/components/ui/tooltip'
 import { useIsMobile } from '@/shared/hooks/use-mobile'
 import { cn } from '@/shared/lib/utils'
 

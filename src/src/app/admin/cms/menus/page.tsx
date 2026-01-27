@@ -1,7 +1,7 @@
 'use client'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { MenuList } from '@/shared/components/menu/MenuList'
 import { Button } from '@/shared/components/ui/button'
-import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 

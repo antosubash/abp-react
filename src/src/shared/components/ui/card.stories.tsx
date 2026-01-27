@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { Calendar, Heart, MapPin, MessageCircle, Share2 } from 'lucide-react'
 import { action } from 'storybook/actions'
+import { Avatar, AvatarFallback, AvatarImage } from './avatar'
+import { Badge } from './badge'
+import { Button } from './button'
 import {
   Card,
   CardAction,
@@ -9,10 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from './card'
-import { Button } from './button'
-import { Badge } from './badge'
-import { Avatar, AvatarFallback, AvatarImage } from './avatar'
-import { Heart, Share2, MessageCircle, Calendar, MapPin } from 'lucide-react'
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',
@@ -21,7 +21,8 @@ const meta: Meta<typeof Card> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A flexible card component with header, content, and footer sections. Perfect for displaying content in a structured layout.',
+        component:
+          'A flexible card component with header, content, and footer sections. Perfect for displaying content in a structured layout.',
       },
     },
   },
@@ -115,7 +116,8 @@ export const BlogPostCard: Story = {
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground mb-4">
-          React is a JavaScript library for building user interfaces. In this guide, we&apos;ll cover the fundamentals...
+          React is a JavaScript library for building user interfaces. In this guide, we&apos;ll
+          cover the fundamentals...
         </p>
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
@@ -186,7 +188,7 @@ export const StatsCard: Story = {
           <div className="text-sm text-green-600">+12% from last month</div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">$45,678</CardTitle>
@@ -196,7 +198,7 @@ export const StatsCard: Story = {
           <div className="text-sm text-green-600">+8% from last month</div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold">89%</CardTitle>
@@ -231,4 +233,4 @@ export const InteractiveCard: Story = {
       </CardFooter>
     </Card>
   ),
-} 
+}

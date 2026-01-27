@@ -1,9 +1,9 @@
 import { PermissionGrantInfoDto } from '@/client'
 import { Permission } from './PermissionToggle'
 
-import clsx from 'clsx'
 import { Button } from '@/shared/components/ui/button'
 import { DialogFooter } from '@/shared/components/ui/dialog'
+import clsx from 'clsx'
 import { usePermissionsChanges, UsePermissionsChangesProps } from './usePermissionChanges'
 
 type TogglePermissionProps = UsePermissionsChangesProps & {
@@ -88,4 +88,3 @@ export const TogglePermission = ({
     </>
   )
 }
-

@@ -1,22 +1,28 @@
-import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { Badge } from '@/shared/components/ui/badge'
 import { PublicLayout } from '@/shared/components/layout'
+import { Badge } from '@/shared/components/ui/badge'
+import { Button } from '@/shared/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
+import {
+  ArrowRight,
+  CheckCircle,
+  Code,
+  Cpu,
+  Database,
+  Globe,
+  Layers,
+  Palette,
+  Rocket,
+  Shield,
+  Zap,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { 
-  Rocket, 
-  Shield, 
-  Palette, 
-  Globe, 
-  Code, 
-  CheckCircle, 
-  ArrowRight,
-  Zap,
-  Layers,
-  Database,
-  Cpu
-} from 'lucide-react'
 
 /**
  * The Home component is an asynchronous function that returns a comprehensive landing page.
@@ -41,8 +47,9 @@ export default async function Home() {
                   AbpReact
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  A modern, high-performance React-based frontend solution for ABP Framework applications. 
-                  Built with Next.js, TypeScript, and Tailwind CSS for optimal performance and developer experience.
+                  A modern, high-performance React-based frontend solution for ABP Framework
+                  applications. Built with Next.js, TypeScript, and Tailwind CSS for optimal
+                  performance and developer experience.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -79,8 +86,9 @@ export default async function Home() {
               Everything you need to build modern web apps
             </h2>
             <p className="text-muted-foreground md:text-xl max-w-3xl mx-auto">
-              AbpReact provides a complete foundation for building enterprise-grade React applications 
-              with ABP Framework integration, modern tooling, and beautiful UI components.
+              AbpReact provides a complete foundation for building enterprise-grade React
+              applications with ABP Framework integration, modern tooling, and beautiful UI
+              components.
             </p>
           </div>
 
@@ -119,9 +127,7 @@ export default async function Home() {
                   <Palette className="w-6 h-6 text-green-600" />
                 </div>
                 <CardTitle>Visual Builder</CardTitle>
-                <CardDescription>
-                  Puck CMS integration for visual content editing
-                </CardDescription>
+                <CardDescription>Puck CMS integration for visual content editing</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -203,9 +209,7 @@ export default async function Home() {
                   <Database className="w-6 h-6 text-red-600" />
                 </div>
                 <CardTitle>ABP Integration</CardTitle>
-                <CardDescription>
-                  Seamless integration with ABP Framework backend
-                </CardDescription>
+                <CardDescription>Seamless integration with ABP Framework backend</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -267,7 +271,7 @@ export default async function Home() {
               Follow these simple steps to create your first AbpReact application
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -278,12 +282,10 @@ export default async function Home() {
                 Install the ABP React template using dotnet CLI
               </p>
               <div className="bg-muted p-3 rounded-lg text-left">
-                <code className="text-xs">
-                  dotnet new install Anto.Abp.React.Template
-                </code>
+                <code className="text-xs">dotnet new install Anto.Abp.React.Template</code>
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-green-600">2</span>
@@ -298,7 +300,7 @@ export default async function Home() {
                 </code>
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-purple-600">3</span>
@@ -308,9 +310,7 @@ export default async function Home() {
                 Run the development server and start building
               </p>
               <div className="bg-muted p-3 rounded-lg text-left">
-                <code className="text-xs">
-                  cd my-app && pnpm dev
-                </code>
+                <code className="text-xs">cd my-app && pnpm dev</code>
               </div>
             </div>
           </div>
@@ -325,7 +325,8 @@ export default async function Home() {
               Ready to build something amazing?
             </h2>
             <p className="text-muted-foreground md:text-xl mb-8 max-w-2xl mx-auto">
-              Start exploring the components, check out the documentation, or dive into the admin panel to see what AbpReact can do for you.
+              Start exploring the components, check out the documentation, or dive into the admin
+              panel to see what AbpReact can do for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/admin">
@@ -334,13 +335,21 @@ export default async function Home() {
                   Explore Admin Panel
                 </Button>
               </Link>
-              <Link href="https://abp-react-storybook.antosubash.com" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://abp-react-storybook.antosubash.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <Palette className="w-4 h-4 mr-2" />
                   View Storybook
                 </Button>
               </Link>
-              <Link href="https://antosubash.github.io/abp-react/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://antosubash.github.io/abp-react/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <Code className="w-4 h-4 mr-2" />
                   Documentation

@@ -1,18 +1,24 @@
 'use client'
 import { IdentityRoleCreateDto, roleCreate } from '@/client'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { Button } from '@/shared/components/ui/button'
+import { Checkbox } from '@/shared/components/ui/checkbox'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog'
+import { Input } from '@/shared/components/ui/input'
+import { useToast } from '@/shared/components/ui/use-toast'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
-import { Checkbox } from '@/shared/components/ui/checkbox'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/components/ui/dialog'
-import { Input } from '@/shared/components/ui/input'
-import { useToast } from '@/shared/components/ui/use-toast'
 
 export type AddUserProps = {}
 
@@ -44,7 +50,7 @@ export const AddRole = ({}: AddUserProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Role creation wasn&apos;t successful.",
+          description: 'Role creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }
@@ -111,4 +117,3 @@ export const AddRole = ({}: AddUserProps) => {
     </section>
   )
 }
-

@@ -64,7 +64,7 @@ export const PageEdit = ({ pageId, pageDto, onDismiss }: PageEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page update wasn&apos;t successful.",
+          description: 'Page update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

@@ -1,3 +1,3 @@
 // Section Components
-export { HeroSection } from './hero';
-export { IntroSection } from './intro';
+export { Hero } from './hero'
+export { Intro } from './intro'

@@ -1,6 +1,6 @@
 import { userGetList } from '@/client'
-import { useQuery } from '@tanstack/react-query'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useQuery } from '@tanstack/react-query'
 
 /**
  * Custom hook to fetch a list of users.

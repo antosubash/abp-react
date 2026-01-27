@@ -1,8 +1,8 @@
 'use client'
 import { ProfileChangePasswordData, profileChangePassword } from '@/client'
+import { Button, Input, useToast } from '@/shared/components/ui'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Input, useToast } from '@/shared/components/ui'
 
 export const ChangePassword = () => {
   const { toast } = useToast()
@@ -36,7 +36,7 @@ export const ChangePassword = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Password update wasn&apos;t successful.",
+          description: 'Password update wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

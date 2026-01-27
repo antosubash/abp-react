@@ -1,6 +1,6 @@
 import { EmailSettingsDto, emailSettingsGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 /**
  * Custom hook to fetch email settings using React Query.

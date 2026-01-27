@@ -1,17 +1,17 @@
 'use client'
 import { EmailSettingsDto, EmailSettingsUpdateData, emailSettingsUpdate } from '@/client'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useEmailing } from '@/features/settings/hooks/useEmailing'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { useEmailing } from '@/features/settings/hooks/useEmailing'
+import { Button } from '@/shared/components/ui/button'
+import { Checkbox } from '@/shared/components/ui/checkbox'
+import { Input } from '@/shared/components/ui/input'
+import { useToast } from '@/shared/components/ui/use-toast'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
-import { Checkbox } from '@/shared/components/ui/checkbox'
-import { Input } from '@/shared/components/ui/input'
-import { useToast } from '@/shared/components/ui/use-toast'
 import { TestEmail } from './TestEmail'
 
 export const Emailing = () => {
@@ -54,7 +54,7 @@ export const Emailing = () => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Email settings wasn&apos;t successfull.",
+          description: 'Email settings wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }
@@ -182,4 +182,3 @@ export const Emailing = () => {
     </section>
   )
 }
-

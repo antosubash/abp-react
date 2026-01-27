@@ -2,13 +2,22 @@
 import { pageAdminUpdate, UpdatePageInputDto, VoloCmsKitAdminPagesPageDto } from '@/client'
 import { PuckEditor } from '@/features/cms/components/puck/PuckEditor'
 import { htmlToPuckData, isPuckData } from '@/features/cms/components/puck/utils'
-import { Alert, AlertDescription, Badge, Button, Error, Input, Label, Switch, useToast } from '@/shared/components/ui'
-import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { usePage } from '@/features/cms/hooks/usePages'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import {
+  Alert,
+  AlertDescription,
+  Badge,
+  Button,
+  Error,
+  Input,
+  Label,
+  useToast,
+} from '@/shared/components/ui'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, Clock, RefreshCw, Save, Eye } from 'lucide-react'
+import { ArrowLeft, Clock, Eye, RefreshCw, Save } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -230,7 +239,7 @@ export default function EditPage() {
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPage, pageId] })
       queryClient.invalidateQueries({ queryKey: [QueryNames.GetPages] })
       localStorage.removeItem(`page-draft-${pageId}`) // Clear draft after successful save
-      
+
       // Remove the redirect - stay on the current page
       // router.push('/admin/cms')
     } catch (err: unknown) {
@@ -364,7 +373,6 @@ export default function EditPage() {
                 Unsaved Changes
               </Badge>
             )}
-
 
             <Button
               size="sm"

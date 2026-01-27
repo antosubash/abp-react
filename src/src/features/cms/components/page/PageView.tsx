@@ -8,12 +8,18 @@
  */
 
 import { VoloCmsKitContentsPageDto } from '@/client'
-import { PageComments } from '@/features/comments/components/comment/PageComments'
-import { htmlToPuckData, isPuckData } from '@/features/cms/components/puck/utils'
 import { config } from '@/features/cms/components/puck/config'
+import { htmlToPuckData, isPuckData } from '@/features/cms/components/puck/utils'
+import { PageComments } from '@/features/comments/components/comment/PageComments'
 import { Alert, AlertDescription } from '@/shared/components/ui/alert'
 import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
 import { Render } from '@measured/puck'
 import { AlertTriangle, FileText, RefreshCw } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
@@ -65,7 +71,6 @@ export const PageView = ({ page }: PageViewProps) => {
   useEffect(() => {
     if (page.script && typeof page.script === 'string' && page.script.trim().length > 0) {
       try {
-
         // TODO: Implement proper script sandboxing for security
         // Script execution is temporarily disabled to prevent security vulnerabilities
         console.warn('Script execution is temporarily disabled for security reasons')
@@ -237,7 +242,7 @@ export const PageView = ({ page }: PageViewProps) => {
                 </div>
                 <CardTitle>{page.title}</CardTitle>
                 <CardDescription>
-                  {contentError || renderError || "This page doesn&apos;t have any content yet."}
+                  {contentError || renderError || 'This page doesn&apos;t have any content yet.'}
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">

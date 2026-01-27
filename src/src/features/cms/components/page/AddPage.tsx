@@ -1,5 +1,6 @@
 'use client'
 import { CreatePageInputDto, pageAdminCreate } from '@/client'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { Button } from '@/shared/components/ui/button'
 import {
   Dialog,
@@ -13,7 +14,6 @@ import { Label } from '@/shared/components/ui/label'
 import { Textarea } from '@/shared/components/ui/textarea'
 import { useToast } from '@/shared/components/ui/use-toast'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
 import { Permissions } from '@/shared/lib/utils'
 import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
@@ -54,7 +54,7 @@ export const AddPage = ({ onDismiss }: AddPageProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Page creation wasn&apos;t successful.",
+          description: 'Page creation wasn&apos;t successful.',
           variant: 'destructive',
         })
       }

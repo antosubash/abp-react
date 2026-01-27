@@ -1,4 +1,3 @@
-import type { Config } from '@measured/puck'
 // Temporarily comment out missing block components
 // import { ButtonBlockConfig } from './components/ButtonBlock/config'
 // import { CardBlockConfig } from './components/CardBlock/config'
@@ -19,8 +18,6 @@ import type { Config } from '@measured/puck'
 // import { WelcomeBlockConfig } from './components/WelcomeBlock/config'
 // import { GalleryBlockConfig } from './components/GalleryBlock/config'
 // import { CarouselBlockConfig } from './components/CarouselBlock/config'
-
-
 
 // Import prop types from each component
 // import type { ButtonBlockProps } from './components/ButtonBlock/ButtonBlockProps'
@@ -55,7 +52,15 @@ export const config = {
     },
     layout: {
       title: 'Layout',
-      components: ['Hero', 'CardBlock', 'ContainerBlock', 'FlexBlock', 'GridBlock', 'SpacerBlock', 'TableBlock'],
+      components: [
+        'Hero',
+        'CardBlock',
+        'ContainerBlock',
+        'FlexBlock',
+        'GridBlock',
+        'SpacerBlock',
+        'TableBlock',
+      ],
     },
     media: {
       title: 'Media',
@@ -73,9 +78,7 @@ export const config = {
       title: 'Utilities',
       components: ['DividerBlock'],
     },
-  }
+  },
 }
-
-
 
 export default config

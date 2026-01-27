@@ -9,6 +9,7 @@ This directory contains the enhanced permission management components with impro
 The main enhanced permission dialog component that replaces the old `RolePermission` and `UserPermission` components.
 
 **Features:**
+
 - **Modern UI Design**: Clean, card-based layout with better visual hierarchy
 - **Search Functionality**: Search permissions by name or display name
 - **Tabbed Navigation**: Organized permission groups with tabbed interface
@@ -19,6 +20,7 @@ The main enhanced permission dialog component that replaces the old `RolePermiss
 - **Accessibility**: Better ARIA labels and keyboard navigation
 
 **Usage:**
+
 ```tsx
 import { EnhancedPermissionDialog } from '@/components/permission'
 
@@ -42,15 +44,17 @@ import { EnhancedPermissionDialog } from '@/components/permission'
 Enhanced permission toggle component with multiple variants.
 
 **Variants:**
+
 - `default`: Standard toggle with icon
 - `compact`: Minimal toggle for dense layouts
 - `detailed`: Full-featured toggle with description and badge
 
 **Usage:**
+
 ```tsx
 import { Permission } from '@/components/permission'
 
-<Permission
+;<Permission
   name="Create Users"
   id="users.create"
   isGranted={true}
@@ -66,16 +70,18 @@ import { Permission } from '@/components/permission'
 Component to display permission change history and statistics.
 
 **Features:**
+
 - Change statistics (granted, revoked, total)
 - Recent changes list with timestamps
 - Undo and reset functionality
 - Visual indicators for change types
 
 **Usage:**
+
 ```tsx
 import { PermissionChangeHistory } from '@/components/permission'
 
-<PermissionChangeHistory
+;<PermissionChangeHistory
   changes={changes}
   onUndo={handleUndo}
   onReset={handleReset}
@@ -91,6 +97,7 @@ import { PermissionChangeHistory } from '@/components/permission'
 Enhanced hook for managing permission changes with advanced features.
 
 **Features:**
+
 - Change tracking with timestamps
 - Undo functionality
 - Change statistics
@@ -98,6 +105,7 @@ Enhanced hook for managing permission changes with advanced features.
 - Reset to original state
 
 **Usage:**
+
 ```tsx
 import { useEnhancedPermissionChanges } from '@/components/permission'
 
@@ -113,37 +121,42 @@ const {
   getChangeStats,
 } = useEnhancedPermissionChanges({
   permissions: permissionList,
-  type: 'identity'
+  type: 'identity',
 })
 ```
 
 ## Key Improvements
 
 ### 1. Visual Design
+
 - **Modern Card Layout**: Clean, organized interface with proper spacing
 - **Color-Coded Status**: Green for granted, red for revoked, gray for neutral
 - **Icons**: Contextual icons for different permission types
 - **Badges**: Visual indicators for permission counts and status
 
 ### 2. User Experience
+
 - **Search**: Find permissions quickly with real-time search
 - **Tabs**: Organized navigation between permission groups
 - **Visual Feedback**: Immediate feedback for all actions
 - **Loading States**: Clear loading indicators and error messages
 
 ### 3. Functionality
+
 - **Change Tracking**: Complete history of all permission changes
 - **Undo/Reset**: Ability to undo changes or reset to original state
 - **Bulk Operations**: Grant/revoke all permissions at once
 - **Validation**: Proper validation and error handling
 
 ### 4. Accessibility
+
 - **ARIA Labels**: Proper accessibility labels for screen readers
 - **Keyboard Navigation**: Full keyboard support
 - **Focus Management**: Proper focus handling
 - **Screen Reader Support**: Descriptive text and status announcements
 
 ### 5. Performance
+
 - **Optimized Rendering**: Efficient re-rendering with proper memoization
 - **Lazy Loading**: Load permission data on demand
 - **Debounced Search**: Efficient search with debouncing
@@ -154,21 +167,19 @@ const {
 ### From Old Components
 
 **Before:**
+
 ```tsx
 import { RolePermission } from '@/components/role/RolePermission'
 
-<RolePermission roleDto={role} onDismiss={onClose} />
+;<RolePermission roleDto={role} onDismiss={onClose} />
 ```
 
 **After:**
+
 ```tsx
 import { EnhancedPermissionDialog } from '@/components/permission'
 
-<EnhancedPermissionDialog
-  entity={role}
-  entityType="role"
-  onDismiss={onClose}
-/>
+;<EnhancedPermissionDialog entity={role} entityType="role" onDismiss={onClose} />
 ```
 
 ### Breaking Changes
@@ -196,4 +207,4 @@ The components use Tailwind CSS classes and follow the design system. Custom sty
 - Large permission lists are handled efficiently with virtualization
 - Search is debounced to prevent excessive API calls
 - Components are memoized to prevent unnecessary re-renders
-- Change tracking is optimized for memory usage 
+- Change tracking is optimized for memory usage

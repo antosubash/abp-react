@@ -19,10 +19,12 @@ export async function GET() {
   let tenantId = session.tenantId
 
   // Ensure tenantId is always a string and handle edge cases
-  if (!tenantId || 
-      tenantId === 'default' || 
-      (typeof tenantId === 'object' && Object.keys(tenantId).length === 0) ||
-      typeof tenantId !== 'string') {
+  if (
+    !tenantId ||
+    tenantId === 'default' ||
+    (typeof tenantId === 'object' && Object.keys(tenantId).length === 0) ||
+    typeof tenantId !== 'string'
+  ) {
     tenantId = ''
   } else {
     tenantId = String(tenantId)

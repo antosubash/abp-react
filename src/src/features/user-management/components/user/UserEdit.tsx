@@ -4,6 +4,8 @@ import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
 
+import { useAssignableRoles } from '@/features/role-management/hooks/useAssignableRoles'
+import { useUserRoles } from '@/features/user-management/hooks/useUserRoles'
 import Loader from '@/shared/components/ui/Loader'
 import { Button } from '@/shared/components/ui/button'
 import { Checkbox } from '@/shared/components/ui/checkbox'
@@ -16,8 +18,6 @@ import {
 } from '@/shared/components/ui/dialog'
 import { Input } from '@/shared/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
-import { useAssignableRoles } from '@/features/role-management/hooks/useAssignableRoles'
-import { useUserRoles } from '@/features/user-management/hooks/useUserRoles'
 import classNames from 'clsx'
 
 const TABS_NAME = {
@@ -60,7 +60,7 @@ export const UserEdit = ({ userDto, userId, onDismiss }: UserEditProps) => {
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "User update wasn&apos;t successfull.",
+          description: 'User update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }

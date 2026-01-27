@@ -66,7 +66,7 @@ export const TenantEdit = ({ tenantDto, tenantId, onDismiss }: TenantEditProps) 
       if (err instanceof Error) {
         toast({
           title: 'Failed',
-          description: "Tenant update wasn&apos;t successfull.",
+          description: 'Tenant update wasn&apos;t successfull.',
           variant: 'destructive',
         })
       }

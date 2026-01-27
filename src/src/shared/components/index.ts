@@ -1,8 +1,8 @@
 // Shared Components
-export * from './ui';
-export * from './layout';
-export * from './navigation';
-export * from './menu';
-export * from './sections';
-export * from './analytics';
-export { VersionDisplay } from './version-display';
+export * from './analytics'
+export * from './layout'
+export * from './menu'
+export * from './navigation'
+export * from './sections'
+export * from './ui'
+export { VersionDisplay } from './version-display'

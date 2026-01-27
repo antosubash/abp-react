@@ -1,7 +1,13 @@
 'use client'
-import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { Button } from '@/shared/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
 import { Permissions } from '@/shared/lib/utils'
 import { FileText, MessageSquare, Plus } from 'lucide-react'
 import Link from 'next/link'

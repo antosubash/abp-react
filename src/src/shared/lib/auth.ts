@@ -1,6 +1,6 @@
 import { client as APIClient } from '@/client'
-import { getSession } from '@/shared/lib/actions'
 import { sessionOptions } from '@/sessionOptions'
+import { getSession } from '@/shared/lib/actions'
 import { getIronSession } from 'iron-session'
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
@@ -83,21 +83,21 @@ export const setUpLayoutConfig = async () => {
     APIClient.setConfig({
       baseUrl: typeof window !== 'undefined' ? '' : process.env.NEXT_PUBLIC_API_URL!,
     })
-    
+
     APIClient.interceptors.request.use(async (options) => {
       try {
         const session = await getSession()
-        
+
         // Only set authorization header if we have a valid access token
         if (session.access_token) {
           options.headers.set('Authorization', `Bearer ${session.access_token}`)
         }
-        
+
         // Set tenant header if available
         if (session.tenantId) {
           options.headers.set('__tenant', session.tenantId)
         }
-        
+
         return options
       } catch (error) {
         console.error('Error in request interceptor:', error)

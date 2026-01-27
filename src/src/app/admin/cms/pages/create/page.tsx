@@ -10,13 +10,12 @@ import { Alert, AlertDescription } from '@/shared/components/ui/alert'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
-import { Switch } from '@/shared/components/ui/switch'
 import { useToast } from '@/shared/components/ui/use-toast'
 
 import { pageAdminCreate } from '@/client'
 import { PuckEditor } from '@/features/cms/components/puck/PuckEditor'
-import { useAppConfig } from '@/shared/hooks/useAppConfig'
 import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { useAppConfig } from '@/shared/hooks/useAppConfig'
 import { Permissions } from '@/shared/lib/utils'
 
 const generateSlug = (title: string): string => {
@@ -310,7 +309,6 @@ export default function CreatePage() {
           name="content"
           control={control}
           render={({ field }) => {
-
             // Ensure we pass proper Puck data structure to the editor
             let puckData = field.value
             if (typeof field.value === 'string') {

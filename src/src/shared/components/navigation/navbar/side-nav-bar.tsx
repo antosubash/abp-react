@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-export default function SideNavBar() {
+function SideNavBar() {
+export default SideNavBar;
   const pathname = usePathname()
 
   // Initialize expanded menus based on current path
@@ -81,9 +82,13 @@ export default function SideNavBar() {
                       }`}
                     >
                       {menu.icon && (
-                        <menu.icon className={`h-4 w-4 transition-colors ${
-                          isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                        }`} />
+                        <menu.icon
+                          className={`h-4 w-4 transition-colors ${
+                            isActive
+                              ? 'text-primary'
+                              : 'text-muted-foreground group-hover:text-primary'
+                          }`}
+                        />
                       )}
                       <span className="font-medium">{menu.name}</span>
                       {isActive && (
@@ -113,13 +118,19 @@ export default function SideNavBar() {
                             key={subIndex}
                             href={submenu.link}
                             className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-primary/5 text-sm group ${
-                              isSubmenuActive ? 'text-primary bg-primary/10 border border-primary/20' : ''
+                              isSubmenuActive
+                                ? 'text-primary bg-primary/10 border border-primary/20'
+                                : ''
                             }`}
                           >
                             {submenu.icon && (
-                              <submenu.icon className={`h-3.5 w-3.5 transition-colors ${
-                                isSubmenuActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                              }`} />
+                              <submenu.icon
+                                className={`h-3.5 w-3.5 transition-colors ${
+                                  isSubmenuActive
+                                    ? 'text-primary'
+                                    : 'text-muted-foreground group-hover:text-primary'
+                                }`}
+                              />
                             )}
                             <span className="font-medium">{submenu.name}</span>
                             {isSubmenuActive && (

@@ -1,6 +1,6 @@
 import { GetFeatureListResultDto, featuresGet } from '@/client'
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 /**
  * Custom hook to fetch feature list based on provider name and provider key.

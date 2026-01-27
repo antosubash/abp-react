@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { Download, Heart, Plus } from 'lucide-react'
 import { action } from 'storybook/actions'
 import { Button } from './button'
-import { Download, Heart, Plus } from 'lucide-react'
 
 const meta: Meta<typeof Button> = {
   title: 'UI/Button',
@@ -10,7 +10,8 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A versatile button component with multiple variants, sizes, and states. Built on top of Radix UI and styled with Tailwind CSS.',
+        component:
+          'A versatile button component with multiple variants, sizes, and states. Built on top of Radix UI and styled with Tailwind CSS.',
       },
     },
   },
@@ -62,7 +63,8 @@ export const Variants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All available button variants. Each variant has a distinct visual style for different use cases.',
+        story:
+          'All available button variants. Each variant has a distinct visual style for different use cases.',
       },
     },
   },
@@ -83,7 +85,8 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different button sizes for various UI contexts. The icon size is perfect for square buttons with icons.',
+        story:
+          'Different button sizes for various UI contexts. The icon size is perfect for square buttons with icons.',
       },
     },
   },
@@ -145,7 +148,8 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'An interactive button example using explicit action function. The action will be logged in the Actions panel.',
+        story:
+          'An interactive button example using explicit action function. The action will be logged in the Actions panel.',
       },
     },
   },
@@ -186,4 +190,4 @@ export const FullWidth: Story = {
       },
     },
   },
-} 
+}

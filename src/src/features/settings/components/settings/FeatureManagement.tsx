@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
+import { useState } from 'react'
 import { Features } from './Features'
 
 export const FeatureManagement = () => {
@@ -20,4 +20,3 @@ export const FeatureManagement = () => {
     </section>
   )
 }
-

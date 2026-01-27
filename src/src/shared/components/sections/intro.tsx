@@ -1,32 +1,13 @@
-import Image from 'next/image'
-import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { Badge } from '@/shared/components/ui/badge'
-import { 
-  Rocket, 
-  Shield, 
-  Users, 
-  Palette, 
-  Globe, 
-  Code, 
-  CheckCircle, 
-  ArrowRight,
-  Github,
-  Mail,
-  MessageCircle
-} from 'lucide-react'
-
 export const Intro = () => {
   return (
     <div className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to AbpReact
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to AbpReact</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A modern, high-performance React-based frontend solution for ABP Framework applications. 
-            Built with Next.js, TypeScript, and Tailwind CSS for optimal performance and developer experience.
+            A modern, high-performance React-based frontend solution for ABP Framework applications.
+            Built with Next.js, TypeScript, and Tailwind CSS for optimal performance and developer
+            experience.
           </p>
         </div>
 
@@ -36,7 +17,8 @@ export const Intro = () => {
               🎨 UI Components
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Basic building blocks like buttons, inputs, cards, and more. These are the foundation of your user interface.
+              Basic building blocks like buttons, inputs, cards, and more. These are the foundation
+              of your user interface.
             </p>
             <ul className="text-sm text-gray-500 dark:text-gray-500 space-y-1">
               <li>• Buttons and form controls</li>
@@ -51,7 +33,8 @@ export const Intro = () => {
               🧩 Puck Components
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Visual builder components for the CMS. These allow content editors to create rich layouts without code.
+              Visual builder components for the CMS. These allow content editors to create rich
+              layouts without code.
             </p>
             <ul className="text-sm text-gray-500 dark:text-gray-500 space-y-1">
               <li>• Content blocks and sections</li>
@@ -66,7 +49,8 @@ export const Intro = () => {
               🔐 Enterprise Security
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Full ABP authentication and authorization integration with enterprise-grade security features.
+              Full ABP authentication and authorization integration with enterprise-grade security
+              features.
             </p>
             <ul className="text-sm text-gray-500 dark:text-gray-500 space-y-1">
               <li>• JWT-based authentication</li>
@@ -96,7 +80,7 @@ export const Intro = () => {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Getting Started
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600 mb-2">1</div>
@@ -153,16 +137,16 @@ export const Intro = () => {
             Start exploring the components in Storybook to see what&apos;s available!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="https://abp-react-storybook.antosubash.com" 
+            <a
+              href="https://abp-react-storybook.antosubash.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Open Storybook
             </a>
-            <a 
-              href="https://antosubash.github.io/abp-react/" 
+            <a
+              href="https://antosubash.github.io/abp-react/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -174,4 +158,4 @@ export const Intro = () => {
       </div>
     </div>
   )
-} 
+}
