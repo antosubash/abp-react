@@ -1,5 +1,5 @@
-import AdminLayout from '@/layout/admin-layout'
-import { setUpLayoutConfig } from '@/lib/auth'
+import { AdminLayout } from '@/shared/components/layout'
+import { setUpLayoutConfig } from '@/shared/lib/auth'
 import React from 'react'
 
 // Force dynamic rendering for admin pages since they use cookies and server-side features

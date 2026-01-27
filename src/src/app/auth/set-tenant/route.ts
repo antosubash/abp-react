@@ -1,5 +1,5 @@
 import { tenantGetTenantGuid } from '@/client'
-import { getSession } from '@/lib/actions'
+import { getSession } from '@/shared/lib/actions'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 

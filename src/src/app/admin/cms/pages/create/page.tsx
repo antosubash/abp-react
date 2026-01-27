@@ -6,18 +6,18 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
-import { useToast } from '@/components/ui/use-toast'
+import { Alert, AlertDescription } from '@/shared/components/ui/alert'
+import { Button } from '@/shared/components/ui/button'
+import { Input } from '@/shared/components/ui/input'
+import { Label } from '@/shared/components/ui/label'
+import { Switch } from '@/shared/components/ui/switch'
+import { useToast } from '@/shared/components/ui/use-toast'
 
 import { pageAdminCreate } from '@/client'
-import { PuckEditor } from '@/components/puck/PuckEditor'
-import { useAppConfig } from '@/lib/hooks/useAppConfig'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { Permissions } from '@/lib/utils'
+import { PuckEditor } from '@/features/cms/components/puck/PuckEditor'
+import { useAppConfig } from '@/shared/hooks/useAppConfig'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { Permissions } from '@/shared/lib/utils'
 
 const generateSlug = (title: string): string => {
   return title

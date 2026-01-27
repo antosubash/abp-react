@@ -1,5 +1,5 @@
-import { getSession } from '@/lib/actions'
-import { defaultSession } from '@/lib/session-utils'
+import { getSession } from '@/shared/lib/actions'
+import { defaultSession } from '@/shared/lib/session-utils'
 
 /**
  * GET handler for the session route.

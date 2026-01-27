@@ -1,5 +1,0 @@
-export { ImageBlockConfig } from './config'
-export { ImageBlock } from './ImageBlock'
-export { ImageBlockDefaults } from './ImageBlockDefaults'
-export { ImageBlockFields } from './ImageBlockFields'
-export type { ImageBlockProps } from './ImageBlockProps'

@@ -1,5 +1,5 @@
-import { ChangePassword } from '@/components/profile/ChangePassword'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ChangePassword } from '@/features/auth/components/profile/ChangePassword'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import Link from 'next/link'
 
 export default function ChangePasswordPage() {

@@ -1,24 +1,17 @@
 'use client'
 import { menuItemAdminUpdate, MenuItemUpdateInput, MenuItemWithDetailsDto } from '@/client'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Error from '@/components/ui/Error'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import Loader from '@/components/ui/Loader'
+import { Alert, AlertDescription, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Error, Input, Label, Loader } from '@/shared/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { useToast } from '@/components/ui/use-toast'
-import { QueryNames } from '@/lib/hooks/QueryConstants'
-import { useGrantedPolicies } from '@/lib/hooks/useGrantedPolicies'
-import { useMenuItem } from '@/lib/hooks/useMenuItems'
+} from '@/shared/components/ui/select'
+import { Switch, useToast } from '@/shared/components/ui'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useGrantedPolicies } from '@/features/permissions/hooks/useGrantedPolicies'
+import { useMenuItem } from '@/shared/hooks/useMenuItems'
 import { useQueryClient } from '@tanstack/react-query'
 import { AlertCircle, ArrowLeft, Save } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'

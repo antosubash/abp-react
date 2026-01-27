@@ -1,5 +1,0 @@
-export { HeroConfig } from './config'
-export { Hero } from './Hero'
-export { HeroDefaults } from './HeroDefaults'
-export { HeroFields } from './HeroFields'
-export type { HeroProps } from './HeroProps'

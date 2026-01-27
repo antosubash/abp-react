@@ -1,5 +1,5 @@
 'use client'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/shared/components/ui'
 
 export default function CmsLayout({ children }: { children: React.ReactNode }) {
   return (

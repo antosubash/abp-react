@@ -1,5 +1,5 @@
-import { Emailing } from '@/components/settings/Emailing'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Emailing } from '@/features/settings/components/settings/Emailing'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import Link from 'next/link'
 
 export default function SettingsPage() {

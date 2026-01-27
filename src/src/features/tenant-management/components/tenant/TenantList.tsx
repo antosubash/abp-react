@@ -1,0 +1,177 @@
+'use client'
+import { TenantDto, TenantUpdateDto } from '@/client'
+import { CustomTable } from '@/shared/components/ui/CustomTable'
+import Error from '@/shared/components/ui/Error'
+import Loader from '@/shared/components/ui/Loader'
+import { Search } from '@/shared/components/ui/Search'
+import { useToast } from '@/shared/components/ui/use-toast'
+import { QueryNames } from '@/shared/hooks/QueryConstants'
+import { useTenants } from '@/features/tenant-management/hooks/useTenants'
+import { Permissions } from '@/shared/lib/utils'
+import { useQueryClient } from '@tanstack/react-query'
+import { ColumnDef, PaginationState, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { useMemo, useState } from 'react'
+import { PermissionActions } from '@/features/permissions/components/permission/PermissionActions'
+import { DeleteTenant } from './DeleteTenant'
+import { FeatureList } from './FeatureList'
+import { TenantEdit, TenantExtraProperties } from './TenantEdit'
+
+export const TenantList = () => {
+  const { toast } = useToast()
+  const queryClient = useQueryClient()
+  const [searchStr, setSearchStr] = useState<string | undefined>()
+  const [tenantActionDialog, setTenantActionDialog] = useState<{
+    tenantId: string
+    tenantDto: TenantUpdateDto & { extraProperties?: TenantExtraProperties }
+    dialgoType?: 'edit' | 'manage_features' | 'delete'
+  } | null>()
+
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+  const { isLoading, data, isError } = useTenants(pageIndex, pageSize, searchStr)
+  const pagination = useMemo(
+    () => ({
+      pageIndex,
+      pageSize,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [pageIndex, pageSize, toast]
+  )
+
+  const defaultColumns: ColumnDef<TenantDto>[] = useMemo(
+    () => [
+      {
+        header: 'Tenant Management',
+        columns: [
+          {
+            accessorKey: 'actions',
+            header: 'Actions',
+            cell: (info) => {
+              return (
+                <PermissionActions
+                  actions={[
+                    {
+                      icon: 'features',
+                      policy: Permissions.TENANTS_MANAGE_FEATURES,
+                      callback: () => {
+                        setTenantActionDialog({
+                          dialgoType: 'manage_features',
+                          tenantId: info.row.original.id!,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
+                        })
+                      },
+                    },
+                    {
+                      icon: 'pencil',
+                      policy: Permissions.TENANTS_UPDATE,
+                      callback: () => {
+                        setTenantActionDialog({
+                          dialgoType: 'edit',
+                          tenantId: info.row.original.id!,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
+                        })
+                      },
+                    },
+                    {
+                      icon: 'trash',
+                      policy: Permissions.TENANTS_DELETE,
+                      callback: () => {
+                        setTenantActionDialog({
+                          tenantId: info.row.original.id as string,
+                          tenantDto: {
+                            ...info.row.original,
+                            extraProperties: info.row.original.extraProperties
+                              ? (info.row.original.extraProperties as TenantExtraProperties)
+                              : undefined,
+                          } as TenantUpdateDto & { extraProperties?: TenantExtraProperties },
+                          dialgoType: 'delete',
+                        })
+                      },
+                    },
+                  ]}
+                />
+              )
+            },
+          },
+          {
+            accessorKey: 'name',
+            header: 'Tenant Name',
+            cell: (info) => info.getValue(),
+          },
+        ],
+      },
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tenantActionDialog]
+  )
+
+  const onSearchUpdateEvent = (value: string) => {
+    setSearchStr(value)
+  }
+
+  const table = useReactTable({
+    data: data?.items ?? [],
+    pageCount: data?.totalCount ?? -1,
+    state: {
+      pagination,
+    },
+    columns: defaultColumns,
+    getCoreRowModel: getCoreRowModel(),
+    onPaginationChange: setPagination,
+    manualPagination: true,
+  })
+
+  if (isLoading) return <Loader />
+  if (isError) return <Error />
+
+  return (
+    <>
+      {tenantActionDialog?.dialgoType === 'edit' && (
+        <TenantEdit
+          tenantDto={tenantActionDialog.tenantDto}
+          tenantId={tenantActionDialog.tenantId}
+          onDismiss={() => {
+            queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] })
+            setTenantActionDialog(null)
+          }}
+        />
+      )}
+      {tenantActionDialog?.dialgoType === 'delete' && (
+        <DeleteTenant
+          tenant={{
+            tenantId: tenantActionDialog.tenantId,
+            tenantName: tenantActionDialog.tenantDto.name,
+          }}
+          onDismiss={() => {
+            queryClient.invalidateQueries({ queryKey: [QueryNames.GetTenants] })
+            setTenantActionDialog(null)
+          }}
+        />
+      )}
+      {tenantActionDialog?.dialgoType === 'manage_features' && (
+        <FeatureList
+          onDismiss={() => setTenantActionDialog(null)}
+          tenantId={tenantActionDialog.tenantId}
+        />
+      )}
+      <Search onUpdate={onSearchUpdateEvent} value={searchStr ?? ''} />
+      <CustomTable<TenantDto>
+        table={table}
+        totalCount={data?.totalCount ?? 0}
+        pageSize={pageSize}
+      />
+    </>
+  )
+}

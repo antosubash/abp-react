@@ -1,4 +1,4 @@
-import { getSession } from '@/lib/actions'
+import { getSession } from '@/shared/lib/actions'
 import { NextRequest, NextResponse } from 'next/server'
 
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'

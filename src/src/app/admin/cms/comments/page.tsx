@@ -1,5 +1,5 @@
 'use client'
-import { CommentList } from '@/components/comment/CommentList'
+import { CommentList } from '@/features/comments/components/comment/CommentList'
 
 export default function CmsCommentsPage() {
   return (

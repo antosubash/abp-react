@@ -1,4 +1,4 @@
-import { AdminLoading } from '@/components/ui/AdminLoading'
+import { AdminLoading } from '@/shared/components/ui/AdminLoading'
 
 /**
  * Next.js loading component for the admin page.

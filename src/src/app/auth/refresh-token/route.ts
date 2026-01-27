@@ -1,4 +1,4 @@
-import { refreshToken } from '@/lib/auth'
+import { refreshToken } from '@/shared/lib/auth'
 import { redirect } from 'next/navigation'
 
 /**

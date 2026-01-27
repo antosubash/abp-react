@@ -1,6 +1,6 @@
 import { clientConfig } from '@/config'
-import { getSession } from '@/lib/actions'
-import { getClientConfig } from '@/lib/session-utils'
+import { getSession } from '@/shared/lib/actions'
+import { getClientConfig } from '@/shared/lib/session-utils'
 import * as client from 'openid-client'
 /**
  * Handles the GET request for the login route.

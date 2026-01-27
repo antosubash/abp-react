@@ -1,7 +1,7 @@
 import { clientConfig } from '@/config'
-import { getSession } from '@/lib/actions'
-import { RedisSession, createRedisInstance } from '@/lib/redis'
-import { defaultSession, getClientConfig } from '@/lib/session-utils'
+import { getSession } from '@/shared/lib/actions'
+import { RedisSession, createRedisInstance } from '@/shared/lib/redis'
+import { defaultSession, getClientConfig } from '@/shared/lib/session-utils'
 import * as client from 'openid-client'
 /**
  * Handles the GET request for logging out a user.

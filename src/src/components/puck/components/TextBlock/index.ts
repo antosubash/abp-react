@@ -1,5 +1,0 @@
-export { TextBlockConfig } from './config'
-export { TextBlock } from './TextBlock'
-export { TextBlockDefaults } from './TextBlockDefaults'
-export { TextBlockFields } from './TextBlockFields'
-export type { TextBlockProps } from './TextBlockProps'

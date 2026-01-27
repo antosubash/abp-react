@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query'
-import { QueryNames } from './lib/hooks/QueryConstants'
-import { SessionData } from './lib/session-utils'
+import { QueryNames } from './shared/hooks/QueryConstants'
+import { SessionData } from './shared/lib/session-utils'
 
 /**
  * Custom hook to get the session from the `/session` endpoint.

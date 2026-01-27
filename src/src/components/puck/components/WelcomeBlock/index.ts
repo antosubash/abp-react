@@ -1,5 +1,0 @@
-export { WelcomeBlockConfig } from './config'
-export { WelcomeBlock } from './WelcomeBlock'
-export { WelcomeBlockDefaults } from './WelcomeBlockDefaults'
-export { WelcomeBlockFields } from './WelcomeBlockFields'
-export type { WelcomeBlockProps } from './WelcomeBlockProps'

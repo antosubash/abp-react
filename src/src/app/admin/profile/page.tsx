@@ -1,5 +1,5 @@
-import { ProfileSettings } from '@/components/profile/ProfileSettings'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ProfileSettings } from '@/features/auth/components/profile/ProfileSettings'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import Link from 'next/link'
 
 export default function ProfilePage() {
