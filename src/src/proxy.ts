@@ -13,7 +13,7 @@ import { sessionOptions } from './sessionOptions'
  * @param {NextRequest} request - The incoming request object.
  * @returns {Promise<NextResponse | undefined>} - The response object or undefined.
  */
-export async function middleware(request: NextRequest): Promise<NextResponse | undefined> {
+export async function proxy(request: NextRequest): Promise<NextResponse | undefined> {
   try {
     const session = await getIronSession<SessionData>(await cookies(), sessionOptions)
 
