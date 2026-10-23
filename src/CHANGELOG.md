@@ -1,8 +1,40 @@
 # Changelog
 
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.17...v2.6.0)
+
+### 🚀 Enhancements
+
+- Complete Next.js 16 upgrade ([#245](https://github.com/antosubash/abp-react/pull/245))
+
+### 🩹 Fixes
+
+- **security:** Upgrade to Node 26.12.1 and patch vulnerable dependencies ([#246](https://github.com/antosubash/abp-react/pull/246))
+
+### ❤️ Contributors
+
+- Sajan ([@sajanv88](http://github.com/sajanv88))
+- Anto Subash ([@antosubash](http://github.com/antosubash))
+
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.16...v2.5.17)
 
 [compare changes](https://github.com/antosubash/abp-react/compare/2.5.15...v2.5.16)
+
+## v2.6.0
+
+[compare changes](https://github.com/antosubash/abp-react/compare/2.5.17...v2.6.0)
+
+### 🚀 Enhancements
+
+- Complete Next.js 16 upgrade ([#245](https://github.com/antosubash/abp-react/pull/245))
+
+### 🩹 Fixes
+
+- **security:** Upgrade to Node 26.12.1 and patch vulnerable dependencies ([#246](https://github.com/antosubash/abp-react/pull/246))
+
+### ❤️ Contributors
+
+- Sajan ([@sajanv88](http://github.com/sajanv88))
+- Anto Subash ([@antosubash](http://github.com/antosubash))
 
 ## v2.5.17
 
