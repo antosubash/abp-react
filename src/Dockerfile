@@ -1,8 +1,9 @@
-FROM node:23-slim AS base
+FROM node:26.12.1-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV HUSKY=0
-RUN corepack enable
+# Node 25+ no longer bundles corepack; keep in sync with packageManager in package.json
+RUN npm install -g pnpm@12.3.4
 RUN npm install husky -g
 COPY . /app
 WORKDIR /app

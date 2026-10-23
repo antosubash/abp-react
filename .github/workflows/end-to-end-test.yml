@@ -15,14 +15,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v7
               with:
-                  node-version: 18
-            - uses: pnpm/action-setup@v2
+                  node-version-file: .node-version
+            - uses: pnpm/action-setup@v6
               name: Install pnpm
               id: pnpm-install
               with:
-                  version: 7
+                  package_json_file: src/package.json
                   run_install: false
             - name: Install dependencies
               run: pnpm install

@@ -97,7 +97,7 @@ Check out the live demo at [https://abpreact.antosubash.com/](https://abpreact.a
 
 Before you begin, ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/en/) (LTS version recommended)
+- [Node.js](https://nodejs.org/en/) (26.12.1, pinned in `.node-version`)
 - [pnpm](https://pnpm.js.org/en/installation) (Package manager)
 - [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) (Backend framework)
 - [ABP Framework](https://abp.io/) (Backend framework)

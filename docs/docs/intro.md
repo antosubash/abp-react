@@ -61,7 +61,7 @@ ABP React is a comprehensive React UI implementation that serves as a drop-in re
 
 Ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/en/) (18.0 or higher)
+- [Node.js](https://nodejs.org/en/) (26.12.1, pinned in `.node-version`)
 - [pnpm](https://pnpm.js.org/en/installation) (recommended package manager)
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [ABP Framework](https://abp.io/) (latest version)

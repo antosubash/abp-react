@@ -254,10 +254,10 @@ The project includes Docker configuration for containerized deployment:
 
 ```dockerfile
 # Multi-stage build for production
-FROM node:18-alpine AS builder
+FROM node:26.12.1-alpine AS builder
 # ... build steps
 
-FROM node:18-alpine AS runner
+FROM node:26.12.1-alpine AS runner
 # ... runtime configuration
 ```
 
