@@ -12,12 +12,12 @@ Before starting development, ensure you have the following tools installed:
 
 ### Required Tools
 
-- **Node.js** (18.0 or higher)
+- **Node.js** (26.12.1, pinned in `.node-version`)
   - Download from [nodejs.org](https://nodejs.org/)
   - Verify: `node --version`
 
-- **pnpm** (8.0 or higher)
-  - Install: `npm install -g pnpm`
+- **pnpm** (12.3.4, pinned via `packageManager` in `src/package.json`)
+  - Install: `npm install -g pnpm@12.3.4`
   - Verify: `pnpm --version`
 
 - **.NET 8 SDK**
@@ -540,9 +540,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v7
         with:
-          node-version: '18'
+          node-version-file: .node-version
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: src/package.json
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test

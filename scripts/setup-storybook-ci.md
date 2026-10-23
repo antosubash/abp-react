@@ -94,8 +94,8 @@ You can modify `.github/workflows/storybook.yml` to:
 ### Environment-Specific Settings
 
 The workflow uses these environment variables:
-- `NODE_VERSION`: Set to 22 (can be customized)
-- `PNPM_VERSION`: Set to 9 (can be customized)
+- Node.js: read from `.node-version` (26.12.1)
+- pnpm: read from `packageManager` in `src/package.json` (12.3.4)
 
 ### Performance Optimization
 

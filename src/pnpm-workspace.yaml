@@ -1,0 +1,12 @@
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  unrs-resolver: true
+
+# Transitive security fixes where the parent package has no patched release yet
+overrides:
+  '@measured/puck>uuid': ^11.1.1
+  basic-ftp: ^6.2.1
+  js-yaml@4: ^4.3.2
+  tar: ^7.5.21
+  undici@6: ^6.28.1
